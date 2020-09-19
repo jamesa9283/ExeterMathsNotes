@@ -5,10 +5,20 @@
 \usepackage{amsmath}
 \usepackage{bm}
 
+
+\newcommand{\di}{\frac{dy}{dx}}
+\newcommand{\dii}{\frac{d^2y}{dx^2}}
+\newcommand{\din}{\frac{d^ny}{dx^n}}
+\newcommand{\dt}{\frac{dx}{dt}}
+\newcommand{\dtt}{\frac{d^2x}{dt^2}}
+\newcommand{\dtn}{\frac{d^nx}{dt^n}}
+\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2}}
+
+
 \newtheorem{example}{Example}
 \newtheorem{solution}{Solution}
 
-\title{First Oder Linear ODEs}
+\title{First Order Linear ODEs}
 \author{James Arthur}
 
 \begin{document}
@@ -19,8 +29,123 @@
 \multicols{2}
 
 \section{Recap of previous modules}
+A differentiable equation is an mathematical relation involving a derivative of a dependant variable w.r.t. single/many independant variables\\
 
-$\frac{dy}{dx}$
+\subsection{Notation:}
+$$ \dt = \dot{x},\qquad \di = y',\qquad f\left( x, y, \di,\, \dots \,, \din \right) = 0$$ $$ f_{xy} = \frac{\partial^f }{\partial x \partial y} $$
+
+\subsection{Prerequisites: } Integration, ODEs and PDEs from Advanced Calculus.
+
+\section{Basic Defintions and Concepts}
+
+\subsection{Classifications}
+\begin{enumerate}
+  \item Use of full or partial derivative
+  \item Coeeficients are functions of independant variables only / contant, otherwise non Linear
+  \item The highest derivative is the order of the description DE
+  \item Degree is the highest derivative in rationalised form
+  \item An explicit solution is; $f = F(x, y, z, t) $ and implicit solution; $F(f, x, y, z, t) = 0$
+  \item Initial Value Problem (time) or boundary value problem (space).
+\end{enumerate}
+
+\subsection{Review of integration methods}
+\begin{enumerate}
+  \item List of commonly used integrals (link)
+  \item Polynomials, logarithms, trigonometric, inverse, hyperbolic and inverse hyperbolic trig.
+\end{enumerate}
+
+\subsection{Concepts}
+\begin{enumerate}
+  \item Given a DE, we want a solution.
+  \item A solution is a derived relation between the dependant and independant variables without any derivative term and defined in the iterval / domain / region.
+  \item replacing the solution within the domain satisfies the description DE
+  \item Needs integration on one or two variables
+  \item Not always analytical and closed forms possible. (could use numerical integration, iterative solution schemes.)
+\end{enumerate}
+
+\begin{enumerate}
+  \item Linear higher order ODEs (Laplace transforms)
+  \begin{enumerate}
+    \item transforms linear ODEs in algebraic forms
+    \item needs table of laplace, inverse laplace formula
+  \end{enumerate}
+  \item the Geometric meaning is the slope of $y(x)$: $y'(x) = f(x_0, y_0)$ implies at a point $ (x_0, y_0)$ is the slope at $\di$
+  \item There is something called a direction field that we can use to visualise the DE without solving it.
+  \item Curves of equal inclination $f(x, y) = c$ along which derivative is constant. Lots of paralell lines.
+  \item Limitation of direction field give an overall idea about the solution but have limited accuracy
+  \item Orthoganal trajectories are a family of courves that intersect another family of curves at right angles.
+  For a curve $G(x, y, c) $ firstly final out $\di = f(x, y)$. General solution of the orthoganal trajector $\di = \frac{-1}{f(x, y)}$.
+  \item existence is under what condition there is at least one Solution
+  \item uniqueness is what condition it has at most one Solution
+  item the general solution contains the constants of integration
+  \item particular solution are when you ise the initial / boundary conditions
+\end{enumerate}
+
+\subsection{Famous models}
+\begin{itemize}
+  \item Van der Pol oscillator
+  $$\begin{aligned}
+    \dot x &= y \\
+    \dot{y} &= \mu (1 - x^2)y - x
+  \end{aligned}$$
+  \item Lorentz Attractor
+  $$\begin{aligned}
+    \dot x &= \sigma (y - x)\\
+    \dot y &= x (\rho - z) - y \\
+    \dot z &= xy - \beta z \\
+  \end{aligned}$$
+\end{itemize}
+
+Have to be careful between phase portrait and direction fields. Phase portraits are almost a guess and direction field as you have a solution at every point with a direction field.
+
+\section{Analytical Solutions}
+
+\subsection{Seperation of variables}
+
+\begin{align*}
+  g(y)y' &= f(x)\\
+  \int g(y)dy = \int f(x)dx + c
+\end{align*}
+
+\subsection{Reduction to seperable form}
+
+\begin{align*}
+  y' = f(\frac{y}{x})\\
+  v + x \frac{dv}{dx} &= f(v) && \text{by letting $ y = vx$}\\
+  \int \frac{dv}{f(v) - v} &= \int \frac{dx}{x} + c\\
+  &= \ln |x| + c\\
+\end{align*}
+
+\subsection{Exact ODEs and integrating factors}
+
+Let us have an ODE: $M(x, y) + N(x, y)\di = 0$ which can be written as $M(x, y)dx + N(x, y)dy$. We can then write a total differential as partial derivatives:
+\begin{equation}  \label{eq:1}
+  du = \pd{u}{x} dx + \pd{u}{y} = 0 \implies u(x, y) = c
+\end{equation}
+Which then we can compare the two and we get:
+$$ M = \pd{u}{x}, \qquad N = \pd{u}{y} $$ $$\implies \pd{M}{y} = \frac{\partial^2u}{\partial y \partial x}, \pd{N}{x} = \frac{\partial^2u}{\partial x \partial y} $$
+
+So then we can say for an ODE to be exact:
+$$ \pd{M}{y} = \pd{N}{x} $$
+
+To solve the DE, take (\ref{eq:1}) and integrate with respect to u:
+\begin{align*}
+  du &= \pd{u}{x} dx + \pd{u}{y} = 0 && \text{(1)}\\
+  u = \int M dx + K(y)= c \\
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
