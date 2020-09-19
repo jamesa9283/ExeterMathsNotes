@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.10.3)  19 SEP 2020 11:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.10.3)  19 SEP 2020 11:25
 entering extended mode
 **C:/Users/james/Documents/Notes/ECM2903_Differential-Equations_Notes/Week1/Lec
 1/FirstOrderODEs.tex
@@ -172,28 +172,29 @@ LaTeX Font Info:    ... okay on input line 14.
 
  [1
 
-{C:/Users/james/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (FirstOrder
-ODEs.aux) )
+{C:/Users/james/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] (FirstO
+rderODEs.aux) )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 20 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 1085 strings out of 492895
- 13741 string characters out of 3123735
- 75711 words of memory out of 3000000
- 5034 multiletter control sequences out of 15000+200000
- 10723 words of font info for 38 fonts, out of 3000000 for 9000
+ 1087 strings out of 492895
+ 13762 string characters out of 3123735
+ 76711 words of memory out of 3000000
+ 5035 multiletter control sequences out of 15000+200000
+ 11031 words of font info for 39 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,6n,21p,304b,187s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,6n,21p,304b,202s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/james/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmbx12.pfb><C:/Users/james/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/james/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/james/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on FirstOrderODEs.pdf (1 page, 37921 bytes).
+ublic/amsfonts/cm/cmbx10.pfb><C:/Users/james/AppData/Local/Programs/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/james/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/james/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/jam
+es/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on FirstOrderODEs.pdf (2 pages, 54262 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
+ 29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
