@@ -138,6 +138,10 @@ To solve the DE, take (\ref{eq:1}) and integrate with respect to u:
   \implies k &= \int \left[ N - \pd{}{y}\left[ \int M dx \right]\right]dy \\
 \end{align*}
 
+From this we can substitute $k(y)$ back in and get the general solution of an exact ODE:
+
+$$ u(x, y) = \int M dx + \int{\left[ N + \pd{}{y}\left[ \int M dx \right] \right]}dy $
+
 \subsection{Reduction to Integrating Factors}
 
 We have a $P(x, y)dx + Q(x, y)dy = 0 $ can be moved into $F\cdot P dx + F\cdot Q dx = 0$ and is exact.
