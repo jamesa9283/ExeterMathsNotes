@@ -18,6 +18,7 @@
 
 \newtheorem{example}{Example}
 \newtheorem{solution}{Solution}
+\newtheorem{definition}{Defintion}
 
 \title{First Order Linear ODEs}
 \author{James Arthur}
@@ -140,7 +141,7 @@ To solve the DE, take (\ref{eq:1}) and integrate with respect to u:
 
 From this we can substitute $k(y)$ back in and get the general solution of an exact ODE:
 
-$$ u(x, y) = \int M dx + \int{\left[ N + \pd{}{y}\left[ \int M dx \right] \right]}dy $
+$$ u(x, y) = \int M dx + \int{\left[ N + \pd{}{y}\left[ \int M dx \right] \right]}dy $$
 
 \subsection{Reduction to Integrating Factors}
 
@@ -169,6 +170,68 @@ $$ y(x) = ce^{-\int p(x)dx} $$
 
 
 
+\fbox{\parbox{0.425\textwidth}{\begin{example}{
+ Solve $x^3dx + y^3dy$
+}\end{example}\begin{solution}{
+  Firstly let us test for exactness. Our $M = x^3$ and $N=y^3$. The test says that the DE is exact if we know that $\pd{M}{y} = \pd{N}{x}$. We know that from a differential:
+  $$ \pd{M}{y} = 0 = \pd{N}{x} = 0 $$
+  This means that the equation is exact, so we can now plug this into the general solution to an exact equation:
+  $$ u(x, y) = \int M dx + \int{\left[ N + \pd{}{y}\left[ \int M dx \right] \right]}dy $$
+  and we get the solution:
+  $$ u(x, y) = \frac{1}{4}x^4 + \frac{1}{4}y^4  + C$$
+}\end{solution}}}\vspace{10pt}
+
+
+\subsection{Nonhomogeneous Linear ODEs}
+
+When $\displaystyle{r(x) \neq 0}$ in $\displaystyle{\dii + p(x)y = r(x)}$. We can then do the following:
+\begin{align*}
+  \implies dy + pydx &= rdx \\
+  dy + (py - r)dx &= 0 \\
+  (py - r)dx = dy = 0 \\
+\end{align*}
+
+Now we can look at the integrating factor, which we know is of form:
+$$ R = \frac{1}{N}\left[\pd{M}{y} - \pd{N}{x}\right] $$
+which we can sub in $\displaystyle{M = py - r}$ and $\displaystyle{N = 1}$ and we get:
+$$ R = 1 \cdot (p - 0) = p(x) $$
+So for a non-homogenous linear ODE, the integrating factor is $p(x)$.
+
+\section{Non-linear ODE}
+We can take a bernoulli equation:
+$$ \dii + p(x)y = g(x)\cdot y^n $$
+which we can write it as:
+$$ \dii = gy^n - py $$
+
+The equation is linear for $n = 0,1$, so we shall consider it without this condition. Firstly we are going to apply a substitution, $u(x) = y(x)^{1-n}$. Working it through we get:
+\begin{align*}
+  \fd{u}{x} &= (1-n)\left[ y(x) \right]^{-n}\dii \\
+  &= (1-n)y^{-n}(gy^n - py) \\
+  &= (1 - n)(g - py^{1-n}) \\
+  &= (1 - n)(g - pu) \\
+\end{align*}
+
+Which is linear and solvable.
+
+\section{Existence and Uniqueness}
+An initial value problem $\displaystyle{\dii = f(x, y), \quad y(x_0) = y_0}$ has:
+\begin{itemize}
+  \item no Solution
+  \item precisely one solution
+  \item many solutions
+\end{itemize}
+
+\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+ Existence: Under what condition the IVP has at least one solution.
+}\end{definition}}}\vspace{10pt}
+
+More formally: A function $\displaystyle{f(x, y)}$ is continuous in some bounded rectangle $R$, $\displaystyle{R : |x - x_0| < a,\, |y - y_0|< b}$ there exists some $K$, such that $\displaystyle{|f(x, y)|\le K\quad \forall (x, y) \in R}$ then the IVP exists.\\
+
+\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+ Uniqueness: Under what conditions the IVP has at most one solution.
+}\end{definition}}}\vspace{10pt}
+
+More formally: If the function and its partial derivatives $f$, $f_y$ are continuous in $R$: $\displaystyle{|f(x, y)| \le K|f_y(x, y)| \le M, \quad \forall (x, y) \in R}$
 
 
 
