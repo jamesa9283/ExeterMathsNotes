@@ -26,10 +26,13 @@
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 \newcommand{\eR}{\overbar{\R}}
 
+\setlength{\columnsep}{20pt}
+
 \newtheorem{example}{Example}
 \newtheorem{solution}{Solution}
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
 
 \title{The Real Number System}
 \author{James Arthur}
@@ -84,7 +87,7 @@ $$ \b = \sup S $$
 \vspace{-10pt}
 \begin{figure}[H]
   \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 \draw[latex-latex] (-3,0) -- (3,0) ; %edit here for the axis
 \draw[shift={(2.1,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
 \draw[shift={(2.1,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
@@ -108,7 +111,7 @@ We also call the supremum the least upper bound.\\
 Take our diagram from above:
 \begin{figure}[H]
   \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 \draw[latex-latex] (-3,0) -- (3,0) ; %edit here for the axis
 \draw[shift={(0,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
 \draw[shift={(0,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
@@ -137,7 +140,7 @@ $$ \a = \inf \, S $$
 \vspace{-30pt}
 \begin{figure}[H]
   \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 \draw[latex-latex] (-3,0) -- (3,0) ; %edit here for the axis
 \draw[shift={(-2.1,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
 \draw[shift={(-2.1,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
@@ -174,7 +177,7 @@ The completeness axiom is distinguishing of the reals. They are the only complet
 If we take the example below;
 \begin{figure}[H]
   \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 \draw[latex-latex] (-3,0) -- (3,0) ; %edit here for the axis
 \draw[densely dotted, ultra thick, orange] (-0.5,0) -- (0.5,0); % adds a dotted line
 \draw[shift={(-2.1,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
@@ -224,7 +227,7 @@ $$ \sup\, S =\infty \quad \inf\, S = -\infty $$
 }\end{example}\begin{solution}{
 \begin{figure}[H]
   \centering
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 \draw[latex-latex] (-3,0) -- (3,0) ; %edit here for the axis
 \draw[shift={(2,0)},color=black] (0pt,3pt) -- (0pt,-3pt);
 \draw[shift={(2,0)},color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
@@ -290,7 +293,7 @@ As we can use the ordered relation of the reals we can produce something known a
   \end{enumerate}
 
 It holds in cases (c) and (d), since
-$$ |a + b| = \begin{cases}
+$$ ||a| - |b|| = \begin{cases}
 |a| - |b| & \text{ if } |b| \le |a|,\vspace{5px}\\
 |b| - |a| & \text{ if } |a| \le |b|.\\
 \end{cases}
@@ -303,7 +306,7 @@ $$ |a + b| = \begin{cases}
   $$ (a,\, b) = \{ x: a < x < b\} $$
   \begin{figure}[H]
     \centering
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.9]
   \draw[latex-latex] (-1.5,0) -- (3.5,0) ; %edit here for the axis
   \draw[(-, ultra thick, orange] (0,0) -- (0.01,0);
   \draw[-), ultra thick, orange] (2,0) -- (2.01,0);
@@ -323,7 +326,7 @@ $$ |a + b| = \begin{cases}
   $$ [a,\, b] = \{ x: a \le x \le b \} $$
   \begin{figure}[H]
     \centering
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.9]
   \draw[latex-latex] (-1.5,0) -- (3.5,0) ; %edit here for the axis
   \draw[[-, ultra thick, orange] (0,0) -- (0.01,0);
   \draw[{-]}, ultra thick, orange] (2,0) -- (2.01,0);
@@ -348,7 +351,7 @@ A neighborhood is used to talk about closeness of points. We are now going to go
 
  \begin{figure}[H]
    \centering
-   \begin{tikzpicture}
+   \begin{tikzpicture}[scale=0.9]
      \draw[latex-latex] (-1.5,0) -- (3.5,0) ; %edit here for the axis
      \draw[(-, ultra thick, orange] (0,0) -- (0.01,0);
      \draw[{-)}, ultra thick, orange] (2,0) -- (2.01,0);
@@ -372,7 +375,7 @@ A neighborhood is used to talk about closeness of points. We are now going to go
 
  \begin{figure}[H]
    \centering
-   \begin{tikzpicture}
+   \begin{tikzpicture}[scale=0.9]
      \draw[latex-latex] (-1.5,0) -- (3.5,0) ; %edit here for the axis
      \draw[(-, ultra thick, orange] (1.3,0) -- (1.31,0);
      \draw[{-)}, ultra thick, orange] (2.5,0) -- (2.51,0);
@@ -398,7 +401,7 @@ A neighborhood is used to talk about closeness of points. We are now going to go
 
  \begin{figure}[H]
    \centering
-   \begin{tikzpicture}
+   \begin{tikzpicture}[scale=0.9]
      \draw[latex-latex] (-2,0) -- (3.5,0) ; %edit here for the axis
      \draw[(-, ultra thick, orange] (1.7,0) -- (1.71,0);
      \draw[{-)}, ultra thick, orange] (2.9,0) -- (2.91,0);
@@ -494,8 +497,211 @@ We also note that because of a vacouity argument $\varnothing$ is also open, hen
 
 Now, what about the intersection of open sets and union of closed sets. Well, it can be proved that the intersection of finitely many open sets is open and union of finitely many closed sets is closed. However the infinite versions of these statements need not be the same.
 
-{\color{red} \textbf{The concept of open and closed sets, doesn't form a dichotomy (A set is partitioned into two. i.e. odd or even naturals). }} A set can be neither open or closed or both.
+{\color{red} \textbf{The concept of open and closed sets, doesn't form a dichotomy (A set is partitioned into two. i.e. odd or even naturals). }} A set can be neither open or closed or both.\\
 
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+ A {\color{blue} deleted neighbourhood } of a point $\displaystyle{x_0}$ is a set that contains every point of some neighborhood of $\displaystyle{x_0}$ except $\displaystyle{x_0}$. For example:
+ $$ S = \{x : 0 < |x - x_0| < \e \} $$
+ is a deleted neighborhood of $x_0$. We also say it is deleted $\e$-neighborhood of $x_0$.
+}\end{definition}}}\vspace{10pt}
+
+Let $S$ be a subset of $\R$.
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+  $x_0$ is a {\color{blue} limit point } of $S$ if every deleted neighbourhood of $x_0$ contains a point of $S$
+}\end{definition}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+  Let $S = (-\infty,\,-1] \cup (1,\, 2) \cup \{3\}$. Find the limit points of $S$.
+}\end{example}\begin{solution}{
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=0.9]
+\draw[latex-latex] (-2,0) -- (4,0) ; %edit here for the axis
+\draw[{[-}, ultra thick, orange] (-1,0) -- (-1.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (-1.88,-1ex) -- (-1, -1ex) -- (-1, 1ex) -- (-1.88,1ex) -- cycle;
+\draw[shift={(-1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(-1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$-1$};
+%
+\draw[(-, ultra thick, orange] (1,0) -- (1.01,0);
+\draw[-), ultra thick, orange] (2,0) -- (2.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (1,-1ex) -- (2, -1ex) -- (2, 1ex) -- (1,1ex) -- cycle;
+\draw[shift={(1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$1$};
+\draw[shift={(2,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(2,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$2$};
+%
+\draw[shift={(3,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(3,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$3$};
+\node at (3,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+\end{tikzpicture}
+\end{figure}
+
+Every point in $S$ is limit point, apart from $\{3 \}$
+}\end{solution}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+  $\displaystyle{x_0}$ is a {\color{blue} boundary point } of $S$ if every neighborhood of $\displaystyle{x_0}$ contains at least one point in $S$ and one not in $S$. The set of boundary points of $S$  is the {\color{blue} boundary } of $S$, denoted by $\partial S$. The {\color{blue} closure } of $S$, denoted by $\overline S$, is $\overline S = S \cup \partial S$
+}\end{definition}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+  Let $S = (-\infty,\,-1] \cup (1,\, 2) \cup \{3\}$. Find the closure of $S$.
+}\end{example}\begin{solution}{
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=0.9]
+\draw[latex-latex] (-2,0) -- (4,0) ; %edit here for the axis
+\draw[{[-}, ultra thick, orange] (-1,0) -- (-1.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (-1.88,-1ex) -- (-1, -1ex) -- (-1, 1ex) -- (-1.88,1ex) -- cycle;
+\draw[shift={(-1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(-1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$-1$};
+%
+\draw[(-, ultra thick, orange] (1,0) -- (1.01,0);
+\draw[-), ultra thick, orange] (2,0) -- (2.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (1,-1ex) -- (2, -1ex) -- (2, 1ex) -- (1,1ex) -- cycle;
+\draw[shift={(1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$1$};
+\draw[shift={(2,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(2,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$2$};
+%
+\draw[shift={(3,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(3,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$3$};
+\node at (3,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+\end{tikzpicture}
+\end{figure}
+
+The boundary points of $S$ are: $\partial S = \{-1, 1, 2, 3\} $ and $\overline S = (-\infty,\, -1]\cup[1,\, 2]\cup\{3\}$
+}\end{solution}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+  $x_0$ is an {\color{blue} isolated point } to $S$ if $x_0 \in S$ and there is a neighborhood of $x_0$ that contains no other points of $S$.
+}\end{definition}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+  Let $S = (-\infty,\,-1] \cup (1,\, 2) \cup \{3\}$. Find the isolated points of $S$.
+}\end{example}\begin{solution}{
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=0.9]
+\draw[latex-latex] (-2,0) -- (4,0) ; %edit here for the axis
+\draw[{[-}, ultra thick, orange] (-1,0) -- (-1.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (-1.88,-1ex) -- (-1, -1ex) -- (-1, 1ex) -- (-1.88,1ex) -- cycle;
+\draw[shift={(-1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(-1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$-1$};
+%
+\draw[(-, ultra thick, orange] (1,0) -- (1.01,0);
+\draw[-), ultra thick, orange] (2,0) -- (2.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (1,-1ex) -- (2, -1ex) -- (2, 1ex) -- (1,1ex) -- cycle;
+\draw[shift={(1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$1$};
+\draw[shift={(2,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(2,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$2$};
+%
+\draw[shift={(3,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(3,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$3$};
+\node at (3,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+\end{tikzpicture}
+\end{figure}
+
+Theres only one isolated point of $S$, $\{3 \}$.
+}\end{solution}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}{
+  $x_0$ is {\color{blue} interior } to $S$ if $x_0$ is in the interior of $S^c$. The collection of such points is the {\color{blue} exterior } of $S$.
+}\end{definition}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+  Let $S = (-\infty,\,-1] \cup (1,\, 2) \cup \{3\}$. Find the exterior of $S$.
+}\end{example}\begin{solution}{
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=0.9]
+\draw[latex-latex] (-2,0) -- (4,0) ; %edit here for the axis
+\draw[{[-}, ultra thick, orange] (-1,0) -- (-1.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (-1.88,-1ex) -- (-1, -1ex) -- (-1, 1ex) -- (-1.88,1ex) -- cycle;
+\draw[shift={(-1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(-1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$-1$};
+%
+\draw[(-, ultra thick, orange] (1,0) -- (1.01,0);
+\draw[-), ultra thick, orange] (2,0) -- (2.01,0);
+\fill[opacity = 0.2, orange, rounded corners=1ex] (1,-1ex) -- (2, -1ex) -- (2, 1ex) -- (1,1ex) -- cycle;
+\draw[shift={(1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$1$};
+\draw[shift={(2,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(2,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$2$};
+%
+\draw[shift={(3,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(3,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$3$};
+\node at (3,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+\end{tikzpicture}
+\end{figure}
+
+We can write $S^c = (-1,\, 1] \cup [2,\,3)\cup(3,\,\infty)$ and then we can find the exterior of S, $(S^c)^o = (-1,\,1)\cup(2,\,3)\cup(3,\,\infty)$.
+}\end{solution}}}\vspace{10pt}
+
+\begin{theorem}
+  A set $S$ is closed if and only if no point $S^c$ is a limit point of S
+\end{theorem}
+\begin{proof}
+  Begin by proving the forward direction. If $S$ is closed, then $S^c$ is open and then for any $x_0 \in S^c \ex $ $\e$-neighborhood contained in $S^c$, hence $x_0$ cannot be a limit point.\\
+
+  Next for the reverse direction. If no point of $S^c$ is a limit point of $S$, every point $x_0 \in S^c$ has neighborhood contained in $S^c$, hence $S^c$ is open. Therefore, $S$ is closed.
+\end{proof}
+
+\begin{corollary}
+  A set is closed if and only if it contains all its limit points
+\end{corollary}
+What if it has no limit points? Well, it's just closed. Let us take an example:
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+ Take $S = \{1, 2, 3 \}$ and determine whether it closed or not.
+}\end{example}\begin{solution}{
+
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=0.9]
+\draw[latex-latex] (0,0) -- (4,0) ; %edit here for the axis
+%
+\draw[shift={(1,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(1,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$1$};
+\node at (1,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+%
+\draw[shift={(2,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(2,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$2$};
+\node at (2,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+%
+\draw[shift={(3,0)}, thick, color=black] (0pt,3pt) -- (0pt,-3pt);
+\draw[shift={(3,0)}, thick, color=black] (0pt,0pt) -- (0pt,-3pt) node[below]
+{$3$};
+\node at (3,0) [circle,fill,inner sep=1.5pt, color=orange]{};
+\end{tikzpicture}
+\end{figure}
+
+You can take a deleted $\e$-neighborhood of all of these points and see that none of them are limit points. Hence the set is closed.
+}\end{solution}}}\vspace{10pt}
 
 
 \end{document}
