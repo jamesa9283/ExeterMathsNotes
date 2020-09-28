@@ -21,6 +21,7 @@
 \newcommand{\sub}{\subset}
 \renewcommand{\a}{\alpha}
 \renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
 \newcommand{\e}{\varepsilon}
 \newcommand{\ex}{\exists}
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
@@ -702,6 +703,55 @@ What if it has no limit points? Well, it's just closed. Let us take an example:
 
 You can take a deleted $\e$-neighborhood of all of these points and see that none of them are limit points. Hence the set is closed.
 }\end{solution}}}\vspace{10pt}
+
+\subsection{Open Coverings}
+
+A collection $\mathcal{H}$ of open sets is an open covering of a set $S$ if every point in $S$ is contained in a set $H$ belonging to $\mathcal{H}$; that is, if $\displaystyle{S\sub \{ H : H \in \mathcal{H}\}}$
+
+\begin{theorem}[Heine-Borel Theorem]
+   If $\mathcal{H}$ is an open covering of a closed and bounded subset $S$ of the real line, then $S$ has an open covering $\widetilde{\mathcal{H}}$ consisting of finitely many open sets belonging to $\mathcal{H}$.
+\end{theorem}
+
+\begin{proof}
+  Since S is bounded, it has supremum, $\a$, and infimum, $\b$. As $S$ is closed, we can say that $\a$ and $\b$ are in $S$. Now we shall define a couple of things:
+  $$ S_t = S \cap [\a,\, t] \qquad \a \le t $$
+  and let
+  \begin{align*}
+    F = \{ &t : \a \le t \le \b \\
+    &\text{ and finitely many sets from $\mathcal{H}$ to cover $S_t$} \}
+  \end{align*}
+  As we know that $\displaystyle{S_\b = S}$, all we need to prove is $\displaystyle{\b \in F}$. We shall use the completeness of the reals to prove this.\\
+
+  \noindent
+  Starting with the things we know, $\displaystyle{\a \in S}$. We can then deduce that $\displaystyle{S_\a = \{ \a \}}$, which is contained in some open set, $H_\a$ from $\mathcal{H}$ as we know that $\mathcal{H}$ covers $S$, therefore $\a \in F$. Since $F$ is non-empty and bounded above by $\b$ we wish to show that the supremum, $\g$, can be seen the same as $\b$. As we definitionally know that $\g \le \b$ from $F$, it suffices to know that $\g \nless \b$. Let us consider two cases:\\
+
+  \noindent
+  \emph{Case 1:} Suppose that $\g < \b$ and $\g \notin S$. Since $S$ is closed, $\g$ is not a limit point of $S$. This means that $\ex \e > 0:$
+  $$ [\g - \e,\, \g + \e] \cap S = \varnothing $$
+  Then $S_{\g - \e} = S_{\g + \e}$, which can't happen, due to $\g$ being a supremum $S_{\g - \e}$ has a subcovering from $\mathcal{H}$, but $S_{\g + \e}$ wouldn't. This is a contradiction and hence if $\g \notin S$, then $\g \nless \b$.\\
+
+  \noindent
+  \emph{Case 2:} Suppose that $\g < \b$ and $\g \in S$. Then there is an open set $H_\g \in \mathcal{H}$ along with an interval, for $\e > 0$, $[\g - \e, \g + \e]$. It then follows that since $S_{\g - \e}$ has a finite covering, so does $S_{\g + \e}$. This is a contradiction from the defintion of $\g$. Hence, if $\g \in S$ then $\g \nless \b$.\\
+
+  \noindent
+  So we know that $\b = \g$. Therefore $H_\b$ exists and is in $\mathcal{H}$. $H_\b$ contains $\b$ and an interval of the form, for some $\e > 0$: $[\b - \e,\, \b + \e]$. Since we know that $S_{\b - \e}$ is covered finitely by some collection: $\{ H_1,\, \dots\,, H_k \}$, then $S_\b$ is covered by some collection: $\{ H_1,\, \dots\,, H_k,\, H_\b \}$. Hence, $S_\b = S$.
+\end{proof}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Compactness]{
+  A set is {\color{blue} compact }if it is closed and bounded
+}\end{definition}}}\vspace{10pt}
+
+\begin{theorem}[Bolzano-Weirstrass Theorem]
+  Every bounded infinite set of real numbers has at least one limit point
+\end{theorem}
+
+\begin{proof}
+  It will suffice to show that a bounded nonempty set without a limit point can only contain a finite number of elements. \\
+
+  If $S$ has no limit points, then $S$ is closed and every point, $x \in S$ has a open neighborhood, $N_x$, that only contains itself. The collection:
+  $$ \mathcal{H} = \{ N_x : x \in S \} $$
+  is an open covering for $S$. Heine-Borel Theorem states that $S$ can be covered by finitely many elements of $\mathcal{H}$, say $N_{x_1},\, \dots ,\, N_{x_n}$. Since these sets only depend on a finite set of points, $x_1, \, \dots \, x_n$. Then $S = \{ x_1, \, \dots \, x_n \}$ and hence, is finite.
+\end{proof}
 
 
 \end{document}
