@@ -24,8 +24,8 @@
 \newcommand{\nab}{\underline{\nabla}}
 \newcommand{\grad}{{\nab}\, f}
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
-\renewcommand{\div}[1]{\nab \cdot #1}
-\newcommand{\curl}[1]{\nab \times #1}
+\renewcommand{\div}{\nab \cdot}
+\newcommand{\curl}{\nab \times}
 
 \newtheorem{example}{Example}
 \newtheorem{solution}{Solution}
@@ -68,7 +68,9 @@ which then can be manipulated into:
 $$ [\nab \times \vec{u}]_i = \e_{ijk} \pd{u_k}{x_j} \qquad j,k = 1, 2, 3 $$
 where $i$ is a free index and $j, k$ are dummy suffixes, so $j, k = 1, 2, 3$
 
-\section{Combinations of $\grad$, $\div(\quad)$ and $\curl(\quad)$}
+\section{Combinations of gradient, divergence and curl}%  $\grad$, $\div(\quad)$ and $\curl(\quad)$}
+
+\subsection{Divergence of Gradient}% $\underline{\nabla} \cdot \underline{\nabla} f$}
 
 If we take $\nab \cdot \grad$ where $f = (x_1, x_2, x_3, t)$. We can write the div of grad as:
 \begin{align*}
@@ -85,6 +87,17 @@ Where the $\Delta = \nab ^2$ is the laplacian. So how do we write this in suffix
   &= \pd{^2 f}{x_j}\\
 \end{align*}
 
+\subsection{Curl of Gradient}
+
+We can write the curl of gradient as:
+\begin{align*}
+  \left[\curl \grad\right]_i &= \e_{ijk}\nab_j\grad_k\\
+  &= \e_{ijk}\pd{}{x_j}\pd{f}{x_k}\\
+  &= \e_{ikj}\pd{}{x_k}\pd{f}{x_j}\\
+  &= - \e_{ijk}\pd{}{x_k}\pd{f}{x_j}\\
+  &= - \e_{ijk}\pd{}{x_j}\pd{f}{x_k} && \text{if $f\in c^2$}\\
+  &\implies \curl\grad = 0\\
+\end{align*}
 
 
 
