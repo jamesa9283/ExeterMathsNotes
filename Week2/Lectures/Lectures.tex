@@ -1,0 +1,101 @@
+\documentclass{article}
+
+% Packages
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, positioning}
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\vec}[1]{\underline{\textbf{#1}}}
+\newcommand{\veci}{\bm{\hat{\imath}}}
+\newcommand{\vecj}{\bm{\hat{\jmath}}}
+\newcommand{\veck}{\bm{\hat{k}}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\de}{\delta}
+\newcommand{\kd}{\delta_{i, j}}
+\newcommand{\at}{\e_{i, j, k}}
+\newcommand{\nab}{\underline{\nabla}}
+\newcommand{\grad}{{\nab}\, f}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\renewcommand{\div}[1]{\nab \cdot #1}
+\newcommand{\curl}[1]{\nab \times #1}
+
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+\newtheorem{definition}{Definitions}
+
+\title{Vector Calculus Week 2 - More Suffix Notation}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+
+
+\multicols{2}
+
+\section{Gradient, Divergence and Curl}
+\subsection{Gradient}
+
+Assume we have a $f = f(x, y, z)$ or $f = f(x_1,x_2,x_3)$, so a scalar calued function. Then we define grad f as:
+$$ \grad = \left(\pd{}{x}\veci + \pd{}{y}\vecj + \pd{}{z}\veck \right)\, f$$
+We say grad of $f$ is a differential operator. So:
+$$ \grad = \left(\pd{f}{x}\veci + \pd{f}{y}\vecj + \pd{f}{z}\veck \right) $$
+and we can write it in suffix notation aswell:
+$$ \left[ \grad \right]_i = \pd{}{x_i} \qquad i = 1, 2, 3$$
+
+\subsection{Divergence}
+
+Assume we have a vector field, $\vec{u} = \vec{u} (x, y, z, t)$. We define the divergence of this vector field as;
+$$ \nab \cdot \vec{u} = \left(\pd{u_1}{x_1} + \pd{u_2}{x_2} + \pd{u_3}{x_3}\right)$$
+Placing this in suffix notation, we get that:
+$$ [\nab \cdot \vec{u}]_j = \pd{u_j}{x_j} $$
+
+\subsection{Curl}
+
+the curl of a vector field can be written as:
+$$ \nab \times \vec{u} $$
+To write this in suffix notation, we can just use the cross produce formula:
+$$ [\nab \times \vec{u}]_i = \e_{ijk} \nab_j u_k $$
+which then can be manipulated into:
+$$ [\nab \times \vec{u}]_i = \e_{ijk} \pd{u_k}{x_j} \qquad j,k = 1, 2, 3 $$
+where $i$ is a free index and $j, k$ are dummy suffixes, so $j, k = 1, 2, 3$
+
+\section{Combinations of $\grad$, $\div(\quad)$ and $\curl(\quad)$}
+
+If we take $\nab \cdot \grad$ where $f = (x_1, x_2, x_3, t)$. We can write the div of grad as:
+\begin{align*}
+  \div \grad &= \left(\pd{}{x}\veci + \pd{}{y}\vecj + \pd{}{z}\veck \right) \cdot \left(\pd{f}{x}\veci + \pd{f}{y}\vecj + \pd{f}{z}\veck \right) \\
+  &= \pd{}{x_1}\pd{f}{x_1} + \pd{}{x_2}\pd{f}{x_2} + \pd{}{x_3}\pd{f}{x_3}\\
+  &= \pd{^2 f}{x_1^2} + \pd{^2 f}{x_2} + \pd{^2 f}{x_3}\\
+  &= \Delta f
+\end{align*}
+
+Where the $\Delta = \nab ^2$ is the laplacian. So how do we write this in suffix notation?
+\begin{align*}
+  \div \grad &= \nab_j[\grad]_j\\
+  &= \pd{}{x_j} \pd{f}{x_j}\\
+  &= \pd{^2 f}{x_j}\\
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
