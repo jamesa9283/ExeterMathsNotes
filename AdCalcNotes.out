@@ -1,0 +1,82 @@
+\BOOKMARK [0][-]{part.1}{I Integration}{}% 1
+\BOOKMARK [1][-]{section.1}{Definite Integrals}{part.1}% 2
+\BOOKMARK [2][-]{subsection.1.1}{Riemann Sums}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{Properties of the definite integral}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.3}{Some proofs}{section.1}% 5
+\BOOKMARK [1][-]{section.2}{The Fundamental Theorem of Calculus}{part.1}% 6
+\BOOKMARK [2][-]{subsection.2.1}{Gappy Proof of FTC}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.2}{The Fundamental Theorem and Integration - an example}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Indefinite integrals}{part.1}% 9
+\BOOKMARK [1][-]{section.4}{Methods of integration}{part.1}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Basic integrals obtained from differentiating well known functions}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Integration by substitution}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Methods of integration}{part.1}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Integrals of trigonometric and hyperbolic functions}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{Integrals of rational functions using partial fractions}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{Integration by parts}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Improper Integrals:}{part.1}% 17
+\BOOKMARK [2][-]{subsection.6.1}{Improper Integrals - Type I}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.2}{Improper Integrals - Type II}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.3}{The Mean Value Theorem for integration}{section.6}% 20
+\BOOKMARK [1][-]{section.7}{ Integration: General Examples}{part.1}% 21
+\BOOKMARK [1][-]{section.8}{Integral Test for Infinite Series}{part.1}% 22
+\BOOKMARK [2][-]{subsection.8.1}{Examples}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.2}{Estimating infinite sums}{section.8}% 24
+\BOOKMARK [1][-]{section.9}{Estimating N!}{part.1}% 25
+\BOOKMARK [0][-]{part.2}{II Differential Equations}{}% 26
+\BOOKMARK [1][-]{section.10}{Basic Definitions}{part.2}% 27
+\BOOKMARK [2][-]{subsection.10.1}{What is a differential equation?}{section.10}% 28
+\BOOKMARK [2][-]{subsection.10.2}{Motivating Examples}{section.10}% 29
+\BOOKMARK [2][-]{subsection.10.3}{What is the solution of a differential equation}{section.10}% 30
+\BOOKMARK [2][-]{subsection.10.4}{Linear or Nonlinear DEs}{section.10}% 31
+\BOOKMARK [1][-]{section.11}{First Order Differential Equations}{part.2}% 32
+\BOOKMARK [2][-]{subsection.11.1}{Separable equations}{section.11}% 33
+\BOOKMARK [2][-]{subsection.11.2}{First order homogeneous differential equations}{section.11}% 34
+\BOOKMARK [2][-]{subsection.11.3}{Linear first order differential equations}{section.11}% 35
+\BOOKMARK [1][-]{section.12}{Linear Second Order Differential Equations}{part.2}% 36
+\BOOKMARK [2][-]{subsection.12.1}{Formulation}{section.12}% 37
+\BOOKMARK [2][-]{subsection.12.2}{Using one solution to find another}{section.12}% 38
+\BOOKMARK [1][-]{section.13}{Linear Differential Equations with Constant Coefficients}{part.2}% 39
+\BOOKMARK [2][-]{subsection.13.1}{Second Order Recap}{section.13}% 40
+\BOOKMARK [2][-]{subsection.13.2}{Initial-value Problems}{section.13}% 41
+\BOOKMARK [2][-]{subsection.13.3}{Boundary-value Problems}{section.13}% 42
+\BOOKMARK [2][-]{subsection.13.4}{2nd order inhomogeneous ODEs with constant coefficients}{section.13}% 43
+\BOOKMARK [2][-]{subsection.13.5}{Higher-order inhomogeneous ODEs with constant coefficients}{section.13}% 44
+\BOOKMARK [0][-]{part.3}{III Partial Differentiation}{}% 45
+\BOOKMARK [1][-]{section.14}{Calculus for functions of severable variables}{part.3}% 46
+\BOOKMARK [2][-]{subsection.14.1}{Basics}{section.14}% 47
+\BOOKMARK [2][-]{subsection.14.2}{Summary}{section.14}% 48
+\BOOKMARK [2][-]{subsection.14.3}{Continuity}{section.14}% 49
+\BOOKMARK [2][-]{subsection.14.4}{Summary}{section.14}% 50
+\BOOKMARK [2][-]{subsection.14.5}{Differentiation}{section.14}% 51
+\BOOKMARK [2][-]{subsection.14.6}{Summary}{section.14}% 52
+\BOOKMARK [1][-]{section.15}{More derivatives}{part.3}% 53
+\BOOKMARK [2][-]{subsection.15.1}{Clairaut's theorem}{section.15}% 54
+\BOOKMARK [2][-]{subsection.15.2}{Summary}{section.15}% 55
+\BOOKMARK [2][-]{subsection.15.3}{Linear approximation and total derivative}{section.15}% 56
+\BOOKMARK [2][-]{subsection.15.4}{Summary}{section.15}% 57
+\BOOKMARK [2][-]{subsection.15.5}{The chain rule for partial differentiation}{section.15}% 58
+\BOOKMARK [2][-]{subsection.15.6}{Summary}{section.15}% 59
+\BOOKMARK [1][-]{section.16}{Implicit differentiation}{part.3}% 60
+\BOOKMARK [2][-]{subsection.16.1}{Summary}{section.16}% 61
+\BOOKMARK [1][-]{section.17}{Simple Partial differential equations }{part.3}% 62
+\BOOKMARK [2][-]{subsection.17.1}{Summary}{section.17}% 63
+\BOOKMARK [1][-]{section.18}{Gradient Vectors and Directional Derivatives}{part.3}% 64
+\BOOKMARK [2][-]{subsection.18.1}{Directional derivatives}{section.18}% 65
+\BOOKMARK [2][-]{subsection.18.2}{2-D Gradient vectors}{section.18}% 66
+\BOOKMARK [2][-]{subsection.18.3}{3-D Gradient vectors}{section.18}% 67
+\BOOKMARK [2][-]{subsection.18.4}{Tangent Plane to a Surface}{section.18}% 68
+\BOOKMARK [2][-]{subsection.18.5}{Normal Line to a Surface}{section.18}% 69
+\BOOKMARK [1][-]{section.19}{Summary}{part.3}% 70
+\BOOKMARK [1][-]{section.20}{Multivariable Taylor Series}{part.3}% 71
+\BOOKMARK [2][-]{subsection.20.1}{Linear Approximation and Hessian}{section.20}% 72
+\BOOKMARK [2][-]{subsection.20.2}{Local behaviour of multivariable functions}{section.20}% 73
+\BOOKMARK [1][-]{section.21}{The key take home message}{part.3}% 74
+\BOOKMARK [1][-]{section.22}{Summary}{part.3}% 75
+\BOOKMARK [0][-]{part.4}{IV Appendix}{}% 76
+\BOOKMARK [1][-]{section.23}{Linear Independence of Functions}{part.4}% 77
+\BOOKMARK [1][-]{section.24}{Linear Independence of Common Functions}{part.4}% 78
+\BOOKMARK [2][-]{subsection.24.1}{Polynomials}{section.24}% 79
+\BOOKMARK [2][-]{subsection.24.2}{Exponentials}{section.24}% 80
+\BOOKMARK [2][-]{subsection.24.3}{Trigonometric Functions}{section.24}% 81
+\BOOKMARK [1][-]{section.25}{Summary}{part.4}% 82
