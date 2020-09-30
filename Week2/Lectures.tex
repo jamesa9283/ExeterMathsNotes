@@ -1,0 +1,167 @@
+\documentclass{article}
+
+% Packages
+\usepackage{fullpage}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, positioning}
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\di}{\frac{dy}{dx}}
+\newcommand{\dii}{\frac{d^2y}{dx^2}}
+\newcommand{\din}{\frac{d^ny}{dx^n}}
+\newcommand{\dt}{\frac{dx}{dt}}
+\newcommand{\dtt}{\frac{d^2x}{dt^2}}
+\newcommand{\dtn}{\frac{d^nx}{dt^n}}
+\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\fd}[2]{\frac{d #1}{d #2}}
+\renewcommand{\l}{\lambda}
+\newcommand{\el}{e^{\l x}}
+
+
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+\newtheorem{definition}{Definitions}
+
+\title{Differential Equations Week 2 - Second Order ODEs}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+
+
+\multicols{2}
+
+\section{Linear Second Order}
+
+The DE is linear in $y$ and of the form; $y'' + p(x)y' + q(x)y = r(x)$. we also know the {\color{blue} superposition or linearity principle}, which says that: if $y_1(x)$ and $y_2(x)$ are solutions of the DE, then $Ay_1(x) + By_2(x)$ are solutions. These are known as basis of the solutions. \\
+
+Also theIVt requires two conditions. We also know that $y_1(x)$ and $y_2(x)$ must be linearly independent, hence a linearly dependent basis. So we know that $k_1y_1(x) + k_2y_2(x) = 0$.
+
+\subsection{Finding basis if one solution is known}
+Le us assume that we know $y_1(x)$ and we have an equation of the form, $y'' + y'p(x) + q(x)y = r(x)$. Then we can let $y = y_2$ and then $y = uy_1$ due to linear independence of solutions. Then:
+\begin{align*}
+  y' &= y_2' = uy_1' + u'y_1 \\
+  y'' &= y_2'' = u'' + 2u'y_1' + uy_1''\\
+\end{align*}
+Now we sub these into the ODE, we get that:
+\begin{align*}
+  u''y_1 + 2u'y_1' + uy'' + p(u'y_1 + uy_1') + quy_1 &= 0\\
+  u''y_1 + u'(2y_1' + py_1) + u(y_1'' + py_1' + qy_1) &= 0\\
+\end{align*}
+The last coeeficient becomes $0$ as we know that $y_1$ is a solution. We then transform it by letting $u' = v$ and then $u'' = v$. So:
+\begin{align*}
+  v' + v\left( \frac{2y_1'}{y_1} + p\right) = 0 \\
+  \implies u = \int{\frac{1}{y_1^2}e^{-\int{pdx}}}
+\end{align*}
+So then, we know that:
+$$ \frac{y_2}{y_1} = \int{\frac{1}{y_1^2}e^{-\int{pdx}}} $$
+
+\subsection{Homogenous Linear ODEs}
+
+Let us take an ODE of the form: $y'' + ay' + by = 0$ and then let the solution be of the form: $y = e^{\l x}$. Then you get the characteristic equation, which is $\l^2 + a\l + b = 0$, and then $\displaystyle{\l = \frac{-a \pm \sqrt{a^2 - 4b}}{2}}$. Then we must see whether the solution is two real solutions, one real solution or a complex conjugate.
+
+\subsubsection{Case 1: Two distinct roots}
+If discriminant $> 0$, then as $y_1,y_2$ are defined for all $x$, then their quotient are not constant. Hence, we then know that: $y = c_1e^{\l_1 x} + c_2e^{\l_2 x}$
+
+\subsubsection{Case 2: Repeated roots}
+If the discriminant $=0$, then we must have $\displaystyle{\l = -\frac{a}{2}}$. So $y_1 = e^{-\frac{a}{2}x}$ and we have to work out what $y_2$ is. However, we know that:
+$$  y_2' = u'y_1 + y_1'u $$ and $$ y_2'' = u''y_1 + 2u'y_1' + uy_1'' $$
+
+Then we can plug these into $\displaystyle{y_2'' + ay_2' + by_2 = 0}$ and we get that
+$$u''y_1 + u'(2y_1' + ay_1) + u(y_1'' + ay_1' + by_1) = 0$$
+and from differentiating $y_1$ we know that $2y_1' + ay_1 = 0$ and because we know $y_1$ is a root of the equation, $y_1'' + ay_1' + by_1 = 0$, so then:
+$$ u''y_1 = 0 $$
+However, we know that $y_1 \neq 0$, so then $u'' = 0$ and hence:
+$$ u(x) = c_1x + c_2 $$
+Given the structure of the solution, we can say again that:
+$$ y = Ay_1 + By_2 = Ay_1 + Buy_1$$
+and hence,
+$$ y = e^{-\frac{a}{2}x}\left[ \widetilde{c_1} + \widetilde{c_2}x \right] $$
+
+\subsubsection{Case 3: Complex Conjugates}
+If the discriminant is $< 0$, then $\l = -\frac{a}{2} \pm i \omega$, where $\omega = b - \frac{a^2}{4}$. Then we know that:
+\begin{align}
+  e^{\l_1 x} = e^{-\frac{a}{2}x}(\cos \omega x + i\sin \omega x) \\
+  e^{\l_2 x} = e^{-\frac{a}{2}x}(\cos \omega x - i\sin \omega x)
+\end{align}
+Then adding the two, we get that:
+\begin{align}
+  y_1 = e^{-\frac{a}{2} x}\cos \omega x \\
+  y_2 = e^{-\frac{a}{2} x}\sin \omega x
+\end{align}
+and hence that:
+$$ y(x) = e^{-\frac{a}{2} x}(\cos \omega x + \sin \omega x) $$
+
+\section{Differential Operators}
+You can write an ODE using much simpler expressions, so $y'' + ay' + by = 0$ is the same as $D^2 + aD + bI = L$, where $\displaystyle{Dy = y' = \dii}$.\\
+
+Now, $D(e^{\l x}) = \l e^{\l x} = \l ^2 e^{\l x}$.
+$$ \therefore L(e^{\l x} = e^{\l x}) = e^{\l x}(\l ^2 + a\l + b) = P(\l)\el = 0 $$
+So $\el$ is a solution if and only if $\l$ is a solution of the characteristic equation.
+
+\section{Euler Cauchy Equations}
+It has a general form: $\displaystyle{x^2y'' + axy' + by = 0}$. To solve follow the procedure:\\
+
+Let one solution be: $\displaystyle{y = x^m}$, then $y' = xm^{m-1}$ and $y'' = m(m-1)x^{m-2}$. Then sub in and solve the following equation:
+$$ m^2 + m(a-1) + b = 0 $$
+Then again there are three cases.
+
+\subsection{Case 1: Two different roots}
+
+This one is pretty simple, plug in your $m_1, m_2$ from the quadratic above and use the general rule and you get that: $y(x) = c_1x^{m_1} + c_2x^{m_2}$
+
+\subsection{Case 2: Repeated Roots}
+
+We get that $b = \frac{(a-1)^2}{4}$, then you get that $m_1 = \frac{(1-a)}{2}$. Then we get that we need we need a $y_2  = uy_1$ and use the order reduction approach from above. You end up with $u = \ln x$. So the general solution is:
+$$ (c_1 + c_2\ln x)x^{\frac{(1-a)}{2}} $$
+
+\subsection{Case 3: Complex Conjugates}
+
+We say that we have a $m_1,m_2 = c \pm id$. Then plugging it in, we get:
+\begin{align*}
+  y &= x^{c \pm id} \\
+  &= x^c \exp(ln ( x^{\pm id})) \\
+  &= x^c e^{\pm id ln x}\\
+  &= x^c(\cos(d\ln x) \pm i\sin(d\ln x)) \\
+\end{align*}
+Then adding and substracting, we get the general solution:
+$$ y(x) = x^c[ A\cos(d\ln x) + B\sin(d\ln x)] $$
+
+\section{Nonhomegenous ODEs}
+The general form is $y'' + p(x)y' + q(x)y = r(x)$, where $r(x) \neq 0$. We have a general solution, that is of the form; $y(x) = y_{PI}(x) + y_{CF}(x) = y_p + C_1y_1 + C_2y_2$.\\
+
+The method for solving this is:
+\begin{enumerate}
+  \item If $r(x)$ is one of the entries on the table, use the corresponding $y_p$.
+  \item If $y_p$ is the solution of the ODE, then multiply $y_p$ by $x$, or $x^2$ if this solution corresponds to a doble root of the characteristic equation.
+  \item If $r(x)$ is the sum of functions, choose for sum of functions in the corresponding $y_p$.
+\end{enumerate}
+
+\subsection{Existence and Uniqueness of solutions}
+
+Let us take an ODE, $y'' + py' + qy = r(x)$, where $r(x) \neq 0$. Then we take the IVP and initial conditions of: $y(x_0) = k_0$ and $y'(x_0) = k_1$. If $p$ and $q$ are continuous in an interval $I$ and $x_0$ is in $I$, then the IVP has a unique solution on the interval $I$, $y_h = c_1y_1 + c_2y_2$.\\
+
+\noindent
+Linear independence is the same, so if $k_1y_1 + k_2y_2 = 0 \implies k_1=0, k_2=0$, then they are linearly independent. Two solutions are also linearly dependent, if and only if their Wronksian is zero at $x_0$.
+$$ W(y_1, y_2) = y_1y_2' - y_1'y_2 = ky_2y_2' - ky_2y_2' = 0 $$
+and we write the wronskian as:
+$$ W(y_1, y_2) =
+\left|\begin{matrix}
+  y_1 & y_2 \\
+  y_1' & y_2' \\
+\end{matrix}\right| $$
+
+A general solution method, goes along like this. Find a general solution for $r(x) = 0$ and then, find the particular integral as:
+$$ y_p(x) = -y_1\int{\frac{y_r}{W}} + y_2\int{\frac{y_1 r}{W}} $$
+Where $y_1, y_2$ are a basis of solutions for the ODE and $W$ is the wronskian.
+
+\end{document}
