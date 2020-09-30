@@ -4,6 +4,7 @@
 \usepackage{fullpage}
 \usepackage{multicol}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{bm}
 \usepackage{tikz}
@@ -76,7 +77,7 @@ If we take $\nab \cdot \grad$ where $f = (x_1, x_2, x_3, t)$. We can write the d
 \begin{align*}
   \div \grad &= \left(\pd{}{x}\veci + \pd{}{y}\vecj + \pd{}{z}\veck \right) \cdot \left(\pd{f}{x}\veci + \pd{f}{y}\vecj + \pd{f}{z}\veck \right) \\
   &= \pd{}{x_1}\pd{f}{x_1} + \pd{}{x_2}\pd{f}{x_2} + \pd{}{x_3}\pd{f}{x_3}\\
-  &= \pd{^2 f}{x_1^2} + \pd{^2 f}{x_2} + \pd{^2 f}{x_3}\\
+  &= \pd{^2 f}{x_1^2} + \pd{^2 f}{x_2^2} + \pd{^2 f}{x_3^2}\\
   &= \Delta f
 \end{align*}
 
@@ -99,10 +100,83 @@ We can write the curl of gradient as:
   &\implies \curl\grad = 0\\
 \end{align*}
 
+\subsection{Gradient of Divergence}
+Assume we have a $\vec u$, vector field, and we want $\grad \div$.
 
+\begin{align*}
+  [\grad \div]_i &= \nab_i \pd{u_j}{x_j} \\
+  &= \pd{}{x_i}\pd{u_j}{x_j} \\
+  &= \pd{^2 u_j}{x_i\partial x_j}
+\end{align*}
 
+\subsection{Divergence of Curl}
+We can write divergence of curl as:
+\begin{align*}
+  [\div\curl\vec u]_i &= \pd{}{x_i}[\curl\vec u]_i \\
+  &= \pd{}{x_i}\e_{ijk}\pd{u_k}{x_j} \\
+   \text{$i, j, k = 1, 2, 3$, so $i \leftrightarrow j$}\\
+  &= \pd{}{x_j}\e_{jik}\pd{u_k}{x_i} \\
+  &= -\e_{ijk}\pd{}{x_j}\pd{u_k}{x_i} \\
+  &= -\e_{ijk}\pd{}{x_i}\pd{u_k}{x_j} && \text{as $\vec u \in c^2$} \\
+\end{align*}
+As $\div(\curl\vec u) = -\div(\curl\vec u)$, then we know that $\div(\curl\vec u) = 0$
 
+\subsection{Curl of Curl}
+We can write curl of curl, $ \curl(\curl\vec u)$, as:
+\begin{align*}
+  [\curl(\curl\vec u)]_i &= \e_{ijk}\pd{}{x_j}(\curl\vec u)_k \\
+  &= \e_{ijk}\pd{}{x_j}\e_{klm}\pd{u_m}{x_l} \\
+  &= (\delta_{il}\delta_{jm} - \delta_{im}\delta_{jl})\pd{^2 u_m}{x_j\partial x_l} \\
+  &= \delta_{il}\delta_{jm}\pd{^2 u_m}{x_j\partial x_l} - \delta_{im}\delta_{jl}\pd{^2 u_m}{x_j\partial x_l} \\
+  &= \pd{^2 u_j}{x_j \partial x_i} - \pd{^2 u_i}{x_j \partial x_j}\\
+  &= \pd{}{x_i}\pd{u_j}{x_j} - \pd{^2 u_i}{x_j^2} \\
+  &= [\nab(\div\vec u)]_i - [\Delta\vec u]_i\\
+  &= [\nab(\div\vec u) - \nab^2\vec u]_i\\
+\end{align*}
 
+\section{Scalar Field / Vector Fields Defintions}
+
+A scalar or vector quantity is said to be a {\color{blue} field }if it is a function of position. Examples
+\begin{enumerate}
+  \item {\color{orange}Temperature} is a scalar field, $T = T(x, y, z) = T(\vec r)$
+  \item {\color{orange}Pressure and Density} are also scalr fields $P = P(\vec r)$ and $\rho = \rho(\vec r)$
+  \item if a physical quantity is a scalar we speak of a scalar field or function of position.
+\end{enumerate}
+
+\noindent
+If a physical quantity is a vector, such as force $\vec F = \vec F(x, y, z)$. We speak of a {\color{blue}vector field} or {\color{blue}vector function}. \\
+
+\noindent
+A {\color{blue} vector-valued function }is an $f: A\subset \R^n \mapsto \R^m$. So, for each $\vec x = (x_1,\,\dots\,, x_n) \in A$, $f$ assigns a value $f(\vec x)$, an m-tuple, in $\R^m$. These functions, $f$, are called vector-valued functions if $m>1$ and scalar if $m=1$.\\
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+  Take the function, $f: (x, y, z) \mapsto (x^2 + y^2 + z^2)^\frac{3}{2}$
+}\end{example}\begin{solution}{
+  It's a scalar function from $\R^3$ to $\R$.
+}\end{solution}}}\vspace{10pt}
+
+\noindent\fbox{\parbox{0.475\textwidth}{\begin{example}{
+   Take the function $g: (x_1, x_2, x_3) \mapsto (x_1x_2x_3, \sqrt{x_1x_3}) $
+}\end{example}\begin{solution}{
+  This is a vector valued function from $\R^3$ to $\R^2$
+}\end{solution}}}\vspace{10pt}
+
+To specify a temperature $T$ in a region $A$ of space requires a function $T$, $T: A\subset \R^m \mapsto \R$. $T = T(x, y, z)$.\\
+
+\noindent
+To specify the velocity of a fluid moving in space requires a map, $\vec v: \R^4 \mapsto \R^3$ where $\vec v (x, y, z, t)$ is the velocity of the fluid at $(x, y, z)$ at time $t$.\\
+
+\noindent
+When $f: U\subset\R^n \mapsto \R$, we say that $f$ is a real valued function of $n$-variables with domain $U$.\\
+
+\noindent
+Let $f: U:\R^n \mapsto \R$, then graph $f = \{ (x_1, x_2,\, \dots\,, x_n) \in \R^{n + 1} : (x_1,\, \dots\,, x^n)\}$
+If $n= 1$, then we can conclude that graph $f$ is curve in $\R^2$ and if $n=2$, then graph $f$ is a surface in $\R^3$.
+
+\subsection{Level Sets, Curves and Surfaces}
+A level set is a subset of $\R^3$ on which $f$ is constant. For example, for $f(x, y, z) = x^2 + y^2 + z^2$, the set where $x^2 + y^2 + z^2 = 1$ is alevel set. A level set is a set of $(x, y, z): f(x, y, z) = c$ where $c \in \R$.\\
+
+For functions $f(x, y)$, we speak of level curves or contours. example, $f: \R^2 \mapsto \R$, $f(x, y) = x + y + 2$, has as it's graph the inclined plane $z = x + y + 2$. The plane intersects the $xy$ plan where $z = 0$ in the line $y = -x - 2$ and the $z$-axis at $(0, 0, 2)$. For any $c \in \R$, the level curve of $c$ is the straight line: $y = -x + (c-2): L_c \{(x, y): y = - x + c - 2 \}\subset \R^2$
 
 
 
