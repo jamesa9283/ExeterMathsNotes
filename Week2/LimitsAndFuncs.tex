@@ -13,12 +13,15 @@
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
 \usepackage{amsthm}
+\usepackage{tcolorbox}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true, %set true if you want colored links
     linktoc=all,     %set to all if you want both sections and subsections linked
     linkcolor=black,  %choose some color if you want links to stand out
 }
+\usepackage{fancyhdr}
+
 
 % Macros
 \newcommand{\R}{\mathbb{R}}
@@ -34,25 +37,26 @@
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 \newcommand{\eR}{\overbar{\R}}
 
-\setlength{\columnsep}{20pt}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}% removes header line
+\fancypagestyle{plain}{% for chapter starting pages
+  \fancyhf{}% clears header fields
+  \cfoot{\hyperlink{contents}{TOC}}}
+\cfoot{\hyperlink{contents}{TOC}}% links the TOC at the center of the page footer
+
+%\setlength{\columnsep}{20pt}
 
 %ToC stuff
-\newtheoremstyle{mythmstyle}%
-    {}%
-    {}%
-    {\it}%
-    {}%
-    {\bf}%
-    {}%
-    { }%
-    {\thmname{#1}\thmnumber{ #2}%
-    \thmnote{: #3\addcontentsline{toc}{subsubsection}{{\it#1}: \tt#3}}. }
-\theoremstyle{mythmstyle}
-\newtheorem{theorem}{Theorem}[subsection]
 \newtheorem{example}{Example}
 \newtheorem{solution}{Solution}
-\newtheorem{definition}{Definition}[subsection]
+%\newtheorem{definition}{Definition}[subsection]
 \newtheorem{corollary}{Corollary}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
 
  % Document stuff
 
@@ -71,16 +75,16 @@
 
 We consider limits of real functions, that is $f: X \to \R$, with $X\sub\R$.
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Limit]{
+\noindent\begin{definition}{Limit}{}{
  We say that $f(x)$ approaches the limit $L$ as $x$ approaches $x_0$, and write
  $$ \lim_{x\to x_0}{f(x)} = L$$
  if $f$ is defined on some deleted neighbourhood of $x_0$ and, for every $\e > 0$, there is a $\d > 0$ such that:
  $$ |f(x) - L| < \e $$
  if
  $$ 0 < |x - x_0| < \d $$
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\begin{theorem}[Limit Uniqueness]
+\begin{theorem}{Limit Uniqueness}{}
   If $\displaystyle{\lim_{x\to x_0}{f(x)}}$ exists, then it is unique, that is, if:
   $$ \lim_{x\to x_0}{f(x)} = L_1 \qquad\text{ and }\lim_{x\to x_0}{f(x)} = L_2 $$
   then $\displaystyle{L_1 = L_2}$
@@ -95,10 +99,10 @@ We consider limits of real functions, that is $f: X \to \R$, with $X\sub\R$.
     |L_1 - L_2| &= |L_1 - f(x) + f(x) - L_2| \\
     &\le |L_1 - f(x)| + |L_2 - f(x)| < 2\e \\
   \end{align*}
-  Given we know that $\e$ is arbitarily small, then $|L_1 - L_2|$ is abitrarily small and hence, $L_1 = L_2$.
+  Given we know that $\e$ is arbitrarily small, then $|L_1 - L_2|$ is arbitrarily small and hence, $L_1 = L_2$.
 \end{proof}
 
-\begin{theorem}[Algebra of Limits]
+\begin{theorem}{Algebra of Limits}{}
   If $\lim_{x\to x_0}{f(x)} = L_1$ and $\lim_{x\to x_0}{g(x)} = L_2$, then:
   \begin{align*}
     \lim_{x\to x_0}{(f + g)} &= L_1 + L_2 \\
@@ -112,21 +116,21 @@ We consider limits of real functions, that is $f: X \to \R$, with $X\sub\R$.
 \end{proof}
 
 \subsection{One Sided Limit}
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Left-hand limits]{
+\noindent\begin{definition}{Left-hand limits}{}{
 We say that $f(x)$ approaches the left-hand limit $L$ as $x$ approaches $x_0$ from the left and write:
 $$ \lim_{x\to x_0^{-}}{f(x)} = L $$
 if $f$ is defined on some open interval $(a, x_0)$ and, for each $\e>0, \ex \d > 0$,
 $$ |f(x) - L|<\e \text{ if } x_0 - \d < x < x_0$$
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Right-hand limit]{
+\noindent{{\begin{definition}{Right-hand limit}{}{
 We say that $f(x)$ approaches the right-hand limit $L$ as $x$ approaches $x_0$ from the right and write:
 $$ \lim_{x\to x_0^{+}}{f(x)} = L $$
 if $f$ is defined on some open interval $(x_0, b)$ and, for each $\e>0, \ex \d > 0$,
 $$ |f(x) - L|<\e \text{ if } x_0 < x < x_0 + \d$$
 }\end{definition}}}\vspace{10pt}
 
-\begin{theorem}
+\begin{theorem}{}{}
   A function $f$ has a limit at $x_0$ $\iff$ it has right and left handed limits and they are equal.
   $$ \lim_{x\to x_0}{f(x)} = L $$
   if and only if
@@ -138,19 +142,19 @@ $$ |f(x) - L|<\e \text{ if } x_0 < x < x_0 + \d$$
 
 \subsection{Limits at $\pm\infty$}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Limit at infinity]{
+\noindent\begin{definition}{Limit at infinity}{}{
  We say that $f(x)$ approaches the limit $L$ as $x$ approaches $\infty$, and write:
  $$ \lim_{x\to x_0}{f(x)} = L $$
  if $f$ is defined on an interval $(a,\, \infty)$ and, for each $\e > 0$, there is a number $\b$ st,
  $$ |f(x) - L| < \e \qquad\text{if $x > \b$}$$
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Left infinite limit]{
+\noindent\begin{definition}{Left infinite limit}{}{
  We say $f(x)$ approaches $\infty$ as $x$ approaches $x_0$ from the left, and write:
  $$ f(x_0-) = \infty $$
  if $f$ is defined on an interval $(a, x_0)$ and, for each real number $M$, there is a $\d > 0$ such that:
  $$ f(x) > M \text{ if } x_0 - \d < x < x_0 $$
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
 NB! When we say a limit exists, we mean that it is finite, i.e. not $\pm\infty$. If it is, we can say it exists in the extended reals.\\
 
@@ -159,15 +163,15 @@ Also with infinite limits, we know that the `Uniqueness of Limits' and the `Alge
 The `Alegbra of Limits' rules are also valid if $L_1,L_2 = \infty$ provided the RHS are not indeterminant forms.
 
 \subsection{Monotonics}
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Monotonicity]{
+\noindent\begin{definition}{Monotonicity}{}{
 A function $f$ is {\color{blue} nondecreasing }on an interval $I$ if:
 $$ f(x_1) \le f(x_2) \quad\text{if }x_1,x_2\in I \text{ and }x_1<x_2$$
 or {\color{blue} nondecreasing }if,
 $$ f(x_1) \ge f(x_2) \quad\text{if }x_1,x_2\in I \text{ and }x_1<x_2$$
 We further define that if the `$\le$' can be replaced with a `$<$', then $f$ is strictly monotonic on $I$
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\begin{theorem}
+\begin{theorem}{}{}
   Suppose that $f$ is monotonic on $(a,\, b)$ and define
   $$ \a = \inf_{a<x<b}{f(x)} \text{ and } \sup_{a<x<b}{f(x)} $$
   \begin{enumerate}
@@ -184,22 +188,23 @@ We further define that if the `$\le$' can be replaced with a `$<$', then $f$ is 
   Too long and tedious to typeset
 \end{proof}
 
+\newpage
 \section{Continuity}
 Now we have defined limits, we can now define continuity.\\
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Continuity at $x_0$]{
+\noindent\begin{definition}{Continuity at $x_0$}{}{
  We say that $f$ is continuous at $x_0$ if $f$ is defined on an open interval $(a, b)$ containing $x_0$ and that $\lim_{x\to x_0}{f(x)} = f(x_0)$.
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Left continuity at $x_0$]{
+\noindent\begin{definition}{Left continuity at $x_0$}{}{
   We say $f$ is continuous from the left at $x_0$ if $f$ is defined on an open interval $(a, x_0)$ and $f(x_0-) = f(x_0)$.
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Right Continuity at $x_0$]{
+\noindent\begin{definition}{Right Continuity at $x_0$}{}{
   we say $f$ is continuous from the right at $x_0$ if $f$ is defined on an open interval $(x_0,\, b)$ and $f(x_0+) = f(x_0)$.
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\begin{theorem}
+\begin{theorem}{}{}
   A function $f$ is continuous at $x_0$ if and only if $f$ is defined on an open interval $(a, b)$ containing $x_0$ and for each $\e>0$ there is a $\d>0$ st,
   \begin{equation}
     |f(x) - f(x_0)| < \e
@@ -207,18 +212,18 @@ Now we have defined limits, we can now define continuity.\\
   whenever $|x - x_0| < \d$
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}{}{}
   A function $f$ is continuous from the right at $x_0$ if and only if $f$ is defined on an interval $[x_0,\, b)$ and for each $\e > 0\ex\d > 0$ st (1) holds whenever: $\displaystyle{x_0 \le x < x_0 + \d}$
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}{}{}
   A function $f$ is continuous from the left at $x_0$ if and only if $f$ is defined on an interval $(a, x_0]$ and for each $\e > 0\ex\d > 0$ st (1) holds whenever: $\displaystyle{x_0 - \d < x \le x_0}$
 \end{theorem}
 
 Note that $f$ is continuous if and only if $f(x_0-) = f(x_0+) = f(x_0)$.\\
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}{
- A function $f$ is continuous on an open interval $(a,\, b)$ if it is continouos at every point in $(a,\, b)$. If, in addition,
+\noindent\begin{definition}{Continuous on a set}{}{
+ A function $f$ is continuous on an open interval $(a,\, b)$ if it is continuous at every point in $(a,\, b)$. If, in addition,
  \begin{equation}
    f(b-)=f(b)
  \end{equation}
@@ -227,12 +232,12 @@ Note that $f$ is continuous if and only if $f(x_0-) = f(x_0+) = f(x_0)$.\\
    f(a+) = f(a)
  \end{equation}
  then $f$ is continuous on $(a,\,b]$ or $[a,\,b)$ respectively. If both are true then $f$ is continuous on $[a,\,b]$.
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 More generally, if $S$ is a subset of $D_f$ consisting of finitely or infinitely many disjoint intervals, then $f$ is continuous on $S$ if $f$ is continuous on every interval in $S$. (From here on, if we say ``$f$ is continuous on $S$'' we mean $S$ is a set of this kind.).
 
 \subsection{Discontinuities}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Piecewise Continuity]{
+\noindent\begin{definition}{Piecewise Continuity}{}{
   $f$ is {\color{blue} piecewise continuous }on $[a,\,b]$ if
   \begin{enumerate}
     \item $\ex f(x_0+)\forall x_0\in[a,\,b)$
@@ -240,9 +245,9 @@ More generally, if $S$ is a subset of $D_f$ consisting of finitely or infinitely
     \item $f(x_0+) = f(x_0-) = f(x_0)$ for all but finitely many points $x_0\in (a,\,b)$
   \end{enumerate}
   If (3) fails to hold at some $x_0$ in $(a,\,b)$, $f$ has a {\color{blue}  jump discontinuity}.
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Removable discontinuity]{
+\noindent\begin{definition}{Removable discontinuity}{}{
 Let $f$ be defined on a deleted neighborhood of $x_0$ and be discontinuous (perhaps even undefined) at $x_0$. We say that $f$ has a removable discontinuity at $x_0$ if $\lim_{x\to x_0}{f(x)}$ exists. In
 this case, the function
 $$g(x) = \begin{cases}
@@ -250,19 +255,18 @@ $$g(x) = \begin{cases}
   \lim_{x\to x_0}{f(x)} & \text{ if $x = x_0$}\\
 \end{cases} $$
 is continuous at $x_0$.
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
 \subsection{Continuity Arithmetic}
-\begin{theorem}
+\begin{theorem}{}{}
   If $f$ and $g$ are continuous on a set $S$, then so are $f + g$, $f - g$ and $fg$. So is $\displaystyle{\frac{f}{g}}$ given $g\neq 0$ at $x_0$.
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}{}{}
   Suppose that $g$ is continous at $x_0$, $g(x_0)$ is an interior point of $D_f$ and $f$ is continuous at $g(x_0)$. Then $f\circ g$ is continuous at $x_0$.
 \end{theorem}
 \begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[scale=0.9]
+  \begin{tikzpicture}
     \draw[latex-latex] (-3.5,0) -- (3.5,0) ; %edit here for the axis
     \draw[(-, ultra thick, orange] (0,0) -- (0.01,0);
     \draw[{-)}, ultra thick, orange] (2,0) -- (2.01,0);
@@ -299,9 +303,10 @@ So the above theorem is saying that we must have some $(g(x_0) - \e,\, g(x_0) + 
 
 \end{proof}
 
+\newpage
 \section{Boundedness}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Bounded Below]{
+\noindent\begin{definition}{Bounded Below}{}{
  A funtion $f$ is bounded below on a set $S$ if theres an $m\in\R$
  $$ f(x) \geq m \qquad\forall x\in S $$
  In this case,
@@ -310,41 +315,43 @@ So the above theorem is saying that we must have some $(g(x_0) - \e,\, g(x_0) + 
  $$ \a = \inf_{x\in S}{f(x)} $$
  If $\ex x_1\in S$, such that $f(x_1) = \a$, then we say that $\a$ is the minimum of $f$ on $S$ and write:
  $$ \a = \min_{x\in S}{f(x)} $$
-}\end{definition}}}\vspace{10pt}
+}\end{definition}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Bounded Above]{
+\noindent{{\begin{definition}{Bounded Above}{}{
  $f$ is bounded above on $S$, if $\ex M\in\R$, such that, $f(x) \le M \qquad \forall x\in S$. Then we can write;
  $$ \b = \sup_{x\in S}{f(x)} $$
  If $\ex x_2\in S$, such that $f(x_2) = \b$, then we say that $\b$ is the minimum of $f$ on $S$ and write:
  $$ \b = \max_{x\in S}{f(x)} $$
 }\end{definition}}}\vspace{10pt}
 
-\noindent\fbox{\parbox{0.475\textwidth}{\begin{definition}[Bounded]{
+\noindent\begin{definition}{Bounded}{}
   If $f$ is both bounded below and bounded above on a set $S$, then $f$ is bounded on $S$.
-}\end{definition}}}\vspace{10pt}
-
-\begin{theorem}[Boundedness Theorem]
+\end{definition}\vspace{10pt}
+\begin{theorem}{Boundedness Theorem}{}
   If $f$ is continuous on a finite closed interval $[a,\, b]$, then $f$ is bounded on $[a,\,b]$
 \end{theorem}
-\begin{tikzpicture}[declare function={f(\x)=0.3*(\x-3.5)^3-\x+7;a=1;b=6;c=4.94; t = 3;}] %starts and declares the function
- \draw[-stealth] (-0.5,0) -- (6.5,0); % draw x axis
- \draw[-stealth] (0,-0.5) -- (0,6.5); % draw y axis
- \draw[blue] plot[smooth,domain={a}:{b}] ({\x},{f(\x)}); %draws function
- \foreach \X in {a,b,t}
- {\draw[dashed] (\X,0) node[below]{$\X$} |- (0,{f(\X)}) node[left] {$f(\X)$};} %plots points and draws dashes
- % \e-neighbourhood code
- \draw[(-, ultra thick, red] (2.75,0) -- (2.76,0);
- \draw[{-)}, ultra thick, red] (3.25,0) -- (3.26,0);
- \draw[ultra thick, red] (2.75,0) -- (3.25,0);
- % \d-neighbourhood
- \draw[(-, ultra thick, red] (0, {f(3)-0.25}) -- (0, {f(3)-0.24});
- \draw[{-)}, ultra thick, red] (0, {f(3)+0.25}) -- (0, {f(3)+0.26});
- \draw[ultra thick, red] (0, {f(3)-0.25}) -- (0, {f(3)+0.25});
- %
- \node at (a,{f(a)}) [circle,fill,inner sep=1.5pt, color=blue]{};
- \node at (b,{f(b)}) [circle,fill,inner sep=1.5pt, color=blue]{};
-\end{tikzpicture}
-  Assume $f$ is bounded, it curves again, I promise...
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[declare function={f(\x)=0.3*(\x-3.5)^3-\x+7;a=1;b=6;c=4.94; t = 3;}] %starts and declares the function
+   \draw[-stealth] (-0.5,0) -- (6.5,0); % draw x axis
+   \draw[-stealth] (0,-0.5) -- (0,6.5); % draw y axis
+   \draw[blue] plot[smooth,domain={a}:{b}] ({\x},{f(\x)}); %draws function
+   \foreach \X in {a,b,t}
+   {\draw[dashed] (\X,0) node[below]{$\X$} |- (0,{f(\X)}) node[left] {$f(\X)$};} %plots points and draws dashes
+   % \e-neighbourhood code
+   \draw[(-, ultra thick, red] (2.75,0) -- (2.76,0);
+   \draw[{-)}, ultra thick, red] (3.25,0) -- (3.26,0);
+   \draw[ultra thick, red] (2.75,0) -- (3.25,0);
+   % \d-neighbourhood
+   \draw[(-, ultra thick, red] (0, {f(3)-0.25}) -- (0, {f(3)-0.24});
+   \draw[{-)}, ultra thick, red] (0, {f(3)+0.25}) -- (0, {f(3)+0.26});
+   \draw[ultra thick, red] (0, {f(3)-0.25}) -- (0, {f(3)+0.25});
+   %
+   \node at (a,{f(a)}) [circle,fill,inner sep=1.5pt, color=blue]{};
+   \node at (b,{f(b)}) [circle,fill,inner sep=1.5pt, color=blue]{};
+  \end{tikzpicture}
+  \caption{Assume $f$ is bounded, it curves again, I promise...}
+\end{figure}
 \begin{proof}
   Suppose we take a $t\in[a,\,b]$. Since $f$ is continuous at $t $  $\ex $ an open interval, $t\in I_t$, st,
   \begin{equation*}
@@ -362,7 +369,7 @@ Let $\displaystyle{M = 1 + \max_{1\le i\le n}{|f(t_i)|}}$ and since,\\ $\display
 $$ |f(x)| \le M \qquad\forall x\in[a,\,b] $$
 \end{proof}
 
-\begin{theorem}[Extreme value Theorem]
+\begin{theorem}{Extreme value Theorem}{}
   Suppose that $f$ is continuous on a finite closed interval, $[a, b]$. Let,
   $$ \a = \inf_{a\le x\le b}{f(x)}\text{ and } \b =\sup_{a\le x\le b}{f(x)} $$
   Then $\a$ and $\b$ are respectively the minimum and maximum of $f$ on $[a,\,b]$; that is there are points $x_1$ and $x_2$ in $[a,\,b]$ such that;
@@ -386,22 +393,24 @@ $$ |f(x)| \le M \qquad\forall x\in[a,\,b] $$
   $$ \b_1 = \max_{1\le i \le n}{\frac{f(t_i) + \b}{2}} $$
   Then $f(t) < \b \,\forall \,t \in \bigcup_{i=1}^n{I_{t_i}\cap[a,\,b]} = [a,\,b]$, so we now have $\b <\b_1$ and hence a contradiction. So $f(x_2) = \b$ for some $x_2\in [a,\,b]$.
 \end{proof}
-
-\begin{theorem}[Intermediate Value Theorem]
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[declare function={f(\x)=0.3*(\x-3.5)^3-\x+7;a=1;b=6;}] %starts and declares the function
+   \draw[-stealth] (-0.5,0) -- (6.5,0); % draw x axis
+   \draw[-stealth] (0,-0.5) -- (0,6.5); % draw y axis
+   \draw[blue] plot[smooth,domain={a}:{b}] ({\x},{f(\x)}); %draws function
+   \foreach \X in {a,b}
+   {\draw[dashed] (\X,0) node[below]{$\X$} |- (0,{f(\X)}) node[left] {$f(\X)$};} %plots points and draws dashes
+   \draw[dashed, thick, green] (3,0) node[below]{$c$} |- (0,{f(3)}) node[left] {$\mu$};
+   \draw[dotted, thick, orange] (1, {f(1)}) -- (6, {f(6)});
+   % endpoints of the graph
+   \node at (a,{f(a)}) [circle,fill,inner sep=1.5pt, color=blue]{};
+   \node at (b,{f(b)}) [circle,fill,inner sep=1.5pt, color=blue]{};
+  \end{tikzpicture}
+\end{figure}
+\begin{theorem}{Intermediate Value Theorem}{}
   Suppose that $f$ is continuous on $[a,\, b]$, $f(a)\neq f(b)$, and $\mu$ is between $f(a)$ and $f(b)$. Then $f(c) = \mu$, for some $c\in [a,\, b]$
 \end{theorem}
-\begin{tikzpicture}[declare function={f(\x)=0.3*(\x-3.5)^3-\x+7;a=1;b=6;}] %starts and declares the function
- \draw[-stealth] (-0.5,0) -- (6.5,0); % draw x axis
- \draw[-stealth] (0,-0.5) -- (0,6.5); % draw y axis
- \draw[blue] plot[smooth,domain={a}:{b}] ({\x},{f(\x)}); %draws function
- \foreach \X in {a,b}
- {\draw[dashed] (\X,0) node[below]{$\X$} |- (0,{f(\X)}) node[left] {$f(\X)$};} %plots points and draws dashes
- \draw[dashed, thick, green] (3,0) node[below]{$c$} |- (0,{f(3)}) node[left] {$\mu$};
- \draw[dotted, thick, orange] (1, {f(1)}) -- (6, {f(6)});
- % endpoints of the graph
- \node at (a,{f(a)}) [circle,fill,inner sep=1.5pt, color=blue]{};
- \node at (b,{f(b)}) [circle,fill,inner sep=1.5pt, color=blue]{};
-\end{tikzpicture}
 \begin{proof}
   Suppose that $f(a) < \mu < f(b)$. The set,
   $$ S = \{ x : a \le x \le b \text{ and }f(x)\le\mu  \} $$
