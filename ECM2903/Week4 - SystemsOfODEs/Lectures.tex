@@ -1,0 +1,181 @@
+\documentclass{article}
+
+% Packages
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
+\usepackage{amsthm}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\di}{\frac{dy}{dx}}
+\newcommand{\dii}{\frac{d^2y}{dx^2}}
+\newcommand{\din}{\frac{d^ny}{dx^n}}
+\newcommand{\dt}{\frac{dx}{dt}}
+\newcommand{\dtt}{\frac{d^2x}{dt^2}}
+\newcommand{\dtn}{\frac{d^nx}{dt^n}}
+\renewcommand{\vec}[1]{\underline{\textbf{#1}}}
+\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\fd}[2]{\frac{d #1}{d #2}}
+\renewcommand{\l}{\lambda}
+\newcommand{\g}{\gamma}
+\renewcommand{\o}{\omega}
+\newcommand{\el}{e^{\l x}}
+
+
+%ToC stuff
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+%\newtheorem{definition}{Definition}[subsection]
+\newtheorem{corollary}{Corollary}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
+
+
+\title{Differential Equations Week 4 - Systems of ODEs}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+
+\multicols{2}
+
+\section{Preliminaries}
+Qualitive methods are about general behavior of a family of solutions. We aren't aiming to solve it, we are analysing behavior.
+
+We are focusing on stability of the ODEs. If you make a small change an early time, you have a small change later.\\
+
+\section{Systems of ODEs.}
+
+We can take the characteristic equations and calculate the eigenvectors. with a general solution of: $\displaystyle{y = c_1\vec x_1 e^{\l_1 t }+ \dots + c_n\vec x_n e^{\l_n t} }$. We can also we can write any system as first order ODES. Let $y_n = y^(n-1)$ and then any equation is a system of ODEs. Then the solution is $y = \vec h (t)$ and the IVP is $K = \begin{bmatrix}
+  K_1 & \dots & K_n
+\end{bmatrix}^T$
+
+Uniqueness and Existence: This is very similar to before. Let $f_1 \dots f_n$ be continuous with continuous partial derivative and there be some initial conditions in some domain, $R$. Then, the ODE has a solution on an interval $(t_0 - \alpha, t_0 + \alpha)$ satisfying the IC and this solution is unique.
+
+We can write the system as: $\displaystyle{\vec y' = A\vec y + \vec g}$ and if it is homogenous, then $\displaystyle{\vec g = \vec 0}$ and then $\displaystyle{\vec y' = A\vec y}$.
+
+If $A$ and $g$ are both continuous on $t_0 \in(\alpha, \beta)$, then the ODE has a solution $y(t)$ and it is unique.
+
+We can apply superpoistion of linearity property and use the similar linear independence of the basis we learnt before. A wronskian can also be written. We shall again, be writing a lot of exponentials.
+
+\subsection{Systems of ODEs with constant Coefficients}
+For a system: $\displaystyle{\vec y' = A\vec y}$, the solution can be written as;
+$${\vec y =\vec x e^{\l t} = A\vec x e^{\l t}}$$
+
+This then yields the eigenvalue problem $Ax = \l x$ and the corresponding solutions are:
+$$ y_1 = \vec x_1 e^{\l_1 t}, \dots, y_n = \vec x_n e^{\l_n t} $$
+and we can write a wronskian:
+\begin{align*}
+  W &= (\vec y_1, \dots, \vec y_n) \\
+  &=
+  e^{\l_1+\dots+\l_n}\left|\begin{matrix}
+    \vec x_1 & \vec x_2 & \dots & \vec x_n \\
+    \vec x_1^{(1)} & \vec x_2^{(1)} & \dots & \vec x_n^{(1)} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \vec x_1^{(n-1)} & \vec x_2^{(n-1)} & \dots & \vec x_n^{(n-1)} \\
+  \end{matrix}\right|
+\end{align*}
+$W$ is only zero when the determinant is zero as an exponential is always positive. We also have a general solution:
+$$ \vec y = c_1\vec x_1 e^{\l_1 t} + \dots + c_n\vec x_n e^{\l_n t} $$
+
+\subsection{Phase Portraits}
+A paramentric curve with parameter $t$ is called a trajectory or orbit / path and the $y_1-y_2$ plane is called a phase plane with trajectories gives phase portraits. Dividing we get:
+$$ \fd{y_2}{y_1} = \frac{a_{21}y_1 + a_{22}y_2}{a_{11}y_1 + a_{12}y_2} $$
+This associated every point $P$ in the $(y_1, y_2)$ plane with a unique tangent diection, $\displaystyle{\fd{y_2}{y_1}}$ of the trajectory passing through $P$ except the point, $P = P_0$ where $\displaystyle{\fd{y_2}{y_1} = \frac{0}{0}}$ becomes indeterminant and is hence called a critical point.\\
+
+There are five types of critical point:
+\begin{enumerate}
+  \item Improper Nodes: Where all trajectories except two, have the same limiting direction of the tangent
+  \item Proper Nodes: Where all the trajectories have a definite limiting direction
+  \item Saddle Points: where there re two incoming, two outgoing, rest in the neighbourhood.
+  \item Centers: enclosed by infinitely many closed trajectories
+  \item Spiral Points: about which the trajectories spiral approaching $P_0$ as $t\to \infty$
+  \item Degenerate Node: Does not happen if $A$ is symmetric $(a_{kj} = a_{jk})$ or skew symmetric $(a_{kj} = -a_{jk})$
+\end{enumerate}
+
+\subsection{Critical Points and Stability}
+The family of solution curves can be obtained through:
+$$ y(t) = \begin{bmatrix}
+  y_1 (t) & y_2(t) \\
+\end{bmatrix}^T $$
+Then we say the solutions are of the form: $\displaystyle{\vec y (t)= \vec x e^{\l t}}$ where $\{\l ,\vec x, \vec y \}$ are the eigenvalues and eigenvectors. Then we can derive the $\vec A\vec x = \l\vec x$ equation back from $\vec y'(t)$.\\
+
+Now, let us say the two eigenvalues of the C.Eq are: $\l_1, \l_2$. Then we can write the C.Eq as:
+$$ \l^2 - (a_{11} - a_{22}) + \det(\vec A) = 0 $$
+and now we can compare coefficients with a quadratic equation and let: $p = a_{11} + a_{22}$, $q = \det(\vec A)$ and $\Delta = p^2 - 4q$ and then:
+$$ \l_1 = \frac{1}{2}(p + \sqrt\Delta) \qquad \frac{1}{2}(p - \sqrt\Delta)$$
+and we can also say: $\l_1 - \l_2 = \sqrt\Delta$
+
+From here we can now look at the critical points and stability, now we can say:
+If $p = 0$, then you have a center\\
+If $p\neq 0$, then you have a spiral\\
+If $q>0$, then you have a node or a center \\
+If $q < 0$, then you have a saddle\\
+If $\Delta \geq 0$, then you have a node\\
+If $\Delta < 0$, then you have a spiral\\
+
+Real, same sign $\implies$ node\\
+Real, opposite signs $\implies$ saddle \\
+Pure imaginary $\implies$ center \\
+Complex $\implies$ spiral\\
+
+\begin{enumerate}
+  \item Stable: Trajector initiating at point $P_1$ stays within the disk of radius $\varepsilon$
+  \item Unstable: Trajectory intiating at $P_1$ diverges outside the disk of radius $\varepsilon$
+  \item Stable, attrative: Every trajectory apporoaches $P_0$ as $t\to \infty$.
+\end{enumerate}
+
+Stable and attractive $\implies$ $p<0$and $ q>0$\\
+Stable $\implies$ $p \le 0 $ and $ q>0$\\
+Unstable $\implies$ $P>0 $ and $ q<0$\\
+
+\section{Nonlinear Systems}
+\noindent\begin{definition}{Autonomous}{}
+  We shall call a system autonomous if the independent variable doesn't appear on the RHS.
+\end{definition}\vspace{10pt}
+
+We can linearise a nonlinear system, so we can linearise near a $P_0$ and yield, $$ \vec y' = f(\vec y) = \vec A \vec y = h(\vec y) $$
+and since $P_0$ is critical, then $f_1(0, 0) = 0$, $f_2(0, 0) = 0$ and hence,
+\begin{align*}
+  y_1' &= a_{11}y_1 + a_{12}y_2 + h_1(y_1, y_2)\\
+  y_2' &= a_{21}y_1 + a_{22}y_2 + h_2(y_1, y_2)
+\end{align*}
+
+\noindent\begin{theorem}{}{}
+   If $f_1$ and $f_2$ are continuous and have continuous partial derivatives in a neighbourhood of the critical point $P_0(0, 0)$ and if $\det(\vec A)\neq 0$, then the kind and stability of the critical point is the same as the linearised system.
+\end{theorem}\vspace{10pt}
+
+Exception: If $\vec A$ has equal or pure imaginary eigenvalues, then the nonlinear and the linearised system may have the ame kind of critical points or spiral points.
+
+
+If the equation is non-homogenous, we can follow similar processes to the previos weeks and what we saw earlier. Solve for $\vec y_h$ and then we can apply the two methods:
+
+Method of undetermined Coeffieicients can only be applied when $\vec A$ has constants or $\vec g$ is positive integers of $t$, exponential, cosine and sine. Then $y_p$ is assumed to be similar to $\vec g$
+
+
+
+
+
+\end{document}

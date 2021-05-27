@@ -1,0 +1,177 @@
+\documentclass{article}
+
+% Packages
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
+\usepackage{amsthm}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\di}{\frac{dy}{dx}}
+\newcommand{\dii}{\frac{d^2y}{dx^2}}
+\newcommand{\din}{\frac{d^ny}{dx^n}}
+\newcommand{\dt}{\frac{dx}{dt}}
+\newcommand{\dtt}{\frac{d^2x}{dt^2}}
+\newcommand{\dtn}{\frac{d^nx}{dt^n}}
+\renewcommand{\vec}[1]{\underline{\textbf{#1}}}
+\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\fd}[2]{\frac{d #1}{d #2}}
+\renewcommand{\l}{\lambda}
+\newcommand{\g}{\gamma}
+\renewcommand{\o}{\omega}
+\newcommand{\el}{e^{\l x}}
+
+
+%ToC stuff
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+%\newtheorem{definition}{Definition}[subsection]
+\newtheorem{corollary}{Corollary}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
+
+
+\title{Differential Equations Week 5 - Series solutions of ODEs}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+
+\multicols{2}
+
+\section{Power Series Method}
+\begin{enumerate}
+  \item Inifnite series around center $x_0$,
+  $$ \sum_{m = 0}^x {a_mx^m} = a_0 + a_1(x -x_0) + \dots \quad m\in\Z^+$$
+  For a given homogenous ODE: $\displaystyle{y'' +p(x)y' + q(x) = 0}$, the coefficients are a power series. Then the solution of the ODE can be obtained as a power series.
+  \item Replace powers of power series and collect same powers of $x$.
+\end{enumerate}
+
+\subsection{Convergence interval and Radius of Convergence}
+\begin{enumerate}
+  \item Useless case, always $x = x_0$
+  \item It converges for $|x - x_0| < R$, where
+  $$ R = \left({\lim_{m\to\infty}{{\sqrt[\leftroot{-3}\uproot{3}p]{|a_m|}}}}\right)^{-1} \quad R = \left(\lim_{m\to\infty}{\left|\frac{a_{m+1}}{a_m}\right|}\right)^{-1} $$
+  if $R$ is infinite the only converges at $x_0$
+  \item Best Case, interval is infinite, is when the two limits are 0.
+\end{enumerate}
+
+\subsection{Operation}
+\begin{enumerate}
+  \item Termwise Differention: if a power series $y$ can be termwise differention and $y''$ and $y'$ also converge w/ radius $R$
+  \item Termwise Addition: two power series $y$ and $w$ w/ $R > 0$ and then $y + w$ also converges w/ radius $R$.
+  \item Termwise Multiplication: two power series $y$ and $w$ w/ $R > 0$ and then $y \cdot w$ also converges w/ radius $R$.
+  \item Vanishing of all coefficients: if for $y$, a power series and $y = 0$, then $a_m = 0 \quad\forall m$.
+\end{enumerate}
+
+\section{Legendres Equation}
+$$ (1 - x^2)y'' - 2xy' + n(n+1)y = 0 $$
+and hence $\displaystyle{y'' - \frac{2x}{1 - x^2}y' + \frac{n(n+1)}{1 - x^2} = 0}$. Now we can substitute in the power series:
+\begin{align*}
+  &= \sum_{m = 2}^\infty {m(m - 1)a_mx^{m-2}} + \sum_{m = 2}^\infty {m(m - 1)x^{m}a_m} \\
+  &\quad - \sum_{m=1}^\infty{2ma_mx^m} + n(n+1)\sum_{m=0}^\infty{a_mx^m} = 0
+\end{align*}
+Let $m = s + 2$
+$$ a_{s+2} = \frac{(n - s)(n + s + 1)}{(s + 2)(s + 1)}a_s \quad n\in\N$$
+It converges for $|x| < 1$, since $y_1$ contains even powers and $y_2$ odd powers. Hence, $y_1, y_2$ are non-constant and linearly independent. Doing some more calculations, the $n^th$ term is:
+$$ a_n = \frac{(2n)!}{2^n(n!)^2} $$
+and the polynomial:
+$$ P_n(x) = \sum_{n=0}^\infty{\frac{(2n - 2m)!}{2^nm!(n-m)!(n - 2m)!}} $$
+
+\section{Forbenius Method}
+\noindent\begin{theorem}{}{}
+   Let $b(x)$ and $c(x)$ be analytic at $x_0$. Then, $\displaystyle{y'' + \frac{1}{x}by' + \frac{1}{x^2}cy = 0}$ has at least one solution that can be represented as:
+   $$ y(x) = x^r\sum^\infty_{m = 0}{a_mx^m} \quad r\in\C,\, a_0 \neq 0$$
+\end{theorem}\vspace{10pt}
+
+\noindent\begin{definition}{Regular Point}{}
+  A regular point is a point, $x_0$, where $p$, $q$ are analytic. So a power series method can be applied. A non-regular point is singular
+\end{definition}\vspace{10pt}
+
+\noindent\begin{definition}{Indicial Equation}{}
+  Let $y = \sum_{m=0}^\infty{a_mx^{m+r}}$ and hence plug back into the ODE, then you get an equation of the form:
+  $$ r(r-1) + b_0r + c_0 = 0 $$
+  This is the indicial equation
+\end{definition}\vspace{10pt}
+
+If the roots of the indicial equation are:
+\begin{enumerate}
+  \item Distinct Roots, then the solutions are:
+    $$ y_1 = x^{r_1}\sum_{m=0}^\infty {a_mx^m} \quad y_2 = x^{r_2}\sum_{m=0}^\infty{A_mx^m}$$
+  \item Double Roots, then the solutions are: ($r = \frac{1}{2}(1 - b_0)$)
+  $$ y_1 = x^{r}\sum_{m=0}^\infty {a_mx^m} \quad y_2 = y_1\ln{x} + x^{r}\sum_{m=0}^\infty{A_mx^m}$$
+  \item Roots differing by an integer, then the solutions are: ($r_1 - r_2 > 0$)
+    $$ y_1 = x^{r_1}\sum_{m=0}^\infty {a_mx^m} \quad y_2 = ky_1\ln{x} + x^{r_2}\sum_{m=0}^\infty{A_mx^m}$$
+\end{enumerate}
+
+\section{Bessel Equations / Functions}
+$$ x^2y'' + xy' + (x^2 -v^2)y = 0 $$
+Applying forbenius method, we have:
+$$ a_{2m} = (-1)^m\left( \frac{1}{2^{m+n}m!(n + m)!} \right) $$
+and hence
+$$ \mathcal{J}_n(x) = x^n\sum_{m = 0}^\infty {\frac{(-1)^m x^2m}{2^{2m + n}m!(n + m)!}} $$
+
+\subsection{Bessel and Gamma}
+If we take $\mathcal{J}_n$ where $v \geq 0$,
+$$ a_0 = \frac{1}{2^n\Gamma{(n + 1)}} $$
+and hence:
+$$ \mathcal{J}_n(x) = x^v\sum_{m = 0}^\infty {\frac{(-1)^m x^2m}{2^{2m + v}m!\Gamma(1 +v + m)!}} $$
+and now we can extend the bessel of first kind to all real $x$:
+$$ \mathcal{J}_n(x) = x^{-v}\sum_{m = 0}^\infty {\frac{(-1)^m x^2m}{2^{2m - v}m!\Gamma(1 - v + m)!}} \quad v \notin \Z $$
+
+If $v\in\Z$, then $\mathcal{J}_v = \mathcal{J}_{-v}(-1)^v$, otherwise the basis of the ODE is:
+$$ y(x) = c_1\mathcal{J}_v + c_2 \mathcal{J}_{-v} $$
+
+We know the following:
+$$ [x^v \mathcal{J}_v]' = x^v \mathcal{J}_{v - 1} \,\text{ and }\, [x^{-v} \mathcal{J}_{-v}]' = -x^{-v} \mathcal{J}_{v + 1} $$
+
+\noindent\begin{theorem}{Derivatives}{}
+  \begin{align}
+    \mathcal{J}_{v - 1} + \mathcal{J}_{v+1} &= \frac{2v}{x}\mathcal{J}_v \tag{a}\\
+    \mathcal{J}_{v} + x^v \mathcal{J}_v' &= - x^{-v} \mathcal{J}_{v + 1} \tag{b}
+  \end{align}
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  \begin{align}
+    vx^{v - 1} + x^v \mathcal{J}_v &= x^v \mathcal{J}_{v-1} - vx^{v-1} \tag{$a*$} \\
+    \mathcal{J}_v + x^v \mathcal{J}_v' &= -x^v \mathcal{J}_{v+1} \tag{$b*$}
+  \end{align}
+  Add and subtract $(a*)$ and $(b*)$
+\end{proof}
+
+For half order $v$ we also know the bessel function, as the gamma function is valid:
+$$ \mathcal{J}_{\frac{1}{2}} = \sqrt{\frac{2}{\pi x}}\sin x \qquad \mathcal{J}_{-\frac{1}{2}} = \sqrt{\frac{2}{\pi x}}\cos x $$
+
+When $v\in\Z$, we can find a second linearly independent solution to the bessel equation, this solution is the Bessel Equation of the second kind, $Y_n(x)$. The indicial equation has two solutions with root $r= 0$, this is case 2.
+$$ \therefore y_2 = \mathcal{J}_0\ln x + \sum_{m=1}^\infty {\frac{(-1)^{m-1}h_m}{2^{2m}(m!)^2}x^m} $$
+where we let $h_m$ be the $m^{th}$ partial sum of the harmonic series. We also have a second:
+$$ \frac{2}{\pi}(y_1 + (\gamma - \ln 2)\mathcal{J}_0) $$
+
+
+
+\end{document}
