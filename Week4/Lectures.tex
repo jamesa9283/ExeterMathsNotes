@@ -10,7 +10,7 @@
 \usepackage{float}
 \usepackage{tikz}
 \usepackage{xcolor}
-\usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
+\usetikzlibrary{shapes.geometric, positioning, arrows, intersections, backgrounds,arrows.meta}
 \usepackage{amsthm}
 \usepackage{tcolorbox}
 \usepackage{hyperref}
@@ -178,8 +178,10 @@ If we have $\Delta \p = 0$, this is a known PDE known as the laplace equation.
       \pd{}{x} & \pd{}{y} & \pd{}{z} \\
       F_1 & F_2 & F_3 \\
     \end{matrix}\right|\\
-  &= \left( \pd{F_3}{y} - \pd{F_2}{z} \right)\veci + \left(\pd{F_1}{z} - \pd{F_3}{z}\right)\vecj + \left(\pd{F_2}{x} - \pd{F_1}{y} \right)\veck\\
-  \div\curl\vec F &= \pd{F_3}{x\pa y} - \pd{F_2}{x\pa z} + \pd{F_1}{y \pa z} - \pd{F_3}{x \pa y} + \pd{F_2}{x \pa z} - \pd{F_1}{y \pa z}\\
+  &= \left( \pd{F_3}{y} - \pd{F_2}{z} \right)\veci +\\
+  &\quad \left(\pd{F_1}{z} - \pd{F_3}{z}\right)\vecj + \left(\pd{F_2}{x} - \pd{F_1}{y} \right)\veck\\
+  \div\curl\vec F &= \pd{F_3}{x\pa y} - \pd{F_2}{x\pa z}+ \pd{F_1}{y \pa z}\\
+  &\quad- \pd{F_3}{x \pa y} + \pd{F_2}{x \pa z} - \pd{F_1}{y \pa z}\\
   &= \vec 0
   \end{align*}
 \end{proof}
@@ -209,6 +211,66 @@ Let $\p, f, g$ be scalar fields and $\vec F, \vec G$ be vector fields, then:
 
 
 \section{Orthoginal Curvilinear Co-ordinate Systems}
+Assume a one to one map from $x_i$ to $u_i$, the surfaces $u_i = k$ are defined as a co-ordinate surface and the intersection of the co-ordinate curves.
+$$ d\vec r = (dx_1, dx_2, dx_3) = \pd{\vec r}{u_1} du_1 + \pd{\vec r}{u_2}du_2 + \pd{\vec r}{u_3}du_3 $$
+
+\begin{figure}[H]
+  \begin{tikzpicture}[x=(10:4cm),y=(90:4cm),z=(225:4cm),>=Triangle]
+  \coordinate (O) at (0,0,0);
+  \draw [->] (O) -- (1,0,0) node [at end, right] {$u_2$ axis};
+  \draw [->] (O) -- (0,1,0) node [at end, above] {$u_3$ axis};
+  \draw [->] (O) -- (0,0,1) node [at end, left]  {$u_1$ axis};
+
+  \draw [draw=blue, -Circle] (O) to [bend left=8]
+    coordinate [pos=7/8] (q2n)
+    (1,-1/4,0) coordinate (q2) node [right] {$q_2$};
+  \draw [draw=blue, -Circle] (O) to [bend right=8]
+    coordinate [pos=7/8] (q3n)
+    (0,1,1/2) coordinate (q3) node [left] {$q_3$};
+  \draw [draw=blue, -Circle] (O) to [bend right=8]
+    coordinate [pos=7/8] (q1n)
+    (1/4,0,1) coordinate (q1) node [right] {$q_1$};
+
+  \begin{pgfonlayer}{background}
+  \begin{scope}
+  \clip (O) to [bend left=8] (q2) -- (1,1,0) -- (q3n) to [bend right=8] (O);
+  \shade [left color=green, right color=green!15!white, shading angle=135]
+    (O) to [bend left] (q3n) to [bend left=16] (3/4,1/2,0) to [bend left=16] (q2n) -- cycle;
+  \end{scope}
+
+  \begin{scope}
+  \clip (O) to [bend left=8] (q2) -- (1,0,1) -- (q1) to [bend left=8] (O);
+  \shade [left color=red, right color=red!15!white, shading angle=45]
+    (O) to [bend right] (q1n) to [bend left=16] (1,0,1) to [bend left=16]
+    (q2n) to [bend right] (O);
+  \end{scope}
+
+  \begin{scope}
+  \clip (O) to [bend right=8] (q1) -- (0,1,1) -- (q3) to [bend left=8] (O);
+  \shade [left color=cyan, right color=cyan!15!white, shading angle=225]
+    (O) -- (q1n) to [bend right=16] (0,1,1) to [bend left=16] (q3n)
+  to [bend left] (O);
+  \end{scope}
+  \end{pgfonlayer}
+
+  \node at (1/3,1/3,0) {$u_1=\mbox{const}$};
+  \node at (0,1/2,1/2) {$u_2=\mbox{const}$};
+  \node at (1/2,0,1/3) {$u_3=\mbox{const}$};
+  \end{tikzpicture}
+\end{figure}
+
+\subsection{Scale Factors}
+
+If we let $\vec e_1$ be an arbitrary unit vector in the direction of $u_1$, and similarly for $\vec e_2$ and $\vec e_3$, then:
+$$ e_1 = \pd{\vec r}{u_1}\frac{1}{h_1} \qquad h_1 = \left|\pd{\vec r}{u_1} \right| $$
+and similarly for $\vec e_2$ and $\vec e_3$. Now we can rewrite $d\vec r$:
+$$ d\vec r = h_1\vec e_1 du_1 + h_2\vec e_2 du_2 + h_3\vec e_3 du_3 $$
+We want, $\vec e_i \cdot \vec e_j = \delta_{ij}$ and $(\vec e_1, \vec e_2, \vec e_3)$ to be right handed.
+
+\subsection{Differential of arc length}
+Let $\displaystyle{d\vec r} = h_1du_1\vec e_1 + h_2du_2\vec e_2 + h_3du_3\vec e_3$, then, $\displaystyle{ds^2 = h_1^2du_1^2 + h_2du_2^2 + h_3^2du_3^2}$. Now we find $dS$, by taking the pross product between $\displaystyle{\pd{\vec r}{u_1}u_1}$ and $\displaystyle{\pd{\vec r}{u_3}du_3}$. Hence for $u_1$ surface,
+$dS = h_2h_3du_2du_3$
+for the u_2 surfa
 
 
 \subsection{Grad, Curl and Div in Curvilinear Co-ordinates}
