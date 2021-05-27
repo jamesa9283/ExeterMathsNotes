@@ -1,0 +1,169 @@
+\documentclass{article}
+
+
+% Packages
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
+\tikzset{point/.style={circle,draw=black,inner sep=0pt,minimum size=3pt}}
+\usepackage{amsthm}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+\usepackage{fancyhdr}
+
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\sub}{\subset}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\ex}{\exists\,}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\eR}{\overbar{\R}}
+\newcommand{\xb}{\bar{x}}
+
+%\setlength{\columnsep}{20pt}
+
+%ToC stuff
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+%\newtheorem{definition}{Definition}[subsection]
+\newtheorem{corollary}{Corollary}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{lemma}{Lemma}%
+{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{lm}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
+
+ % Document stuff
+
+\title{Week 5: Series of Functions}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+
+\section{Limits of function series}
+
+\noindent\begin{definition}{Limit of a functional series}{}
+ Suppose $\{ f_n \}$, $n\in\N_1$ is a sequence of functions defined on a set $E$, then suppose the limit exists,
+ $$ f(x) = \lim_{n\to\infty}{f_n(x)} $$
+\end{definition}\vspace{10pt}
+
+Now we say that $f_n(x)$ converges to $f(x)$ or $\{ f_n \}$ converges to $f$ pointwise on $E$. Similarly:
+
+\noindent\begin{definition}{Sum of a series}{}
+   If $\sum f_n(x)$ converges $\forall\, x\in E$, we say:
+   $$ f(x) = \sum_{n =1}^\infty {f_n(x)} $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{Contunity of a series of continuous functions}{}
+  To say that a series of continuous functions is continuous, it suffices to show:
+  $$ \lim_{t\to x}{\lim_{n \to \infty}{f_n(t)}} = \lim_{n \to \infty}{\lim_{t\to x}{f_n(t)}}  $$
+\end{theorem}\vspace{10pt}
+
+
+\subsection{Convergence}
+\noindent\begin{definition}{Uniform Convergence (Sequence)}{}
+   A sequence of functions $\{f_n\}, n\in\N_1$, converges uniformly on $E$ to a function $f$ if $\forall \e>0$, $\ex\,N$, $n \geq N\, \implies$
+   $$ |f_n(x) - f(x)| \le \e \qquad \forall x \in E$$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{definition}{Uniform Convergence (Series)}{}
+   We say that the sequence (series) $\sum f_n(x)$ converges uniformly on $E$ if the sequence $\{ s_n \}$ of the partial sums is:
+   $$ s_n = \sum_{i=1}^n {f_i (x)} $$
+\end{definition}\vspace{10pt}
+
+
+\subsection{Cauchy Time}
+\noindent\begin{theorem}{}{}
+   The sequence $\{f_n\}$ defined on $E$, converges uniformly on $E$, $\iff$ $\forall \e > 0$, $\ex\,N$, $m \geq N$ and $n\geq N$, $x \in E$, $\implies$
+   $$ |f_n(x) - f(x)|\le \e $$
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  Suppose that $\{f_n\}$ converges uniformly on $E$, and let $f$ be the limit of the sequence. Then $\ex\,N$, $n\geq N$, $x\in E,\,\implies$
+  $$ |f_n(x) - f(x)| \le \frac{1}{2}\e $$
+  \begin{align*}
+    |f_n - f_m| &\le |f_n - f| + |f_m - f|\\
+    &\le \e
+  \end{align*}
+
+  Suppose that cauchy holds, then we know every cauchy sequence converges on the real line. So we have to prove that the convergence is uniform; Let $\e >0$, $\ex\,N$, st the theorem holds. Now fix $n$, and take $m \to \infty$, this gives:
+  $$ |f_m - f_n| \le \e \forall n \geq N, x\in E $$
+\end{proof}
+
+\noindent\begin{theorem}{}{}
+   Suppose $\displaystyle{\lim_{n\to\infty}{f_n} = f}$, $x\in E$. Let $\displaystyle{M_n = \sup_{x\in E}{|f_n - f|}}$. Then $f_n \to f$ uniformly on $E$ $\iff$ $M_n \to 0$ as $n \to \infty$
+\end{theorem}\vspace{10pt}
+
+
+\noindent\begin{theorem}{Wierstrass}{}
+  Suppose $\{f_n\}$ is a sequence of functions defined on $E$, and
+  $$ |f_n| \le M \qquad (x\in E, n\in\N_1) $$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  If $\displaystyle{\sum M_n}$ converges, then for $\e > 0$,
+  $$ \left | \sum_{i = n}^M {f_i} \right| \le \sum_{i = n}^m {M_i} \le \e $$
+  if $m$ and $n$ are large enough.
+\end{proof}
+
+\section{Continuity}
+Let's prove Thm 1.1
+\begin{proof}
+  Let $\e > 0$ by uniform convergence of $\{f_n\}$, then $\ex N$, $n, m \geq N$, $t\in E,\,\implies$
+  $$ |f_n - f_m| \le \e $$
+  Letting $t\to x$, we obtain: $\displaystyle{|A_m - A_n| \le \e}$ for $n, m \geq N$, st. $\{ A_n\}$ is a cauchy sequence and so converges to $A$.
+  $$ |f - A| \le |f - f_n| + |f_n - A_n| + |A_n - A| $$
+  Now let them all be less than a third by the usual limit nonsence and hence,
+  $$ |f - A| \le \e $$
+\end{proof}
+
+\noindent\begin{theorem}{}{}
+   If $\{f_n\}$ is a sequence of continuous functions on $E$, and if $f_n \to f$ uniformly on $E$, then $f$ is continuous on $E$ (from above)
+\end{theorem}\vspace{10pt}
+
+\noindent\begin{theorem}{}{}
+   Suppose $K$ is compact and
+   \begin{enumerate}
+     \item $\{f_n\}$ is continuous on $K$
+     \item $\{f_n\}$ converges pointwise on $K$
+     \item $f_n \geq f_{n+1}$ $\forall n\in \N$
+   \end{enumerate}
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  Let $g_n = f_n - f$, then $g_n$ is continuous, $g_n\to 0$ pointwise and $g_n \geq g_{n+1}$. So prove that $g_n\to 0$ uniformly om $K$.\\
+
+  Let $\e > 0$, $K_n = \{ x\in K : g_n(x) \geq \e \}$ as $g_n$ is continuous, $K$ is closed and hence compact. Since $g_n \geq g_{n+1}$, we have $K_n \geq K_{n+1}$. Fix an $x\in K$. Since $g_n\to 0$, then $x\notin K_n$ if $n$ is large, thus $x\notin \bigcup K_n$. Hence $K_N$ is empty for $n \geq N$, then:
+  $$ 0 \le g_n < \e \qquad \forall x\in K\, n \geq N $$
+\end{proof}
+
+
+
+
+\end{document}

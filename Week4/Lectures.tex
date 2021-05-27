@@ -1,0 +1,205 @@
+\documentclass{article}
+
+
+% Packages
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
+\tikzset{point/.style={circle,draw=black,inner sep=0pt,minimum size=3pt}}
+\usepackage{amsthm}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+\usepackage{fancyhdr}
+
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\sub}{\subset}
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\ex}{\exists\,}
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\eR}{\overbar{\R}}
+\newcommand{\xb}{\bar{x}}
+
+%\setlength{\columnsep}{20pt}
+
+%ToC stuff
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+%\newtheorem{definition}{Definition}[subsection]
+\newtheorem{corollary}{Corollary}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{lemma}{Lemma}%
+{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{lm}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
+
+ % Document stuff
+
+\title{Week 4: Sequences}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\multicols{2}
+\section{Sequences}
+
+\noindent\begin{definition}{Limit of a Sequence}{}
+  A sequence, $\{s_n \}$ converges to a limit $s$, if for every $\e > 0\, \ex N\in \Z$,
+  $$ |S_n - S|< \e \quad n \ge N $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{definition}{Divergence}{}
+  We say that $\displaystyle{\lim_{n\to\infty}{a_n} = \infty}$ if $\forall a \in \R$, $s_n > a$ for $n > a$. Similarly for $-\infty$.
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{}{}
+   Let $\displaystyle{\lim_{x\to \infty}{f(x)} = L}$, where $L\in \eR$ and suppose that $s_n = f(n)$ for large $n$, then:
+   $$ \lim_{n\to\infty}{s_n} = L $$
+\end{theorem}\vspace{10pt}
+
+\noindent\begin{definition}{Subsequence}{}
+  A subsequence $\{ t_k \}$ if $t_k = s_{n_k}$, where $\{ n_k \}$ is an increasing subsequence of integers.
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{Uniqueness of subsequence limit}{}
+   If $\displaystyle{\lim_{n\to\infty}{s_n} = s}$, then $\displaystyle{\lim_{n\to\infty}{s_{n_k}} = s \quad\forall \{s_{n_k} \}}$  of $\{ s_k \}$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  Consider the finite case, $\forall \e > 0\,\ex N$,
+  $$ |S_n - S| < \e \quad k \ge K$$
+  Since, $\{ n_k \}$ is increasing $\ex K$, $n_k \ge N$ if $k > K$
+  $$ |S_{n_k} - S|<\e \qquad k \ge K $$
+  For infinite limits, $\forall \e >0, \, \ex N$,
+  $$ S_n > n \qquad n \ge N $$
+  as we know $\displaystyle{\{ n_k \}}$ is increasing, then $n_k > n$ for $n \ge N$ but $S_{n_k} > n$ for some $n \ge N$ and so the limit is infinite. For limit to $-\infty$, use the sequence $-S_n$
+\end{proof}
+
+\noindent\begin{theorem}{Limit Points of Sequences}{}
+  A point $\xb$ is a limit point of a set $S$, iff there is a sequence $\{ x_n \}$ of points in $S$, $x_n \neq \xb$ for $n \ge 1$, and $\displaystyle{\lim_{n\to\infty}{x_n} = \xb}$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  Suppose such a $\{x_n\}$ exists. Then $\forall\e>0,\, \ex N$,
+  $$ 0 < |x_n - \xb| < \e \qquad \forall n \ge N $$
+  Therefore every $\e$-neigh. contains $\infty$ many points of $S$ hence $\xb$ is a limit point of $S$.\\
+
+  Now let $\xb$ be a limit point of $S$. $\forall N \ge 1$, $(\xb - \frac{1}{n}, \xb + \frac{1}{n})$ has to contain some point $x_n \in S$, $x_n \neq \xb$. Since,
+  $$ |x_n - \xb| \le \frac{1}{n}\qquad m \ge n $$
+  and $\displaystyle{\lim_{n\to\infty}{x_n} = \xb}$
+\end{proof}
+
+\noindent\begin{theorem}{Bounded and Subsequence Theorems}{}
+  \begin{enumerate}
+    \item If $\{ x_n \}$ is bounded then it has a convergent subsequence
+    \item If $\{ x_n \}$ is unbounded above, then it has a subsequence $\{ x_{n_k} \}$ st,
+    $$ \lim_{x\to\infty}{x_{n_k}} = \infty $$
+    \item If $\{ x_n \}$ is unbounded above, then $\{ x_n \}$ has a subsequence st,
+    $$ \lim_{x\to\infty}{x_{n_k}} = -\infty $$
+  \end{enumerate}
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  \textbf{Proof of 1:} Let $S$ be a set of distinct numbers of $\{ s_n \}$, if $s$ is finite, then $\ex,\, \xb\in s$, which occurs infinitely often. Then,
+  $$ \lim_{n\to\infty}{x_{n_k}} = \xb $$
+  If $s$ is infinte, then since $s$ is bounded BWT applies, now $s$ has a limit point, $\xb$. Then by previous thm, $\ex\{y_j\}\in s$ with $y_j \neq s$,
+  $$ \lim_{j\to\infty}{y_j} = \xb $$
+  However, $\{ y_j \}$ may not be a subsequence of $\{ x_n \}$, so $y_j = x_{n_j}$ may not be true, where $n_j$ is increasing. So now take an increasing subsequence of $n_j$, $\{ n_j \}$, then $\{ y_{j_k} \} = \{ s_{n_{j_k}} \}$ is a subsequence. So it has the same limit as; $\{ y_j \}$
+  $$ \lim_{k\to\infty}{\{ s_{n_{j_k}} \}} = \xb $$
+\end{proof}
+
+\subsection{Cauchy Sequences}
+
+\noindent\begin{definition}{Cauchy Sequences}{}
+  A sequence $\{ s_n \}$ of real numbers is said to be cauchy if $\e > 0,\,\ex N\in\N$, $n\ge N$ and $m\ge N$, then:
+  $$ |S_n - S_m| < \e $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{lemma}{}{}
+  Let $\{ s_n \}$ be a convergent, then it's cauchy
+\end{lemma}\vspace{10pt}
+\begin{proof}
+  Suppose that $s_n\to s$ as $n\to\infty$. Let $\e > 0,\,\ex N, \, n\ge N$
+  $$ |s_n - s|< \frac{\e}{2} $$
+  Now take $m, n \ge N$, then
+  \begin{align*}
+    |s_n - s_m| &= |s_n - s - (s_m - s)| \\
+    &\le |s_n - s| + |s_m - s| \\
+    &< \e
+  \end{align*}
+\end{proof}
+
+\noindent\begin{lemma}{}{}
+  Let $\{ s_n \}$ be cauchy, then it's convergent
+\end{lemma}\vspace{10pt}
+\begin{proof}
+  Let $\{ s_n \}$ be cauchy, and hence it's bounded. By thm 3.14(a), there is a convergent subsequence $\{ s_{n_k} \}$ for some $s\in\R$. Now claim, $\displaystyle{s_k \in s}$ as $\displaystyle{k \to \infty}$.\\
+
+  Let $\e > 0,\, \ex N_2$, $k \ge N_1$, then
+  $$ |s_{n_k} s| < \frac{\e}{2} $$
+  Then $\ex N_2, \, m, n \ge N_2$, then $|s_m - s_n| < \frac{\e}{2}$. If $K \ge \max(m, n)$,
+  \begin{align*}
+    |s_k - s| &= |(s_k - s_{n_k}) - (s - s_{n_k})|\\
+    &\le |s_k - s_{n_k}| + |s - s_{n_k}|\\
+    &< \e
+  \end{align*}
+\end{proof}
+
+\section{Series}
+\noindent\begin{definition}{Series}{}
+   If $\displaystyle{\{ a_k \}^\infty_k = \sum_{n = k}^\infty a_k}$ is infinite and $a_n$ is the $n^th$ term. If $\displaystyle{\sum_{k=1}^\infty} = A$, then it converges. Also we say $\displaystyle{A_n = a_k + \dots + a_n \qquad n \ge k}$ is the $n^th$ partial sum of the sum. We can also say that,
+   $$ \lim_{k\to\infty}{A_n} = A $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{Cauchy Criterion for Series}{}
+   A series $\sum a_n$ converges iff $\forall \e > 0,\,\ex N$,
+   $$ |a_n + a_{n-1} +\dots + a_m| < \e \qquad m \ge n \ge N \quad (*)$$
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  Let $\{ A_n \}$ be the series of partial sums of our series. Then
+  $${A_m - A_{n-1} = a_n + \dots + a_m}$$
+  If $(*)$ holds, then
+  $$|A_m - A_{n-1}| < \e \text{ if } m \ge n \ge N \quad (**)$$
+  To say $\sum a_n$ is convergent, then $\{ A_n \}$ is convergent. This is equiv to $\{ A_n \}$ being cauchy, which is what $(**)$ says.
+\end{proof}
+
+\noindent\begin{corollary}{}{}
+  If $\sum a_n$ converges, then $\displaystyle{\lim_{n\to\infty}{a_n} = 0}$
+\end{corollary}\vspace{10pt}
+\begin{proof}
+  Taking $m = n$ in the previous thm, then $\forall\e > 0,\,\ex N > 0$,
+  $$ |a_n| < \e \text{ if } n \ge N $$
+  which is $\displaystyle{\lim_{n\to\infty}{a_n} = 0}$
+\end{proof}
+
+\noindent\begin{corollary}({Divergence Test}){}
+  If $\displaystyle{\lim_{n\to\infty}{a_n}\neq 0}$, then $\sum a_n$ divergent
+\end{corollary}\vspace{10pt}
+
+
+
+\end{document}
