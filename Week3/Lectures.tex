@@ -1,0 +1,197 @@
+\documentclass{article}
+
+% Packages
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric, positioning, arrows, intersections}
+\usepackage{amsthm}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+
+% Macros
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\di}{\frac{dy}{dx}}
+\newcommand{\dii}{\frac{d^2y}{dx^2}}
+\newcommand{\din}{\frac{d^ny}{dx^n}}
+\newcommand{\dt}{\frac{dx}{dt}}
+\newcommand{\dtt}{\frac{d^2x}{dt^2}}
+\newcommand{\dtn}{\frac{d^nx}{dt^n}}
+\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\fd}[2]{\frac{d #1}{d #2}}
+\renewcommand{\l}{\lambda}
+\newcommand{\g}{\gamma}
+\renewcommand{\o}{\omega}
+\newcommand{\el}{e^{\l x}}
+
+
+%ToC stuff
+\newtheorem{example}{Example}
+\newtheorem{solution}{Solution}
+%\newtheorem{definition}{Definition}[subsection]
+\newtheorem{corollary}{Corollary}
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
+
+
+\title{Differential Equations Week 2 - Linear Higher Order ODEs}
+\author{James Arthur}
+
+\begin{document}
+\maketitle
+\tableofcontents\newpage
+
+\multicols{2}
+
+\section{Overview}
+A higher order ODE and its $n$th derivatives, form an ODE.
+
+We know that the solution is $n$th times differentiable\\
+
+\noindent\begin{theorem}{Fundemental Theorem for homogenous linear ODEs}{}
+   The sum and constant multiples of solutions are again solutions of the ODE
+\end{theorem}\vspace{10pt}
+
+The general solution is $\displaystyle{y(x) = c_1y_1 + \dots + c_ny_n}$, where $\{c_1,\dots, c_n \}$ are arbitrary constants and $\{y_1, \dots, y_n \}$ is a basis or fundemental system of solution.
+
+The $n$ solutions are linearly independant when $k_1y_1+\dots+k_ny_n = 0$ implies that $\{k_1, \dots, k_n \}$ are zero.
+
+\subsection{Initial Value Problem}
+An IVP consists of the ODE, $$\displaystyle{y^{(n)} + p_{n-1}y^{(n-1)}+\dots +p_1y' + p_0y = 0}$$ and $n$ initial conditions with a given $x_0$ and several constants.\\
+
+\noindent\begin{theorem}{Uniqueness of HODEs}{}
+  If the coefficients are continuous on some open interval, $I$, and $x_0 \in I$, then the IVP has a unique solutions $y(x)$ on $I$.
+\end{theorem}\vspace{10pt}
+
+The Wronskian of $n$ solutions:
+$$ W = \left|\begin{matrix}
+  y_1 & y_2 & \dots & y_n \\
+  y_1' & y_2' & \dots & y_n' \\
+  \vdots & \vdots & \ddots & \vdots \\
+  y_1^{(n-1)} & y_2^{(n-1)} & \dots & y_n^{(n-1)}\\
+\end{matrix}\right| $$
+has to be non-zero for linear independence.
+
+\noindent\begin{theorem}{Existence}{}
+   If the coefficients are continuous on some open interval, $I$, then the ODE has a general solution on $I$
+\end{theorem}\vspace{10pt}
+
+\noindent\begin{theorem}{General Solution}{}
+   If the ODE has continuous coefficients on some open interval $I$, then every solution $y = Y(x)$  is of the form $\displaystyle{Y(x) = C_1y_1 + \dots + C_ny_n}$, where the `$y$'s are the basis and `$C$'s are the contants.
+\end{theorem}\vspace{10pt}
+
+\section{Homogenous ODEs with constant coefficients}
+The ODE can be solved rather easily by subbing in $y = e^{\l x}$ and getting a characteristic equation. Hence solve and follow usual procedure.
+
+\subsection{Real Roots}
+\textit{Case 1: Distinct Roots}, then the solution is; $y_1 = e^{\l_1 x}, \dots, y_n = e^{\l_n x}$. Then linearly combine and get general solution. Now plug into the Wronskian and pull out the exponential terms:
+\begin{align*}
+  W &= \left|\begin{matrix}
+    e^{\l_1 x} & e^{\l_2 x} & \dots & e^{\l_n x} \\
+    \l_1e^{\l_1 x} & \l_2e^{\l_2 x} & \dots & \l_ne^{\l_n x} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \l_1^{(n-1)}e^{\l_1 x} & \l_2^{(n-1)}e^{\l_2 x} & \dots & \l_n^{(n-1)}e^{\l_n x}\\
+  \end{matrix}\right| \\
+  &= E\left|\begin{matrix}
+    1 & 1 & \dots & 1 \\
+    \l_1 & \l_2 & \dots & \l_n \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \l_1^{(n-1)} & \l_2^{(n-1)} & \dots & \l_n^{(n-1)}\\
+  \end{matrix}\right| \\
+\end{align*}
+where $E = e^{\l_1 + \dots + \l_n}$ and hence $W = 0$, iff the determinant on the right is zero. This is known as the vandermonde or cauchy determinant.\\
+
+\noindent\begin{theorem}{Linearly Independence Theorem}{}
+   Any number of solutions of the form $y = e^{\l x}$ are linearly independent on an open interval, $I$, iff the corresponding roots, $\l$, are all different.
+\end{theorem}\vspace{10pt}
+
+\textit{Case III: Multiple Real Roots}, For $\l_1 = \l_2$ the solutions are $y_1, y_2 = xy_1$ which are linearly independant. More generally, for real roots of order $m$, the linearly independant solutions are:
+$$ e^{\l x}, xe^{\l x}, x^2e^{\l x}, \dots, x^{m-1}e^{\l x} $$
+
+\subsection{Complex Roots}
+
+\textit{Case 2: Simple Complex Roots}
+For complex roots, they must be conjugate pairs, since the coefficients of the ODE are real. So for a $\l = \g \pm i\o$, then the two linearly independant solutions are:
+$$ y_1 = e^{\g x}\cos{\o x} \qquad y_2 = e^{\g x}\sin{\o x} $$
+
+\textit{Case 4: Multiple Complex Roots}, let us have complex double roots, $\displaystyle{\l = \g \pm i\o}$. The coresponding linearly independant solutions are: $\displaystyle{e^{\g x}\sin{\o x}, e^{\g x}\cos{\o x}, xe^{\g x}\sin{\o x}, xe^{\g x}\cos{\o x}}$. Therefore, we gain the general solution:
+$$ y = e^{\g x}\big[ (A_1 + A_2x)\cos{\o x} + (B_1 + B_2x)\sin{\o x}\big] $$
+For triple roots, just add $x^2$ terms.
+
+\section{Non-homogenous Linear ODEs}
+This is very similar to the second order, the proess is basically the same. We can solve via `Method of Undetermined Coefficients' or `Method of variation of paramaters'.
+
+\subsection{Method of Undetermined Coefficients}
+The basic rule is to know off, $r(x)$ and then solve. Next take a general particular integral and then follow usual solution. Then you can multiply by $x^k$ where $k$ is the number of $y_p$'s in the solution plus one.
+Then if you have a summation of many particular integrals, just break it up.
+
+\subsection{Variation of Parameters}
+Particular solutions of the nonhomogenous equations:
+\begin{align*}
+  y_p(x) &= \sum_{k=1}^{n}y_k(x)\int\frac{W_k}{W(x)}r(x)dx\\
+  &= y_1(x)\int\frac{W_1}{W(x)}r(x)dx + \dots\\
+  &\quad + y_n(x)\int\frac{W_n}{W(x)}r(x)dx
+\end{align*}
+The wronskians $W_j(j = 1,\dots, n)$ are obtained from $W$ by replacing the $j^{th}$ column by $\begin{bmatrix}
+  0 & \dots & 0 & 1 \\
+\end{bmatrix}^T$, where $\{y_1, \dots, y_n \}$ are a basis.
+
+Therefore, Wronskians $W_j(j=1, \dots, n)$ for each component are:
+$$   W_1 = \left|\begin{matrix}
+    0 & e^{\l_2 x} & \dots & e^{\l_n x} \\
+    0 & \l_2e^{\l_2 x} & \dots & \l_ne^{\l_n x} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    1 & \l_2^{(n-1)}e^{\l_2 x} & \dots & \l_n^{(n-1)}e^{\l_n x}\\
+  \end{matrix}\right|$$ all the way to $$W_n = \left|\begin{matrix}
+      e^{\l_1 x} & e^{\l_2 x} & \dots & 0 \\
+      \l_1e^{\l_1 x} & \l_2e^{\l_2 x} & \dots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \l_1^{(n-1)}e^{\l_1 x} & \l_2^{(n-1)}e^{\l_2 x} & \dots & 1\\
+    \end{matrix}\right| $$
+This method should be used for ODEs greater than 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
