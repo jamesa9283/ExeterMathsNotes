@@ -1,0 +1,1489 @@
+\documentclass{article}
+\def\npart {2}
+\def\nterm {Summer Term}
+\def\nyear {2020}
+\def\nlecturer {Ana Rodrgiues}
+\def\ncourse {Complex Analysis}
+
+\input{header}
+
+\begin{document}
+  \maketitle
+
+  \section{Introduction to Complex Analysis}
+  In this introduction we are going to prove some foundational things about complex numbers, which make them a field. Firstly we define the set,
+  $$ \C = \{ x + iy : x, y \in \R \} $$
+  as the complexes, so they are a set of `2D numbers'. This is most obvious in Lean where my convention is to write them as $\langle a , b \rangle = a + ib$.\\
+  \textbf{Addition}: Let $\displaystyle{z = a + ib}$ and $\displaystyle{w = c + id}$, then we can deduce,
+  $$ z + w = (a + c) + (b + d)i $$
+  hence $\C$ is closed under addition (and by \texttt{sub\_eq\_neg\_add} subtraction aswell).\\
+  \textbf{Multiplication}: Again let $\displaystyle{z = a + ib}$ and $\displaystyle{w = c + id}$, then we can deduce,
+  $$ z \cdot w = (ac - bd) + (ad - bc)i $$
+  hence $\C$ is closed under multiplication.\\
+  \textbf{Division}: Again let $\displaystyle{z = a + ib}$ and $\displaystyle{w = c + id}$, then we can deduce,
+  $$ \frac{z}{w} = \frac{z\overline{w}}{|w|} $$
+hence closed. In technicalities with a few more lemmas we have a field, but we don't bother too much about that, yet (hopefully).
+\begin{nlemma}
+  Let $z \in \C$, then we can say $z\conj z = |z|^2$
+\end{nlemma}
+\begin{proof}
+  $$z\conj z = (x + iy)(x - iy) = x^2 + y^2 = |z|^2$$
+\end{proof}
+\textbf{Argand Diagrams}: An argand diagram is a way to visualise complex numbers. Let us plot $\displaystyle{z = -3 + 2i}$ and $\displaystyle{w = 1 + i}$.\\
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        xmin=-4.5,
+        xmax=4.5,
+        ymin=-4.5,
+        ymax=4.5,
+        axis equal,
+        axis lines=middle,
+        xlabel=Re($z$),
+        ylabel=Im($z$),
+        disabledatascaling]
+
+    \draw[very thick][red] (-3,2) node[anchor=south] {\textbullet};
+    \draw[thick][blue] (1,1) node[anchor=south] {\textbullet};
+    \end{axis}
+  \end{tikzpicture}
+  %\caption{An argand diagram showing $\displaystyle{z = -3 + 2i}$ and $\displaystyle{w = 1 + i}$.}
+\end{figure}
+
+\begin{nlemma}
+  Let $\displaystyle{z, w \in \C}$, then,
+  \begin{enumerate}
+    \item $(z \pm \conj w) = (\conj z \pm \conj w)$
+    \item $\conj {(zw)} = \conj z \conj w$
+    \item $\displaystyle{\conj{ \left(\frac{z}{w}\right) } = \frac{\conj z}{\conj w}}$ \qquad if $w \neq 0$
+  \end{enumerate}
+\end{nlemma}
+
+\begin{ncor}
+  If $z, w \in \C$, then $\displaystyle{|zw| = |z||w|}$
+\end{ncor}
+\begin{proof}
+  $\displaystyle{|zw|^2 = (zw)(\conj z\conj w) = (z\conj z)(w\conj w) = |z|^2|w|^2}$
+\end{proof}
+\begin{ncor}{Triangle Inequality}
+  If $\displaystyle{z, w \in \C}$ then, $\displaystyle{|z+w| \le |z| + |w|}$.
+\end{ncor}
+\begin{proof}
+  If $z + w = 0$, then proof complete. If $\displaystyle{z + w \neq 0}$,
+  $$ \frac{z}{z+w} + \frac{w}{z + w} = 1 $$
+  and then,
+  $$ \Re\left( \frac{z}{z+w}\right) + \Re\left(\frac{w}{z + w}\right) = 1 $$
+  We know also that,
+  $$ Re\left( \frac{z}{z + w} \right) \le |\frac{z}{z+w}| $$
+  and similarly for the other. Hence,
+  \begin{align*}
+    \left|\frac{z}{z + w}\right| + \left|\frac{w}{z + w}\right| &\ge 1\\
+    |z + w| &\le |z| + |w|
+  \end{align*}
+\end{proof}
+\textbf{Polar Form}: We can say $$ z = re^{i\theta} = r(\cos \theta  + i\sin\theta) $$
+
+\subsection{Roots of complex numbers and equations}
+
+\begin{nlemma}
+  Every complex number has $n$-distinct n$^th$ roots
+\end{nlemma}
+
+\begin{nthm}{(\textit{De Mouvire's})}
+  For all, $z \in \C$, then $r, \th \in \R$,
+  $$ z^n = r^n (\cos n\th + i\sin n\th) $$
+\end{nthm}
+
+Let $z = re^{i\th} = r(\cos \th + i\sin \th)$ and $\mu = \rho e^{i\a}= \rho(\cos \a + i\sin \a)$, then,
+$$ r(\cos \th + i\sin \th) = \rho^n(\cos n\a + i\sin n\a) $$
+Which implies,
+$$ \rho^n = r \qquad n\a = \th + 2k\pi \quad (k \in \Z^+)$$
+Hence,
+$$ \rho = r^{\frac{1}{n}} \qquad \a = \frac{\th + 2k\pi}{n} $$
+
+\newpage
+\subsection{Complex Functions}
+  We shall consider functions of the form $f : D \to \C$, where $D \subset \C$.
+
+  \begin{nlemma}{(\textit{Remainder Theorem})}
+    If $g$ is a polynomial over $\C$ and $b\in\C$, then $\ex h(z)$ over $\C$ st, $g(z) = (z - b)h(z) + g(b)$.
+  \end{nlemma}
+  \begin{nthm}
+    If $g(z) = a_nz^{n} + a_{n-1}z^{n-1} + \dots + a_1z + a_0$ with $a_n \neq 0$ and $a_i \in \C (i \in \N_1)$, then $g(z)$ has at most $n$ complex roots.
+  \end{nthm}
+  \begin{proof}
+    In general, every polynomial over $\C$ can be written as,
+    $$ a(z - z_1)(z - z_2)\dots(z - z_n) $$
+    and the only polynomials $p(z)$ over $\C$ with no solutions are $p(z) = 0$ (by FTA).
+  \end{proof}
+\subsubsection{Exponential and Logarithm}
+
+\begin{ndefi}
+  The complex Exponential is defined as,
+  $$ e^{z} = e^x (\cos y + i\sin y) $$
+\end{ndefi}
+
+\begin{nlemma}
+  $\fa z \in \C$, we have,
+  $$ e^z = \sum_{n=0}^{\infty} {\frac{z^n}{n!}} $$
+\end{nlemma}
+
+\begin{nlemma}
+  $\fa z, w \in \C$,
+  \begin{enumerate}
+    \item $e^{z + w} = e^ze^w$
+    \item $e^{z + 2\pi i} = e^z$
+    \item $|e^z| = e^{\Re(z)}$
+\end{enumerate}
+\begin{proof}
+  \begin{align*}
+    |e^{z}| &= |e^{x + iy}|\\
+    &= |e^x||e^{iy}|\\
+    &= |e^x||\cos y + i\sin y|\\
+    &= |e^x|\cdot 1\\
+    &= e^x = e^{\Re(z)}
+  \end{align*}
+\end{proof}
+\end{nlemma}
+
+\begin{ndefi}{(\textit{Complex Trigonometry})}
+  $\fa z \in\C$,
+  $$ \cos z = \frac{e^{iz} - e^{-iz}}{2} \qquad \sin z = \frac{e^{iz} + e^{-iz}}{2i} $$
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Complex Hyperbolic Trigonometry})}
+  $\fa z \in\C$,
+  $$ \cos ix = \frac{e^{-x} - e^{x}}{2} = \cosh x \qquad \sin ix = \frac{e^{-x} + e^{x}}{2i} = i\sinh x $$
+\end{ndefi}
+
+\begin{nlemma}
+  For $\theta, \phi \in \R$, we have $e^{i(\theta + \phi)} = e^{i\theta}e^{i\phi}$
+\end{nlemma}
+\begin{proof}
+  \begin{lstlisting}
+  lemma comp_exp_add (θ φ : ℝ) : exp(θ * I) * exp(φ * I) = exp((θ + φ) * I) :=
+  begin
+    repeat {rw exp_mul_I},
+    simp only [add_mul, mul_add],
+    rw [add_comm, mul_comm (sin ↑φ) I, mul_assoc _ I _,
+        tactic.ring.mul_assoc_rev I I _, ← pow_two, I_sq],
+    simp only [neg_mul_eq_neg_mul_symm, one_mul, mul_neg_eq_neg_mul_symm],
+    rw [← mul_assoc (cos ↑θ), mul_comm (cos ↑θ), ← add_assoc, add_comm (I * cos ↑θ * sin ↑φ),
+        add_right_comm (-(sin ↑θ * sin ↑φ)), add_comm (-(sin ↑θ * sin ↑φ)),
+        tactic.ring.add_neg_eq_sub, ← cos_add, mul_comm _ I, add_assoc],
+    have H1 : I * cos ↑θ * sin ↑φ + I * sin ↑θ * cos ↑φ = I * (cos ↑θ * sin ↑φ + sin ↑θ * cos ↑φ),
+    { ring},
+    rw [H1, add_comm (cos ↑θ * sin ↑φ), ← sin_add, mul_comm],
+  end
+  \end{lstlisting}
+\end{proof}
+\begin{ncor}
+  For $r, s, \theta, \phi \in \R$, we have $re^{i\phi}(se^{i\theta}) = rse^{i(\theta + \phi)} $
+\end{ncor}
+\begin{proof}
+  \begin{lstlisting}
+    lemma exp_form_mul (φ θ : ℝ) (r s : ℂ) : (r*exp(φ * I)) * (s*exp(θ * I)) = r * s * exp((θ + φ) * I) := by rw [mul_mul_mul_comm, comp_exp_add, add_comm]
+  \end{lstlisting}
+\end{proof}
+
+\begin{ndefi}{(\textit{Complex Logarithm})}
+  If we have $e^z = w$, then we can solve and get,
+  $$ z = \log r + i(\th + 2k\pi) \qquad k \in\Z^+ $$
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Principle Complex Logarithm})}
+  We define the principle logarithm as,
+  $$ Log(w) = log |w| + i\arg(w) $$
+\end{ndefi}
+and we can deduce that,
+\begin{nlemma}
+  $\fa z, w \in \C\setminus {0}$,
+  $$ log(zw) = Log(z) + Log(w) + 2n\pi \qquad (n \in \N) $$
+\end{nlemma}
+
+\section{Topology}
+
+\begin{ndefi}{(\textit{Open Disc})}
+  $D(a, r) = \{z\in\C : |z - a| < r\}$
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Closed Disc})}
+  $\overline D(a, r) = \{z\in\C : |z - a| \le r\}$
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Punctured Disc})}
+  $D'(a, r) = \{z\in\C : 0 < |z - a| < r\}$
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Open Set)}}
+  A set $S\subset \C$ is open $\fa z\in\C$, $\ex r > 0$, $D(z; r) \subset S$.
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Closed Set)}}
+  A set $S\subset \C$ is closed if $\C\setminus S$ is open.
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Limit point)}}
+  A point $z\in\C$ is a limit point of $S$ if $D'(z;r)\cap S \neq 0\,\,\,\fa r>0$. A point of $S$ which isn't a limit point is an isolated point.
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Closure)}}
+  the closure of $S$ is the union of $S$ and it's limit points.
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Interior Point)}}
+  $\ex r > 0, D(z;r) \subset S$
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Exterior Point)}}
+  $\ex r>0, D(z;r) \cap S = \es$
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Boundary Point)}}
+  $z$ is a boundary point if it's neither a interior or exterior point of $S$.
+\end{ndefi}
+
+\begin{nlemma}
+  Let $A\subset \C$, each point $a\in\C$ is either an interior of $A$, an exterior of $A$ or a boundary point of $A$.
+\end{nlemma}
+
+\begin{minipage}{.5\textwidth}
+    \centering
+    \begin{nprop}
+      \begin{enumerate}
+        \item The following three statements are equivalent, \begin{itemize}
+          \item $S$ is closed.
+          \item $S$ contains all it's limit points.
+          \item $\overline S = S$.
+      \end{itemize}
+      \item $z\in\overline S \iff V \cap S \ne \es\,\, \fa z \in \text{open set } V$
+      \item $\overline S$ is a closed set.
+      \end{enumerate}
+    \end{nprop}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}
+    \tikz
+      \draw [blue!50!cyan, dashed, ultra thick, shift={(0,3)}]
+        plot [smooth cycle, tension=1, domain=0:320, samples=18] (\x:{2+rand/2});
+        \draw (-2,2) node[circle,draw,inner
+        sep=1pt,label=below:$\lambda_0$](z0) {}circle (20pt);
+        \draw[-stealth] (z0) -- (-1.5,2.5) node[midway,above]{$r$};
+    \end{tikzpicture}\\\vspace{25pt}
+    {\hspace{20pt} A disk, $D(\lambda_0; r)$ in an open set $S$.}
+\end{minipage}
+
+\vspace{10pt}
+\begin{proof}
+  TO DO
+\end{proof}
+
+\begin{ndefi}{\textit{(Bounded Set)}}
+  $S\subset \C$ is bounded if $\ex M\in\R$, $|z| \le M\,\fa z\in S$.
+\end{ndefi}
+
+\begin{ndefi}{\textit{(Compactness)}}
+  A set is bounded and closed is compact.
+\end{ndefi}
+
+\begin{ndefi}
+  An open set $U\subset \C$ is connected if any two points $a$ and $b$ in $U$, one can join $a$ to $b$ in a finite sequence of straight lines segments contained within $U$.
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Domain})}
+  If $A\subset \C$ is a domain if $A$ is nonempty, open and connected.
+\end{ndefi}
+
+\section{Continuity}
+
+\begin{ndefi}{(\textit{Limit})}
+  Let $A \subset \C$, $f : A \to \C$ and $a\in\C$ be a limit point of $A$. $f(z) \to l$, as $z \to a$ if $\fa \e > 0 \,\,\ex \d > 0, z\in D(a, \d)\cap A$ then $f(z) \in D(l, \e)$.
+\end{ndefi}
+
+\begin{nthm}
+  Let $f : A \to \C$ and $a\in\C$ be a limit point of $A$. Then $f(z) \to l$ as $z \to a$ $\iff$ $f(a_n) \to l,\,\, \fa a_n : \N \to \C, a_n \to a$.
+\end{nthm}
+
+{\color{red}\begin{question}
+  Does a limit only exist when $a$ is a limit point?
+\end{question}}
+
+\begin{ndefi}{(\textit{Continuous at})}
+  Let $f : A \to \C$. If $a\in A$ is a limit point of $A$, and if $f(z) \to f(a)$ as $z \to a$, we say that $f$ is continuous at $a$.
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Continuous on})}
+  Let $f : A \to \C$. Suppose that each point of $A$ is a limit point of $A$. We say $f$ is continuous on $A$ if $f$ is continuous at all $a\in A$.
+\end{ndefi}
+
+\begin{nthm}
+  Continuity holds under addition, multiplication and their inverses, with the usual caveats.
+\end{nthm}
+
+\begin{remark}
+  Polynomials are continuous on all of $\C$, rational functions are continuous where defined.
+\end{remark}
+
+\section{Holomorphic Functions}
+
+\begin{ndefi}{(\textit{Differentiable})}
+  Let $A \subset \C$ be open, $f : A \to \C$. We say $f$ is differentiable at $a\in A$ if,
+  $$ \lim_{z \to a} {\frac{f(z) - f(a)}{z - a}} \quad\text{exists} $$
+  This limit is called $f'(a)$.
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Holomorphic})}
+  Let $f: U \to \C$, which is differentiable at every point of $U$ is Holomorphic.
+\end{ndefi}
+
+\begin{nthm}
+  If $f : A \to \C$ and g are differentiable then,
+  $$ f \pm g \qquad fg \qquad fg^{-1} \qquad f \circ g \qquad g \circ f $$
+  are differentiable
+\end{nthm}
+
+\begin{nthm}{(\textit{Cauchy Riemann Equations})}
+  Let $U \subset \C$ be open. Suppose that $f : U \to \C$ is a function,
+  $$ f(x + iy) = u(x, y) + iv(x, y) $$
+  $x, y \in \R$, $u, v : \R \to \R$. If $z_0 \in U$ and if $f$ is differentiable at $z_0$,
+  $$ u_x = v_y \qquad u_y = -v_x $$
+\end{nthm}
+
+\begin{nlemma}{(\textit{Partial Converse of C-R})}
+  Suppose $f(x + iy) = u(x, y) + iv(x, y)$ is a function on an open set $U$ and suppose $z_0 \in U$. If $f$ satisfies the CR (with $u_x, v_y$ are continuous at $z_0$), then $f$ is differentiable.
+\end{nlemma}
+
+\section{Integration}
+
+\subsection{Path Integrals}
+\begin{ndefi}{(\textit{Path})}
+  A path is a continuous map $\g : [a,\,b] \to \C$. It is called smooth if $\g$ is differentiable and $\g'$ is continuous.
+\end{ndefi}
+
+\noindent
+We write $\g(t) + x(t) + iy(t)$ where $x, y : [a,\,b] \to \R$.
+\begin{itemize}
+  \item $\g$ is continuous if $x(t)$ and $y(t)$ are continuous.
+  \item $\g$ is differentiable if $x(t)$ and $y(t)$ are differentiable.
+\end{itemize}
+
+\begin{eg}
+  Let $z_1, z_2 \in \C$. The line segment from $z_1 \to z_2$ is the path $\g : [0,\,1] \to \C$,
+  $$ \g(t) = z_1 + (z_2 - z_1)t $$
+\end{eg}
+
+\begin{eg}
+  Let $z_0 \in \C, \, (r\in \R) > 0, \a, \b \in \R, a < \b$. We define $\g : [\a,\, \b] \to \C$,
+  $$ \g(t) = z_0 + re^{it} $$
+\end{eg}
+
+Let $\g : [a,\,b] \to \C$,
+\begin{itemize}
+  \item $\g(a)$ is the starting point
+  \item $\g(b)$ is the end point
+  \item If $\g(a) = \g(b)$, then the path is closed
+  \item If $\fa t, s \in (a,\, b)$ and $\g(t) = \g(s) \iff t = s$ (i.e. $\g$ is injective)
+\end{itemize}
+
+\begin{notation}
+  $\g^{-}$ is a map $\g^- : [-b,\,-a] \to \C$, i.e. the reversal of $\g$
+\end{notation}
+
+\begin{ndefi}{(\textit{Path Integral})}
+  Let $f$ be continuous on an open set $U$, $\g : [a,\,b] \to \C$ be a smooth path contained within $U$. The path integral is defined as,
+  $$ \int_\g f(z)dz = \int_{a}^{b} {f(\g(t))\g'(t)}dt $$
+\end{ndefi}
+
+\begin{eg}
+  Let $f(z) = z$ and $\g$ be the line segment from $1$ to $2 + 2i$,
+  $$ \g(t) = 1 + (1 + 2i)t \qquad t\in [0, 1]$$
+  then,
+  $$ \int_\g z\,dz = \int_{0}^{1} {(1 + (1 + 2i)t)}(1 + 2i)dt = -\frac{1}{2} + 4i$$
+\end{eg}
+
+\subsubsection{Properties of the path integral}
+
+\begin{align*}
+  \int_\g {f + g}\,dz &= \int_\g f\,dz + \int_\g g\,dz\\
+  \int_\g af\,dz &= a\int_\g f\,dz \qquad {\fa a \in\C}\\
+  \int_{\g^-} f\,dz &= -\int_\g f\,dz\\
+\end{align*}
+
+\begin{thm}{(\textit{FTC for $\C$})}
+  Assume $f: U \to \C$ is holomorphic and $U$ is open. Assume also that $f'$ is continuous. Then,
+  $$ \int_{\g} {f'(z)\,dz} = f(\g(b)) - f(\g(a)) $$
+  If $\g$ is closed, then,
+  $$ \int_{\g} {f'(z)\,dz} = 0 $$
+\end{thm}
+
+\subsection{Contour Integral}
+
+\begin{defi}{(\textit{Contour})}
+  A contour, $\g = (\g_1, \dots, \g_n)$ is a sequence of smooth paths arranged end to end.
+\end{defi}
+
+\begin{defi}{(\textit{Closed Contour})}
+  A contour is closed if $\g_1 = \g_n$.
+\end{defi}
+
+\begin{defi}{(\textit{Contour Integral})}
+  We define an integral over the contour $\g$ as,
+  $$ \int_\g f(z)\,dz = \sum_{i=1}^n \int_{\g_i} f(z)\,dz $$
+\end{defi}
+
+\begin{defi}{(\textit{Path Length})}
+  If $\g$ is a smooth path, $\g : [a,\,b] \to \C$, then we define it's length to be,
+  $$ \l(\g) = \int_a^b |\g'(t)|\,dt $$
+\end{defi}
+
+\begin{defi}{(\textit{Contour Length})}
+  If we have a smooth contour we define it's lengh to be,
+  $$ \l (\g) = \sum_{i=1}^n {\int_a^b |\g_i'(t)|\,dt} $$
+\end{defi}
+
+\begin{eg}
+  If $\g$ is a line segment from $w_1$ to $w_2$, $\g : [0,\,1] \to \C$, then,
+  $$ \l(\g) = \int_0^1 {|w_2 - w_1|}\,dt = |w_2 - w_1| $$
+\end{eg}
+
+\begin{lemma}
+  If $f$ is complex valued then,
+  $$ \left|\int_a^b { f(t) }\,dt \right| \le \int_a^b |f(t)|\, dt$$
+\end{lemma}
+
+\begin{ncor}{(\textit{M-L Bounds})}
+  Consider a contour $\g$ and continuous function $f$ on $\g$. Suppose $|f(z)| \le M \quad \fa z \in \g$. Then,
+  $$ \left| \int_\g f(z)\,dz \right| \le ML \qquad \text{ where $L = \l(\g)$}$$
+\end{ncor}
+
+\section{Sequences and Series of Complex Numbers}
+Let $a_n$ be a sequence of complex numbers, let $a\in\C$, we say that $a$ is the limit of $a_n$ as $n \to \infty$ if $\fa \e >0, \ex N\in \R,\,\fa n>N$,
+$$ |a_n - a| < \e $$
+
+\begin{nthm}
+  Let $z_n$ be a sequence of complex numbers, let $z\in\C$, then the following are equivalent,
+  \begin{enumerate}
+    \item $z_n \to z$ as $n \to\infty$
+    \item $|z_n - z| \to 0$ as $n\to\infty$
+    \item $Re(z_n) \to Re(z)$, $Im(z_n) \to Im(z)$ as $n \to \infty$
+  \end{enumerate}
+\end{nthm}
+
+\begin{ndefi}{(\textit{Cauchy Sequences})}
+  A sequence $a_n$ of complex numbers is a cauchy sequence if $\fa\e>0,\ex N\in\R$, if $n, m\ge N$, then
+  $$ |a_n - a_m| < \e $$
+\end{ndefi}
+
+\begin{nthm}
+  If $a_n$ is a convergent sequence of complex numbers, then $(a_n)$ is cauchy.
+\end{nthm}
+\begin{proof}
+  Since $a_n$ is convergent $a_k \to l$ as $n \to\infty$. Take $\e > 0$, by def, $\ex N$, if $n > N$, then $|a_n - l| < \frac{\e}{2}$. Suppose $n, m > N$,
+  \begin{align*}
+    |a_n - a_m| &= |a_n - l + l - a_m|\\
+    &\le |a_n - l| + |a_m - l|\\
+    &< \e
+  \end{align*}
+\end{proof}
+
+\begin{ndefi}{(\textit{Convergent Series})}
+  Let $\displaystyle{\sum_{n=0}^\infty {z_n}}$ be an infinite series of complex numbers, we say the series converges if, $\displaystyle{\sum_{n=0}^N {z_n}}$ converges.
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Absolutely convergent})}
+  $\displaystyle{\sum_{n=0}^\infty {z_n}}$ converges absolutely if $\displaystyle{\sum_{n=0}^\infty {|z_n|}}$ converges.
+\end{ndefi}
+
+\begin{nlemma}
+  If $\displaystyle{\sum_{n=0}^\infty {|z_n|}}$ converges so does, $\displaystyle{\sum_{n=0}^\infty {z_n}}$.
+\end{nlemma}
+
+\begin{ncor}
+  Let $(z_n)_{n=0}^\infty$ be a sequence of complex numbers. If $\fa\e>0\,\ex N,$ $\displaystyle{\left| \sum^n_{m+1} {z_k} \right| < \e}$ and $n, m > N$, then $\displaystyle{\sum_{k=0}^\infty {z_k}}$ is convergent.
+\end{ncor}
+
+\subsection{Sequences of functions}
+\begin{ndefi}{(\textit{Pointwise Limit of a sequence of functions})}
+  Let $(f_n)$ be a sequence of functions on $U$. Let $f : U \to \C$, we say that $f$ is pointwise limit on $f$ of $f_n$ if $\fa x \in U$, we have $f_n(x) \to f(x)$ as $n \to \infty$
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Uniform Convergence})}
+  Let $(f_n)$ be a sequence of functions in $U$. we say that $f$ is the uniform limit of $f_n$ if,
+  $$ \sup_{x\in U} {|f_n - f| \to 0} \text{ as $n\to \infty$} $$
+  we say that $(f_n)$ is uniformly convergent to $f$.
+\end{ndefi}
+
+\begin{nthm}
+  Let $(f_n)$ be a sequence of continuous functions that converge uniformly to $f$ on $U \sub\C$, st, $\fa z\in U$, $z$ is a limit point. Then $f$ is continuous.
+\end{nthm}
+
+\begin{nthm}
+  Let $\g$ be a contour and $f_n$ a sequence of functions integrable on $\g$. Assume that $f_n \to f$ uniformly on $g$. Then,
+  $$ \int_\g f_n\,dz \to \int_\g f\,dz $$
+\end{nthm}
+
+\begin{ndefi}{(\textit{Uniform Cauchy})}
+  $(f_n)_{n=1}^\infty$ defined on $U$ is uniformly cauchy on $U$ if $\fa\e>0\,\ex N,\,\fa n, m > N, \fa z\in U$,
+  $$ |f_n(z) - f_m(z)| < \e $$
+\end{ndefi}
+
+\begin{nlemma}
+  A sequence of functions defined on $U$ is uniformly convergent on $U$ if and only if it is uniformly cauchy on $U$.
+\end{nlemma}
+
+\begin{nlemma}
+  Let $(f_n)_{n=1}^\infty$ be a sequence of functions on $U$, the series $\displaystyle{\sum_{n=0}^infty {f_n(z)}}$ converges uniformly on $U$ if,
+  $$ S_N(z) = \sum_{1}^N f_n(z) $$
+\end{nlemma}
+
+\begin{nthm}{(\textit{Weirstrass M-Test})}
+  Let $(f_n)_{n=1}^\infty$ be a sequence of functions defined on a subset of $U\sub\C$. The series, $\displaystyle{\sum_1^\infty {f_n}}$ converges uniformly and absolutely on $U$ if, $\ex\, (M_n)_{n=1}^\infty \ge 0 \in \R$, st, $\fa n \in \N$, $\fa z\in U$ we have,
+  $$ |f_n(z)| \le M_n \text{ and } \sum_{n=0}^\infty {M_n} \text{ converges}$$
+\end{nthm}
+
+\section{Cauchy Theorem(s) - Many of them}
+\begin{nthm}{(\textit{Vauge Cauchy Theorem})}
+  If $f$ is holomorphic at every $z\in\g$ (a closed contour) then,
+  $$ \int_\g f(z)\,dz = 0$$
+\end{nthm}
+
+\begin{ndefi}{(\textit{Interior point $\g$ in triangles})}
+  Given any two edge points on distinct edges any point on the interval between these two points on the interior point.
+\end{ndefi}
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[scale=.5]
+      \begin{scope}[very thick,decoration={
+        markings,
+        mark=at position 0.5 with {\arrow{>}}}
+      ]
+        \draw[postaction={decorate}] (0,0)--(5,0);
+        \draw[postaction={decorate}] (5,0)--(3,4);
+        \draw[postaction={decorate}] (3,4)--(0,0);
+        \node (w1) at (-0.5, 0) {$w_1$};
+        \node (w2) at (5.7, 0) {$w_2$};
+        \node (w3) at (3, 4.5) {$w_3$};
+        \node (dT1) at (2.5, -0.8) {$\partial T_1$};
+        \node (dT2) at (5.3, 2) {$\partial T_2$};
+        \node (dT3) at (0.5, 2) {$\partial T_3$};
+      \end{scope}
+  \end{tikzpicture}
+\end{figure}
+
+\begin{nthm}
+  If $f$ is holomorphic on a domain $U$ and $T\sub U$ is a triangle in $U$, then $\partial T = \partial T_1 + \partial T_2 + \partial T_3$ and,
+  $$ \int_{\partial T} {f(z)\,dz} = 0$$
+\end{nthm}
+
+\begin{nlemma}
+  Take a triangle $T$ with vertices $w_1,\, w_2,\, w_3$. Subdivide $T$ into subtraingles $T_1, T_2, T_3, T_4$, where each subtriangle has half the dimensions of the original triangle. Then,
+  $$ \int_{\partial T} {f(z)\,dz} = \sum_{j=1}^4 \int_{\partial T_j} f(z)\,dz $$
+\end{nlemma}
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[border rotated/.style = {shape border rotate=180},
+  triangle/.style={draw, shape=regular polygon, regular polygon sides=3,draw,thick,inner sep=0pt,minimum
+  size=3.5cm,inner sep=-1.2cm,outer sep=0pt},scale=3/7,transform shape]
+  \node [triangle,fill=gray!15](1) {\fontsize{20.74}{22.4}$T_1$};
+  \node [triangle,fill=gray!15,anchor=north] (2) at (1.210) {\fontsize{20.74}{22.4}$T_2$};
+  \node [triangle,fill=blue!15,anchor=north] (3) at (1.-30) {\fontsize{20.74}{22.4}$T_3$};
+  \node [triangle,fill=gray!15,border rotated,below=0pt of 1] (4)  {\fontsize{20.74}{22.4}$T_4$};
+  \node (11) [above=0.3cm of 1] {\fontsize{20.74}{22.4}$w_1$};
+  \node  (21) [below left=0.3cm and 0.3cm of 2] {\fontsize{20.74}{22.4}$w_2$};
+  \node (31) [below right=0.3cm and 0.3cm of 3] {\fontsize{20.74}{22.4}$w_3$};
+  \end{tikzpicture}
+\end{figure}
+
+\begin{nlemma}{(\textit{Gorsats Lemma})}
+  Let $f$ be holomorphic in $U\sub \C$ and take $\a \in U$. Then, $\ex\, v(z)$ defined on $U$, st,
+  $$ f(z) = f(\a) + (z-\a)f'(\a) + (z - \a)v(z) $$
+  and such that, $\displaystyle{v(z)\to 0}$ as $\displaystyle{z\to \a}$
+\end{nlemma}
+
+\newpage
+\subsection{Nested Sequence of compact sets}
+\begin{nlemma}
+Let $U$ be a closed subset of $\C$ and let $(a_n)$ be a convergent sequence of elements of $U$ with limit $a$. Then $a\in U$.
+\end{nlemma}
+
+\begin{nlemma}
+  Let $\displaystyle{U_1 \bus U_2 \bus \dots \bus U_n \bus \dots}$ be a decreasing sequence of compact subsets of $\C$. Then $\ex\a\in \C$, st, $\a \in U_n \fa n \in\N$
+\end{nlemma}
+
+\begin{ndefi}{(\textit{Star Domain})}
+  A domain in $\C$ is star if it has a star center.
+\end{ndefi}
+
+\begin{ndefi}{(\textit{Star Center})}
+  We call $z_0\in\C$ a star center of $U$ if, $\fa z\in U$, the line segment between $z_0$ and $z$ is contained in $U$.
+\end{ndefi}
+
+\begin{nthm}
+  If $f$ is holomorphic on a star domain $U$, then $f = g'$ for some $g$ holomorphic on $U$.
+\end{nthm}
+
+\begin{ncor}{(\textit{Cauchy Theorem on Star Domains})}
+  If $U$ is a star domain with $f$ as holomorphic on $U$, and $\g$ is closed contour on $U$, then,
+ $$ \int_\g f(z)\,dz = 0 $$
+\end{ncor}
+
+\begin{nthm}{(\textit{Cauchy Theorem})}
+  Let $U$ be a domain. Let $\g$ be a closed contour, st, $U$ contains $\g *$ and the interior of $\g$. Let $F$ be holomorphic on $U$, then,
+  $$ \int_\g f(z)\,dz = 0 $$
+\end{nthm}
+
+\subsection{Jordan Closed Curve}
+\begin{nthm}
+  Let $\g$ be a simple closed curve, then $\C\setminus \g*$ is the disjoint union of a bounded region called the interior of $\g$ and an unbounded region called the exterior of $\g$.
+\end{nthm}
+
+\begin{nthm}{(\textit{Deformation Theorem})}
+  Let $f$ be a function, holomorphic on a domain $U$. Let $\g_1,\, \g_2$ be contours with the the same start and end points, st, $U$ contains $\g_1*$ and $\g_2*$ and the region between them. Then,
+  $$ \int_{\g_1} {f(z)\,dz} = \int_{\g_2} {f(z)\,dz} $$
+\end{nthm}
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+    \node (A) at (1, 1) {$A$};
+    \node (B) at (-1, -1) {$B$};
+    \draw (A) to[out=-30,in=-30] (B);
+    \node (l1) at (0, 1.6) {$\g_1$};
+    \draw (B) to[out=90,in=120] (A);
+    \node (l2) at (0, -1.5) {$\g_2$};
+  \end{tikzpicture}
+  \caption{Diagram for Deformation Theorem}
+\end{figure}
+
+\begin{ndefi}{(\textit{Positively Oriented Curve})}
+  A simple closed curve is said to be positively oriented if the interior is to the left of the curve when travelling in the direction of the contour.
+\end{ndefi}
+
+\begin{nthm}
+  Let $\g_1$ and $\g_2$ be positively oriented simple contours with $\g_2*$ lying inside $\g_1$. If $f$ is holomorphic on some domain that contains $\g_1*$ and $\g_2*$ and the region between the contours,
+  $$ \int_{\g_1} f(z)\,dz = \int_{\g_2} {f(z)\,dz} $$
+\end{nthm}
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+     \draw[double distance=6pt] plot[smooth cycle,tension=0.7] coordinates {(0,0) (0.3,0.6) (1,0.8) (1.4,0.2)
+     (1.2,-0.3) (0.4,-0.4)};
+     \draw[-latex] (3pt,0) -- ++(-1,-0.2) node[left]{$\g_2$};
+     \draw[-latex] (1.4cm+3pt,0.2) -- ++(1,-0.2)
+     node[right]{$\g_1$};
+  \end{tikzpicture}
+  \caption{Diagram for Thm7.16}
+  % \label{}
+\end{figure}
+
+\begin{nthm}{(\textit{Cauchy Integral Formula})}
+  Let $U$ be a domain, $\g$ be a positively oriented simple contour with it's image and interior lying entirely inside $U$. Suppose that $a\in\g$. If $f$ is holomorphic on $U$, then,
+  $$ f(a) = \frac{1}{2\pi i}\int_\g {\frac{f(z)}{z-a}}\,dz $$
+\end{nthm}
+
+\begin{eg}
+  Let $\g$ be the circle with center $(0, 0)$ and radius 2. Then,
+  $$ \int_\g \frac{e^{z^2}}{z + 1}\,dz = 2\pi ie$$
+  We can then get from CIF,
+  $$ \int_\g \frac{f(z)}{z - a}\,dz = 2\pi i f(a) $$
+  Let $a = -1$ and $f(z) = e^{z^2}$,
+  $$ \int_\g \frac{e^{z^2}}{z+1}\,dz = 2\pi i f(-1) = 2\pi i e $$
+\end{eg}
+
+\subsection{Cauchys Integral Formula for the nth derivative}
+\begin{nthm}{(\textit{Cauchys Integral Formula for the nth derivative})}
+  Let $U$ be a domain, $\g$ a positively oriented simple contour with it's image and interior lying entirely in $U$. Suppose $a$ is a path in the interior of $\g$. If $f$ is holomorphic on $U$, then,
+  $$ f^{(n)}(a) = \frac{n!}{2\pi i}\int_\g \frac{f(z)}{(z - a)^{n+1}}\,dz $$
+\end{nthm}
+
+\begin{eg}
+  Let $\g$ be the unit circle, compute $\displaystyle{\int_\g \frac{\sin z}{z^4}}$. First take $a=0$ and $n=3$,
+  $$ \int_\g \frac{f(z)}{z^4} = \frac{2\pi i}{3!}f^{(3)}{(0)} = -\frac{\pi i}{3} $$
+\end{eg}
+
+\subsection{Morera's Theorem}
+\begin{nthm}
+  Let $U$ be a domain, $f$ continuous on $U$, st, for all positively oriented simple contours $\g$,
+  $$ \int_\g f(z)\,dz = 0 $$
+  st, $\g*$ and it's interior are contained in $U$, then $\ex g : U \to \C$ st,
+  $$ g' = f' \qquad \fa z\in U$$
+\end{nthm}
+
+\begin{nthm}{(\textit{Morera's Theorem})}
+  Let $U$ be a domain, let $f$ be continuous on $U$. If
+  $$ \int_\g f(z)\,dz = 0 \qquad \fa \text{positively oriented simple closed contours} $$
+  st, $\g*$ and it's interior is contained in $U$, then $f$ is holomorphic on $U$.
+\end{nthm}
+
+\subsection{Cauchy Estimates}
+Let $f$ be holomorphic on a domain containing $\cdi a r$. If $M$ is an upper bound for $|f(z)|$ on the boundary of the disc, st,
+$$ |f(z)| \le M,\,\fa z\in D(a, r) $$
+then,
+$$ f^{(n)}(a) \le \frac{n! M}{r^n} \qquad\fa n \in Z^+ $$
+
+\begin{nprop}
+  Let $U$ be a compact subset of $\C$ and let $f : U \to \C$ be continuous. Then, $f$ is bounded.
+\end{nprop}
+
+\begin{ndefi}{(\textit{Entire Function})}
+  An entire function is holomorphic on $\C$
+\end{ndefi}
+
+\begin{nthm}{(\textit{Louiville's Theorem})}
+  Let $f$ be entire, if $f$ is bounded then, $f$ is constant.
+\end{nthm}
+
+\begin{nthm}{(\textit{Generalised Louville})}
+  Let $f$ be entire, if $\ex n, C, R$, st,
+  $$ |f(z)| \le C|z|^n $$
+  whenever $|z| > R$. Then $f$ is a polynomial of degree at most $n$.
+\end{nthm}
+
+\begin{eg}
+  Suppose $f$ is an entire function, satisfying
+  $$ |f(z)| \le |z| + 1 \qquad \fa z \in \C $$
+  Prove that $f(z)$ is a polynomial of degree 1, where $|A| \le 1$ and $B \le 1$.\\
+  So let $n = 1$, and so we want to show things when $|z| \ge 1$, then,
+  $$ |z| + 1 \le 2|z| \qquad \text{so let $C = 2$ and $R=1$}$$
+  We now know that $f(z) = Az + B$. We can differentiate and plug in zero to get the required inequalities,
+  \begin{align*}
+    |f(0)| &= |A(0) + B|\\
+    &\le |0| + 1\\
+    |B| &\le 1
+  \end{align*}
+  and now use Cauchy's estimate,
+  \begin{align*}
+    |f^{(n)}(a)| &\le \frac{n!M}{r^n}\\
+    = \frac{M}{r} && \text{as $n=1$}\\
+    &\le \frac{1}{r} && \text{as $z = 0$}\\
+    &\le 1 && \text{as we are in $D(1, 1)$}
+  \end{align*}
+\end{eg}
+
+\section{Power Series}
+Let $a\in\C$, $(a_n)$ is a sequence of complex numbers, $\fa n\ge 0$ we define $f_n: \C\to\C$ by $f_n(z) = a_n(z-a)^n$,
+$$ \is f_n \qquad \text{is the power series about $a$} $$
+\begin{nlemma}
+  Any differentiable complex function has a local power series expansion.
+\end{nlemma}
+
+\begin{nthm}{(\textit{Taylors Theorem})}
+  Let $f$ be holomorphic on a domain $U$, suppose that the $\di a r \sub U$, where $a\in\C$, $r > 0$. Then $\ex (a_n)_{n=0}^{\infty}$ of complex numbers st, $\fa z\in\di a r$
+  $$ f(z) = \is a_n(z-a)^n $$
+  $\g$ is a circular contour, $\di a r$, where,
+  $$ a_n = \frac{f^{(n)}(a)}{n!} = \frac{1}{2\pi i}\int_\g {\frac{f(w)}{(w - a)^{n+1}}} $$
+\end{nthm}
+
+\begin{proof}
+  Assume $a = 0$, let $f$ be holomorphic on a domain $U$. Suppose that $\di 0 R \sub U$. Let $z \in \di 0 R$, st, $|z| < R$. Let $\mu = \di 0 S$ with $|z| < S < R$.\\
+
+  \noindent
+  By Cauchy's Integral Formula we have,
+  \begin{equation}
+    f^{(n)}(a) = \frac{n!}{2\pi i}\int_\g {\frac{f(w)}{(w - a)^{n+1}}}\, dw \tag{$*$}
+  \end{equation}
+  Take $n = 0$ in $(*)$,
+  \begin{align*}
+    f^{(0)}(z) &= \frac{1}{2\pi i}\int_\mu \frac{f(w)}{(w- z)}\,dw\\
+    &= \frac{1}{2\pi i}\int_\mu \frac{f(w)}{w(1- \frac{z}{w})}\,dw\\
+    &= \frac{1}{2\pi i}\int_\mu \frac{f(w)}{w}\cdot\frac{1}{(1- \frac{z}{w})}\,dw\\
+    &= \frac{1}{2\pi i}\int_\mu \frac{f(w)}{w}\is \left( \frac{z}{w} \right)^n\,dw\\
+    &= \frac{1}{2\pi i}\int_\mu \is\left(\frac{f(w)}{w^{n+1}} z^n \right)\,dw\\
+    &= \is \frac{1}{2\pi i} \int_\mu \left(\frac{f(w)}{w^{n+1}} \right)\,dw\, z^n \\
+    &= \is f^{(n)}(0)\,z^n
+  \end{align*}
+\end{proof}
+
+Let $f$ be holomorphic on a domain $U$ and suppose $\id a R \sub U$, where $a\in\C$ and $R>0$. Then, $\ex (a_n)_{n=0}^\infty$ of complex numbers, $\fa z\in\di a R$,
+$$ f(z) = \is {a_n(z-a)^n} \qquad \text{ where } a_n = \frac{f^{(n)}(a)}{n!} $$
+$\g$ is any circular contour, $\di a r, (r < R)$.
+
+\subsection{Radius of Convergence}
+
+The sum $\displaystyle{\is z^n}$ converges if $|z| < 1$ and diverges if $|z| > 1$. This is the series converges inside the unit circle at $(0, 0)$ and diverges outside. So we can ask,
+$$ \is a_n(z - a)^n \quad\text{ for what values does it converge?} $$
+There are three possibilities,
+\begin{enumerate}
+  \item The series converges only when $z = a$
+  \item The series converges everywhere $\fa z\in\C$
+  \item The series converges where $\ex R$, st, the series converges in $\di a R$ only.
+\end{enumerate}
+
+\begin{nlemma}
+  Let $\displaystyle{\is a_n(z - a)^n}$ be a power series. If the series converges for $z_0\in\C$ with $z_0 \ne a$, $\fa r$, st, $0 < z < |z_0 - a|$ the series converges uniformly and absolutely on $\cdi a r$
+\end{nlemma}
+
+\begin{nthm}{(\textit{Radius of Convergence})}
+  Let $\displaystyle{\is a_n(z - a)^n}$ be a power series. Suppose $\ex z_0 \ne a$, st, the power series converges when $z = z_0$. If the series doesn't converge $\fa z\in\C$, then $\ex R > 0$, $R \in\R$, st, the series converges absolutely when $|z - a| < R$ and diverges when $|z - a| > R$.
+\end{nthm}
+
+The number $R$ is called a radius of convergence of the power series,
+\begin{itemize}
+  \item If a power series converges $\fa z \in\C$, we say it has infinite radius of convergence.
+  \item  If the series converges only at $a$, the radius of convergence must be zero.
+\end{itemize}
+
+\begin{nthm}
+  Let $f$ be a function of $z\in\C$ defined by,
+  $$ f(z) = \is a_n(z - a)^n \quad \text{ with Radius of convergence, $R$} $$
+  Then, $f$ is holomorphic on $\di a R$ and,
+  $$ f'(z) = \is na_n(z - a)^{n-1} \quad \fa z\in \di a R $$
+\end{nthm}
+
+\begin{nthm}
+  If, $\displaystyle{f(z) = \is a_n(z - a)^n}$ is a power series that converges in a domain containing a $\di a R$ where $a\in\C$ and $R > 0$ ($R\in\R$) then, $f(z)$ is holomorphic on $\di a R$ and $\displaystyle{a_n = \frac{f^{(n)}(a)}{n!} \quad \fa n\in\N}$
+\end{nthm}
+
+\begin{eg}
+  What is the power series of $\displaystyle{f(z) = z\sin z}$ around $\pi$?\\
+  We know that,
+  $$ \sin w = \is \frac{(-1)^n}{(2n + 1)!}w^{2n+1} $$
+  Let $w = z - \pi$,
+  $$ \sin(z - \pi) = \is \frac{(-1)^n(z - \pi)^{2n + 1}}{(2n + 1)!} $$
+  and so,
+  \begin{align*}
+    z\sin z &= (w + \pi)\sin(w + \pi)\\
+    &= w\sin(w + \pi) + \pi\sin(w + \pi)\\
+    &= -w\sin w - \pi \sin w\\
+    &= -(w + \pi)\is \frac{(-1)^nw^{2n+1}}{(2n + 1)!}
+  \end{align*}
+\end{eg}
+
+\begin{eg}
+  Find the taylor series for $f(z) = \cos (3z^2)$ around $z= 0$ and state the radius of convergence,\\
+  Let $w = 3z^3$ and let us use the taylor series for $\cos w$,
+  \begin{align*}
+    \cos w &= \is \frac{(-1)^nw^{2n}}{(2n)!}\\
+    &= \is \frac{(-1)^n(3z^3)^{2n}}{(2n)!}\\
+    &= \is \frac{(-1)^n9^nz^{6n}}{(2n)!}
+  \end{align*}
+  This series converges $\fa w$ and so it converges $\fa z$.
+\end{eg}
+
+\section{Zeros of holomorphic functions}
+Let $f$ be a holomorphic function of a complex variable. A zero of $f$ is a complex number $z_0$, st, $f(z_0) = 0$.
+
+Suppose $f$ is holomorphic in a domain containing a point $a\in\C$. Then, $\ex r > 0$, st, $f$ has a power series,
+$$ f(z)= \is a_n(z - a)^n \quad \text{ in }\di a r $$
+and now suppose that $a$ is a zero of $f$. Then,
+\begin{itemize}
+  \item Either all of $a_n = 0, \quad \fa n > 0 \implies f(x) = 0$ on $\di a r$.
+  \item $\ex N\in\N$, st, $a_0=a_1=\dots=a_{N-1}$ and $a_N \ne 0$.
+\end{itemize}
+
+For the second point there, we say that $f$ has a zero of order $N$ at $a$. By Taylors Theorem, $f$ has a zero of order $N$ at $a\in\C$ if $f(a) = f'(a) = \dots = f^{(n-1)}(a) = 0$ and $f^{(n)}(a) \ne 0$.
+
+\begin{defi}{(\textit{Simple Zero})}
+  A zero of order one is a simple zero, i.e. $f(a) = 0$, but $f'(a) \ne 0$.
+\end{defi}
+
+\begin{defi}{(\textit{Double Zero})}
+  A zero of order two is a double zero.
+\end{defi}
+
+\begin{eg}
+  Let $f(z) = z$, then we have a simple zero at $z=0$ as,
+  \begin{itemize}
+    \item $f(0) = 0$
+    \item $f'(z) = 1 \implies f'(0) = 1$
+  \end{itemize}
+  and now let $f(z) = z^2$, then we have a double zero at $z = 0$ as,
+  \begin{itemize}
+    \item $f(0) = 0^2 = 0$
+    \item $f'(z) = 2z, \implies$ $f'(0) = 0$
+    \item $f''(z) = 2, \implies$ $f''(0) = 2$
+  \end{itemize}
+\end{eg}
+
+\begin{nlemma}
+  Suppose that $f$ and $g$ have zeros of order $n$ and $m$ respectively at $a\in\C$, then $fg$ has a zero of order $n + m$ at $a$.
+\end{nlemma}
+
+\begin{nlemma}{(\textit{Isolated Zeros})}
+  Let $f$ be holomorphic on a domain $U$ containing a point $a$. If $\ex m\in\N$, st, $f$ has a zero of order $m$ at $a$, then the zero is isolated.
+\end{nlemma}
+
+More intuitively, a zero is isolated, if $\ex r > 0$, st, $f(z)\ne 0$ if $z\in \pdi a r$
+
+\begin{nthm}
+  Let $f$ be holomorphic on a domain $U$, if $\ex a\in U$ and $r > 0$, st, $\di a r \subset U$ and st, $f(z) = 0\, \fa z\in D(a, r)$, then $f(z) = 0\, \fa z \in U$.
+\end{nthm}
+
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+     \draw plot[smooth cycle,tension=0.7] coordinates {(0,0) (0.3,0.6) (2,1.6) (2.8,0.4)
+     (2.4,-0.6) (0.8,-0.8)};
+     \node (U) at (-0.5, 1) {$U$};
+     \draw (1.2,0) circle[radius=0.6];
+     \fill (1.2,0) circle[radius=1pt];
+     \draw[-latex] (0.8,0) -- ++(-2,-0.4) node[left]{$f(z)=0,\,\fa z\in\di a r$};
+     \draw[-latex] (2.2,0.4) -- ++(2,-0.4)
+     node[right]{$f(z) = 0,\,\fa z\in U$};
+  \end{tikzpicture}
+  \caption{Diagram for locally zero $\implies$ globally zero}
+  % \label{}
+\end{figure}
+
+Let $S$ be an open subset of $\C$, consider all $A\sub S$, st,
+\begin{itemize}
+  \item A is open
+  \item $S\setminus A$ is open
+\end{itemize}
+If the only set $A$ that satisfy $(1)$ and $(2)$ are $\es$ and $S$ itself, then $S$ is topologically connected.
+
+\begin{nlemma}
+  $S$ is topologically connected if and only if it is connected.
+\end{nlemma}
+
+\begin{nthm}{(\textit{Identity Theorem})}
+  Let $U$ be a domain and let $f : U \to \C$ be holomorphic. The following are equivalent:
+  \begin{enumerate}
+    \item $f(z) = 0 \quad\fa z\in U$
+    \item $\ex a\in U,\, r >0$, st, $f(z) = 0,\, \fa z\in\di a r$
+    \item The set $S$ of zeros of $f$ has a limit point $z_0\in U$.
+  \end{enumerate}
+\end{nthm}
+
+\subsection{Laurent Series}
+Let,
+$$ f(z) = \is a_n(z - a)^n = a_0 + a_1(z-a) + \dots $$
+\begin{nthm}{(\textit{Laurent Theorem})}
+  If $f$ is holomorphic on an annulus,
+  $$ A = \{z\in\C : R < |z - a| < S\} $$
+  for $0 < R \le S$, then, $\ex (b_n)_{n\in\Z^+}\in \C$, st,
+  $$ f(z) = \ls b_n(z - a)^n \qquad \text{the laurent series $\fa z\in A$}$$
+\end{nthm}
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+
+    \draw [name path=C, thick, draw, fill=blue!20](0,0) circle (1.5cm);
+    \draw [name path=A, thick, draw,fill=white](0,0) circle (1cm);
+    \draw [thick](0,0)-- (0.76,0.64);
+    \draw [thick](0,0)-- (0.37,1.45);
+
+    \draw[->, thick] (-2,0) -- (2,0);
+    \draw[->, thick] (0,-2) -- (0,2);
+
+    \begin{scriptsize}
+    \draw (-1.54,1.94) node {$A$};
+    \draw (1.11,0.73) node {$R$};
+    \draw (0.55,1.69) node {$S$};
+    \end{scriptsize}
+
+  \end{tikzpicture}
+  \caption{ Then annulus $A$ from $R$ to $S$}
+  % \label{}
+\end{figure}
+
+\noindent
+$f(z)$ moreover $\fa r$, st, $R < r < S$ and $\fa n\in\Z^+$, if $\g$is the circular contour with center $a$ and center $r$, then,
+$$ b_n = \frac{1}{2\pi i}\int_\g {\frac{f(w)}{(w - a)^{n + 1}}} $$
+
+\noindent
+Suppose $\displaystyle{\ls a_n(z - a)^{n}}$ is a laurent series convergent on the annulus. Then,
+$$ \lsp a_n(z - a)^n \quad \text{is the principle part of the Laurent Series.} $$
+
+\begin{nthm}{(\textit{Uniqueness})}
+  Let $A = \{ z\in\C : R < |z - a| < S\}$, $0 < R< S < \infty$. If the series $\displaystyle{\ls b_n(z - a)^n}$ converges $\fa z\in A$, then,
+  $$ f(z) = \ls b_n(z - a)^n \quad \text{ is holomorphic on $A$ and $\fa n\in\Z^+$ with the usual $b_n$ defined above.} $$
+  where $\g$ is the circular contour, $\di a r$, $R< r < S$.
+\end{nthm}
+
+\begin{eg}
+  $A = \{z\in\C : 1 < |z| < 2\}$. Let $f : \C\setminus\{1, 2\} \to \C$, st, $\displaystyle{f(z) = \frac{1}{(z-1)(z-2)}}$ and find the Laurent series about 0.\\
+
+  \begin{align*}
+    f(z) &= \frac{1}{z - 2} - \frac{1}{z-1}\\
+    &= \frac{1}{-2\left(1 - \frac{z}{2}\right)} + \frac{1}{z\left(1 - \frac{1}{z}\right)}\\
+    &= -\frac{1}{2}\is\frac{z^n}{2^n} + \lsp z^n
+  \end{align*}
+  which is the Laurent expansion around $0$.
+\end{eg}
+
+\begin{eg}
+  Let $\mu$ be the circular contour, $\di 0 {\frac{3}{2}}$. Compute,
+  $$ I = \mu_\mu f(z)\,dz \quad \text{ with } f(z) = \frac{1}{(z-1)(z-2)}$$
+  and we know that,
+  $$ f(z) = \ls a_nz^n \qquad a_n = \int_\mu {\frac{f(w)}{w^{n+1}}} $$
+  and so let $n = -1$,
+  \begin{align*}
+    a_{-1} &= \frac{1}{2\pi i}\int_\mu {f(w)}\,dw\\
+    2\pi i a_{-1} &= \int_\mu f(w)\,dw
+  \end{align*}
+  and so as we know that $\displaystyle{f(z) = -\frac{1}{2}\is\frac{z^n}{2^n} + \lsp z^n}$. So now compute $a_{-1}$. WE can get that $a_{-1} = -1$, and so,
+  $$ \int_\mu f(w)\,dw = -2\pi i $$
+\end{eg}
+
+\subsection{Singularities}
+\begin{ndefi}{(\textit{Isolated Singularity})}
+  Let $U$ be a domain on which $f$ is holomorphic. If $a\not\in U$, st, $\pdi a r$ is a subset of $U$ for some $r > 0$. Then, $f$ has an isolated singularity.
+\end{ndefi}
+
+\noindent
+If $f$ has an isolated singularity at $a$, then by Laurents Theorem,
+$$ f(z) = \ls b_n(z - a)^n \quad \text{ above $\pdi a r$ for some $r > 0$} $$
+
+\begin{eg}
+  Find the Laurent Series of $\displaystyle{f(z) = \frac{\sin z}{z}}$,
+  \begin{align*}
+    f(z) &= \frac{1}{z}\is \frac{(-1)^nz^{2n + 1}}{(2n + 1)!}\\
+    &= \is \frac{(-1)^nz^{2n}}{(2n + 1)!}
+  \end{align*}
+\end{eg}
+
+\begin{ndefi}{(\textit{Removable Singularity})}
+  $f$ has a removable singularity if it's Laurent Series has zero principle part, $b_n = 0,\,\fa n < 0$
+\end{ndefi}
+
+\begin{eg}
+  $f(z) = e^{\frac{1}{z}}$ has a laurent series about $z = 0$,
+  \begin{align*}
+    f(z) &= \is (\frac{1}{z})^n\frac{1}{n!}\\
+    &= \is \frac{1}{z^nn!}\\
+    &= \frac{1}{n!} + \lsp \frac{1}{(-n)!}z^n
+  \end{align*}
+\end{eg}
+
+\begin{ndefi}{(\textit{Essential Singularity})}
+  There are infinitely many terms in the principle part, hence, it is a essential singularity. $\nexists\, m$, st, $b_n = 0,\, \fa n<-m$.
+\end{ndefi}
+
+To find singulaties look at the Laurent Series,
+$$ \dots + \frac{1}{z^3} + \frac{1}{z^2} + \frac{1}{z} + 1 + z + z^2 + \dots $$
+\begin{itemize}
+  \item principle part all zeros, $f$ has a removable singularity
+  \item principle part not all zero, $f$ has an essential singularity
+\end{itemize}
+
+\begin{nthm}{(\textit{Picards Great Theorem})}
+  If $f$ is defined on a punctured disc and has an essential singularity at $a$, then $f$ takes all complex values with at most one exception on $\pdi a r$.
+\end{nthm}
+
+\section{Residues and Cauchy (again...)}
+If $f$ is a function holomorphic on a punctured disc, $\pdi a r$ for some $a\in\C$ and $r >0$, with Laurent Series,
+$$ \ls b_n(z - a)^n \qquad\text{ for $z\in\pdi a r$, then,} $$
+the residue of $f$ at $a$ is,
+$$ \Res(f, a) = b_{-1} $$
+
+The residue of $f$ at $a$ is, $\displaystyle{\Res(f, a) = b_{-1}}$ and if $f$ has a removable singulairty at $a$, then, $\displaystyle{\Res(f, a) = 0}$ and if $a$ is a simple pole, then, $\displaystyle{\Res(f, a)\ne 0}$
+
+\begin{nthm}{(\textit{Cauchy Residue Theorem})}
+  If $\g$ is a closed simple contour, traversed anticlockwise, if $f$ is a holomorphic function on a domain containing the image and the interior of $\g$ except for a finite number of isolated singularities in the interior of the whole curve $(a_1, a_2, \dots, a_n)$, then,
+  $$ \int_\g f(z)\,dz = 2\pi i \sum_{j=0}^n \Res(f, a_j) $$
+\end{nthm}
+
+\subsection{Computing Residues}
+
+If $f$ has laurent series,
+$$ \sum_{\infty}^\infty b_n(z - a)^n \qquad \text{for $t \in D'(a, r)$}$$
+Then,
+$$ \res (f, a) = b_{-1} $$
+Given this, we have Cauchy Residue Theorem, suppose $\g$ is a closed, simple contour traversed anticlockwise. $f$ is holomorphic except at a finite number of isolated singulairties, say $(a_1, \dots, a_k)$, then,
+$$ \int_\g f(z)\,dz = 2\pi i \sum_{j=0}^k \res (f, a_j) $$
+
+If $f$ has a simple pole at $a$, then $f$ has a laurent series,
+$$ f(z) = \frac{b_{-1}}{z - a} + b_0 + b_1(z- a) + b_2(z - a)^2 + \dots $$
+and we have,
+$$ \res (f, a) = b_{-1} = \lim_{z \to a} (z - a)f(z) $$
+\begin{eg}
+  Let $\g$ be $D(0, 3)$ and $\displaystyle{f(z) = \frac{1}{(z - 1)(z - 2)}}$. $f$ has two singularities.
+  $$ \res(f, 1) = \lim_{z \to 1} (z - 1)\frac{1}{(z - 1)(z - 2)} = \lim_{z \to 1} \frac{1}{z - 2} = -1 $$
+  $$ \res (f, 2) = \lim_{z \to 2} (z - 2)\frac{1}{(z - 1)(z - 2)} = \lim_{z \to 2} \frac{1}{z - 1} = 1 $$
+  and so,
+  $$ \int_\g f(z)\,dz = 2\pi i (-1 + 1) = 0 $$
+\end{eg}
+
+\begin{nlemma}
+  If $\displaystyle{f(z) = \frac{h(z)}{k(z)}}$ and it has an isolated singularity at $a$, $h$ and $k$ are holomorphic on $D(a, r)$ if $h(a) \ne 0$ and $k$ has a simple zero at $a$. Then,
+  $$ \res (f, a) = \frac{h(a)}{k'(a)} $$
+\end{nlemma}
+
+\begin{eg}
+  Consider $\displaystyle{f(z) = \frac{\sin z}{\cos z}}$ and
+  $$ \res \left(f, \frac{3\pi}{2}\right) = \frac{\sin \frac{3\pi}{2}}{-\sin \frac{3\pi}{2}} = -1 $$
+\end{eg}
+
+For poles of higher order, we look towards the laurent series.
+
+\begin{eg}
+  Compute the residue of $\displaystyle{f(z) = \frac{\sin z}{(z - \pi)^6}}$. \\
+  Firstly, let $w = z - \pi$.
+  \begin{align*}
+    f(z + \pi) &= \frac{\sin(w + \pi)}{w^6}\\
+    &= -\frac{\sin w}{w^6}\\
+    &= -\frac{1}{w^6}\left( w - \frac{w^3}{3!} + \frac{w^5}{5!} + \dots \right)\\
+    &= - \frac{1}{w^5} + \frac{1}{3!w^3} - \frac{1}{5!w} + \dots
+  \end{align*}
+  Hence, $\displaystyle{b_{-1} = -\frac{1}{5!}}$ an hence $\displaystyle{\res (f, \pi) = \frac{1}{5!}}$
+\end{eg}
+
+
+\begin{notation}
+  Note that,
+  \begin{align*}
+    1 + w + w^2 + w^3 + \dots \\
+    1 + w + w^2 + w^3 + \mathcal{O}(w^4)
+  \end{align*}
+\end{notation}
+
+
+\begin{nprop}
+  Suppose $f$ has a pole of order $n$ at $a \in \C$, then,
+  $$ \res (f, a) = \lim_{z \to a} \frac{g^{(n-1)(z)}}{(n-1)!} $$
+  where $g(z) = (z - a)^n f(z)$.
+\end{nprop}
+
+\begin{eg}
+  Let $\displaystyle{f(z) = \frac{\sin z}{(z- 1)^3}}$ and $f$ has a triple pole at $z = 1$. Let us write,
+  $$ g(z) = (z - 1)^3f(z) = \sin z $$
+  and so,
+  $$ \res (f, 1) = \lim_{z \to 1} \frac{(\sin z)''}{2!} = -\frac{1}{2}\sin 1 $$
+\end{eg}
+
+When we consider residues at essential singularities, it suffices to just compute and consider the laurent series,
+\begin{eg}
+  Find $\res (f, 0)$ where $f(z) = e^{\frac{2}{z}}$. Let $w = \frac{2}{z}$.
+  \begin{align*}
+    f \left( \frac{w}{2} \right) &= e^w\\
+    &= 1 + w + w^2 + w^3 + \dots\\
+    &= 1 + \frac{2}{z} + \frac{4}{z^2} + \frac{8}{z^3} + \dots
+  \end{align*}
+  and so, $\res (f, 0) = 2$
+\end{eg}
+
+\section{How to integrate 101}
+
+Complex Analysis is very useful for solving a wide amount of integrals.
+
+\subsection{Integrating Trigonometric Functions}
+
+If $z = e^{it}$, then we can write,
+$$ \cos t = \frac{1}{2}(z + z^{-1}) \qquad \text{ and } \qquad \sin t = \frac{1}{2i}(z - z^{-1}) $$
+
+We want to write,
+$$ \int_0^{2\pi} {F(\cos t, \sin t)\,dt} $$
+as a function of $z$ alone.
+
+\begin{eg}
+  Compute,
+  $$ \int_0^{2\pi} {\frac{\cos 2t}{5 - 3\cos t}\,dt} $$
+  Firstly we can let $z = e^{it}$ and preform a substitution.
+  \begin{align*}
+    \int_0^{2\pi} {\frac{\cos 2t}{5 - 3\cos t}\,dt} &= \int_0^{2\pi} {\frac{\frac{1}{2}z^2 + z^{-2}}{5 - \frac{3}{2}(z + z^{-1})}}\,dt\\
+    &= \int_0^{2\pi} {\frac{\frac{1}{2}z^2 + z^{-2}}{5 - \frac{3}{2}(z + z^{-1})}}\,\frac{dz}{iz}\\
+    &= \int_0^{2\pi} {\frac{z^4 + 1}{z^2 (3z^2 - 10z + 3)}}\,dt && \text{This step took half an hour of the lecture}\\
+  \end{align*}
+  Looking at the integrand we can say, it has a double pole at $z = 0$ and simple poles at $z = 3$ and $z = \frac{1}{3}$. We shall take the disc of center 0 and radius $1$. Now we can say that we want the residue of $z = 0$ and $z = \frac{1}{3}$.\\
+
+  We can calculate the residue at $z = 0$, by doing the following,
+  \begin{align*}
+    \res (f, 0) &= \lim_{z \to 0} {g'(z)}\\
+    &= \lim_{z \to 0 } { (z^2 f(z))'}\\
+    &= \lim_{z \to 0} {(\frac{z^4 + 1}{3z^2 - 10z + 3})}\\
+    &= \frac{10}{9}i
+  \end{align*}
+  and now the other residue as $z = \frac{1}{3}$ is a simple pole,
+  \begin{align*}
+    \res \left(f, \frac{1}{3}\right) &= \lim_{z \to \frac{1}{3}} { \left(z - \frac{1}{3}\right)f(z)}\\
+    &= \lim_{z \to \frac{1}{3}} {\frac{i(z^4 + 1)}{z^2}}\\
+    &= -\frac{41}{36}i
+  \end{align*}
+  and then by Cauchy Residue Theorem,
+  \begin{align*}
+    \int_0^{2\pi} {\frac{\cos 2t}{5 - 3\cos t}\,dt} &= 2\pi i \left[ \res (f, 0) + \res \left( f, \frac{1}{3} \right) \right]\\
+    &= 2\pi i \left[ \frac{10}{9}i + \frac{41}{36}i \right] = \frac{\pi}{18}
+  \end{align*}
+\end{eg}
+
+\subsection{Semi-circle Method}
+We want to compute $\displaystyle{\int_{-\infty}^\infty f(x)\,dx}$ using a semicircle contour with radius $R$ and letting $R \to \infty$.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+  % The axes
+  \draw[help lines,->] (-3,0) -- (3,0) coordinate (xaxis);
+  \draw[help lines,->] (0,-1) -- (0,3) coordinate (yaxis);
+
+  % The path
+  \path[draw,line width=0.8pt,postaction=decorate] (-2,0) node[below] {$-R$} -- (2,0) node[below] {$R$} arc (0:180:2);
+
+  % The labels
+  \node[below] at (xaxis) {$\Re z$};
+  \node[left] at (yaxis) {$\Im z$};
+  \node[below left] {$O$};
+  \end{tikzpicture}
+  \caption{Semicircle Method Diagram}
+  % % \label{}
+\end{figure}
+
+\subsubsection{Odd function using Semi-circle}
+
+Consider,
+$$ \int_{-\infty}^\infty { \frac{1}{1 + x^2}\,dx} $$
+We can consider the following integral over $\g = \g_1 + \g_2$, where we define $\g_1 = [-R, R]$ and $\g_2 = Re^{it}$ where $t \in [0, \pi]$. The integrand has two singularities, $z = \pm i$, only one of which is in $\g$, $z = i$. Consider the residue of the single pole $z = i$,
+\begin{align*}
+  \res (f, i) &= \lim_{z \to i} {(z - i)f(z)} \\
+  &= \lim_{z \to i} \frac{1}{z + i}\\
+  &= \frac{1}{2i} = -\frac{i}{2}
+\end{align*}
+Hence we can say that,
+$$ \int_\g \frac{1}{1 + z^2}\,dz = 2\pi i (-\frac{i}{2}) = \pi $$
+and we can also split up,
+\begin{align*}
+  \int_\g \frac{1}{1 + z^2}\,dz &= \int_{\g_1} \frac{1}{1 + z^2}\,dz + \int_{\g_2} \frac{1}{1 + z^2}\,dz\\
+  &= \int_{-R}^R \frac{1}{1 + z^2}\,dz + \int_{\g_2} \frac{1}{1 + z^2}\,dz\\
+\end{align*}
+So we now consider $I_2$ as $R \to \infty$, so do the ML-inequality,
+\begin{align*}
+  |f(z)| &= \left | \frac{1}{1 + z^2} \right | \\
+  &\le \frac{1}{R^2 - 1}\\
+\end{align*}
+and we know that $\ell (\g) = \pi R$, hence,
+$$ \left|\int_{\g_1} \frac{1}{1 + z^2}\,dz \right| \le \frac{\pi R}{R^2 - 1} $$
+and so as $R \to \infty$,
+$$ \int_{\g_1} \frac{1}{1 + z^2}\,dz \to 0 $$
+and now,
+\begin{align*}
+  \int_{-R}^R {f(z)}\, dz &= \pi - \int_{\g_1} \frac{1}{1 + z^2}\,dz\\
+  &= \pi && \text{ as $R \to \infty$}
+\end{align*}
+
+\subsubsection{Trigonometric using Jordan's Inequality and Semi-circle}
+
+\begin{nlemma}{(\textit{Jordan's Inequality})}
+  If $0 < t < \frac{\pi}{2}$, then, $\sin t \ge \frac{2t}{\pi}$
+\end{nlemma}
+
+\begin{eg}
+  Compute,
+  $$ I = \int_{0}^\infty {\frac{x\sin x}{x^2 + 1}}\,dx $$
+  Take $\displaystyle{f(z) = \frac{ze^{iz}}{z^2 + 1}}$ and so,
+  $$ I = \Im \left( \int_{0}^\infty \frac{ze^{iz}}{z^2 + 1}\,dz \right) $$
+  and so let $\g$ be defined the same as before, then we consider $I_2$,
+  \begin{align*}
+    I_2 &= \int_{\g_2} \frac{ze^{iz}}{z^2 + 1}\,dz\\
+    &\le \int_0^\pi \left |\frac{Re^{it} e^{Re^{it}}}{(Re^{it})^2 + 1}\,iRe^{it}\right |\,dt \\
+    &\le \frac{R^2}{R^2-1}\int_0^\pi |e^{Re^{it}}|\,dt\\
+    &= \frac{R^2}{R^2-1}\int_0^\pi e^{-R\sin t}\,dt\\
+    &= \frac{2R^2}{R^2-1}\int_0^{\frac{\pi}{2}} e^{-R\sin t}\,dt\\
+    &\le \frac{2R^2}{R^2-1}\int_0^{\frac{\pi}{2}} e^{-\frac{2Rt}{\pi}}\,dt\\
+    &= \frac{2R^2}{R^2-1}K && \text{$K \in \C$}
+  \end{align*}
+  Hence as $R \to \infty$, $I_2 \to 0$ and so we can just apply CRT to the integral and achieve the solution. There are two simple poles in the integrand at $z = \pm i$ and as before only $i \in \g$ and so we only need to calculate one residue.
+  \begin{align*}
+    \res (f, i) &= \lim_{z \to i} {(z - i) \frac{ze^{iz}}{z^2 + 1}}\\
+    &= \lim_{z \to i} {\frac{ze^{iz}}{z + i}} = \frac{1}{2e}\\
+  \end{align*}
+  and so, by CRT,
+  \begin{align*}
+    \int_\g f(z)\,dz &= 2\pi i \res(f, i)\\&= \frac{\pi i}{e}
+  \end{align*}
+  and so,
+  $$ \int_{\infty}^\infty \frac{1}{1 + x^2}\,dx = \frac{\pi}{e} $$
+\end{eg}
+
+\subsubsection{Even integrand using Semi-Circle}
+
+
+Let us consider the following integral,
+$$ I = \int_0^{\infty} {\frac{dx}{(1 + x^2)^2}}\,dx $$
+and, as the integrand is even,
+\begin{equation*}
+  I = \frac{1}{2}\int_{-\infty}^\infty {\frac{dx}{(1 + x^2)^2}}\,dx \tag{$*$}
+\end{equation*}
+Hence, we consider $f(z) = \frac{1}{(1 + z^2)^2}$ over the contour $\g = \g_1 + \g_2$, where $\g_1 = [-R, R]$ and $\g_2 = Re^{it}$ with $t \in [0, \pi]$.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+  % The axes
+  \draw[help lines,->] (-3,0) -- (3,0) coordinate (xaxis);
+  \draw[help lines,->] (0,-1) -- (0,3) coordinate (yaxis);
+  \node at (0, 1) {\textbullet};
+  \node[right] at (0, 1) {$i$};
+
+  % The path
+  \path[draw,line width=0.8pt,postaction=decorate] (-2,0) node[below] {$-R$} -- (2,0) node[below] {$R$} arc (0:180:2);
+
+  % The labels
+  \node[below] at (xaxis) {$\Re z$};
+  \node[left] at (yaxis) {$\Im z$};
+  \node[below left] {$O$};
+  \end{tikzpicture}
+  \caption{Diagram of $\g$}
+  % % \label{}
+\end{figure}
+
+The singularity of $f(z)$ is $z = i$, if $R > i$. As $i$ is a double pole, then let $g(z) = (z - i)^2 f(z)$ and now,
+$$ g'(z) = \frac{-2}{(z + i)^3} $$
+and hence,
+$$ \res (f, i) = \lim_{z \to i} {\frac{-2}{(z + i)^3}} = -\frac{i}{4}$$
+and so, by CRT,
+\begin{align*}
+  \int_\g f(z)\,dz &= 2\pi i (\res (f, i))\\
+  &= -2\pi i \cdot \frac{i}{4} = \frac{\pi}{2}
+\end{align*}
+
+and now consider $I_2$ under the ML-bound. We can say,
+\begin{align*}
+  \left | \int_{\g_2} f(z)\,dz \right | &\le \frac{1}{(R^2 - 1)^2} \ell{(\g)} \\
+  &\le \frac{\pi R}{(R^2 - 1)^2}
+\end{align*}
+and so as $R \to \infty$, $I_2 \to 0$. Hence as we take $R \to \infty$,
+\begin{align*}
+  \int_\g f(z)\,dz &= \int f(z)\,dz\\
+  &= \int_{-\infty}^\infty \frac{1}{(1 + z^2)^2} \,dz\\
+  &= \frac{\pi}{2}
+\end{align*}
+and as ($*$) we can say,
+$$ \int_0^\infty \frac{1}{(1 + z^2)^2} \,dz = \frac{\pi}{4}$$
+
+\subsubsection{Large powered denomenator using Semicircle}
+
+Now, we shall evaluate the following integral,
+$$ \int_0^\infty { \frac{dx}{x^{1000} + 1}} $$
+and let $f(z) = \frac{1}{z^{1000} + 1}$, which has a simple pole at $\a = e^{\frac{\pi}{1000}i}$. Now, we let $ \g_1 = [-R, R] $  and then $\g_2 = Re^{it}$ where $t \in [0, \frac{\pi}{500}]$ and $\g_3$ is reversal for $[0, \a^2R]$ which we let,
+$$ \g_3^{-} = \a^2t \qquad  t \in [0, R]$$
+Then $\a$ is inside $\g$. Now, consider $I_3$,
+\begin{align*}
+  I_3 &= \int_{\g_3^{-}} \frac{dx}{z^{1000} + 1}\\
+  &= -\int_{\g} {\frac{\a^2}{(\a^2t)^{1000} + 1}} \\
+  &= -\int_0^R {\frac{\a^2}{(\a^2t)^{1000} + 1}}\\
+  &= - \a^2 I_1
+\end{align*}
+We can now see that the integrand in $\g_2$ is $mathcal{O}(\frac{1}{R^{1000}})$, hence, the length of $\g$ is $\frac{\pi R}{500}$, by the ML-inequality, $mathcal{O}(\frac{1}{R^{999}}) \to 0$ as $R \to \infty$. This means,
+$$ \int_{\g_2} f(z)\,dz \to 0 \qquad \text{ as } R \to \infty$$
+Then the residue at $f$ is simply,
+$$ \res (f, \a) = \frac{1}{1000\a ^ {999}} $$
+and by Cauchy Residue Theorem,
+\begin{align*}
+  I &= 2\pi i \res (f, \a)\\
+  &= \frac{2\pi i}{1000\a^{999}}
+\end{align*}
+and so,
+\begin{align*}
+  I &= I_1 + I_2 + I_3\\
+  &= (1 - \a^2)I_2 + I_3\\
+  \frac{2\pi i}{1000\a^{999}} &= (1 - \a^2)I_2 && \text{as $R \to \infty$}\\
+  \frac{2\pi i}{1000(1 - \a^2)\a^{999}} &= I_2\\
+  \frac{2\pi i}{1000(\a^{-1} + \a)} &= I_2\\
+  \frac{\pi}{1000}\frac{2i}{\a^{-1} + \a} &= I_2\\
+  \frac{\pi}{1000}\csc \left(\frac{\pi}{1000}\right) &= I_2
+\end{align*}
+
+then,
+$$ \int_{0}^\infty \frac{1}{1 + x^{1000}}\,dx = \frac{\pi}{1000}\csc \left(\frac{\pi}{1000}\right) $$
+
+\subsubsection{Large powered denomenator and powered numerator using Semicircle}
+
+Compute,
+$$ \int_0^\infty {\frac{x^{666}}{x^{1000} + 1}}\,dx $$
+Consider, $\g = \g_1 + \g_2 + \g_3$, where $\g_1 = [0, R]$, $\g_2 = Re^{it}$ where $t \in [0, \frac{\pi}{500}]$ and $\g_3$ is the reversal of $[0, \a^2R]$, which we parameterised as,
+$$ \g_3^{-} = \a^2t \qquad t \in [0, R] $$
+We can show $I_2 \to 0$ as $R \to \infty$. Then the integral over $\g_3$ is,
+\begin{align*}
+  I_3 &= -\int_0^R \frac{(\a^2 t)^{666}}{(\a^2 t)^{1000} + 1}\, \a^2dt \\
+  &= -\a^{2 \times 667}I_1
+\end{align*}
+We see that the residue of the integrand at $\a$ is,
+$$ \res (f, \a) = \frac{\a^{666}}{1000\a^{999}} $$
+and so by Cauchy Residue Theorem, as $R \to \infty$,
+\begin{align*}
+  2\pi i \frac{\a^{666}}{1000\a^{999}} &= I_1 + I_2 + I_3\\
+  &= (1 - \a^{2 \times 667})I_1
+\end{align*}
+Hence,
+\begin{align*}
+  I_1 &= \frac{2\pi i \a^{666}}{1000(1 - \a^{2 \times 667}) a^{999}}\\
+  &= \frac{\pi}{1000} \frac{2i \a^{666}}{\a^{667}\a^{999}(\a^{-667} + \a^{667})}\\
+  &= \frac{\pi}{1000} \frac{2i}{(\a^{-667} + \a^{667})}\\
+  &= \frac{\pi}{1000} \csc \left( \frac{667\pi}{1000} \right)
+\end{align*}
+
+\section{Argument Principle and Rouche's Theorem}
+
+\begin{ndefi}{(\textit{Meromorphic})}
+  Let $U \subseteq \C$ be a domain and take $S \subseteq U$. A function $f : U\setminus S \to \C$ is meromorphic on $U$ if $f$ is differnetiable at every point of $U\setminus S$, and every point of $S$ is a pole of $f$.
+\end{ndefi}
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+  \draw [thick]  plot[smooth, tension=.7] coordinates {(-4,2.5) (-3,3) (-2,2.8) (-0.8,2.5) (-0.5,1.5) (0.5,0) (0,-2)(-1.5,-2.5) (-4,-2) (-3.5,-0.5) (-5,1) (-4,2.5)};
+  %Open set
+  \draw [thick,fill=black!20!green!60!white]  plot[smooth, tension=.7] coordinates {(-3,2.5) (-3.5,2.2) (-4,1.5) (-3,0) (-3,-1) (-2.5,-1.7) (-1.5,-2) (-0.5,-1) (-0.5,0) (-1,1.5) (-2.5,2.5) (-3,2.5)};
+  %Nodes and names
+  \node at (-2.5,3.5) {$U$};
+  \node at (-1.8,-1) {$S$};
+  \end{tikzpicture}
+  \caption{A Meromorhic function is holomorphic on $U \setminus S$.}
+  % % \label{}
+\end{figure}
+
+\begin{nthm}{(\textit{Argument Principle})}
+  Let $U$ be a domain and $f$ be meromorphic on $U$. If $\g$ is a simple positively oriented closed contour, such that, $\g$ and it's interior is contained in $U$, and $\g$ passes through no zero or poles of f, then,
+  % $$ \frac{1}{2\pi i}\int_\g \frac{f'(z)}{f(z)}\,dz = Z - P $$
+  \begin{equation*}
+  \frac{1}{2\pi i}\int_\g \frac{f'(z)}{f(z)}\,dz = \tikz[baseline]{\node(d4) {$Z$}} +  \tikz[baseline]{\node(d5){$P$}}
+  \end{equation*}
+  \vspace{1cm}\par
+  % insert text
+  \noindent\hfil\begin{tikzpicture}
+  \node (t1) {number of zeros in\\ the interior of $\g$};
+  \node[above right] (t2) at (t1.east) {number of poles in the\\ interior of $\g$ (counted w/ multiplicity)};
+  \end{tikzpicture}
+  % insert lines between text
+  \begin{tikzpicture}[overlay]
+  \draw[blue,thick,->] (d4) to [in=90,out=245] (t1.north);
+  \draw[blue,thick,->] (d5) to [in=90,out=265] (t2.north);
+  \end{tikzpicture}
+\end{nthm}
+
+and the final main result of the course,
+
+\begin{nthm}{(\textit{Rouche's Theorem})}
+  Let $\g$ be a simple closed contour. Let $f$ and $g$ be holomorphic in a domain that contains the image and the interior of $\g$. Suppose for all $z \in \g^*$ we have that,
+  $$ |f(z) - g(z)| < |f(z)| + |g(z)| $$
+  then, $f$ and $g$ are non-zero on $\g^*$ and $Z_f = Z_g$.
+\end{nthm}
+
+\begin{eg}
+  Prove that all of the zeros of $f(z) = z^5 + 7z + 12$ lie in the annulus,
+  $$ A = \{z \in \C : 1 \le |z| < 2\} $$
+  Let $\g$ be $D(0, 2)$ and we seek a function $g(z)$ that approximates $f$ well on $\g$,
+  $$ |f(z) - g(z)| < |f(z)| + |g(z)| $$
+  Take $g(z) = z^5$ and hence, in $D(0, 2)$,
+  \begin{align*}
+    |f(z) - g(z)| &= |z^5 + 7z + 12 - z^5|\\
+    &= |7z + 12|\\
+    &\le 7|z| + 12\\
+    &= 26
+  \end{align*}
+  and so now we consider $|g(z)| = |z^5| = |z|^5 = 32$. Hence, we have shown that, $|f(z) - g(z)| < |f(z)| - |g(z)|$. Hence, by Rouche's theorem, we can say that $Z_f = Z_g$ on $D(0, 2)$. So we find all the zeros of $g(z)$ on $D(0, 2)$ and we can say that $f(z)$ has 5 zeros on $D(0, 2)$. Now, let $\g$ be the circular contour $D(0, 1)$ and again $f(z) = z^5 + 7z + 12$. Now we want to select our $g(z)$. We take $g(z) = 12$. Then,
+  \begin{align*}
+    |f(z) - g(z)| &= |z^5 + 7z + 12 - 12|\\
+    &= |z^5 + 7z| \\
+    &\le |z|^5 + 7|z|\\
+    &= 8
+  \end{align*}
+  and as we can say that $|g(z) = 12|$, then using Rouche's Theorem we can say $Z_f = Z_g$ and $g(z)$ has zero zeros on $f(z)$ on $D(0, 1)$.\\
+  Hence,
+  \begin{itemize}
+    \item $f$ has 5 zeros on $D(0, 2)$
+    \item $f$ has 0 zeros on $D(0, 1)$.
+  \end{itemize}
+  and so all of $f$'s zeros are in A.
+\end{eg}
+
+
+\end{document}

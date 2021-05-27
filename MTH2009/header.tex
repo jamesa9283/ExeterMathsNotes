@@ -1,0 +1,554 @@
+\makeatletter
+\ifx \nauthor\undefined
+  \def\nauthor{James Arthur}
+\else
+\fi
+
+\author{Based on lectures by \nlecturer \\\small Notes taken by \nauthor}
+\date{\nterm\ \nyear}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{alltt}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{pdflscape}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage{slashed}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{tkz-euclide}
+\usepackage[normalem]{ulem}
+\usepackage[all]{xy}
+\usepackage{imakeidx}
+\usepackage{wrapfig}
+
+\setlength{\headheight}{20pt}
+\setlength{\headsep}{10pt}
+
+% lstLean
+
+\definecolor{keywordcolor}{rgb}{0.7, 0.1, 0.1}   % red
+\definecolor{commentcolor}{rgb}{0.4, 0.4, 0.4}   % grey
+\definecolor{symbolcolor}{rgb}{0.0, 0.1, 0.6}    % blue
+\definecolor{sortcolor}{rgb}{0.1, 0.5, 0.1}      % green
+
+\def\lstlanguagefiles{lstlean.tex}
+\lstset{language=lean}
+
+
+\makeindex[intoc, title=Index]
+\indexsetup{othercode={\lhead{\emph{Index}}}}
+
+\ifx \nextra \undefined
+  \usepackage[pdftex,
+    hidelinks,
+    pdfauthor={James Arthur},
+    pdfsubject={Exeter Maths Notes: Year \npart\ - \ncourse},
+    pdftitle={Year \npart\ - \ncourse},
+  pdfkeywords={Exeter Mathematics Maths Math \npart\ \nterm\ \nyear\ \ncourse}]{hyperref}
+  \title{Year \npart\ --- \ncourse}
+\else
+  \usepackage[pdftex,
+    hidelinks,
+    pdfauthor={James Arthur},
+    pdfsubject={Exeter Maths Notes: Year \npart\ - \ncourse\ (\nextra)},
+    pdftitle={Year \npart\ - \ncourse\ (\nextra)},
+  pdfkeywords={Exeter Mathematics Maths Math \npart\ \nterm\ \nyear\ \ncourse\ \nextra}]{hyperref}
+
+  \title{Year \npart\ --- \ncourse \\ {\Large \nextra}}
+  \renewcommand\printindex{}
+\fi
+
+\pgfplotsset{compat=1.12}
+
+\pagestyle{fancyplain}
+\ifx \ncoursehead \undefined
+\def\ncoursehead{\ncourse}
+\fi
+
+\lhead{\emph{\nouppercase{\leftmark}}}
+\ifx \nextra \undefined
+  \rhead{
+    \ifnum\thepage=1
+    \else
+      \npart\ \ncoursehead
+    \fi}
+\else
+  \rhead{
+    \ifnum\thepage=1
+    \else
+      \npart\ \ncoursehead \ (\nextra)
+    \fi}
+\fi
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{positioning}
+\usetikzlibrary{fadings}
+\usetikzlibrary{intersections}
+\usetikzlibrary{cd}
+\usetikzlibrary{shapes}
+
+
+\newcommand*{\Cdot}{{\raisebox{-0.25ex}{\scalebox{1.5}{$\cdot$}}}}
+\newcommand {\pd}[2][ ]{
+  \ifx #1 { }
+    \frac{\partial}{\partial #2}
+  \else
+    \frac{\partial^{#1}}{\partial #2^{#1}}
+  \fi
+}
+\ifx \nhtml \undefined
+\else
+  \renewcommand\printindex{}
+  \DisableLigatures[f]{family = *}
+  \let\Contentsline\contentsline
+  \renewcommand\contentsline[3]{\Contentsline{#1}{#2}{}}
+  \renewcommand{\@dotsep}{10000}
+  \newlength\currentparindent
+  \setlength\currentparindent\parindent
+
+  \newcommand\@minipagerestore{\setlength{\parindent}{\currentparindent}}
+  \usepackage[active,tightpage,pdftex]{preview}
+  \renewcommand{\PreviewBorder}{0.1cm}
+
+  \newenvironment{stretchpage}%
+  {\begin{preview}\begin{minipage}{\hsize}}%
+    {\end{minipage}\end{preview}}
+  \AtBeginDocument{\begin{stretchpage}}
+  \AtEndDocument{\end{stretchpage}}
+
+  \newcommand{\@@newpage}{\end{stretchpage}\begin{stretchpage}}
+
+  \let\@real@section\section
+  \renewcommand{\section}{\@@newpage\@real@section}
+  \let\@real@subsection\subsection
+  \renewcommand{\subsection}{\@ifstar{\@real@subsection*}{\@@newpage\@real@subsection}}
+\fi
+\ifx \ntrim \undefined
+\else
+  \usepackage{geometry}
+  \geometry{
+    papersize={379pt, 699pt},
+    textwidth=345pt,
+    textheight=596pt,
+    left=17pt,
+    top=54pt,
+    right=17pt
+  }
+\fi
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\ifx \nisofficial \undefined
+\let\@real@maketitle\maketitle
+\renewcommand{\maketitle}{\@real@maketitle\begin{center}\begin{minipage}[c]{0.9\textwidth}\centering\footnotesize These notes are not endorsed by the lecturers, and I have modified them (often significantly) after lectures. They are nowhere near accurate representations of what was actually lectured, and in particular, all errors are almost surely mine.\\ \tableofcontents\end{minipage}\end{center}}
+\else
+\fi
+
+\let\endtitlepage\relax
+
+% Theorems
+\theoremstyle{definition}
+\newtheorem*{aim}{Aim}
+\newtheorem*{axiom}{Axiom}
+\newtheorem*{claim}{Claim}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem*{defi}{Definition}
+\newtheorem*{eg}{Example}
+\newtheorem*{ex}{Exercise}
+\newtheorem*{fact}{Fact}
+\newtheorem*{law}{Law}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{notation}{Notation}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{question}{Question}
+\newtheorem*{rrule}{Rule}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{assumption}{Assumption}
+
+\newtheorem*{remark}{Remark}
+\newtheorem*{warning}{Warning}
+\newtheorem*{exercise}{Exercise}
+
+\newtheorem{nthm}{Theorem}[section]
+\newtheorem{nlemma}[nthm]{Lemma}
+\newtheorem{nprop}[nthm]{Proposition}
+\newtheorem{ncor}[nthm]{Corollary}
+\newtheorem{ndefi}[nthm]{Definition}
+
+
+\renewcommand{\labelitemi}{--}
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelenumi}{(\roman{*})}
+
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+% :tada: emoji, converted using svg2tikz
+\definecolor{cDD2E44}{RGB}{221,46,68}
+\definecolor{cEA596E}{RGB}{234,89,110}
+\definecolor{cA0041E}{RGB}{160,4,30}
+\definecolor{cAA8DD8}{RGB}{170,141,216}
+\definecolor{c77B255}{RGB}{119,178,85}
+\definecolor{c5C913B}{RGB}{92,145,59}
+\definecolor{c9266CC}{RGB}{146,102,204}
+\definecolor{cFFCC4D}{RGB}{255,204,77}
+\def\tada{\tikz[y=0.80pt,x=0.80pt,yscale=-0.5,xscale=0.5,inner sep=0pt,outer sep=0pt]{
+\path[fill=cDD2E44](11.626,7.488)..controls(11.514,7.6)and(11.429,7.735)..(11.358,7.883)--(11.35,7.875)--(0.134,33.141)--(0.145,33.152)..controls(-0.0630,33.555)and(0.285,34.375)..(0.998,35.0890)..controls(1.711,35.8020)and(2.531,36.15)..(2.934,35.942)--(2.944,35.952)--(28.21,24.735)--(28.2020,24.726)..controls(28.349,24.656)and(28.484,24.571)..(28.597,24.457)..controls(30.159,22.895)and(27.626,17.83)..(22.941,13.144)..controls(18.254,8.458)and(13.189,5.926)..(11.626,7.488)--cycle;
+\path[fill=cEA596E](13,12)--(0.416,32.5060)--(0.134,33.141)--(0.145,33.152)..controls(-0.0630,33.555)and(0.285,34.375)..(0.998,35.0890)..controls(1.23,35.321)and(1.471,35.497)..(1.7070,35.646)--(17,17)--(13,12)--cycle;
+\path[fill=cA0041E](23.0120,13.0660)..controls(27.682,17.738)and(30.275,22.718)..(28.8010,24.19)..controls(27.328,25.664)and(22.348,23.0720)..(17.675,18.4020)..controls(13.0040,13.73)and(10.412,8.748)..(11.885,7.275)..controls(13.359,5.8020)and(18.339,8.394)..(23.0120,13.0660)--cycle;
+\path[fill=cAA8DD8](18.59,13.6090)..controls(18.391,13.77)and(18.131,13.854)..(17.856,13.824)..controls(16.988,13.73)and(16.258,13.428)..(15.747,12.951)..controls(15.2060,12.446)and(14.939,11.768)..(15.0120,11.0890)..controls(15.14,9.897)and(16.336,8.8030)..(18.375,9.0230)..controls(19.168,9.1080)and(19.522,8.853)..(19.534,8.731)..controls(19.548,8.61)and(19.257,8.285)..(18.464,8.199)..controls(17.596,8.1050)and(16.866,7.8030)..(16.354,7.326)..controls(15.813,6.821)and(15.545,6.143)..(15.619,5.464)..controls(15.749,4.272)and(16.944,3.178)..(18.981,3.399)..controls(19.559,3.461)and(19.864,3.342)..(19.993,3.265)..controls(20.0960,3.2020)and(20.137,3.142)..(20.141,3.1070)..controls(20.153,2.986)and(19.866,2.661)..(19.0710,2.575)..controls(18.522,2.515)and(18.124,2.0230)..(18.185,1.473)..controls(18.244,0.924)and(18.735,0.527)..(19.286,0.587)..controls(21.323,0.8060)and(22.259,2.129)..(22.13,3.322)..controls(22,4.516)and(20.8050,5.6080)..(18.766,5.389)..controls(18.188,5.326)and(17.886,5.446)..(17.756,5.523)..controls(17.653,5.585)and(17.611,5.646)..(17.6070,5.68)..controls(17.594,5.8020)and(17.883,6.126)..(18.678,6.212)..controls(20.715,6.432)and(21.651,7.754)..(21.522,8.947)..controls(21.393,10.139)and(20.198,11.233)..(18.16,11.0120)..controls(17.582,10.95)and(17.278,11.0700)..(17.148,11.146)..controls(17.0440,11.21)and(17.0040,11.27)..(17,11.3040)..controls(16.987,11.425)and(17.276,11.75)..(18.0700,11.836)..controls(18.618,11.896)and(19.0170,12.389)..(18.956,12.938)..controls(18.928,13.212)and(18.789,13.449)..(18.59,13.6090)--cycle(23.0010,20.16)..controls(22.7070,20.16)and(22.417,20.0310)..(22.219,19.785)..controls(21.874,19.353)and(21.945,18.724)..(22.375,18.379)..controls(22.593,18.2040)and(27.793,14.12)..(35.142,15.171)..controls(35.689,15.249)and(36.0690,15.755)..(35.991,16.3020)..controls(35.913,16.848)and(35.411,17.232)..(34.859,17.15)..controls(28.366,16.228)and(23.672,19.9040)..(23.626,19.941)..controls(23.44,20.0890)and(23.22,20.16)..(23.0010,20.16)--cycle;
+\path[fill=c77B255](30.661,22.857)..controls(32.634,22.3)and(33.995,23.18)..(34.319,24.335)..controls(34.643,25.489)and(33.941,26.95)..(31.969,27.5050)..controls(31.199,27.721)and(30.968,28.0890)..(30.999,28.2060)..controls(31.0330,28.324)and(31.424,28.518)..(32.192,28.3010)..controls(34.164,27.746)and(35.525,28.626)..(35.849,29.78)..controls(36.175,30.935)and(35.471,32.394)..(33.498,32.95)..controls(32.729,33.166)and(32.497,33.535)..(32.531,33.652)..controls(32.564,33.769)and(32.954,33.963)..(33.723,33.747)..controls(34.253,33.598)and(34.8070,33.9070)..(34.956,34.438)..controls(35.1040,34.97)and(34.795,35.522)..(34.263,35.672)..controls(32.292,36.227)and(30.93,35.349)..(30.6040,34.193)..controls(30.28,33.0390)and(30.983,31.58)..(32.957,31.0240)..controls(33.727,30.8070)and(33.958,30.44)..(33.924,30.322)..controls(33.892,30.2050)and(33.5020,30.0100)..(32.734,30.226)..controls(30.76,30.782)and(29.4,29.9040)..(29.0750,28.747)..controls(28.75,27.593)and(29.453,26.134)..(31.426,25.577)..controls(32.194,25.362)and(32.425,24.992)..(32.393,24.876)..controls(32.359,24.758)and(31.97,24.564)..(31.2010,24.78)..controls(30.669,24.93)and(30.118,24.62)..(29.968,24.0890)..controls(29.819,23.559)and(30.129,23.0070)..(30.661,22.857)--cycle(5.754,16)..controls(5.659,16)and(5.562,15.986)..(5.466,15.958)..controls(4.937,15.799)and(4.637,15.242)..(4.796,14.713)..controls(5.929,10.94)and(6.956,4.919)..(5.694,3.349)..controls(5.553,3.171)and(5.34,2.996)..(4.852,3.0330)..controls(3.914,3.1050)and(4.0030,5.0840)..(4.0040,5.1040)..controls(4.0460,5.655)and(3.632,6.135)..(3.0820,6.176)..controls(2.523,6.21)and(2.0510,5.8040)..(2.0100,5.253)..controls(1.9070,3.874)and(2.336,1.218)..(4.7020,1.0390)..controls(5.758,0.959)and(6.635,1.326)..(7.254,2.0960)..controls(9.625,5.0470)and(7.218,13.6020)..(6.712,15.288)..controls(6.582,15.721)and(6.184,16)..(5.754,16)--cycle;
+\path[fill=c9266CC](2,18)circle(0.0564cm);
+\path[fill=c5C913B](25.5,9.5)circle(0.0423cm)(32.5,19.5)circle(0.0423cm)(23.5,31.5)circle(0.0423cm);
+\path[fill=cFFCC4D](28,4)circle(0.0564cm)(32.5,8.5)circle(0.0423cm)(29.5,12.5)circle(0.0423cm)(7.5,23.5)circle(0.0423cm);
+}}
+% end of :tada:
+\renewcommand\qedsymbol{\tada}
+
+\everymath{\displaystyle}
+
+\newcommand\qedsym{\hfill\ensuremath{\square}}
+% Strike through
+\def\st{\bgroup \ULdepth=-.55ex \ULset}
+
+\tikzset{every picture/.style={remember picture}}
+\usepackage{accents}
+\newcommand\myubar[1]{%
+\underaccent{\bar}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Maths Symbols %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Matrix groups
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Or}{\mathrm{O}}
+\newcommand{\PGL}{\mathrm{PGL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\PSO}{\mathrm{PSO}}
+\newcommand{\PSU}{\mathrm{PSU}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\Mat}{\mathrm{Mat}}
+
+% Matrix algebras
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\ort}{\mathfrak{o}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\su}{\mathfrak{su}}
+\newcommand{\uu}{\mathfrak{u}}
+\renewcommand{\sl}{\mathfrak{sl}}
+
+% Special sets
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\H}{\mathbb{H}}
+
+% Brackets
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\bket}[1]{\left\lvert #1\right\rangle}
+\newcommand{\brak}[1]{\left\langle #1 \right\rvert}
+\newcommand{\braket}[2]{\left\langle #1\middle\vert #2 \right\rangle}
+\newcommand{\bra}{\langle}
+\newcommand{\ket}{\rangle}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\normalorder}[1]{\mathop{:}\nolimits\!#1\!\mathop{:}\nolimits}
+\newcommand{\tv}[1]{|#1|}
+\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+
+% not-math
+\newcommand{\bolds}[1]{{\bfseries #1}}
+\newcommand{\cat}[1]{\mathsf{#1}}
+\newcommand{\ph}{\,\cdot\,}
+\newcommand{\term}[1]{\emph{#1}\index{#1}}
+\newcommand{\phantomeq}{\hphantom{{}={}}}
+% Probability
+\DeclareMathOperator{\Bernoulli}{Bernoulli}
+\DeclareMathOperator{\betaD}{beta}
+\DeclareMathOperator{\bias}{bias}
+\DeclareMathOperator{\binomial}{binomial}
+\DeclareMathOperator{\corr}{corr}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\gammaD}{gamma}
+\DeclareMathOperator{\mse}{mse}
+\DeclareMathOperator{\multinomial}{multinomial}
+\DeclareMathOperator{\Poisson}{Poisson}
+\DeclareMathOperator{\var}{var}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+
+% Algebra
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\fix}{fix}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\image}{image}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\newcommand{\Bilin}{\mathrm{Bilin}}
+\newcommand{\Frob}{\mathrm{Frob}}
+
+% Others
+\newcommand\ad{\mathrm{ad}}
+\newcommand\Art{\mathrm{Art}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\Der}{\mathrm{Der}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\exterior}{\mathchoice{{\textstyle\bigwedge}}{{\bigwedge}}{{\textstyle\wedge}}{{\scriptstyle\wedge}}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\Gr}{\mathrm{Gr}}
+\newcommand{\haut}{\mathrm{ht}}
+\newcommand{\Hol}{\mathrm{Hol}}
+\newcommand{\hol}{\mathfrak{hol}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\lie}[1]{\mathfrak{#1}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\pr}{\mathrm{pr}}
+\newcommand{\Ps}{\mathcal{P}}
+\newcommand{\pt}{\mathrm{pt}}
+\newcommand{\qeq}{\mathrel{``{=}"}}
+\newcommand{\Rs}{\mathcal{R}}
+\newcommand{\Vect}{\mathrm{Vect}}
+\newcommand{\wsto}{\stackrel{\mathrm{w}^*}{\to}}
+\newcommand{\wt}{\mathrm{wt}}
+\newcommand{\wto}{\stackrel{\mathrm{w}}{\to}}
+\renewcommand{\d}{\mathrm{d}}
+\renewcommand{\P}{\mathbb{P}}
+%\renewcommand{\F}{\mathcal{F}}
+
+
+% CA
+
+\newcommand{\conj}[1]{\overline{#1}}
+\renewcommand{\ex}{\exists\,}
+\newcommand{\fa}{\forall\,}
+\newcommand{\es}{\varnothing}
+\newcommand{\sub}{\subset}
+\newcommand{\bus}{\supseteq}
+
+% Greek Letters
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\renewcommand{\d}{\delta}
+\newcommand{\e}{\varepsilon}
+\newcommand{\g}{\gamma}
+\renewcommand{\th}{\theta}
+\renewcommand{\ph}{\varphi}
+
+\renewcommand{\l}{\ell\,}
+\newcommand{\di}[2]{D(#1, #2)}
+\newcommand{\cdi}[2]{\overline D(#1, #2)}
+\newcommand{\pdi}[2]{D'(#1, #2)}
+\newcommand{\is}{\sum_{n=0}^\infty}
+\newcommand{\ls}{\sum_{n = -\infty}^{\infty}}
+\newcommand{\lsp}{\sum_{n = -\infty}^{-1}}
+
+
+
+\let\Im\relax
+\let\Re\relax
+
+\DeclareMathOperator{\area}{area}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\ccl}{ccl}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\cls}{\overline{\mathrm{span}}}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\cosec}{cosec}
+\DeclareMathOperator{\cosech}{cosech}
+\DeclareMathOperator{\covol}{covol}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\energy}{energy}
+\DeclareMathOperator{\erfc}{erfc}
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\fst}{fst}
+\DeclareMathOperator{\Fit}{Fit}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\hcf}{hcf}
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\like}{like}
+\DeclareMathOperator{\Lk}{Lk}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\otp}{otp}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\Rad}{Rad}
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator*{\res}{res}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Rees}{Rees}
+\DeclareMathOperator{\Root}{Root}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\snd}{snd}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\stab}{stab}
+\DeclareMathOperator{\St}{St}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\vol}{vol}
+
+\pgfarrowsdeclarecombine{twolatex'}{twolatex'}{latex'}{latex'}{latex'}{latex'}
+\tikzset{->/.style = {decoration={markings,
+                                  mark=at position 1 with {\arrow[scale=2]{latex'}}},
+                      postaction={decorate}}}
+\tikzset{<-/.style = {decoration={markings,
+                                  mark=at position 0 with {\arrowreversed[scale=2]{latex'}}},
+                      postaction={decorate}}}
+\tikzset{<->/.style = {decoration={markings,
+                                   mark=at position 0 with {\arrowreversed[scale=2]{latex'}},
+                                   mark=at position 1 with {\arrow[scale=2]{latex'}}},
+                       postaction={decorate}}}
+\tikzset{->-/.style = {decoration={markings,
+                                   mark=at position #1 with {\arrow[scale=2]{latex'}}},
+                       postaction={decorate}}}
+\tikzset{-<-/.style = {decoration={markings,
+                                   mark=at position #1 with {\arrowreversed[scale=2]{latex'}}},
+                       postaction={decorate}}}
+\tikzset{->>/.style = {decoration={markings,
+                                  mark=at position 1 with {\arrow[scale=2]{latex'}}},
+                      postaction={decorate}}}
+\tikzset{<<-/.style = {decoration={markings,
+                                  mark=at position 0 with {\arrowreversed[scale=2]{twolatex'}}},
+                      postaction={decorate}}}
+\tikzset{<<->>/.style = {decoration={markings,
+                                   mark=at position 0 with {\arrowreversed[scale=2]{twolatex'}},
+                                   mark=at position 1 with {\arrow[scale=2]{twolatex'}}},
+                       postaction={decorate}}}
+\tikzset{->>-/.style = {decoration={markings,
+                                   mark=at position #1 with {\arrow[scale=2]{twolatex'}}},
+                       postaction={decorate}}}
+\tikzset{-<<-/.style = {decoration={markings,
+                                   mark=at position #1 with {\arrowreversed[scale=2]{twolatex'}}},
+                       postaction={decorate}}}
+
+\tikzset{circ/.style = {fill, circle, inner sep = 0, minimum size = 3}}
+\tikzset{scirc/.style = {fill, circle, inner sep = 0, minimum size = 1.5}}
+\tikzset{mstate/.style={circle, draw, blue, text=black, minimum width=0.7cm}}
+
+\tikzset{eqpic/.style={baseline={([yshift=-.5ex]current bounding box.center)}}}
+\tikzset{commutative diagrams/.cd,cdmap/.style={/tikz/column 1/.append style={anchor=base east},/tikz/column 2/.append style={anchor=base west},row sep=tiny}}
+
+\definecolor{mblue}{rgb}{0.2, 0.3, 0.8}
+\definecolor{morange}{rgb}{1, 0.5, 0}
+\definecolor{mgreen}{rgb}{0.1, 0.4, 0.2}
+\definecolor{mred}{rgb}{0.5, 0, 0}
+
+\def\drawcirculararc(#1,#2)(#3,#4)(#5,#6){%
+    \pgfmathsetmacro\cA{(#1*#1+#2*#2-#3*#3-#4*#4)/2}%
+    \pgfmathsetmacro\cB{(#1*#1+#2*#2-#5*#5-#6*#6)/2}%
+    \pgfmathsetmacro\cy{(\cB*(#1-#3)-\cA*(#1-#5))/%
+                        ((#2-#6)*(#1-#3)-(#2-#4)*(#1-#5))}%
+    \pgfmathsetmacro\cx{(\cA-\cy*(#2-#4))/(#1-#3)}%
+    \pgfmathsetmacro\cr{sqrt((#1-\cx)*(#1-\cx)+(#2-\cy)*(#2-\cy))}%
+    \pgfmathsetmacro\cA{atan2(#2-\cy,#1-\cx)}%
+    \pgfmathsetmacro\cB{atan2(#6-\cy,#5-\cx)}%
+    \pgfmathparse{\cB<\cA}%
+    \ifnum\pgfmathresult=1
+        \pgfmathsetmacro\cB{\cB+360}%
+    \fi
+    \draw (#1,#2) arc (\cA:\cB:\cr);%
+}
+\newcommand\getCoord[3]{\newdimen{#1}\newdimen{#2}\pgfextractx{#1}{\pgfpointanchor{#3}{center}}\pgfextracty{#2}{\pgfpointanchor{#3}{center}}}
+
+\newcommand\qedshift{\vspace{-17pt}}
+\newcommand\fakeqed{\pushQED{\qed}\qedhere}
+
+\def\Xint#1{\mathchoice
+   {\XXint\displaystyle\textstyle{#1}}%
+   {\XXint\textstyle\scriptstyle{#1}}%
+   {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+   {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+   \!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}
+     \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
+\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+\newcommand\separator{{\centering\rule{2cm}{0.2pt}\vspace{2pt}\par}}
+
+\newenvironment{own}{\color{gray!70!black}}{}
+
+\newcommand\makecenter[1]{\raisebox{-0.5\height}{#1}}
+
+\mathchardef\mdash="2D
+
+\newenvironment{significant}{\begin{center}\begin{minipage}{0.9\textwidth}\centering\em}{\end{minipage}\end{center}}
+\DeclareRobustCommand{\rvdots}{%
+  \vbox{
+    \baselineskip4\p@\lineskiplimit\z@
+    \kern-\p@
+    \hbox{.}\hbox{.}\hbox{.}
+  }}
+\DeclareRobustCommand\tph[3]{{\texorpdfstring{#1}{#2}}}
+\makeatother
