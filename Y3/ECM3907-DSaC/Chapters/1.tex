@@ -1,5 +1,99 @@
 % !TEX root = ../notes.tex
 
-\section{Week I - Introduction}
+\section{Week I - Preliminaries}
 
-test1
+\subsection{Continuous time Dynamical Systems}
+We are going to consider,
+\begin{align*}
+  \di{\mathbf{x}}{t} (t) &= f(x(t), u(t))\\
+  y(t) &= g(x(t), u(t))
+\end{align*}
+We are going to call $x$ the state and $u$ the input and $y$ the output. There may be a case where our variables are vector valued and hence have a system of differential equations. We call $f$ and $g$ time invariant as they do not vary with $t$ and not explicitly dependent on $t$.
+
+\begin{eg}
+  The equations governing aerobic digestion are,
+  \begin{align*}
+    \di b t &= (e^{-s} - D)b \\
+    \di s t &= ke^{-s}b + D(s_I - s)
+  \end{align*}
+  where $b$ and $s$ are biomass and substrate concentrations, which comprise the states. Then $D$ and $s_I$ are the dilution rate and input substrate concentration, these are the inputs.
+\end{eg}
+
+We consider systems over some $0 \le t \le t_1$ and we consider where $x(t)$ is uniquely determined over our interval by the initial condition and the input on that same interval. This places a constrain on the functions $f$ and $g$ since, in general, $x(t)$ need not be uniquely determined by the initial condition and the input.\\
+
+Our form may seem rather restrictive, however, it's less restrictive than it appears, let's consider a pendula
+\begin{eg}
+  The angle of a damped pendulum is defined by,
+  $$ mL^2\dii \theta t = -\nu \di \theta t - mgL\sin(\theta) + T $$
+  now, we let $x_1 = \theta$, $x_2 = \di \theta t$, $u = T$ and $y = \theta$. Now we write this in the previous form,
+  \begin{align*}
+    \di {x_1} t &= \di \theta t = x_2 \\
+    \di {x_2} t &= \dii \theta t = \frac{1}{mL^2}\left( -\nu x_2 - mgL\sin (x_1) + u\right)\\
+    y = \theta = x_1
+  \end{align*}
+  Hence,
+  \begin{align}
+    f_1 &= x_2\\
+    f_2 &= \frac{1}{mL^2}\left( -\nu x_2 - mgL\sin (x_1) + u\right)\\
+    g_1 = x_1
+  \end{align}
+\end{eg}
+
+\begin{ndefi}[Autonomous]
+  If the input $u(t)$ is missing, then the system is said to be autonomous and the state and output depend only on the initial state.
+\end{ndefi}
+
+particular attention is to be paid to linear time-invariant systems, the solutions to linear ODEs. Then we can write them as,
+\begin{align*}
+  \di x t (t) &= Ax(t) + Bu(t)\\
+  y(t) &= Cx(t) + Du(t)
+\end{align*}
+
+\subsection{Equilibria and Stability}
+
+\begin{ndefi}[Equilibrium]
+  Consider a fixed input $u(t) = u_e \fa t \in \R$. Then the state and input pair $(x_e, u_e)$ is called an equilibrium if $f(x_e, u_e) = 0$.
+\end{ndefi}
+
+\begin{eg}
+  We consider the anaerobic digester. Then, we need solutions to,
+  $$ (e^{-s} - D)b = 0 \qquad ke^{-s}b + D(s_I - s) = 0 $$
+  We can solve these equations nicely, and get the following equilibrium,
+  \begin{align*}
+    (x_e, u_e) &=\left( \begin{bmatrix}
+      0 \\ c_1
+    \end{bmatrix}, \begin{bmatrix}
+      0 \\ c_2
+    \end{bmatrix} \right)\\
+    (x_e, u_e) &= \left( \begin{bmatrix}
+      0 \\ c_3
+    \end{bmatrix}, \begin{bmatrix}
+      c_4 \\ c_3
+    \end{bmatrix} \right)\\
+    (x_e, u_e) &= \left( \begin{bmatrix}
+      c_5 \\ c_6
+    \end{bmatrix}, \begin{bmatrix}
+      e^{-c_6} \\ c_6 - kc_5
+    \end{bmatrix} \right)
+  \end{align*}
+\end{eg}
+
+If we let the input depend on the state, $u(t) = k(x(t)), \fa t \ge 0$ and some function $k$, then we can define new functions $F(x(t)) = f(x(t), u(x(t)))$ and $G(x(t)) = g(x(t), u(x(t)))$, whereupon we obtain an autonomous system,
+\begin{align*}
+  \di x t (t) &= F(x(t))\\
+  y(t) &= G(x(t))
+\end{align*}
+
+For a autonomous system the state $x_e$ is an equilibrium point if $F(x_e) = 0$. This is a lot simpler. A system may have many equilibria.
+
+\begin{ndefi}[Stability]
+  Informally we call an equilibria stable if whenever $x(0)$ is sufficiently close to $x_e$ if $x(t)$ remains close to $x_e, \fa t \ge 0$
+\end{ndefi}
+
+\begin{ndefi}[Asymptotically Stable]
+  A system is asymptotically stable if it is stable ad in addition, if $x(0)$ is sufficiently close to $x_e$, then $x(t) \to x_e$ as $t \to \infty$.
+\end{ndefi}
+
+If we want to see if a system is stable, we can do so by considering energy. In terms of our pendulum, the energy is,
+$$ V(x_1, x_2) = \frac{g}{L}(1 - \cos(x_1)) + \frac{1}{2}x_2^2 $$
+and if the system doesn't have an increasing change in energy, then we can say that it stays relatively close to an initial condition and hence can be asymptotically stable. This applies to our $V(x_1, x_2)$.
