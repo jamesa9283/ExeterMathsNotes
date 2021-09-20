@@ -2,4 +2,79 @@
 
 \section{Week I - Introduction}
 
-test1
+\subsection{Division Algorithm}
+
+\begin{ndefi}[Well Ordering Principle]
+  Every non-empty subset of $\N_0$ contains a least element
+\end{ndefi}
+
+\begin{nthm}[Division Algorithm]
+  Given a $a\in\Z$ and a $b\in\N_1$ there exists unique integers $q$ and $r$ satisfying $a = bq + r$ and $0\le r < b$.
+\end{nthm}
+The proof splits into uniqueness and existence.
+
+\begin{proof}
+  We shall first prove existence, define $S := \{a - xb : x \in \Z \quad \text{ and } a - xb \ge 0 \}$. We know $S \ne 0$ since,
+  \begin{itemize}
+    \item if $a \ge 0$, then choose $m = 0$, them $a - mb = a \ge 0$
+    \item if $a < 0$, then let $a = m$, so $a - mb = a - ab = (-a)(b-1) \ge 0$ since $-a>0$ and $b > 0$\footnote{I think this is wrong, I don't see this as true.}
+  \end{itemize}
+  Hence $S$ is non-empty subset of $\N_0$ and so by the well ordering principle $S$ must contain a least element $r \ge 0$. Since $r \in S$, then we have there exists a $q \in\Z$ such that $a - qb = r$ and so $a = qb + r$. Now it remains to check that $r < b$, so assume for a contradiction that $r \ge b$, then let there be a $r_1 = r -b \ge 0$. Then,
+  $$ a = qb + r = qb + (r_1 + b) = (q+1)b + r_1 $$
+  and so $a - (q+1) b = r_1 \in S$ and is smaller than $r$, a contradiction.\\
+
+  Now let us show uniqueness, assume that there exist another pair $q', r'$ such that $a = q'b+r'$ where $0 \le r' < b$. Then form $a = a + qb + r = q'b + r'$ we have that, $(q - q')b = r' - r$. If $q = q'$, then we must have $r = r'$, suppose for a contradiction that this isn't true, then,
+  $$ b \le |q - q'||b| = |r - r'| $$
+  However, since $0 \le r, r' < b$ and so $|r - r'| < b$ which gives a contradiction.
+\end{proof}
+
+\subsection{Greatest Common Divisor}
+Let us start with a theorem.
+\begin{nthm}
+  Let $a, b \in \Z$, $\ex d \in \N_0$ and non-unique $x, y \in \Z$ such that,
+  \begin{enumerate}
+    \item $d \m a$ and $d \mid b$
+    \item and if $e \in \Z$, $e \mid a$ and $e \mid b$, then $e \mid d$
+    \item $d = ax + by$
+  \end{enumerate}
+\end{nthm}
+
+\begin{proof}
+  If $a = b = 0$, then $d = 0$\\
+  Suppose that $a \ne b \ne 0$, then let
+  $$ S := \{am + bn : m,n \in \Z \text{ and } am + bn > 0\} $$
+  Now $a^2 + b^2 > 0$ so $S$ is non-empty and a subset of $\N_1$. Hence, by the Well ordering principle then there must be some minimum element $d$. Then we can write $d = ax + by$ by definition of $S$.\\
+
+  \noindent
+  By the division Algorithm, $a = qs + r$ for some $q, r \in \Z$ with $0 \le q  < d$. Suppose for a contradiction that $r \ne 0$. Then,
+  $$ 0 < r = a - qd = a - q(ax + by) = (1- qx)a - qby $$
+  Hence, $r \in S$. But $r < d$, contradiciting the minimality of $d$ in $S$. So we must have $r = 0$, i.e $d \m a$. The same works for $d \m b$.\\
+
+  \noindent
+  Suppose that $e \in \Z$, $e \m a$ and $e \m b$. Then $e$ divides any linear combination of $a$ and $b$, so $e \m d$. Suppose that $e \in \N_1$ also satisfies $(i)$ and $(ii)$. Then, $e \m d$ and $d \m e$ and so $d = \pm e$, but $d, e \ge 0$ and so $d = e$. Thus $d$ is unique.
+\end{proof}
+
+\noindent
+Note that this is a standard trick to prove that integers divide, by just proving that $r = 0$ by contradiction.
+
+\begin{ncor}
+  If $a, b \in \Z$ then there exists a unique $d \in \N_1$ such that.
+  \begin{enumerate}
+    \item $d \m a$ and $d \m b$
+    \item if $e \in \Z$, then $e \m a$ and $e \m b$ then $e \m d$
+  \end{enumerate}
+\end{ncor}
+
+\begin{proof}
+  The existence of a $d$ is given by the theorem. In the proof of uniqueness we only use $(i)$ and $(ii)$.
+\end{proof}
+
+\begin{ndefi}[Greatest Common Divisor]
+  Let $a, b \in \Z$. Them $d$ of the previous corollary is just the greatest common divisor of $a$ and $b$, written $\gcd (a, b)$. Also sometimes seen as $\hcf (a, b)$.
+\end{ndefi}
+
+If $\gcd(a, b) = 1$, then $a$ and $b$ are coprime.
+
+\begin{identity}[Bezouts Identity]
+  Given $a, b \in \Z$ there exist $x, y \in \Z$ such that $\gcd(a, b) = ax + by$.
+\end{identity}
