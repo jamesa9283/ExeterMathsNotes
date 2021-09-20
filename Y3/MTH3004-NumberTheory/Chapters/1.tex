@@ -78,3 +78,120 @@ If $\gcd(a, b) = 1$, then $a$ and $b$ are coprime.
 \begin{identity}[Bezouts Identity]
   Given $a, b \in \Z$ there exist $x, y \in \Z$ such that $\gcd(a, b) = ax + by$.
 \end{identity}
+
+\begin{nprop}
+  Let $a, b, c \in \Z$, then,
+  \begin{enumerate}
+    \item $\gcd(a, b) = \gcd(b, a)$
+    \item $\gcd(a, \gcd(b, c)) = \gcd(\gcd(a, b), c)$
+    \item $\gcd(ac, bc) = |c|\gcd(a, b)$
+    \item $\gcd(1, a) = \gcd(a, 1) = a$
+    \item $\gcd(0, a) = \gcd(a, 0) = |a|$
+    \item $c \m \gcd(a, b)$ if and only if $c \m a$ and $c \m b$
+    \item $\gcd(a + cb, b) = \gcd(a, b)$
+  \end{enumerate}
+\end{nprop}
+
+Then we can consider the following remark,
+\begin{remark}
+   Note that $\gcd(a, b) = 0$ if and only if, $a = b = 0$. Otherwise, $\gcd(a, b) \ge 1$.
+\end{remark}
+
+\begin{proof}
+  Checking these properties are pretty simple, for $(vi)$ just use Bezouts. \\
+
+  We shall prove $(iii)$, so let $d = \gcd(a, b)$ and $e = \gcd(ac, bc)$. By $(vi)$, $cd \m e = gcd(ac, bc)$ since $cd \m ac$ and $cd \m bc$. Then by Bezouts, there exists $x, y \in \Z$ such that $d = ax + by$. Then,
+  $$ cd = acx + bcy $$
+  and as $e \m ac$ and $e \m bc$ and so by linearity we have $e \m cd$. Therefore, $|e| = |cd|$ and so, $e = |c|d$.\\
+
+  Now, let's prove $(vii)$, let $e = \gcd(a + bc, b)$ and $f = \gcd(a, b)$. Then $e \m (a + bc)$ and $e \m b$. Thus by linearity, we have $e \m a$. Hence, $e \m a$ and $e \m b$ so by property $(vi)$, we have $e \m f$. Similarly we can get that $f \m a + bc$ and $f \m b$ and so again my $(vi)$ we have $e = f$ as $f, e \ge 0$.
+\end{proof}
+
+\begin{nlemma}[Euclids Lemma]
+  Let $a, b, c \in \Z$. If $a \m bc$ and $\gcd(a, b) = 1$, then $a \m c$.
+\end{nlemma}
+
+\begin{proof}
+  Suppose that $a \m bc$ and $\gcd(a, b) = 1$. By Bezouts, we get that for some $x, y \in \Z$ we get $1 + ax + by$. Hence, $c = acx + bcy$, but $a \m acx$ and $a \m bcy$, so $a \m c$ by linearity.
+\end{proof}
+
+\begin{nthm}[Solubility of linear equations in $\Z$]
+  Let $a, b, c \in \Z$. The equation,
+  $$ ax + by = c $$
+  is soluble with $x, y \in \Z$ if and only if $\gcd(a, b) = c$
+\end{nthm}
+
+\begin{proof}
+  Let $d = \gcd(a, b)$. Then $d \m a$ and $d \m b$ so if there exists $x, y \in \Z$ such that $c = ax + by$ then $d \m c$ by linearity of divisibility. Now, suppose that $d \m c$. Then we can write $c = qd$ for some $q \in \Z$. By Bezouts, there exists some $x', y' \in \Z$ such that $d = ax' + by'$. Hence, $c = qd = aqx' + bqy'$ and so $x = qx'$ and $y = qy'$ gives a suitable solution.
+\end{proof}
+
+\subsection{Euclids Algorithm}
+
+\begin{nthm}[Euclids Algorithm]
+  Let $a, b \in \N_1$ with $a > b > 0$ and $b \nmid a$. Let $r_0 = a$, $r_1 = b$ and apply the division Algorithm repeatedly to obtain a sequence of remainders defined sucessively,
+  \begin{align*}
+    r_0 &= r_1q_1 + r_2 && 0 < r_2 < r_1\\
+    r_1 &= r_2q_2 + r_3 && 0 < r_3 < r_2\\
+    &\vdots\\
+    r_{n-2} &= r_{n-1}q_{n-1} + r_n && 0 < r_{n} < r_{n-1}\\
+    r_{n-1} &= r_nq_n + r_{n+1} && r_{n+1}=0
+  \end{align*}
+  Then the last non-zero remainder, $r_n$ is the $\gcd(a, b)$.
+\end{nthm}
+
+\begin{proof}
+  There is a stage at which $r_{n+1} = 0$ because the $r_i$ are strictly decreasing non-negative integers. We have,
+  \begin{align*}
+    \gcd(r_i, r_{i+1}) &= \gcd(r_{i+1}q_{i+1} + r_{i+2}r_{i+1})\\
+    &= \gcd(r_{i+2}r_{i+1}) \\
+    &= \gcd(r_{i+1}, r_{i+2})
+  \end{align*}
+  Applying this result repeatedly,
+  \begin{align*}
+    \gcd(a, b) &= \gcd(r_0, r_1)\\
+    &= \gcd(r_2, r_3)\\
+    &= \dots\\
+    &= \gcd(r_{n-1}, r_n)\\
+    &= r_n
+  \end{align*}
+  Where the last equality is because $r_n \m r_{n-1}$
+\end{proof}
+
+\begin{remark}
+   One can also use Euclids Algorithm to find the $x, y\in \Z$ Bezouts Identity state to exist by working backwards. These aren't unique.
+\end{remark}
+
+\subsection{Extended Euclidean Algorithm}
+
+Instead of doing Euclids, and working backwards we can compute our bezouts $x, y$ during euclids. This is the extended Euclids Algorithm. This time we are going to define sequnces of integers $x_i$ and $y_i$, such that $r_i = ax_i + by_i$. Recall that $r_n$ is the last non-zero remainder and that $r_n = \gcd(a, b)$. Therefore $\gcd(a, b) = r_n = ax_n + by_n$ and so $(x, y) := (x_n, y_n)$.\\
+
+We have that $r_0 = a$ and $r_1 = b$. Hence, we see $r_0 = 1 \times a + 0 \times b$ and $r_1 = 0 \times a + 1 \times b$, and so we set $(x_0, y_0) := (1, 0)$ and $(x_1, y_1) := (0, 1)$. So, now we consider for $i \ge 2$ we have a pair $(x_j, y_j)$ for $j < i$. Then $r_{i-2} = r_{i-1}q_{i-1} + r_i$ and so,
+\begin{align*}
+  r_i &= r_{i-2} - r_{i-1}q_{i-1}\\
+  &= (ax_{i-2} + by_{i-2}) + (ax_{i-1} + by_{i-1})q_{i-1}\\
+  &= a(x_{i-2} - x_{i-1}q_{i-1}) + b(y_{i-2} - y_{i-1}q_{i-1})\\
+\end{align*}
+Thus we set $x_i := x_{i-2} - x_{i-1}q_{i-1}$ and $y_i := y_{i-2} - y_{i-1}q_{i-1}$. These can be defined recursively this way.
+$$ (x_i, y_i) := (x_{i-2}, y_{i-2}) - q_{i-1}(x_{i-1}, y_{i-1}) $$
+
+\begin{eg}
+  We compute $\gcd(841, 160)$ use Extended Euclidean Algorithm.
+  % Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[!ht]
+\centering
+\begin{tabular}{llllllllll}
+$i$ & $r_{i-2}$            &   & $r_{i-1}$            &          & $q_{i-1}$ &   & $r_i$ & $x_i$ & $y_i$ \\ \hline
+0 &                       &   &                       &          &            &   & 841  & 1    & 0    \\
+1 &                       &   &                       &          &            &   & 160  & 0    & 1    \\
+2 & 841                   & = & 160                   & $\times$ & 5          & + & 41   & 1    & -5   \\
+3 & 160                   & = & 41                    & $\times$ & 3          & + & 37   & -3   & 16   \\
+4 & 41                    & = & 37                    & $\times$ & 1          & + & 4    & 4    & -21  \\
+5 & 37                    & = & 4                     & $\times$ & 9          & + & 1    & -39  & 205  \\
+6 & \multicolumn{1}{r}{4} & = & \multicolumn{1}{r}{1} & $\times$ & 4          & + & 0    &      &      \\
+  & \multicolumn{1}{r}{}  &   &                       &          &            &   &      &      &
+\end{tabular}%
+\end{table}
+
+Therefore, $\gcd(841, 160) = 1 = 841 \times (-39) + 160 \times 205$.
+\end{eg}
