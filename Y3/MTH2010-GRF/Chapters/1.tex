@@ -72,8 +72,72 @@ $$ \frac{n(n-1) \dots (n + k -1)}{k} $$
 
 We can now see the dihedral group $D_{2n}$,
 \begin{ndefi}[Dihedral Group]
-  Let us take the $n$-gon and depending on when $n$ is odd or even we have a vertex along with the vertex one, you get them lying on the y-axis. Then you get all the rotations symmetries in the plane, which maps the $n$-gon to itself. There are $2n$ of them, the rotation clockwise with angle $\frac{2\pi}{n}$, there are $n$ of these. Then we have the elements where we flip the shape, $s$, first where $s^2 = 1$.
+  Let us take the $n$-gon ($n \ge 3$) and depending on when $n$ is odd or even we have a vertex along with the vertex one, you get them lying on the y-axis. Then you get all the rotations symmetries in the plane, which maps the $n$-gon to itself. There are $2n$ of them, the rotation clockwise with angle $\frac{2\pi}{n}$, there are $n$ of these. Then we have the elements where we flip the shape, $s$, first where $s^2 = 1$.
   $$ D_{2n} = \{1, r, r^2, \dots, r^{n-1}, s, sr, sr^2, \dots, sr^{n-1} \} $$
   Then this is our $2n$ elements. This is indeed a group with composition of rotations and $n \ge 3$ then the group isn't abelian. We also have the interesting rule which spits out the non-commutative behavior,
-  $$ sr^i r^{-i}s = r^{n-i}s $$
+  $$ sr^i = r^{-i}s = r^{n-i}s $$
 \end{ndefi}
+
+We can describe the group by it's elements and it's composition rule. We can define $D_4$ quite nicely,
+$$ D_{4} = \{1, r, s, sr\} $$
+and we find this to be commutative. Hence, $D_4$ is abelian.
+
+\begin{nlemma}
+  The following are true:
+  \begin{itemize}
+    \item The natural element is unique
+    \item The inverse of each element is unique
+    \item $(ab)^{-1} = b^{-1}a^{-1}$
+    \item $au = av \implies u = v$ and $ub = vb \implies u = v$.
+    \item Exponentiation makes sense
+    \item Associativity means that any string of elements combined with the composition rule can be done in any order.
+  \end{itemize}
+\end{nlemma}
+
+
+\begin{ndefi}[Subgroup]
+  A subgroup, $H \subset G$, of a group $(G, \cdot)$,
+  \begin{itemize}
+    \item $\forall x, y \in H, x \cdot y \in H$
+    \item $\forall x \in H, x^{-1} \in H$
+  \end{itemize}
+\end{ndefi}
+
+This leads to also us being able to say $x \cdot x ^{-1} = e_G \in H$, so the natural element must also be in $H$.
+
+\begin{eg}
+  \begin{itemize}
+    \item $(G, \cdot)$ is a subgroup of itself.
+    \item We can take the trivial subgroup $\{e_G\}$.
+    \item Given a $m \in \Z$ the subset $m\Z = \{mk : k \in \Z\}$ of integers is a subgroup of $(\Z, +)$.
+    \item If we take $\{1, r, r^2, \dots, r^{n-1}\}$ this is a subgroup of $D_{2n}$.
+  \end{itemize}
+\end{eg}
+
+\begin{ndefi}[Order of an element]
+  Let $G$ be a group and $a \in G$. The order of $a$ is,
+  $$ \ord (a) = \min \{n \ge 1 : a^n = e_G\} $$
+\end{ndefi}
+If you never reach the natural element, we call $\ord a$ to be infinite.
+
+\begin{nlemma}
+  The following are true,
+  \begin{itemize}
+    \item $\ord a = 1$ if and only if $a = e_G$
+    \item Let $0 \ne n \in \Z$, then $\ord n = \infty$
+    \item Every element in a finite group must have finite order. As if the order was infinite, then you must have infinitely elements, namely, $\{1, a, a^2, a^3, \dots, a^i, a^{i+1}, \dots\}$ which are all distinct and so $G$ cannot be finite.
+    \item Consider some $k = \ord a < \infty$ and $n \ge 1$ with $a^n = e_G$, then $k \m n$
+    \begin{proof}
+      We have instantly that $n \ge k$ and now let $n = tk + r$ with $0 \le r < k$. Then, $a^n = a^{tk+r} = a^{tk} \cdot a^r = (a^k)^ta^r = e_G^ta^r = a^r = e_G$. Hence, we can say that $r = 0$ as $n$ is the smallest number such that $a^n = e_G$.
+    \end{proof}
+  \end{itemize}
+\end{nlemma}
+
+If we consider the symmetric group, then we can say,
+\begin{nlemma}
+  Let $n \ge k \ge 1$ and $\sigma = (a_1, a_2, \dots, a_k) \in S_n$ and is a k-cycle. Then $\ord \sigma = k$. Further, if $\sigma \in S_n$ then one can write $\sigma = \tau_1 \circ \tau_2 \circ \dots \circ \tau_m$ and we can find the order of this disjoin composition of cycles. We find that this is, $\ord (\lcm(\tau_i))_{i=0}^m$
+\end{nlemma}
+
+\begin{remark}
+   Disjoint cycles commute. 
+\end{remark}
