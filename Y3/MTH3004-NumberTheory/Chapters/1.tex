@@ -17,7 +17,7 @@ The proof splits into uniqueness and existence.
   We shall first prove existence, define $S := \{a - xb : x \in \Z \quad \text{ and } a - xb \ge 0 \}$. We know $S \ne 0$ since,
   \begin{itemize}
     \item if $a \ge 0$, then choose $m = 0$, them $a - mb = a \ge 0$
-    \item if $a < 0$, then let $a = m$, so $a - mb = a - ab = (-a)(b-1) \ge 0$ since $-a>0$ and $b > 0$\footnote{I think this is wrong, I don't see this as true.}
+    \item if $a < 0$, then let $a = m$, so $a - mb = a - ab = (-a)(b-1) \ge 0$ since $-a>0$ and $b > 0$\footnote{You absolute plank, there doesn't exist any numbers between $0$ and $1$ in $\Z$, so $b > 0$ is the same as $b \ge 1$}
   \end{itemize}
   Hence $S$ is non-empty subset of $\N_0$ and so by the well ordering principle $S$ must contain a least element $r \ge 0$. Since $r \in S$, then we have there exists a $q \in\Z$ such that $a - qb = r$ and so $a = qb + r$. Now it remains to check that $r < b$, so assume for a contradiction that $r \ge b$, then let there be a $r_1 = r -b \ge 0$. Then,
   $$ a = qb + r = qb + (r_1 + b) = (q+1)b + r_1 $$
