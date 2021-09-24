@@ -52,7 +52,7 @@
 
  % Document stuff
 
-\title{Week 2: Limits and Functions}
+\title{Real Analysis (Incomplete)}
 \author{James Arthur}
 
 \begin{document}
@@ -322,7 +322,7 @@ $$ ||a| - |b|| = \begin{cases}
 \end{proof}
 
 \section{Open and Closed Sets}
-\begin{definition}
+\begin{definition}{Open Interval}
   We define an {\color{blue} open interval} between $\displaystyle{a}$ and $\displaystyle{b}$, $\displaystyle{a, b \in \eR}$, as such:
   $$ (a,\, b) = \{ x: a < x < b\} $$
   \end{definition}
@@ -342,7 +342,7 @@ $$ ||a| - |b|| = \begin{cases}
   \end{tikzpicture}
   \end{figure}
 
-\begin{definition}
+\begin{definition}{Closed Interval}
   We define a {\color{blue} closed interval} between $\displaystyle{a}$ and $\displaystyle{b}$, $\displaystyle{a, b \in \eR}$, as such:
   $$ [a,\, b] = \{ x: a \le x \le b \} $$
   \end{definition}
@@ -366,7 +366,7 @@ $$ ||a| - |b|| = \begin{cases}
 
 A neighborhood is used to talk about closeness of points. We are now going to go through a load of set definitions!\\
 
-\begin{definition}{}{}
+\begin{definition}{$\e$-neighborhood}
  If $\displaystyle{x_0}$ is a real number and $\displaystyle{\e>0}$, then the open interval $\displaystyle{(x_0 - \e, x_0 + \e)}$ is an {\color{blue} $\e$-neighbourhood of $x_0$}.
 \end{definition}\vspace{10pt}
  \begin{figure}[H]
@@ -389,7 +389,7 @@ A neighborhood is used to talk about closeness of points. We are now going to go
  \end{figure}
 
 
-\begin{definition}{}{}
+\begin{definition}{Neighborhood}
  If a set $S$ contains an $\e$-neighbourhood of $x_0$, then $S$ is a {\color{blue} neighborhood of $x_0$}. i.e. we need $\displaystyle{(x_0-\e,\, x_0+\e) \sub S}$
 \end{definition}\vspace{10pt}
  \begin{figure}[H]
@@ -414,7 +414,7 @@ A neighborhood is used to talk about closeness of points. We are now going to go
    \end{tikzpicture}
  \end{figure}
 
-\begin{definition}{}{}
+\begin{definition}{Interior Point}
  If $S$ is a neighbourhood of $x_0$, then $x_0$ is an {\color{blue} interior point of $S$}.
 \end{definition}\vspace{10pt}
  \begin{figure}[H]
@@ -453,7 +453,7 @@ A neighborhood is used to talk about closeness of points. We are now going to go
    \caption{$x_0$ is an interior point, however $x_1$ is not}
  \end{figure}
 
-\begin{definition}{}{}
+\begin{definition}{Interior}
  The set of interior points of $S$ is the {\color{blue} interior } of $S$, denoted by {\color{blue} $S^0$ }
 \end{definition}\vspace{10pt}
 
@@ -461,14 +461,14 @@ A neighborhood is used to talk about closeness of points. We are now going to go
  If every point of S is an interior point, ($S^0 = S$), then $S$ is {\color{blue} open }.
 \end{definition}\vspace{10pt}
 
-\begin{definition}{}{}
+\begin{definition}{Closed}
  A set is {\color{blue} closed } if $S^c$ is open.
 \end{definition}\vspace{10pt}
 
 \begin{example}{
  Any open interval $S= (a,\,b)$ is open.\\
 }\end{example}\begin{solution}{
-Need to show that $\displaystyle{\forall x_0\in(a,\, b), \: \ex \e>0: (x_0 - \e, x_0+\e)\sub (a,\,b)}$\\
+Need to show that $\displaystyle{\forall x_0\in(a,\, b), \:}$ $\displaystyle{\ex \e>0: (x_0 - \e, x_0+\e)\sub (a,\,b)}$\\
 Assume that $\displaystyle{a, b \in \R}$. Let $\displaystyle{x_0\in(a,\,b)}$ and let $\e = \min (x_0 - a, b - x_0)$. Then clearly $\displaystyle{(x_0-\e,\, x_0+\e)\sub (a,\, b)}$. \\
 The rest of the proof is left as an exercise. (Where $a = -\infty$ or $b=\infty$).\\
 Now we know that $\R$ is open and $S^c$, where $S^c = (-\infty,\, a)\cup[b, \infty)$, and $\varnothing$ is closed
@@ -514,7 +514,7 @@ Now, what about the intersection of open sets and union of closed sets. Well, it
 
 {\color{red} \textbf{The concept of open and closed sets, doesn't form a dichotomy (A set is partitioned into two. i.e. odd or even naturals). }} A set can be neither open or closed or both.\\
 
-\begin{definition}{}{}
+\begin{definition}{Deleted Neighborhood}
  A {\color{blue} deleted neighbourhood } of a point $\displaystyle{x_0}$ is a set that contains every point of some neighborhood of $\displaystyle{x_0}$ except $\displaystyle{x_0}$. For example:
  $$ S = \{x : 0 < |x - x_0| < \e \} $$
  is a deleted neighborhood of $x_0$. We also say it is deleted $\e$-neighborhood of $x_0$.
@@ -522,7 +522,7 @@ Now, what about the intersection of open sets and union of closed sets. Well, it
 
 Let $S$ be a subset of $\R$.
 
-\begin{definition}{}{}
+\begin{definition}{Limit Points}{}
   $x_0$ is a {\color{blue} limit point } of $S$ if every deleted neighbourhood of $x_0$ contains a point of $S$
 \end{definition}\vspace{10pt}
 
@@ -560,7 +560,7 @@ Let $S$ be a subset of $\R$.
 Every point in $S$ is limit point, apart from $\{3 \}$
 }\end{solution}\vspace{10pt}
 
-\begin{definition}{}{}
+\begin{definition}{Boundary Points}{}
   $\displaystyle{x_0}$ is a {\color{blue} boundary point } of $S$ if every neighborhood of $\displaystyle{x_0}$ contains at least one point in $S$ and one not in $S$. The set of boundary points of $S$  is the {\color{blue} boundary } of $S$, denoted by $\partial S$. The {\color{blue} closure } of $S$, denoted by $\overline S$, is $\overline S = S \cup \partial S$
 \end{definition}\vspace{10pt}
 
@@ -598,7 +598,7 @@ Every point in $S$ is limit point, apart from $\{3 \}$
 The boundary points of $S$ are: $\partial S = \{-1, 1, 2, 3\} $ and $\overline S = (-\infty,\, -1]\cup[1,\, 2]\cup\{3\}$
 }\end{solution}\vspace{10pt}
 
-\begin{definition}{}{}
+\begin{definition}{Isolated Point}{}
   $x_0$ is an {\color{blue} isolated point } to $S$ if $x_0 \in S$ and there is a neighborhood of $x_0$ that contains no other points of $S$.
 \end{definition}\vspace{10pt}
 
@@ -636,7 +636,7 @@ The boundary points of $S$ are: $\partial S = \{-1, 1, 2, 3\} $ and $\overline S
 Theres only one isolated point of $S$, $\{3 \}$.
 }\end{solution}\vspace{10pt}
 
-\begin{definition}{}{}
+\begin{definition}{Exterior}{}
   $x_0$ is {\color{blue} interior } to $S$ if $x_0$ is in the interior of $S^c$. The collection of such points is the {\color{blue} exterior } of $S$.
 \end{definition}\vspace{10pt}
 
