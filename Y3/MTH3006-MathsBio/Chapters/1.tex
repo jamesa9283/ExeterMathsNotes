@@ -1,31 +1,8 @@
 % !TEX root = ../notes.tex
 
-\section{Introduction}
-
-In this module we are going to consider continuous time models under the pretense of biological systems,
-$$ \di x t = f(x, t, \mu) $$
-
-\begin{eg}
-  Here's an example we will use a couple of times,
-  $$ \di N t = f(N, t, \vec \mu) = rN \left( 1 - \frac{N}{K} \right) $$
-  where $\vec\mu = \begin{pmatrix}
-    r \\ K
-  \end{pmatrix}$
-\end{eg}
-
-We are also going to look at discrete systems, these are going to be through difference equations.
-$$ \vec x (t + 1) = A\vec x(t) $$
-
-and also we shall study PDEs,
-
-$$ \pd u t = f(x, t, x, \mu, \pd u x, \pdd u x) $$
-
-\begin{eg}
-  $$ \pd u t = Ku(1 - u) + D\pdd u x $$
-\end{eg}
 
 
-\section{Continuous Models for a single species}
+\section{Continuous Models for a single species}\marginnote{\emph{Lecture 2}}[0mm]
 We are going to model simply how we model population dynamics for a single species. We are going to call $N(t)$ our population size at a certain time. We are going to say that $N(t)$ is continuous. We also say $N \in \R$ and so it's going to be a density measure. We are going to constrain this $N \ge 0, \,\fa t$. We can measure this and create a model,
 $$ \di N t = f(N, t, \vec \mu) $$
 We call $N$ the variable, then $\vec \mu$ the parameter. We let $t \in \R$ and $t > 0$. \\

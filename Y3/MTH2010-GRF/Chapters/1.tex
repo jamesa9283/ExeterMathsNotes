@@ -1,7 +1,7 @@
 % !TEX root = ../notes.tex
 
 \section{Basics of Groups}
-We start by defining a group, it is an example of an algebraic structure.
+We\marginnote{\emph{Lecture 1}}[0mm] start by defining a group, it is an example of an algebraic structure.
 \begin{ndefi}[Group]
   $G$ is a nonempty set and endowed with a composition rule $(\cdot)$. We denote this $(G, \cdot)$. $(\cdot)$ is well defined, so we can associate another element $a \cdot b \in G$ and $a \cdot b$ is unique. $(\cdot)$ must be associative,
   $$ a \cdot (b \cdot c) = (a \cdot b) \cdot c $$
@@ -74,7 +74,7 @@ We can now see the dihedral group $D_{2n}$,
 \begin{ndefi}[Dihedral Group]
   Let us take the $n$-gon ($n \ge 3$) and depending on when $n$ is odd or even we have a vertex along with the vertex one, you get them lying on the y-axis. Then you get all the rotations symmetries in the plane, which maps the $n$-gon to itself. There are $2n$ of them, the rotation clockwise with angle $\frac{2\pi}{n}$, there are $n$ of these. Then we have the elements where we flip the shape, $s$, first where $s^2 = 1$.
   $$ D_{2n} = \{1, r, r^2, \dots, r^{n-1}, s, sr, sr^2, \dots, sr^{n-1} \} $$
-  Then this is our $2n$ elements. This is indeed a group with composition of rotations and $n \ge 3$ then the group isn't abelian. We also have the interesting rule which spits out the non-commutative behavior,
+  Then\marginnote{\emph{Lecture 2}}[0mm] this is our $2n$ elements. This is indeed a group with composition of rotations and $n \ge 3$ then the group isn't abelian. We also have the interesting rule which spits out the non-commutative behavior,
   $$ sr^i = r^{-i}s = r^{n-i}s $$
 \end{ndefi}
 
@@ -139,5 +139,5 @@ If we consider the symmetric group, then we can say,
 \end{nlemma}
 
 \begin{remark}
-   Disjoint cycles commute. 
-\end{remark}
+   Disjoint cycles commute.
+\end{remark}\marginnote{\emph{Lecture 3}}[0mm]
