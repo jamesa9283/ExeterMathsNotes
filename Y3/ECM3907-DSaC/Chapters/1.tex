@@ -97,3 +97,82 @@ For a autonomous system the state $x_e$ is an equilibrium point if $F(x_e) = 0$.
 If we want to see if a system is stable, we can do so by considering energy. In terms of our pendulum, the energy is,
 $$ V(x_1, x_2) = \frac{g}{L}(1 - \cos(x_1)) + \frac{1}{2}x_2^2 $$
 and if the system doesn't have an increasing change in energy, then we can say that it stays relatively close to an initial condition and hence can be asymptotically stable. This applies to our $V(x_1, x_2)$.
+
+If we consider a torque input, $u = mL^2x_1$ then will result in an unstable system with respect to it's equilibria point $(0, 0)$.
+
+\subsection{Linearisation}
+You can apply our linear tecniques to non-linear systems by linearising them. Firstly, consider an equilibrium point and let $f$ and $g$ be continuously differentiable. Then, we can linearise by using Taylor Series.\\
+
+Let $u(t) = u_e + \d u(t)$ and $x(t) = x_e + \d x(t)$ and also $y_e = g(x_e, u_e)$. Then,
+\begin{align*}
+  \di {\d x}{t} &= A\d x + B\d u + O(x^2)\\
+  \d y &= C\d x + D \d u + O(x^2)
+\end{align*}
+where we define $A, B, C, D$ as,
+$$ A = \begin{bmatrix}
+  \pd {f_1}{x_1} & \dots & \pd{f_1}{x_d}\\
+  \vdots & & \vdots \\
+  \pd{f_d}{x_1} &\dots & \pd{f_d}{x_d}
+\end{bmatrix}(x_e, u_e) \qquad B = \begin{bmatrix}
+  \pd {f_1}{u_1} & \dots & \pd{f_1}{u_d}\\
+  \vdots & & \vdots \\
+  \pd{f_d}{u_1} &\dots & \pd{f_d}{u_d}
+\end{bmatrix} (x_e, u_e) $$
+$$ C = \begin{bmatrix}
+  \pd {g_1}{x_1} & \dots & \pd{g_1}{x_m}\\
+  \vdots & & \vdots \\
+  \pd{g_m}{x_1} &\dots & \pd{g_m}{x_m}
+\end{bmatrix}(x_e, u_e) \qquad B = \begin{bmatrix}
+  \pd {g_1}{u_1} & \dots & \pd{g_1}{u_m}\\
+  \vdots & & \vdots \\
+  \pd{g_m}{u_1} &\dots & \pd{g_m}{u_m}
+\end{bmatrix} (x_e, u_e) $$
+where $f \in (\R\times\R \to \R\times\R)^d$, $g \in (\R\times\R \to \R\times\R)^m$ and $u \in (\R \to \R)^n$ and $x \in (\R \to \R)^d$.
+
+\begin{eg}
+  We consider the Lotka-Volterra equations,
+  $$ \di {x_1} t = ax_1 - bx_1x_2 \qquad \di {x_2} t = cx_1x_2 - dx_2 $$
+  where $x_1$ and $x_2$ are the prey and predators and $a, b, c, d \in \R$. We have some equilibrium at $(0, 0)$ and also $\left( \frac{d}{c}, \frac{a}{b} \right)$.\\
+  We can calculate our matrix and get,
+  $$ \di {\d\vec x} t = \begin{bmatrix}
+    0 & -\frac{bd}{c} \\ \frac{ac}{d} & 0
+  \end{bmatrix} \d\vec{x} + O(x^2)$$
+\end{eg}
+
+
+\begin{eg}
+  Consider our friend, the damped pendulum,
+  \begin{align*}
+    \di {x_1} t &= x_1 \\
+    \di {x_2} t &= -\frac{\nu}{mL^2}x_2 - \frac{g }{L}\sin(x_1) + \frac{1}{mL^2}u
+  \end{align*}
+  where $x_1 = \frac{\pi }{6}$ and $x_2 = 0$ and $u = \frac{mgL }{2}$. Then we can form the linearisation matrix,
+  $$ \begin{bmatrix}
+    \pd{f_1}{x_1} & \pd{f_1}{x_2}\\
+    \pd{f_2}{x_1} & \pd{f_2}{x_2}
+  \end{bmatrix} \left(\frac{\pi }{6},\, 0,\, \frac{mgL }{2}\right) = \begin{bmatrix}
+    0 & 1 \\ -\frac{\sqrt 3 g }{2L } & -\frac{\nu}{mL^2}
+  \end{bmatrix}$$
+  and as we have an input, we need to form a second matrix,
+  $$ \begin{bmatrix}
+    \pd{f_1}{u} \\ \pd{f_2}{u}
+  \end{bmatrix} \left(\frac{\pi }{6},\, 0,\, \frac{mgL }{2}\right) = \begin{bmatrix}
+    0 \\ \frac{1}{mL^2}
+  \end{bmatrix}$$
+  Thus,
+  $$ \di {\d\vec x} t = \begin{bmatrix}
+    0 & 1 \\ -\frac{\sqrt 3 g }{2L } & -\frac{\nu}{mL^2}
+  \end{bmatrix} \d\vec{x} + \begin{bmatrix}
+    0 \\ \frac{1}{mL^2}
+  \end{bmatrix}\d u + O(x^2)$$
+\end{eg}
+
+\subsection{Discrete Time Dynamical Systems}
+Here is a difference equation,
+\begin{align*}
+  x(k + 1) &= f(x(k), u(k))\\
+  y(k) &= g(x(k), u(k))
+\end{align*}
+Here $x, y, u$ are sequences defined for all $k \ge 0 \in \Z$. We write $u, x, y \in \Z_+ \to \R$.\\
+
+We call $(x_e, u_e)$ an equilibrium and input pair if $x_e$ and $u_e$ if there are constant vectors satisfying $f(x_e, u_e) = x_e$. There are also similar ideas to what we considered for continuous systems.
