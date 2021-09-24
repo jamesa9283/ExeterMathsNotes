@@ -26,6 +26,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\sub}{\subset}
 \renewcommand{\a}{\alpha}
 \renewcommand{\b}{\beta}
@@ -35,6 +36,7 @@
 \newcommand{\ex}{\exists\,}
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 \newcommand{\eR}{\overbar{\R}}
+\newcommand{\xb}{\bar{x}}
 
 %\setlength{\columnsep}{20pt}
 
@@ -44,12 +46,15 @@
 %\newtheorem{definition}{Definition}[subsection]
 \newtheorem{corollary}{Corollary}
 
+\tikzset{point/.style={circle,draw=black,inner sep=0pt,minimum size=3pt}}
+
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{theorem}{Theorem}%
 {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section]{definition}{Definition}%
 {colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
-
+\newtcbtheorem[number within=section]{lemma}{Lemma}%
+{colback=red!5,colframe=red!35!black,fonttitle=\bfseries}{def}
  % Document stuff
 
 \title{Real Analysis (Incomplete)}
@@ -1122,6 +1127,365 @@ $$ |f(x)| \le M \qquad\forall x\in[a,\,b] $$
 \end{proof}
 
 \subsection{Monotonics 2: God what a mess}
+
+\section{Definition of a Derivative}
+\noindent\begin{definition}{Derivative}{}
+   A function $f$, is differentiable at an interior point, $x_0$, of it's domain if the difference qiotient:
+   $$ \frac{f(x) - f(x_0)}{x -x_0}, \quad x\neq x_0 $$
+   approaches a limit as $x$ approaches $x_0$, in which case the limit is called the {\color{blue} derivative }of $f$ at $x_0$ and is denoted: $f'(x_0)$, thus:
+   $$ f'(x_0) = \lim_{x\to x_0}\frac{f(x) - f(x_0)}{x -x_0} $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{definition}{}{}
+   We say that $f(x_0)$ is a {\color{blue} local extreme }value of $f$, if there is a $\d > 0$, such that the sign of $f(x) - f(x_0)$ diesnt change:
+   $$ (x_0 - \d, \, x_0 + \d) \sub D_f $$
+   or a {\color{blue} local minimum } of $f$ if:
+   $$ f(x_0) \le f(x) $$
+   if for all $x$ in the set, these are true, then we have globals
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{}{}
+  If $f$ is differentiable at a local extreme point $x_0 \in D_f^0$, then $f(x_0) = 0$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  We consider the case where $x_0$ is a local maximum. Then, $\ex \d > 0$, $\displaystyle{(x_0 - \d,\, x_0 + \d) \sub D_f}$ and $f(x) \le f(x_0)$ for all $x\in (x_0-\d,\, x_0+\d)$. We have:
+  $$ 0 \le \lim_{x\to x_0-} \frac{f(x) - f(x_0)}{x - x_0} $$
+  and
+  $$ \lim_{x\to x_0-} \frac{f(x) - f(x_0)}{x - x_0} \le 0$$
+  So, as it exists,
+  $$ \lim_{x\to x_0-} \frac{f(x) - f(x_0)}{x - x_0} = 0 $$
+  The case of a local minimum at $x_0$ is obtained by applying the above to $-f$.
+\end{proof}
+
+\section{Rolles Theorem}
+
+\noindent\begin{theorem}{Rolle's Theorem}{}
+   Suppose that $f$ is continuous on the closed interval $[a, \, b]$ and differentiable on the open interval $(a, \, b)$ and $f(a) = f(b)$, then $f'(c) = 0$ for some $c\in (a,\,b)$
+\end{theorem}\vspace{10pt}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+      \draw[thick, orange] (1,1) node[point,fill=black] (a) {} parabola bend (3,3) (4,2.5) node[point,fill=black] (b) {};
+      \draw[white] (1,1+9/8) -- (4,2.5+9/8) coordinate (topright);
+      \node[point,fill=black] (x0) at (2.5,2.875) {};
+
+      \coordinate (origin) at (0,0);
+      \draw[<->] (topright -| origin) -- (origin) -- (origin -| topright) -- +(1,0);
+      \draw[dotted,very thick] (a) -- (a|-origin) node[below,black] {$a$};
+      \draw[dotted,very thick] (b) -- (b|-origin) node[below] {$b$};
+      \draw[dashed] (x0) -- (x0|-origin) node[below] {$x_0$};
+  \end{tikzpicture}
+\end{figure}
+\begin{proof}
+  Since $f$ is continuous on $[a,\, b]$, then, by EVT, $f$ attains both a min and max values.
+  $$ \a = \min_{x\in [a,\,b]}{f(x)} \qquad \b = \max_{x\in [a,\,b]}{f(x)} $$
+  If $\a = \b$, then $f$ is constant on $(a,\, b)$, clearly $f'(x) = 0 \,\forall x\in [a,\, b]$.\\
+  If $\a \neq \b$, then at least one $\a$ or $\b$ is attained at a point $c\in (a,\, b)$ (Since $f(a) = f(b)$), and hence $f'(c) = 0$.
+\end{proof}
+
+\section{Darboax's Theorem}
+
+
+\noindent\begin{theorem}{Darboax's Theorem}{}
+  Suppose that $f$ is differentiable on $[a,\, b]$, $f'(a)\neq f'(b)$, and $\mu$ is between $f'(a)$ and $f'(b)$. Then $f'(c) = \mu$ for some $c\in (a,\, b)$.
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  Suppose that $f'(a) < \mu < f'(b)$ aand then define:
+  $$ g(x) = f(x) - \mu x $$
+  Then
+  $$ g'(x) = f'(x) - \mu $$
+  and then:
+  \begin{equation}
+    g'(a) < 0 \qquad 0 < g'(b) \tag{$*$}
+  \end{equation}
+  Since $g$ is continuous on $[a,\, b]$, $g$ attains a min, by EVT, at some point $c\in [a,\, b]$. Then, ($*$), implies $\ex \d > 0$,
+  $$ g(x) < g(a), \quad\forall a < x < a + \d $$
+  and
+  $$ g(x) < g(b), \quad b - \d < x < b $$
+  therefore $c\neq a$ and $c \neq b$. Hence $a < c < b$, and therefore $g'(c) = 0$ since $c$ is a min in $D_g^0$, that is $f'(c)\neq \mu$\\
+  The proof when $f'(b)<\mu < f'(a)$ is obtained when you apply the above argument to $-f$.
+\end{proof}
+
+\section{Mean Value Theorem}
+
+\noindent\begin{theorem}{Cauchy's Mean Value Theorem}{}
+  If $f$ and $g$ are continuous on a closed interval $[a,\, b]$ nd differentiable on the open interval $(a,\, b)$, then:
+  $$ [g(b) - g(a)]f'(c) = [f(b) - f(a)]g'(c) $$
+  for some $c\in (a,\, b)$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  Let $h(x) = (g(b) - g(a))f(x)- (f(b) - f(a))g(x)$, then we can say $h$ is continuous on $[a,\, b]$ and differentiable on $(a,\, b)$. Therefore Rolle's Theorem implies that $h'(c) = 0$ for some $c\in (a,\, b)$, that is:
+  $$ h'(c) = (g(b) - g(a))f'(c) - (f(b) - f(a))g'(c) = 0 $$
+\end{proof}
+
+\noindent\begin{theorem}{Mean Value Theorem}{}
+  If $f$ is continuous on the closed interval $[a,\,b]$ and differentiable on $(a,\,b)$, then
+  $$ f'(c) = \frac{f(b) - f(a)}{b - a} $$
+  for some $c\in (a,\,b)$
+\end{theorem}\vspace{10pt}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+      \draw[thick, orange] (1,1) node[point,fill=blue] (a) {} parabola bend (3,3) (4,2.5) node[point,fill=black] (b) {};
+      \draw[thick, blue] (1,1) -- (4,2.5);
+      \draw[green] (1,1+9/8) -- (4,2.5+9/8) coordinate (topright);
+      \node[point,fill=black] (x0) at (2.5,2.875) {};
+
+      \coordinate (origin) at (0,0);
+      \draw[<->] (topright -| origin) -- (origin) -- (origin -| topright) -- +(1,0);
+      \draw[dotted,very thick] (a) -- (a|-origin) node[below,black] {$a$};
+      \draw[dotted,very thick] (b) -- (b|-origin) node[below] {$b$};
+      \draw[dashed] (x0) -- (x0|-origin) node[below] {$c$};
+  \end{tikzpicture}
+\end{figure}
+\begin{proof}
+  Apply Cauchy MVT and let $g(x) = x$
+\end{proof}
+\subsection{Consequences}
+\noindent\begin{theorem}{}{}
+ If $f'(x) = 0$ for all $x\in (a,\,b)$ then $f$ is constant on $(a\,b)$.
+\end{theorem}\vspace{10pt}
+\noindent\begin{theorem}{}{}
+ If $f'$ exists and does not change sign on $(a,\,b)$, then $f$ is monotonic on $(a,\,b)$
+\end{theorem}\vspace{10pt}
+\noindent\begin{theorem}{Lipschitz Continuity}{}
+ If $|f'(x)|\le M \quad\forall x\in(a,\,b)$, then $|f(x) - f(x')| < M|x - x'|$ for all $x, x' \in (a,\,b)$.
+\end{theorem}\vspace{10pt}
+
+
+\section{Sequences}
+
+\noindent\begin{definition}{Limit of a Sequence}{}
+  A sequence, $\{s_n \}$ converges to a limit $s$, if for every $\e > 0\, \ex N\in \Z$,
+  $$ |S_n - S|< \e \quad n \ge N $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{definition}{Divergence}{}
+  We say that $\displaystyle{\lim_{n\to\infty}{a_n} = \infty}$ if $\forall a \in \R$, $s_n > a$ for $n > a$. Similarly for $-\infty$.
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{}{}
+   Let $\displaystyle{\lim_{x\to \infty}{f(x)} = L}$, where $L\in \eR$ and suppose that $s_n = f(n)$ for large $n$, then:
+   $$ \lim_{n\to\infty}{s_n} = L $$
+\end{theorem}\vspace{10pt}
+
+\noindent\begin{definition}{Subsequence}{}
+  A subsequence $\{ t_k \}$ if $t_k = s_{n_k}$, where $\{ n_k \}$ is an increasing subsequence of integers.
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{Uniqueness of subsequence limit}{}
+   If $\displaystyle{\lim_{n\to\infty}{s_n} = s}$, then $\displaystyle{\lim_{n\to\infty}{s_{n_k}} = s \quad\forall \{s_{n_k} \}}$  of $\{ s_k \}$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  Consider the finite case, $\forall \e > 0\,\ex N$,
+  $$ |S_n - S| < \e \quad k \ge K$$
+  Since, $\{ n_k \}$ is increasing $\ex K$, $n_k \ge N$ if $k > K$
+  $$ |S_{n_k} - S|<\e \qquad k \ge K $$
+  For infinite limits, $\forall \e >0, \, \ex N$,
+  $$ S_n > n \qquad n \ge N $$
+  as we know $\displaystyle{\{ n_k \}}$ is increasing, then $n_k > n$ for $n \ge N$ but $S_{n_k} > n$ for some $n \ge N$ and so the limit is infinite. For limit to $-\infty$, use the sequence $-S_n$
+\end{proof}
+
+\noindent\begin{theorem}{Limit Points of Sequences}{}
+  A point $\xb$ is a limit point of a set $S$, iff there is a sequence $\{ x_n \}$ of points in $S$, $x_n \neq \xb$ for $n \ge 1$, and $\displaystyle{\lim_{n\to\infty}{x_n} = \xb}$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  Suppose such a $\{x_n\}$ exists. Then $\forall\e>0,\, \ex N$,
+  $$ 0 < |x_n - \xb| < \e \qquad \forall n \ge N $$
+  Therefore every $\e$-neigh. contains $\infty$ many points of $S$ hence $\xb$ is a limit point of $S$.\\
+
+  Now let $\xb$ be a limit point of $S$. $\forall N \ge 1$, $(\xb - \frac{1}{n}, \xb + \frac{1}{n})$ has to contain some point $x_n \in S$, $x_n \neq \xb$. Since,
+  $$ |x_n - \xb| \le \frac{1}{n}\qquad m \ge n $$
+  and $\displaystyle{\lim_{n\to\infty}{x_n} = \xb}$
+\end{proof}
+
+\noindent\begin{theorem}{Bounded and Subsequence Theorems}{}
+  \begin{enumerate}
+    \item If $\{ x_n \}$ is bounded then it has a convergent subsequence
+    \item If $\{ x_n \}$ is unbounded above, then it has a subsequence $\{ x_{n_k} \}$ st,
+    $$ \lim_{x\to\infty}{x_{n_k}} = \infty $$
+    \item If $\{ x_n \}$ is unbounded above, then $\{ x_n \}$ has a subsequence st,
+    $$ \lim_{x\to\infty}{x_{n_k}} = -\infty $$
+  \end{enumerate}
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  \textbf{Proof of 1:} Let $S$ be a set of distinct numbers of $\{ s_n \}$, if $s$ is finite, then $\ex,\, \xb\in s$, which occurs infinitely often. Then,
+  $$ \lim_{n\to\infty}{x_{n_k}} = \xb $$
+  If $s$ is infinte, then since $s$ is bounded BWT applies, now $s$ has a limit point, $\xb$. Then by previous thm, $\ex\{y_j\}\in s$ with $y_j \neq s$,
+  $$ \lim_{j\to\infty}{y_j} = \xb $$
+  However, $\{ y_j \}$ may not be a subsequence of $\{ x_n \}$, so $y_j = x_{n_j}$ may not be true, where $n_j$ is increasing. So now take an increasing subsequence of $n_j$, $\{ n_j \}$, then $\{ y_{j_k} \} = \{ s_{n_{j_k}} \}$ is a subsequence. So it has the same limit as; $\{ y_j \}$
+  $$ \lim_{k\to\infty}{\{ s_{n_{j_k}} \}} = \xb $$
+\end{proof}
+
+\subsection{Cauchy Sequences}
+
+\noindent\begin{definition}{Cauchy Sequences}{}
+  A sequence $\{ s_n \}$ of real numbers is said to be cauchy if $\e > 0,\,\ex N\in\N$, $n\ge N$ and $m\ge N$, then:
+  $$ |S_n - S_m| < \e $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{lemma}{}{}
+  Let $\{ s_n \}$ be a convergent, then it's cauchy
+\end{lemma}\vspace{10pt}
+\begin{proof}
+  Suppose that $s_n\to s$ as $n\to\infty$. Let $\e > 0,\,\ex N, \, n\ge N$
+  $$ |s_n - s|< \frac{\e}{2} $$
+  Now take $m, n \ge N$, then
+  \begin{align*}
+    |s_n - s_m| &= |s_n - s - (s_m - s)| \\
+    &\le |s_n - s| + |s_m - s| \\
+    &< \e
+  \end{align*}
+\end{proof}
+
+\noindent\begin{lemma}{}{}
+  Let $\{ s_n \}$ be cauchy, then it's convergent
+\end{lemma}\vspace{10pt}
+\begin{proof}
+  Let $\{ s_n \}$ be cauchy, and hence it's bounded. By thm 3.14(a), there is a convergent subsequence $\{ s_{n_k} \}$ for some $s\in\R$. Now claim, $\displaystyle{s_k \in s}$ as $\displaystyle{k \to \infty}$.\\
+
+  Let $\e > 0,\, \ex N_2$, $k \ge N_1$, then
+  $$ |s_{n_k} s| < \frac{\e}{2} $$
+  Then $\ex N_2, \, m, n \ge N_2$, then $|s_m - s_n| < \frac{\e}{2}$. If $K \ge \max(m, n)$,
+  \begin{align*}
+    |s_k - s| &= |(s_k - s_{n_k}) - (s - s_{n_k})|\\
+    &\le |s_k - s_{n_k}| + |s - s_{n_k}|\\
+    &< \e
+  \end{align*}
+\end{proof}
+
+\section{Series}
+\noindent\begin{definition}{Series}{}
+   If $\displaystyle{\{ a_k \}^\infty_k = \sum_{n = k}^\infty a_k}$ is infinite and $a_n$ is the $n^th$ term. If $\displaystyle{\sum_{k=1}^\infty} = A$, then it converges. Also we say $\displaystyle{A_n = a_k + \dots + a_n \qquad n \ge k}$ is the $n^th$ partial sum of the sum. We can also say that,
+   $$ \lim_{k\to\infty}{A_n} = A $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{Cauchy Criterion for Series}{}
+   A series $\sum a_n$ converges iff $\forall \e > 0,\,\ex N$,
+   $$ |a_n + a_{n-1} +\dots + a_m| < \e \qquad m \ge n \ge N \quad (*)$$
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  Let $\{ A_n \}$ be the series of partial sums of our series. Then
+  $${A_m - A_{n-1} = a_n + \dots + a_m}$$
+  If $(*)$ holds, then
+  $$|A_m - A_{n-1}| < \e \text{ if } m \ge n \ge N \quad (**)$$
+  To say $\sum a_n$ is convergent, then $\{ A_n \}$ is convergent. This is equiv to $\{ A_n \}$ being cauchy, which is what $(**)$ says.
+\end{proof}
+
+\noindent\begin{corollary}{}{}
+  If $\sum a_n$ converges, then $\displaystyle{\lim_{n\to\infty}{a_n} = 0}$
+\end{corollary}\vspace{10pt}
+\begin{proof}
+  Taking $m = n$ in the previous thm, then $\forall\e > 0,\,\ex N > 0$,
+  $$ |a_n| < \e \text{ if } n \ge N $$
+  which is $\displaystyle{\lim_{n\to\infty}{a_n} = 0}$
+\end{proof}
+
+\noindent\begin{corollary}({Divergence Test}){}
+  If $\displaystyle{\lim_{n\to\infty}{a_n}\neq 0}$, then $\sum a_n$ divergent
+\end{corollary}\vspace{10pt}
+
+
+
+\section{Limits of function series}
+
+\noindent\begin{definition}{Limit of a functional series}{}
+ Suppose $\{ f_n \}$, $n\in\N_1$ is a sequence of functions defined on a set $E$, then suppose the limit exists,
+ $$ f(x) = \lim_{n\to\infty}{f_n(x)} $$
+\end{definition}\vspace{10pt}
+
+Now we say that $f_n(x)$ converges to $f(x)$ or $\{ f_n \}$ converges to $f$ pointwise on $E$. Similarly:
+
+\noindent\begin{definition}{Sum of a series}{}
+   If $\sum f_n(x)$ converges $\forall\, x\in E$, we say:
+   $$ f(x) = \sum_{n =1}^\infty {f_n(x)} $$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{theorem}{Contunity of a series of continuous functions}{}
+  To say that a series of continuous functions is continuous, it suffices to show:
+  $$ \lim_{t\to x}{\lim_{n \to \infty}{f_n(t)}} = \lim_{n \to \infty}{\lim_{t\to x}{f_n(t)}}  $$
+\end{theorem}\vspace{10pt}
+
+
+\subsection{Convergence}
+\noindent\begin{definition}{Uniform Convergence (Sequence)}{}
+   A sequence of functions $\{f_n\}, n\in\N_1$, converges uniformly on $E$ to a function $f$ if $\forall \e>0$, $\ex\,N$, $n \geq N\, \implies$
+   $$ |f_n(x) - f(x)| \le \e \qquad \forall x \in E$$
+\end{definition}\vspace{10pt}
+
+\noindent\begin{definition}{Uniform Convergence (Series)}{}
+   We say that the sequence (series) $\sum f_n(x)$ converges uniformly on $E$ if the sequence $\{ s_n \}$ of the partial sums is:
+   $$ s_n = \sum_{i=1}^n {f_i (x)} $$
+\end{definition}\vspace{10pt}
+
+
+\subsection{Cauchy Time}
+\noindent\begin{theorem}{}{}
+   The sequence $\{f_n\}$ defined on $E$, converges uniformly on $E$, $\iff$ $\forall \e > 0$, $\ex\,N$, $m \geq N$ and $n\geq N$, $x \in E$, $\implies$
+   $$ |f_n(x) - f(x)|\le \e $$
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  Suppose that $\{f_n\}$ converges uniformly on $E$, and let $f$ be the limit of the sequence. Then $\ex\,N$, $n\geq N$, $x\in E,\,\implies$
+  $$ |f_n(x) - f(x)| \le \frac{1}{2}\e $$
+  \begin{align*}
+    |f_n - f_m| &\le |f_n - f| + |f_m - f|\\
+    &\le \e
+  \end{align*}
+
+  Suppose that cauchy holds, then we know every cauchy sequence converges on the real line. So we have to prove that the convergence is uniform; Let $\e >0$, $\ex\,N$, st the theorem holds. Now fix $n$, and take $m \to \infty$, this gives:
+  $$ |f_m - f_n| \le \e \forall n \geq N, x\in E $$
+\end{proof}
+
+\noindent\begin{theorem}{}{}
+   Suppose $\displaystyle{\lim_{n\to\infty}{f_n} = f}$, $x\in E$. Let $\displaystyle{M_n = \sup_{x\in E}{|f_n - f|}}$. Then $f_n \to f$ uniformly on $E$ $\iff$ $M_n \to 0$ as $n \to \infty$
+\end{theorem}\vspace{10pt}
+
+
+\noindent\begin{theorem}{Wierstrass}{}
+  Suppose $\{f_n\}$ is a sequence of functions defined on $E$, and
+  $$ |f_n| \le M \qquad (x\in E, n\in\N_1) $$
+\end{theorem}\vspace{10pt}
+\begin{proof}
+  If $\displaystyle{\sum M_n}$ converges, then for $\e > 0$,
+  $$ \left | \sum_{i = n}^M {f_i} \right| \le \sum_{i = n}^m {M_i} \le \e $$
+  if $m$ and $n$ are large enough.
+\end{proof}
+
+\section{Continuity}
+Let's prove Thm 1.1
+\begin{proof}
+  Let $\e > 0$ by uniform convergence of $\{f_n\}$, then $\ex N$, $n, m \geq N$, $t\in E,\,\implies$
+  $$ |f_n - f_m| \le \e $$
+  Letting $t\to x$, we obtain: $\displaystyle{|A_m - A_n| \le \e}$ for $n, m \geq N$, st. $\{ A_n\}$ is a cauchy sequence and so converges to $A$.
+  $$ |f - A| \le |f - f_n| + |f_n - A_n| + |A_n - A| $$
+  Now let them all be less than a third by the usual limit nonsence and hence,
+  $$ |f - A| \le \e $$
+\end{proof}
+
+\noindent\begin{theorem}{}{}
+   If $\{f_n\}$ is a sequence of continuous functions on $E$, and if $f_n \to f$ uniformly on $E$, then $f$ is continuous on $E$ (from above)
+\end{theorem}\vspace{10pt}
+
+\noindent\begin{theorem}{}{}
+   Suppose $K$ is compact and
+   \begin{enumerate}
+     \item $\{f_n\}$ is continuous on $K$
+     \item $\{f_n\}$ converges pointwise on $K$
+     \item $f_n \geq f_{n+1}$ $\forall n\in \N$
+   \end{enumerate}
+\end{theorem}\vspace{10pt}
+
+\begin{proof}
+  Let $g_n = f_n - f$, then $g_n$ is continuous, $g_n\to 0$ pointwise and $g_n \geq g_{n+1}$. So prove that $g_n\to 0$ uniformly om $K$.\\
+
+  Let $\e > 0$, $K_n = \{ x\in K : g_n(x) \geq \e \}$ as $g_n$ is continuous, $K$ is closed and hence compact. Since $g_n \geq g_{n+1}$, we have $K_n \geq K_{n+1}$. Fix an $x\in K$. Since $g_n\to 0$, then $x\notin K_n$ if $n$ is large, thus $x\notin \bigcup K_n$. Hence $K_N$ is empty for $n \geq N$, then:
+  $$ 0 \le g_n < \e \qquad \forall x\in K\, n \geq N $$
+\end{proof}
+
+
 
 
 \end{document}
