@@ -1,0 +1,102 @@
+% !TEX root = ../notes.tex
+
+\section{LTI Systems}
+
+We\marginnote{\emph{Lecture 4}}[0mm] are going to consider some linear ODES,
+$$ \din n y t + \din {n-1} y t + \dots + a_0y = b_m\din m u t + b_{m-1}\din {m-1} u t + \dots + b_0u$$
+qhwew $a_i, b_i \in \R$ and $u, y : \R \to \R$ and we consider $m < n$ for the moment, so the order of differentiation of $u$ doesnt exceed $m$. To solve these we are going to consider laplace transform.
+
+\subsection{Laplace Transforms}
+
+\begin{ndefi}[exponentially bounded]
+  Here, $f$ is called exponentially bounded, if $|f(t)| \le Me^{\a t}$ for some $\a \in \R$
+\end{ndefi}
+
+
+The laplace transforms for an exponentially bounded function $f(t)$ defined on $t \ge 0$ is defined by,
+$$ \mathcal{L}(f) = F(s) = \int_0^\infty e^{-st}f(t)\,dt $$
+The above integral is defined for all $s \in \C$ where $\Re c > \a$.\\
+This is a restriction for the existence of laplace transform, but not the DEs. When $f$ is exponentially bounded, means that just that the integral converges nicely, it makes our life easier.
+
+\begin{nlemma}
+  If ${f} = {g}$, then $f = g$ for (almost\footnote{we just want the integrals to be equal, but at some $t$, $f (t) \ne g(t)$. If they are continuous, this doesn't matter}) all $t \ge 0$.
+\end{nlemma}
+ We will focus on piecewise continuous, in which $f = g$ for all $t \ge 0$.
+
+This means that the laplace transform is invertible, then we can say $\mathcal{L}^{-1}(\mathcal{L}(f)) = f$ and we will use lookup tables for these transforms.
+
+\begin{remark}
+   Note, we can say nothing about $\mathcal{L}^{-1}(\mathcal{L}(f))$ for $t < 0$
+\end{remark}
+
+
+Let $f$ and $g$ be defined on $t \ge 0$
+\begin{enumerate}
+  \item $\mathcal{L}(af + bg) = a\L(f) + b\L(g)$
+  \item $\L(e^{at}) = \frac{1}{s - a}$
+  \item $\L(t^ne^{at}) = \frac{n!}{(s - a)^{n+1}}$
+  \item $\L(\frac{d^k f}{dt^k}) = s^k \L(f) - s^{k-1}f(0) - \dots - s\frac{d^{k-2}f}{dt^{k-2}}(0) - \frac{d^{k-1}f}{dt^{k-1}}(0)$
+  \item $\L\left( \int_0^t f(\tau)\,d\tau\right) = \frac{1}{s}\L(f)$
+  \item $\L(\int_0^t g(t - \tau)f(\tau)d\tau) = \L(f(t))\L(g(t))$
+\end{enumerate}
+Note, in $4$, we assume that $f$ is $k$ differentiable. We will sometimes want to lift this assumption.
+
+If we take the laplace transform of the ODE,
+$$ \din n y t + \din {n-1} y t + \dots + a_0y = b_m\din m u t + b_{m-1}\din {m-1} u t + \dots + b_0u$$
+we can rearrage and get something of,
+$$ Y(s) = \frac{b(s)}{a(s)}U(s) + \frac{c(s) - d(s)}{a(s)} $$
+where,
+\begin{align*}
+  a(s) &= s^n + a_{n-1}s^{n-1} + \dots + a_0\\
+  b(s) &= b_m s^{n-1} + b_{m-1}s^{m-1} + \dots + b_0\\
+  c(s) &= y(0)s^{n-1} + \left( \di y t (0) + a_{n-1}y(0) \right)s^{n-2} + \dots + \left( \din {n-1} y t (0) + a_{n-1}\din {n-2} y t (0) + \dots + a_1y(0) \right)\\
+  d(s) &= b_m u(0)s^{m-1} + \left( b_m \di u t (0) + b_{m-1}u(0) \right)s^{m-2} + \dots + \left( b_m \din {m-1} u t (0) + b_{m-1}\din {m-2} u t + b_1u(0) \right)
+\end{align*}
+
+Thus,
+$$ y(t) = \L^{-1}\left( \frac{b(s)}{a(s)}U(s) + \frac{c(s) - d(s)}{a(s)} \right) $$
+We are going to use result 7, then we can continue from,
+\begin{align*}
+  &= \L^{-1}\left( \frac{b(s)}{a(s)}U(s) + \frac{c(s) - d(s)}{a(s)} \right)\\
+  &= \int_0^t \L^{-1}\left( \frac{b(s)}{a(s)}\right)(t - \tau)u(\tau)\,d\tau + \L^{-1}\left(\frac{c(s) - d(s)}{a(s)} \right)
+\end{align*}
+
+We call the ratio $G(s) = \frac{b(s)}{a(s)}$ the transfer function, $W(t) = \L^{-1}\left( \frac{b(s)}{a(s)} \right)$ the impulse response, and $y_f(t) = \L^{-1}\left( \frac{c(s) - d(s)}{a(s)} \right)$ the free response, so,
+$$ y(t) = \int^t_0 W(t - \tau)u(\tau) \,d\tau + y_f(t) $$
+
+The inverse Laplace transforms can be obtained using a partial fraction decomposition. We will show how this works in general later, so consider the example,
+
+\begin{eg}
+  Consider, $\frac{d^2 y}{dt^2} + 3\di y t + 2y = \di u t + 3u$ with $u(t) = \sin t$, $y(0) = 0$ and $\di y t (0) = 1$. So,
+  \begin{itemize}
+    \item Find the free response
+    \item Find the impulse response
+    \item Find $y(t)$ ($t \ge 0$)
+  \end{itemize}
+\end{eg}
+
+We\marginnote{\emph{Lecture 5}}[0mm] note that both $W(t)$ and $y_f(t)$ both take forms of $\L^{-1}\left( \frac{p (s)}{a (s)} \right)$, so let's find the closed form for this,
+We split it up into,
+\begin{align*}
+  \frac{p(s)}{a(s)} &= \sum_{i=1}^N \sum^{r_i}_{j = 1} \frac{h_{i, j}}{(s - \l_i)^j}
+\end{align*}
+where $\l_i, h_{i,j} \in \C$ and $a(s) = \prod_{j=1}^N (s - \l_i)^{r_i}$. Here with $f_k (s) = \frac{p(s)}{\prod_{i=1, i \ne j}^N (s - \l_i)^{r_i}}$ the coefficients $h_{k, j}$ can we obtained from some formula,
+\begin{align*}
+  h_{k, r_k} &= f_k (\l_k)\\
+  h_{k, r_k-1} &= \di {f_k} s (\l_k)\\
+  &\vdots\\
+  h_{k, 1} &= \frac{1}{(r_k-1)!}\left( \din {r_k-1} {f_k} s (\l_k) \right)
+\end{align*}
+thus,
+$$ \L^{-1} \left( \frac{p(s)}{a(s)}\right) = \sum_{i=1}^N \sum_{j = 1}^{r_i} \frac{h_{i,j}t^{j-1}e^{\l_i t}}{(j - 1)!}$$
+
+Applying this we get some formula. We assumed that both $u(t)$ and $y(t)$ are exponentially bounded and sufficiently differentiable, in whih case $u(t)$ and $y(t)$ satisfy the differential equation even when they are not exponentially bounded. Now we onlu need to assume that they are integrable, then we can get a weak solution, i.e. when they are not differentiable. We can consider a step function. We need to have the correct initial conditions.\\
+
+We only consider piecewise continuous functions, then we define $y(0) = y(0_-)$ and this is the left hand limit, and the same for everything else. To account for this, we modify the Laplace transform to say,
+$$ \L\left(\din n f t \right) = s^k \L(f) - s^{k-1}f(0_-) - \dots - s\din {k-2} f t (0_-) - \din {k-1} f t (0_-) $$
+
+Let's consider the degree of differentiation of the RHS is greater than the left, so we will do polynomial long division. So take the RHS and replace theoremstyle differentials with $s^r$, then we get,
+$$ g_rs^r + g_{t-1}s^{r-1} + \dots + g_0 = (s^n + a_{n-1}s^{n-1} + \dots) (q_{r-n}s^{r-n} + q_{r-n-1}s^{r-n-1} + \dots) + b_ms^m + b_{m-1}s^{m-1} + \dots $$
+Then we define $y = \hat y - (q_{r-n}\din {r-n} u t + q_{r-n-1}\din {r-n-1} u t + \dots)$ then we can transform back to our original equation.
+
+\marginnote{\emph{Lecture 6}}[0mm]
