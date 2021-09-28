@@ -21,6 +21,10 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.bib
+*.run.xml
+*.bcf
+
 
 CW/
 pp/
