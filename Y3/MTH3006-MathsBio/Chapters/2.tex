@@ -1,0 +1,31 @@
+% !TEX root = ../notes.tex
+
+lets try and formalise some of these ideas. So consider,
+$$ \di N t = f(N) $$
+where $N \in \R, t \in \R, f : \R \to \R$. Then we define steady states as, where $f(N^*) = 0$. These are also reffered to as fixed points or equilibrium. When a system in the first place depends on whether the state is attracting.
+\begin{ndefi}[Attrracting]
+  A steady state $N^*$ is attracting if all trajectories that start close to $N^*$ approach it as $t \to \infty$.
+\end{ndefi}
+
+We consider $N = N^* + n$, recall the taylor series is an approximation to a function at a point,
+$$ f(x) \approx f(a) + f'(a)(x - a) + \frac{f''(a)(x - a)^2}{2!} + \dots $$
+as we consider small values of $n$ we can throw away higher terms. Hence, we can linearise it.
+\begin{align*}
+  \di N t &= f(N)\\
+  \di {N^* + n} t &= f(N^* + n)\\
+  \di n t &= f(N^* + n)\\
+  \di n t &\approx f(N^*) + f'(N^*)(N^* + n - N^*) + f''(a)\frac{(N^* + n - N^*)}{2!} + \dots\\
+  \di n t &\approx 0 + f'(N^*)n + \frac{f''(N^*)}{2!}n^2 + \dots\\
+  \di n t &\approx f'(N^*)n
+\end{align*}
+and so we can model it by,
+$$ \di n t = f'(N^*)n $$
+which can be solved as,
+$$ n(t) \approx n_0e^{f'(N^*t} $$
+If $f'(N^*) > 0$, then we just have an exponential (unstable), but if $f'(N^*) < 0$ then we have a decaying exponential (stable).
+
+\begin{eg}
+  We shall consider,
+  $$ \di x t = rN\left( 1 - \frac{N}{k} \right) $$
+  and so we want $f(N^*) = 0$ and hence we get that $N^* = 0$ and $N^{**} = k$. Then we find $f'(N) = r\left(1 - \frac{2N}{K}\right)$. Hence we can find $f'(0) = r$ and $r'(k) = -r$ and as $r > 0$, $f'(N^*) > 0$ hence $N^*$ is unstable and as $f(N^{**}) < 0$ then $N^{**}$ is stable.
+\end{eg}
