@@ -95,6 +95,7 @@ Here are a few examples of manifolds,
   \item If we let $M_n (\R)$ be all real $n \times n$ matrices, then this is a manifold as it's just $\R^{n^2}$. We also can say $\GL(n, \R) \subset M_n(\R)$ and so by the previous point, $\GL(n, \R)$ is a manifold.
 \end{itemize}
 
+Now we can formalise the idea of tangent vectors on a manifold\cite{Lee-2009}
 \begin{ndefi}[Tangent Vectors]
   Let $M$ be a $C^\infty$ manifold, then we can say that $x \in M$. Let us take a chart of $M$, $\phi : U \to \R^n$ where $x \in U$. Now take two curves $\g_1, \g_2 : (-1, 1) \to M$ with $\g_1(0) = \g_2(0) = x$ such that we can form $\phi \circ \g_1 \circ \phi \circ \g_2 : (-1, 1) \to \R^n$ are differentiable. \\
   Now define an equivalence such that $\g_1$ and $\g_2$ are equivalent at $0$ if and only if $(\phi \circ \g_1)' = (\phi \circ \g_2)' = 0$. Then take the equivalence class of all of these curves and these are the tangent vectors of $M$.
