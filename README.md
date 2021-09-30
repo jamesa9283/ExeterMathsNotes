@@ -33,3 +33,5 @@ Here are some selected notes from third year:
 * Groups, Rings and Fields (Prof. Mohammed Sa\"idi) - [Groups, Rings and Fields](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH2010-GRF/notes.pdf)
 * Number Theory (Prof. Henri Johnston) - [Number Theory](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3004-NumberTheory/notes.pdf)
 * MathsBio (Dr Ozgur Akman and Dr Marc Goodfellow) - [MathsBio](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3006-MathsBio/notes.pdf)
+
+There also exist some notes I am writing for my dissertation, they are based around Geometric Mechanics and Lie Groups. They can be found [here](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/Dissertation/notes.pdf)
