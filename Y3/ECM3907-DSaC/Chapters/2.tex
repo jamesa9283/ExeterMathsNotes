@@ -99,4 +99,62 @@ Let's consider the degree of differentiation of the RHS is greater than the left
 $$ g_rs^r + g_{t-1}s^{r-1} + \dots + g_0 = (s^n + a_{n-1}s^{n-1} + \dots) (q_{r-n}s^{r-n} + q_{r-n-1}s^{r-n-1} + \dots) + b_ms^m + b_{m-1}s^{m-1} + \dots $$
 Then we define $y = \hat y - (q_{r-n}\din {r-n} u t + q_{r-n-1}\din {r-n-1} u t + \dots)$ then we can transform back to our original equation.
 
-\marginnote{\emph{Lecture 6}}[0mm]
+Input\marginnote{\emph{Lecture 6}}[0mm] output stability. We shall consider our general linear ODE, then with $m < n$. We have shown that this has a unique solution for any integrable $u$ and $y(0_-)$ and all of it's derivatives up to $n - 1$. We call a system input-output stable if,
+\begin{itemize}
+  \item if $u(t) = 0$ for all $t \ge 0$ then $y(t) \to 0$ as $t \to \infty$.
+  \item If $\sup_{t\ge 0} {|u(t)|} < \infty$, then $\sup_{t \ge 0} {|y(t)|} < \infty$.
+\end{itemize}
+
+We will now show that a system is stable if and only if all of the roots of $a(s) = s^n + a_{n-1}s^{n-1} + \dots + a_0$ are in the open left half plane. To prove this,
+\begin{itemize}
+  \item 1 implies that the roots of $a(s)$ are all in the open left half plane
+  \item If all the roots of $a(s)$ are in the open left half plane then 1 holds.
+  \item If all of the roots of $a(s)$ are in the opel left half plane then 2 holds.
+\end{itemize}
+
+For $(a)$ holds, let $u(t) = 0$, this implies that,
+$$ y(t) = \L^{-1}\left( \frac{c(s)}{a(s)}\right) $$
+and the $a$ and $c$ are what we expect they are. If $\din {n-1} y t (0) = 1$ and $y(0) = \di y t (0) = \dots = 0$, then we can say that,
+\begin{align*}
+  y(t) &= \L^{-1}\left(\frac{1}{a(s)}\right)\\
+  &= \sum_{i=1}^N \sum_{j = 1}^{r_i} \frac{h_{i,j}t^{j-1}e^{\l_i t}}{(j - 1)!}
+\end{align*}
+where $\widetilde{h}_{i, r_i} \ne 0$. Thus, we can say that for these to converge, we must say $\Re \l_i < 0$ and $\l_i$ are the roots. Hence, first is proved.\\
+For $(b)$ and $(c)$, note that all the roots are in the open left half plane, then $W(t) = \sum_{i=1}^N \sum_{j=1}^{r_i} \frac{\hat{h}_{i, j}t^{j-1}e^{\l_i t}}{(j - 1)!}$ and $y_f (t) = \sum_{i=1}^N \sum_{j=1}^{r_i} \frac{\widetilde{h}_{i, j}t^{j-1}e^{\l_i t}}{(j - 1)!}$ for some $\widetilde{h_{i, j}}, \hat{h}_{i, j} \in \C$, where $a(s) = \prod_{i=1}^N (s - \l_i)^{r_i}$, so $\l_i$ are all in the open left half plane. \\
+Hence we can now choose a $0 > \l \in \R$ such that $\l_i - \l$ is in the open left half plane. We can then find $M, N  \in \C$ such that $|W(t)| \le Me^{\l t}$ and $|y_f (t)| \le Ne^{\l t}$ forall $t \ge 0$. This then proves $(b)$. \\
+
+For $(c)$,
+\begin{align*}
+  \sup_{t \ge 0} |y(t)| &= \sup_{t \ge 0} \left| \int^t_0 W(t - \tau)u(\tau) \,d\tau + y_f(t) \right| \\
+  &\le \sup_{t \ge 0} \left| \int^t_0 W(t - \tau)u(\tau) \,d\tau \right|  + \sup_{t \ge 0}| y_f(t) |
+  &\le \sup_{t \ge 0} \int^t_0 |W(t - \tau)u(\tau)| \,d\tau  + \sup_{t \ge 0}| y_f(t) | \\
+  &\le \sup_{t \ge 0} \int^t_0 |W(t - \tau)|\,d\tau \times \sup_{t\ge 0} |u(\tau)|  + \sup_{t \ge 0}| y_f(t) | \\
+  &\le M\sup_{t \ge 0} \int_0^t e^{\l \tau}\,d\tau \times \sup_{t \ge 0} |u(t)| + \sup_{t \ge 0} |y_f (t)|
+\end{align*}
+and so it follows that $\sup_{t \ge 0} |u(t)| < \infty$ implies $\sup_{t \ge 0} |y(t)| < \infty$ which proves $(c)$.
+
+If we have $u$ differentiated the same amount of $\hat{y}$, then we can again use long division to prove the same result, by letting $\hat y = y + q_0u$. Then we can show that this substitution still allows the lemma to be true.
+
+\subsection{Routh Hurwitz Stability Criterion}
+We have show that linear ODEs are stable if and only if $a(s)$'s roots are in the open left half plane. We could solve $a(s) = 0$, however this requires numerical techniques which could end up with rounding errors, for example,
+\begin{eg}
+  Consider $a(s) = (s - \a)^n$ and now consider a pertibation on those roots with a polynomial, $a_\e (s) = (s - \a)^n - \e$ with roots $\a + \e^{\frac{1}{n}}e^{\frac{2k\pi i}{n}}$ for $k \in \Z$ and $k < n - 1$.
+\end{eg}
+
+For a polynomial $a(s)$, the Routh Hurwitz criterion provides a computable condition based solely on coefficients.
+\begin{table}[!ht]
+\centering
+{%
+\begin{tabular}{llll}
+$r_{0, 0}$ & $r_{0, 1}$ & $r_{0, 2}$ & $\dots$ \\
+$r_{1, 0}$ & $r_{1,1}$  & $r_{1, 2}$ & $\dots$ \\
+$\vdots$   & $\vdots$   & $\vdots$   &       \\
+$r_{n,0}$  & $r_{n,1}$  & $r_{n, 2}$ & $\dots$
+\end{tabular}%
+}
+\end{table}
+where $r_{0, 0} = a_0$ and $r_{0, 1} = a_2$, $r_{0, 2} = a_4$ and $r_{1, 0} = a_1$, $r_{1, 1} = a_3$ and so on. Then onwards from that we define $r_{i, j} = r_{i-1, 0} \times r_{i-2, j+1} = r_{i-2, 0} \times r_{i-1, j+1}$. Then we say that all of the roots of $a(s)$ are in the open left half plane if and only if $r_{i, 0} > 0$ for $i = 0, 1, 2, \dots, n$.
+
+\begin{proof}
+  I am not LaTeXing that, I'm sorry, I've just looked at the slides. I'll give a brief idea though.
+\end{proof}
