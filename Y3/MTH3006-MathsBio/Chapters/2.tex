@@ -103,10 +103,10 @@ We want a sigmoidal form of function so we can encode these assumptions.
 \begin{axis}[
         axis x line=middle,
         axis y line=middle,
-        ymax=3, ymin=0, ylabel=$f(N)$,
+        ymax=2, ymin=0, ylabel=$p(N)$,
         xlabel=$N$
         ]
-    \addplot[domain=0:3, blue, dotted, ultra thick] {2x^2 / (1 + N^2)};
+    \addplot[domain=0:3, blue, ultra thick] {2*x*x / (1/2 + x*x)};
 \end{axis}
 \end{tikzpicture}
 \caption{Sigmoidal Function, $p(N)$}
@@ -122,4 +122,5 @@ The goal is to scale variables and time such that we get an equivalent system wi
 
 Our stategy is to find constants $\a$ and $\b$ so that $u = \a$ and $\tau = \b t$ yields a simpler system. The first thing we do is write down a new system, $\di u \tau$.
 $$ \di u \tau = \di N t \di t \tau \di u N $$
-and so
+and so we can do some algebra (ommited), then we get to a point where we want to choose some values for our placeholders of $\a$ and $\b$, given the form of the system, we choose that $\a = \frac{1}{A}$ and $\b = B\a = \frac{B}{A}$ and hence the system simplifies to,
+$$ \d u {\tau} = ru (1 - \frac{u}{q}) + \frac{u^2}{1 + u^2} $$
