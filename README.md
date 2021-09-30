@@ -5,7 +5,7 @@ between the two campus' taking modules in Pure and Applied Maths. Here you will
 find some compiled notes from my time at Exeter.
 
 NB! I was the last cohort of the Penryn Undergraduate courses, so you may see
-changes to some things in respect to how they are taught in Stretham although
+changes to some things in respect to how they are taught in Streatham although
 they have the same name, i.e. Linear Algebra and Vector Calculus.
 
 ## Year I
