@@ -1,0 +1,173 @@
+% !TEX root = ../notes.tex
+
+\subsection{Homomophism}
+
+\begin{ndefi}[Homomophism]
+  Let there be a group $(G, \circ)$ and $(H, *)$ and define a homomophism from $G \to H$ which satisfy,
+  \begin{enumerate}
+    \item For $g_1, g_2 \in G$, $f(g_1 \circ g_1) = f(g_1) * f(g_2)$
+    \item $f(e_G) = e_H$
+  \end{enumerate}
+\end{ndefi}
+
+If we take $\Z \to \Z_n$ then we define the map $f(k) = [k]_n$ and we can see this by, $f(k_1 + k_2) = [k_1 + k_2]_n = [k_1]_n + [k_2]_n = f(k_1) + f(k_2)$
+\begin{align*}
+  f(k_1 + k_2) = [k_1 + k_2]_n\\
+  &= [k_1]_n + [k_2]_n\\
+  &= f(k_1) + f(k_2)
+\end{align*}
+So this is a homomophism and it's surjective. If we let $f: \Z \to \Z$ and have $m \to km$ and this is also a homomorphism.
+\begin{align*}
+  f(k_1 + k_2) &= m(k_1 + k_2)\\
+  &= mk_1 + mk_2\\
+  &= f(k_1) + f(k_2)
+\end{align*}
+
+\begin{ndefi}[Image]
+  Let $f : G \to H$ be a homomorphism, we define the image as,
+  $$ \Im f = \{ h \in H \m \ex g \in G, h = f(g)\} $$
+\end{ndefi}
+
+\begin{ndefi}[Kernel]
+  Let $f : G \to H$ be a homomorphism, we define the kernel as,
+  $$ \ker f = \{ h \in H \m f(h) = e_G \} $$
+\end{ndefi}
+
+For example, consider $f : \Z \to \Z_n$ where $f (k) = [k]_n$ and so we can say $\ker f = \{nz \m z \in \Z\}$, we notice this is a subgroup. However, if $g : \Z \to \Z$ where $z \mapsto mz$ we say $\ker g = \{0\}$ if $m \ne 0$, another subgroup. This leads us to the following lemmas,
+\begin{nlemma}
+  $\Im f$ is a subgroup of $H$ and $\ker f$ is a subgroup of $G$.
+\end{nlemma}
+\begin{proof}
+  The first part, follows quite nicely from absorbing and splitting using the definition of group homomorphisms. the second part is also follows nicely, so we verify the subgroup axiom,
+  \begin{itemize}
+    \item Closure, $g_1, g_2 \in \ker f$ and so, $f(g_1) = f(g_2) = e_H$ and show $f(g_1 \circ g_2) = f(g_1) * f(g_2) = e_H * e_H = e_H$.
+    \item If $f(g) = e_H$ then prove $f(g^{-1}) = e_H$ and so, $e_H = f(g \circ g^{-1}) = f(e_G) = f(g) * f(g^{-1})$, hence, $f(g^{-1}) = (f(g))^{-1}$. Hence, $f(g)^{-1} \in \ker f$.
+  \end{itemize}
+\end{proof}
+
+\begin{nlemma}
+  Let $f: G \to H$ be a homomorphism.
+  \begin{itemize}
+    \item $f$ is surjective if and only if $\Im H = f$.
+    \item $f$ is injective if and only if $\ker f = e_G$
+  \end{itemize}
+\end{nlemma}
+\begin{proof}
+  Assume that $f$ is injective, so $\ker f = \{e_G\}$, so if $g \in \ker f$ then $g = e_G$. We also know that the kernel also always contains $e_G$ and $g$ and we know $f$ is injective and so $g = e_G$ as they both map to $e_H$. Now suppose that $\ker f =  \{e_G\}$ and show that $f$ is injective. Take $g_1, g_2 \in G$ and assume that $f(g_1) = f(g_2)$. We get $f(g_1) \circ f(g_2)^{-1} = e_H$ and so, $f(g_1 \circ g_2^{-1}) = e_H$ and hence, we must have $g_1 \circ g_2^{-1} \in \ker f$. However $\ker f = \{e_G\}$ and so, $g_1 \circ g_2^{-1} = e_G$ and so, $g_1 = g_2$.
+\end{proof}
+
+\section{Cosets and Normal Subgroups}
+Consider $G$ be a group an consider a subgroup $H$ of $G$. We want to define the left coset, but before we define a relation,
+\begin{ndefi}[Relation]
+  $x \sim y \implies x^{-1}y = h\in H$
+\end{ndefi}
+This can then be proved to be an equivalence relation,
+\begin{proof}
+  \begin{enumerate}
+    \item Reflexive, $x \sim x$ which means $x^{-1} x = e_G \in H$ as $H$ is a subgroup.
+    \item Symmetry, $x \sim y \implies y \sim x$. If $x \sim y$, $y = xh$ implies $yh^{-1} = x$ but $h^{-1} \in H$ and so $y \sim x$.
+    \item Transitivity, $x \sim y$ and $y \sim z$ then $x \sim z$. We have $y = xh$ and $z = yh'$ and so $z = yhh'$ and $hh' \in H$ and so $x \sim z$.
+  \end{enumerate}
+\end{proof}
+Now we can consider equivalence classes of elements of this relation, which is,
+$$ \overline{x} = \{x \sim y \m y \in G\} = \{xh \m h \in H\} = xH $$
+
+\begin{ndefi}[Left Coset]
+  We define the left coset as this equivalence relation.
+\end{ndefi}
+We also know that equivalence classes form a partition,
+$$ G = \bigcup_{x \in G}\overline{x} = \bigcup_{x \in G} xH $$
+Cosets are also not unique, we can have $x_1H = x_2H$ when $x_1 \sim x_2$.\\
+
+If we consider all of the left cosets $(G / H)_{\text{left}} = \{xH : x \in G\}$. If $G$ is finite, so there are finitely many left cosets. This is the index of $H \in G$ and denoted, $|G : H|$
+
+
+\begin{eg}
+  Consider $\Z$ and $n\Z$ as our groups, then if we consider $a \sim b$ this is just saying $-a + b \in n\Z$, however this just says $b - a \in n\Z$ which is the definition for divisibility. Let $a \in\Z$, then $a = kn + r$, then we can say $a \sim r$ which is equivalent to $\overline a = \overline r$. Hence,
+  $$ \Z/n\Z = \{\overline 0,\, \overline 1,\, \overline 2,\, \dots ,\, \overline{n-1}\} = n\Z $$
+\end{eg}
+
+\begin{nthm}[Legrange's Theorem]
+  Let $G$ be a group and $H$ be a subgroup. Then,
+  $$ |G| = |H||G : H| $$
+\end{nthm}
+\begin{proof}
+  Firstly, we aim to show that all left cosets have the same number of elements, more specifically $|H| = |xH|$. We aim to find a bijection $H \to xH$, we can try $x \mapsto xh$. Now prove this is a bijection, surjectivity is obvious, so prove injectivity. Hence we prove that if $\phi(h_1) = \phi(h_2)$ then $h_1 = h_2$. We have that $xh_1 = xh_2$ and so injectivity is clear. So we can say that $|H| = |xH|$, and as we know,
+  $$ G = \bigcup_{x \in G} xH $$
+  then $|G| = |G : H||H|$
+\end{proof}
+
+\begin{ncor}
+  \begin{itemize}
+    \item Let $G$ be a finite group and $H$ a subgroup. Then $|H| \m |G|$.
+    \item Let $G$ be a finite group and $x \in G$ then $\ord (x) = |\gen x| \m |G|$
+  \end{itemize}
+\end{ncor}
+
+\begin{nthm}[Cauchy's Theorem]
+  Let $G$ be finite group and let $p$ be a prime, then if $p \m |G|$, then you can find a subgroup and an element of order $p$
+\end{nthm}
+We will see sylows theorem later, which is a converse to Legranges theorem and instead of relating just to $p$, it related to $p^n$.\\
+
+Suppose that $H$ is a subgroup, we have seen a left coset, $xH$. We can do the same with $Hx$ which is the right coset. In general $xH \ne Hx$ as the group law is not generally commutative, as we want $xh = h'x$. However this works for more than just commutativity, so we define a normal subgroup.
+
+\subsection{Normal Subgroups}
+
+\begin{ndefi}[Normal Subgroup]
+  A subgroup $H$ of $G$ is called normal if,
+  $$ xH = Hx = \{h'x : h' \in H\} \qquad \fa x \in G $$
+\end{ndefi}
+
+Lets consider a non-example,
+\begin{eg}
+  Consider $K = \gen s$ of $D_8$ and we claim it's not normal, so $rK = Kr$. We have $H' = \{1, s\}$ and $rK = \{r, rs = sr^2\}$ and $Kr = \{r, sr\}$\footnote{Check this}. However, $Kr \ne rK$ as $sr \ne sr^2$. Hence, not normal.
+\end{eg}
+
+\begin{ndefi}[Conjugate]
+  Two elements $g,h \in G$ if we can find a $x \in G$ such that,
+  $$ g = x h x^{-1} $$
+  and we call it the conjugate of $g$ by $x$.
+\end{ndefi}
+If we consider a subgroup to be normal we must have $Hx = xH$, this is equivalent to saying $H = xHx^{-1} = \{xhx^{-1} : h \in H\}$. This can be seen by writing $xh = hx$.
+
+\begin{nlemma}
+  If we have a group homeomorphism $\phi : G \to H$, then $\ker \phi$ is a normal subgroup.
+\end{nlemma}
+\begin{proof}
+  So we have to prove that any $g \in \ker \phi$ and then $xgx^{-1} \in \ker\phi$ and so consider $f(xgx^{-1}) = f(x)f(g)f(x^{-1}) = f(x)e_{H}f(x)^{-1} = f(x)f(x)^{-1} = e_H$ as so $xgx^{-1} \in \ker\phi$ as required.
+\end{proof}
+
+Now we will consider the symmetry group. If we have some $\s \in S_n$, then we can decompose a $\s$ uniquely as $\s = (a_1\,a_2\,\dots\, a_{n_1})\dots (b_1\,b_2\,\dots\,b_{n_k})$. The $k$-tuple of $(n_1\, n_2\,\dots\, n_k)$ is called the cycle type of $\s$.
+
+\begin{eg}
+  The permutation $(1\,2)(3\,4\,5\,6)$ has type $(2,\,4)$.
+\end{eg}
+
+\begin{nprop}
+  If two permutations are conjugate if and only if they have the same cycle type.
+\end{nprop}
+\begin{proof}
+  In notes
+\end{proof}
+
+Consider our permutation $\s = (1\,2)(3\,4\,5\,6)$ and another one of the same type $\widetilde\s = (3\,4)(1\,2\,5\,6)$ then there exists $\tau \in S_6$ such that $\wt\s = \tau\s\tau^{-1}$ we write out,
+\begin{align*}
+  \s \qquad& (1\,2)(3\,4\,5\,6)\\
+  \widetilde{\s} \qquad& (3\,4)(1\,2\,5\,6)\\
+  \tau \qquad& (1\,3)(2\,4)(5)(6)
+\end{align*}
+The important thing is that, $\tau$ is not unique. Note, that in $S_3$ all three elements must be conjugate. We have two three cycles and two transpositions, and we know that a two cycle can't be conjugate to a three cycle, which shows the power of this proposition.\\
+
+In $S_n$ we have a subgroup $A_n$ (the subgroup of even permutations). If $\s = (a_1\,a_2\,\dots\,a_k)$, ie. a k-cycle.
+\begin{ndefi}[Signature]
+  If we consider $\e : S_n \to \{\overline{0}, \overline{1}\}$ and consider a new map, $\s \mapsto \e(\s)$ where we define,
+  $$ \e(\s) = \begin{cases}
+    0 & \text{if $\s$ is even}\\
+    1 & \text{if $\s$ is odd}
+  \end{cases} $$
+\end{ndefi}
+
+A $k$-cycle can be considered as a product of transpositions is to start with $\s = (a_k\, a_{k-1})\,(a_{k-2})(a_{k-3})\dots (a_1\,a_0)$.\\
+We can also say that $A_n$ is normal as if we consider $\e$ we really have $\Z/2\Z$ and we have a homomorphism, ie. $\e(\s_1\s_2) = \e(\s_1)\e(\s_2)$. The kernel is just the even permutations, $A_n$. Hence, $A_n$ is normal.\\
+
+Take two $\s_1, \s_2 \in A_n$, when are they conjugate in $A_n$? Hence find, $\t \in A_n$ such that $\s_2 = \t\s_1\t^{-1}$. We need them to find two of the same cycle type, but we see that this $\t$ doesn't exist. Consider $A_4 = \{e,\,(1\,2\,3),\, (a\,b)(c\,d)\}$, if we look to the product of transpositions, they are conjugate, but if we look at the three cycles, $(1\,2\,3)(1\,3\,2)$ there doesn't exist a $\t \in A_4$.
