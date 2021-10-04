@@ -1,0 +1,74 @@
+% !TEX root = ../notes.tex
+
+\begin{proof}\marginnote{\emph{Lecture 7}}[0mm]
+  I am not \LaTeX ing that, I'm sorry, I've just looked at the slides. I'll give a brief idea though.\\
+
+  We firstly form our Routh array in the usual way, our criterion states that the roots are in the left open half plane when all the left entries are positive. We form some polynomials, and a series of polynomials where $a(s) = a_0(s)$.\\
+  Then, we can say that $r_{i+1, 0} \ne 0$ and then we say that when the left entries are positive, then the degrees of the polynomials decrease. We aim to show the following are equivalent:
+  \begin{itemize}
+    \item The roots of $a_i(s)$ are all in the open left half place and $a_i, a_{i+1}, r_{i, 0}, r_{i+1, 0} > 0$
+    \item The roots of $a_{i+1}(s)$ are all in the open half plane and (some other coefficients are > 0).
+  \end{itemize}
+  We can note $a_i$ and $a_{i+1}$ differ by a degree of one. If our polynomials roots are in the left half plane, then we can say the coefficients must all have the same sign.\\
+  Hence, now consider $\hat a_{i+1}^\g$ with $0 \le \g \le 1$ and all the left hand entries are greater than $0$. We can then increase $\g$, then we get something proportional to $a_i$ and then at $1$, we are proportional to $sa_{i+1}$. When $s = 1$, we can say that there is a zero at the origin of multiplicity one. \\
+  All of the polynomials of our new family have same same degree. Then if $a_{i+1}^\g(i\omega) = 0$ $0 \ne \omega \in \R$, then all of the polynomials have this root. We finally note that since all of the hat polynomials have the same degree, then the roots will vary continuously with $\g$. Then we can say as $\g$ varies none of the roots of the polynomials can cross the imaginary axis. \\
+  If all of the roots of $a_i (s)$ then no roots will cross the imaginary axis and one approaches the origin, but that polynomial with that root is divisble by $a_{i+1}$ and so then $a_{i+1}$ must also be in the open left half plane.  If we decrease $\g$, then again no roots cross the left open half plane, so the ones at the origin, move into the left or right. So we now show that $\a_{i+2}, r_{i+2, 0} > 0$ moves into the left half plane. Hence, we now have the equivalence condition.\\
+  Now induct on the equivalence, then if all the original or initial polynomials have roots in the open left half plane, then so must the rest by assumption and induction.
+\end{proof}
+
+\section{Closed Loop Stability}
+We are now interested to use feedback control on our system to let $u$ be influenced on $y$ and pehaps an addition external input signal $w$. We can capture what we are interested in a block diagram,
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+  % We start by placing the blocks
+  \node [input, name=input] {};
+  \node [sum, right of=input] (sum) {$\Sigma$};
+  \node [block, right of=sum] (controller) {$G$};
+  \node[block, below of=controller] (K) {$K$};
+  % We draw an edge between the controller and system block to calculate the coordinate u. We need it to place the measurement block.
+  % \draw [->] (controller) -- node[name=u] {} (system);
+  \coordinate [right of=controller] (fork);
+  \node [output, right of=fork] (output) {};
+  % draw arrows
+  \draw [->] (input) -- node[pos=0.9] {$+$} node [pos=0.3] {$w$} (sum);
+  \draw [->] (sum) -- node {$u$} (controller);
+  \draw [->] (controller) -- node {$y$} (output);
+  \draw [->] (fork)  |- (K);
+  \draw [->] (K.west) -| node[pos=0.99] {$-$}
+      node [pos=0.2] {$z$} (sum);
+\end{tikzpicture}
+\caption{Closed Loop System}
+\end{figure}
+
+\noindent
+We are interested that $G$ and $K$ are ODEs of a similar form.
+$$ \din {n_1} y t + \din {n_1-1} y t + \dots + a_0y = b_m\din {m_1} u t + b_{m_2-1}\din {m_3-1} u t + \dots + b_0u$$
+$$ \din {n_2} y t + \din {n_2-1} y t + \dots + a_0y = b_m\din {m_2} u t + b_{m_2-1}\din {m_2-1} u t + \dots + b_0u$$
+$n_1 \ge m_1$ and $n_2 \ge m_2$.\\
+Let $a(s) = s^{n_1} + a_{n_1 - 1}s^{n_1 - 1} + \dots + a_0$ etc. and then let $G(s) = \frac{b(s)}{a(s)}$ and $K(s) = \frac{q(s)}{p(s)}$, then we can look at the laplace transforms,
+$$ Y(s) = G(s)U(s) + \frac{c(s)}{a(s)} \qquad Z(s) = K(s)Y(s) + \frac{d(s)}{p(s)} \qquad U(s) = W(s) - Z(s) $$
+and now we can eliminate $u$ and $z$, to obtain,
+
+Alternatively, breaking up $G(s)$ and $K(s)$
+$$ Y(s) = \frac{b(s) p(s)}{a(s) p(s) + b(s) q(s)} W(s) + \frac{c(s)p(s) - d(s)b(s)}{a(s)p(s) + b(s)q(s)} $$
+
+we assume that $a(s)p(s)$ and $b(s)q(s)$ do not have any common roots in the closed right half plane. We will show that the closed root system is stable if and only if $1 + G(s)K(s)$ has no zeros in the closed right half plane. \\
+
+Note that this is basically boiled down to showing the howing right half plane zeros of the equation coincide with the closed right half plane roots of $ap + bq$ and poles of $\frac{G(s)}{1 + G(s)K(s)}$
+
+\subsection{Nyquist Stability Condition}
+We have considered closed loop systems characterised by the polynomials from the ODEs, and the relationship between their laplace transforms. \\
+
+The Nyquist Stability Condition, proves a necessary and sufficient condition for all of the zeros fo $1 + G(s)K(s)$ to be in the open left half plane. \\
+
+We will consider the Nyquist Diagram of $L(s) = G(s)K(s)$ is a plot of $L(s)$ in the complex plane as $s$ traverses a path in the complex plane, ie. the Nyquist contour.
+
+\begin{eg}
+  For example, study $L(s) = \frac{s+1}{s^2 + 1}$ which has poles at $s = \pm i$, the Nyquist contour, so we start elsewhere.
+\end{eg}
+
+\begin{nlemma}[Nyquist Stability Condition]
+  The Nyquist stability criterion states that the zeros of $1 + L(s)$ are all in the open left half plane if and only if the Nyquist diagram of $L(s)$ does not pass through the point $s = -1$ and encircles this point as many times anticlockwise as the number of poles of $L(s)$ is in the open right half plane.
+\end{nlemma}
