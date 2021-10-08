@@ -16,7 +16,7 @@
   Now induct on the equivalence, then if all the original or initial polynomials have roots in the open left half plane, then so must the rest by assumption and induction.
 \end{proof}
 
-\section{Closed Loop Stability}
+\section{Closed Loop Stability}\marginnote{\emph{Lecture 8}}[0mm]
 We are now interested to use feedback control on our system to let $u$ be influenced on $y$ and pehaps an addition external input signal $w$. We can capture what we are interested in a block diagram,
 
 \begin{figure}[!ht]
@@ -72,3 +72,25 @@ We will consider the Nyquist Diagram of $L(s) = G(s)K(s)$ is a plot of $L(s)$ in
 \begin{nlemma}[Nyquist Stability Condition]
   The Nyquist stability criterion states that the zeros of $1 + L(s)$ are all in the open left half plane if and only if the Nyquist diagram of $L(s)$ does not pass through the point $s = -1$ and encircles this point as many times anticlockwise as the number of poles of $L(s)$ is in the open right half plane.
 \end{nlemma}
+
+We\marginnote{\emph{Lecture 9}}[0mm] are now going to prove the Nyquist Stability Condition.
+\begin{proof}
+  We note that the poles of $L(s)$ are the same as $1 + L(s)$. Hence, the contour will enclose all of the poles of $1 + L(s)$, and there is a zero on the imaginary axis if and only if it passes through $s = -1$. \\
+  Factor
+  $$ 1 + L(s) = \a \frac{(s - z_1)(s - z_2) \dots (z - p_M)}{(s - p_1)\dots (s - p_N)} $$
+  and now we say that for $s_0 \in \C$ the argument of $1 + L(s)$ is the sum of the arguments of $(s_0 - z_j) $ minus the sum of the argument of $ (s_0 - p_j)$, $j = 1, \dots, N$. \\
+  Next as $s$ traverses the contour, then the change of argument of $s - \b$ is $-2\pi$ if $\b \in N_C$ otherwise zero. It follows that the change in argument of $1 + L(s)$ as $s$ traverses the Nyquist contour is $2\pi (P - Z)$ where $P$ is the number of poles and $Z$ is the number of zeros. This $P - Z$ is just the number of anticlockwise rotations around $-1$ by $L(s)$.\\
+  Thus $1 + L(s)$ has no zeros in the ORHP if and only if the number of anticlockwise rotations encirclements of the point $-1$ by the Nyquist Diagram is equal to the number of poles of $L(s)$ in the ORHP.
+\end{proof}
+Useful sketching tips,
+\begin{enumerate}
+  \item Consider $L(i\o)$ as $\o\to \infty$ and $\o\to 0$
+  \item Determine what happens at the imaginary axis poles of $L(s)$, you could use a Laurent Expansion, however here a few rules of thumb,
+  \begin{itemize}
+    \item When the Nyquist contour rotates through an angle, so does the diagram in the same direction and angle.
+    \item As the Nyquist contour turns through a semicircle the diagram will span an arc of the circle through an angle of $\pi$ times the multiplicity of the pole.
+  \end{itemize}
+  \item Sketch $L(i\o)$ for $0 \le \o < \infty$ paying attention to the signs of it's real and imaginary parts and the points where the imaginary or real part is zero.
+  \item The plot of $L(i\o)$ for $-\infty < \o \le 0$, just reflect through the real axis
+  \item Determine what happens on the infinite circular arc.
+\end{enumerate}
