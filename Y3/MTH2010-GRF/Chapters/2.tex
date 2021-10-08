@@ -1,6 +1,6 @@
 % !TEX root = ../notes.tex
 
-\subsection{Homomophism}
+\subsection{Homomophism}\marginnote{\emph{Lecture 4}}[0mm]
 
 \begin{ndefi}[Homomophism]
   Let there be a group $(G, \circ)$ and $(H, *)$ and define a homomophism from $G \to H$ which satisfy,
@@ -56,7 +56,7 @@ For example, consider $f : \Z \to \Z_n$ where $f (k) = [k]_n$ and so we can say 
   Assume that $f$ is injective, so $\ker f = \{e_G\}$, so if $g \in \ker f$ then $g = e_G$. We also know that the kernel also always contains $e_G$ and $g$ and we know $f$ is injective and so $g = e_G$ as they both map to $e_H$. Now suppose that $\ker f =  \{e_G\}$ and show that $f$ is injective. Take $g_1, g_2 \in G$ and assume that $f(g_1) = f(g_2)$. We get $f(g_1) \circ f(g_2)^{-1} = e_H$ and so, $f(g_1 \circ g_2^{-1}) = e_H$ and hence, we must have $g_1 \circ g_2^{-1} \in \ker f$. However $\ker f = \{e_G\}$ and so, $g_1 \circ g_2^{-1} = e_G$ and so, $g_1 = g_2$.
 \end{proof}
 
-\section{Cosets and Normal Subgroups}
+\section{Cosets and Normal Subgroups}\marginnote{\emph{Lecture 5}}[0mm]
 Consider $G$ be a group an consider a subgroup $H$ of $G$. We want to define the left coset, but before we define a relation,
 \begin{ndefi}[Relation]
   $x \sim y \implies x^{-1}y = h\in H$
@@ -123,7 +123,7 @@ Lets consider a non-example,
   Consider $K = \gen s$ of $D_8$ and we claim it's not normal, so $rK = Kr$. We have $H' = \{1, s\}$ and $rK = \{r, rs = sr^2\}$ and $Kr = \{r, sr\}$\footnote{Check this}. However, $Kr \ne rK$ as $sr \ne sr^2$. Hence, not normal.
 \end{eg}
 
-\begin{ndefi}[Conjugate]
+\begin{ndefi}[Conjugate]\marginnote{\emph{Lecture 6}}[0mm]
   Two elements $g,h \in G$ if we can find a $x \in G$ such that,
   $$ g = x h x^{-1} $$
   and we call it the conjugate of $g$ by $x$.
