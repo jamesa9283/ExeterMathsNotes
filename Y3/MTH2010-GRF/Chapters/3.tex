@@ -1,0 +1,146 @@
+% !TEX root = ../notes.tex
+
+\subsection{Quotient Groups}
+
+We\marginnote{\emph{Lecture 7}}[0mm] are going to consider a factor group, so we are going to start with $H$, a normal subgroup of $G$.
+\begin{ndefi}[Quotient Group Law]
+  We define a composition law $(\cdot)$ on the set of left cosets $G/H$ by,
+  \begin{align*}
+    (\cdot) : G/H \times G/H \to G/H\\
+    (xH, yH) \mapsto xH \cdot yH = xyH
+  \end{align*}
+\end{ndefi}
+ This is well defined as $H$ is normal, $x'H = xH$ and $y' = yH \implies x'y'H = xyH$.
+
+\begin{nprop}
+   $(G/H, \cdot)$ is a group and it is called the quotient group of $G$ by $H$
+ \end{nprop}
+ \begin{proof}
+   Associativity can be checked quickly, then $e_{G/H}$ is just $e_GH = H$, we can see this by $e_GH \cdot xH = e_gxH = xH$. The inverse, is just $x^{-1}H$, then we see, $xHx^{-1}H = xx^{-1}H = e_GH = H$
+ \end{proof}
+
+Now consider $\phi : G \to G/H$ and get $\phi(g) = gH$. This is a group homomorphism.
+
+\begin{nprop}
+  The map $\phi$ is a group homomorphism and $\ker \phi = H$.
+\end{nprop}
+\begin{proof}
+  The fact that $\phi$ is surjective is clear as $gH = \phi(g)$. It is a homomorphism as,
+  $$ \phi (g_1g_2) = g_1g_2H = (g_1H)\cdot(g_2H) = \phi(g_1)\phi(g_2) $$
+  We now show that $\ker\phi = H$, first $H \subset \ker \phi$ since if $g\in H$, then $e_G^{-1}g = g \in H$ and $e_G \sim g$ hence $\phi g = gH = e_GH$. Conversely let $g \in \ker \phi$ meaning $\phi g = gH = e_GH$, then $e_G \sim g$ and $e_G^{-1}g = g \in H$.
+\end{proof}
+
+\subsubsection{First Isomorphism Theorem}
+
+\begin{nthm}[First Isomorphism Theorem]
+  Suppose $f : G \to H$ is a group homomorphism. The quotient group $G/\ker(f)\cong \Im(f)$
+\end{nthm}
+\begin{proof}
+  Consider $\pi : G/\ker(f) \to \Im(f)$ defined by $\pi(g\ker(f)) = f(g)$ and we show $\pi$ is a group isomorphism. Firstly, check $\pi$ is well defined. Assume $g\ker(\pi) = g'\ker(\pi)$ meaning $g'^{-1}g = \wt{g} \in \ker(\pi)$. Then,
+  \begin{align*}
+    f(g) &= f(g'\wt{g})\\
+    &= f(g')f(\wt g)\\
+    &= f(g')e_H\\
+    &= f(g')
+  \end{align*}
+  since $\wt g \in \ker (f)$. Further $\pi$ is a homomorphism:
+  \begin{align*}
+    \pi(g\ker(f) \cdot g'\ker(f)) &= \pi(gg'\ker(f))\\
+    &= f(gg')\\
+    &= f(g)f(g')\\
+    &= \pi(g\ker (f))\pi(g'\ker (f))
+  \end{align*}
+  The homomorphism is surjective, if $f(g) \in \Im(f)$, $g \in G$, then $f(g) = \pi(g\ker (f))$. It is also injective, assume $f(g) = \pi(g\ker(f)) = \pi(g'\ker (f)) = f(g')$, then $f(g')^{-1}f(g) = f(g'^{-1}g) = e_H$  and $g'^{-1}g \in \ker(f)$and so $g\ker(f) = g'\ker(f)$.
+\end{proof}
+
+\begin{ncor}
+   Suppose $G$ is finite, and we have a group homomorphism, $f: G \to H$, then,
+   $$ \frac{|G|}{|\ker (f)|} = |\Im(f)| $$
+\end{ncor}
+\begin{proof}
+  As $G/\ker(f)\cong \Im(f)$ then if $G$ is finite, then everything is finite. Further, we can say $|G/H| = |\Im f|$, now applying Legranges Theorem, we get the result,
+  $$ \frac{|G|}{|\ker f|} = |\Im f| $$
+\end{proof}
+
+\section{Group Actions}
+Groups acts on sets and so we can focus our attention to something called group actions. Let's start with a motivating example. Consider $D_8$, which is linked to the four vertices of a square. We can consider a rotation of $\frac{\pi }{2}$ and $s$ which is just the symmetry. $D_8$ acts on the vertices $1, 2, 3, 4$
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}
+\draw (0,0) -- (0,2) -- (2,2) -- (2,0) -- (0,0);
+\node[below left] at (0,0) {1};
+\node[above left] at (0,2) {2};
+\node[above right] at (2,2) {3};
+\node[below right] at (2,0) {4};
+\end{tikzpicture}
+\end{figure}
+What it does to this square is just a group action.
+
+\begin{ndefi}[Group Action]
+  Let $(G, *)$ be a group and a set $A$. A group action is a map,
+  $$ (\cdot) : G \times A \to A $$
+  $$ (g, a) \mapsto g \cdot a $$
+  satisying,
+  \begin{align}
+    (g_1 * g_2) \cdot a &= g_1 \cdot (g_2 \cdot a) \quad \fa g_1, g_2 \in G, \quad a \in A\\
+    e_G \cdot a &= a \quad \fa a\in A
+  \end{align}
+\end{ndefi}
+
+A group can act on itself, in two ways; by left multiplication and conjugation.\\
+
+\begin{ndefi}[Action by left multiplication]
+  Consider $(\cdot) : G \times G \to G$ and define $(h, g) \mapsto h \cdot g = h * g$. Axiom $(1)$ is satisfied,
+  $$ (h_1 * h_2) \cdot g = (h_1 * h_2) * g = h_1 * (h_2 * g) = h_1 . (h_2.g) $$
+  and axiom $(2)$ is also satisfied.
+\end{ndefi}
+
+\begin{ndefi}[Action by conjugation]
+  A group $(G, *)$ acts on itself defined by $(h, g) \mapsto (h \cdot g) = h * g * h^{-1}$. Now check the axioms,
+  \begin{align*}
+    (h_1 * h_2) \cdot g &= (h_1 * h_2) * g * (h_1 * h_2)^{-1}\\
+    &= (h_1 * h_2) * g * (h_2^{-1} * h_1^{-1})\\
+    &= h_1 * (h_2 * g * h_2^{-1}) * h_1^{-1}\\
+    &= h_1 \cdot (h_2 \cdot g)\\
+  \end{align*}
+  The second axiom is also satisfied.
+\end{ndefi}
+
+We are now going to consider a permutation action, if we have a map, $\tau_g : A \to A$ such that $\t_g (a) = g \cdot a$ and this is a bijection. It has an inverse, $t_{g^{-1}} : A \to A$,
+$$ \t_{g^{-1}} \circ \t_{g} = \t_{g} \circ \t_{g^{-1}} = \id_A $$
+Or more precisely,
+\begin{align*}
+  (\t_{g^{-1}} \circ \t_g) (a) &= \t_{g^{-1}}(\t_g (a))\\
+  &= \t_{g^{-1}} (g \cdot a) \\
+  &= g^{-1} \cdot (g \cdot a)\\
+  &= (g^{-1} * g) \cdot a\\
+  &= e_G \cdot a \\
+  &= a
+\end{align*}
+
+\begin{ndefi}[Permutation Representation]
+  Let $(S_A, \circ)$ be the group of all bijections from $A \to A$; $S_A$ is the group of symmetries of $A$, the group law is just composition of bijections. The map,
+  $$ \tau : G \to S_A $$
+  is defined by,
+  $$ \t(g) = \t_g $$
+  is a group homomorphism,
+  \begin{align*}
+    \t (g_1 * g_2) (a) &= (g_1 * g_2)\cdot a \\
+    &= g_1 \cdot (g_2 \cdot a)\\
+    &= \t_{g_1} (\t_{g_2}(a)) \\
+    &= (\t(g_1) \circ \t(g_2))(a)
+  \end{align*}
+  and we call $\tau$ the permutation representation associated to the action $(\cdot)$.
+\end{ndefi}
+
+\noindent
+If $A$ is finite, say $|A| = n$, then we can list the elements of $A = \{a_1, \dots, a_n\}$ and label them. This isn't unique, but then what is the group of bijections? It's just $S_n$.\\
+
+\noindent
+We now define the kernel of a representation,
+\begin{ndefi}[Kernel of representation]
+  The kernel of $\t : G \to S_A$
+  $$ \ker \t = \{g\in G : \t_g = \id_A\} = \{g \in G : g \cdot a = a\} $$
+  is just the kernel of the representation $\t$. If we find $\ker \t = \{e_G\}$, or $\t$ is injective, we say $(\cdot)$ is faithful.
+\end{ndefi}
