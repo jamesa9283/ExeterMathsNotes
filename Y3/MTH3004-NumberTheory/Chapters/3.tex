@@ -1,0 +1,136 @@
+% !TEX root = ../notes.tex
+
+\section{Residue Classes}
+\begin{nprop}\label{prop:eq_if_le_mod}
+   Let $a, b \in \Z$ and $n \in \N_1$. If $a \c b \mod n$ and $|b - a| < n$ then $a = b$.
+ \end{nprop}
+\begin{proof}
+  Since $n \m (a - b)$, by the comparison property of divisibility we have $n \le |a  - b|$ unless $a - b = 0$.
+\end{proof}
+As $\mod n$ is an equivalence relation,
+
+\begin{ndefi}[Residue Class]
+  Consider $n \in \N$, then $a \in \Z$ we write $[a]_n$ for an equivalence class $a \mod n$. Thus,
+  $$ [a]_n = \{x \in \Z : x \c a \mod n\} = \{a + qn : q \in \Z\} $$
+  This is called the residue class of a modulo $n$
+\end{ndefi}
+$[a]_n$ is the coset, $\Z/n\Z$.
+
+\begin{eg}
+  Consider $n = 2$, then,
+  \begin{align*}
+    [0]_2 = \{x \in \Z : x \c 0 \mod 2\}\\
+    [1]_2 = \{x \in \Z : x \c 1 \mod 2\}
+  \end{align*}
+\end{eg}
+
+\begin{nprop}
+   Let $n\in\Z$. The $n$ residue classes are disjoint and thier union is the set of all integers. Or $\fa x \in \Z$, $x \c y\mod n$ such that $y$ is precisely one of $\{0, 1, \dots, n - 1\}$.
+ \end{nprop}
+ \begin{proof}
+   The integers $0, 1, \dots, n-1$ are incongruent $\mod n$ by the Proposition \ref{prop:eq_if_le_mod}. Hence, the residue classes are distinct and thus disjoint. Every integer must be in one of these classes by the division algorithm, as we can write $x = nq +r$. The result then follows from taking $x \c r \mod n$ and hence, $x \in [r]_n$.
+ \end{proof}
+ Distinct left cosets of $\Z/n\Z$ are always disjoint and partition $\Z$.
+
+\subsection{Complete Residue Systems}
+\begin{ndefi}[Complete Residue System]
+  Let $n \in \N_1$. If $S$ is a subset of $\Z$ containing exctly one element of each residue class modulo $n$ we say that $S$ is a complete residue system modulo $n$.
+\end{ndefi}
+
+\begin{nprop}
+   The last proposition says $S = \{0,1,\dots, n-1\}$ is a complete residue system. Note, that if $S$ is any complete residue system, then $|S| = n$. Any set of integers that are incongruent $\mod n$ are a complete residue system $\mod n$.
+ \end{nprop}
+
+ \begin{eg}
+   The following are complete residue systems,
+   \begin{align*}
+     &\{1, 2,\dots, n\}\\
+     &\{1, n+2, 2n+3, 3n+4,\dots, n^2\}\\
+     &\{x \in \Z : -\frac{n}{2} < x \le \frac{n}{2}\}
+   \end{align*}
+ \end{eg}
+
+\begin{nprop}
+  Let $n \in \N_1$ an $k \in \Z$. Assume $n$ and $k$ are coprime. If $\{a_1, \dots, a_n\}$ is a complete residue system modulo $n$ then so is $\{ka_1, \dots, ka_n\}$.
+\end{nprop}
+\begin{proof}
+  If $ka_i \c ka_j \mod n$ then by the cancellation law for congruences we have $a_i \c a_j\,\mod n$ since $\gcd(k, n)= 1$. Therefore no two distinct elements in this set, $\{ka_1, \dots, ka_n\}$, are congruent modulo $n$.
+\end{proof}
+
+\begin{eg}
+  The set $\{0, 1, 2, 3, 4\}$ is a complete residue system $\mod 5$ and so $\{0,2,4,6,8\}$ is also a complete residue system $\mod 5$.
+\end{eg}
+
+\subsection{Linear Congruences}
+The most basic congruences are linear congruence, for example,
+$$ ax \c b \mod n $$
+When $n$ is small, we can brute force it, however, it becomes impractical quickly.
+
+\begin{nthm}[Linear Congruences with exactly one solution]
+  Let $a, b \in \Z$ and let $n \in \N$. Suppose that $a$ and $n$ are coprime. Then the linear congruence,
+  $$ ax \c b \mod n $$
+  has exactly one solution.
+\end{nthm}
+\begin{proof}
+  We need only to test $1, 2, \dots, n$ since they constitute a complete residue system. Therefore, we consider the products, $a, 2a, \dots, na$. Since $a$ and $n$ are coprime, these numbers are also a complete residue system. Hence, exactly one of the elements of this sets is congruent to $b \mod n$.
+\end{proof}
+
+\begin{nthm}[Solubility of a Linear Congruence]
+  Let $a, b \in \Z$ and let $n \in \N$. Then the linear congruence,
+  \begin{equation}
+    ax \c b \mod n
+  \end{equation}
+  has one or more solutions if and only if $\gcd (a, b) \m b$.
+\end{nthm}
+\begin{proof}
+  By definition, the congruence $(1)$ is soluble if and only if $n \m (b - ax)$ for some $x \in \Z$, and this is true if and only if $b - ax = ny$ for some $x, y \in \Z$. Hence $(1)$ is soluble if and only if,
+  $$ ax + ny =b $$
+  for some $x, y \in \Z$. Therefore this result follows from the solubility of linear equations theorem
+\end{proof}
+
+\begin{nthm}[]
+  Let $a, b \in \Z$ and let $n \in \N$. Let $d = \gcd (a, n)$. Suppose $d \m b$ and write $a = da'$, $b = db'$ and $n = dn'$. Then the linear congruence
+  \begin{equation}
+    ax \c b \mod n
+  \end{equation}
+  has exactly $d$ solutions modulo $n$. These are,
+  \begin{equation}
+     t, t +n' + t+ 2n', \dots, t + (d-1)n'
+  \end{equation}
+  where $t$ is the unique solution $\mod n'$ to,
+  \begin{equation}
+    a'x \c b' \mod n'
+  \end{equation}
+\end{nthm}
+\begin{proof}
+  Every solution of $(2)$ is a solution of $(4)$ and vice versa. Since $a'$ and $n'$ are coprime, $(4)$ has exactly one solution, $t$, $\mod n'$  by the Theorem 3.7. Thus the $d$ numbers in $(3)$ are solutions of $(4)$ and hence $(2)$.\\
+
+  \noindent
+  No two items in the list are congruent $\mod n$ since the relationships
+  \begin{align*}
+    t + rn' &\c t + sn' \mod n && \text{with $0 \le r < d$, $0 \le s < d$}\\
+    rn' &\c sn' \mod n && \text{and hence $r \c s \mod d$}
+  \end{align*}
+  But $0 \le |r - s| < d$ so $r = s$. It remains to show that $(2)$ has no solutions other than $(3)$. If $y$ is a solution of $(2)$, then $ay \c b \mod n$
+. But we also have $at \c b \mod n$. Thus $y \c t \mod n'$
+  by the cancellation law for congruences. Hence, $y = t + kn'$ for some $k \in \Z$. But $r \c k \mod d$ for some $r \in \Z$ such that $0 \le r < d$. Therefore we have,
+  $$ kn' \c rn' \mod n \qquad \text{and so $y \c t + rn' \mod n$} $$
+  Therefore $y$ is congruent$\mod n$ to one of these numbers in $(3)$.
+\end{proof}
+
+\begin{algorithm}
+  Let $a, b \in \Z$ and let $n \in \N$. Suppose we want to solve,
+  \begin{equation}
+    ax \c b \mod n
+  \end{equation}
+  Firstly apply Extended Euclidian algorithm to compute $d := \gcd(a, n)$ to find $x', y' \in Z$ such that,
+  \begin{equation}
+    ax' + ny' = d
+  \end{equation}
+  if $d \nmid b$ then there are no solutions. Otherwise, these are exactly $d$ solutions $\mod n$, which we find as follows. Write $a = da'$, $b = db'$ and $n = dn'$. Dividing $(6)$ through by $d$ gives,
+  \begin{equation}
+    a'x' + n'y' = 1
+  \end{equation}
+  Thus reducing this $\mod n'$ gives $a'x' \c 1 \mod n'$ and multiplying through by $b'$ gives $a'(b'x') \c b' \mod n$. Therefore $t := b'x'$ is the unique solution to $a'x' \c b' \mod n'$. Now the solutions to $(5)$ are,
+  $$ t, t+n', t + 2n', \dots, t + (d - 1)n' $$
+\end{algorithm}
