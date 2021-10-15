@@ -1,0 +1,56 @@
+% !TEX root = ../notes.tex
+
+Now we consider,\marginnote{\emph{Lecture 10}}[0mm]
+$$ L(s) = \frac{1}{(s^2 + 1)^2} $$
+we can then find the residue of this as,
+$$ A = \lim_{s \to i} ((s - i)^2 L(s)) = - \frac{1}{4} $$
+and now we can find the small semicircular arc and then the points here are $s = i + re^{i \theta}$ as $\theta \in [-\frac{\pi }{2}, \frac{\pi }{2}]$
+Now we put this into the Laurent series,
+$$ L(i + re^{i \theta}) = \frac{1}{4r^2} e^{i (\pi - 2 \theta)} + \dots $$
+For small $r$, we just have $\frac{1 }{4r^2}$ and so we have a clockwise circle. Then the rest of the Nyquist diagram lies on the positive real axis. $L(i \o) \to 0$ as $\o \to \infty$ and $L(0) = 0$. There are two clockwise encirclements of $-1$ and $L(s)$ has no poles in the ORHP, so the closed loop isn't stable.\\
+
+\noindent
+We can use Matlab to sketch these Nyquist diagrams, however we can't use it when we have an imaginary axis pole.
+
+% Lec 11
+
+\begin{eg}\marginnote{\emph{Lecture 11}}[0mm]
+  We have proved the Nyquist Stability condition for quotients of functions. However, it also holds for meromorphic functions in the OHRP. In particular, this allows us to consider time delays. We note that $\L(f(t - \t)) = e^{-st}\L(f(t))$ and consider the system,
+  \begin{align*}
+    \di z t (t) + z(t) &= 2y(t)\\
+    y(t) &= u(t - T)\\
+    u(t) &= w(t) - z(t))\\
+  \end{align*}
+  Now we are going to take Laplace transforms where $w = u = y = z$. Hence we get,
+  \begin{align*}
+    Y(s) &= e^{-sT}U(s)\\
+    (s+1)Z(s) &= 2Y(s)
+  \end{align*}
+  so we want to sketch $L(s) = \frac{2e^{-sT}}{s + 1}$ to sketch this we can consider $\frac{2}{s+1}$, but now we consider the exponential, we know that $|e^{-i\o T} = 1|$ and we know $\arg(e^{-i\o T}) = - \o T$. Thus we know that the Nyquist diagram can be obtained from the Nyquist diagram of $\frac{2}{s+1}$ by changing the argument by an amount $-\o T$ and we know $\o$ is increasing and so we will have a spiral. \\
+
+  We note that above a certain critial value, then it will be sufficient for it to encircle $-1$. We got our Nyquist diagram by changing the argument of each point. We note that $|\frac{2}{1 + i \o}| = 1$ we then require to find $\o_c T$ is equal to the difference between $- \pi$ and $\arg(\frac{2}{1 + i\o_c})$ more specifically $\o_c T = \pi + \arg(\frac{2}{1 + i\o_c})$.\\
+
+  Firstly, we can say that $|\frac{2}{1 + \o_c}|^2 = |\frac{4}{1 + \o_c^2}| = 1$, i.e. $\o_c = \sqrt 3$. Then, $\arg(\frac{2}{1 + i\sqrt 3}) = -\frac{\pi }{3}$. We therefore require $\o_cT = \sqrt T = \pi - \frac{\pi }{3} = \frac{2\pi }{3}$. Hence $T = \frac{2\pi}{3 \sqrt 3}$.
+\end{eg}
+
+\subsection{System Response}
+We have seen how laplace transforms are particularly suited to our uses and adding onto of the RH and NSC. \\
+
+Consider our usual DE,
+$$ \din n y t + \din {n-1} y t + \dots + a_0y = b_m\din m u t + b_{m-1}\din {m-1} u t + \dots + b_0u$$
+Now, note that if $X \in \C$
+\begin{align*}
+  X &= |X| e^{i \arg{X}}\\
+  |X|\cos (\o_0 + \arg X) &= \Re (|X|e^{i (\o_0t + \arg X)}) = \Re (Xe^{i\o_t t})\\
+  \L(|X|\cos (\o_0 t + \arg(X))) &= \L(\Re (Xe^{i \o_0 t})) \\
+  &= \L\left(\frac{1}{2} (Xe^{i\o_0 t}) + \overline{X} e^{-\o_0 t}\right) \\
+  &= \frac{1}{2} \left(X \frac{1}{s - i\o_0} + \overline{X} \frac{1}{s + i\o_0}\right)
+\end{align*}
+We let $u(t) = \cos (\o_0 t)$. Using partial fraction expansions, it follows that,
+\begin{align*}
+  Y(s) &= G(s)U(s)\\
+  &= \frac{1}{2}\left(G(i\o_0) \frac{1}{s - i\o_0} + G(-i\o_0)\frac{1}{1 + i\o_0}\right) + \frac{p(s)}{a(s)}
+\end{align*}
+for some polynomial $p(s)$. Since $G(-i\o_0) = \overline{G(i\o_0)}$, then
+$$ y(t) = |G(i\o_0)|\cos (\o_0 + \arg G(i\o_0)) + \L^{-1} \left( \frac{p(s)}{a(s)} \right) $$
+Moreover, if the roots of $a(s)$ are in the ORHP, then $\L^{-1} \left( \frac{p(s)}{a(s)} \right) \to 0$ as $t \to \infty$ so $y(t)$ tends towards to a soinasoidal system with the same frequence as $u(t)$ but with applitude multiplied by $|G(i\o_0)|$ and phase increased by $\arg G(i\o_0)$
