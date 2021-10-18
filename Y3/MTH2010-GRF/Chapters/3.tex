@@ -145,4 +145,62 @@ We now define the kernel of a representation,
   is just the kernel of the representation $\t$. If we find $\ker \t = \{e_G\}$, or $\t$ is injective, we say $(\cdot)$ is faithful.
 \end{ndefi}
 
-\marginnote{\emph{Lecture 9}}[0mm]
+\marginnote{\emph{Lecture 9}}[0mm] \subsection{Stabilisers and Orbits}
+Consider a group $G$ acting on a set $A$,
+\begin{ndefi}[Stabiliser]
+  We define the following set called the stabiliser
+  $$ \stab (a) = \{g \in G : g \cdot a = a\} $$
+\end{ndefi}
+\begin{remark}
+   These are the elements that when acted on $g$ doesn't change it. They fix $g$.
+\end{remark}
+The interesting thing is that
+\begin{nprop}
+   $\stab (a)$ is a subgroup of $G$.
+\end{nprop}
+\begin{proof}
+  We begin by seeing that $e_G \cdot a = a$ and so $e_G \in \stab (a)$. Then we can prove that $g^{-1} \in \stab (a)$,
+  $$ a = e_G \cdot a = (g^{-1} \cdot g)\cdot a = g^{-1} \cdot (g \cdot a) = g^{-1} \cdot a $$
+  Furthermore, let $g_1, g_2 \in \stab (a)$ and then,
+  $$ (g_1 * g_2) \cdot a = g_1 \cdot (g_2 \cdot a) = g_1 \cdot a = a $$
+\end{proof}
+
+\noindent
+Let us define a relation amoung elements of a non-empty set, $a \sim b \iff \ex g \in G : a = g \cdot b$
+\begin{nprop}
+   This relation is an equivalence relation.
+\end{nprop}
+\begin{proof}
+  Simple.
+\end{proof}
+
+\begin{ndefi}[Orbit]
+  Let $a \in A$. The equivalence class of $a$ for the relation $\sim$ is,
+  $$ \overline a = \{b \in A : \ex g \in G, b = g \cdot a\} = \{g \cdot a : g \in G\} $$
+  is called the orbit of a, for the given action, ad is denoted $\orb (a)$.
+\end{ndefi}
+We note that also,
+$$ A = \bigcup_{a \in A} \orb (a) $$
+meaning $A$ is equal to the disjoint union of its orbits under the given action of $G$. \\
+The action is transitive if there is only one orbit in which case this orbit necessarily contains all elements of $A$. In this case, $A = \orb (a)$ for every $a \in A$.
+
+\begin{eg}
+  For example consider the action,
+  \begin{align*}
+    S_n \times \{1, 2, \dots, n\ \to \{1, 2, \dots, n \}\\
+    (\s, i) \mapsto \s(i)
+  \end{align*}
+  Then this is transitive as we just have to find that for any $i$ and $j$ we can map $i$ to $j$. Hence, if $i = j$, then take the identity. Otherwise, take the transposition $(ij)$.
+\end{eg}
+
+\begin{nthm}[The Orbit-Stabiliser Theorem]
+  Assume $(G, *)$ is a group acting on a set $A$ and $G$ is finite. Then the orbit $\orb (a)$ of an element $a \in A$ is finite and,
+  $$ |\orb (a)| = \frac{|G|}{|\stab(a)|} $$
+\end{nthm}
+\begin{proof}
+  Consider the map,
+  $$ f: \orb(a) to (G / \stab(a)) $$
+  defined by,
+  $$ f(g \cdot a) = g \cdot \stab (a) $$
+  We check that this map is well defined, it is. Then we prove that this is injective and it is surjective. Then $f$ is a bijection. Hence, we get nicely the result.
+\end{proof}

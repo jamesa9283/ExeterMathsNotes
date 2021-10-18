@@ -1,0 +1,136 @@
+% !TEX root = ../notes.tex
+
+Recall\marginnote{\emph{Lecture 10}}[0mm] the left regular representation of $G$ on itself by left multiplication. Assume $G$ is of finite cardinality $n$. If we lavel the elements of $G$ as $\{g_1, \dots, g_n\}$ the regular representation defined a faithful permutation representation (an injective homomorphism),
+$$ \rho : G \to S_n $$
+called the regular permutation representation defined as followed,
+\begin{ndefi}[Regular permutation representation]
+  If $g \in G$, $\rho(g)$ is the permutation defined for $i,j \in \{1, \dots, n\}$ by,
+  $$ \rho(g)(i) = j \qquad \text{if $g * g_i = g_j$} $$
+\end{ndefi}
+The permutation representation $\rho$ depends on the give labelling of the elements of $G$. In particular, since $\ker \rho = \{e_G\}$ we obtain by the FIT that $G$ is isomorphic to it's image $\r(G)$; a subgroup of $S_n$. Hence, we obtain,
+\begin{nthm}[Cayley's Theorem]
+  A finite group of cardinality $n$ is isomorphic to a subgroup of $S_n$.
+\end{nthm}
+Next, we define the left action of a group $G$ on the set of left cosets of a given subgroup. Let $H$ be a subgroup of $G$ and $A = (G/H)_{left}$ the set of left cosets of $H$. The group $G$ acts on $A$ by
+$$ g \cdot (g'H) = (g * g')H $$
+This action is called the action of $G$ on the left cosets of $H$ by left multiplication. If $|G : H| = m$ is finite, and we lavel the elementsof $A$ as $\{g_1H, \dots, g_mH\}$, then the above representation defines a homomorphism
+$$ \t : G \to S_m $$
+as follows: if $g \in G$, $\t(g)$ is the permutation defined for $i,j \in \{1, \dots, m\}$ by
+$$ \t(g)(i) = j \qquad \text{if $g \cdot g_jH = (g*g_i)H = g_jH$}$$
+The permutation representation $\t$ depends on the given labelling of the elements of $A$.\\
+
+\noindent
+Let $\t_H : G\to S_{G/H}$ be the permutation representation associated to the action of $G$ by left multiplication on the left cosets of $H$. Thus if $g \in G$,
+$$ \t_H(g) : G/H \to G/H $$
+is the bijection defined by,
+$$ \t_H(g)(g'H) = (g*g')H $$
+
+\begin{nthm}
+  The following hold,
+  \begin{itemize}
+    \item $G$ acts transitively on $G/H$.
+    \item The stabiliser of $e_GH$ is the subgroup $H$.
+    \item $\ker (\t_H) = \bigcap_{x \in G} xHx^{-1}$, and $\ker (\t_H)$ is the largest normal subgroup of $G$ contained in $H$.
+  \end{itemize}
+\end{nthm}
+\begin{proof}
+  \begin{itemize}
+    \item Let $aH, bH \in G/H$ and $g = b * a^{-1}$. Then
+    \begin{align*}
+      g \cdot(aH) &= (b * a^{-1})\cdot aH\\
+      &= (b * a * a^{-1})H \\
+      &= bH
+    \end{align*}
+    \item The stabiliser of $e_GH$ is
+    \begin{align*}
+      \{g \in G : g.(e_GH) = gH = H\} &= \{g \in G : gH = H\}\\
+      &= H
+    \end{align*}
+    \item By definition,
+    \begin{align*}
+      \ker (\pi_H) &= \{g \in G : g \cdot (xH) = xH,\, \fa x \in G\}\\
+      &= \{g \in G : (g*x)H = xH,\, \fa x \in G\}\\
+      &= \{g \in G : (x^{-1}*g*x)H = H,\,x\in G\}\\
+      &= \{g \in G : x^{-1}*g*x \in H,\,\fa x \in G\}\\
+      &= \{g \in G : g \in xHx^{-1},\, \fa x \in G\}\\
+      &= \bigcap_{x \in G} xHx^{-1}
+    \end{align*}
+    Further $\ker (\pi_H)$ is a normal subgroup of both $G$ and $H$. Now let $N$ be a normal subgroup of $G$ contained in $H$ then $N = xHx^{-1} \subset xHx^{-1},\,\fa x \in G$ hence, $N \subset \bigcap_{x \in G} xHx^{-1} = \ker (\pi_H)$. This shows that $\ker (\pi_H)$ is the largest subgroup of $G$ contained in $H$.
+  \end{itemize}
+\end{proof}
+
+\begin{ncor}
+   Let $G$ be a finite group of cardinality $n$ and $p$ the smallest prime number dividing $n = |G|$, then any subgroup of $G$ of index $p$ is normal. In particular, if $G$ has a subgroup of index $2$ then this subgroup must be normal.
+\end{ncor}
+\begin{proof}
+  Let $H \le G$ and then $\pi_H$ is the permutation representation by the multiplication of left cosets of $H$ in $G$. Let $K = \ker pi_H$ and so $|G : K| = |G : H||H : K| = pm$.\\
+
+  \noindent
+  Since $H$ has $p$ left cosets, $G/K$ is isomorphic to a subgroup of $S_p$ ($\pi_H(G)$) by the FIT. By Lagrange’s Theorem, $pm = |G/K| \m |S_p| = p!$. Thus $m \m \frac{p! }{p} = (p-1)!$. But all prime factors of $(p-1)! < p$ and by the minimality of $p$, every possible prime divisor of $m \ge p$. This forces $m =1$ as $m \m |G|$, so $H = K$ is a normal subgroup of $G$ (since $K$ is normal): the equality $|H : K| = 1$ just means that $H = K$.
+\end{proof}
+
+\section{Class Equation}\marginnote{\emph{Lecture 11}}[0mm]
+\subsection{Normalisers, Centralisers and Centers}
+
+We are going to consider the class equation which relates to conjuagtion. We are going to consider the subsets of $G$, $\S(G) = \{A \sub G\}$, these arent necessarily subgroups, they are just subsets. Then we have the following action,
+$$ (\cdot) : G \times \S(G) \to \S(G)$$
+$$ (g,\,A) \mapsto gAg^{-1} = \{gag^{-1} : a \in A\}$$
+If you have a group action, you have a stabiliser and an orbit.
+$$ \stab(A) = \{g \in G : gAg^{-1} = A\} $$
+and this is the normaliser.
+\begin{ndefi}[Normaliser]
+  The stabiliser of the above group action,
+  $$ N_G(A) = \{g \in G : gAg^{-1} = A\} $$
+\end{ndefi}
+The normaliser is a subgroup of $G$ as it is just a stabiliser. The normaliser of $a$ acts on $A$ itself,
+$$ \phi_A : N_G(A) \times A \to A $$
+$$ (g, a) \mapsto gag^{-1}$$
+this is a group action and we are interested in this group action. We can go deeper and find the stabiliser of $\phi_A$,
+$$ \orb(a) = \{gag^{-1} : g \in N_G(A)\} $$
+$$ \stab(a) = \{g \in N_G : gag^{-1}=a \iff ga = ag\} $$
+Hence the stabiliser is just the commuting elements of this. Hence, we now look towards the kernel of $\phi_A$ and we say that,
+\begin{ndefi}[Centraliser]
+  We say that the kernel of the $\phi_A$ is the centraliser,
+  $$C_G(A) = \ker \phi_A = \bigcap_{a \in A}\stab(a) = \{g \in N_A(a) L gag^{-1} = a,\,\fa a \in A\} $$
+  and these are just all the commuting elements.
+\end{ndefi}
+and we know that
+\begin{nlemma}
+  The $C_G(A)$ is always a normal subgroup of $N_G(A)$.
+\end{nlemma}
+Now we ask, what happens when $A = G$ and so we ask, what is $N_G(G)$? $G$, and what is $C_G(G)$? Well we write it out,
+$$ Z(G) = \{g \in G : gh = hg,\, \fa h \in G\} $$
+and this is called the center of $G$.
+\begin{ndefi}[Center of $G$]
+  The center is a normal abelian subgroup of $G$ such that,
+  $$ Z(G) = \{g \in G : gh = hg,\, \fa h \in G\} $$
+\end{ndefi}
+
+\begin{eg}
+  If $G$ is abelian, then $Z(G) = G$, so we are only interested when $G$ is not abelian.
+\end{eg}
+
+We also note that the center is contained in the centraliser of every subset of $A$. The center is the intersection of all subsets of $A \in G$.
+
+\subsection{The Class Equation}
+Let us consider $g \in G$ and the subset $\{g\} \sub G$, then,
+$$ N_G(\{g\})=C_G(\{g\}) = \{h \in G : hgh^{-1} = g\} = \{h \in G : hg = gh\} $$
+This is then the subgroup of elements that commute with $g$. We note that $C_G(g) = \stab(g)$ is precisely the stabiliser of $g$ under the conjugation action of $G$ onto itself. The orbit of $\{g\}$ under conjuagtion is,
+$$ \orb(g) = \{hgh^{-1} : h \in G\} $$
+and consists of all elements of $G$ which are conjugate to $g$. \\
+We note that $\orb(g) = \{g\} \iff hgh^{-1} = g$ for all $h \in G$ and this is equivalent to $g \in Z(G)$. Thus,
+$$ |\orb(g)| = 1 \iff g \in Z(G) $$
+Now assume that $G$ is finite. The orbit-stabiliser theorem states that,
+$$ |\orb(g)| = \frac{|G|}{|C_G(g)|} $$
+The congugacy classes of elements of $G$ form a partition of $G$
+$$ G = \bigcup_{g \in G} \orb(g) $$
+where the union is disjoint. By the above discussion, we have,
+$$ Z(G) = \bigcup_{g \in G,\,|\orb(g)|=1}\orb(g) $$
+where the union is over all of these elements of $G$ with $|\orb(g)|=1$. Let $\{\orb(g_1),\dots, \orb(g_r)\}$ be the distinct conjuagacy classes of $G$ that are \textbf{not} contained in $Z(G)$. Then,
+$$ G = Z(G)\bigcup \left(\bigcup_{i=1}^r \orb(g_i)\right)$$
+Counting the number of elements of $G$, and soncisdering the relation $|\orb(g_i)| = |G : C_G(g_i)|$, we find the class equation:
+
+\begin{nthm}[The Class Equation]
+  Let $G$ be a finite group and $\{\orb(g_1),\dots, \orb(g_r)\}$ be the distinct conjuagacy classes of $G$ which are \textbf{not} contained in $Z(G)$, then,
+  $$ |G| = |Z(G)| + \sum_{i=1}^r |G : C_G(g_i)| $$
+\end{nthm}
