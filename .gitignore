@@ -29,6 +29,7 @@
 CW/
 pp/
 parts/
+matlab/
 
 header.tex
 lstlean.tex
