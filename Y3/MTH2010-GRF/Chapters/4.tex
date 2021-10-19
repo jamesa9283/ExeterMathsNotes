@@ -110,7 +110,7 @@ and this is called the center of $G$.
   If $G$ is abelian, then $Z(G) = G$, so we are only interested when $G$ is not abelian.
 \end{eg}
 
-We also note that the center is contained in the centraliser of every subset of $A$. The center is the intersection of all subsets of $A \in G$.
+We also note that the center is contained in the centraliser of every subset of $A$. The center is the intersection of all subsets of $A \in G$.\footnote{check this}
 
 \subsection{The Class Equation}
 Let us consider $g \in G$ and the subset $\{g\} \sub G$, then,
@@ -134,3 +134,52 @@ Counting the number of elements of $G$, and soncisdering the relation $|\orb(g_i
   Let $G$ be a finite group and $\{\orb(g_1),\dots, \orb(g_r)\}$ be the distinct conjuagacy classes of $G$ which are \textbf{not} contained in $Z(G)$, then,
   $$ |G| = |Z(G)| + \sum_{i=1}^r |G : C_G(g_i)| $$
 \end{nthm}
+\marginnote{\emph{Lecture 12}}[0mm]
+
+\begin{nthm}[]
+  If $p$ is a prime and $|G| = p^m$ then $Z(G)$ is non-trivial.
+\end{nthm}
+\begin{proof}
+  Considering the class equation, we know $p \m |G|$ and we claim $p \m |G : C_G(g_i)|$, this is true as $|G : C_G(g_i)| \m |G|$ but as $|G| = p^m$ we must know that $|G : C_G(g_i)|$ is a power of $p$ and so $p \m |G : C_G(g_i)|$ and so hence know that $p \m Z(G)$ and it must be non-trivial.
+\end{proof}
+
+Here a weaker version of sylows theorem,
+\begin{nthm}[Cauchy's Theorem]
+  Let $G$ be a finite group and $p$ a prime number which divides $|G|$. Then there exists an element of $G$ of order $p$, and a subgroup of $G$ of cardinality $p$.
+\end{nthm}
+
+\subsubsection{Conjuagacy Classes of $S_n$}
+We will now look to find all of the cycles that commute with some cycle $\s$.\\
+
+Take $1 \le m \le n \in \Z$ and say $\s = (a_1\,a_2\,\dots\,a_m) \in S_m$. There are $\frac{n(n-1)\dots (n+m-1)}{m}$ and this is $|\orb (\s)|$ and so using orbit-stabiliser theorem,
+$$ \frac{n!}{|C_{S_n}(\s)|} = \frac{n(n-1)\dots (n+m-1)}{m} $$
+and so we get that,
+$$ |C_{S_n}(\s)| = (n-m)!m $$
+We can determine this centraliser in a nicer way. The centraliser is just $\{\t\in S_n : \t\s = \s\t\}$ and we know that $\{\s^i\t,\, \}$ where $0 \le i \le m- 1$ and $\t$ is disjoint. Looking at the cardinality of this set, we find that it's just $m(n - m)!$, which says that we must just have the centraliser as $C_{S_n}(\s) = \{\s^i\t\}$.
+
+\subsection{Simple Groups}
+\begin{tcolorbox}
+  \center Simple groups are not simple.
+\end{tcolorbox}
+
+\begin{ndefi}[Simple Groups]
+  $G$ is simple if the only normal subgroups of $G$ are $H = G$ and $H = \{e_G\}$.
+\end{ndefi}
+
+\begin{nthm}
+  $A_5$ is a simple subgroup.
+\end{nthm}
+\begin{proof}
+  We consider all the different cycles in $A_5$, you have
+  $$ 1 \qquad (1\,2\,3) \qquad (1\,2\,3\,4\,5) \qquad (1\,2)(3\,4) $$
+  Now we count the amount of each cycle. There are one $1$-cycles. There are 20 $3$-cycles, 24 $5$-cycles and 15 of the rest. Now let us find their orbits. \\
+  We consult the orbit-stabiliser theorem. We see that,
+  $$ |\orb_{A_5}((1\,2\,3))| = \frac{|A_5|}{|C_{A_5}((1\,2\,3))|}$$
+  We can find the centraliser in $S_5$ so we then take that and consider $C_{A_5}((1\,2\,3)) = C_{S_5}((1\,2\,3)) \cap A_5$ and so we see that $C_{A_5}((1\,2\,3)) = 3$. Hence,
+  $$ |\orb_{A_5}((1\,2\,3))| = \frac{|A_5|}{|C_{A_5}((1\,2\,3))|} = \frac{60}{3} = 20 $$
+  and so all $3$-cycles conjugate in $S_5$ are conjugate in $A_5$.\\
+  We now do the same for the $5$-cycles. We find that $|\orb_{A_5}((1\,2\,3\,4\,5))|$. Then we see that there are two conjugacy classes with both cardinality 12.\\
+  Now for the last type. We can check that there is no odd permutation such that it commutes. Hence the cardinality of the centraliser of this is even and it divides $|A_5|$ and so we see it must be 15.\\
+
+  Now suppose $H$ is normal, now it must be the union of the conjuagacy classes. Find ways to sum, $\{1, 12, 12, 15, 20\}$ to make $60$. There is only way to do this, by adding them all together. Hence it's either $1$ or $60$ and so $A_5$ is simple.
+\end{proof}
