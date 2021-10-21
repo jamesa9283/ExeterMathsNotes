@@ -1,0 +1,9 @@
+% !TEX root = ../notes.tex
+
+\section{Ball and Beam Experiment}
+The ball and beam is a common lab experiment for teaching control systems. We consider a beam and sat in the beam, which has a groove there is a ball. About the pivot, we have a motor that can pivot the beam.\\
+
+If we don't add any torque we have an unstable system. The ball will cause a moment and hence induce some torque. Left to it's own devices the beam with rotate and the ball will fall off the beam. Hence, to stabilise the system we need some sort of control. This control is a motor around the pivot. We will need a sensor to see where the ball is; whether thats to see the angle of the beam, or a sensor to find the position of the ball. If we know the position of the ball, we can create a feedback control law to allow us to put the ball wherever we want. \\
+
+\noindent
+We will design a controller in a simulation to move the ball $0.2m$ along the beam and hold it there. The model will be slightly out so we can consider slight sensitivities as we can't model the motor nicely. There will be some imperfections.
