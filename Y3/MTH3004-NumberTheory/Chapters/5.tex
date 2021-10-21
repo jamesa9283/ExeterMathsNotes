@@ -1,0 +1,106 @@
+% !TEX root = ../notes.tex
+
+
+\section{Exponentiation}
+
+\begin{nprop}
+ Fix $n \in \N$ and $a \in \Z$. There exists some $r \in \N$ such that $a^r \c 1 \mod n$ if and only if $\gcd(a, n) = 1$.
+\end{nprop}
+
+\begin{proof}
+  Suppose there exists $r \in \N$ such that $a^r \c 1 \mod n$. Then $a^{r-1}$ is a solution to $ax \c 1 \mod n$ and so $\gcd(a, n) = 1$ by the proposition on units of $\Z/n\Z$. Suppose conversely that $\gcd(a, n) = 1$ and so there are only finitely many possible values of $a^k \mod n$ so there exists $i, j \in \N$ with $i < j$ such that $a^i \c a^j\mod n$. Since $\gcd(a, n) = 1$ we may apply the cancellation law for congruences $i$ times obtain $a^{j-i}\c 1\mod n$/ Thus take $r = j-i$.
+\end{proof}
+
+\begin{ndefi}[Order]
+  Let $n \in \N$ and $a \in \Z$ and suppose $\gcd(a, n) = 1$. Then the least $d \in \N$ such that $a^d \c 1 \mod n$ is called the order of $a\mod n$ and is written $\ord_n(a)$
+\end{ndefi}
+
+\begin{nprop}
+   Let $n \in \N$ and $a\in \Z$. Suppose that $\gcd(a, n) = 1$. For $r, s \in \Z$ we have $a^r \c a^s \mod n$ if and only if $r \c s \mod \ord_n(a)$
+\end{nprop}
+\begin{proof}
+  Let $k =\ord_n(a)$. Then $a^k \c 1 \mod n$. Now assume wlog $r > s$. Suppose $r \c s \mod k$, then there exists some $t \in \N$ such that $r = s + tk$. Hence,
+  $$ a^r \c a^{s + tk} \c a^s(a^k)^t \c a^s \mod n $$
+  Suppose conversely that $a^r \c a^s \mod n$. Since $\gcd(a, n)= 1$ we may apply the cancellation law $s$ times to obtain $a^{r - s}\c 1 \mod n$. By the division algorithm, there exist $u, t \in \N_0$ such that $r - s = tk + u$ where $0 \le u < k$.\\
+  $$ a^{r-s} \c a^{u+tk} \c a^u(a^k)^t \c a^u\mod n $$
+  and so $a^u\c 1 \mod n$. However, $0 \le u  < k$ and $k$ is the least positive integer such this is true. Hence $u = 0$. Therfore, $k \m (r - s)$, ie. $r \c s \mod k$.
+\end{proof}
+
+\begin{ncor}
+   Let $n \in N$ and $a \in \Z$ and suppose that $\gcd(a, n) = 1$. Then $a^k \c 1 \mod n$ if and only if $\ord_n(a) \m k$.
+\end{ncor}
+\begin{proof}
+  Just take $r = k$ and $s = 0$ in the above proposition.
+\end{proof}
+
+\begin{ncor}
+   Let $n \in \N$ and $a \in \Z$ and suppose $\gcd(a, n) = 1$. Then the numbers $\{1, a, a^2,\dots, a^{\ord_n(k) - 1}\}$ are all incongruent $\mod n$ .
+\end{ncor}
+\begin{proof}
+  Combine the above proposition with the proposition that says if $c, d \in \Z$ with $c \c d \mod n$ and $|c - d| < n$ then $c = d$.
+\end{proof}
+
+\subsection{Reduced Residue Systems}
+
+\begin{ndefi}[Reduced Residue System]
+  Let $n \in \N$. A subset $R \sub \Z$ is said to be a reduced residue system $\mod n$ if
+  \begin{itemize}
+    \item $R$ contains $\varphi(n)$ elements
+    \item no two elements of $R$ are congruent $\mod n$ and,
+    \item $\fa r \in R, \gcd(r, n) = 1$
+  \end{itemize}
+\end{ndefi}
+\begin{remark}
+   If $R$ is a reduced residue system $\mod n$ then,
+   $$ (\Z/n\Z)^\times = \{[a]_n : a \in R\} $$
+\end{remark}
+
+\begin{nprop}
+   Let $n \in \N$ and $k \in \Z$. If $\{a_1, a_2, \dots, a_{\varphi(n)}\}$ is a reduced residue system $\mod n$ and $\gcd(k, n) = 1$ then $\{ka_1, ka_2, \dots, ka_{\varphi(n)}\}$ is also a reduced redidue system $\mod n$.
+\end{nprop}
+\begin{proof}
+  If $ka_i \c ka_j\mod n$ then by the cancellation law for congruences $a_i \c a_j\mod n$ since $\gcd(k, n) =1$. Therefore, no two elements in $\{ka_1, ka_2, \dots, ka_{\varphi(n)}\}$ are congruent $\mod n$. Moreover, since $\gcd(a_i, n) = \gcd(k, n) = 1$ we have $\gcd(ka_i, n) = 1$ so each $ka_i$ is coprime to $n$
+\end{proof}
+
+\subsection{Euler- Fermat Theorem}
+\begin{nthm}[Euler-Fermat]
+  Let $n \in \N$, $a \in \Z$ and suppose $\gcd(a, n) = 1$. Then $a^{\phi(n)} \c 1\mod n$.
+\end{nthm}
+\begin{proof}
+  Let $\{b_1, \dots, n_{\varphi(n)}\}$ be a reduced residue system $\mod n$. Then since $\gcd(a, n) = 1$, then $\{ab_1, ab_2, \dots, ab_{\varphi(n)}\}$ is also a reduced residue system by the proposition on reduced residue systems. Hence the product in the first is congruent to the product of the second. Therefore,
+  $$ b_1b_2\dots b_{\varphi(n)} \c a^{\varphi(n)}b_1b_2\dots b_{\varphi(n)}\mod n $$
+  then by the cancellation property and $\gcd(b_i, n)$ apply it repeatedly to get the required result.
+\end{proof}
+
+\begin{ncor}
+   Let $n \in \N$ and $a \in \Z$ and suppose $\gcd(a, n) = 1$. Then $\ord_n(a) \m \varphi(n)$.
+\end{ncor}
+\begin{proof}
+  Combine the Euler-Fermat Theorem and the earlier corollary that since $\gcd(a, n) = 1$, we have $a^k = 1\mod n$ if and only if $\ord_n(a) \m k$.
+\end{proof}
+
+\begin{eg}
+  If we consider $\varphi(12) = 4$. So for every $a \in \Z$ with $\gcd(a, 12) = 1$ we must have $\ord_n(a) = 1, 2$ or $4$. In fact, we can notice that with the reduced residue systems $\{1, 5, 7, 11\}$ there isn't an element with order $4$, and hence no element of order $\varphi(12)$.
+\end{eg}
+
+\begin{ncor}
+   Let $p$ be a prime and let $a \in \Z$  such that $p \nmid a$. Then $a^{p-1} \c 1\mod p$
+\end{ncor}
+\begin{proof}
+  This follows immediately as $\varphi(p) = p - 1$.
+\end{proof}
+
+\begin{eg}
+  We know that $\ord_{19}(3) = 18 = \varphi(19)$ and we know $\ord_{19}(8) = 6$ which is a factor of 18.
+\end{eg}
+
+\begin{nthm}[Fermat's Little Theorem]
+  Let $p$ be a prime and let $a \in \Z$. Then $a^p \c a \mod p$.
+\end{nthm}
+\begin{proof}
+  If $p \nmid a$, this follows from the earlier corollary. If $p \m a$, then $a^p$ and $a$ are congruent to $0$ $\mod p$.
+\end{proof}
+
+\begin{remark}
+   Many of the results in this section can be thought of in terms of group theory once we realise that, $(Z\n\Z)^\times$ is just a finite abelian group. For example, $\ord_n(a)$ is just the order of $[a]_n$ in $(\Z/n\Z)^\times$. Moreover, Lagranges Theorem tells us that the order of an element divides the order of the group; so $\ord_n(a) \m \varphi(n) = \#(\Z/ n\Z)^\times$ which hence gives Euler-Fermat Theorem.
+\end{remark}
