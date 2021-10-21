@@ -1,0 +1,209 @@
+% !TEX root = ../notes.tex
+
+\section{$\Z/n\Z$, Chinese Remainder Theorem and $\varphi(n)$}
+
+\subsection{$\Z/n\Z$ and it's units}
+
+\begin{ndefi}[]
+  Let $n \in \N$. We write $\Z/n\Z = \{[a]_n : 0 \le a \le n - 1\}$ (such that $|\Z/n\Z|=n$). We set $[a]_n + [b]_n := [a + b]_n$ and $[a]_n[b]_n := [ab]_n$. (We have showed that both of these are well defined).
+\end{ndefi}
+
+\begin{nlemma}
+  The set $\Z/n\Z$ is a commutative ring whth $0 = [0]_n$ and $1 = [1]_n$
+\end{nlemma}
+\begin{proof}
+  MTH2010
+\end{proof}
+
+\begin{ndefi}[]
+  Let $n \in \N$. Let $(\Z/n\Z)^\times$ denote the group of units of the ring $\Z/n\Z$. Explicitly, we have
+  $$ (\Z/n\Z)^\times = \{[a]_n \in \Z/n\Z : \ex [b]_n \in \Z/n\Z \text{ such that $[a]_n[b]_n = 1$}\} $$
+\end{ndefi}
+This is a finite group under multiplication, and is abelian since $\Z/n\Z$ is commutative.
+
+\begin{ndefi}[Multiplicative inverse]
+  Let $n \in \N$ and let $a \in \Z$ such that $\gcd (a, n) = 1$. Then the unique solution to $ax \c 1\ mod n$ is called the multiplicative inverse of $a \mod n$ and is denoted $[a]_n^{-1}$ or $a^{-1}\mod n$
+\end{ndefi}
+
+\subsection{Chinese Remainder Theorem}
+\begin{nthm}[Special Chinese Remainder Theorem]
+  Let $n, m \in \N$ be coprime and $a, b \in \Z$ be given. Then the pair of linear congruences,
+  \begin{align*}
+    x &\c a \mod m\\
+    x &\c b \mod n
+  \end{align*}
+  has a solution $x \in \Z$. Moreover, if $x'$ is another solution $x \c x' \mod mn$
+\end{nthm}
+\begin{proof}
+  Since $n$ and $m$ are coprime, there must exist some $a', b' \in \Z$ such that $a'n \c 1 \mod m$ and $b'n \c 1 \mod n$. Define $x := aa'n + bb'm$. Then $x \c a'an \c a \mod m$ and $x \c bb'm \c b \mod n$.\\
+  Hence $x$ is a solution, so suppose we have an $x'$ that satisfies these equations. Then $m \m (x - x')$ and $n \m (x - x')$. Hence, as $m$ and $n$ are coprime, then it follows that $mn \m (x - x')$, which is the same as $x \c x' \mod mn$
+\end{proof}
+
+\begin{remark}
+ We used the fact that $m$ and $n$ are coprime twice in the above proof. This is necessary because, for example $x \c 2 \mod 12$ and $x \c 4 \mod 20$ has no solution.
+\end{remark}
+
+\begin{nthm}[Chinese Remainder Theorem]
+  Let $n_1, n_2, \dots, n_t \in \N$ with $\gcd(n_i, n_j) = 1$ whenever $i \ne j$ and let $a_1, \dots, a_t \in \Z$ be given. Then the system of congruences
+  \begin{align*}
+    x &\c a_1\mod n_1\\
+    &\vdots\\
+    x &\c a_t \mod n_t
+  \end{align*}
+  has a solution $x \in \Z$. Moreover if $x'$ is any other solution, then $x' \c x \mod N$ where $N := n_1n_2\dots n_t$.
+\end{nthm}
+\begin{proof}
+  Define $N_i := \frac{N}{n_i}$. Then $\gcd(N_i, n_i) = 1$, since $n_i$ is coptime to all factors of $N_i$. Hence by the theorem on linear congruences with exactly on solution, these exists $x_i \in \Z$ such that $N_ix_i \c 1 \mod n_i$. Next, define $x := \sum_{i=1}^t a_iN_ix_i$. Thus $x \c a_kN_kx_k \mod n_k$ since $n_k \m N_i$ for all $k$. Therefore, $x \m a_k(N_kx_k) \m a_k \mod n_k$ for all $k$.\\
+
+  \noindent
+  Suppose $x' \c a_k \mod n_k$ for all $k$. Then $x' = x \mod n_k$ thus, $n_k \m (x' - x)$, then since all $n_i$ are coprime, $N \m (x' - x)$. This yields that $x' \c x \mod N$.
+\end{proof}
+
+\subsection{Euler $\varphi$ function}
+\begin{ndefi}[Euler Phi Function]
+  For $n \in \N$ we define the $\varphi$ function as,
+  $$ \varphi(n) = \#\{a \in \N : 1 \le a \le n,\, \gcd(a, n) = 1\} $$
+\end{ndefi}
+
+\begin{remark}
+   $\varphi(1) = 1$ and for $p$ prime, $\varphi(p) = \#\{1,2, \dots, p-1\} = p-1$.
+\end{remark}
+
+\begin{remark}
+   On the proposition on uniots of $\Z/n\Z$ and complete residue systems. We have that $\varphi(n) = \#(\Z/n\Z)$. Note, since $\gcd(0, n) = \gcd(n, n) = n$ for all $n \in \N$, we also have,
+   $$ \varphi(n) = \#\{a \in\Z:0\le a < n, \gcd(a, n) = 1\} $$
+\end{remark}
+
+\begin{nthm}
+  Let $m ,n \in N$ be coprime. Then $\varphi(mn) = \varphi(m)\varphi(n)$
+\end{nthm}
+\begin{proof}
+  Let $a \in \Z$ with $0 \le a < mn$ and define $b, c \in \Z$ by,
+  $$ a \c b \mod m \qquad\text{ and }\qquad a \c c \mod n $$
+  where $0 \le b < m$ and $0 \le c < n$. The Chinese Remainder Theorem tells us that there is a bijective correspondence between choices of $a$ and pairs $(b,\, c)$. We now show that $\gcd(a,\,mn) = 1 \iff \gcd(b,\,m)=\gcd(c,\,n) = 1$. We shall use the proposition on units of $\Z/n\Z$ several times.\\
+
+  \noindent
+  Suppose $\gcd(a,\m mn) = 1$. Then $ax \c 1 \mod mn$ has a solution $r \in\Z$. By an earlier proposition we have $ar \c 1 \mod m$ since $m \m mn$. Hence, $br \c ar \c 1\mod m$ and so the congruence $bx \c 1\mod n$ is soluble. Thus, $\gcd(b, m)=1$. Similarly, $\gcd(c, n) = 1$.\\
+
+  \noindent
+  Suppose conversely $\gcd(b, m) = \gcd(c, n) = 1$. Then the congruences $bx \c 1\mod m$ and $cy \c 1\mod n$ are soluble so there exist $s, t \in \Z$ such that $bs \c 1\mod m$ and $ct \c 1 \mod n$. Since $m$ and $n$ are coprime, by Chinese Remainder Theorem there exists $r \in \Z$ such that $r \c s \mod m$ and $r \c t \mod n$.\\
+
+  \noindent
+  Hence $ar \c bs \c 1\mod n$ and $ar \c ct \c 1\mod n$ and so $x = ar$ is the solution to,
+  $$ x \c 1 \mod n \qquad\text{ and }\qquad x \c 1 \mod n $$
+  By the Chinese Remainder Theorem $ar \c 1 \mod mn$. Hence, $\gcd(a, mn) = 1$.\\
+
+  Therefore the number of integers $a$ with $0 \le a < mn$ is equal to the number of pairs of integers $(b\, c)$ with $0 \le b < m$, $\gcd(b, m) = 1$ and $0 \le c < n$, $\gcd(c,\, n)= 1$, ie. $\varphi(m)\varphi(n)$.
+\end{proof}
+
+\begin{nthm}
+  Let $p$ be a prime and $r \in \N$. Then
+  $$ \varphi(p^r) = p^r - p^{r-1} = p^{r-1}(p - 1) $$
+\end{nthm}
+\begin{proof}
+  For all $m \in \N$, either $\gcd(p^r, m) = 1$ or $p \m m$. Thus,
+  \begin{align*}
+    \varphi(p^r) &= \#\{m\in \N : m \le p^r,\, p \nmid m\}\\
+    &= \#\{m \in \N : m \le p^r\} - \#\{m \in \N : m \le p^r,\, p \m m\}\\
+    &= p^r p^{r-1}\\
+    &= p^{r-1}(p-1)
+  \end{align*}
+\end{proof}
+
+\begin{nprop}
+   Let $n \in \N$ such that $n \ge 2$. By FTA, we may write $n = p_1^{e_1}p_2^{e_2}p_3^{e_3}\dots p_r^{e_r}$ where all $p_i$'s are distinct and $e_i \in \N$. Then,
+   $$ \varphi(n) = \prod_{i = 1}^r (p_i - 1)p_i^{e_i - 1} $$
+\end{nprop}
+\begin{proof}
+  By the last two theorems we have,
+  \begin{align*}
+    \varphi(n) &= \varphi(p_1^{e_1}\dots p_r^{e_r}) = \prod_{i=1}^r \varphi(p_i^{e_i}) \\
+    &= \prod_{i=1}^r (p_i^{e_i} - p_i^{e_i-1})\\
+    &= \prod_{i=1}^r (p_i-1)p_i^{e_i - 1}
+  \end{align*}
+\end{proof}
+
+\begin{ncor}
+   Let $n \in \N$. Then,
+   $$ \varphi = n\prod_{p \m n} \left( 1 - \frac{1}{p} \right) $$
+   where the product runs over all distinct prime divisors of $n$.
+\end{ncor}
+\begin{proof}
+  From above,
+  \begin{align}
+    \varphi(n) &= \prod_{i=1}^r (p_i - 1)p_i^{e_i-1} = \prod_{i=1}^n p_i^{e_i} (1 - p_i^{-1}) \\
+    &= n \prod_{i=1}^r (1 - p_i^{-1}) = \prod_{p \m n} \left( 1 - \frac{1}{p} \right)
+  \end{align}
+\end{proof}
+
+\begin{nprop}
+   Let $n \in \N$, we have $\sum_{d \m n} \varphi(d) = n$
+\end{nprop}
+\begin{proof}
+  We classify $\{1, 2,\dots, n\}$ according to their greatest common divisor with $n$. Thus,
+  $$ \{a \in \N : a \le n\} = \bigcup_{d \m n} \{a \in \N : a\le n,\, \gcd(n,\, a) = d\} $$
+  where the union is disjoint. Hence, $n = \sum_{d \m n} R_d$ where $R_d := \#\{a \in \N : 1 \le a \le n,\, \gcd(n, a) = d\}$. If $d \m n$, we can write $n = dn'$ and then by the distributive law of gcd's we have $\gcd(n, a) = d$ if and only if $a = da'$ with $\gcd(a', n') = 1$. Moreover, $a \le n$ if and only if $a' \le n'$. It follows that,
+  $$ R_d = \#\{a' \in \N: 1 \le a' \le n',\, \gcd(n',\, a') = 1\} $$
+  and hence $R_d = \varphi(n')$. Then the size of that set is just $\varphi(n')$. Therefore $n = \sum_{d\m n} \varphi\left(\frac{n}{d}\right)$. However, when $d \m n$ we have $n = d \cdot \frac{n}{d}$, thus $d$ runs over the positive divisors of $n$, so does $e = \frac{n}{d}$ and therefore we have $\sum_{e \m n} \varphi\left( e \right)$
+\end{proof}
+
+\section{Exponentiation}
+
+\begin{nprop}
+ Fix $n \in \N$ and $a \in \Z$. There exists some $r \in \N$ such that $a^r \c 1 \mod n$ if and only if $\gcd(a, n) = 1$.
+\end{nprop}
+
+\begin{proof}
+  Suppose there exists $r \in \N$ such that $a^r \c 1 \mod n$. Then $a^{r-1}$ is a solution to $ax \c 1 \mod n$ and so $\gcd(a, n) = 1$ by the proposition on units of $\Z/n\Z$. Suppose conversely that $\gcd(a, n) = 1$ and so there are only finitely many possible values of $a^k \mod n$ so there exists $i, j \in \N$ with $i < j$ such that $a^i \c a^j\mod n$. Since $\gcd(a, n) = 1$ we may apply the cancellation law for congruences $i$ times obtain $a^{j-i}\c 1\mod n$/ Thus take $r = j-i$.
+\end{proof}
+
+\begin{ndefi}[Order]
+  Let $n \in \N$ and $a \in \Z$ and suppose $\gcd(a, n) = 1$. Then the least $d \in \N$ such that $a^d \c 1 \mod n$ is called the order of $a\mod n$ and is written $\ord_n(a)$
+\end{ndefi}
+
+\begin{nprop}
+   Let $n \in \N$ and $a\in \Z$. Suppose that $\gcd(a, n) = 1$. For $r, s \in \Z$ we have $a^r \c a^s \mod n$ if and only if $r \c s \mod \ord_n(a)$
+\end{nprop}
+\begin{proof}
+  Let $k =\ord_n(a)$. Then $a^k \c 1 \mod n$. Now assume wlog $r > s$. Suppose $r \c s \mod k$, then there exists some $t \in \N$ such that $r = s + tk$. Hence,
+  $$ a^r \c a^{s + tk} \c a^s(a^k)^t \c a^s \mod n $$
+  Suppose conversely that $a^r \c a^s \mod n$. Since $\gcd(a, n)= 1$ we may apply the cancellation law $s$ times to obtain $a^{r - s}\c 1 \mod n$. By the division algorithm, there exist $u, t \in \N_0$ such that $r - s = tk + u$ where $0 \le u < k$.\\
+  $$ a^{r-s} \c a^{u+tk} \c a^u(a^k)^t \c a^u\mod n $$
+  and so $a^u\c 1 \mod n$. However, $0 \le u  < k$ and $k$ is the least positive integer such this is true. Hence $u = 0$. Therfore, $k \m (r - s)$, ie. $r \c s \mod k$.
+\end{proof}
+
+\begin{ncor}
+   Let $n \in N$ and $a \in \Z$ and suppose that $\gcd(a, n) = 1$. Then $a^k \c 1 \mod n$ if and only if $\ord_n(a) \m k$.
+\end{ncor}
+\begin{proof}
+  Just take $r = k$ and $s = 0$ in the above proposition.
+\end{proof}
+
+\begin{ncor}
+   Let $n \in \N$ and $a \in \Z$ and suppose $\gcd(a, n) = 1$. Then the numbers $\{1, a, a^2,\dots, a^{\ord_n(k) - 1}\}$ are all incongruent $\mod n$ .
+\end{ncor}
+\begin{proof}
+  Combine the above proposition with the proposition that says if $c, d \in \Z$ with $c \c d \mod n$ and $|c - d| < n$ then $c = d$.
+\end{proof}
+
+\subsection{Reduced Residue Systems}
+
+\begin{ndefi}[Reduced Residue System]
+  Let $n \in \N$. A subset $R \sub \Z$ is said to be a reduced residue system $\mod n$ if
+  \begin{itemize}
+    \item $R$ contains $\varphi(n)$ elements
+    \item no two elements of $R$ are congruent $\mod n$ and,
+    \item $\fa r \in R, \gcd(r, n) = 1$
+  \end{itemize}
+\end{ndefi}
+\begin{remark}
+   If $R$ is a reduced residue system $\mod n$ then,
+   $$ (\Z/n\Z)^\times = \{[a]_n : a \in R\} $$
+\end{remark}
+
+\begin{nprop}
+   Let $n \in \N$ and $k \in \Z$. If $\{a_1, a_2, \dots, a_{\varphi(n)}\}$ is a reduced residue system $\mod n$ and $\gcd(k, n) = 1$ then $\{ka_1, ka_2, \dots, ka_{\varphi(n)}\}$ is also a reduced redidue system $\mod n$.
+\end{nprop}
+\begin{proof}
+  If $ka_i \c ka_j\mod n$ then by the cancellation law for congruences $a_i \c a_j\mod n$ since $\gcd(k, n) =1$. Therefore, no two elements in $\{ka_1, ka_2, \dots, ka_{\varphi(n)}\}$ are congruent $\mod n$. Moreover, since $\gcd(a_i, n) = \gcd(k, n) = 1$ we have $\gcd(ka_i, n) = 1$ so each $ka_i$ is coprime to $n$
+\end{proof}
