@@ -72,5 +72,12 @@ where $\O$ is the axel vector.
 and so,
 \begin{align*}
   K &= \frac{1}{2} \int_\b {\rho (\vec X)\norm{\vec\O \times \vec X}^2 d^3\vec X}\\
-  &= \frac{1}{2} \int_\b {\rho (\vec X)(\vec\O\times\vec X) \cdot (\vec\O\times\vec X) d^3\vec X}
+  &= \frac{1}{2} \int_\b {\rho (\vec X)(\vec\O\times\vec X) \cdot (\vec\O\times\vec X) d^3\vec X}\\
+  &= \frac{1}{2}\int_\b {\rho (\vec X)(\norm{\vec \O^2}\norm{\vec X^2} - (\vec\O \cdot \vec X)^2)^2 \cdot (\vec\O\times\vec X) d^3\vec X}\\
+  &= \frac{1}{2}\mathbb{I}\vec\O \cdot \vec \O
 \end{align*}
+where $I$ is the moment of inertia tensor, which we define as,
+$$ \mathbb{I} = \int_\b \rho(\vec X)\norm{\vec X}^2I - \vec X\vec X^T d^3\vec X $$
+where $\vec X\vec X^T = \vec X \otimes \vec X$ and,
+$$ (a \otimes b)c = (b \cdot c)a $$
+for all $a, b, c \in \R^3$.
