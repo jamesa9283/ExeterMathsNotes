@@ -54,3 +54,54 @@ We let $u(t) = \cos (\o_0 t)$. Using partial fraction expansions, it follows tha
 for some polynomial $p(s)$. Since $G(-i\o_0) = \overline{G(i\o_0)}$, then
 $$ y(t) = |G(i\o_0)|\cos (\o_0 + \arg G(i\o_0)) + \L^{-1} \left( \frac{p(s)}{a(s)} \right) $$
 Moreover, if the roots of $a(s)$ are in the ORHP, then $\L^{-1} \left( \frac{p(s)}{a(s)} \right) \to 0$ as $t \to \infty$ so $y(t)$ tends towards to a soinasoidal system with the same frequence as $u(t)$ but with applitude multiplied by $|G(i\o_0)|$ and phase increased by $\arg G(i\o_0)$
+
+\marginnote{\emph{Lecture 12}}[0mm]
+Consider again,
+$$ \din n y t + \din {n-1} y t + \dots + a_0y = b_m\din m u t + b_{m-1}\din {m-1} u t + \dots + b_0u$$
+with $m \le n$ and suppose that $y(t) = u(t) = 0$ for all $t < 0$. We can get from Laplace transforms, $Y(s) = G(s)U(s)$.
+Now consider where the input is a step input, ie. $u(t) = A$ $(t\ge 0)$, $u(t)=0 $ for $t < 0$. Recall that $U(s)=\L(u(t)) = \frac{A}{s}$. Hence we can write,
+\begin{align*}
+  Y(s) &= \frac{G(s)A}{s}\\
+  &= \frac{G(0)A}{s} + \frac{p(s)}{a(s)}
+\end{align*}
+where we use partial fraction decomposition. So, we then get $y(t) = G(0)A + \L\left(\frac{p(s)}{a(s)} \right)$. If all the roots of $a(s)$ are in the ORHP, then $\L\left(\frac{p(s)}{a(s)}\right) \to 0$ as $t \to \infty$and it follows that $y(t) \to G(0)A$. Hence, the steady state response to a step input of magnitude $A$ is a steady state value of $G(0)A$.\\
+
+Consider a closed loop system,
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+  % We start by placing the blocks
+  \node [input, name=input] {};
+  \node [sum, right of=input] (sum) {$\Sigma$};
+  \node [block, right of=sum] (controller) {$G$};
+  \node [right of = controller] (X) {};
+  \node[block, right of=X] (K) {$K$};
+  \node [right of=K] (Y) {};
+  \node [below of =K] (Z) {};
+  % We draw an edge between the controller and system block to calculate the coordinate u. We need it to place the measurement block.
+  % \draw [->] (controller) -- node[name=u] {} (system);
+  \coordinate [right of=controller] (fork);
+  \node [output, right of=fork] (output) {};
+  % draw arrows
+  \draw [->] (input) -- node[pos=0.9] {$+$} node [pos=0.3] {$u$} (sum);
+  \draw [->] (sum) -- node {$e$} (controller);
+  \draw [->] (controller) -- (K);
+  \draw (K) -- node[pos=0.8] {$y$} (Y) |- (Z) -| node[pos=0.99] {$-$} (sum);
+%  \draw [->] (K) -- node {$y$} (output);
+%  \draw [->] (K.west) -| node[pos=0.99] {$-$} node [pos=0.2] {$z$} (sum);
+\end{tikzpicture}
+\caption{Closed Loop System}
+\end{figure}
+and suppose $G(s)$ does not have a pole at the origin and the closed loop system is stable. We aim to find $\lim_{t\to\infty}(y(t))$ when $(i)$ $K(s) = k_1$ and $(ii)$ $K(s) = k_1 + \frac{k_2}{s}$.\\
+
+Firstly we note that $Y(s) = \frac{G(s)K(s)}{1 + G(s)K(s)}U(s)$ and $U(s) = \frac{A}{s}$. We can then consider the first case, $ Y(s) = \frac{G(s)k_1}{1 + G(s)k_1}\frac{A}{s} $ so $y(t) \to \frac{G(0)k_1A}{1 + G(0)k_1}$ as $t \to\infty$\\
+For case $(ii)$, then $K(s) = k_1 + \frac{k_2}{s}$, then, $Y(s) = \frac{G(s)(k_1s + k_2)}{s + G(s)(k_1s+k_2)}\frac{A}{s}$, so $y(t) \to \frac{G(0)k_2 A}{G(0)k_2} = A$ as $t\to \infty$.\\
+
+Note that, with the second controller $K(s) = k_1 + \frac{k_2}{s}$, the response $y(t)$ of the system tends towards a constant value equal to the size $A$ of the step input, and the error $e = u - y$ tends to zero.\\
+
+This holds under some very general assumptions, mainly that $G(s)$ doesn't have a pole at the origin and the closed loop system is stable.
+
+\begin{ndefi}[Proportional Control]
+  This is referred to as proportional control as the controller $K(s) = k_1 + \frac{k_2}{s}$ is the transfer function $W(s)$ to $Y(s)$ of the system governed by the equation:
+  $$ y(t) = k_1w(t)+ k_2 \int_0^t w(\t)\,d\t $$
+\end{ndefi}
