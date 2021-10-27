@@ -102,5 +102,104 @@
 \end{proof}
 
 \begin{remark}
-   Many of the results in this section can be thought of in terms of group theory once we realise that, $(Z\n\Z)^\times$ is just a finite abelian group. For example, $\ord_n(a)$ is just the order of $[a]_n$ in $(\Z/n\Z)^\times$. Moreover, Lagranges Theorem tells us that the order of an element divides the order of the group; so $\ord_n(a) \m \varphi(n) = \#(\Z/ n\Z)^\times$ which hence gives Euler-Fermat Theorem.
+   Many of the results in this section can be thought of in terms of group theory once we realise that, $(\Z/n\Z)^\times$ is just a finite abelian group. For example, $\ord_n(a)$ is just the order of $[a]_n$ in $(\Z/n\Z)^\times$. Moreover, Lagranges Theorem tells us that the order of an element divides the order of the group; so $\ord_n(a) \m \varphi(n) = \#(\Z/ n\Z)^\times$ which hence gives Euler-Fermat Theorem.
 \end{remark}
+
+\subsection{Modular Exponentiation}
+Let $b \in \Z$ and $e, m \in \N$. We want a way to compute $b^e \mod m$ efficiently. We can write $e$ in binary, ie. $e = \sum_{i=0}^k a_i2^i$ where $a_i \in \{0,\,1\}$ for $0 \le i \le k$. Then we observe,
+$$ b^e = b^{\left( \sum_{i=0}^k a_i2^i \right)} = \prod_{i=0}^k \left( b^{2^i} \right)^{a_i} $$
+
+Based on this we have the following algorithm,
+\begin{algorithm}
+  Let $b \in \Z$ and $e, m \in \N$. Set $x = 1$ ($x$ is the product). While $e > 0$ repeat,
+  \begin{enumerate}
+    \item If $e$ is odd, the replace $x$ by $bx$ and reduce this $\mod m$. (If $e$ is even $x$ is not altered).
+    \item Replace $b$ by $b^2$ and reduce $\mod m$
+    \item If $e$ is even replace $e$ by $\frac{e}{2}$, if $e$ is odd, then replace $e$ by $\frac{e - 1}{2}$. (Drop the units in the binary expansion and shift the digits one to the right)
+  \end{enumerate}
+  When this is completed $x \c b^e \mod m$.
+\end{algorithm}
+\newpage
+\begin{eg}
+  We want to compute $3^{499}\mod 997$. We set $b = 3$, $e = 499$, $m = 997$ and $x = 1$.
+\begin{table}[!ht]
+\centering
+\begin{tabular}{c|c|c|c}
+step & $x\mod m$ & $b\mod m$ & $e$   \\\hline
+0    & 1         & 3       & 499 \\
+1    & 3         & 9       & 249   \\
+2   &  27        & 81       & 124 \\
+3   &  27        & 579       & 62 \\
+4   &  27        & 249       & 31 \\
+5   &  741       & 187       & 15 \\
+6   &  981        & 74       & 7 \\
+7   &  810        & 491       & 3 \\
+8   &  904        & 804       & 1 \\
+9   &  3        & -       & 0 \\
+\end{tabular}%
+\end{table}
+Hence we get $3^{499}\mod 997$. Note that we don't need to calculate $b$ in the last step. Moreover we get the binary expansion of $499$, which is $111110011$ (by going from bottom to top in $e$, ignoring the $0$, letting odd be $1$ and even $0$).\\
+This minimises the number of multiplications, at one step we are just multiplying two integers modulo $m$, so they are small numbers.
+\end{eg}
+
+\subsection{Polynomial Congruence}
+\begin{nthm}[Legranges Polynomial Congruence Theorem]
+  Let
+  $$ f(x) = a_0 + a_1x + \dots + a_nx^n \in \Z[x] $$
+  and let $p$ be a prime such that $p\not\m a_d$. Then $f(x) \c 0\mod p$ has at most $d$ solutions $\mod p$.
+\end{nthm}
+
+\begin{remark}
+   More generally, any polynomial equation of degree $d$ over a field has at most $d$ solutions (note that $\Z/p\Z = \F_p$ is a field).
+\end{remark}
+
+\begin{proof}
+  The proof is by induction on $d$. When $d = 1$ we get that,
+  $$ a_1x + a_2 \c 0 \mod p $$
+  since $a_1 \not\c 0\mod p$, then $\gcd(a_1, p)= 1$ and so there is exactly one solution.\\
+
+  Assume that the theorem is true for polynomials of degree $d - 1$ and suppose for a contradiction that $f(x) \c 0 \mod p$ has $d + 1$ incongruent solutions $\mod p$ say $x_0, x_1, \dots x_d$ where $f(x_k) \c 0 \mod p$. Recall we have for $r \in \N$,
+  $$ x^r - y^r = (x - y)(x^{r-1} + x^{r-2}y + \dots + xy^{t-2} + y^{y-1}) $$
+  Hence,
+  $$ f(x) - f(x_0) = \sum_{r=1}^n a_r(x^r - x_0^r) = \sum_{r=1}^n a_r(x - x_0)g_r(x) $$
+  where each $g_r \in \Z[x]$ is of degree $r - 1$ and has leading coefficient $1$. Hence, $f(x) - f(x_0) = (x- x_0)g(x)$. Thus,
+  $$ f(x_k) - f(x_0) = (x_k - x_0)g(x_k) \c 0\mod p $$
+  since $f(x_k) \c f(x_0) \c 0\mod p$. But $x_k - x_0 \not\c 0 \mod p$ if $k \ne 0$ so we must have $g(x_k) \c 0 \mod p$ for each $k \ne 0$ (by cancellation law for congruences). But this means $g(x) \c 0 \mod p$ has $d$ incongruent solutions $\mod p$ - contradiction! Hence desired result is proved.
+\end{proof}
+
+\begin{ncor}
+   Let $a \in \Z$ and $p$ be an odd prime. If $a^2 \c 1 \mod p$, then $a \c \pm 1 \mod p$.
+\end{ncor}
+\begin{proof}
+  Lagranges Polynomial Theorem says that $a^2 \c 1 \mod p$ has at most two solutions and these are $a\c \pm 1\mod p$ are solutions and these must be distinct because $p$ is odd. Therefore we have found all the solutions.
+\end{proof}
+
+\begin{eg}
+  Let $p$ and $q$ be distinct odd primes. Consider the congruence,
+  $$ x^2 \c 1 \mod pq $$
+  It is clear that $x\c \pm 1 \mod pq$ are solutions, but are there any other solutions? By the CRT we have,
+  \begin{align*}
+    x^2 &\c 1 \mod pq\\
+    &\iff x^2 \c 1 \mod p \text{ and } x^2 \c 1 \mod q\\
+    &\iff x \c \pm 1\mod p \text{ and } x\c \pm 1 \mod q\\
+  \end{align*}
+  Thus there are four solutions $\mod pq$. Hence,
+  $$ x\c 1\mod pq \iff \begin{cases}
+    x \c 1 \mod p\\
+    x \c 1 \mod q
+  \end{cases} $$
+  and
+  $$ x\c -1\mod pq \iff \begin{cases}
+    x \c -1 \mod p\\
+    x \c -1 \mod q
+  \end{cases} $$
+  and so there remains two pairs of congruences,
+  $$ \begin{cases}
+    x \c 1 \mod p\\
+    x \c -1 \mod q
+  \end{cases} \qquad \text{ and } \qquad \begin{cases}
+    x \c -1 \mod p\\
+    x \c 1 \mod q
+  \end{cases} $$
+  Note that if $x$ is a solution to one of these, then $x$ is a solution of the other.
+\end{eg}
