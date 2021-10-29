@@ -2,7 +2,7 @@
 
 \section{Spherical Pendulum}
 
-We want to consider a pendulum in 3D space. We will think about this through the definition of spherical coordinates, as in actuality our motion of the bob will just be on $S^2$. However, we need to define what are Euler Lagrange equations?\\
+We want to consider a pendulum in 3D space. We will think about this through the definition of spherical coordinates, as in actuality our motion of the bob will just be on $S^2$. However, we need to define what are Euler Lagrange equations?\cite{holm_2011}\\
 
 \begin{minipage}{0.49\textwidth}
   Firstly, here is what the Euler Lagrange equations are,
@@ -42,46 +42,46 @@ We want to consider a pendulum in 3D space. We will think about this through the
       \filldraw [fill=black!40,draw=black] (bob) circle[radius=0.1];
   \end{tikzpicture}
 \end{minipage}\vspace{10pt}
-We are going to use polar coordinates to derive our system of equations. Note, that we are going to assume that our sphere, or pendulum rod, has radius of $1$.
+We are going to use polar coordinates to derive our system of equations.
 \begin{align*}
-  x &= \sin \theta \cos\phi \\
-  y &= \sin\theta\sin\phi\\
-  z &= 1 - \cos\theta
+  x &= R\sin \theta \cos\phi \\
+  y &= R\sin\theta\sin\phi\\
+  z &= R(1 - \cos\theta)
 \end{align*}
 Our first focus is $T(q, \dot q)$, which will just be $\frac{1}{2}mv^2$. We can see that $v = |\dot{\vec{r}}(t)|$ and so $v = \sqrt{\dot x^2 + \dot y^2 + \dot z^2}$. Hence, we now find what $v$ is and then find the lagrangian. Firstly, we note that,
 $$ \di {} t (x(t)) = \pd{x}{\theta}\di {\theta}{t} + \pd{x}{\phi}\di \phi t $$
 and similarly for $y(t)$ and $z(t)$. Hence,
 \begin{align*}
-  \di {x(t)} t &= \cos \theta \cos \phi \,\dot \theta - \sin \theta \sin \phi \,\dot \phi\\
-  \di {y(t)} t &= \cos \theta\sin\phi \dot \theta + \sin \theta\cos \phi \dot \phi\\
-  \di {z(t)} t &= \sin \theta\dot \theta
+  \di {x(t)} t &= R\cos \theta \cos \phi \,\dot \theta - R\sin \theta \sin \phi \,\dot \phi\\
+  \di {y(t)} t &= R\cos \theta\sin\phi \dot \theta + R\sin \theta\cos \phi \dot \phi\\
+  \di {z(t)} t &= R\sin \theta\dot \theta
 \end{align*}
 and now we derive our $T(q, \dot q)$,
 \begin{align*}
-  T(q, \dot q) &= \frac{1}{2}m \bigg( \left(\cos \theta \cos \phi \,\dot \theta - \sin \theta \sin \phi \,\dot \phi\right)^2 + \\
-  & \left( \cos \theta\sin\phi \dot \theta + \sin \theta\cos \phi \dot \phi \right)^2 + \\
-  & \left( \sin \theta\dot \theta \right)^2 \bigg)
+  T(q, \dot q) &= \frac{1}{2}m \bigg( \left(R\cos \theta \cos \phi \,\dot \theta - R\sin \theta \sin \phi \,\dot \phi\right)^2 + \\
+  & \left(R \cos \theta\sin\phi \dot \theta + R\sin \theta\cos \phi \dot \phi \right)^2 + \\
+  & \left( R\sin \theta\dot \theta \right)^2 \bigg)
 \end{align*}
 which then can be simplified down to,
-$$ T(\theta, \dot \theta, \phi, \dot \phi) = \frac{1}{2}m\left( \dot \theta^2 + \dot \phi ^2\sin^2 \theta \right) $$
+$$ T(\theta, \dot \theta, \phi, \dot \phi) = \frac{mR^2}{2}\left( \dot \theta^2 + \dot \phi ^2\sin^2 \theta \right) $$
 and we note that our system has only one potential energy, gravitation potential! Hence,
-$$ V(\theta, \dot \theta, \phi, \dot \phi) = mgz = mg(1 - \cos \theta) $$
+$$ V(\theta, \dot \theta, \phi, \dot \phi) = -mgz = -mgR(1 - \cos \theta) $$
 Hence, we can now talk about Lagrangian explicitly,
-$$ L(\theta, \dot \theta, \phi, \dot \phi) = \frac{1}{2}m \left( \dot \theta^2 + \dot\phi^2\sin^2 \theta - 2g\left(1 - \cos \theta\right) \right) $$
+$$ L(\theta, \dot \theta, \phi, \dot \phi) = \frac{mR^2}{2} \left( \dot \theta^2 + \dot\phi^2\sin^2 \theta\right) + mgR\left(1 - \cos \theta\right) $$
 Finally, we can now take derivatives of this function and produce the Euler Lagrange equations. We need to find the basis vectors, $\theta$ and $\phi$, as we have two basis vectors, we will have two equations. Firstly, $\theta$
 \begin{align*}
-  \di {} t \pd{L}{\dot\theta} - \pd{L}{\theta} = \di {} t {m \dot \theta} + \left( mg\sin\theta + m\sin \theta \cos \theta \,\dot\phi^2 \right) &= 0\\
-  m\ddot{\theta} + mg\sin \theta - m\sin \theta \cos \theta\,\dot \phi^2  &= 0\\
-  \ddot{\theta} + g\sin \theta - \sin \theta \cos \theta\,\dot \phi^2  &= 0\\
+  \di {} t \pd{L}{\dot\theta} - \pd{L}{\theta} = \di {} t {mR^2 \dot \theta} - \left( \dot\phi^2mR^2\sin\theta\cos\theta - mgR\sin\theta \right) &= 0\\
+  mR^2\ddot{\theta} - mR^2\sin \theta \cos \theta\,\dot \phi^2 + mgR\sin \theta &= 0\\
+  R\ddot{\theta} - R\sin \theta \cos \theta\,\dot \phi^2 + g\sin \theta &= 0
 \end{align*}
 and secondly, $\phi$
 \begin{align*}
-  \di {} t \pd{L}{\dot\phi} - \pd{L}{\phi} = \di {} t {m \dot \theta} (m \dot \phi \sin^2 \theta) &= 0\\
-  m\ddot\phi\sin^2 \theta + 2m\dot \phi \sin \theta\cos \theta &= 0\\
-  \ddot\phi\sin \theta + 2\dot \phi\cos \theta &= 0\\
+  \di {} t \pd{L}{\dot\phi} - \pd{L}{\phi} = \di {} t  (mR^2 \dot \phi \sin^2 \theta) &= 0\\
+  mR^2\ddot\phi\sin^2 \theta + 2mR^2\dot \phi\,\dot\theta \sin \theta\cos \theta &= 0\\
+  \ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta &= 0\\
 \end{align*}
 We have derived the Euler-Lagrange equations for the spherical pendulum, which are
 $$ \begin{cases}
-  \quad\ddot{\theta} + g\sin \theta - \sin \theta \cos \theta\,\dot \phi^2  = 0\\
-  \quad\ddot\phi\sin \theta + 2\dot \phi\cos \theta = 0
+  \quad R\ddot{\theta} - R\sin \theta \cos \theta\,\dot \phi^2 + g\sin \theta = 0\\
+  \quad\ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta = 0
 \end{cases} $$
