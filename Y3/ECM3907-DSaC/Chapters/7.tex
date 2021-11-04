@@ -1,0 +1,95 @@
+% !TEX root = ../notes.tex
+
+\section{Linear Input-State-Output Systems}
+We will not consider systems of the form,\marginnote{\emph{Lecture 13}}[0mm]
+\begin{align*}
+  \di x t &= Ax + Bu\\
+  y &= Cx + Du
+\end{align*}
+We can solve the DE by using an integrating factor,
+\begin{align*}
+  \di x t &= Ae^{-At} + Bue^{-At}\\
+  \di x t e^{-At} - Ae^{-At} &= Bue^{-At}\\
+  \di{}{t} (xe^{-At}) &= Bue^{-At}\\
+  x(t)e^{-At} - x(0) &= \int_0^t Bue^{a\t}\,d\t
+\end{align*}
+
+%part ii
+\subsection{Input-State Stability}
+\begin{ndefi}[Input-State Stability]
+  Consider the system,
+  $$ \di x t = Ax + Bu \qquad y = Cx + Du $$
+  We call this stable if,
+  \begin{enumerate}
+    \item if $u= 0$ for all $t \ge 0$ then $x(t) \to 0$ as $t \to \infty$
+    \item If $\sup_{t \ge 0} \max |u_i (t)| < \infty$ then $sup_{t \ge 0} \max |x_i(t)| < \infty $
+  \end{enumerate}
+\end{ndefi}
+
+\noindent
+If a system is input-state stable, then it is input -output stable. We aim to show that a system is input-state stable if and only if all the eigenvalues of $A$ is in OLHP.\\
+% Lect 14
+\begin{proof}
+  We first prove that condition (1) and forward holds and then we seek to prove (2) and backwards holds.\\
+
+  We recall,
+  $$ x(t) = e^{At}x(0) + \int_0^t e^{A(t - \t)}Bu(\t)\,d\t $$
+  We then consider each entry in $(sI - A)^{-1}$ and the obtain a partial fraction decomposition. Then we take inverse laplace transforms and the result follows.\\
+
+  For the second part, we take our decomposition and then consider the inverse laplace transform. Then proceed by contradiction, assume we have a eigenvalue in the ORHP, then by our inverse laplace, if follows that all matrices corresponding to our ORHP eigenvalue is zero, then we find that the ORHP eigenvalue has a non-zero eigenvector which can be written using our $(sI - A)^{-1}$ equation and so implies it's zero, but this causes a contradiction.\\
+
+  Now we prove a bounded input leads to a bounded state, we use variation of constants, then we proceed very similarly to input-output systems.
+\end{proof}
+
+
+We now consider choosing $u$ to shape some sort of desired behaviour. We now consider controllability,
+
+\subsection{Controllability}
+
+\begin{ndefi}[Controllability]
+  We call a system controllable if for $z_0,\,z_1 \in \R^d$ there exists some $t_1 > 0$ and an input $u$ which steeps the system from the initial state $x(0) = z_0$ to the final state $x(t_1) = z_1$
+\end{ndefi}
+
+\begin{nthm}
+  We will show the following are equivilent,
+  \begin{enumerate}
+    \item The system is controllable
+    \item For any $T > 0$, $\int_0^T e^{-A\t}BB^T e^{-A^T\t}\,d\t$ is non-singular.
+    \item If $z \in \R^d$ satisfies $z^T [B \quad AB \quad \dots \quad A^{d-1}B]$ then $z = 0$
+  \end{enumerate}
+\end{nthm}
+
+The third is easiest to use, the second is more complicated, however, it does give a neat expression for $u$ from $x(0) = z_0$ to $x(t_1) = z_1$ while minimising the integral. Finally the third leads to a linear control law $u = Kx$ where $K \in M_{m \times n}(\R)$.\\
+
+\noindent
+We will show that if $(ii)$ does not hold, then $(iii)$ does not hold, if $(iii)$ does not hold, then $(i)$ does not hold and if $(ii)$ holds then so does $(i)$.\\
+
+\begin{proof}[Proof of Theorem 5.3]
+  Case $(i)$, Firstly, suppose there exists a $T > 0$ and $0 \ne z \in \R^d$ such that $z^T\int_0^T e^{-A\t}BB^T e^{-A^T\t}\,d\t = 0$. This implies that $z^T e^{-A\t}BB^T e^{-A^T\t} = 0$ for all $0 \le \t \le T$. If we define $w(t) = z^T e^{-At}B = 0$, hence we see $w(0) = 0$ and all the derivatives are zero, so then it follows that $z^TB = 0$ and $z^TAB = 0$ and so on.
+  It hence follows that $z^T [B \quad AB \quad \dots \quad A^{d-1}B] = 0$.\\
+
+  \noindent
+  The case (ii) requires Cayley Hamilton Theorem. It follows from the theorem that $z^T A^jB = 0$ for all $j \in \Z$ and moreover and considering the powerseries of matrix exponetial $z^Te^{At}B = 0$ and so the result follows from variation of constants formula. Thus the system is not controllable.\\
+
+  \noindent
+  The case (iii), follows from definiting the integral as $W(T)$ and if it's nonsingular, then we can define an input $u(t)$ using $W^{-1}(T)$. Then from variations of constant the result follows. Moreover we can show that the input minimises $u(t)^Tu(t)$.
+\end{proof}
+
+\section{State Space Isomorphism}
+Consider the system,
+$$ \di x t = Ax + Bu \qquad y = Cx + Du $$
+let $T \in R^{d \ti d}$ be non-singular, and let
+$$ \hat A = TAT^{-1},\, \hat B = TB,\, \text{ and } \hat C = CT^{-1} $$
+Then, defining $z = Tx$, we find that
+$$ \di x t = \hat Az + \hat Bu,\, y = \hat Cz + Du $$
+Thus the trajectories are in an one-to-one correspondence with the first. \\
+
+Consider a controllable system, we have our $V$ non-singular and there is a $w^TV = [0 \qquad \dots \qquad 1]$ and construct $w^TA^{k-1}$ and then,
+$$ TAT^{-1} = \begin{bmatrix}
+  0 & 1 & 0 & \dots & 0\\
+  0 & 0 & 1 & \dots & 0\\
+  \vdots & \vdots &\vdots && \vdots\\
+  -a_0 & -a_1 & -a_2 & \dots & -a_{d-1}
+\end{bmatrix} \qquad TB = \begin{bmatrix}
+  0 \\ 0 \\ \vdots \\ 0 \\ 1
+\end{bmatrix}$$
