@@ -1,0 +1,62 @@
+% !TEX root = ../notes.tex
+
+\section{The Hat Map as a Lie Algebra Isomorphisms}
+The lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\mathfrak{SO}(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
+$$ \di {}{t} \pd{\ell}{\Oh} - \ad^*_{\Oh}\pd{\ell}{\Oh} = 0 $$
+Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
+\begin{align*}
+  \ip{\ad_{\Oh}^*\vec\Pi}{\oh} &= \ip{\vec\Pi}{\ad_{\Oh}{\oh}}\\
+  &= \ip{\vec\Pi}{[\Oh,\,\oh]}\\
+  &= \Tr(\vec\Pi^T [\Oh,\,\oh])\\
+  &= \Tr(\vec\Pi^T \Oh\oh - \vec\Pi^T\oh\Oh)\\
+  &= \vdots\\
+  &= \ip{[\vec\Pi,\,\Oh]}{\oh}
+\end{align*}
+
+Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ {[\Oh,\,\oh] = }\widehat{\vec\O\ti\vec\o} $
+\begin{proof}
+  Exercise
+\end{proof}
+We define, $\hat{\cdot} : (\R^3,\, \cdot \ti \cdot) \to (\mathfrak{SO}(3),\, [\cdot,\, \cdot])$. This is the isomorphism.\\
+
+We have described Lagrangians that have left or right invariance. We now look to Lagrangians that have Symmetry breaking parameters, like gravity. If we consider the spherical pendulum, we have defined $\Oh = R^T\dot R$ and we define $\oh = R\vec\O$ and then we can see that $\oh = \dot R R^T = \dot R R^{-1}$ where $R \in \SO(3)$. This doesn't lead to a symmetric Lagrangian but we can still use our theory here. \\
+
+We are going to study rigid body dynamics in the spatial frame. We look firstly to the Lagrangian. We have showed,
+$$ L(R,\,\dot R) = \frac{1}{2} \int_\b \rho(\vec X) \norm{\dot R \vec X}^2 d^3\vec X $$
+and we showed that $L(R,\, \dot R) = L(e,\, R^{-1}\dot R)$ and then we used Euler Poincare Theorem to show that $\ell = \frac{1}{2}\mathbb{I}\vec\O \cdot \vec\O$. Now assume we would prefer to formulate rigid body dynamics in the spatial frame. We need to consider a $\vec\o$ such that $\oh = \dot R R^{-1}$. We can now prove that, $L(R,\,\dot R) \ne L(R\chi,\,\dot R\chi)$ (right multiplication) hence we have broken symmetry,
+\begin{proof}
+  Exercise
+\end{proof}
+
+Now we seek this Lagrangian,
+\begin{align*}
+  L(R,\,\dot R) &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\dot R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\dot RR^{-1}R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\hat\o R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\b}\rho(\vec X)(\o \ti R\vec X) \cdot (\o \ti R\vec X)d^3\vec X\\
+  &= \vdots\\
+  &= \frac{1}{2}\vec\o \cdot (R\mathbb{I} R^T)\o = L(\vec\o,\,R)
+\end{align*}
+We define a new parameter, $\mathbb{J} := R\mathbb{I}R^T$ and so $\ell = \ell(\mathbb{J},\,\vec\o) = \frac{1}{2}\vec\o(t) \cdot \mathbb{J}(t) \vec\o(t)$
+% J is for spatial frame.
+
+Now we take variations as usual,
+$$ \d\int_{t_1}^{t_2} \ell(\J,\,\vec\o) = 0 $$
+\begin{align*}
+  \d \int_{t_1}^{t_2} \frac{1}{2}\vec \o(t) \cdot \mathbb{J}(t) \vec\o(t) dt = 0
+\end{align*}
+and we ask what is $\d\J(t)$,
+\begin{align*}
+  \d\J(t) &= \d(R\I R^T)\\
+  &= \d R\I R^T + R\I \d R^T\\
+  &= \d R R^{-1}R\I R^T - R\I R^{-1}\d R R^{-1}\\
+  &= \Lh \J - \J \Lh\\
+  &= [\Lh,\,\J]
+\end{align*}
+where $\Lh = \d R R^{-1}$
+
+\begin{exercise}
+  Prove that $\d \oh = \vec\Lhd + [\Lh,\, \oh]$ and $\d\vec\o = \dot{\vec{\Lambda}} + \vec\Lambda \ti \vec\o$ and then take variations of $\frac{1}{2}\vec\o \cdot \J\vec\o$ and prove that $\di{}{t} (\J\vec\o) = \vec 0$
+  and then
+ $\di{\J}{t} \oh + \J\vec{\dot{\hat{\o}}} = \vec 0$ and so $\di{\J}{t} = [\oh,\,\J]$.
+\end{exercise}
