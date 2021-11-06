@@ -1,0 +1,263 @@
+% !TEX root = ../notes.tex
+We now move into the second part of the module, we shall now consider sets that have more than one binary operation that follows the group axioms and we call these rings and fields. Firstly, we will formally define polynomials and use this as a motivating example.
+
+\section{Polynomials}\marginnote{\emph{Lecture 16}}[0mm]
+We start by defining a polynomial,
+\begin{ndefi}[Polynomial]
+  A polynomial with coefficients in $\Q$ is an infinite sequence
+  $$ (a_0,\,a_1,\,\dots,\,a_n,\,\dots) $$
+  such that $\ex N \ge 0$ with $a_i =0\,\fa i \ge N$
+\end{ndefi}
+
+Further we say that,
+$$ (a_0,\, a_1,\,\dots,\,a_n,\,\dots) = (b_0,\, b_1,\,\dots,\,b_n,\,\dots) \iff a_i = b_i \fa i \ge 0 $$
+Then we can add and multiply polynomials, if we have
+$$ (a_0,\, a_1,\,\dots,\,a_n,\,\dots) + (b_0,\, b_1,\,\dots,\,b_n,\,\dots)= (c_0,\, c_1,\,\dots,\,c_n,\,\dots) $$
+where $c_i = a_i + b_i\, \fa i \ge 0$. We can multiply polynomials, this is slightly more complicated,
+$$ (a_0,\, a_1,\,\dots,\,a_n,\,\dots) \ti (b_0,\, b_1,\,\dots,\,b_n,\,\dots) = (d_0,\, d_1,\,\dots,\,d_n,\,\dots) $$
+where, $d_n = \sum_{s+t = i} a_sb_t$.
+
+\begin{notation}
+  Let $X = (0,\,1\,0,\,\dots)$ and $n \ge 1$ then,
+  $$ X^n = X \ti \dots \ti X = (0,\,0,\,\dots,\,1,\,0,\,\dots) $$
+  where we see $1$ is shifted to the $n^{th}$ digit. Further for all $i,\,j \ge 0$ we have $X^iX^j = X^{i+j}$\\
+
+  For $a \in \Q$ the polynomial,
+  $$ a = (a,\,0,\,0,\,\dots) $$
+  is called the constant polynomial.\\
+
+  Every polynomial $(a_0,\,a_1,\,\dots,\,a_n,\,0,\,\dots)$ with $a_i = 0$ for all $i > n$ can be written,
+  \begin{align*}
+    (a_0,\,a_1,\,\dots,\,a_n,\,0,\,\dots) &= (a_0,\,0,\,\dots) + (0,\,a_1,\,0,\,\dots) + \dots + (0,\,\dots,\,a_n) \\
+    &= (a_0,\,0,\,\dots) + (a_1,\,0,\,\dots)(0,\,1,\,0,\,\dots) + \dots + (a_n,\,0,\,\dots)(0,\,\dots,\,1) \\
+  \end{align*}
+  and hence we denote this as $f(X) = a_0 + a_1X + a_2X^2 + \dots + a_nX^n$, then $\{a_i\}_{0 \le i \le n}$ are called the coefficients of $f$. If $a_n \ne 0$, then $n$ is called the degree of the polynomial $f$ and denoted $\deg(f)$. The coefficient of $a_n$ is called the leading coefficient and $a_0$ is the constant coefficient of $f$.\\
+
+  Finally, we write,
+  $$ \Q[X] = \{f(X) = a_0 + a_1X + a_2X^2 + \dots + a_nX^n : n \ge 0,\, a_i \in \Q\} $$
+  and call it the set of polynomials with rational coefficients. Identifying thr set of constant polynomials with $\Q$ we can view $\Q$ as a subset of $\Q[X]$.
+\end{notation}
+
+We look at the set $\QX$ and see that $\Q\sub\QX$. We also note that $\QX$ is endowed with two operations $+$ and $\ti$.
+
+\begin{nlemma}
+  Given $f, g\in \QX$ we have that $\deg(f + g) \le \max(\deg(f),\,\deg(g))$, with equality when $\deg(f) \ne \deg(g)$ and $\deg(f \ti g) = \deg(f)\deg(g)$ if $f$ and $g$ are both non-zero.
+\end{nlemma}
+\begin{proof}
+  Exercise
+\end{proof}
+
+\begin{nprop}
+  $(\Q[X],\,+)$ is an abelian group.
+\end{nprop}
+\begin{proof}
+  It follows from the definition of polynomials that this is commutative, so just prove that it's a group.
+  \begin{enumerate}
+    \item The natural element is just the constant polynomial $0 = (0,\,0,\,\dots,\,0,\,\dots)$ as called the zero polynomial, $f(X) + 0 = 0 + f(X) = f(X)\, \fa f \in \QX$.
+    \item Further the inverse element for $f(X) = a_0 + a_1X + \dots + a_nX^n$ is just $f(X) = -a_0 + (-a_1)X + \dots + (-a_n)X^n$. This satisfies $f(X) + (-f(X)) = 0$ hence it is the inverse of $f(X)$.
+    \item Closure and Associativity follow from the definiton.
+  \end{enumerate}
+\end{proof}
+
+\begin{ndefi}[Division]
+  Let $f, g \in \QX$. We say that $g$ divides $f$ if $\ex h \in \QX$ such that\footnote{I hold that this is NOT a definition, it is a lemma as this can be proved.}
+  $$ f(X) = g(X)h(X) $$
+\end{ndefi}
+
+\begin{nlemma}
+  Let $u \in \QX$. Then $u$ divides the constant polynomial $1$ if and only if $u$ is a non-zero constant polynomial, ie. $u \in \Q \setminus \{0\}$. Such $u$ is called a unit of $\QX$.\footnote{This should be split into a lemma and then a definition}
+\end{nlemma}
+\begin{proof}
+  Assume that $u \ne 0 = a_0 \in \Q$ is a non zero constant polynomial. Let $v = \frac{1}{a_0}$ and then $uv = 1$ and $u$ divides $1$.\\
+  Conversely, let $f(X)$ be a unit with $n = \deg(f)$, ie. $a_n \ne 0$. Then $\ex g \in \QX, \deg(g) = m$; thus $b_m \ne 0$, such that $fg = 1$.  In particular $a_nb_m \ne 0$ and $\deg(fg) = n + m = \deg(1) = 0$, hence $n = m = 0$ and $u = a_0 \ne 0$
+\end{proof}
+
+\begin{ndefi}[Irriducible]
+  Let $f \in\QX$ be a non constant polynomial, $f \in \QX\sm\Q$ and $\deg(f) \ge 1$. We say that $f$ is irreducible if whenever $f(X) = g(X)h(X)$ then either $g$ or $h$ is a unit.
+\end{ndefi}
+\marginnote{\emph{Lecture 17}}[0mm]
+%new lect
+\noindent
+We can consider some examples,
+\begin{eg} Here are two examples,
+  \begin{itemize}
+    \item We can prove that $f(X) = a_0 + a_1X$ is irreducible. This is because $\deg(f) = 1$ and so for $\deg(fg) = 1$, then we must have that $\deg(g) = 0$.
+    \item Consider $f(X) = X^2- 3$, suppose $X^2 - 3 = (aX + b)(cX + d) = bd + (ad + bc)X + acX^2$ and so we know that $ac = 1$ and $ad + bc = 0$ and $bd = -3$. We claim that these have no solutions, $ad + bc = \frac{d}{c} - \frac{3c}{d} = - \frac{d^2 - 3c^2}{cd} = 0$ and so $d^2 - 3c^2 = 0$ and so $d^2 = 3c^2$ this must be $c = d = 0$ as we would have an irrational number. This is a contradiction from our original equations. Hence $f(X)$ is irreducible.
+  \end{itemize}
+\end{eg}
+
+Here is the main theorem for polynomials,
+\begin{nthm}[Polynomial Division]
+  Let $f, g \in \QX$ with $g \ne 0$. Then $!\ex h, r \in \QX$ such that,
+  $$ f = hg + r $$
+  where $r = 0$ or $r \ne 0$ and $\deg(r) < \deg(g)$.
+\end{nthm}
+\begin{proof}
+  We assume wlog $m \ge n$ and set $d = m - n \ge 0$ (if $m < n$ take $h(X) = 0$ and $r(X) = f(X)$) and continue via induction on $d$.\\
+
+  For unicity we assume we have $h$, $h'$ and $r$ and $r'$ then manipulate and reach that they are equal.
+\end{proof}
+
+Now we can talk about the uniqueness of our division,
+
+\begin{nthm}[Unique Factorisation of Polynomials]
+  Let $f \in \QX$ be a non zero polynomial which is not a unit. Then,
+  $$ f = g_1g_2g_3\dots g_n $$
+  with $g_i$ is irreducible for all $1 \le i \le r$. Further if
+  $$ f = h_1h_2\dots h_s $$
+  is another such factorisation, with $h_i$ irreducible for $1 \le i \le s$, then $r = s$ and after rearranging the $\{g_i\}$ one has $g_i = u_ih_i$ where $u_i$ is a unit.
+\end{nthm}
+
+This theorem will be superseded with a more general result relating to a ring with prime elements as the factorisation. Hence, I ommit the proof here.
+
+Suppose we have $f(X)\in \QX$ and $c \in \Q$. We define the value $f(c)$ by,
+$$ f(c) = a_0 + a_1c + a_2c^2 + \dots + a_nc^n $$
+Thus, $f$ can be viewed as,
+$$ f : \Q \to \Q $$
+defined by,
+$$ c \mapsto f(c) $$
+If $g \in \QX$ is another polynomial then,
+$$ fg(c) = f(c)g(c) \qquad (f + g)(c) = f(c) + g(c) $$
+We also say $\a \in \Q$ is a root of $f$ if $f(\a) = 0$. In this case we say $f$ has a root in $\Q$.
+
+\begin{nlemma}
+  Let $f \in \QX$, where $\deg(f) \ge 1$. If $c \in \Q$ is a root of $f$ then $X - c$ divides $f$.w
+\end{nlemma}
+\begin{proof}
+  By the division algorithm we have that $f(X) = h(X) (X - c) + r(X)$ and $\deg(r) < \deg(X - c) = 1$. Thus $r(X)$ is a constant. Furthermore,
+  \begin{align*}
+    f(c) &= h(c)(c - c) + r \\
+    &= 0 + r \\
+    &= r
+  \end{align*}
+  Hence, $r = f(c) = 0$ and $f(X) = h(X)(X - c)$.
+\end{proof}
+
+\begin{nlemma}
+  Let $f \in \QX$ with $\deg(f) = n \ge 1$. Then $f$ has at most $n$ roots in $\Q$.
+\end{nlemma}
+\begin{proof}
+  We argue by induction on $n = \deg(f)$. If $n = 1$, then $f(X) = a_0 + a_1X$ and we see that $X = -\frac{a_0}{a_1}$ is the only root. Suppose the lemma is true for polynomials of degree $< n$. Assume $c \in \Q$ is a root of $f$. Then by Lemma 6.9 there exists $g \in \QX$ with,
+  $$ f(X) = (X - c)g(X) $$
+  and $\deg(g) = n-1$. Assume $c' \ne c$ is another root of $f$, then,
+  $$ f(c') = (c' - c)g(c') = 0 $$
+  Hence $g(c') = 0$ as $c \ne c'$. By induction there are at most $n - 1$ such $c'$, hence there are at most $n$ roots of $f$.
+\end{proof}
+
+We note here that $\Q$ was not special, we could have done this analysis over any algebraically closed field, so we could have chose $\C$.
+
+\begin{nthm}[The fundemental Theorem of Algebra]
+  Let $f \in \C[X]$ be a polynomial with $\deg(f) \ge 1$. Then $\ex c \in \C$ with $f(c) = 0$.
+\end{nthm}
+\begin{proof}
+  Because it's me and I have one, here is my favourite proof of this theorem.
+  \begin{tcolorbox}
+    Take a polynomial ($p(z) = z^n + a_1z^{n-1} + \dots + a_n$) that has no roots in $\C$ and then consider,
+    $$ f_r(s) = \frac{p(re^{2\pi is})/p(r)}{|p(re^{2\pi is})/p(r)|} $$
+    which is a loop and as you vary $r$, you get a homotopy of loops based at $1$. Hence, $[f_r] \in \pi_1({S^1})$. Now choose an $r > 1$ and $r > |a_1| + \dots + |a_n|$. Then for $|z| = r$ we have,
+    $$ |z^n| > (|a_1| + \dots + |a_n|)|z^{n-1}| > |a_1z^{n-1}| + \dots + |a_n| \ge |a_1z^{n-1} + \dots + a_n| $$
+    Now define a $p_t = z^n + t(a_1z^{n-1} + \dots + a_n)$ and then define a lift and then use Theorem 1.12 (from my AlgTop notes). This gives, $[\omega_n] = [f_r] = 0$ and hence $n = 0$ and so $p(z) = a_0$ and so that is the only polynomial with no roots and so FTA proved.
+  \end{tcolorbox}
+\end{proof}
+
+This tells us that if $n \ge 1$, this polynomial is not irreducible and so there is only polynomials of degree one that are irreducible.
+
+\section{Rings}
+We consider a set with two composition laws such that $(R,\,+,\,\ti)$,
+\begin{ndefi}[Commutative Ring]
+  If we have a set $(R,\,+,\,\ti)$, then the following is true,
+  \begin{enumerate}
+    \item $(R,\,+)$ is an abelian group.
+    \item $\ti$ must be commutative and associative
+    \item Addition and multiplication are distributive, ie.
+    $$ a \ti (b + c) = a \ti b + a \ti c $$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{remark}
+   If $(R,\,+,\,\ti)$ is not commutative, then $(ii)$ is not true.
+\end{remark}
+
+We say that $R$ has an identity element if $\ex 1_R \in R$ such that,
+$$ a\ti 1_R = a\, \fa a \in R $$
+
+\begin{remark}
+   Every ring does not have to have an identity element (See rng).
+\end{remark}
+
+\begin{notation}
+   We will say $a \ti b = ab$ and $a - b = a + (-b)$.
+\end{notation}
+
+\begin{eg}
+  \begin{enumerate}
+    \item $(\Z,\,+,\,\ti)$ is a ring with identity $1$.
+    \item $(\Q,\,+,\,\ti)$, $(\R,\,+,\,\ti)$ and $(\C,\,+,\,\ti)$ are rings with identity one.
+    \item For $m \ge 1$, $(\Z/m\Z,\,+,\,\ti)$ is a ring with identity the class $\bar{1}$ of $1$.
+    \item $(\QX,\,+,\,\ti)$ is a ring with identity of constant polynomial $f(X) = 1$.
+  \end{enumerate}
+\end{eg}
+
+Here are a load of properties of these rings,
+\begin{nlemma}
+  Let $R$ be a ring. Then the following hold,
+  \begin{enumerate}
+    \item $0_Ra = a0_R = 0_R$, for all $a \in R$
+    \item $\fa a,\,b \in R, (-a)b = a(-b)$
+    \item $\fa a, b \in R, (-a)(-b) = ab$
+    \item If $R$ has an identity element $1_R$ then $-a = (-1)_R a$ for all $a\in R$.
+  \end{enumerate}
+\end{nlemma}
+
+\begin{ndefi}[Zero Divisor]
+  Let $R$ be a ring. An element $a \in R \sm \{0_R\}$ is called a zero divisor if $\ex b \in R \sm \{0\}$ such that
+  $$ ab = 0_R $$
+\end{ndefi}
+
+\begin{eg}
+  Take $\bar 2 \in \Z/4\Z$, this is a zero divisor since $\bar 2 \ti \bar 2 = \bar 4 = \bar 0$.
+\end{eg}
+
+\begin{nprop}
+  $\Z/n\Z$ has no zero divisors if and only if $n$ is a prime.
+\end{nprop}
+\begin{proof}
+  Firsly assume $n$ is not a prime, $n = n_1n_2$ with $1 < n_i < n$ hence $\bar n = 0 = \bar{n_1}\bar{n_2}$ and $\bar{n_i} \ne 0$ is a zero divisor. Converly assume $n =p$ is a prime integer and $\bar{a}\bar{b} = 0 = \bar{p} = \bar{ab}$, then $p \m ab$ and hence $p \m a$ or $p \m b$.
+\end{proof}
+
+\begin{nprop}
+   $\QX$ has no zero divisors.
+\end{nprop}
+\begin{proof}
+  Suppose $f(X) \ne 0$, thus $\deg(f) = n \ge 0$ and $a_n \ne 0$ and $g(X)$ similarly but $\deg(g) = m \ge 0$. Then,
+  $$ fg = a_0b_0 + (a_0b_1 + a_1b_0)X + \dots + a_nb_n X^{n+m} \ne 0$$
+  since $a_n b_m \ne 0$.
+\end{proof}
+
+From now on whenever we assume that $R$ has an identity we suppose $1_R \ne 0_R$ as if $a \in R$ gives $a = a1_R = a0_R = 0_R$ and you get the zero ring.
+
+\begin{ndefi}[Unit]
+  Assume $R$ has an identity $1$. An element $u \in R$ is called a unit if $\ex v \in R$ such that $uv = 1$. We denote $v$ by $u^{-1}$ and call it the inverse of $u$.
+\end{ndefi}
+
+\begin{ndefi}[Group of Units]
+  Let $R$ be a ring with identity $1$. The set of units of $R$ is denoted
+  $$ R^\ti = \{u \in R : u \text{unit}\} $$
+\end{ndefi}
+
+We now prove it's a group,
+
+\begin{nlemma}
+  $R^\ti$ is closed under multiplication and $(R^\ti,\,\ti)$ is an abelian group.
+\end{nlemma}
+\begin{proof}
+  First $1 \in R^\ti$. Let $u_1, u_2 \in R^\ti$, there exists $v_1,\,v_2 \in R$ such that $u_1v_1 = u_2v_2 = 1$. Then $1 = (u_1v_1)(u_2v_2) = (u_1u_2)(v_1v_2)$ hence $u_1u_2$ is a unit and $(u_1u_2)^{-1} = v_1v_2 = u_1^{-1}u_2^{-1}$.
+  Further let $u \in R^\ti$, there exists $v \in R$ such that $uv = 1$ hence $v \in R^\ti$ is a unit and $v= u^{-1}$. Hence $R^\ti$ is a group and furthermore it's abelian.
+\end{proof}
+
+\begin{nprop}
+   $(\Z/n\Z)^\ti = \{\bar a \in \Z/n\Z : \gcd(a,\,n) = 1\}$
+\end{nprop}
+\begin{proof}
+  Suppose $\bar a \in (\Z/\Z)^\ti$ if and only if there exists $\bar b \in \Z/n\Z$ such that $\bar{a}\bar{b} = \bar{ab} = \bar 1$. That is true if and only if there exists $k \in \Z$ such that $ab = nk + 1$ and that is precisely the definition of $\gcd(a,\,n) = 1$.
+\end{proof}
