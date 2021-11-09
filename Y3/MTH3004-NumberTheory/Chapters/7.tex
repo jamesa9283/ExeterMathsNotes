@@ -1,0 +1,167 @@
+% !TEX root = ../notes.tex
+
+\section{Hensel Lifting}
+\subsection{Hensel Lifting}
+Suppose we want to solve a polynomial congruence,
+$$ f(x) \c 0 \mod n $$
+this can be reduced to solvbing a system of congruences,
+$$ f(x) \c 0 \mod p_i^{e_i} $$
+where $n= p_1^{e_1}\dots p_i^{e_i}$ and we shall now show that this can be reduced further to linear congruences of $\mod p_i$.
+
+\begin{nthm}[Hensel's Lemma]
+  Let $p$ be a prime. Let $f(x) \in \Z[x]$ and let $f'(x) \in \Z[x]$ be it's formal derivative. If $a \in \Z$ satisfies,
+  $$ f(x) \c 0\mod p, \qquad f'(a) \not\c 0 \mod p $$
+  then for each $n \in \N$ there exists $a_n \in \Z$ such that
+  $$ f(a_n) \c 0 \mod p \qquad \text{ and } a_n \c a \mod p $$
+  Moreover, $a_n$ is unique modulo $p^n$.
+\end{nthm}
+
+If we take $f(x) = x^2 + 1$ ($x^2 \c -1 \mod 5^4$) and $a = 2$, we can apply the above lemma. Let $a_2 = 2 + 5t_1$, we now plug this into $f(a_2) \c 0 \mod 5^2$ and get that $t_1 \c 1 \mod 5$, hence $a_2 = 7$. Now we could let $a_3 = 7 + 5^2t_2$ and then similarly to before solve for $t_2$ using
+$f(a_3) \c 0 \mod 5^3$. However, we can shortcut by writing $a_4 = 7 + 5^2t_3$, this is because we know $a_4 \c a_2 \mod 5^2$. Then we get that, $t_3 \c 7 \mod 5^2$. Therefore, $a_4 = 7 + 5^2 \ti 7 = 182$. If we started with $a = -2$, then we would have ended up with $a_4 = -182$.
+
+\begin{remark}
+  Even if the hypotheses of Hensel's Lemma are not satisfies, we can still try to use the same technique. However, it may not exist or be unique.
+\end{remark}
+
+\begin{proof}[Proof of Hensel's Lemma]
+  \begin{nlemma}
+    Let $f \in \Z[X]$ and let $f'(X)$ be it's formal derivative. Then there exists $g \in \Z[X, Y]$ satisfying the following polynomial identity,
+    $$ f(X + Y) = f(X) + f'(X)Y + g(X, Y)Y^2 $$
+  \end{nlemma}
+  \begin{remark}
+     The ientity of the Lemma is similar to Taylors Formula, but we don't have factorials as they can cause issues reducing modulo $p$
+  \end{remark}
+  \begin{proof}[Proof of Lemma 6.2]
+    The formula comes from isolating the first two terms in the binomial thoerem. Writing $f(X) = \sum_{i=0}^d c_iX^i$ we have,
+    $$ f(X + Y) = \sum_{i=0}^d c_i(X + Y)^i = c_0 + \sum_{i=1}^d c_i(X^i + iX^{i-1}Y + g_i(X,\, Y)Y^2) $$
+    where $g_i \in \Z[X, Y]$.
+    \begin{align*}
+      f(X + Y) &= \sum_{i=0}^d c_iX^i + \sum_{i=1}^d ic_iX^{i-1}Y + \sum_{i=1}^d c_ig_i(X,\, Y)Y^2 \\
+      &= f(X) + f'(X)Y + g(X, Y)Y^2
+    \end{align*}
+    where $g(X,\, Y) = \sum_{i=1}^d c_ig_i(X,\,Y)$. Gives the desired identity.
+  \end{proof}
+   We will prove Hensel's Lemma by induction on $n \in \N$, the assumptive step being there exists a $a_n \in \Z$ satisfying $(1)$ that is unique $\mod p^n$. The $n = 1$ case is trivial using $a_1 = a$. We now suppose the inductive hypothesys holds for $n = k$ and prove for $n = k + 1$. The idea is to consider $a_k + p^kt_k$ and see if $t_k \in \Z$ can be chosen in such a way that $a_k + p^kt_k$ satisfies the required properties of $a_{k+1}$. By the earlier lemma with $X = a_k$ and $Y = p^kt_k$ there exists $z_k \in \Z$ such that,
+   \begin{align*}
+     f(a_k + p^kt_k) &= f(a_k) + f'(a_k)p^kt_k + z_kp^{2k}t^2 \\
+     &\c f(a_k) + f'(a_k)p^kt_k \mod p^{k+1}
+   \end{align*}
+   We have $z_k \in \Z$ not $z_k \in \Z[X,\,Y]$ are consider $g(a,\,b)$ where we have already considered $a, n \in \Z$. Hence the second follows as $k+1 \le 2k$. In $f'(a_n)p^kt_k$ the factors $f'(a_k)$ and $t_k$ only matter $\mod p$ since it already contains a factor of $p^k$ and the modulus is $p^{k+1}$. Thus recalling that $a_k \c a \mod p$ we have $f'(a)p^kt_k \c f'(a_k)p^kt_k \mod p^{k+1}$.\\
+
+   Therefore we have,
+   \begin{align*}
+     f(a_k + p^kt_k) \c 0 \mod p^{k+1} &\iff f(a_k) + f'(a)p^kt_k \c 0 \mod p^{k+1}\\
+     &\iff f'(a)t_k \c - \frac{f(a_k) }{p^k} \mod p
+   \end{align*}
+   Where we already know $-\frac{f(a_k)}{p^k} \in \Z$ by the induction hypothesis. But $f'(a) \not\c 0 \mod p$ and so $\gcd(f'(a),\,p) = 1$ and thus by the theorem on linear congruences with exactly one solution, the last congruence ($\mod p$) has a solution $t_k$, which is unique $\mod p$.    We set $a_{k+1} = a_k + p^kt_k$. Then we have $f(a_{k+1}) \c 0 \mod p^{k+1}$ and $a_{k+1} \c a_k \mod p^k$, so in particular $a_{k+1} \c a \mod p$. \\
+   It remains to show uniqueness. Suppose $\ex b_{k+1} \in \Z$ with $f(b_{k+1}) \c 0 \mod p^{k+1}$ and $b_{k+1} \c a \mod p$ an so $f(b_{k+1}) \c 0 \mod p^k$. Then by the induction hympothesis we have $b_{k+1} \c a_k \mod p^k$. Thus $b_{k+1} a_k + p^ks_k$ for some $s_k \in \Z$. But the displayed equation above and proceeding discussion shows that $s_k \c t_k \mod p$ and thus, $a_{k+1} \c b_{k+1} \mod p^{k+1}$ as desired.
+ \end{proof}
+
+\begin{remark}
+  An adaptation of the above proof can show in principle one can always lift from a solution from $p^k$ to a solution $\mod p^{2k}$.\\
+  Moreover, for $m > n > 1$ we always have $a_m \c a_n \mod p^n$.
+\end{remark}
+
+\subsection{Primitive Roots}
+We recall that if $n \in \N$ and $a \in \Z$ and $\gcd(a,\,n) = 1$, then $\ord_n(a) \m \phi(n)$. In this section we are interested where $\ord_n(a) = \phi(n)$.
+
+\begin{ndefi}[Primitive Root]
+  Let $n \in \N$, we say $a \in \Z$ is a primitive root $\mod n$ if and only if $\gcd(a,\,n) = 1$ and $\ord_n(a) = \phi(n)$.
+\end{ndefi}
+
+\begin{remark}
+   This is equivalent for $[a]_n$ to be a generator for the abelian group $(\Z/n\Z)^\ti$, which then must be cyclic.
+\end{remark}
+
+another remark,
+\begin{remark}
+  For some values of $n$ there are no primitive roots, for example every non trivial element of $(\Z/8\Z)^\ti = \{1,\,3,\,5,\,7\}$ and so $(\Z/8\Z)^\ti$ is not cyclic.
+\end{remark}
+
+\begin{nlemma}
+  Let $n \in \N$ and $a \in \Z$ such that they are coprime. Then for $k \in \Z$ we have,
+  $$ \ord_n(a^k) = \frac{\ord_n(a)}{\gcd(\ord_n(a),\,k)} $$
+  In particular, $\ord_n(a) = \ord_n(a^k)$ if and only if $\gcd(\ord_n(a),\,k) = 1$.
+\end{nlemma}
+\begin{proof}
+  Let $f = \ord_n(a)$. The integer $\ord_n(a^k)$ is the least $d \in \N$ such that $a^{dk} \c 1 \mod n$. By an earlier corollary, this is also the least $d$ such that $dk \c 0 \mod f$. But, by the cancelation law for congruence we can say $d \c 0 \mod \frac{f }{h}$ where $h = \gcd(f,\,k)$. But it is clear the least positive integer that is a solution i just $d = \frac{f }{h}$ and so $\ord_n(a^k) = \frac{f }{h}$ as required.
+\end{proof}
+
+\begin{nthm}
+  Let $p$ be a prime and let $d \in \N$ be a divisor of $p -1$. Then there are exactly $\phi(d)$ elements $a \mod p$ such that $\ord_p(a) = d$. In particular there are $\phi(p - 1)$ primitive roots $\mod p$.
+\end{nthm}
+\begin{proof}
+  Fix a prime $p$ and for any $d\in \N$ such that $d \m (p - 1)$ define,
+  $$ A(d) = \{a \in \N : 1 \le a \le p - 1,\, \ord_p(a) = d\} $$
+  Let $\psi(d) = \# A(d) \ge 0$. We aim to show that $\psi(d) = \phi(d)$. Since the sets $A(d)$ partition $\{1,\,2,\,\dots,\, p - 1\}$ we have,
+  $$ \sum_{d \m (p - 1)} \psi(d) = p - 1 $$
+  and we also know that,
+  $$ \sum_{d \m (p - 1)} \phi(d) = p - 1 $$
+  Therfore, we can show that if $\psi(d) \le phi(d)$ for all $d \m (p - 1)$ then $\psi(d) = \phi(d)$ for all such $d$. (Otherwise if $\psi(d_0) < \phi(d_0)$ then the sums can't be equal - contradiction.).\\
+  If $\psi(d) = 0$, then $\psi(d) \le \phi(d)$ and we are done. Hence, $\psi(d) \ge 1$. Then $A(d) \ne \varnothing$ and so $a \in A(d)$ for some $a$. Hence $\ord_p(a) = d$ and so $a^d \c 1\mod p$. Then $(a^i)^d \c 1 \mod p$ for all $i \in \Z$.\\
+  In particular,
+  $$ a,\,a^2,\,\dots,\,a^d $$
+  are all solutions to $x^d - 1 \c 0 \mod p$. By an earlier corollary we have that all the above numbers are incongruent $\mod p$ and by Lagranges polynomial congruence theorem, then the congrucence above has at most $d$ solutions. So the above numbers are solutions to that congruence and are the only solutions. Hence each number in $A(d)$ must be congruent to $a^k \mod p$ for some $k = 1,\,\dots,\,d$. By Lemma 6.4, $\ord_p(a^k) = d$ if and only if $\gcd(k,\,d) = 1$. In other words, from the list of numbers, there are $\phi(d)$ of them that have order $d \mod p$. Thus $\psi (d) = \phi(d)$ if $\psi(d) \ne 0$, as required.
+\end{proof}
+
+\begin{ncor}
+   Let $p$ be prime, then there exists a primitive root $g$ modulo $p$ (not necessarily unique). In other words, $(\Z/p\Z)^\ti$ is cyclic. Moreover, for any $a \in \Z$ with $p\nmid a, \ex k \in\Z$, such that $a \c g^k \mod p$.
+\end{ncor}
+\begin{proof}
+  The existence of primitive roots follow by the thoerem as $\phi(p - 1) \ge 1$. By definition, $\ord_p(g) = p - 1$ and $1,\,g,\,g^2,\,\dots,\,g^{p-2}$ are congruent modulo $p$, in some order which gives the last claim.
+\end{proof}
+
+\begin{nthm}[Primitive Root Test]
+  Let $n \in \N$ and $a \in \Z$ where $a$ and $n$ are coprime. Then $a$ is a primitive root $\mod n$ if and only if
+  $$ a^{\frac{\phi(n)}{q}} \not\c 1 \mod n $$
+  for every prime $q \m \phi(n)$.
+\end{nthm}
+\begin{proof}
+  If $a^{\frac{\phi(n)}{q}} \c 1 \mod n$, then $\ord_n(a) \le \frac{\varphi(n)}{q} < \phi(n)$ and so cannot be a primitive root modulo $n$.\\
+  Suppose conversely that $a^{\frac{\phi(n)}{q}} \not\c 1 \mod n$ for every prime $q \m \phi(n)$. Consider the prime factorisation of $q = \prod_{i} p_i^{r_i}$. Let $m = \ord_n(a)$, then $m \m \phi(n)$ and so $m = q_1^{t_1} \dots q_s^{t_s}$ where $0 \le t_i \le r_i$. Suppose that $m < \phi(n)$.
+  Then $\ex j, t_j < r_j$, hence $m \m q_1^{r_1}\dots q_j^{t_j} \dots q_s^{r_s} = (\phi(n)/q_j)$. But $a^m \c 1 \mod n$ and so $a^{\frac{\phi(n) }{q_j}} \c 1 \mod n$ - Contradiction.
+\end{proof}
+
+\begin{nthm}
+  Let $p$ be a prime. If $g$ is a primitive root mod $p$, then $g$ is also a primitive root mod $p^e$ for all $e > 1$ if and only if $g^{p-1} \not\c 1\mod p^2$.
+\end{nthm}
+\begin{proof}
+  Not examinable. See Apostal Introduction to ANT, Chp 10.
+\end{proof}
+
+\begin{nthm}
+  Let $n \in \N$. Then $(\Z/n\Z)^\ti$ is cyclic $\iff$ there exists a primitive root modulo $n$ $\iff$ $n = 1,2,4, p^e, 2p^{e}$ where $e \in \N$ and $p$ is an odd prime.
+\end{nthm}
+\begin{proof}
+  Not examinable. See again Apostal Introduction to ANT, Chp 10.
+\end{proof}
+
+\subsection{Wilson's Theorem}
+\begin{nthm}[Wilson's Theorem]
+  An integer is prime if and only if $(p - 1)! \c -1 \mod p$.
+\end{nthm}
+\begin{proof}
+  Suppose that $n$ is composite. Then there exists $d$ dividing $n$ with $1 < d < n$. Therefore, $d \m (n - 1)!$ and $d \m n$. So if $(n - 1)! \c -1 \mod n$, then $n \m ((n-1)! + 1)$ and so $d \m ((n - 1)! + 1)$. Hence, $d \m 1 = ((n - 1)! + 1) - (n - 1)!$ - Contradiction. Hence, $(n - 1)! \not\c -1 \mod n$.\\
+
+  Suppose $p$ is a prime. The case $p = 2$ is easy so we can assume that $p$ is odd. Each $a \in \{1,\,2,\,\dots,\,p-1\}$ is coprime to $p$ and therefore has a unique inverse $a^{-1} \in \{1,\,2,\,\dots,\,p-1\}$ modulo $p$, that is $aa^{-1} \c 1 \mod p$.
+  Note that $(a^{-1})^{-1}\c a \mod p$. If $a = a^{-1}$, the $1 \c aa^{-1} \c a^2 \mod p$ and so $a \c \pm 1 \mod p$ and so $a = 1$ or $a = p - 1$. In the product,
+  $$ (p - 1)! = 1 \times 2 \ti \dots \ti (p - 2) \ti (p - 1) $$
+  we pair off each term except $1$ and $p - 1$. Hence, $(p - 1)! \c 1 \ti (p - 1) \c -1 \mod p$.
+\end{proof}
+
+We now consider an alternative proof using primitive roots.
+
+\begin{proof}[\textbf{Alternative proof using Primitive Roots for Wilson's Theorem}]
+  If $n$ is compositve, proceed as before. Again, we are reduced to considering $p$ as an odd prime. Let $g$ be a pimitive root modulo $p$. Then the powers $1, g, g^2, \dots, g^{p-2}$ are congruent modilo $p$ in some order,
+  $$ (p - 1)! = 1gg^{2}g^3\dots g^{p-2} = g ^{1 + 2 + \dots + (p-2)} $$
+  and the sum is just an arithmetic progression we see that,
+  $$ (p - 1) \c g^{(p-1)(p-2)/2}\mod p $$
+  as $p$ is odd, we can write $p = 2k +1$ and as $k < 2k = p-1$ then $g^k \not\c 1 \mod p$ but $g^{2k} = g^{p-1} \c 1 \mod p$ as $\ord_p(g) = p - 1$ by definition. Since $(g^k)^2 = g^{2k} \c 1 \mod p$ and $p$ is an odd prime we have $g^k \c \pm 1 \mod p$. Hence, $g^k \c -1 \mod p$. We now conclude,
+  \begin{align*}
+    (p - 1)! &\c g^{(p-1)(p-2)/2} \mod p\\
+    &= g^{(2k - 1)k}\\
+    &= (g^k)^{2k-1}\\
+    &\c (-1)^{2k-1} \mod p \\
+    &\c -1 \mod p
+  \end{align*}
+\end{proof}
