@@ -1,0 +1,100 @@
+% !TEX root = ../notes.tex
+
+We are now going to prove the controller canonical form, \marginnote{\emph{Lecture 16}}[0mm]
+\begin{proof}
+  We note that by the definitions of $w$ and $V$.
+  $$ w^TV = \begin{pmatrix}
+    0 & 0 & \dots & 0 & 1
+  \end{pmatrix} $$
+  and so $w^TA^kB = 0$ and $w^TA^{d-1}B = 1$. Now suppose $a_i \in \R$ satisfy $\begin{pmatrix}
+    \a_0 & \a_1 & \dots & \a_{d-1}
+  \end{pmatrix}T = 0$. To show that $T$ is non-singular, it suffices to show that $a_i = 0$. Since the $k^{th}$ row of $T$ is $w^TA^{k-1}$, then $0 = w^T(\a_0I + \a_1A + \dots + \a_nA^{d-1})B = \a_{d-1}$, but $0 = w^T(\a_0I + \a_1A + \dots + \a_nA^{d-1})AB = \a_{d-2}$. Hence, by induction then
+  $\a_0 = \a_1 = \dots = 0$
+
+  Now we note that,
+  $$ TB = \begin{bmatrix}
+    w^TB \\ w^TAB \\ \vdots \\ w^TA^{d-1}B
+  \end{bmatrix} = \begin{bmatrix}
+    0 \\ 0 \\ \vdots \\ 1
+  \end{bmatrix}$$
+  and so $TB$ has the requisite form. It remains to show that $TAT^{-1}$ has the requistite form. We note that the $(i,j)$ of $TV$ and $TAV$ are $wA^{i+j-2}B$ and $wA^{i+j-1}B$ respectively. Then by the Cayley-Hamilton Theorem,
+  $$ TAV = \begin{bmatrix}
+    0 & 1 & 0 & \dots & 0 \\
+    0 & 0 & 1 & \dots & 0 \\
+    \vdots & \vdots & \vdots && \vdots\\
+    -a_0 & -a_1 & -a_2 & \dots & - a_{d-1}
+  \end{bmatrix} TV$$
+  and the result should be clear.
+\end{proof}
+
+\section{Pole Placement}
+The idea of that its possible to arbitrarily assign the poles of a system using a transformation. \\
+
+if we let $\hat K$ and $u = -\hat K z$, then we will have that $\di z t = (\hat A = \hat B \hat K)z$ where,
+$$ \begin{bmatrix}
+  0 & 1 & 0 & \dots & 0 \\
+  0 & 0 & 1 & \dots & 0 \\
+  \vdots & \vdots & \vdots && \vdots\\
+  -a_0 - k_0 & -a_1-k_1 & -a_2-k_2 & \dots & - a_{d-1} - k_{d-1}
+\end{bmatrix} $$
+
+It can be verified that the eigenvales can be placed arbitrarily by choice of $\hat K$. If we let $K = \hat K T$ and $u = - Kx$. Then, $\di x t = (A - BK)x$ and the characteristic polynomial of $\hat A - \hat B\hat K$ is the same as $A - BK$ then we can arbitrarily place the eigenvales of $A - BK$ by choice of $K$, up to the laws of FTA.\\
+
+We note that pole placement is also true for multi-input-output systems, ie. this is true for every controllable system. The proof for this is similar but with addition that there necessarily exists matrices $N\in \R^{n\ti d}$ and $M \in \R^{n\ti 1}$ such that $(A - BN, BM)$ is controllable.
+
+We can now update our theorem,
+\begin{nthm}
+  We will show the following are equivalent,
+  \begin{enumerate}
+    \item The system is controllable
+    \item For any $T > 0$, $\int_0^T e^{-A\t}BB^T e^{-A^T\t}\,d\t$ is non-singular.
+    \item If $z \in \R^d$ satisfies $z^T [B \quad AB \quad \dots \quad A^{d-1}B]$ then $z = 0$
+    \item The eigenvales of $A - BK$ can be arbitrarily assigned by a suitable choice of $K \in \R^{n \ti d}$.
+  \end{enumerate}
+\end{nthm}
+
+% Lec 17
+We can do all this tedious calculation in matlab with \marginnote{\emph{Lecture 17}}[0mm] \texttt{charpoly}. We can use \texttt{place} to place roots wherever we want.
+
+\section{Stabilisability}
+We are now interested to pick the input to drive the system to the origin,
+\begin{ndefi}[Stabilisability]
+  If we consider $\di x t = Ax + Bu$ this is stabilisible if, for any $z_0 \in \R^d$, there exists an input $u$ such that $x(0) = z_0$ and $\lim_{t\to\infty} x(t) = 0$.
+\end{ndefi}
+
+To determine whether a system is stabilisible, we will demonstatrate the existence of a non-singular matrix $T$ which transforms the system into the form,
+$$ TAT^{-1} = \begin{bmatrix}
+  A_{11} & A_{12} \\ 0 & A_{22}
+\end{bmatrix}  \text{ and } TB = \begin{bmatrix}
+  B_1 \\ 0
+\end{bmatrix}$$
+where $\di {\hat x} t = A_{11}\hat x + B_1 u$ is controllable.
+
+\begin{proof}
+  We consider the contrabililty matrix as before and $TV = \begin{bmatrix}
+    \hat V \\ 0
+  \end{bmatrix}$ and this can be constructed via gaussian elimination. We let the number of rows of $\hat V$ is $r$. Now we can get that,
+  $$ \begin{bmatrix}
+    \har B & \hat A\hat B & \dots \hat A^{d-1}\hat B
+  \end{bmatrix} = V$$
+  and so the final $d - r$ rows of $\hat B$ is zero. By CHT then the final $d - r$ tows of $\hat A^d \hat B$ are zero. We can now show if,
+  $$ \hat A = \begin{bmatrix}
+    \hat A_{11} & \hat A_{12}\\
+    \hat A_{21} & \hat A_{22}
+  \end{bmatrix} $$
+  then $\hat A_{21} = 0$ by multiplying by $V$ and the equating with $V$ and considering the $d - r$ rows.
+\end{proof}
+
+\begin{nthm}
+  A system
+  $$ \di x t = Ax + Bu $$
+  is stabilisible if and only if the eigenvalues of $A_{22}$ are in the OLHR.
+\end{nthm}
+\begin{proof}
+  Now we will partition $z = Tx$ compatibly with $TAT^{-1} = \begin{bmatrix}
+    A_{11} & A_{12} \\
+    0 & A_{22}
+  \end{bmatrix}$ and $z \in \R^2$. We now note that $\di {z_2} t = A_{22}z_2$ and then $z_2(t) = e^{A_{22}t}z_2(0)$, if $A_{22}$ has an eigenvalue in the CRHP, then $z_2(t)$ doesnt tend to zero as $t \to \infty$, so the system is not stabilisible.\\
+
+  As $\di {\hat{x}} t = A_{11}\hat x + B_1u$ is controllable, $\ex \hat K \in \R^{r \ti n}$ such that the eigenvalues of $A_{11} - B_1\hat K$ are all in the open left half plane. 
+\end{proof}
