@@ -5,11 +5,11 @@ We are going to consider a continuous level, but you can use discrete level.
 % mathscr
 \begin{nthm}[The variation principle]
   $$ \L = \int_{t_1}^{t_2} \frac{1}{2}\I\vec \O \cdot \vec\O \,dt $$
-  and we find differential equations by letting $\d\L = 0$ but this is subject to $\d\vec\O(t_1) = \d\O(t_2) = \vec 0$
+  and we find differential equations by letting $\d\L = 0$ but this is subject to $\d\vec\O(t_1) = \d\vec\O(t_2) = \vec 0$
 \end{nthm}
 and so,
 $$ \d\int_{t_1}^{t_2} \frac{1}{2}\I\vec\O \cdot \vec\O\, dt = \int_{t_1}^{t_2} \frac{1}{2}\I\d\vec\O \cdot \vec\O + \frac{1}{2}\I\vec\O \cdot \d\vec\O \, dt  = \int_{t_1}^{t_2}\I\vec\O \cdot \d\vec\O$$
-but what is $\d\vec\O$, but remember we have $\hat\O$, which is the lie algebra of $\SO(3)$. We said, $\Oh = R^T\dot R = R^{-1}\dot R$. Now we take variations of $\Oh = \vec\O \times \vec X$ and so,
+but what is $\d\vec\O$, but remember we have $\Oh$, which is the lie algebra of $\SO(3)$. We said, $\Oh = R^T\dot R = R^{-1}\dot R$. Now we take variations of $\Oh = \vec\O \times \vec X$ and so,
 $$ (\d \vec \O)\times\vec X = (\d\Oh) \vec X $$
 and so we see that,
 $$ \d\Oh = \d(R^{-1}\dot R) = \d R^{-1}\dot R + R^{-1}\d\dot R = 0 $$
@@ -26,18 +26,28 @@ as $\d I = \d RR^{-1} + R\d R^{-1}$ and then we see that $R^{-1}\d R R^{-1} + R^
   Prove,
   $$ \d\vec\O = \dot\Lambda + (\vec\O \times \vec\Lambda) $$
 \end{exercise}
-
+{\color{red} \begin{solution}
+  We can use the fact that $\wh{[\vec\O,\,\vec\Lambda]} = [\Oh,\,\Lh]$ and then we can get the required result.
+  \begin{align*}
+    \d\Oh &= \Lhd + [\Oh,\,\Lh] \\
+    &= \Lhd + \wh{[\vec\O,\,\vec\Lambda]} \\
+    &= \Lhd + \wh{(\vec\O \ti \vec\Lambda)} \\
+    \wh{\d\vec\O} &= \wh{\Ld + (\Ov \ti \Lv)} \\
+  \end{align*}
+  and so we can see that $\d\Ov = \dot\Lv + (\Ov \ti \Lv)$
+\end{solution}
+ }
+\noindent
 Now, let us substitute this back into our variational principle.
 \begin{align*}
-  \int_{t_1}^{t_2} \I \vec\O \cdot \vec\O \,dt &= 0 \\
+  \d\int_{t_1}^{t_2} \I \vec\O \cdot \vec\O \,dt &= 0 \\
   \int_{t_1}^{t_2}\I \vec\O \cdot \d\vec\O \,dt &= 0 \\
-  \int_{t_1}^{t_2} {\I \vec\O \cdot (\dot\La + \vec\O \times \vec\La)\,dt} &= 0\\
-  \left[ \I\vec\O \cdot \La |_{t_2} - \I\vec\O \cdot \La |_{t_1} \right] - \int_{t_1}^{t_2} \di{}{t}(\I\vec\O) \cdot \Lambda\,dt + \int_{t_1}^{t_2} (\I\vec\O \times \vec\O)\cdot \vec\Lambda &= 0\\
-  0 - 0 - \int_{t_1}^{t_2} (- \I\dot{\vec\O} + \I\vec\O \times \vec\O) \cdot \Lambda \, dt &= 0
+  \int_{t_1}^{t_2} {\I \vec\O \cdot (\Ld + \vec\O \times \vec\La)\,dt} &= 0\\
+  \left[ \I\vec\O \cdot \Lv |_{t_2} - \I\vec\O \cdot \Lv |_{t_1} \right] - \int_{t_1}^{t_2} \di{}{t}(\I\vec\O) \cdot \Lv\,dt + \int_{t_1}^{t_2} (\I\vec\O \times \vec\O)\cdot \Lv &= 0\\
+  0 - 0 - \int_{t_1}^{t_2} (- \I\dot{\vec\O} + \I\vec\O \times \vec\O) \cdot \Lv \, dt &= 0
 \end{align*}
 Hence,
 $$ \I\dot{\vec \Lambda} = \I\vec\O \times \vec\O $$
-
 \noindent
 We can write the equations by considering the tangent space.
 
@@ -50,7 +60,7 @@ and satisfies,
 $$ \d\int_{t_1}^{t_2} L(R, \dot R)\,dt = 0 $$
 this means,
 \begin{align*}
-  \int_{t_1}^{t_2} L(R, \dot R)\,dt &= \int_{t_1}^{t_2} \ip{\pd{L}{R}}{\d R} + \ip{\pd{L}{\dot R}}{\d R}\, dt\\
+  \d\int_{t_1}^{t_2} L(R, \dot R)\,dt &= \int_{t_1}^{t_2} \ip{\pd{L}{R}}{\d R} + \ip{\pd{L}{\dot R}}{\d R}\, dt\\
   &= \ip{\pd{L}{\dot R}}{\d R}\Bigg|_{t_2} - \ip{\pd{L}{\dot R}}{\d R}\Bigg|_{t_1} + \int_{t_1}^{t_2} \ip{\pd{L}{R} - \di{}{t} \pd{L}{\dot R}}{\d R} \,dt
 \end{align*}
 and so we can notice $\di{}{t}\pd{L}{\dot R} - \pd{L}{R} = 0$

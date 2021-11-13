@@ -2,9 +2,9 @@
 
 Let $g(t) \in G$ such that $g(0) = e$ where $\eta = \dot g (0) \in T_eG$
 $$ ad_\eta \xi := \di {}{t} _{t = 0} Ad_{g(t)}\xi \qquad \fa \xi \in \mathfrak{g} $$
-qhich we can see to be
+which we can see to be
 $$ \dot g(0)\xi g(0)^{-1} + g(0)\xi \di {}{t}_{t=0} g(t)^{-1}= \eta\xi - \xi\eta $$
-Hence we can say that $\ad_{\eta}^\xi = [\eta, \xi] = \eta\xi - \xi\eta$.\\
+Hence we can say that $\ad_{\eta}\xi = [\eta, \xi] = \eta\xi - \xi\eta$.\\
 Hence now we define the coadjoint action on $\mu$,
 \begin{ndefi}[Adjoint / Coadjoint action on $\mathfrak{g}/\mathfrak{g^*}$]
   The adjoint action of the matrix lie algebra on itself is given by,
@@ -16,10 +16,25 @@ Hence now we define the coadjoint action on $\mu$,
 \begin{exercise}
   Find $\ad^*_\eta \mu$.
 \end{exercise}
-
+{\color{red} \begin{solution}
+  Above we said that $\ip{\Ad^*_g\mu}{\xi} = \ip{g^T \mu (g^T)^{-1}}{\xi}$ and so $\Ad^*_g \mu = g^T \mu (g^T)^{-1}$. As before we define,
+  $$ \ad^*_g \mu = \dit_{t=0} Ad_g^* \mu $$
+  and now we can input our definitions and differentiate where we define $g(0) = 0$ and $\dot g (0) = \eta \in T_eG$,
+  \begin{align*}
+    \ad^*_g \mu &= \dit_{t=0} Ad_g^* \mu \\
+    &= \dit_{t=0} g^T \mu (g^T)^{-1} \\
+    &= [\dot g^T \mu (g^T)^{-1} - g^T \mu (g^T)^{-1}\dot g^T (g^T)^{-1}]_{t=0} \\
+    &= \dot g(0)^T \mu (g(0)^T)^{-1} - g(0)^T \mu (g(0)^T)^{-1}\dot g(0)^T (g(0)^T)^{-1} \\
+    &= \eta^t \mu e - e \mu e^{-1} \eta^T e^{-1} \\
+    &= \eta^T \mu - \mu \eta^T \\
+    &= [\eta^T,\,\mu]
+  \end{align*}
+  Hence, $\ad_g^*\mu = [\eta^T,\,\mu]$
+\end{solution}
+ }
 \section{Rotation}
 \subsection{Inertial Frame}
-A spatial coordinate system with origin at the centre of mass of the given rigid body. We denote it by, $\vec{x}(t) \in \R^3$, where $\vec x = X$. Assume we have a spacial coordinate system,
+A spatial coordinate system with origin at the centre of mass of the given rigid body. We denote it by, $\vec{x}(t) \in \R^3$, where $\vec x = X$. Assume we have a spatial coordinate system,
 % draw two coordinate axis (x, y, z) and (X, Y, Z)
 We need a way to rotate things without constraints, so we denote a tensor $R(t)$ and say $\vec x(t) = R(t)\vec X$ where $\vec X$ is in the body coordinate system. The configuration of the body particle at time $t$ is given by a rotation matrix that takes the label $\vec X$ to current position $\vec x(t)$ where $R \in \SO(3)$ is a proper rotation matrix; this means,
 $$ R^T = R^{-1} \qquad \det R = 1 $$
@@ -30,7 +45,7 @@ $$ K = \frac{1}{2}\int_\b \rho \norm{\vec x}^2\, d^3\vec X$$
 which we can change to,
 \begin{align*}
   \frac{1}{2}\int_\b \rho \norm{\vec x}^2\, d^3\vec X &= \frac{1}{2}\int_\b \rho(\vec X)\norm{\dot R(t)\vec X}^2 \,d^3\vec X\\
-  &= \frac{1}{2}\int_\b \rho(\vec X)\dot R(t)\vec X \circ \dot R(t)\vec X \,d^3\vec X\\
+  &= \frac{1}{2}\int_\b \rho(\vec X)\dot R(t)\vec X \cdot \dot R(t)\vec X \,d^3\vec X\\
 \end{align*}
 Now we can say if $V = 0$. Hence, $L = K$ and so,
 $$ \di{}{t}\pd{K}{\dot R} - \pd{K}{R} = \vec 0 $$
@@ -71,13 +86,17 @@ where $\vec\O = \begin{bmatrix}
 where $\O$ is the axel vector.
 and so,
 \begin{align*}
-  K &= \frac{1}{2} \int_\b {\rho (\vec X)\norm{\vec\O \times \vec X}^2 d^3\vec X}\\
-  &= \frac{1}{2} \int_\b {\rho (\vec X)(\vec\O\times\vec X) \cdot (\vec\O\times\vec X) d^3\vec X}\\
-  &= \frac{1}{2}\int_\b {\rho (\vec X)(\norm{\vec \O^2}\norm{\vec X^2} - (\vec\O \cdot \vec X)^2)^2 \cdot (\vec\O\times\vec X) d^3\vec X}\\
+  K &= \frac{1}{2} \int_\b {\rho (\vec X)\norm{\vec\O \times \vec X}^2 \,d^3\vec X}\\
+  &= \frac{1}{2} \int_\b {\rho (\vec X)(\vec\O\times\vec X) \cdot (\vec\O\times\vec X) \,d^3\vec X}\\
+  &= \frac{1}{2}\int_\b {\rho (\vec X)(\norm{\vec \O^2}\norm{\vec X^2} - (\vec\O \cdot \vec X)^2) \,d^3\vec X}\\
+  &= \frac{1}{2}\int_\b {\rho (\vec X)(\vec\O^T\vec\O\norm{\vec X^2} - \vec\O^T\vec X \vec X^T\vec\O) \,d^3\vec X}\\
+  &= \frac{1}{2}\int_\b {\rho (\vec X)\vec\O^T(\norm{\vec X^2}I - \vec X \vec X^T)\vec\O\, d^3\vec X}\\
+  &= \frac{1}{2}\int_\b {\rho (\vec X)\vec\O^T\vec\O(\norm{\vec X^2} - \vec X \vec X^T)\, d^3\vec X}\\
+  &= \frac{1}{2}\vec\O \cdot \vec\O \int_\b {\rho (\vec X)(\norm{\vec X^2} - \vec X \vec X^T)\, d^3\vec X}\\
   &= \frac{1}{2}\mathbb{I}\vec\O \cdot \vec \O
 \end{align*}
-where $I$ is the moment of inertia tensor, which we define as,
+where $\I$ is the moment of inertia tensor, which we define as,
 $$ \mathbb{I} = \int_\b \rho(\vec X)\norm{\vec X}^2I - \vec X\vec X^T d^3\vec X $$
 where $\vec X\vec X^T = \vec X \otimes \vec X$ and,
-$$ (a \otimes b)c = (b \cdot c)a $$
-for all $a, b, c \in \R^3$.
+$$ (\vec a \otimes \vec b)\vec c = (\vec b \cdot \vec c)\vec a $$
+for all $\vec a, \vec b, \vec c \in \R^3$.

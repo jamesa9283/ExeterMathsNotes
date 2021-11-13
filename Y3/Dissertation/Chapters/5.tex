@@ -1,17 +1,37 @@
 % !TEX root = ../notes.tex
 
 Euler Poincare equtions,
-$$ \di {}{t} \pd{\ell}{\vec\O} - \pd{\ell}{\vec\O} = \vec 0 $$
+$$ \di {}{t} \pd{\ell}{\vec\O} - \pd{\ell}{\vec\O} \ti \O = \vec 0 $$
 \begin{exercise}
   Derive these
 \end{exercise}
-These are the euler-poincare equations for rotational dynamics with symmetry under left multiplication.
+{\color{red} \begin{solution}
+  We shall start from Hamilton's Principle and move forward to derive our Euler-Poincare Equations.
+  \begin{align*}
+    \d\int_{t_1}^{t_2} \ell(\Oh)\,dt &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Oh}}{\d\Oh}\, dt\\
+    &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov}
+  \end{align*}
+  Now, we shall use a fact we proved in the last exercise $\d\Ov = \Ld + (\Ov \ti \Lv)$ to derive the Euler-Poincare equations we wanted,
+  \begin{align*}
+    \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov} &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\Ld + \Ov \ti \Lv} \\
+    &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\dit\Lv} + \ip{\pd{\ell}{\Ov}}{\Ov \ti \Lv} \\
+    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\Ov}}{\Lv} + \ip{-\Ov \ti \pd{\ell}{\Ov}}{\Lv} \\
+    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\Ov}}{\Lv} + \ip{ \pd{\ell}{\Ov} \ti \Ov}{\Lv} \\
+    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\Ov} + \pd{\ell}{\Ov} \ti \Ov}{\Lv} = \vec 0\\
+  \end{align*}
+  Hence we say that
+  \begin{equation*}
+    \dit\pd{\ell}{\Ov} - \pd{\ell}{\Ov} \ti \Ov = \vec 0
+  \end{equation*}
+\end{solution} }
+These are the Euler-Poincare equations for rotational dynamics with symmetry under left multiplication.
 
+\newpage
 \begin{nthm}[]
   The spatial angular momentum (in the spatial frame) is conserved along solutions of the Euler-Poincare equations.
 \end{nthm}
 \begin{proof}
-  We know $\di {}{}\pd{\ell}{\vec \O} - \pd{\ell}{\vec \O} \times \O = 0$ and we know that $R\pd{\ell}{\vec\O}$ and the multiplcation by $R$ means spatial frame. Hence we prove,
+  We know $\di {}{t}\pd{\ell}{\vec \O} - \pd{\ell}{\vec \O} \times \O = 0$ and we know that $R\pd{\ell}{\vec\O}$ and the multiplcation by $R$ means spatial frame. Hence we prove,
   $$ \di{}{t} R\pd{\ell}{\vec \O} = \vec 0$$
   \begin{align*}
     \di{}{t} R\pd{\ell}{\vec \O} &= \dot R \pd{\ell}{\vec \O} + R\di { }{t} \pd{\ell}{\vec\O}\\
@@ -24,7 +44,7 @@ These are the euler-poincare equations for rotational dynamics with symmetry und
 Now we want to write a general form of the Euler-Poincare Equations for left invariant systems. \\
 Let $L$ be a lagrangian on the tangent bundle of a matrix lie group $G$,
 $$ L : TG \to \R $$
-$$ L = L(g, \dot G) \qquad g \in G $$
+$$ L = L(g, \dot g) \qquad \fa g \in G $$
 Assume that the lagrangian is left-invariant,
 $$ L(g,\,\dot g) = L(hg,\, h\dot g) \quad \fa h\in G $$
 and now let $h = g^{-1}$, and so $L(g,\,\dot g) = L(g^{-1}g\,g^{-1}\dot g) = \ell(\xi)$. We have gone from a lie group to a lie algebra, $\xi = g^{-1}\dot g \in T_eG = \mathfrak{g}$ which is a matrix lie algebra. We now aim to use the action functional and variational derivative,
