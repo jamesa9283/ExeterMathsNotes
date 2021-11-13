@@ -1,0 +1,96 @@
+% !TEX root = ../notes.tex
+
+\section{Quadratic Residues, Legendre Symbols, Euler Criterion and Gauss' Lemma}
+We will study the theory of congruences modulo an odd prime $p$. By completing the square we can reduce any quadratic residue to,
+$$ x^2 \c a \mod p $$
+
+\begin{nlemma}
+  Let $p$ be an odd prime and $a \in \Z$. Consider,
+  \begin{equation}
+    x^2 \c a \mod p
+  \end{equation}
+  if $p \m a$, then $(1)$ is equivalent to $x \c 0 \mod p$. Otherwise if $p \nmid a$ and $(1)$ has one solution, then $x \c b \mod p$ then $p \nmid b$ and $x \c -b$ is another, different solution.
+\end{nlemma}
+\begin{proof}
+  If $x \c 0 \mod p$, then clearly $x^2 \c 0 \mod p$. The converse follows from Euclid's Lemma for primes.\\
+  Now suppose $p \nmid a$ and $b^2 \c a \mod p$, then clearly $-b$ is also a solution to this equation. If $b \c - b \mod p$ and so $b \c 0 \mod p$. But then $a \c b^2 \c 0 \mod p$ - Contradiction as $a \nmid b$.
+\end{proof}
+
+\begin{ndefi}[Quadratic Residue]
+  Let $p$ be an odd prime and $a \in \Z$ such that $p \nmid a$. Then $a$ is a Quadratic Residue mod $p$ if $\ex x \in \Z$ such that $x^2 \c a \mod p$ and $a$ is a Quadratic Non-Residue if not.
+\end{ndefi}
+
+\begin{nprop}
+  Let $p$ be an odd prime. Then every reduced residue system mod $p$ contains exactly $\frac{(p-1)}{2}$ quadratic residues and $\frac{(p-1)}{2}$ quadratic non-residues mod $p$. The quadratic residue belong to the residue classes contaning,
+  $$ 1^2,\,2^2,\,\dots,\,\left(\frac{(p-1)}{2}\right)^2 $$
+\end{nprop}
+\begin{proof}
+  First show that the list of numbers are distinct mod $p$. If $x^2 \c y^2 \mod p$ where $1 \le x, y \le \frac{p-1}{2}$ then $(x+y)(x-y) \c 0 \mod p$. But, $1 < x+ y < p$ so $x + y$ is coprime to $p$. So by the Cancellation Law, we must have $x - y \c 0 \mod p$ and so $x \c y \mod p$ and as $|x - y| < p$, then $x = y$. The remaining squares are,
+  $$ \left(\frac{p+1}{2}\right)^2,\,\left(\frac{p+3}{2}\right)^2,\,\dots,\, (p - 2)^2,\, (p-1)^2 $$
+  but $(p - k)^2 \c (-k)^2 \c k^2 \mod p$ for every $k \in \Z$ with $1 \le k \le \frac{(p - 1)}{2}$, these are then congruent to,
+  $$ \left(\frac{p-1}{2}\right)^2,\,\left(\frac{p-3}{2}\right)^2,\,\dots,\, 2^2,\, 1^2 $$
+  this is our original list. Hence, there are precisely $\frac{p-1}{2}$ quadratic residues mod $p$ and so there are $\frac{p-1}{2}$ quadratic non-residues mod $p$.
+\end{proof}
+
+\subsection{Legendre Symbol}
+\begin{ndefi}[Legendre Symbol]
+  Let $p$ be an odd prime. For any $a \in \Z$, we define the Legendre Symbol to be,
+  $$ \gls = \begin{cases}
+    +1 & \text{$p \nmid a$ and $a$ is a quadratic residue mod $p$} \\
+    -1 & \text{$p \nmid a$ and $a$ is not a quadratic residue mod $p$}\\
+    0 & \text{$p \m a$}
+  \end{cases}$$
+\end{ndefi}
+
+\begin{remark}
+   By an earlier lemma, we see that $x^2 \c a \mod p$ has precisely $\gls + 1$ distinct solutions mod $p$
+\end{remark}
+
+\begin{remark}
+   We always have $\ls 1 p = 1$. Moveover, if $a, b \in \Z$ such that $a \c b \mod p$. Then, $\ls a p \c \ls b p$. This is sometimes known as periodicity.
+\end{remark}
+
+\begin{eg}
+  If $m \in \Z$ with $p \nmid m$, then $\ls {m^2} p = 1$.
+\end{eg}
+
+\subsection{Eulers Criterion}
+
+\begin{nlemma}
+  Let $p$ be an odd prime and let $g$ be a primitive root mod $p$. Let $a \in \Z$ with $p \nmid a$. Then $a \c g^k \mod p$ for some $k \in \Z$ and $a$ is a quadratic residue mod $p$ if and only if $k$ is even.
+\end{nlemma}
+\begin{proof}
+  First note that a primitive root $g$ mod $p$ exists by an earlier Corollary, so $a \c g^k \mod p$ for some $k \in \Z$. Suppose $k \in \Z$ is even. Then $k = 2j$ and so $a \c (g^j)^2 \mod p$. Thus $a$is a quadratic residue mod $p$. Suppose conversely $a$ is a quadratic resdiue mod $p$. Then $a \c b^2 \mod p$ for some $b \in \Z$ and $p \nmid b$.
+  Then $b \c g^r$ for some $r \in \Z$ and so $g^k \c (g^r)^2 \c g^{2r} \mod p$. By an earlier proposition, we can say $k \c 2r \mod p-1$ by an earlier proposition since $\ord_p(g) = \phi(p) = p-1$. So $k \c 2r \mod 2$ since $2 \c (p-1)$. Hence $k \c 0 \mod 2$ and is even.
+\end{proof}
+
+\begin{nthm}[Eulers Criterion]
+  If $p$ is an odd prime and $a \in \Z$ then
+  $$ \gls \c a^{\frac{p-1}{2}}\mod p $$
+\end{nthm}
+\begin{proof}
+  This is obvious if $p \m a$. So suppose $p \nmid a$. Let $g$ be a primitive root mod $p$. Then there exists some $k \in \Z$ such that $a \c g^k \mod p$. Since $\ord_p(g) = p - 1$ we have $g^{p-1} \c 1 \mod p$ and $g^{\frac{p-1}{2}}\not\c 1 \mod p$. Since $p$ is an odd prime we have, $g^{\frac{p-1}{2}}\c \pm 1 \mod p$.
+  Therefore, $g^{\frac{p-1}{2}} \c -1 \mod p$. Then,
+  $$ a^{\frac{p-1}{2}} = \left(g^k\right)^{\frac{p-1}{2}} \c \left(g^{\frac{p-1}{2}} \right)^k \c (-1)^k \mod p $$
+  The result now follows from the previous lemma.
+\end{proof}
+
+Now for an alternative proof,
+\begin{proof}[alternative proof]
+  Again, we may suppose $p \nmid a$. Suppose that $\gls = 1$. Then $\ex b \in \Z$ with $p \nmid b$ such that $a \c b^2 \mod p$. Thus by FLT we have,
+  $$ a^{\frac{p-1}{2}} \c \left(b^2\right)^{\frac{p-1}{2}} \c b^{p-1} \c 1 \c \gls \mod p $$
+  Now suppose that $\gls = -1$ and consider the polynomial
+  $$ f(x) = x^{\frac{p-1}{2}}-1 $$
+  since $f$ has degree $\frac{p-1}{2}$, hence by Lagranges Polynomial Congruence Theorem,
+  $$ f(x) \c 0 \mod p $$
+  has $\frac{p-1}{2}$ solutions. But we have shown by that the quadratic residues mod $p$ are solutions and there are $\frac{p-1}{2}$ of them. Hence, none of the quadratic non-residues are solutions and so $a^{\frac{p-1}{2}} \not\c 1 \mod p$. But by FLT we have $a^{p-1} \c 1 \mod p$ and we can say that $a^{\frac{p-1}{2}} \c \pm 1 \mod p$. Therefore,
+  $$ a^{\frac{p-1}{2}} \c -1 \c \gls \mod p $$
+  This completes the proof.
+\end{proof}
+
+\begin{nthm}[Multiplicity of Legendre's Symbol]
+  Let $p$ be an odd prime and $a, b \in \Z$. Then $\ls{ab} p = \ls a p \ls b p$
+\end{nthm}
+\begin{proof}
+  If $$
+\end{proof}
