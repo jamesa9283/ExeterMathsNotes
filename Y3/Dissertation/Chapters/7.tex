@@ -1,7 +1,7 @@
 % !TEX root = ../notes.tex
 
 \section{The Hat Map as a Lie Algebra Isomorphisms}
-The lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\mathfrak{SO}(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
+The lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\SO(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
 $$ \di {}{t} \pd{\ell}{\Oh} - \ad^*_{\Oh}\pd{\ell}{\Oh} = 0 $$
 Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
 \begin{align*}
@@ -13,11 +13,11 @@ Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defin
   &= \ip{[\vec\Pi,\,\Oh]}{\oh}
 \end{align*}
 
-Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ {[\Oh,\,\oh] = }\widehat{\vec\O\ti\vec\o} $
+Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ {[\Oh,\,\oh] = }\wh{\vec\O\ti\vec\o} $
 \begin{proof}
   Exercise
 \end{proof}
-We define, $\hat{\cdot} : (\R^3,\, \cdot \ti \cdot) \to (\mathfrak{SO}(3),\, [\cdot,\, \cdot])$. This is the isomorphism.\\
+We define, $\hat{\cdot} : (\R^3,\, \ti) \to (\SO(3),\, [\cdot,\, \cdot])$. This is the isomorphism.\\
 
 We have described Lagrangians that have left or right invariance. We now look to Lagrangians that have Symmetry breaking parameters, like gravity. If we consider the spherical pendulum, we have defined $\Oh = R^T\dot R$ and we define $\oh = R\vec\O$ and then we can see that $\oh = \dot R R^T = \dot R R^{-1}$ where $R \in \SO(3)$. This doesn't lead to a symmetric Lagrangian but we can still use our theory here. \\
 

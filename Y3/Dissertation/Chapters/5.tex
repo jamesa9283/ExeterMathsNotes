@@ -35,8 +35,8 @@ These are the Euler-Poincare equations for rotational dynamics with symmetry und
   $$ \di{}{t} R\pd{\ell}{\vec \O} = \vec 0$$
   \begin{align*}
     \di{}{t} R\pd{\ell}{\vec \O} &= \dot R \pd{\ell}{\vec \O} + R\di { }{t} \pd{\ell}{\vec\O}\\
-    &= R\Oh\pd{\ell}{\vec\O} + R(\pd{\ell}{\vec \O} \times \vec\O)\\
-    &= R(\O \times \pd{\ell}{\vec\O}) + R(\pd{\ell}{\vec \O} \times \vec\O)\\
+    &= R\Oh\pd{\ell}{\vec\O} + R\left(\pd{\ell}{\vec \O} \times \vec\O\right)\\
+    &= R\left(\O \times \pd{\ell}{\vec\O}\right) + R\left(\pd{\ell}{\vec \O} \times \vec\O\right)\\
     &= \vec 0
 \end{align*}
 \end{proof}
@@ -51,7 +51,7 @@ and now let $h = g^{-1}$, and so $L(g,\,\dot g) = L(g^{-1}g\,g^{-1}\dot g) = \el
 \begin{align*}
   \d \int_{t_1}^{t_2} L(g,\,\dot g) &= \vec 0\\
   \d \int_{t_1}^{t_2} \ell(\xi)\,dt &= \vec 0\\
-  \int_{t_1}^{t_2} \ip{\pd{\ell}{xi}}{\d \xi}\,dt &= \vec 0\\
+  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d \xi}\,dt &= \vec 0\\
 \end{align*}
 Now we want to consider $\d \xi = \d (g^{-1}\dot g)$,
 \begin{align*}
@@ -59,28 +59,84 @@ Now we want to consider $\d \xi = \d (g^{-1}\dot g)$,
   &= g^{-1}\d gg^{-1}\dot g + g^{-1}\di {}{t}\d g\\
   &= -(g^{-1}\d g)g^{-1}\dot g + g^{-1}\di{}{t}\d g\\
   &= - \eta\xi + \di{}{t}\d (g^{-1}\d g) + (g^{-1}\dot g)(g^{-1}\di{}{t}\d g)\\
-  &= -\eta\xi \dot\eta+\xi\eta\\
+  &= -\eta\xi +  \dot\eta+\xi\eta\\
   &= \dot\eta + [\xi,\,\eta]\\
   &= \dot\eta + \ad_{\xi}{\eta}
 \end{align*}
 and so back to the derivation,
 \begin{align*}
-  \int_{t_1}^{t_2} \ip{\pd{\ell}{xi}}{\d \xi}\,dt &= \vec 0\\
-  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dot\eta + \ad_{\xi}\eta}\\
-  \int_{t_1}^{t_2} \ip{-\di{}{t} \left(\pd{\ell}{\xi}\right)}{\eta} + \ip{\ad^{*}_{\xi}\pd{\ell}{\xi}}{\eta}\,dt
+  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d \xi}\,dt &= 0\\
+  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dot\eta + \ad_{\xi}\eta} &= 0\\
+  \int_{t_1}^{t_2} \ip{-\di{}{t} \left(\pd{\ell}{\xi}\right)}{\eta} + \ip{\ad^{*}_{\xi}\pd{\ell}{\xi}}{\eta}\,dt &= 0
 \end{align*}
 Since $\eta$ is arbitrary our equation is of this form,
 $$ \di{}{t} \pd{\ell}{\xi} - \ad^{*}_{\xi}\pd{\ell}{\xi} = 0 $$
 and these are our Euler-Poincare equations for a left invariant system.
 
-\begin{nthm}[Noether Theorem]
+\begin{nthm}[Noethers Theorem for left-invariant systems]
   The Euler Poincare equations associated a left-invariant system preserve the generalised momentum along solutions of the Euler-Poincare equations, that is,
   $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = 0 $$
 \end{nthm}
-\begin{proof}
-  Exercises
-\end{proof}
+{\color{red} \begin{proof}
+  Suppose we have a left invariant lagrangian, i.e. $L(g, \dot g) = L(e,\,g^{-1}\dot g) = \ell(g^{-1}g) := \ell(\xi)$ where $\xi = g^{-1}\dot g$. Firstly, however, let us consider the following derivative where $\mu(t) \in \mathfrak{g}$,
+  \begin{align*}
+    \ditat{t_0}\left( \Ad_{g^{-1}(t)}\mu(t) \right) &= \ditat{t_0} \Ad_{g^{-1}(t)g(t_0)}\left( \Ad_{g^{-1}(t_0)} \mu\right)\\
+    &= -\ad_{g^{-1}(t_0)\dot g(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right)\\
+    &= -\ad_{\xi(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right)
+  \end{align*}
+  and so we can say,
+  $$ \dit\left( \Ad_{g^{-1}(t)}\mu(t) \right) = -\ad_{\xi(t)} \left( \Ad_{g^{-1}(t)} \mu(t)\right) $$
+  Now, we can move forward and consider the trace pairing of our interested quantity and $\mu(t)$.
+  \begin{align*}
+    \ip{ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) }{ \mu(t) } &= \dit \ip{ \Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t) }{ \mu(t) } \\
+    &= \dit \ip{ \pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
+    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } + \ip{ \pd{\ell}{\xi}(t) }{ \dit\Ad_{g^{-1}(t)}\mu(t) } \\
+    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } + \ip{ \pd{\ell}{\xi}(t) }{ -ad_{\xi(t)}(\Ad_{g^{-1}(t)}\mu(t)) } \\
+    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } - \ip{ \pd{\ell}{\xi}(t) }{ ad_{\xi(t)}(\Ad_{g^{-1}(t)}\mu(t)) } \\
+    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } - \ip{ ad^*_{\xi(t)}\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
+    &=  \ip{ \dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
+    &=  \ip{ \Ad^*_{g^{-1}(t)}\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right] }{ \mu(t) } \\
+  \end{align*}
+  Hence, we can say that,
+  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = \Ad^*_{g^{-1}(t)}\underbrace{\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right]}_{\text{LHS of Euler-Poincare Equations}}  $$
+  and as we have a left invariant system, we can use the left invariant Euler-Poincare equations to reduce the above derivative to zero, and hence Noethers Theorem for left invariant systems follows from this.
+\end{proof} }
 
 \begin{exercise}
   Repeat derivations for the Euler-Poincare Equations for right-invariant systems. What is Noether Theorem?\footnote{What about both left and right invariant?}
 \end{exercise}
+{\color{red} \begin{solution}
+  Now let us carry forward with the derivation for right invariant systems. A right invariant lagrangian is one that the following is true, $L(g,\,\dot g) = L(gh,\,\dot gh)$ for all $h \in G$. We then set $h = g^{-1}$ and get that $L(g,\,\dot g) = L(e,\,\dot gg^{-1})$ and so we let $\xi = \dot gg^{-1}$ and hence write our lagrangian as $\ell(\xi)$. Now we again go back to Hamiltons Principle,
+  \begin{align*}
+    0 = \d\int_{t_1}^{t_2} L(g,\,\dot g)\,dt &= \d\int_{t_1}^{t_2} \ell(\xi)\,dt\\
+    &= \int_{t_1}^{t_2} \d\ell(\xi)\,dt \\
+    &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d\xi}\,dt \\
+  \end{align*}
+  Now we consider $\d\xi = \d(\dot g g^{-1})$,
+  \begin{align*}
+    \d(\dot g g^{-1}) &= \d\dot g g^{-1} + \dot g\d g^{-1} \\
+    &= \dit(\d g)g^{-1} - \dot g g^{-1}\d gg^{-1}\\
+    &= \dit(\d g g^{-1}) - \d g\dit(g^{-1}) - \dot g g^{-1}\d gg^{-1}\\
+    &= \dit(\d g g^{-1}) - \d gg^{-1}\dot g g^{-1} - \dot g g^{-1}\d gg^{-1} && \text{let $\nu = \d gg^{-1}$}\\
+    &= \dot\nu + \nu\xi - \xi\nu \\
+    &= \dot\nu + [\nu,\,\xi] \\
+    &= \dot \nu + \ad_\nu\xi \\
+    &= \dot\nu - \ad_\xi\nu
+  \end{align*}
+  Hence, we now can move forward and complete the derivation of the right invariant Euler-Poincare Equations.
+  \begin{align*}
+    \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dit\nu - \ad_\xi\nu}\,dt &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dit\nu} - \ip{\pd{\ell}{\xi}}{\ad_\xi\nu}\,dt \\
+    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi}}{\nu} - \ip{\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt \\
+    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi} -\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt
+  \end{align*}
+  and so we can write down the Euler-Poincare equations for the right invariant system,
+  $$ \dit\pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{\xi} = 0 $$
+  We can restate Noethers Theorem as following,
+  \begin{nthm}[Noethers Theorem for right invariant systems.]
+    The Euler Poincare equations associated a right-invariant system preserve the generalised momentum along solutions of the Euler-Poincare equations, that is,
+    $$ \di{}{t} \left(\Ad^*_{g(t)}\pd{\ell}{\xi}(t)\right) = 0 $$
+  \end{nthm}
+  \begin{proof}
+    This follows from a very similar argument to before by finding that $\dit (\Ad_{g^{-1}}\mu) = \ad_\xi (\Ad_g\mu)$ and applying this fact in an identical analysis of the trace pairings ending with $\dit(\Ad_g^*\pd{\ell}{\xi}) = \Ad^*_g\left[ \dit\pd{\ell}{\xi} + \ad_\xi^* \pd{\ell}{\xi} \right]$ and then the result follows from the right-invariant version of the Euler-Poincare equations.
+  \end{proof}
+\end{solution} }
