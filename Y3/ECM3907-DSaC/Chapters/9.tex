@@ -1,0 +1,103 @@
+% !TEX root = ../notes.tex
+
+\marginnote{\emph{Lecture 19}}[0mm]
+\begin{proof}
+  Firstly we are going to show if 2 holds then so does 1. To show this we use the variation of constants formula and say $W(T) = \int_0^T e^{A^T}C^TCe^{At}\,dt$ and then if $W(T)$ is non-singular, then,
+  $$ x(0) = W(T)^{-1}\int_0^T e^{A^Tt}C^T(y(t - Du(t) - \int_0^t Ce^{A(t-\t)}Bu(\t))\,d\t)\,dt $$
+  so the system is observable.\\
+
+  Secondly we look to case (ii), if $z \in \R^d$ satisfies the condition, then $Cz = 0$ and $CA = 0$ and so $CA^kz = 0$ by the CH Theorem, $Ce^{At}\l z = 0$ for all $t \in \R$ and for any $\l$. Thus, if $u(t) = 0$ for all $t \ge 0$ then $y(t) = Ce^{At} x(0)$, so $y(t) = 0$ whenever $x(0) = \l z$ for some $\l \in \R$ and it follows that $x(0)$ cannot be uniquely determined by $u(t)$ and $y(t)$ in $t \ge 0$.\\
+
+  Finally we consider our case (iii), if $\ex T > 0$ and $z \ne 0$ such that $\int_0^T a^{A^Tt}C^TCe^{At}\,dtz = 0$ then $z^T\int_0^T a^{A^Tt}C^TCe^{At}z\,dt = 0$ and so again $h(t) = Ce^{At}z = 0$. But this implies all the derivatives of $h$ are zero. Hence,
+  $$ \begin{bmatrix}
+    C \\ CA \\ \vdots \\ CA^{d-1}
+  \end{bmatrix}z = 0 $$
+\end{proof}
+
+\begin{remark}
+   It can also be shown that, if the system is observable, then the eigenvales of $A - LC$ can be placed arbitrarily by choice of $L \in \R^{d \ti m}$.
+\end{remark}
+
+\subsection{Observer}
+An observer is a dynamical system that estimates the states of another dynamical system. These are very useful for control. They are basically a replica, but with additional inputs to correct for the difference.\\
+
+Specifically, for the classical system, the observer takes the form
+$$ \di {\hat x} t = A\hat x + Bu - L(y - \hat y), \quad \hat y = C\hat x - Du $$
+We define the observer error $\hat e = \hat x -x$ and rearrange to obtain.
+% thing
+$$ \dit \begin{bmatrix}
+  \hat x \\ \hat e
+\end{bmatrix} = \begin{bmatrix}
+  A & -LC \\ 0 & A - LC
+\end{bmatrix} \begin{bmatrix}
+  \hat x \\ \hat e
+\end{bmatrix} + \begin{bmatrix}
+  B \\ 0
+\end{bmatrix}u \quad y = \begin{bmatrix}
+  C & -C
+\end{bmatrix}\begin{bmatrix}
+  \hat x \\ \hat e
+\end{bmatrix} + Du $$
+
+We notice that $\di {\hat e} t = (A - LC)\hat e$ and this can be solve nicely. If this system is observable, then we can place all the eigenvales where we want and so we can place them in the OLHP and so we have $\hat e \to 0$ as $t \to \infty$. \\
+
+We can apply state feedback using the state of the observer as opposed to the real system. Specifivally we let $u = -K\hat x$ where $K \in \R^{n \ti d}$ is to be assigned. This results in,
+$$ \dit \begin{bmatrix}
+  \hat x \\ \hat e
+\end{bmatrix}  = \begin{bmatrix}
+  A - BK & -LC \\
+  0 & A - LC
+\end{bmatrix}\begin{bmatrix}
+  \hat x \\ \hat e
+\end{bmatrix}, \quad y = \begin{bmatrix}
+  C & -C
+\end{bmatrix}\begin{bmatrix}
+  \hat x \\ \hat e
+\end{bmatrix} - DK\hat x $$
+Finally, we can now say that the poles of the system are the eigenvalues of
+$$ \begin{bmatrix}
+  A - BK & -LC \\
+  0 & A - LC
+\end{bmatrix} $$
+and it can be show that the eignvalues of that matrix can be seen to be $A - BK$ and $A - LC$. We can now describe a controller by choosing the gain matrix $L$ and a state-feedback control law $u = -K\hat x$.
+
+\marginnote{\emph{Lecture 19}}[0mm]
+More matlab bits and bobs
+\subsection{Detectability}
+Detectability is just concerned whether the state is blowing up by considering the output. Consider our system,
+$$ \di x t = Ax + Bu, \quad y = Cx + Du $$
+there exists a non-singular $T \in \R^{d \ti d}$ such that,
+$$ TAT^{-1} = \begin{bmatrix}
+  A_{11} & 0 \\ A_{21} & A_{22}
+\end{bmatrix} \text{ and } CT^{-1} = \begin{bmatrix}
+  C_1 & 0
+\end{bmatrix} $$
+\begin{ndefi}[Detectability]
+  A system is detectable if $u(t) = 0$ and $y(t) = 0$ for $t \ge 0$ imply that $x(t) \to 0$ as $t\to \infty$.
+\end{ndefi}
+
+And a test,
+\begin{nthm}
+  We will show that the system is detectable if and only if the eigenvalues fo $A_{22}$ are in the OLHP
+\end{nthm}
+\begin{proof}
+  Consider a non-singular $T$ such that,
+  with $Tx = z = \begin{bmatrix}
+    z_1^T & z_2^T
+  \end{bmatrix}$ then $\di z t = TAT^{-1}z + TBu$ and by expanding this and using the variation of constants formula we can say that,
+  \begin{align*}
+    z_1(t) &= e^{A_{11}t}z_1(0) + \int_0^t e^{A_{11}(t - \t)}B_1u(\t)\,d\t \\
+    z_2(t) &= e^{A_{22}t}z_2(0)+\int_{0}^t e^{A_{21}z_1(\t) + B_2u(\t)}\, d\t \\
+    y(t) &= C_1e^{A_{11}t}z_1(0) + Du(t) + \int_0^t C_1e^{A_{11}(t - \t)}B_1u(\t)\,d\t
+  \end{align*}
+  Thus, $u = y = 0$ for $t \ge 0$ if and only if $h(t) = C_1e^{A_{11}t}z_1(0) = 0$ for all $t \ge 0$. In particular, all the derivatives are zero. Since the system is observable, this holds if and only if $z_1(0) = 0$.\\
+  Thus if $u = y = 0$, then $z_1(0) = 0$ so,
+  \begin{align*}
+    z_1(t) &= 0 \\
+    z_2(t) &= e^{A_{22}t}z_2(0)\\
+    y(t) &= 0
+  \end{align*}
+  But $Tx = \begin{bmatrix}
+    z_1^T & z_2^T
+  \end{bmatrix}$ and so it follows that $x(t) \to 0$ as $t \to \infty$ if and only if $z_2(t) \to 0$ as $t \to \infty$. This holds for all initial states if and only if all the eigenvalues of $A_{22}$ are in the OLHP.
+\end{proof}

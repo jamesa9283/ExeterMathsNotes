@@ -27,7 +27,7 @@ We are now going to prove the controller canonical form, \marginnote{\emph{Lectu
   and the result should be clear.
 \end{proof}
 
-\section{Pole Placement}
+\subsection{Pole Placement}
 The idea of that its possible to arbitrarily assign the poles of a system using a transformation. \\
 
 if we let $\hat K$ and $u = -\hat K z$, then we will have that $\di z t = (\hat A = \hat B \hat K)z$ where,
@@ -56,7 +56,7 @@ We can now update our theorem,
 % Lec 17
 We can do all this tedious calculation in matlab with \marginnote{\emph{Lecture 17}}[0mm] \texttt{charpoly}. We can use \texttt{place} to place roots wherever we want.
 
-\section{Stabilisability}
+\subsection{Stabilisability}
 We are now interested to pick the input to drive the system to the origin,
 \begin{ndefi}[Stabilisability]
   If we consider $\di x t = Ax + Bu$ this is stabilisible if, for any $z_0 \in \R^d$, there exists an input $u$ such that $x(0) = z_0$ and $\lim_{t\to\infty} x(t) = 0$.
@@ -75,7 +75,7 @@ where $\di {\hat x} t = A_{11}\hat x + B_1 u$ is controllable.
     \hat V \\ 0
   \end{bmatrix}$ and this can be constructed via gaussian elimination. We let the number of rows of $\hat V$ is $r$. Now we can get that,
   $$ \begin{bmatrix}
-    \har B & \hat A\hat B & \dots \hat A^{d-1}\hat B
+    \hat B & \hat A\hat B & \dots \hat A^{d-1}\hat B
   \end{bmatrix} = V$$
   and so the final $d - r$ rows of $\hat B$ is zero. By CHT then the final $d - r$ tows of $\hat A^d \hat B$ are zero. We can now show if,
   $$ \hat A = \begin{bmatrix}
@@ -96,5 +96,54 @@ where $\di {\hat x} t = A_{11}\hat x + B_1 u$ is controllable.
     0 & A_{22}
   \end{bmatrix}$ and $z \in \R^2$. We now note that $\di {z_2} t = A_{22}z_2$ and then $z_2(t) = e^{A_{22}t}z_2(0)$, if $A_{22}$ has an eigenvalue in the CRHP, then $z_2(t)$ doesnt tend to zero as $t \to \infty$, so the system is not stabilisible.\\
 
-  As $\di {\hat{x}} t = A_{11}\hat x + B_1u$ is controllable, $\ex \hat K \in \R^{r \ti n}$ such that the eigenvalues of $A_{11} - B_1\hat K$ are all in the open left half plane. 
+  As $\di {\hat{x}} t = A_{11}\hat x + B_1u$ is controllable, $\ex \hat K \in \R^{r \ti n}$ such that the eigenvalues of $A_{11} - B_1\hat K$ are all in the open left half plane.
 \end{proof}
+\marginnote{\emph{Lecture 18}}[0mm]
+\subsection{Realisation Theory}
+In the section we aim to show that any system,
+$$ \din d y t + a_{d-1}\din {d-1} y t + \dots + a_0y = b_d\din d u t + \din {d-1} u t + \dots + b_0u$$
+to a system of the form,
+$$ \di x t = Ax + Bu \qquad y = Cx + Du $$
+Firstly, we define $a$ and $b$ be the polynomials formed from the coefficients and degree of differentiation. We define $\hat b_i$ by the polynomial long division of $b(s)$ by $a(s)$:
+$$ b(s) - b_da(s) = \hat b_{d-1}s^{d-1} + \hat b_{d-2}s^{d-2} + \dots + \hat b_0 $$
+and so $\hat b_k = b_k - b_da_k$. We now define,
+\begin{align*}
+  x_d &= y - b_du \\
+  x_k &= \di {x_{k+1}} t + a_kx_d - \hat b_k u
+\end{align*}
+Then we can prove that $\di {x_1} t = -a_0x_d + \hat b_0u$. So then we can put into a matrix form and so,
+$$ \di x t = Ax + Bu \quad y = Cx + Du $$
+with,
+$$ A = \begin{bmatrix}
+  0 & 0 & 0 & \dots & 0 & -a_0\\
+  1 & 0 & 0 & \dots & 0 & -a_1\\
+  0 & 1 & 0 & \dots & 0 & -a_2\\
+  0 & 0 & 1 & \dots & 0 & -a_3\\
+  \vdots & \vdots & \vdots && \vdots &\vdots \\
+  0 & 0 & 0 & \dots & 1 & -a_{d-1}\\
+\end{bmatrix} \qquad B = \begin{bmatrix}
+  \hat b_0 \\ \hat b_1 \\ \hat b_2 \\ \hat b_3 \\ \vdots \\ \hat b_{d-1} \\
+\end{bmatrix}$$
+$$ C = \begin{bmatrix}
+  0 & 0 & 0 & \dots & 0 & 1
+\end{bmatrix} \quad D = b_d$$
+
+\subsection{Observability}
+We now seek to infer the initial state from measurement of the input and output into the future,
+\begin{ndefi}[Observable]
+  The following system
+  $$ \di x t = Ax + Bu \qquad y = Cx + Du $$
+  is observable if the initial state $x(0)$ can be deduced from knowledge of $u(t)$ and $y(t)$ for $t \ge 0$.
+\end{ndefi}
+and we have the following theorem,
+\begin{nthm}
+  TFAE,
+  \begin{enumerate}
+    \item The system $\di x t = Ax + Bu$, $y = Cx + Du$
+    \item For any given $T > 0$, $\int e^{A^Tt}C^TCe^{At}\,dt$ is non-singular.
+    \item If $z \in \R^d$ satisfies $\begin{bmatrix}
+      C \\ CA \\ \vdots \\ CA^{d-1}
+    \end{bmatrix}z = 0$ then $z = 0$.
+  \end{enumerate}
+\end{nthm}
+The proof of this is similar to the contrabililty theorem. Show that if 2 holds, so does 1, if 3 does not hold then one does not hold and if 2 does not hold then 3 does not hold.
