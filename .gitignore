@@ -31,6 +31,7 @@ pp/
 parts/
 matlab/
 Oxford/
+papers/
 
 header.tex
 lstlean.tex
