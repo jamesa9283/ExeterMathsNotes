@@ -1,0 +1,43 @@
+% !TEX root = ../notes.tex
+
+\begin{eg}
+  What are the units in $\Z$? We need $ab = 1$ and so the units are $\pm 1$ and so $\Z^\ti = \{-1,\,1\} = \gen{-1} \cong \Z/2\Z$.\\
+\end{eg}
+
+We now define an integral domain,
+\begin{ndefi}[Integral Domain]
+  A ring is called an integral domain if it has no zero divisors
+\end{ndefi}
+
+a few motivating examples are that $\Z$ is an integral domain and $\Z/n\Z$ is also an integral domain if and only if $n$ is prime.
+
+\begin{ndefi}[Field]
+  A ring $F$ with identity is called a field if $F^\ti = F \sm \{0\}$, or $F$ is a field if every non zero element of $F$ is a unit.
+\end{ndefi}
+
+\begin{nlemma}
+  $\Z/n\Z$ is a field if and only if $n$ is a prime integer.
+\end{nlemma}
+\begin{proof}
+  If $\bar k \in \Z/n\Z$ then $\bar k \in (\Z/n\Z)^\ti$ if and only if $\gcd(k,\,n)=1$. Hence every non zero element is a unit if and only if $n$ has no positive divisor $k$ such that $1 < k < n$, which is precisely the definition of $n$ being a prime.
+\end{proof}
+
+and moreover, we have a special name for this field,
+\begin{ndefi}[Finite field with $p$ elements]
+  Let $p$ be a prime integer. The field $\Z/p\Z$ is denoted $\F_p$ and called a finite field with $p$ elements.
+\end{ndefi}
+
+Now we can link integral domains and fields,
+\begin{nlemma}
+  A field is necessarily an integral domain.
+\end{nlemma}
+\begin{proof}
+  Exercise
+\end{proof}
+
+Now for something that really should have been defined before,
+\begin{ndefi}[Subring]
+  A subset $S$ of a ring $R$ is called a subring if $(S,\,+)$ is a subgroup of $(R,\,+)$ and $S$ is closed under multiplication.
+\end{ndefi}
+
+We also introduce that $\Z[i] = \{a + ib : a, b \in \Z\}$ are called the Gaussian Integers.
