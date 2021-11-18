@@ -15,7 +15,7 @@
 \end{proof}
 
 \begin{remark}
-   It can also be shown that, if the system is observable, then the eigenvales of $A - LC$ can be placed arbitrarily by choice of $L \in \R^{d \ti m}$.
+   It can also be shown that, if the system is observable, then the eigenvalues of $A - LC$ can be placed arbitrarily by choice of $L \in \R^{d \ti m}$.
 \end{remark}
 
 \subsection{Observer}
@@ -101,3 +101,48 @@ And a test,
     z_1^T & z_2^T
   \end{bmatrix}$ and so it follows that $x(t) \to 0$ as $t \to \infty$ if and only if $z_2(t) \to 0$ as $t \to \infty$. This holds for all initial states if and only if all the eigenvalues of $A_{22}$ are in the OLHP.
 \end{proof}
+
+\subsection{Tracking}
+Sometimes we are not only interested in the stability of the system, but we also want to manipulate the systems state. We consider our system $\di x t = Ax + Bu$ where our $u = -K(x - x_{\text{ref}})$ where $x_{\text{ref}}$ is our reference for the systems state and $K$ is the stabilising gain. We can apply Laplace transforms and get,
+$$ x(s) = (sI - A + Bk)^{-1}BKx_{\text{ref}} $$
+Now, if $x_{\text{ref}}(s) = \frac{X}{s}$ we can use the final value theorem,
+$$ \lim_{t \to \infty} e(s) = -(A + BK)^{-1}AX $$
+If the states are not all available for control, and it is instead necessary to use the output $y = Cx + Du$, then we can instead use the input $u = -K(\hat x - x_{\text{ref}} )$ where $\hat x$ is the state estimate obtained from an observer.
+
+
+\subsection{LQR and Kalman Filter}
+We have considered design of (state feedback) controllers,
+observers and observer-based controllers using pole placement.
+This allows for the placement of the closed-loop eigenvalues of the system.\\
+
+\noindent
+An alternative approach to design is to optimise some cost
+functional. We have seen an example already of this when we
+constructed an input to drive the system $\di x t = Ax + Bu$ between an initial state $x(0) = z_0$ and a final state $x(t_1) = z_1$.\\
+
+\begin{ndefi}[LQR]
+  The LQR (linear quadratic regulator) provides an optimal control approach to designing a state feedback controller.
+\end{ndefi}
+
+\begin{ndefi}[Kalman Filter]
+  The Kalman filter (linear quadratic estimator) provides an analogous approach to designing optimal observers.
+\end{ndefi}
+
+\subsubsection{LQR Controllers}
+
+
+The LQR controller is a stabilising state feedback control law that minimises,
+$$ \int_0^\infty (x^TQX+u^TRu(t))\,dt$$
+where $Q$ and $R$ matrices are typically defined such that $u^TRu>0$ for all $0 \ne u \in \R^n$ and $x^TQx \ge 0$ for all $x \in \R^d$. This is derived from the solution on,
+$$ A^TX + XA + Q - XBR^{-1}B^TX = 0 $$
+This solution is non-unique but there is one with the property of the eigenvales of $A - BR^{-1}B^TX$ being all in the OLHP. The cost functional is then reduced by $u = -R^{-1}B^TXx$\\
+
+\subsubsection{Kalman Filters}
+
+The Kalman filter provides an optimal estimator for,
+$$ \di x t = Ax + Bu + w \qquad y = Cx + Du + v$$
+where $w$ and $v$ are stochatic variables, with power spectral densities $W$ and $V$ respectively. Typically $v^TVv > 0 \, \fa 0 \ne v \in \R^m$ and $w^TWw \ge 0 \,\fa w \in \R^d$. The optimal estimator is,
+$$ \di x t = A\hat x + Bu - L(\hat y - y) \qquad \hat y = C\hat x + Du $$
+and minimises the power spectral density of the observer error, $\lim_{T\to\infty} \frac{1}{T}\int_0^T (x - \hat x)^T(x - \hat x)\,dt$ and this is obtained by solving,
+$$ YA^T +AY+W-YC^TV^{-1}CY = 0 $$
+where $A - YC^TV^{-1}C$ has eigenvalues in the OLHP. The optimal gain is $L = YC^TV^{-1}$
