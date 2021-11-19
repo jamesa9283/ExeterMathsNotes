@@ -1,5 +1,6 @@
 % !TEX root = ../notes.tex
 
+\marginnote{\emph{Lecture 19}}[0mm]
 \begin{eg}
   What are the units in $\Z$? We need $ab = 1$ and so the units are $\pm 1$ and so $\Z^\ti = \{-1,\,1\} = \gen{-1} \cong \Z/2\Z$.\\
 \end{eg}
@@ -38,6 +39,148 @@ Now we can link integral domains and fields,
 Now for something that really should have been defined before,
 \begin{ndefi}[Subring]
   A subset $S$ of a ring $R$ is called a subring if $(S,\,+)$ is a subgroup of $(R,\,+)$ and $S$ is closed under multiplication.
+\end{ndefi}\marginnote{\emph{Lecture 20}}[0mm]
+
+We can prove that $\Z[\sqrt D] = \{a + b\sqrt D : a,b \in \Z\}$ are fields. We also introduce that $\Z[i] = \{a + ib : a, b \in \Z\}$ are called the Gaussian Integers. The Gaussian Integers have very similar properties to the integers. We can prove that $(\Z[\sqrt{-1}])^\ti = \{1, -1, i, -i\}$ and its also true that for $D < 0$ then there are usually finitely many units.\\
+
+Let us consider $(\Z[\sqrt 2])^\ti$, then indeed $1 + \sqrt 2$ is a unit as $(\sqrt 2 - 1)(1 + \sqrt 2) = 1$. Further we can say $(1 + \sqrt 2)^n$ is a unit, because $(1 + \sqrt 2)^n(\sqrt 2 - 1)^n = 1$ and the set $\{(1 + \sqrt 2)^n : n \in \N_1 \}$ has infinite cardinality.
+
+\begin{nthm}[Dirichlet's Unit Theorem]
+  tbc
+\end{nthm}
+
+\section{Ring Homorphisms and Ideals}
+Firstly, we start with a definition,
+\begin{ndefi}[Ring Homomorphism]
+  Let $R$ and $S$ be rings. A map $\phi : R \to S$ is called a ring homomorphism if it satisfies,
+  \begin{enumerate}
+    \item $\phi(a + b) = \phi(a) + \phi(b)\quad\fa a b \in R$
+    \item $\phi(ab) = \phi(a)\phi(b)\quad\fa a b \in R$
+    \item $\phi(1_R) = 1_S$
+  \end{enumerate}
+  In addition, $\phi(0_R) = 0_S$ and $\phi(-a) = -\phi(a)$ for all $a \in A$.
 \end{ndefi}
 
-We also introduce that $\Z[i] = \{a + ib : a, b \in \Z\}$ are called the Gaussian Integers.
+Again, we say that a ring homomorphism which is a bijection is called an isomorphism.
+
+\begin{eg}
+  \begin{enumerate}
+    \item If we let $\phi : \Z \to \Z/n\Z$ and $\phi(a) = \bar a$, then this is a ring homomorphism.
+    \item Here is a non-example, let $\phi : \Z \to \Z$ and $\phi(a) = 2a$, if we consider $\phi(ab) = 2ab \ne \phi(a)\phi(b) = 4ab$.
+    \item Here is another ring homomorphism, let $\phi : \QX \to \Q$ and $\phi(a_0 + a_1X + \dots + a_nX^n) = a_0$. The axioms follow from the definition of addition and multiplication of polynomials.
+  \end{enumerate}
+\end{eg}
+
+Now we define the kernel and the image of the homomorphism,
+\begin{ndefi}[Kernel]
+  Let $\phi : R \to S$ be a ring homomorphism. We define,
+  $$ \ker \phi = \{r \in R : \phi(r) = 0_S\} $$
+  and call this set the kernel.
+\end{ndefi}
+\noindent
+and the image,
+\begin{ndefi}[Image]
+  Let $\phi : R \to S$ be a ring homomorphism. We define,
+  $$ \Im \phi = \{s \in S : \ex r \in R, \phi(r) = s\} $$
+  and call this set the image.
+\end{ndefi}
+
+\begin{eg}
+  If we consider $\phi : \Z \to \Z/n\Z$ defined by $\phi(a) = \bar a$. Then, if $a \in \ker\phi$, then $\phi(a) = \bar a = \bar 0$ and so $n \mid a$, thus $\ker \phi = n\Z$.
+\end{eg}
+
+Here's a lemma,
+\begin{nlemma}
+  \begin{enumerate}
+    \item $\ker \phi$ is a subring of $R$
+    \item $\Im \phi$ is a subring of $S$
+    \item $\phi$ is surjective if and only if $\im\phi = S$
+    \item $\phi$ is injective if and only if $\ker\phi = \{0_R\}$
+  \end{enumerate}
+\end{nlemma}
+\begin{proof}
+  Consider $(1)$, then let $a, b \in \ker \phi$. Then,
+  $$ \phi(a + b) = \phi(a) + \phi(b) = 0_S + 0_S = 0_S $$
+  and,
+  $$ \phi(ab) = \phi(a)\phi(b) = 0_S0_S = 0_S$$
+  Hence, $a+b, ab \in \ker \phi$.\\
+
+  If $s_1 = \phi(r_1)$ and $s_2 = \phi(r_2)$ then,
+  $$ \phi(r_1 + r_2) = \phi(r_1) + \phi(r_2) = s_1 + s_2 $$
+  and
+  $$ \phi(r_1r_2) = \phi(r_1)\phi(r_2) = s_1s_2 $$
+  hence $s_1 + s_2, s_1s_2 \in \im\phi$\\
+
+  The rest follow from group homomorphisms.
+\end{proof}
+
+Next is an ideal, this is the interesting one. They were discovered by a german mathematician who as one of the fathers of modern ANT.
+\begin{ndefi}[Ideal]
+  Let $R$ be a ring. A subset $I \subset R$ is called an ideal if the following hold,
+  \begin{enumerate}
+    \item $(I,\,+)$ is a subgroup of $(R,\,+)$
+    \item $\fa a \in I, b \in R$, it holds that $ab \in I$. Or $I$ is closed under multiplication by arbitrary elements in $R$.
+  \end{enumerate}
+\end{ndefi}
+an interesting thing here, is that these were introduced surrounding finding unique prime factorisations of $\Z[\sqrt 5]$, it was found that you can't do this. However, if you restrict to ideals then you can define what a prime ideal is and hence you can have unique factorisations of prime ideals.
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $m \in \Z$, then $m\Z$ is an ideal of $\Z$. If $k \in \Z$, $ma \in m\Z$, then $kma = mka \in m\Z$. This is an example of a principal ideal.
+    \item If we take $R$ a ring and $a \in R$ then consider $(a)_R = \{ab : b \in R\}\subset R$ is an ideal of $R$, called the ideal generated by $a$. We note that $a$, the generator, is not unique, $(a)_R = (-a)_R$, more generally it is unique up to multiplication by units.
+  \end{enumerate}
+  \begin{nprop}
+   $(a)_R$ is an ideal of $R$
+  \end{nprop}
+  \begin{proof}
+    Exercise
+  \end{proof}
+\end{eg}
+
+\begin{nlemma}
+  Let $\phi : R \to S$, $\ker\phi$ is an ideal of $R$.
+\end{nlemma}
+\begin{proof}
+  The first property is known, it suffices to prove the second. Let $a \in \ker\phi$ and $b \in R$. Then $\phi(ab) = \phi(a)\phi(b) = 0_S\phi(b) = 0_S$, hence $ab \in \ker\phi$.
+\end{proof}
+
+\subsection{Construction of the quotient ring}
+Let $R$ be a ring and $I$ an ideal of $R$. Recall the relation $\mathcal{H}$ among the elements of $R$ defined by, $a \mathcal{H} b \iff b - a \in I$. The relation $\mathcal{H}$ is an equivalence relation. The equivalence class of $a \in I$ is $\bar a = \{b \in R : b = a + c, c \in I\}$. Thus,
+$$ \bar a = a + I = \{a + c : c \in I\} $$
+is called the class of $a$ modulo $I$. Set,
+$$R/I = \{\bar a : a \in R\}$$
+for the set of equivalence classes of elements of $R$ modulo $I$. We define addition and multiplication as follows,
+$$\bar a + \bar b = \bar{a + b} \qquad (a + I) + (b + I) = a + b + I$$
+$$ \bar a \ti \bar b = \bar{ab} \qquad (a + I)(b + I) = ab + I $$
+We now show this is well defined, i.e. that if $(\wt a + I)(\wt b + I) = \wt{ab} + I$ aswell as $(a + I)(b + I) = ab + I$ and $a+  I = \wt a + I$ and $b + I = \wt b + I$. The last relations imply that $a = \wt a + \a$ and $b = \wt b + \b$. This then follows from $ab = (\wt a + \a)(\wt b + \b)$ and $ab - \wt a\wt b = \wt a \b + \a\wt b + \a\b$ and we know need to show that $ab - \wt{ab} \in I$
+ and as ideals are closed under multiplication the result follows.\\
+
+ \noindent
+ If $R$ is a ring, then $R/I$ is also a ring with this multiplication. We know its an abelian group via addition, so we have to show it's closed under multiplication. We know $ab = \bar{ab} = \bar{ba} =\bar{b}\bar{a}$. We also have distributivity, $\bar a (\bar c + \bar d) = \bar a \bar c + \bar a \bar d$. Also if $R$ has $1_R$, $\bar{1_R} = 1_R + I$.
+
+\begin{nlemma}
+  Cosnider the map $\phi : R \to R/I$ defined by $\phi(a) = \bar a$ for $a \in R$. Then,
+  \begin{enumerate}
+    \item $\phi$ is a ring homomorphism
+    \item $\ker \phi = I$
+  \end{enumerate}
+\end{nlemma}
+\begin{proof}
+  We have already proved $(i)$, so it suffices to prove $(ii)$. Consider $a \in \ker\phi$, then $\bar a = \bar 0_R$, and this implies that $a - 0_R = a \in I$. Hence, $\ker \phi = I$ as $a$ was arbitrary.
+\end{proof}
+
+\begin{eg}
+  Here are some examples,
+  \begin{enumerate}
+    \item Let $n \in \Z$ and $I = n\Z$, which is an ideal of $\Z$. Our relation $\mathcal{H}$ is the relation modulo $n$ and $\Z/I = \Z/n\Z$ endowed with usual $+$ and $\ti$. We know this is a ring.
+    \item Consider $R = \Z[X]$ and,
+    $$ I = \{h(X) = b_2X^2 + b_3X^3 + \dots + b_nX^n : b_i \in \Z,\, n\ge 2\} $$
+    is an ideal of $\Z[X]$. We can write our ideas as $X^2(b_2 + b_3X + \dots + b_{n-2}X^{n-2})$ and so we have the principal ideals generated by $X^2$, hence $I = (X^2)_{\Z[X]}$. If we have $f(X) \in \Z[x]$ then $f(X) - (a_0 + a_1X) \in I$ and so, $\bar{f(X)} = \bar{a_0 + a_1X}$. Hence every class of a polynomial in $\Z[x]$ modulo $I$ is represented by the class of a polynomial of degree $\le 1$ and,
+    $$ \Z[X]/I = \{\bar{a_0 + a_1X} : a_0,a_1 \in \Z\} $$
+    We note in actuality, what happens here is that if we say $\bar{f(X)} = \bar{g(X)}$, then $X^2 \m (f(X) - g(X))$ and we remove any terms that divide $X^2$ after an operation.
+    \item Now consider $R = \QX$, and,
+    $$ I = (X^2 - 2)_{\QX} $$
+    Let $g(X) \in \QX$, then $g(X) = (X^2 - 2)f(X) + (a_0 + a_1X)$ and so $\bar{g(X)} = \bar{r(X)}$. Hence,
+    $$ \QX/I = \{\bar{a_0 + a_1X} : a_0, a_1 \in \Q\} $$
+  \end{enumerate}
+\end{eg}
