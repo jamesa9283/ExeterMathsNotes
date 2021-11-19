@@ -41,11 +41,11 @@ $$ R^T = R^{-1} \qquad \det R = 1 $$
 The map $\vec X \to R(t)\vec X$ is called the body-to-space map. \\
 
 We can now talk about kinetic energy,
-$$ K = \frac{1}{2}\int_\b \rho \norm{\vec x}^2\, d^3\vec X$$
+$$ K = \frac{1}{2}\int_\mathcal{B} \rho \norm{\vec x}^2\, d^3\vec X$$
 which we can change to,
 \begin{align*}
-  \frac{1}{2}\int_\b \rho \norm{\vec x}^2\, d^3\vec X &= \frac{1}{2}\int_\b \rho(\vec X)\norm{\dot R(t)\vec X}^2 \,d^3\vec X\\
-  &= \frac{1}{2}\int_\b \rho(\vec X)\dot R(t)\vec X \cdot \dot R(t)\vec X \,d^3\vec X\\
+  \frac{1}{2}\int_\mathcal{B} \rho \norm{\vec x}^2\, d^3\vec X &= \frac{1}{2}\int_\mathcal{B} \rho(\vec X)\norm{\dot R(t)\vec X}^2 \,d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B} \rho(\vec X)\dot R(t)\vec X \cdot \dot R(t)\vec X \,d^3\vec X\\
 \end{align*}
 Now we can say if $V = 0$. Hence, $L = K$ and so,
 $$ \di{}{t}\pd{K}{\dot R} - \pd{K}{R} = \vec 0 $$
@@ -58,7 +58,7 @@ We know that $R^{-1}= R^T$ and so $RR^T = RR^{-1} = I = e$. If we have $\vec v$,
   &= \norm{R^{-1}\dot R \vec X}
 \end{align*}
 and so,
-$$ K = \frac{1}{2} \int_\b \rho(\vec X) \norm {R^{-1}\dot R \vec X} d^3\vec X$$
+$$ K = \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm {R^{-1}\dot R \vec X} d^3\vec X$$
 Then $K = K(R, \dot R) = K(R^{-1}R, R^{-1}\dot R)$ this is called left symmetry. Hence, we can reduce this to $K(e, R^{-1}\dot R)$ and change notation let $\kappa (R^{-1}\dot R)$ and $R^{-1}\dot R$ is angular velocity of the body. We can see this from the body and from an observation outside the system. Hence, we call this $R^{-1}\dot R = \Oh$.\\
 Interestingly, we know $RR^T = RR^{-1} = I$. Hence,
 $$ \di {}{t} I = \di {}{t} (RR^{-1}) = \dot R R^{-1} + R\di{}{t} R^{-1} = \vec 0 $$
@@ -72,7 +72,7 @@ and we can also write this as,
 and so $R^{-1}\dot R = - (R^{-1}\dot R)^T$ and so $\Oh = - \Oh^T$. This is the antisymmetric property we have noted about this vector.\\
 
 Now we go back to kinetic energy to nicely write it as $\Oh$
-$$ K = \frac{1}{2} \int_\b \rho(\vec X) \norm{\Oh \vec X}^2 d^3\vec X $$
+$$ K = \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\Oh \vec X}^2 d^3\vec X $$
 and now we can prove that $\Oh \vec X = \vec \O \times \vec X$
 where,
 $$ \Oh = \begin{bmatrix}
@@ -86,17 +86,17 @@ where $\vec\O = \begin{bmatrix}
 where $\O$ is the axel vector.
 and so,
 \begin{align*}
-  K &= \frac{1}{2} \int_\b {\rho (\vec X)\norm{\vec\O \times \vec X}^2 \,d^3\vec X}\\
-  &= \frac{1}{2} \int_\b {\rho (\vec X)(\vec\O\times\vec X) \cdot (\vec\O\times\vec X) \,d^3\vec X}\\
-  &= \frac{1}{2}\int_\b {\rho (\vec X)(\norm{\vec \O^2}\norm{\vec X^2} - (\vec\O \cdot \vec X)^2) \,d^3\vec X}\\
-  &= \frac{1}{2}\int_\b {\rho (\vec X)(\vec\O^T\vec\O\norm{\vec X^2} - \vec\O^T\vec X \vec X^T\vec\O) \,d^3\vec X}\\
-  &= \frac{1}{2}\int_\b {\rho (\vec X)\vec\O^T(\norm{\vec X^2}I - \vec X \vec X^T)\vec\O\, d^3\vec X}\\
-  &= \frac{1}{2}\int_\b {\rho (\vec X)\vec\O^T\vec\O(\norm{\vec X^2} - \vec X \vec X^T)\, d^3\vec X}\\
-  &= \frac{1}{2}\vec\O \cdot \vec\O \int_\b {\rho (\vec X)(\norm{\vec X^2} - \vec X \vec X^T)\, d^3\vec X}\\
+  K &= \frac{1}{2} \int_\mathcal{B} {\rho (\vec X)\norm{\vec\O \times \vec X}^2 \,d^3\vec X}\\
+  &= \frac{1}{2} \int_\mathcal{B} {\rho (\vec X)(\vec\O\times\vec X) \cdot (\vec\O\times\vec X) \,d^3\vec X}\\
+  &= \frac{1}{2}\int_\mathcal{B} {\rho (\vec X)(\norm{\vec \O^2}\norm{\vec X^2} - (\vec\O \cdot \vec X)^2) \,d^3\vec X}\\
+  &= \frac{1}{2}\int_\mathcal{B} {\rho (\vec X)(\vec\O^T\vec\O\norm{\vec X^2} - \vec\O^T\vec X \vec X^T\vec\O) \,d^3\vec X}\\
+  &= \frac{1}{2}\int_\mathcal{B} {\rho (\vec X)\vec\O^T(\norm{\vec X^2}I - \vec X \vec X^T)\vec\O\, d^3\vec X}\\
+  &= \frac{1}{2}\int_\mathcal{B} {\rho (\vec X)\vec\O^T\vec\O(\norm{\vec X^2} - \vec X \vec X^T)\, d^3\vec X}\\
+  &= \frac{1}{2}\vec\O \cdot \vec\O \int_\mathcal{B} {\rho (\vec X)(\norm{\vec X^2} - \vec X \vec X^T)\, d^3\vec X}\\
   &= \frac{1}{2}\mathbb{I}\vec\O \cdot \vec \O
 \end{align*}
 where $\I$ is the moment of inertia tensor, which we define as,
-$$ \mathbb{I} = \int_\b \rho(\vec X)\norm{\vec X}^2I - \vec X\vec X^T d^3\vec X $$
+$$ \mathbb{I} = \int_\mathcal{B} \rho(\vec X)\norm{\vec X}^2I - \vec X\vec X^T d^3\vec X $$
 where $\vec X\vec X^T = \vec X \otimes \vec X$ and,
 $$ (\vec a \otimes \vec b)\vec c = (\vec b \cdot \vec c)\vec a $$
 for all $\vec a, \vec b, \vec c \in \R^3$.
