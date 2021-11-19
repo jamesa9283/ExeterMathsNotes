@@ -1,0 +1,42 @@
+% !TEX root = ../notes.tex
+
+\section{Heavy Top}
+
+The heavy top problem is a rigid body with a fixed point. We are going to study it's dynamics in the body frame. $x(t) = R(t)\vec X$ and $R(t) \in \SO(3)$. We know the potential energy of a point mass in a gravitation field is $V = mg\vec e_3 \cdot x(t)$. The lagrangian,
+$$ L(R, \dot R) = \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}\norm{\dot R \vec X} - g\vec e_3 \cdot R\vec X \right)\,d^3\vec X $$
+Now we can verify this neither left nor right invariant.
+\begin{exercise}
+  Prove that $L(R,\,\dot R) \ne L(RR^{-1},\,\dot RR^{-1})$ and $L(R,\,\dot R) \ne L(R^{-1}R,\,\dot R^{-1}\dot R)$
+\end{exercise}
+We know $\Oh = R^{-1}\dot R$, then we know $L = \frac{1}{2}\Ov \cdot \I\Ov - g\vec e_3 \cdot R\vec\b$ where $\b = \int_B \rho(\vec X)\vec X\, d^3\vec X$ and $\vec \b$ is the centre of mass in the body frame. (We could also use $\b = \vec X_b$). We define $\vec\Gamma = R^{-1}\vec e_3$
+and so
+$$\ell(\Oh,\,\vec\Gamma) = \frac{1}{2}\Ov(t) \cdot \I \Ov(t) - g\vec\Gamma(t) \cdot \vec X_b$$
+% X_b is the center of mass
+and we see that $\vec\Gamma(t)$, the gravitational force, is the symmetry breaking parameter. Now we use Hamiltons principle,
+\begin{align*}
+  \d\int_{t_1}^{t_2} \ell(\Oh,\,\vec\Gamma) \,dt &= 0\\
+  \int_{t_1}^{t_2} \left(- \dit \I\Oh + \I\Ov\ti\Ov\right) \cdot \Lambda\,dt - \int_{t_1}^{t_2} g\vec X_b \cdot \d\vec\Gamma &= 0
+\end{align*}
+The first integral is the rigid body terms and the second is the symmetry breaking term. We also define $\Lh = R^{-1}\d R$. We now look to $\d\vec\Gamma$,
+\begin{align*}
+  \d\vec\Gamma &= \d R^{-1}\vec e_3 \\
+  &= -R^{-1}\d R^{-1}\vec e_3 \\
+  &= -\Lh \vec\Gamma\\
+  &= - \Lv\ti\vec\Gamma\\
+\end{align*}
+We can now write the following,
+$$ \int_{t_1}^{t_2} \left(- \dit \I\Oh + \I\Ov\ti\Ov\right) \cdot \Lambda\,dt + \int_{t_1}^{t_2} -g\ip{\vec X_b}{\Lv\ti\vec\Gamma} = 0 $$
+and so we can write,
+$$ \int_{t_1}^{t_2} \left[ -\dit\I\Oh + \I\Oh\ti\Oh) \cdot \Lv - g(\vec X_b \ti \Gamma) \cdot \Lv \right] = 0 $$
+
+Now we get,
+$$ \I\Od = \I\Oh \ti \Oh + g\Gv\times \vec X_b $$
+$$ \Gd = \Gv \ti \Oh $$
+
+\begin{exercise}
+  Find $\dit \left( R\I\Oh \right) = gR(\vec\Gamma \ti \vec X_b) \ne 0$. Find what kind of angular momentum is conserved. Find something that is conserved.
+\end{exercise}
+
+\begin{exercise}
+  Have a look at the spherical pendulum.
+\end{exercise}
