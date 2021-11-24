@@ -4,3 +4,34 @@ Now for the first isomorphism theorem for rings,\marginnote{\emph{Lecture 21}}[0
 \begin{nthm}[The First Isomorphism Theorem for Rings]
   Let $\phi : R \to S$ be a surjective ring homomorphism. Then $R/\ker\phi \cong S$.
 \end{nthm}
+Here is what the theorem says pictorially,
+\[\begin{tikzcd}
+	R & S \\
+	{R/\ker f}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["\phi"', from=1-1, to=2-1]
+	\arrow["\pi"', from=2-1, to=1-2]
+\end{tikzcd}\]
+
+where we say that $\pi$ is a ring isomorphism. Hence, we just need to justify this, as most of it follows from the FIT for Groups.
+\begin{proof}
+  It suffices to prove that $\pi(\bar a\bar b) = \pi(\bar a)\pi(\bar b)$. Firstly we know $\pi(\bar a\bar b) = \pi(\bar{ab}) = f(ab) = f(a)f(b) = \pi(\bar a)\pi(\bar b)$. Hence we have proved the FIT for rings.
+\end{proof}
+
+Ideals can be added and multiplied,
+\begin{ndefi}[Addition and Multiplication of ideals]
+  Suppose we have two ideals, $I$ and $J$ and we define addition,
+  $$ I + J = \{ a + b : a \in I, b \in J\} $$
+  and the product,
+  $$ IJ = \{\sum_{i=1}^m a_ib_j : a \in I,\,b\in J\, m \ge 1 \} $$
+\end{ndefi}
+\begin{proof}
+  We aim to prove addition. So we have to prove that it is closed under addition, so suppose that $a_1,\,a_2 \in I$ and $b_1,\,b_2 \in J$, then,
+  \begin{align*}
+    (a_1 + b_1) + (a_2 + b_2) &= \underbrace{(a_1 + a_2)}_{\in I} + \underbrace{(b_1 + b_2)}_{\in J} \in I + J\\
+  \end{align*}
+  We also note that $0 \in I + J$ as we can write it as $0_R = 0_R + 0_R$. The inverse of an element, $(a + b)^{-1} = \underbrace{a^{-1}}_{\in I} + \underbrace{b^{-1}}_{\in J}$. Hence it's a subgroup under addition, so now take an element $a+b \in I + J$, then prove that take a $c \in R$ and then prove $(a + b)c \in I$. Now we distribute, $(a + b)c = ac + bc$, but we know that $a \in I$ and $b \in J$ and so $ac \in I$ and $bc \in J$. Hence, $ac + bc \in I + J$.\\
+
+  \noindent
+  Now for the product, so we show it's a subgroup. Firstly, zero, $0_R 0_R = 0_R$ and moreover $0_Ra = 0_R$. Now we show it's closed under addition, we show that $a_ib_i \in I$ where $a_i \in I$ and $b_i \in J$ and $c_id_i \in J$ where $c_i \in I$ and $d_i \in I$, then we consider $a_ib_j + c_id_j$, then we know this in $IJ$ as this is just a finite sums of terms where the first term is in $I$ and the second in $J$. Now we consider $(a_ib_i + c_id_i)^{-1} = (a_ib_i)^{-1} + (c_id_i)^{-1}$ and again this is a finite sum of the required form. Hence this is then just in $IJ$. We now seek to prove the other property, if $a_ib_i \in IJ$ and $c \in R$, then $c (a_ib_i) = \underbrace{(ca_i)}_{\in I}b_i \in IJ$.
+\end{proof}
