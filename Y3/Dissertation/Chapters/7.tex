@@ -4,14 +4,17 @@
 The lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\SO(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
 $$ \di {}{t} \pd{\ell}{\Oh} - \ad^*_{\Oh}\pd{\ell}{\Oh} = 0 $$
 Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
-\begin{align*}
+{\color{red} \begin{align*}
   \ip{\ad_{\Oh}^*\vec\Pi}{\oh} &= \ip{\vec\Pi}{\ad_{\Oh}{\oh}}\\
   &= \ip{\vec\Pi}{[\Oh,\,\oh]}\\
-  &= \Tr(\vec\Pi^T [\Oh,\,\oh])\\
-  &= \Tr(\vec\Pi^T \Oh\oh - \vec\Pi^T\oh\Oh)\\
-  &= \vdots\\
+  &= \Tr(\vec\Pi^\top [\Oh,\,\oh])\\
+  &= \Tr(\vec\Pi^\top \Oh\oh - \vec\Pi^\top\oh\Oh)\\
+  &= \Tr(\vec\Pi\Oh^\top\oh - \vec\Pi\Oh\oh^\top)\\
+  &= \Tr(\vec\Pi\Oh\oh^\top - \Oh\vec\Pi\oh^\top) \\
+  &= \Tr((\vec\Pi\Oh - \Oh\vec\Pi)\oh^\top) \\
+  &= \Tr([\vec\Pi,\,\Oh]\oh^\top) \\
   &= \ip{[\vec\Pi,\,\Oh]}{\oh}
-\end{align*}
+\end{align*} }
 
 Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ {[\Oh,\,\oh] = }\wh{\vec\O\ti\vec\o} $
 \begin{proof}
