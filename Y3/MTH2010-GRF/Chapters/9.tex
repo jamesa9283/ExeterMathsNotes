@@ -76,7 +76,7 @@ Here is a lemma about inclusion,
   To make a homomorphism, we must just take the class of that integer as that's the only was to make a homomorphism in $\F_2$. We now consider $f(\sqrt{-3})$, we want to map this to $1$, which we can as $-3 = \bar 1$ and so $f(a + b\sqrt{-3}) = f(a) + f(b)$.
   Consider the map,
   $$f : \Z[\sqrt{-3}] \to \F_2$$
-  $$ f(a + \sqrt{-3}) = \bar a + \bar b $$
+  $$ f(a + b\sqrt{-3}) = \bar a + \bar b $$
   Our map is surjective as we have infinitely many elements mapping to $\bar 0$ and infinitely many mapping to $\bar 1$, forming a dichotemy. Now to check it's a homomorphism
   \begin{align*}
     f\left[ (a + b\sqrt{-3}) + (c + d\sqrt{-3}) \right] &= f\left[ (a + c) + (b + d)\sqrt{-3} \right] \\
@@ -92,7 +92,7 @@ Here is a lemma about inclusion,
     &= \bar{ac + bd} + \bar{ad + bc}\\
     &= \bar a\bar c + \bar b\bar d + \bar a\bar d + \bar b\bar c\\
     &= (\bar a + \bar b)(\bar c + \bar d) \\
-    &= f(a + b\sqrt{-3})f(c + \sqrt{-3})\\
+    &= f(a + b\sqrt{-3})f(c + d\sqrt{-3})\\
   \end{align*}
   So $f$ is a ring homomorphism, so we now show that $\ker f = (2,\,1+\sqrt{-3})_R$. Clearly, $J = (2, 1 + \sqrt{-3})_R \in \ker f$ as $f(2) = f(1 + \sqrt{-3}) = \bar 0$. Now for the other inclusion. Let $a + b\sqrt{-3} \in \ker f$ such that $f(a + b\sqrt{-3}) + \bar a + \bar b = \bar 0$ and so $a - b = 2k$ for some $k \in \Z$. This $a + b \sqrt{-3} = 2k + b + b\sqrt{-3} = 2k + b(1 + \sqrt{-3}) \in J$, as required.
 \end{eg}
