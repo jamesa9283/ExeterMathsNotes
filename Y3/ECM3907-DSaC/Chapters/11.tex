@@ -1,0 +1,89 @@
+% !TEX root = ../notes.tex
+
+\section{Non-linear Systems}
+Thus far, we have considered linear systems, now we consider non-linear systems.
+
+\subsection{Linearisation}
+We consider the system,
+$$ \di x t = f(x(t)) $$
+we assume that $f$ is continuously differentiable in some $D \subset \R^d$. We say that $D$ contains the origin and let the origin be an equilibrium point of this function, ie, $f(0,\,0)=0$. Then for some $x \in D$ then there exists some $0 \le \l_i \le 1$,
+$$ f_i(x) = f_i(0) + \sum_{j=1}^d \pd{f_i}{x_j}(\l_ix)x_j  $$
+and so it follows that $f(x) = Ax + h(x)$ such that,
+$$ A = \begin{bmatrix}
+  \pd{f_1}{x_1}(0) & \dots & \pd{f_1}{x_d}(0) \\
+  \vdots && \vdots \\
+  \pd{f_d}{x_1}(0) & \dots & \pd{f_d}{x_d}(0)
+\end{bmatrix} \quad \text{ and } \quad h(x) = \begin{bmatrix}
+  \pd{f_1}{x_1}(\l_1x) - \pd{f_1}{x_1}(0) & \dots & \pd{f_1}{x_d}(\l_1x) - \pd{f_1}{x_d}(0) \\
+  \vdots && \vdots \\
+  \pd{f_d}{x_1}(\l_d x) - \pd{f_d}{x_1}(0) & \dots & \pd{f_d}{x_d}(\l_dx) - \pd{f_d}{x_d}(0)
+\end{bmatrix} $$
+since $f$ is continuously differentiable, then $\frac{\norm{h(x)}}{\norm{x}} \to 0$ as $\norm x \to 0$.\\
+
+Now we consider a system $\di{\hat x}{t} = \hat f(\hat x (t))$, again $\hat f$ is continuously differentiable in some $\hat D \in \R^d$ which contains $\hat x = \wt x$. Now let $x = \hat x - \wt x$ and so $f(x) = f(\hat x + \wt x)$. Then $\di{\hat x}{t} = \hat f(\hat x (t))$ if and only if $\di x t = f(x(t))$. Now without loss of generality we consider the equilibrium to be the origin. This will make the notation and proof less verbose\footnote{if this disturbs you, consider a change of coordinates}.\\
+
+Now consider our system and let $(\wt x,\,\wt u)$ be an equilibrium and let $f$ and $g$\footnote{$g$ is something we use if $y = g(x, u)$} be continuously differentiable in some region of $(\wt x,\, \wt u)$ then,
+$$ f(x) = A(x - \wt x) + B(u - \wt u) + h(x,\,u)$$
+where
+$$ A = \begin{bmatrix}
+  \pd{f_1}{x_1} & \dots & \pd{f_1}{x_d} \\
+  \vdots && \vdots \\
+  \pd{f_d}{x_1} & \dots & \pd{f_d}{x_d}
+\end{bmatrix}(\wt x, \wt u) $$
+$$ B = \begin{bmatrix}
+  \pd{f_1}{u_1} & \dots & \pd{f_1}{u_n} \\
+  \vdots && \vdots \\
+  \pd{f_d}{u_1} & \dots & \pd{u_d}{x_d}
+\end{bmatrix}(\wt x, \wt u) $$
+and we note that $\frac{\norm{h(x,\,u)}}{\sqrt{\norm{x - \wt x}^2 + \norm{u - \wt u}^2}} \to 0$ as $\norm{x - \wt x} \to 0$ and $\norm{u - \wt u} \to 0$.
+
+
+\subsection{Stability}
+We consider a standard form system where we have an equilibrium of $(\wt x,\,\wt u)$ and it can be decomposed into $f(x) = A(x - \wt x) + h(x)$. We consider $f$ being locally Lipschitz on $D \subset \R^d$ and let $x = \wt x \in \R^d$ be an equilibrium point. Let $B(\wt x,\,\a)$ denote a ball of radius $\a$ centred on $\wt x$.
+
+\begin{ndefi}[Stability]
+  We call the equilibrium point $\wt x$ stable if there exists some $R_0 > 0$ and $t_0 \in \R$ then there is an $r$ satisfying $0 < r < R$ such that $x(t_0) \in B(\wt x,\,r)$ then $x(t) \in B(\wt x,\,R)$ for all $t > t_0$
+\end{ndefi}
+
+We now consider a different type of stability that is slightly stronger,
+\begin{ndefi}[Asymptotically Stable]
+  We call the equilibrium asymptotically stable if it is stable if and there is an $R_1 > 0$ such that if $x_0 \in B(\wt x,\,R_1)$ then $\lim_{t \to \infty} (x(t)) \to \wt x$
+\end{ndefi}
+
+\subsection{Lyapunov's Indirect Method}
+We consider our usual form and the decomposition more particularly, the $A$ from the linearisation. Then we can state the following,
+\begin{nthm}[Lyapunov's Indirect Method]
+  There are two different bases,
+  \begin{enumerate}
+    \item If all of the eigenvalues of $A$ are in the open left half plane, then the equilibrium point $x = \wt x$ is stable.
+    \item If an eigenvalue of $A$ is in the open right half plane, then the equilibrium point $x = \wt x$ is unstable
+  \end{enumerate}
+\end{nthm}
+
+We note that if there is an imaginary axis eigenvalue, then we have that the test is inconclusive.\footnote{The centre manifold theorem allows us to remove this remark}
+
+\subsection{Existence and Uniqueness of solutions}
+We consider our general system and we define what $f$ to be locally Lipschitz,
+\begin{ndefi}[Locally Lipschitz]
+  A function $f$ is locally Lipschitz in a domain $D \subset \R^d$ if, for any $x_0 \in D$, then there exists some $\e > 0$ and $L \ge 0$ such that $\norm{f(x) - f(y)} \le L\norm{x - y}$ for all $x, y \in B(x_0,\,\e)$
+\end{ndefi}
+and moreover we define globally Lipschitz,
+\begin{ndefi}[Globally Lipschitz]
+  We say $f$ is globally Lipschitz if there exists $L \ge 0$ such that $\norm{f(x) - f(y)} \le L\norm{x - y}$ for all $x, y \in \R^d$.
+\end{ndefi}
+
+If $f$ is continuously differentiable in $D$, then it is locally Lipschitz,
+\begin{nthm}[Local existence and uniqueness]
+  If $f$ is locally Lipschitz for some $x_0 \in \R^d$ and $t_0 \in \R^d$ then $\di x t(t) = f(x(t))$ with $x(t_0) = x_0$ has a unique solution over $t \ge t_0$.
+\end{nthm}
+
+and we can consider global existence and uniqueness,
+\begin{ndefi}[Global Existence and Uniqueness]
+  If $f$ is globally Lipschitz, then $\di x t = f(x(t))$ with $x(t_0) = x_0$ has a unique solution over $t \ge t_0$.
+\end{ndefi}
+
+This is a very demanding condition on our system, so we can weaken this to another condition,
+
+\begin{ndefi}[Global Existence and Uniqueness (2)]
+  Let $f$ be locally Lipschitz in $D$ and $t_0 \in \R$, let $W$ be a closed and bounded subset of $D$, let $x_0 \in W$, and let every solution of $\di x t = f(x(t))$ with $x(t_0) = x_0$ lie in $W$. Then $\di x t = f(x)$ with $x(t_0) = x_0$ has a unique solution over the interval $t \ge t_0$.
+\end{ndefi}
