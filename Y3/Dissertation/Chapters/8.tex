@@ -1,0 +1,84 @@
+% !TEX root = ../notes.tex
+
+\section{More Noether Theory}
+
+\subsection{Noethers Theorem for EL equations}
+
+Consider $L(\vec q,\, \dot \vec q)$ for $\vec q \in \R^3$ and $\dot q \in T_{\vec q}\R^3$. Suppose that $L$ is left invariant with respect to the tangent lift on $\SO(3)$, ie. $R\in\SO(3)$ with $L(R\vec q\,\dot R\vec q) = L(\vec q,\,\dot\vec q)$. Then we can prove that,
+$$ \mathsc{E} := \dit \pd{L}{\dot{\vec q}} - \pd{L}{\vec q} = 0 $$
+Now we have theorem,
+\begin{nthm}
+  Corresponding to each one-parameter subgroup of $\SO(3)$ $R(s)$ where $R(0) = e$ and $R'(0) = \hat\xi \in \mathfrak{SO}(3)$. There is a conserved quantity,
+  $$ A_\xi := \ip{\vec q \ti \pd{L}{\dot q}}{\xi} $$
+  with $\di{A_\xi}{t} = 0$ along solutions of the Euler Legrange equations $\mathsc{E}(\vec q) = 0$
+\end{nthm}
+\begin{proof}
+  Associated with the one parameter subgroup $R(s)$ is the generator $\xi_{\mathcal{M}}(\vec q) := \di{}{s}_{s=0} R(s)\vec q = \hat\xi \vec q = \xi\ti\vec q$ where $\mathcal{M} = \R^3$. Now we consider,
+  \begin{align*}
+    \int_{t_1}^{t_2} L(R(s)\vec q,\,R(s)q) = \int_{t_1}^{t_2} L(q,\,\dot q) \,dt \\
+  \end{align*}
+  and now we differentiate this wrt $s$ and then set $s = 0$ to obtain
+  $$ \ip{\pd{L}{\dot q}}{\xi_{\mathcal{M}}(\vec q)} = \pd{\pd{L}{\dot q}}{\xi \ti \vec q} = \ip{\vec q \ti \pd{L}{\dot q}\,\xi} = A_\xi$$
+\end{proof}
+
+\subsection{Noether Theory and EP Reduction}
+We have,
+$$ \int_{t_1}^{t_2} L(R,\,\dot R)\,dt = 0 $$
+and $L$ is left-invariant and so, $L(SR,\,S\dot R) = L(R,\,\dot R)$
+\begin{nthm}[Noethers Theorem]
+  Corresponding to each one parameter subgroup of $\SO(3)$, $S(s)$ with $S(0)= e$ and $S'(0) = \hat\xi \in \mathfrak{SO}(3)$, then there is a conserved quantity
+  $$ A_\xi := \ip{\Ad^*_{R^\top}\pd{\hat\ell}{\Oh}}{\hat\xi} $$
+  with $\di{A_\xi}{t} = 0$ along solutions of the Euler Lagrange Equation.
+  $$ \mathsc{E}(R) := \dit\pd{L}{\dot R} - \pd{L}{R} = \vec 0 $$
+\end{nthm}
+\begin{proof}
+  Consider $S(s)$ and differentiate and let $s = 0$ much like before,
+  $$ \int_{t_1}^{t_2} \pd{\pd{L}{R}}{\xi_{\mathcal{M}(R)}} + \ip{\pd{L}{\dot R}}{\xi_{\mathcal{M}(\dot R)}} $$
+  where here $\xi_{\mathcal{M}}(R) = \hat\xi R$
+\end{proof}
+
+We now have a definition,
+\begin{ndefi}[Infinitesimal Generator]
+  Consider the left action of a Lie group $G$ on the manifold $\mathcal{M}$, $(g, \vec x) \to gx$ ($\vec x \in \mathcal{M}$). Let $\xi \in \mathfrak{g}$ be a vector in the Lie algebra of $G$ and consider one parameter subgroup $$[exp(t\xi) : t \in \R] \subseteq G$$
+  Then the orbit of an element $\vec x$ with respect to this subgroup is a smooth map $t \to (exp(t\xi))\vec x$ in $\mathcal{M}$. The infinitesimal generator associated to $\xi$ at $\vec x \in \mathcal{M}$ denoted by $\xi_{\mathcal{M}}(\vec x)$ is the tangent vector (or velocity) to this curve at point $\vec x$,
+  $$ \xi_{\mathcal{M}} (\vec x) = \dit|_{t=0} (exp(t \xi)\vec x) \in T_{\vec x}\mathcal{M} $$
+  this smooth vector field $\xi_{\mathcal{M}} : M \to TM$ and $x \mapsto \xi_{\mathcal{M}}(\vec x)$ is called the infinitesimal generator vector field associated to $\xi$.
+\end{ndefi}
+
+Let $G$ be an arbitrary matrix lie group, and let $L$ a left-invariant Lagrangian with variational principle $\int_{t_1}^{t_2} L(g,\,\dot g) = 0$ the reduced system is $L(hg,\, h\dot g)|_{h = g^{-1}} = L(e,\,g^{-1}\dot g) = \ell(\xi) = \ell(g^{-1}\dot g)$.
+\begin{nthm}[Noether's Theorem]
+  Corresponding to each one-parameter subgroup of $G$, $\chi(s)$ such that $\chi(0) = e$ and $\xi_s(0) = \eta \in \mathfrak{g}$. There is a conserved quantity
+  $$ \ip{\Ad^*_{g^{-1}} \pd{\ell}{\xi}}{\eta} $$
+\end{nthm}
+\begin{proof}
+  Done before
+\end{proof}
+
+\begin{nprop}
+  The left-invariant Lagrangian $L(g,\,\dot g)$ satisfies,
+  $$ \dit\pd{L}{\dot g} - \pd{L}{g} = \vec 0  \iff \dit\pd{\ell}{\xi} - \ad^*\pd{\ell}{\xi} = 0$$
+\end{nprop}
+\begin{proof}
+  I think I have done this
+  $$ \int_{t_1}^{t_2} \ip{\mathsc{E}}{\d g} = \int_{t_1}^{t_2} \ip{\mathsc{E}(\xi)}{\nu} $$
+\end{proof}
+
+\subsection{Diamond Map}
+Let $V$ be an $n$-dimensional vector space with dual $V^*$ and pairing $\ip{\vec w}{\vec u}_V$ where $u \in V$ and $w \in V^*$. Let $\mathcal{M}(n,\,\R)$ be a vector space of $n \ti n$ matrices with dual $\mathcal{M}(n,\,\R)^*$ and pairing $\ip{B}{A}_{\mathcal{M}} := \Tr(B^\top A)$ where $A \in \mathcal{M}(n,\,\R)$ and mathcal{B \in \mathcal{M}(n,\,\R)}.
+
+The diamond map is a representation of the transformation of the pairing on $V$ to the pairing on $\mathcal{M}(n,\,\R)$.
+
+\begin{eg}
+  Let $u \in V$ and $w \in V^*$ and consider the matrices $A \in mathcal{M}(n,\,\R)$ and $\Lambda \in \mathcal{M}(n,\,\R)$ where $A$ is a general matrix and $\Lambda$ is a symmetric matrix ($\Lambda^\top = \Lambda$). The diamond map is defined by $\ip{\vec w}{A\Lambda\vec u}_V = \ip{\vec u \diamond \vec w}{\Lambda}_{\mathcal{M}}$.
+  \begin{align*}
+    \ip{\vec w}{A\vec u}_V &= \Tr(\vec u \vec w^\top A) \\
+    &= \Tr((\vec w \vec u ^\top)^\top A)
+    &= \ip{wu^T}{A}_{\mathcal{M}} \\
+  \end{align*}
+  This is for any matrix $A \in \mathcal{M}(n,\,\R)$ and vectors $\vec u \in V$ and $\vec w \in V^*$. We now conclude that,
+  \begin{align*}
+    \ip{\vec w}{A\Lambda \vec u}_V &= \Tr(\vec u \vec w^\top A\Lambda) \\
+    &= \ip{(\vec u\vec w^\top A)^\top}{\Lambda}_{\mathcal{M}}\\
+    &= \ip{A^T\vec w\vec u^\top}{\Lambda}
+  \end{align*}
+\end{eg}
