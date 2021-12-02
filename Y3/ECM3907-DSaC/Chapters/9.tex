@@ -61,7 +61,7 @@ $$ \begin{bmatrix}
 \end{bmatrix} $$
 and it can be show that the eignvalues of that matrix can be seen to be $A - BK$ and $A - LC$. We can now describe a controller by choosing the gain matrix $L$ and a state-feedback control law $u = -K\hat x$.
 
-\marginnote{\emph{Lecture 19}}[0mm]
+\marginnote{\emph{Lecture 20}}[0mm]
 More matlab bits and bobs
 \subsection{Detectability}
 Detectability is just concerned whether the state is blowing up by considering the output. Consider our system,
@@ -109,7 +109,7 @@ Now, if $x_{\text{ref}}(s) = \frac{X}{s}$ we can use the final value theorem,
 $$ \lim_{t \to \infty} e(s) = -(A + BK)^{-1}AX $$
 If the states are not all available for control, and it is instead necessary to use the output $y = Cx + Du$, then we can instead use the input $u = -K(\hat x - x_{\text{ref}} )$ where $\hat x$ is the state estimate obtained from an observer.
 
-
+\marginnote{\emph{Lecture 21}}[0mm]
 \subsection{LQR and Kalman Filter}
 We have considered design of (state feedback) controllers,
 observers and observer-based controllers using pole placement.
