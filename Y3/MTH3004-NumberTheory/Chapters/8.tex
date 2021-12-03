@@ -92,5 +92,163 @@ Now for an alternative proof,
   Let $p$ be an odd prime and $a, b \in \Z$. Then $\ls{ab} p = \ls a p \ls b p$
 \end{nthm}
 \begin{proof}
-  If $$
+  If $p \m a$ or $p \m b$, then $p \m ab$ so $\ls{ab} p = 0$ and so either $\ls a p = 0$ and $\ls b p = 0$, the result is proved.\\
+  No suppose $p \nm a$ and $p \nm b$. Then by Euclids lemma for primes we have $p \nm ab$. Moreover, Eulers Criterion tells us,
+  \begin{align*}
+    \ls{ab} p &= (ab)^{\frac{p-1}{2}} \\
+    &= a^{\frac{p-1}{2}}b^{\frac{p-1}{2}} \\
+    &= \ls a p \ls b p \mod p
+  \end{align*}
+  and both sides are $\pm 1$. If they were different, we could have $1 \c -1 \mod p$ which means $p \m 2$ - Contradiction. $p$ is odd.
+\end{proof}
+
+Now for another theorem,
+\begin{nthm}
+  If $p$ is an odd prime then,
+  $$ \ls{-1} p = (-1)^{\frac{p-1}{2}} = \begin{cases}
+    1 & p \c 1 \mod 4 \\
+    -1 & p \c 3 \mod 4
+  \end{cases} $$
+  In other words, $x^2 \c -1 \mod p$ is soluble if and only if $p \c 1 \mod 4$.
+\end{nthm}
+\begin{proof}
+  By Eulers Criterion,
+  $$ \ls{-1} p \c (-1)^{\frac{p-1}{2}} \mod p $$
+  and both sides are $\pm 1$. Then as above if they were different, $p \c 2$ and so they are the same as $p$ is an odd prime.
+\end{proof}
+
+\begin{nthm}
+  There are infinitely many primes $p$ with $p \c 1 \mod 4$.
+\end{nthm}
+\begin{proof}
+  If suffices to prove the for any $N \in \N$ there exists a prime $p$ with $p > N$ and $p \c 1 \mod 4$. Let $M = (2(N!))^2 + 1$. If $p$ is a prime with $p \le N$ then $M \c 1 \mod p$ so $p \nm M$. Let $p$ be a prime factor of $M$, then $p > N$. As $M$ is odd, $p$ is also odd. Then we have $(2(N!))^2 \c -1 \mod p$ and so the congruence $x^2 \c -1 \mod p$ is soluble and so $p \c 1 \mod 4$ by the previous theorem.
+\end{proof}
+
+\subsection{Gauss' Lemma}
+We make the defintion,
+\begin{ndefi}[]
+  Let $a \in \Z$ and $n \in \N$. We write $\l(a, n)$ for the unique integer such that $a \c \l(a, n)\mod n$ and $0 \le \l(a, n) < n$, ie. $\l(a, n)$ is the remainder of the division algorithm applied to $a$ and $n$.
+\end{ndefi}
+
+We note this isn't standard notation, but it is useful. Now we move onto Gauss' Lemma,
+\begin{nthm}[Gauss' Lemma]
+  Let $p$ be an odd prime and let $a \in \Z$ with $p \nm a$. Then,
+  $$ \ls a p = (-1)^\La \qquad \La = \#\{ j \in \N : 1 \le j \le \frac{p-1}{2},\, \l(aj, p) > \frac{p}{2}\}$$
+\end{nthm}
+
+\begin{eg}
+  Let $p = 13$ and $a = 5$.\\
+  If $j = 1$, then $\l(5, 13) = 5 < \frac{13}{2}$\\
+  If $j = 2$, then $\l(10, 13) = 10 < \frac{13}{2}$... and so on. We find that $\La = \#\{2, 4, 5\} = 3$ and so $\ls 5 13 = -1$.
+\end{eg}
+
+\begin{proof}
+  Let $S_a = \{aj : 1 \le j \le \frac{p-1}{2}\}$ and we define,
+  $$ \{r_i\}_{i=1}^m = \{\l(aj, p) : aj \in S_a,\, 0 \le \l(aj, p) < \frac{p}{2}\} $$
+  $$ \{s_i\}_{i=1}^n = \{\l(aj, p) : aj \in S_a,\, \frac{p}{2} \le \l(aj, p) < {p}\} $$
+  so that $n = \La$. Note that $\l(aj, p) \ne \frac{p}{2}$ since $\frac{p}{2} \notin \Z$ and $\l(aj, n) \ne 0$ since $p \nmid a$ and $p \nmid j$. Also note that $j_1 \ne j_2$ then $\l(aj_1, p) \ne \l(aj_2, p)$ since,
+  \begin{align*}
+    \l(aj_1, p) = \l(aj_2, p) \implies aj_1 &\c aj_2 \mod p \\
+    \implies j_1 &\c j_2 \mod p\\
+    \implies j_1 &= j_2 && \text{since $0 < j_1, j_2 < p$.}
+  \end{align*}
+  Hence, $m + n = \#S_a = \frac{p-1}{2}$ as we proved that there isn't anything at the end points and distinct $j$'s return distinct values. We claim that,
+  $$ \{r_1, \dots, r_m, (p - s_1), \dots, (p - s_n)\} = \{1, 2, \dots, \frac{p-1}{2}\} $$
+  It is clear that $r_i, (p - s_i) \in \{1,\,2\,\dots, \frac{p-1}{2}\}$ and there are $\frac{p-1}{2}$ elements so it suffices to prove that they are all different. We have already show that $r_i \ne r_j$ and $s_i \ne s_j$ for $i \ne j$. To show that $r_i \ne p - s_j$ we argue by contradiction. If $r_i + s_i = p$, let $r_i = \l(aj_1, p)$ and $s_i = \l(aj_2, p)$. Then,
+  \begin{align*}
+    r_i + s_j &= p \\
+    &= l(aj_1, p) + \l(aj_2, p) \\
+    &\c aj_1 + aj_2 \mod p\\
+    &\c a(j_1 + j_2) \mod p
+  \end{align*}
+  Hence, $a(j_1 + j_2) \c 0 \mod p$. So by Euclids Lemma for primes, either $p \m a$ or $p \m j_1 + j_2$. However, $p \nm a$ and $2 \le j_1 + j_2 \le p -1$ so then $p \nm j_1 + j_2$ - Contradiction. Therefore $r_i \ne p - s_j$. \\
+  Now on the one hand we have,
+  \begin{align*}
+    r_1r_2 \dots r_m(p-s_1)(p-s_2) \dots (p - s_n) &= 1 \ti 2 \ti \dots \ti \frac{p-1}{2} = \left(\frac{p-1}{2}\right)!\\
+    &= r_1r_2\dots r_m s_1s_2 \dots s_n (-1)^n \mod p
+  \end{align*}
+  On the other hand, by the definition of $r_i$ and $s_j$,
+  \begin{align*}
+    r_1r_2 \dots r_ms_1s_2\dots s_n &= \prod_{j=1}^{\frac{p-1}{2}} \l(aj, p) \\
+    &= \prod_{j=1}^{\frac{p-1}{2}} (aj) \\
+    &\c a^{\frac{p-1}{2}}\left(\frac{p-1}{2}\right)! \mod p
+  \end{align*}
+  Therefore,
+  $$ \left(\frac{p-1}{2}\right)! \c (-1)^n a^{\frac{p-1}{2}}\left(\frac{p-1}{2}\right)! \mod p  $$
+  Now since $p \m \left(\frac{p-1}{2}\right)!$, the cancellation law for congruences shows that,
+  $$ 1 \c (-1)^n a^{\frac{p-1}{2}} \mod p  $$
+  Now we rearrange and get $a^{\frac{p-1}{2}} \c (-1)^n \mod p$ and so $\ls a p \c (-1)^n \mod p$ by Euler's Criterion. Then both sides are $\pm 1$, if they were different, then we get that $2 \m p$ - Contradiction. Therefore $\ls a p = (-1)^\La$ as required.
+\end{proof}
+
+\begin{ndefi}[Floor Function]
+  For any $x \in \R$ we set $\floor{x} := \max\{n \in \Z \}$
+\end{ndefi}
+
+\begin{ncor}
+ If $p$ is an odd prime, then,
+ $$ \ls 2 p = (-1)^{\frac{p^2-1}{8}} = \begin{cases}
+   1 & p \c \pm 1 \mod 8\\
+   -1 & p \c \pm 3 \mod 8
+ \end{cases} $$
+\end{ncor}
+\begin{proof}
+  Apply Gauss' Lemma for $a=2$,
+  $$ \ls 2 p = (-1)^\La $$
+  where $\La = \#\{1 \le j \le \frac{p-1}{2} : \l(2j, p) > \frac{p}{2}\}$. Note that for $1 \le j \le \frac{p-1}{2}$ we have $2 \le 2j \le p -1$ and so $\l(2j, p) = 2j$. Moreover, $2j < \frac{p}{2}$ if and only if $j < \frac{p}{4}$ and $\frac{p}{2} < 2j < p$ if and only if $\frac{p}{4} < j < \frac{p}{2}$.
+  It follows that, $\La = \#\{j \in \N : \frac{p}{4} < j < \frac{p}{2}\}$. We can calculate this,
+  \begin{align*}
+    \#\{j \in \N : \frac{p}{4} < j < \frac{p}{2}\} &= \#\{j \le \frac{p-1}{2}\} - \#\{j < \frac{p}{4}\} \\
+    &= \frac{p-1}{2} - \floor{\frac{p}{4}}
+  \end{align*}
+  Since $p$ is odd, then one of the following must occur,
+  \begin{enumerate}
+    \item $p = 8k+1 \implies \frac{p-1}{2} = 4k, \floor{\frac{p}{4}} = 2k \implies \La = 2k$.
+    \item $p = 8k+3 \implies \frac{p-1}{1} = 4k+1, \floor{\frac{p}{4}} = 2k \implies \La = 2k+1$.
+    \item $p = 8k+5 \implies \frac{p-1}{1} = 4k+2, \floor{\frac{p}{4}} = 2k+1 \implies \La = 2k+1$.
+    \item $p = 8k+7 \implies \frac{p-1}{1} = 4k+3, \floor{\frac{p}{4}} = 2k+1 \implies \La = 2k+2$
+  \end{enumerate}
+  Hence, $(-1)^\La = +1 \iff p = 8k+1 \text{ or } p = 8k + 7$
+  We note that if $p = 8k + r$, then,
+  $$ \frac{p^2 - 1}{8} = \frac{r^2 + 16rk + 64k^2 - 1}{8} = \frac{r^2 - 1}{8} + 2(kr + 4k^2) \c \frac{p^2 - 1}{8} \mod 2$$
+  By checking cases of $r = \pm 1, \pm 3$ and see,
+  $$ \frac{p^2 - 1}{8} = \begin{cases}
+    0 \mod 2 & p \c \pm 1 \mod 8 \\
+    1 \mod 2 & p \c \pm 3 \mod 8
+  \end{cases} $$
+  and the result follows.
+\end{proof}
+
+We now prove that there are more infinitely many primes!
+\begin{nthm}
+  There are infinitely many primes $p$ with $p \c -1 \mod 8$
+\end{nthm}
+\begin{proof}
+  It suffices to prove that for any $N \in \N$ there exists a prime $p$ with $p > N$ and $p \c -1 \mod 8$. Let $M = 8(N!)^2 - 1$. If $p$ is a prime with $p \le N$ then $M \c -1 \mod p$ and so $p \nm M$. Let $p$ be a prime factor of $M$, then $p$ is odd and $p > N$. Moreover,
+  $$ (4(N!))^2 \c 16(N!)^2 \c 2M + 2 \c 2 \mod p $$
+  Thus, $\ls 2 p = 1$ and so $p \c \pm 1\mod 8$ by the Corollary above. But if all the prime factors of $M$ were congruent to $1 \mod 8$, then $M \c 1 \mod 8$, which is not the case. Therefore, $M$ must have at least one prime factor $p$ with $p \c -1 \mod 8$ and $p > N$.
+\end{proof}
+
+\begin{nlemma}
+  Let $p$ be an odd primes and $a \in \Z$ and $p \nm a$. Then,
+  $$ \ls a p = (-1)^t  \qquad t = \sum_{k=1}^\frac{p-1}{2} \floor{\frac{ak}{p}}$$
+\end{nlemma}
+\begin{proof}
+  Recall the notation from Gauss' Lemma. Here, $\l(aj, p) = aj - pk$ for some $k \in \Z$ such that $0 \le aj - pk < p$. It follows that $k \le \frac{aj}{p} < k+1$ and hence $k = \floor{\frac{aj}{k}}$. We therefore deduce that $\l(aj, p) = aj - p \floor{\frac{aj}{k}}$. Now we recall $r_i$ and $s_i$. Then,
+  \begin{align*}
+    \sum_{i=1}^m r_i + \sum_{i=1} s_i &= \sum_{j=1}^{\frac{p-1}{2}} \l(aj, p)\\
+    &= \sum_{j=1}^{\frac{p-1}{2}} \left( aj - p\floor{\frac{aj}{p}} \right)
+  \end{align*}
+  Since $a$ and $p$ are odd, then,
+  \begin{equation}
+    \sum_{j=1}^{\frac{p-1}{2}} j - \sum_{j=1}^{\frac{p-1}{2}}\floor{\frac{aj}{p}} \c \sum_{i=1}^m r_i + \sum_{i=1} s_i \mod 2 \tag{$*$}
+  \end{equation}
+  Now we recall from Gauss' Lemma that,
+  $$ \{r_1, \dots, r_m, (p - s_1), \dots, (p - s_n)\} = \{1, 2, \dots, \frac{p-1}{2}\} $$
+  Thus,
+  $$ \sum_{i=1}^m r_i + np + \sum_{i=1}^n s_i \c \sum_{j=1}^{\frac{p-1}{2}} j \mod 2 $$
+  and so we now can say,
+  $$ \sum_{i=1}^m r_i + \sum_{i=1}^n s_i \c n +  \sum_{j=1}^{\frac{p-1}{2}} j \mod 2 $$
+  Then comparing with $(*)$,
+  $$ n \c \sum_{j=1}^{\frac{p-1}{2}}\floor{\frac{aj}{p}} \mod 2 $$
+  and so the result follows from Gauss' Lemma.
 \end{proof}

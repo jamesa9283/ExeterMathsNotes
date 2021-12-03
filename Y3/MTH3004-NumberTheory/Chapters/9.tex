@@ -1,0 +1,37 @@
+% !TEX root = ../notes.tex
+
+\section{Law of Quadratic Reciprocity}
+Here is the statement,
+\begin{nthm}[LQR]
+  If $p$ and $q$ are distinct odd primes, then,
+  \begin{align*}
+    \ls p q &= \ls q p (-1)^{\frac{p-1}{2}\frac{q-1}{2}}\\
+    &= \begin{cases}
+      \ls p q & \text{if } p \c 1 \mod 4 \text{ or } p \c 1 \mod 4\\
+      -\ls p q & \text{if } p \c q \c 3 \mod 4
+  \end{cases}
+  \end{align*}
+\end{nthm}
+
+\begin{remark}
+   Often forget that $p$ and $q$ are distinct odd primes.
+\end{remark}
+
+We will prove this later, but it is the most important theorem in the module.
+
+\begin{eg}
+  What is $\ls{29}{53}$? In other words, can we solve $x^2 \c 29 \mod 53$? Use LQR,
+  \begin{align*}
+    \ls{29}{53} &= \ls{53}{29} \\
+    &= \ls{24}{29}\\
+    &= \ls 2 {29} ^3 \ls 3 {29}
+  \end{align*}
+  Now we use LQR and the formula for $\ls 2 p$ repeatedly,
+  \begin{align*}
+    \ls{2}{29} &= -1 && (\text{since $29 \c -3 \mod 8$})\\
+    \ls{3}{29} &= \ls{29}{3} \\
+    &= \ls 2 3\\
+    &= -1 && (\text{since $3 \c 3 \mod 8$})
+  \end{align*}
+  Thus, $\ls{29}{53} = (-1)^4 = 1$ and hence $x^2 \c 29 \mod 53$ is soluble.
+\end{eg}
