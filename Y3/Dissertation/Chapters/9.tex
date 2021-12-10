@@ -1,0 +1,77 @@
+% !TEX root = ../notes.tex
+
+\noindent
+If $F = F^\top$ and $G = -G^\top$, then $\Tr(FG) = 0$. We see that $\Lv$ is symmetric so we consider the antisymmetric part,
+\begin{align*}
+  &= \Tr(\vec u\vec w^\top A \Lv )\\
+  &= \Tr (\frac{1}{2}(\vec u\vec w^\top A + A^\top \vec w\vec u^\top)\Lv ) && \text{we are spliitng this by it's symmetric part} \\
+  &= \Tr(\Sym(\vec u\vec w^\top A)\Lv) \\
+  &= \ip{\Sym(\vec u\vec w^\top A)}{\Lv}
+\end{align*}
+We can say that $\vec u \diamond \vec w = \Sym(\vec u\vec w^\top A) = \frac{1}{2}(\vec u\vec w^T A + A^\top \vec w\vec u^\top)$. This is going to appear in EP theory in symmetry breaking paramaters.
+
+\section{EP Reduction with parameters}
+
+What are symmetry breaking parameters? We already know of $\I$ is a symmetry breaking parameter or $\vec e_3 = R\Gamma$ which is gravity.\\
+
+Consider a Lie Group, $G$, and a left action on a manifold, $\mathcal{M}$. Then for a given $a_0 \in \mathcal{M}$ (a parameter), let $L: TG \ti \mathcal{M} \to \R$ be a Lagrangian with symmetry breaking parameter $a_0$, and suppose it is invariant under the left action: $G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$ then $(h, (g, \dot g, a_0)) \to (hg, h\dot g, ha_0)$ for all $h \in G$.
+This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As usual let $h = g^{-1}$, then $L(g, \dot g, a_0) = L(g^{-1}g, g^{-1}\dot g, g^{-1}a_0) =: \ell(\xi, a)$ where $\xi := g^{-1}\dot g$ and $a = g^{-1}a_0$.
+\begin{nthm}
+  Then the following are equivalent,
+  \begin{enumerate}
+    \item Hamiltons Principle
+    $$ \d\int_{t_1}^{t_2} L(g, \dot g, a_0)\,dt = 0 $$
+    with $\d g(t_1) = \d g(t_2) = 0$.
+    \item $g(t)$ satisfies the Euler-Lagrange equations associated with $L(g, \dot g, a_0)$
+    \item The reduced variational principle (or Hamiltons principle),
+    $$ \d\int_{t_1}^{t_2} \ell(\xi, a) \,dt = 0 $$
+    holds on $\mathfrak{g} \ti \mathcal{M}$, using variations $\d \xi = \dot \eta + \ad_{\xi}\eta$ and $\d a = -\eta_\mathcal{M} (a)$ with free variations $\eta(t)$ satisfying end point conditions.
+    \item The Euler-Poincare equations
+    \begin{align*}
+      \dit \pd{\ell}{\xi} &= \ad^*_\xi \pd{\ell}{\xi} - a\diamond \pd{\ell}{a} \\
+      \dot a &=-\xi_\mathcal{M} a
+    \end{align*}
+    hold on $\mathfrak{g} \ti \mathcal{M}$ where $\ip{\pd{\ell}{a}}{\a_\mathcal{M}a} =: \ip{a \diamond \pd{\ell}{a}}{\a}$ for all $\a \in \mathfrak{g}$ and for all $a \in \mathcal{M}$.
+  \end{enumerate}
+\end{nthm}
+\begin{proof}
+  We already know that $\d \xi = \dot \eta + [\xi, \eta]$ and $\eta = g^{-1}\d g$ and then $\d a = -g^{-1}\d g a = -\eta_{\mathcal{M}} a = -\eta a$. Now we look at our variational principle,
+  \begin{align*}
+    0 &= \d\int_{t_1}^{t_2} \ell(\xi, a)\, dt \\
+    &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a})\, dt \\
+    &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{\xi}}{\dot \eta + \ad_{\xi} \eta} - \ip{\pd{\ell}{a}}{\eta_\mathcal{M}}\, dt \\
+    &= \int_{t_1}^{t_2} \ip{ -\dit \pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{xi}}{\eta} - \ip{a \diamond \pd{\ell}{a}}\, dt && \text{ we used integration by parts}
+  \end{align*}
+  Now we want the second equation,
+  \begin{align*}
+    \dot a &= \dit (g^{-1}a_0) \\
+    &= \dit g^{-1} a_0 \\
+    &= -g^{-1}\dot g g^{-1} a_0 \\
+    &= -\xi a \\
+    &= -\xi_\mathcal{M} a
+  \end{align*}
+  and we are done.
+\end{proof}
+
+Now we look at Noethers Theorems.
+\begin{nthm}[Noether's Theorem for Symmetry Breaking Parameters]
+  Let $\xi = g^{-1}\dot g$ be a solution of the Euler Poincare Equations with parameters $a = g^{-1}a_0$. Then,
+  $$ \dit \Ad^*_{g^{-1}(t)} \mu = -\Ad^*_{g^{-1}(t)} (a \diamond \pd{\ell}{a}) $$
+  and $\mu(t) = \pd{\ell}{\xi} \in \mathfrak{g}^*$.
+\end{nthm}
+\begin{proof}
+  Exercise
+\end{proof}
+
+\begin{exercise}
+  Do the same thing for right invariant actions. If the unreduced Lagrangian $L : TG \ti \mathcal{M} \to \R$ is invariant under a right action
+  $$G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$$
+  $$ (h, (g, \dot g, a_0)) \mapsto (gh, \dot g h, a_0h) $$
+  and
+  $$ \dit \pd{\ell}{\xi} = -\ad^*_\xi \pd{\ell}{\xi} - a\diamond \pd{\ell}{a} $$
+  $$ \dot  = -\xi_\mathcal{M}a $$
+  The Noether Theorem is,
+  \begin{nthm}
+    $$ \dit Ad^*_{g(t)} \mu = -\Ad^*_{g(t)} \left(a \diamond \pd{\ell}{a}\right) $$
+  \end{nthm}
+\end{exercise}
