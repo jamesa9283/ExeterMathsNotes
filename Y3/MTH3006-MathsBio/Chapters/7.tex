@@ -1,0 +1,265 @@
+% !TEX root = ../notes.tex
+
+\section{Discrete Time Systems in 1D}
+Consider,
+$$ N_{t+1} = f(N_t) $$
+ and $t \in \Z$. We can say that $N_t$ is the population size at time step $t$, and we now have an evolution function $f: \R \to \R$. Starting at $N_0$, we can generate a trajectory by just recursively applying our map.
+ \[\begin{tikzcd}
+	{N_0} & {N_1} & {N_2} & \dots & {}
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["f", from=1-3, to=1-4]
+\end{tikzcd}\]
+Here is an example, $f(N) = rN$ where $r > 0$ is just our birth rate. We get that $N_t = r^tN_0$. So there are three things that can happen,
+\begin{enumerate}
+  \item $N_t \to 0$ as $t \to \infty$ if $r < 1$ (extinction)
+  \item $N_t \to \infty$ as $t \to \infty$ if $r > 1$ (survival)
+  \item $N_t \to N_0$ as $t \to \infty$ if $r = 1$ (survival)
+\end{enumerate}
+
+We will be considering maps with a single maximum in $(0,\,\infty)$, so something like an inverted quadratic. Again we will loop at the logistic map,
+$$ f(N) = rN\left( 1 - \frac{N}{k} \right) $$
+
+\subsection{Equilibria, Stability and Cobwebbing}
+Recall that for a continuous time system, $N(t) = N_{*}$ if $\fa t\ge 0$ if $f(N_*) = 0$. For discrete systems,
+$$ N_t = N_* $$
+$$ \implies N_{t+1} = N_t = N_* \,\fa t \ge 0$$
+and so we just want $f(N_*) = N_*$. We call $N_*$ as fixed point for the function $f$.\\
+
+We can consider cobwebbing to find these Equilibria, we take a initial condition, then draw up to $f$, then project to $f(N) = N$, then project down again to $N_1$. We then repeat this.
+
+% diagram for just -x^2
+
+If we can converge on a fixed point we can think of it as stable, but some fixed points can't be converged upon and so they are unstable. Again, we see that $f'(N_*)$ defined the dynamics. There are four possibilities.
+\begin{enumerate}
+  \item $0 \le f'(N_*) < 1$, we converge onto a fixed point wherever we start from. So $N_t \to N_0$ and so $N_0$ is stable.
+  \item $f'(N_*) > 1$ and so our cobweb just diverges to positive or negative infinity. It diverges monotonically in each direction.
+  \item $-1 < f'(N_*)$, here we get a spiral inwards. Here $N_*$ is oscillatory stable. This a non-monotonic convergence.
+  \item $f'(N_*) < -1$, here we get an unstable spiral. It diverges to infinity. We say $N_*$ is oscillatory unstable.
+\end{enumerate}
+To see this formally, we write $N_t = N_* + n_t$ and take some sort of Taylor expansion. Then,
+\begin{align*}
+  N_* + n_t &= f(N_* + n_t) \\
+  &= f(N_*) + f'(n_t)n_t + hot.\\
+  &= f'(N_*)n_t
+\end{align*}
+Ignoring the higher order terms we can write,
+$$ n_{t+1} = f'(N_*)n_t $$
+and so now we can consider the assymptotic dynamics and we see that all we need to consider is $f'(N_*)$. Hence we see,
+\begin{enumerate}
+  \item If $|f'(N_*)| < 1$, then $n_t \to 0$ and $N_t \to N_*$ as $t \to \infty$. Hence $N_*$ is a stable fixed point
+  \item If $|f'(N_*)| > 1$ and so $n_t \to \infty$ and $N_t \to \infty$. Hence $N_*$ is an unstable fixed point.
+  \item If $|f'(N_*)| = 1$, there is a change in stability, called a bifurcation.
+\end{enumerate}
+
+If we are interested in the types of bifurcation and the characteristics of each bifurcation, we will consider solutions of different periods. For the bifurcation of the logistic map at $r=3$, we consider period 2 solutions. If we consider these maps, we can find a different type of bifurcation called a period-doubling bifurcation. For each bifurcation we see period $2^n$ solutions. This is where the `classic' bifurcations come from. This is what we call a period-doubling cascade. An interesting thing is when $r = 3.57$, we get $2^n$-period solutions for all $n$, but they are all unstable. This is deterministic chaos.
+
+\section{Reaction Kinetics}
+We will consider the Michaelis-Menten Scheme, we will consider an enzyme, $E$, that binds to a substrate $S$ in order to catalyse $S$ into a product $P$.
+$$ \ce{S + E <=>[k_1][k_{-1}] C ->[k_2] P + E} $$
+We want to know that happens as we increase time. So we want to create systems of differential equations. We use the Law of Mass Action, this states that the rate of a reaction is proportional to the concetration of the reactants. Our reaction scheme has $m$ reactions, $\{R_1, \dots, R_m\}$ and $n$ reactants $\{X_1, \dots, X_n\}$. We denote the concentration of $x_i = [X_i]$. We then define,
+\begin{enumerate}
+  \item Chemical species vector, $x = \begin{pmatrix}
+    x_1 & \dots & x_n
+  \end{pmatrix}^\top$
+  \item Reaction vector, $\vec v(\vec x) = \begin{pmatrix}
+    \vec v_1(\vec x) & \dots & \vec v_m(\vec x)
+  \end{pmatrix}^\top$ where $\vec v_j (\vec x)$ is the rate of $R_j$.
+  \item Stoichiometry Matrix, $N = (N_{ij})$ where $N_{ij}$ is the number of molecules of the $X_i$ produced/consumed in $R_j$.
+\end{enumerate}
+We then obtain the equations for $\vec x(t)$,
+$$ \dot{\vec x} = N\vec v(\vec x) $$
+Hence we just decompose our equations,
+\begin{align}
+  \ce{S + E ->[k_1] C} \tag{$R1$} \\
+  \ce{C ->[k_{-1}] S + E} \tag{$R2$} \\
+  \ce{C ->[k_2] P + E} \tag{$R3$}
+\end{align}
+and we write $[S] = s$, $[E] = e$ and so on. We want to write,
+$$ \vec x = \begin{pmatrix}
+  s \\ e \\ c \\ p
+\end{pmatrix},\, \vec v(\vec x) = \begin{pmatrix}
+  k_1se \\ k_{-1}c \\ k_2c
+\end{pmatrix},\, N = \begin{pmatrix}
+  -1 & 1 & 0\\
+  -1 & 1 & 1 \\
+  1 & -1 & -1\\
+  0 & 0 & 1
+\end{pmatrix} $$
+Now we can say,
+$$ \dit \begin{pmatrix}
+  s \\ e \\ c \\ p
+\end{pmatrix} = \begin{pmatrix}
+  -1 & 1 & 0\\
+  -1 & 1 & 1 \\
+  1 & -1 & -1\\
+  0 & 0 & 1
+\end{pmatrix} \begin{pmatrix}
+  k_1se \\ k_{-1}c \\ k_2c
+\end{pmatrix} $$
+and so we want write,
+\begin{align*}
+  \dit s &= -k_1se + k_{-1}c \\
+  \dit e &= -k_1se + k_{-1}c + k_2c \\
+  \dit c &= k_1se - k_{-1}c - k_2c \\
+  \dit p &= k_2c
+\end{align*}
+Now we choose suitable intial conditions, say $s(0) = s_0$, $e(0) = e_0$, $c(0) = p(0) = 0$. Now we can deduce that the last equation can jusr be solved, it doesn't depend on any other equation. Hence we can write,
+$$ p(t) = k_2\int_0^t c(s)\,ds $$
+and also we can say that $\dot e + \dot c = 0$ and the amount of enzyme is conserved. Hence,
+$$ e(t) + c(t) = k\,\fa t  $$
+and hence, $e(0) + c(0) = e_0 = k$ and so $e(t) = e_0 - c(t)$ and we can compute the enzyme concentration from $c$. Now we can reduce our equations using this,
+\begin{align*}
+  \dot s &= -k_1e_0s + (k_1s + k_{-1}c) \\
+  \dot c &= k_1e_0s - (k_1s + k_{-1} + k_2)c
+\end{align*}
+Now we can now simplify these further by non-dimensionalise them. We let $\tau = k_1e_0t$ and then via chain rule,
+\begin{align*}
+  \di s \tau &= \di s t \di t \tau \\
+  &= \frac{1}{k_1e_0}\dot s \\
+  &= -s + (s + \frac{k_{-1}}{k_1})\frac{c}{e}
+\end{align*}
+and so the second we get that,
+$$ \di{c}{\tau} = s - (s + \frac{k_{-1} + k_2}{k_1})\frac{c}{e} $$
+and we let $v = \frac{c}{e_0}$,
+\begin{align*}
+  \di s \tau &= -s + (s + \frac{k_{-1}}{k_1})v \\
+  \di v \tau &= \frac{s}{e_0}u + (\frac{s}{e_0} - \frac{k_{-1} + k_2}{e_0k_1})v
+\end{align*}
+Now we let $u = \frac{s}{e_0}$
+\begin{align*}
+  \di u \tau &= -u + (u + \frac{k_{-1}}{k_1s_0})v\\
+  \frac{e_0}{s_0}\di v \tau &= u - (u + \frac{k_{-1}+k_2}{s_0k_1})v
+\end{align*}
+Now let $\e = \frac{e_0}{s_0}$ and $k = \frac{k_{-1} + k_2}{k_1s_0}$ and $\l = \frac{k_2}{k_1s_0}$ and we get,
+\begin{align*}
+  \di u \tau &= -u + (u + k - \l)v\\
+  \e\di v \tau &= u - (u + k)v
+\end{align*}
+with initial conditions of $u(0) = 1$ and $v(0) = 0$. In general we have $e_0 << s_0$ and so $\e << 1$. Hence, let $\e = 0$ (the rate of the complex formation is very fast), following $\di v \tau \approx 0$, the complex is essentally at equilibrium. This is referred to as the \textbf{Quasi-Stable State Assumption}, and implies,
+$$ v = \frac{u}{u+k} $$
+and so,
+$$ \di u \tau = -u + (u + k - \l)\frac{u}{u+k} = -\l \frac{u}{u+k} $$
+and in dimensionalised form,
+$$ \di s t = \frac{V_{max}s}{s + k_m} $$
+where $V_{max} = k_2e_0$ and $k_m = \frac{k_{-1} + k_2}{k_1}$. Hence if follows that,
+$$ \di p t = \frac{V_{max}s}{s + k_m} $$
+this is the Michaelis-Menten equation for product formation. We call the $k_m$ the Michaelis Constant, it is a threshold value.\\
+
+\subsection{Two Binding States - Cooperative Binding}
+Now we consider there are two binding states for the substrate and the binding of one substrate molecule fascilitates the binding of the other. Then we can show that,
+$$ \di p \tau = \frac{v_{max}s^2}{s^2 + k_m^2} $$
+This is the hill function and for $n$ binding sites,
+$$ \di p t = \frac{v_{max}s^n}{s^n + k_m^n} $$
+The hill functions are used as a template for modelling gene expression.
+
+\subsection{Autocatalysts}
+Consider the following reaction,
+$$ \ce{A + X ->[k_1] 2X} \qquad \ce{x + Y ->[k_2] 2Y} \qquad \ce{Y ->[k_3] B} $$
+where we fix $[A] = a_0$ and the usual setup applies. This scheme is an example of autocatalysis, $X$ and $Y$ are involved in the their own production. We convert the scheme to ODEs as before,
+$$ \vec x= \begin{pmatrix}
+  x \\ y \\ b
+\end{pmatrix}\, \vec v(\vec x) = \begin{pmatrix}
+  k_1a_0 x \\ k_2xy \\ k_3y
+\end{pmatrix} ,\, N = \begin{pmatrix}
+  1 & -1 & 0 \\ 0 & 1 & -1 \\ 0 & 0 & 1
+\end{pmatrix} $$
+and now we get the following,
+\begin{align*}
+  \dot x &= k_1a_0 x - k_2xy \\
+  \dot y &= k_2xy - k_3y \\
+  \dot b &= k_3y
+\end{align*}
+and again we see that $b(t) = k_3 \int_0^t y(s)\,ds$. So we now non-dimensionalise this system, define $\tau = k_1a_0 t$ and then,
+\begin{align*}
+  \di x \tau &= \di x t \di t \tau \\
+  &= x - \frac{k_2}{k_1a_0}xy
+\end{align*}
+similarly,
+$$ \di y \tau = \frac{k_2}{k_1a_0}xy - \frac{k_3}{k_1a_0}y $$
+now let $v = \frac{k_2}{k_1a_0}$ and so,
+\begin{align*}
+  \di x \tau &= x - xv \\
+  \di v \tau &= \frac{k_2}{k_1a_0}( \frac{k_2}{k_3}x - v)
+\end{align*}
+Now finally, we let $u = \frac{k_2}{k_3}x$ and let $\a = \frac{k_3}{k_1a_0}$. Then,
+\begin{align*}
+  \di u \tau &= u(1 - v) \\
+  \di v \tau &= \a v(u - 1)
+\end{align*}
+This is just the Lotka-Volterra Predator-Prey system. We can write,
+\begin{align*}
+  \di u v &= \di u \tau \di \tau v \\
+  &= \frac{u(1 - u)}{\a v(u - 1)} \\
+  \a \frac{u-1}{u}du &= \frac{1-v}{v}dv \\
+  C &= \a u + v + \ln(u^\a v)
+\end{align*}
+We see that for $C \ge 1 + \a$, the solutions are closed curves over $(u, v)$ plane. We get this oscillatory behaviour as both $u$ and $v$ feed into eachother.
+
+\section{Stage Structured Population Models- PPMs}
+We start by considering classification by age, here we have one class per year of their life cycle and the discrete time steps are in years. We can represent our population as a population vector
+$$ \vec x(t) = \begin{pmatrix}
+  x_1(t) & x_2(t) & \dots & x_n(t)
+\end{pmatrix}^\top $$
+where $x_i(t)$ is population at life cycle $i$. A simple age-based odel is the following,
+\begin{align*}
+  x_1(t+1) &= f_1x_1(t) + \dots + f_nx_n(t) \\
+  x_2(t+1) &= p_1x_1(t) \\
+  x_3(t+1) &= p_2x_2(t) \\
+  & \vdots \\
+  x_n(t+1) &= p_{n-1}x_{n-1}(t)
+\end{align*}
+If wr let $f_i$ be the fecundities in each age class and the $p_i$'s the survival probabilities of each age class. We note that $0 \le p_i \le 1$ and usually the first couple of $f_i$'s are zero ($f_i \ge 0$). We can write the following in vector form,
+$$ \vec x(t+1) = \begin{pmatrix}
+  f_1 & f_2 & f_3 & \dots & f_n \\
+  p_1 & 0 & 0 & \dots & 0 \\
+  0 & p_2 & 0 & \dots & 0 \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & 0 & \dots & p_n
+\end{pmatrix} \vec x(t)$$
+We denote this middle matrix as $L$ as it's a Leslie matrix. We are now going to generalise this model to be a stage structured model. This has the form,
+\begin{align*}
+  x_1(t+1) &= f_1x_1(t) + \dots + f_nx_n(t) \\
+  x_2(t+1) &= g_1x_1(t) + p_2x_2(t) \\
+  x_3(t+1) &= g_2x_2(t) + p_3x_3(t) \\
+  & \vdots \\
+  x_n(t+1) &= g_{n-1}x_{n-1}(t) + p_n(t)x_n(t)
+\end{align*}
+Again $f_i$'s are the fecundities of each stage class, the $g_i$'s are the growth probability and $p'_i$'s as the stasis probability of each stage class. Again $0 \le p_i, g_i \le 1$ and $f_i \ge 0$. Now we see,
+$$ \vec x(t+1) = \begin{pmatrix}
+  f_1 & f_2 & f_3 & \dots & 0 & f_n \\
+  g_1 & p_2 & 0 & \dots & 0 & 0 \\
+  0 & g_2 & p_3 & \dots  & 0 & 0 \\
+  0 & 0 & g_3 & \dots  & 0 & 0 \\
+  \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+  0 & 0 & 0 & \dots & g_{n-1} & p_n
+\end{pmatrix} \vec x(t)$$
+These are examples of the PPM models, these have the general form:
+$$ \vec x(t+1) = A\vec x(t) \qquad \vec x(0) = \vec x_0 $$
+\begin{eg}
+  \textbf{Tulip PPM}\\
+  Assume three stage classes: Seeds, Bulbs and Flowers. We assume that seeds can become bulbs and bulbs can become flowers. Bulbs can stay as bulbs and flowers as flowers. Finally flowers produce bulbs and seeds. Hence our PPM is,
+  $$ A = \begin{pmatrix}
+    0 & 0 & A_{13} \\
+    A_{21} & A_{22} & A_{23} \\
+    0 & A_{32} & A_{33}
+  \end{pmatrix} $$
+\end{eg}
+
+\subsection{Assymptotic Dynamics}
+We are really interested in assymptotic dynamics, so we consider $\vec x(t+1) = A\vec x(t)$ and we can see that $x(t) = A^t\vec x_0$. Hence we are really interested in what $A^t$ looks like. So we want the eigenvalue decomposition of $A$. Assume that $A$ has eigenvalues of $\{\l_1, \l_2, \dots, \l_n\}$ and eigenvectors, $\{\vec w_1, \vec w_2, \dots, \vec w_n\}$ and now we write,
+$$ P = \begin{pmatrix}
+  \vec w_1 & \vec w_2 & \dots & \vec w_n
+\end{pmatrix} $$
+and so,
+$$ AP = \begin{pmatrix}
+  A\vec w_1 & A\vec w_2 & \dots & A\vec w_n
+\end{pmatrix} = \begin{pmatrix}
+  \vec w_1 & \vec w_2 & \dots & \vec w_n
+\end{pmatrix}\begin{pmatrix}
+  \l_1 & 0 & \dots & 0\\
+  0 & \l_2 & \dots & 0 \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \dots & \l_n
+\end{pmatrix} $$
+and so we can write $AP = P\La$ and so $A = P\La P^{-1}$
