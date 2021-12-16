@@ -262,4 +262,208 @@ $$ AP = \begin{pmatrix}
   \vdots & \vdots & \ddots & \vdots \\
   0 & 0 & \dots & \l_n
 \end{pmatrix} $$
-and so we can write $AP = P\La$ and so $A = P\La P^{-1}$
+and so we can write $AP = P\La$ and so $A = P\La P^{-1}$. Using this similarity condition, we want find that,
+$$ A^n = P\La P^{-1}P\La P^{-1} \dots P\La P^{-1} = P\La^n P^{-1} $$
+Now we can expand $\vec x_0 = \a_1\vec w_1 + \a_2 \vec w_2 \dots + \a_n + \vec w_2$ and so,
+$$ \vec x_0 = P\vec\a , \qquad \vec \a = \begin{pmatrix}
+  \a_1 \\ \vdots \\ \a_n
+\end{pmatrix} $$
+and so $\vec x(t) = A^t\vec x_0 = P\La^t \a$ and
+$$ \La^t = \begin{pmatrix}
+  \l_1^t && 0 \\
+  &\ddots& \\
+  0&& \l_n^t
+\end{pmatrix} $$
+and so we can now write that,
+\begin{align*}
+  \vec x (t) &= \begin{pmatrix}
+    \vec w_1 & \vec w_2 & \dots & \vec w_n
+  \end{pmatrix}\begin{pmatrix}
+    \l_1^t && 0 \\
+    &\ddots& \\
+    0&& \l_n^t
+  \end{pmatrix}\begin{pmatrix}
+    \a_1 \\ \vdots \\ \a_n
+  \end{pmatrix} \\
+  &= \a_1\l_1^t \vec w_1 + \a_2\l_2^t \vec w_2 + \dots + \a_n\l_n^t\vec w_n
+\end{align*}
+This is the eigenmode expansion of a solution. We can say that as $t \to \infty$, then there will be a mode that dominates.
+\begin{nthm}[Perron-Frobenius Theorem]
+  Assume that the PPM $A$ is primitive, ie. for some $k \ge 1$, $(A^k)_{ij} \ge 0$. Then:
+  \begin{enumerate}
+    \item $A$ has a single eigenvalue $\l_1$ of maximum modulus.
+    \item $\l_1$ is real and positive
+    \item Both the right $\vec w_1$ and the left eigenvector $\vec v_1$ are both positive.
+    $$ A\vec w_1 = \l_1 \vec w_1 \qquad \vec v_1^\top A = \l_1\vec v_1^\top $$
+    \item $\vec v_1$ and $\vec w_1$ are unique left and right eigenvectors.
+  \end{enumerate}
+\end{nthm}
+Thus, for a primitive $A$,
+$$ \vec x(t) \to \a_1\l_1^t \vec w_1 \text{ as } t\to \infty $$
+or more formally,
+$$ \lim_{t \to \infty} \l_1^{-t}\vec x(t) = \a_1\vec w_1 $$
+so now only three things can happen assumptotically,
+\begin{enumerate}
+  \item If $\l_1 > 1$, then $\norm{x(t)} \to \infty$ as $t \to \infty$
+  \item If $\l_1 = 1$, then $\vec x(t) \to \a_1\vec w_1$ as $t \to \infty$, so it stabilises
+  \item If $\l_1 < 1$, then $\vec x(t) \to \vec 0$ as $t \to \infty$, so we have extinction
+\end{enumerate}
+Now we can consider the fixed points, $x(t) = \hat x$ for all time. If $\hat{\vec x} = A\hat{\vec x}$ and no eigenvalues are equal to one we see that $|A - I| \ne 0$ so,
+$$ \hat{\vec x} = (A - I)\vec 0 = \vec 0 $$
+then we have a unique fixed point. Hence, we have the first condition in the theorem it being unstable, the third it being stable and the second a bifurcation.\\
+
+\noindent
+What about $\a_1$? We know,
+$$ \vec x_0 = \a_1\vec w_1 + \dots + \a_n\vec w_n $$
+for $i \ne j$, then $\vec v_i^\top \vec w_j = 0$. This can be proved by considering the definitions, multiplying and then manipulating the expressions. So,
+\begin{align*}
+  \vec v_1^\top\vec x_0 &= \a_1\vec v_1^\top \vec w_1 + \a_2\vec v_2^\top \vec w_2 + \dots + \a_n\vec v_n^\top \vec w_n \\
+  \vec v_1^\top\vec x_0 &= \a_1\vec v_1^\top \vec w_1 \\
+  \frac{\vec v_1^\top\vec x_0}{\vec v_1^\top \vec w_1} &= \a_1
+\end{align*}
+That is the population inertia. \\
+
+\noindent
+In summary, when $A$ is primitive,
+$$ \lim_{t \to \infty} \l_1^{-t}\vec x(t) = \frac{\vec v_1^\top \vec x_0}{\vec v_1^\top\vec w_1}\vec w_1 $$
+where,
+$$ A\vec w_1 = \l_1\vec w_1, \quad \vec v_1^\top A = \l_1\vec v_1^\top $$
+and $\vec w_1$ is the stable state structure and $\vec v_1$ is the reproductive value.\\
+
+\subsection{Issues}
+
+\textbf{We now, for simplicity, drop the subscript $1$, so any $\vec v$, $\vec w$ and $\l$ are the first}.\\
+
+\noindent
+\begin{enumerate}
+  \item We now consider some target growth rate $\l_T$, and we assume that this to be one. So the question is how can be change $A$ to make $\l = \l_T$.
+  \item How can be find bounds on $\frac{\vec v^\top \vec x_0}{\vec v^\top\vec w}$
+\end{enumerate}
+
+\subsubsection{Controlling $\l - \l_T$}
+If we are interested in an age-structured model, we have a Leslie matrix. What is the characteristic polynomial of the Leslie matrix?
+\begin{align*}
+  c_A(s) &= |sI - A| \\
+  &= s^n - f_1s^{n-1} - f_2p_1s^{n-2} + \dots + f_np_1 + p_{n-1}
+\end{align*}
+and we can show this has only one positive root, $\l$. As $s \to \infty$, $c_A(s) \to \infty$. So, for $s \ge 0$ the graph must only touch the $x$ axis once,
+%TODO put graph here
+Thus for $s \ge 0$:
+\begin{itemize}
+  \item $c(A) < 0$ if $s > \l$
+  \item $c(A) > 0$ if $s < \l$
+\end{itemize}
+If follows that $\l > \l_T \iff c_A(\l_T) < 0$. In particular,
+$$ \l > 1 \iff c_A(1) < 0 $$
+This is equivilent to $R(A) > 0$, where,
+$$ R(A) = f_1 + f_2p_1 + \dots + f_np_1 + \dots + p_{n-1} $$ and so $\l > 1 \iff R(A) > 1$, growth, and $\l < 1 \iff R(A) < 1$, decline.
+
+\subsubsection{Determining the range of the population inertia}
+We know that,
+$$ \lim_{t \to \infty} \l^{-t}\vec x(t) = \frac{\vec v^\top \vec x_0}{\vec v^\top \vec w} $$
+we define $\vec x_0 = (x_i)$, $\vec v = (v_i)$, $v_{min} = \min_{i}v_i$ and $v_{max} = \max_i v_i$. Assume wlog,
+$$ \sum_{i=1}^n x_{i_0} = 1 $$
+then,
+\begin{align*}
+  \vec v^\top x_0 &= \sum_{i=1}^n v_ix_{i_0} \\
+  &\le \sum_{i=1}^n v_{max}x_{i_0} \\
+  &= v_{max}\sum_{i=1}^n x_{i_0}\\
+  &= v_{max}
+\end{align*}
+and so $\vec v^\top \vec x_0 \le v_{max}$ and we can show $v_{min} \le \vec v^\top \vec x_0$ and so,
+$$ \frac{v_{min}}{\vec v^\top w} \le \frac{\vec v^\top \vec x_0}{\vec v^\top \vec w} \le \frac{v_{max}}{\vec v^\top \vec w} $$
+These bounds are sharp, these are attained for suitable choices of $\vec x_0$. We just take $\vec x_0$ to have a one where the maximum or minimum value of $\vec v$.
+
+\subsection{Sensitivity Analysis}
+We take $A$ and preterb it to $A + \D A$ and so we want to consider $\l(A) \mapsto \l(A + \D A)$. We will firstly consider this through a linear approximation with sensitivity analysis and then transfer function analysis which is exact.
+
+\subsubsection{Sensitivity Analysis}
+We want to map $A \mapsto A + \D A$, we then map, each useful quantity from $f(A) \mapsto f(A + \D A)$. Now,
+$$ \l(A) = \l(a_{11}, \dots, a_{nn}) $$
+and,
+$$ \l(A+ \D A) = \l(a_{11} + \D a_{11}, \dots, a_{nn} + \D a_{nn}) $$
+and as we have done many times before we approximate this with a Taylor expansion.
+\begin{align*}
+  \l(A + \D A) = \l(a_{11}, \dots, a_{nn}) + \sum_{i, j = 1}^n \pd{\l}{a_{ij}}(A)\D a_{ij} + \mathcal{O}(2)
+\end{align*}
+Thus,
+$$ \l(A + \D A) = \l(A) + \D\l + \mathcal{O}(2) $$
+and similarly,
+\begin{align*}
+  \vec v (A + \D A) &= \vec v(A) + \D\vec v + \mathcal{O}(2)\\
+  \vec w (A + \D A) &= \vec w(A) + \D\vec w + \mathcal{O}(2)\\
+\end{align*}
+and now exploit that our equations will satisfy the perterbed eigenvalue eignvector equations,
+\begin{align*}
+  (A + \D A)\vec w(A + \D A) &= \l(A + \D A)\vec w(A + \D A)\\
+  (A + \D A + \mathcal{O}(2))(\vec w + \vec{ \D w} + \mathcal{O}(2)) &= (\l(A) + \D\l + \mathcal{O}(2))(\vec w + \vec{\D w} + \mathcal{O}(2))\\
+  A\vec w + A\vec{\D w} + \mathcal{O}(2) + \D A\vec w + \D A\vec{\D w} + \mathcal{O}(2) &= \l(A)\vec w + \l(A)\vec{\D w} + \mathcal{O}(2) + \D\l\vec{\D w} + \mathcal{O}(2) \\
+  A\vec w + A\vec{\D w} + \D A\vec w &= \l\vec w + \l\vec{\D w} + \D\l\vec{w} + \mathcal{O}(2) \\
+  \vec v^\top A\vec w + \vec v^\top A\vec{\D w} + \vec v^\top\D \vec w &= \l\vec v^\top\vec w + \l\vec v^\top\vec{\D w} + \D\l\vec v^\top\vec{w} + \mathcal{O}(2)
+\end{align*}
+Now $TA\vec w = \l\vec w$ and $\vec v^\top A = \l\vec v^\top $
+\begin{align*}
+  \l\vec v^\top\vec w + \l\vec v^\top \D\vec{ w} + \vec v^\top\D A\vec w &= \l\vec v^\top\vec w + \l\vec v^\top\vec{\D w} + \D\l\vec v^\top\vec{w} + \mathcal{O}(2) \\
+  \vec v^\top\D A\vec w &=\D\l\vec v^\top\vec{w} + \mathcal{O}(2)
+\end{align*}
+Thus,
+$$ \D\l = \frac{\vec v^\top\D A\vec w}{\vec v^\top \vec w} + \mathcal{O}(2) $$
+We now assume that $\D A$ is obtained by perturbing one entry $a_{ij}$ ($a_{ij} \mapsto a_{ij} + \D a_{ij}$). Then, \begin{align*}
+  \D A &= \D a_{ij} \vec e_i \vec e_j^\top \\
+  &= \begin{pmatrix}
+    0 &&&& 0 \\
+    & \ddots &&\iddots& \\
+    &&a_{ij}&&\\
+    & \iddots &&\ddots&\\
+    0 &&&& 0
+\end{pmatrix}
+\end{align*}
+where it is on the $i^{th}$ row and $j^{th}$ column. We now substitute this back in and obtain,
+\begin{align*}
+  \D \l &= \frac{\vec v^\top \vec e_i \vec e_j^\top \vec w}{\vec v^\top \vec w}\D a_{ij} + \mathcal{O}(2) \\
+  &= \frac{v_i w_j}{\vec v^\top\vec w}\D a_{ij} + \mathcal{O}(2) \\
+  \frac{\D \l}{\D a_{ij}} &= \frac{v_i w_j}{\vec v^\top\vec w} + \mathcal{O}(1)
+\end{align*}
+Now take the limit as $\D a_{ij} \to 0$, we obtain,
+$$ \pd{\l}{a_{ij}} = \frac{v_i w_j}{\vec v^\top \vec w} $$
+These are our terms and so we can find the sensitivity matrix,
+$$ S = \left( \pd{\l}{a_{ij}} \right) = \frac{\vec v \vec w^\top}{\vec v^\top \vec w} $$
+
+\textbf{Summary:} We mapped $A \mapsto \D A$ and $\l(A) \mapsto \l(A + \D A)$ where $\L(A + \D A) = \l(A) + \D\l + \mathcal{O}(2)$ and,
+$$ \D \l = \sum_{i=1}^n \pd{\l}{a_{ij}}(A)\D a_{ij} $$
+In particular, if we only have one element being perterbed,
+$$ \l(A + \D A) = \l(A) + \pd{\l}{a_{ij}}(A)\D a_{ij} + \mathcal{O}(2) $$
+
+\noindent
+We want $A + \D A$ with an eigenvalue $\l_T$. Then we can say that,
+$$ \l_T = \l + \pd{\l}{a_{ij}}\D a_{ij} + \mathcal{O}(2) $$
+Then it follows for small pertibations,
+$$ \D a_{ij} \approx \frac{\l_T - \l}{\pd{\l}{a_{ij}}} $$
+this is a linear approximation. We can choose the smallest perturbation after calculating the partial derivatives.
+
+\subsubsection{Transfer Function Analysis for PPMs}
+The idea here is $a_{ij} \mapsto a_{ij} + p_{ij}$ such that the perturbed eigenvalue is $\l$:
+$$ \D A = p_{ij}\vec e_i\vec e_j^\top = \begin{pmatrix}
+  0 &&&& 0 \\
+  & \ddots &&\iddots& \\
+  &&p_{ij}&&\\
+  & \iddots &&\ddots&\\
+  0 &&&& 0
+\end{pmatrix}  $$
+and again we proceed from the perturbed eigenvalue equation.
+\begin{align*}
+  (A + \D A)\vec w &= \l \vec w \\
+  A\vec w + p_{ij}\vec e_i\vec e_j^\top \vec w &= \l I\vec w \\
+  (\l I - A)\vec w &= p_{ij}\vec e_i\vec e_j^\top \vec w
+\end{align*}
+Now assume that $|\l I - A|\ne 0$ thus can multiply both sides by $e_j^\top (\l I - A)^{-1}$
+\begin{align*}
+  \vec e_j^\top (\l I - A)^{-1} (\l I - A)\vec w &= \vec e_j^\top (\l I - A)^{-1}p_{ij}\vec e_i\vec e_j^\top \vec w \\
+  \vec e_j^\top \vec w &= p_{ij} \vec e_j^\top (\l I - A)^{-1} \vec e_i (\vec e_j^\top \vec w) \\
+  1 &= p_{ij} \vec e_j^\top (\l I - A)^{-1} \vec e_i \\
+  p_{ij} &= \frac{1}{\vec e_j^\top (\l I - A)^{-1} \vec e_i} \\
+  p_{ij} &= \frac{1}{[(\l I - A)^{-\top}]_{ij}}
+\end{align*}
+
+\subsection{Transient Dynamics}
+
