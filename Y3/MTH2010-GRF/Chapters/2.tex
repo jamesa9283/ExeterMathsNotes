@@ -30,7 +30,7 @@ So this is a homomophism and it's surjective. If we let $f: \Z \to \Z$ and have 
 
 \begin{ndefi}[Kernel]
   Let $f : G \to H$ be a homomorphism, we define the kernel as,
-  $$ \ker f = \{ h \in H \m f(h) = e_G \} $$
+  $$ \ker f = \{ g \in G \m f(g) = e_G \} $$
 \end{ndefi}
 
 For example, consider $f : \Z \to \Z_n$ where $f (k) = [k]_n$ and so we can say $\ker f = \{nz \m z \in \Z\}$, we notice this is a subgroup. However, if $g : \Z \to \Z$ where $z \mapsto mz$ we say $\ker g = \{0\}$ if $m \ne 0$, another subgroup. This leads us to the following lemmas,
@@ -48,7 +48,7 @@ For example, consider $f : \Z \to \Z_n$ where $f (k) = [k]_n$ and so we can say 
 \begin{nlemma}
   Let $f: G \to H$ be a homomorphism.
   \begin{itemize}
-    \item $f$ is surjective if and only if $\Im H = f$.
+    \item $f$ is surjective if and only if $\Im f = H$.
     \item $f$ is injective if and only if $\ker f = e_G$
   \end{itemize}
 \end{nlemma}
