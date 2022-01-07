@@ -32,6 +32,11 @@ parts/
 matlab/
 Oxford/
 papers/
+raw_files/
+Week1/
+Week2/
+Week3/
+Week4/
 
 header.tex
 lstlean.tex
