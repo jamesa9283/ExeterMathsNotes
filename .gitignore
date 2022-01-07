@@ -24,7 +24,7 @@
 *.bib
 *.run.xml
 *.bcf
-
+*.xtr
 
 CW/
 pp/

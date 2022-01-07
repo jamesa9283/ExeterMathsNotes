@@ -96,3 +96,62 @@ Here is a lemma about inclusion,
   \end{align*}
   So $f$ is a ring homomorphism, so we now show that $\ker f = (2,\,1+\sqrt{-3})_R$. Clearly, $J = (2, 1 + \sqrt{-3})_R \in \ker f$ as $f(2) = f(1 + \sqrt{-3}) = \bar 0$. Now for the other inclusion. Let $a + b\sqrt{-3} \in \ker f$ such that $f(a + b\sqrt{-3}) + \bar a + \bar b = \bar 0$ and so $a - b = 2k$ for some $k \in \Z$. This $a + b \sqrt{-3} = 2k + b + b\sqrt{-3} = 2k + b(1 + \sqrt{-3}) \in J$, as required.
 \end{eg}
+
+
+\begin{notation}
+  We now introduce some notation $\subsetneq$, this means a proper subset
+\end{notation}
+
+\begin{ndefi}[Proper Ideal]
+  Let $R$ be a ring, then an ideal of $R$ is proper if $I \subsetneq R$.
+\end{ndefi}
+
+and now a maximal ideal,
+\begin{ndefi}[Maximal Ideal]
+  A proper ideal $M \subsetneq R$ is called a maximal ideal if the only ideals of $R$ containing $M$ are $M$ and $R$.
+\end{ndefi}
+
+Now for a proposition,
+\begin{nprop}
+   Let $J \subsetneq R$ be a proper ideal. There exists a maximal ideal $M$ of $R$ containing $J$, $J \subset M$.
+\end{nprop}
+
+This basically tells us that every ring has a maximal ideal.
+
+\begin{proof}
+  Let $\mathcal{S}$ be the set of all proper ideals of $R$ containing $J$, $\mathcal{S}$ is nonempty and (partially) ordered by the relation of inclusion. Let $J \subset \dots I_k \subset I_{k'} \subset \dots$ with $k, k', \dots \in K$: an index set, be a chain of ideals containing $J$. By Zorn's LEmma we need to show that $\{I_k\}_{k \in K}$ has an upper bound. Let $\mathcal{I} = \bigcup_{k \in K} I_k$. Then $\mathcal{I}$ is an ideal of $R$, if $a, b \in \mathcal{I}$
+  then $a \in I_k, b \in I_{k'}$ for some $k, k' \in K$. Since the family $\{I_k\}_{k \in K}$ is a chain either $I_k \subset I_{k'}$ or $I_{k'} \subset I_k$, say $I_k \subset I_{k'}$, hence $a+ b, ab \in I_{k'} \in \mathcal{I}$. Similary $a \in \mathcal{I}$, $r \in R, \ex k \in K$ with $a \in I_k$, hence $ra \in I_k \subset \mathcal{I}$ since $I_k$ is an ideal. Further $1 \notin \mathcal{I}$ for otherwise $\ex k \in K$ with $1 \in I_k$ hence $1_k = R$ and clearly $\mathcal{I}$ is an upperbound for $\{I_k\}_{k \in K}$.
+\end{proof}
+
+We now consider the Lattice Isomorphism Theorem,
+\begin{nthm}[Lattice Isomorphism Theorem]
+  Let $J \subset R$ be an ideal. There is a one-to-one correspondance between the set of ideals $I$ of $R$ containing $J$ and the set of ideals of the factor ring $R/J$.
+\end{nthm}
+\begin{proof}
+  Let $J \subset I$ be an ideal containing $J$. The set,
+  $$ I/J = \{\bar a \in R/J : a \in I\} $$
+  is an ideal of $R/J$. If $a,b \in I$ then $\bar a + \bar b = \bar{a + b} \in I/J$ and $\bar a \bar b = \bar{ab} \in I/J$ since $a+b, ab \in I$. Further if $\bar r \in R/J$ and $\bar a \in I/J$ then $\bar r \bar a = \bar{ra}$ since $ra \in I$. Conversely if $\wt I$ is an ideal of $R/J$ then $I = \phi^{-1}(\wt I)$ where,
+  $$ \phi : R \to R/J $$
+  $$ a \mapsto a + J $$
+  and so,
+  $$ \phi^{-1}(\wt I) = \{a \in R : \phi(a) = \bar a\} $$
+  now again we have to show this is an ideal and it contains $J$. Firstly is it a subgroup? Yes, it has a zero, $\phi(0) = \bar 0_R \in \wt I$; if we take $a, b \in I$ then $\phi(a), \phi(b) \in wt I$ and moreover $\phi(a) + \phi(b) = \phi(a + b) \in \wt I \implies a + b \in I$ and so... then we have that $a \in I$, $\phi(a) \in \wt I$ we now show that if $c \in R$ then we have closure. We know that $ac \in I$ and so $\phi(ac) \in \wt I$ and so $\phi(ac) = \bar{ac} = \bar a \bar c = \phi(a)\phi(c) \in \wt I$.
+
+  \noindent
+  $J$ is just the kernel of this map. Hence, we aim to find $\phi^{-1}(0)$. We know that $0_{R/J} \in \wt I$ and so $\phi(0_{R/J}) \subset \phi^{-1}(\wt I)$. Furthermore we have that they are inverses. Hence we have a bijection.
+\end{proof}
+
+Here is a nice theorem that follows on,
+\begin{nthm}
+  The ideal $M \subseteq R$ is a maximal ideal if and only if the factor ring $R/M$ is a field.
+\end{nthm}
+\begin{proof}
+  By the Lattice Isomorphism Theorem there is a one to one correspondence between the set of ideals $I$ of $R$ containing $M$ and the ideals of the factor ring $R/M$. Now $R/M$ is a field if and only if the only ideals of $R/M$ are $R/M$ and $\{\bar 0\}$, in which case the corresponding ideals of $R$ containing $M$ are $\phi^{-1}(R/M) = R$ and $\phi^{-1}(0) = \ker \phi = M$; where $\phi: R \to R/M$ is the map $a \mapsto \phi(a) = \bar a$, hence $M$ is a maximal ideal.
+\end{proof}
+
+\begin{eg}
+  Consider $R = \{f : [0,\,1] \to \R\}$, and consider $M_a = \{f \in R : f(a) = 0\}$, then $M_a$ is an ideal of $R$. The map $\phi : R \to R$ defined by $f \mapsto \phi(f) = f(a)$ is a surjective ring homomorphism and $\ker \phi = M_a$. The FIT implies $R/M_a$ is isomorphic to $\R$ which is a field and so $R/M_a$ is a field and $M_a$ is a maximal ideal.
+\end{eg}
+
+\noindent
+More generally if we have a ring isomorphic to a field, then the ring must be a field.
