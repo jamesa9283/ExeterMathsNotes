@@ -33,3 +33,101 @@ Here is a nice characterisation,
   $$ n = \min\{N(a) : a \in I,\, a \ne 0\} $$
   now for $a \in I$ and with $N(a) = n$. We show that $I = (a)_R$. We can see quickly that $(a)_R \subset I$ as $a \in I$, so it suffices to prove that $I \subset (a)_R$. Now let $b \in I$, then we can write $b = \a a + r$, we know that $r = 0$ or $N(r) < N(a)$. We see that $r = b - \a a \in I$; now this forces $r = 0$ as we cannot have that $N(r) < N(a)$ by the definition of $a$. Hence $r = 0$, and so $b = \a a$ and so $b \in (a)_R$ and $I \subset (a)_R$.
 \end{proof}
+
+\begin{ndefi}[Divisble]
+  Let $R$ be a ring, then let $a, b \in R$. Then we say $b$ divides $a$ means that $a = bc$ for some $c \in R$. We write $b/a$.
+\end{ndefi}
+and we can define what we mean by a greatest common divisor,
+\begin{ndefi}[Greatest Common Divisor]
+  A greatest commmon divisor of $a$ and $b$, say $d$ is described as,
+  \begin{enumerate}
+    \item $d/a$ and $d/b$
+    \item If $d'/a$ and $d'/b$, then $d'/d$
+  \end{enumerate}
+\end{ndefi}
+
+\noindent
+This is the same definition as for the integers. We cal note that this isn't unique, if we have $u \in R^\ti$, then $ud = \gcd(a,\, b)$.
+
+\begin{nprop}
+   Let $R$ be a PID, then $d = \gcd(a,\,b)$ always exists. Moreover $(d)_R = (a)_R + (b)_R$ and $d$ is unique up to multiplication by a unit. In particular we have a Bezout Identity,
+   $$ d = sa + rb $$
+\end{nprop}
+\begin{proof}
+  Both $a$ and $b$ are in $(d)_R$ as we can write it as $a = 1a + 0b$ and $b = 0a + 1b$ and this implies that $a = d\a$ and $b = d\b$. We know that $d \in (d)_R$ and so we can write it as some $d = ra + sb$ and we get the Bezout Identity.\\
+
+  Assume that $d'$ is a common divisor of $a$ and $b$, ie. $b =d'x$ and $a = d'y$ and so $d = rd'x + sd'y = d'(rx + sy)$ and so $d'/d$.
+\end{proof}
+
+We remark that the $\gcd(a,\, b)$ for some $a, b \in R$ can always be found when $R$ is a Euclidean Domain and it can be computed using Euclidean division.
+
+\begin{nprop}
+   Every non-zero prime ideal is maximal in a PID.
+\end{nprop}
+\begin{proof}
+  Let $R$ be a PID and $P = (p)_R \subset R$. By proposition (?) there exists some maximal ideal $M \subsetneq R$ containing $P$. We aim to show that $M = P$. As $R$ is a PID, then some $m \in R$ must generate a principal ideal and so $p \in (m)_R$ and so $p = mx$. Since $P$ is prime, either $m \in P$ or $x \in P$. If $m \in P$, then $M = P$ and so the proof is done. Otherwise, if $x \in P$, then $x = py$ for some $y \in R$. Thus $p = xm = pym \implies p(1 - ym) = 0$ and so we can see that $ym = 1$ and so $m$ is unit. If $m$ is unit, then $(m)_R = R$, but this violates our assumption for $M \subsetneq R$ and so $M = P$.
+\end{proof}
+
+\begin{ndefi}[Irreducible, Prime, Associate]
+  Let $R$ be an integral domain,
+  \begin{enumerate}
+    \item An element $r \in R \setminus \{0, R^\ti\}$ is called irreducible if $ab \in R$ then $a \in R^\ti$ or $b \in R^\ti$.
+    \item An element $p \in R\setminus\{0, R^\ti\}$ is called prime if $p/ab$ then $p/a$ or $p/b$
+    \item Two elements $a, b \in R$ are associate we write $a \sim b$ if $a = bu$ where $u \in R^\ti$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{nprop}
+   In an integral domain $R$, a prime element is irreducible
+\end{nprop}
+\begin{proof}
+  Let $p \in R$ we show that $p$ is irreducible. Assume that $p = ab$, then $p/a$ then $p/b$. Suppose that $p/a$ then $a = pr$ for some $r \in R$. Then $p = ab = prb$ and so $p(1 - rb) = 0$ and as $p \ne 0$ then we must have $1 - rb = 0$ as $R$ is an integral domain. Hence we have $rb = 1$ and so $b$ is a unit.
+\end{proof}
+
+\begin{ndefi}[Unique Factorisation Domain]
+  A UFD is an integral domain $R$ in which every element $r \in R\setminus \{0, R^\ti\}$ has the following properties,
+  \begin{enumerate}
+    \item $r = p_1p_2\dots p_n$ is a product of irreducible elements $p_1, p_2, \dots, p_n$.
+    \item The above factorisation is unique up to associates if $r = q_1q_2 \dots q_m$ is another factorisation of $r$ as a product of irreducible elements $q_1, q_2, \dots, q_m$ then $n = m$ and after possible renumbering the factors $p_i \sim q_i$ for all $i$.
+  \end{enumerate}
+\end{ndefi}
+
+We see that $\Z[\sqrt{-5}]$ is the problemed child as $6 = 2 \ti 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$ and we can prove that these factors are irreducible, but not associate. They can proved to be irreducible by considering the norm, for example $2$. We consider $2$ and say $2 = xy$ and consider the norm and so $4 = N(x)N(y)$ and so if we consider $N(x)$ this must be $1, 2$ or $4$. If it is $1$, then $x$ is a unit, if $y = a + b\sqrt{-5}$, then $N(y) \ne 2$ and so we now consider $N(x) = 4$, then $N(y) = 1$ and so $y$  is a unit. Hence $2$ is irreducible.
+The non-associate part of the argument follows neatly from inspection.
+
+\begin{nprop}
+   In a UFD $R$, an element is prime if and only if it is irreducible.
+\end{nprop}
+\begin{proof}
+  We only need to prove that an irreducible element is prime. Let $p \in R$ be an irreducible element and suppose that $p/ab$, thus $ab = pr$ for some $r \in R$, we must show that $p/a$ or $p/b$. Write $a,b$ and $r$ as a product of irreducible elements $a = p_1p_2 \dots p_n$, $b = q_1q_2\dots q_m$ and $r = r_1r_2 \dots r_t$. Thus we have,
+  $$ p_1p_2\dots p_nq_1q_2\dots q_m = pr_1r_2 \dots r_t $$
+  and so, $n + m = 1 + t$ and $p$ must be associate to one of the $p_i$ or $q_i$. If $p \sim p_i$, then $p/a$ and if $p \sim q_i$, then $p/b$.
+\end{proof}
+
+\begin{nprop}
+   Let $a, b$ be non-zero elements of a unique factorisation domain $R$ and suppose $a = up_1^{e_1}p_2^{e_2} \dots p_n^{e_n}$, $a = vp_1^{f_1}p_2^{f_2} \dots p_n^{f_n}$ are the factorisations of $a$ and $b$ where $u,v \in R^\ti$, the primes $p_1, p_2, \dots p_n$ are distinct and the exponents are positive then,
+   $$ d = p_1^{\min(e_1, f_1)}p_2^{\min(e_2, f_2)}\dots p_n^{\min(e_n, f_n)} $$
+\end{nprop}
+\begin{proof}
+  Ommited
+\end{proof}
+
+\begin{nthm}[The Unifying Theorem]
+  A PID is a UFD. In particular an ED is a UFD.
+\end{nthm}
+\begin{proof}
+  Ommited
+\end{proof}
+
+\begin{remark}
+   Note that there is not a strict subset here,
+   $$ \mathrm{ED} \subsetneq \mathrm{PID} \subsetneq \mathrm{UFD} $$
+\end{remark}
+
+\subsection{Addendum: Why is $\Z[\sqrt{-5}]$ so annoying?}
+Gauss did a lot of theorems related to Gaussian integers and Cumer and looked at $\Z[\sqrt{-5}]$. We know this isn't a UFD. We proved that $6 = 2 \ti 3 = (1 + \sqrt{-5})(1 - \sqrt{-5})$. He considered a way to return the uniqueness. He worked with the ideals, he considered the ideals $(6)_R = (2)_R(3)_R = (1 + \sqrt{-5})_R(1 - \sqrt{-5})_R$ where $R = \Z[\sqrt{-5}]$. The ideals we considered weren't prime and we can still factorise them and after we \textbf{full} factorise them we reach a unique factorisation.\\
+
+\noindent
+We can construct $(1 + \sqrt{-5})(1 - \sqrt{-5}) = 6 \in (3)_R$ but neither $1 \pm \sqrt{-5} \in (3)_R$ and so we can still factorise them. We can write $(2)_R = (1 + \sqrt{-5}, 2)_R(1 + \sqrt{-5}, 2)_R = (1 + \sqrt{-5}, 2)_R^2 = p$ and $(3)_R = (1 + \sqrt{-5}, 3)_R(1 - \sqrt{-5}, 3)_R = p_1p_2$ (Exercise).
+Therefore we now have a prime ideal factorisation. Now if we look to the original identity, $(6)_R = p^2p_1p_2 = pp_1pp_2$ as multiplication of ideals are commutative. Now, we can see a miricle, $pp_1pp_2 = (1 + \sqrt{-5})_R(1 - \sqrt{-5})_R$. Hence the factorisation is unique, but only for ideals. This is exactly why they are called ideals, ideal numbers! Cumer went on to prove several cases of Fermat's Last Theorem. Unfortunately in his full proof he had a mistake that factorisation of irreducible elements is unique and so he discovered this.
+
