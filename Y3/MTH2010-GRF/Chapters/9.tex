@@ -97,6 +97,9 @@ Here is a lemma about inclusion,
   So $f$ is a ring homomorphism, so we now show that $\ker f = (2,\,1+\sqrt{-3})_R$. Clearly, $J = (2, 1 + \sqrt{-3})_R \in \ker f$ as $f(2) = f(1 + \sqrt{-3}) = \bar 0$. Now for the other inclusion. Let $a + b\sqrt{-3} \in \ker f$ such that $f(a + b\sqrt{-3}) + \bar a + \bar b = \bar 0$ and so $a - b = 2k$ for some $k \in \Z$. This $a + b \sqrt{-3} = 2k + b + b\sqrt{-3} = 2k + b(1 + \sqrt{-3}) \in J$, as required.
 \end{eg}
 
+\section{Prime and Maximal Ideals}
+
+\subsection{Maximal Ideals}
 
 \begin{notation}
   We now introduce some notation $\subsetneq$, this means a proper subset
@@ -123,6 +126,7 @@ This basically tells us that every ring has a maximal ideal.
   then $a \in I_k, b \in I_{k'}$ for some $k, k' \in K$. Since the family $\{I_k\}_{k \in K}$ is a chain either $I_k \subset I_{k'}$ or $I_{k'} \subset I_k$, say $I_k \subset I_{k'}$, hence $a+ b, ab \in I_{k'} \in \mathcal{I}$. Similary $a \in \mathcal{I}$, $r \in R, \ex k \in K$ with $a \in I_k$, hence $ra \in I_k \subset \mathcal{I}$ since $I_k$ is an ideal. Further $1 \notin \mathcal{I}$ for otherwise $\ex k \in K$ with $1 \in I_k$ hence $1_k = R$ and clearly $\mathcal{I}$ is an upperbound for $\{I_k\}_{k \in K}$.
 \end{proof}
 
+\noindent
 We now consider the Lattice Isomorphism Theorem,
 \begin{nthm}[Lattice Isomorphism Theorem]
   Let $J \subset R$ be an ideal. There is a one-to-one correspondance between the set of ideals $I$ of $R$ containing $J$ and the set of ideals of the factor ring $R/J$.
@@ -154,4 +158,4 @@ Here is a nice theorem that follows on,
 \end{eg}
 
 \noindent
-More generally if we have a ring isomorphic to a field, then the ring must be a field.
+More generally if we have a ring isomorphic to a field, then the ring must be a field. This illustrates something important, mainly, we can show an ideal is maximal by showing existence of a surjective homomorphism from a ring to a field with kernel $I$.
