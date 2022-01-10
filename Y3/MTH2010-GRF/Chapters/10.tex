@@ -1,0 +1,126 @@
+% !TEX root = ../notes.tex
+
+\subsection{Prime Ideals}
+We now talk about prime ideals, they are similar to the notion of prime numbers.
+\begin{ndefi}[Prime Ideals]
+  A proper ideal $P \subsetneq R$ is a prime ideal if for some $a, b \in R$ and $ab \in I$, then $a \in I$ or $b \in I$
+\end{ndefi}
+
+\noindent
+If we consider $\Z/p\Z$ ($p$ is a prime), then we have the ideal $I = p\Z$, then let $a, b \in R$ and $ab \in p\Z$, then $ab = pk$. Then we know that as $p \m ab$ then $p \m a$ or $p \m b$. These two imply that either $a \in p\Z$ or $b \in p\Z$.
+
+\begin{nthm}
+  The ideal $P \subsetneq R$ is prime if and only if $R/P$ is an integral domain.
+\end{nthm}
+\begin{proof}
+  We consider $\phi : R \to R/P$ defined by $\phi(r) = \bar r$. As $P$ is prime, then either $a \in P$ or $b \in P$. Also $\bar{ab} = \bar a \bar b = \bar 0$, which then implies $\bar a = 0$ or $\bar b = 0$. Then this is equivalent to it being an integral domain.
+\end{proof}
+
+We can also say that $R$ is an integral domain if and only if $\{0\}$ is a prime ideal. If $\phi : R \to D$ is a surjective homomorphism from a ring $R$ to an integral domain $D$ with kernel $J$ then $J$ is a prime ideal. Indeed by the FIT: $R/J$ is isomorphic to the integral domain $D$ hence $R/J$ itself is an integral domain and $J$ is a prime ideal.
+
+\begin{nprop}
+  A maximal ideal is a prime ideal.
+\end{nprop}
+\begin{proof}
+  If $M$ is a maximal ideal, then $R/M$ is a field and so is necessarily an integral domain. Hence $M$ is prime.
+\end{proof}
+
+\subsection{Field of Fractions}
+Let $R$ be an integral domain and,
+$$ \wt F = \{(a,\,b) : a, b \in R\, b \ne 0_R\} $$
+Define a relation $\mathcal{H}$ among the elements of $F$,
+$$ (a,\,b)\mathcal{H}(c,\,d) \iff ad = bc $$
+The relation $\mathcal{H}$ is an equivalence relation. Let $F = \wt F/\mathcal{H}$ be the set of equivalence relations of $\mathcal{H}$. Then,
+$$ F = \left\{ \frac{a}{b} : a, b \in R,\, b\ne 0_R \right\} $$
+We define the addition and multiplication in the usual way. Then we have $1_F = \frac{1_R}{1_R}$ and $0_F = \frac{0_R}{1_R}$. Furthermore, $F$ is a field as $\frac{a}{b} \ti \frac{b}{a} = 1_F$ where $\frac{a}{b} \ne 0_F$. We call this the field of fractions of $R$ and denote it $\Frac(R)$
+
+\noindent
+Let $K[X]$ be a field, then we can construct the field of fractional polynomials, namely,
+$$ K(X) = \left\{ \frac{f(X)}{g(X)} : f, g \in K[X],\, g\ne 0 \right\} $$
+and it can proved that this is just a field. Every non-zero polynomial has an inverse, $\frac{f}{g} \ti \frac{g}{f} = 1_{K(X)}$
+
+\noindent
+We constructed this from an integral domain because we wanted to make every non-zero element invertible.
+
+\begin{nprop}
+   Let $R$ be an integral domain. Then the following holds
+   \begin{enumerate}
+     \item The map $\psi : R \to \Frac{R}$ defined by $\psi(r) = \frac{r}{1_R}$ then this is injective.
+     \item Let $\phi : R \to K$ be an injective homomorphism into a field $K$. There exists a unique injective homomorphism $\tau : \Frac(K) \to R$ with the property,
+     $$ \tau(\psi(r)) = \tau\left(\frac{r}{1}\right) = \phi(r) $$
+     In other words, this diagram commutes
+     \[\begin{tikzcd}
+	R && K \\
+	\\
+	{\mathrm{Frac}({R})}
+	\arrow["\psi"', from=1-1, to=3-1]
+	\arrow["\phi", from=1-1, to=1-3]
+	\arrow["\tau"', from=3-1, to=1-3]
+\end{tikzcd}\]
+   \end{enumerate}
+\end{nprop}
+\begin{proof}
+  We can see that $\psi (r + s) = \frac{r + s}{1} = \frac{r}{1} + \frac{s}{1} = \psi (r) + \psi (s)$ and $\psi (rs) = \frac{rs}{1} = \frac{r}{1}\frac{s}{1} = \psi (r)\psi (s)$ and we can also see $\psi(1) = 1$ and so we have a homomorphism. Now we seek to prove that $\ker\psi = \{0\}$, this can be seen as $\frac{r}{1} = \frac{0}{1} \implies r=0$ and so we have an injection.\\
+
+  \noindent
+  We define $\tau : \Frac(K) \to R$ by,
+  $$ \tau\left(\frac{r}{s}\right) = \phi(r)\phi(s)^{-1} $$
+  We see that $s \ne 0_R$ and so $\phi(s) \ne 0_K$ and so this makes sense. We want to show that $\tau(\frac{r}{s} + \frac{t}{h}) = \tau(\frac{rh + ts}{sh}) = \phi(rh + ts)\phi(sh)^{-1} = [\phi(r)\phi(h) + \phi(t)\phi(s)]\phi(s)^{-1}\phi(h)^{-1} = \phi(r)\phi(s)^{-1} + \phi(t)\phi(h)^{-1} = \tau(\frac{r}{s}) + \tau(\frac{t}{h})$.
+  Now for the multiplication is slightly simpler, $\tau(\frac{r}{s}\frac{t}{h}) = \tau(\frac{rt}{sh}) = \phi(rt)\phi(sh)^{-1} = \phi(r)\phi(t)\phi(s)^{-1}\phi(h)^{-1} = \tau(\frac{r}{s})\tau(\frac{t}{h})$. Hence, it's a homomorphism. Now we see to prove that the only thing that maps to zero is zero; to see this
+  $\tau(\frac{r}{s}) = \phi(r)\phi(s)^{-1} = 0_K$, then $\phi(r) = 0_{\Frac(R)}$ and so $r = 0$ as $\phi$ is injective.
+  Hence now we prove uniqueness, we can see that $\tau(\frac{r}{s}) = \tau(\psi(r)\psi(s)^{-1}) = \tau(\psi(r))\tau(\psi(s)^{-1}) = \tau(\psi(r))\tau(\psi(s))^{-1} = \phi(r)\phi(s)^{-1}$
+\end{proof}
+
+The first part implies that $R \subset \Frac(R)$ which is exactly how we think about $\Z$ and $\Q$. The second says that if a field contains $R$, then it contains $\Frac(R)$, if a field contains $\Z$ then it contains $\Q$.
+
+\subsection{Chinese Remainder Theorem}
+Given two rings $R_1$ and $R_2$ we define their product
+$$ R_1 \ti R_2 = \{(r_1,\,r_2) : r_1 \in R_1,\,r_2\in R_2\} $$
+and endow it with the operations $+$ and $\ti$ defined by,
+$$ (r_1,\,r_2) + (s_1,\,s_2) = (r_1 + s_1,\,r_2 + s_2) \qquad (r_1,\,r_2)(s_1,\,s_2) = (r_1s_1,\,r_2s_2) $$
+The set $R_1 \ti R_2$  is a commutative ring, with $1 = (1_{R_1},\,1_{R_2})$ and $0 = (0_{R_1},\,0_{R_2})$.
+
+\noindent
+\begin{ndefi}[Comaximal]
+  We call two ideal comaximal, if $I + J = R$, if two ideals are comaximal, then $I + J = IJ$.
+\end{ndefi}
+
+\begin{nthm}[Chinese Remainder Theorem]
+  Let $I, J$ be ideals of $R$. The map,
+  $$ \phi : R \to R/I \ti R/J $$
+  defined by,
+  $$ r \mapsto (r + I,\, r + J) $$
+  is a ring homomorphism with kernel $I \cap J$. If $I$ and $J$ are co-maximal then this map is surjective and
+  $I \cap J = IJ$, in this case $R/IJ = R/(I \cap J)$ is isomorphic to $R/I \times R/J$.
+\end{nthm}
+\begin{proof}
+  We can see that the map $\phi$ is a ring homomorphism as,
+  \begin{align*}
+    \phi(r + s) &= (r + s + I,\, r + s + J)\\
+    &= (r + I,\, r + J) + (s + I,\, s + J) \\
+    &= \phi(r) + \phi(s)
+  \end{align*}
+  and
+  \begin{align*}
+    \phi(rs) &= (rs + I,\, rs + J)\\
+    &= ((r + I)(s + I),\, (r + J)(s + J))\\
+    &= (r + I,\,r + J)(s + I,\, s + J)\\
+    &= \phi(r)\phi(s)
+  \end{align*}
+  and we can see that $\phi(1) = (1 + I,\, 1 + J) = 1_{R/I\ti R/J}$ and so $\phi$ is a homomorphism. Now we seek to find the kernel of the homomorphism,
+  $$ \ker \phi = \{(r + I,\, r + J) = (0_{R/I},\, 0_{R/J})\} = \{r \in R : r \in I \text{ and } r \in J\} = I \cap J $$
+  Now we suppose that $I + J = R$, then we seek to show that $\phi$ is surjective.
+  % Let $(r_1 + I,\, r_2 + J) \in R/I \ti R/J$.
+  There exists some $a + b = 1$ where $a \in I$ and $b \in J$ as $I + J = R$. We see that $a = 1 - b$ and also $b = 1 - a$. Now consider $a + J = 1 - b + J = 1 + (-b + J) = 1 + J$ and also $b + I = 1 + I$. Consider $r = r_2a + r_1b$, then consider
+  \begin{align*}
+    \phi(r) &= \phi(r_2a + r_1b)\\
+    &= (r_2a + r_1b + I,\, r_2a + r_1b + J)\\
+    &= (r_1b + I,\, r_2a + J)\\
+    &= (r_1 + I,\, r_2 + J)(b + I,\, a + J)\\
+    &= (r_1 + I,\, r_2 + J)(1 + I,\, 1 + J) = (r_1 + I,\, r_2 + J)
+  \end{align*}
+  This is then just an arbitrary element of $R/I \ti R/J$. Furthermore we know that $\ker \phi = I\cap J = IJ$, then we can use the FIT to tell us that $R/\ker\phi = R/(I \cap J) = R/IJ \cong R/I \ti R/J$.
+\end{proof}
+
+\noindent
+We can generalise this to any $n$ ideals of $R$.
