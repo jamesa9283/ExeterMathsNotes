@@ -18,7 +18,7 @@ Here's selected notes from Second Year:
 ### T1
 Most of these will be refactored at some point
 * Real Analysis (Dr. Mark Callaway) - [Real Analysis](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y2/MTH2008-RealAnal/RAnal/RAnal.pdf)
-* Vector Calculus (Dr. Hamid Alemi Ardakani) - [Vector Calculus](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y2/ECM2908-VecCalc/CompleteNotes/VecCalc.pdf)
+* Vector Calculus (Dr. Hamid Alemi Ardakani) - [Vector Calculus](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y2/ECM2908-VecCalc/CompleteNotes/notes.pdf)
 * Differential Equation (Dr. Saptarshi Das) - [Differential Equations](https://github.com/jamesa9283/ExeterMathsNotes/tree/main/Y2/ECM2903-DEs)
 
 ### T2
