@@ -13,7 +13,7 @@ I compiled a selection of notes for our Advanced Calculus (Professor Stuart Town
 [here](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y1/ECM1905-AdCalc/0CompletedAdCalcNotes.pdf)
 
 ## Year II
-Here's selected notes from Second Year:
+Here's selected notes from second year:
 
 ### T1
 Most of these will be refactored at some point
@@ -33,6 +33,8 @@ Here are some selected notes from third year:
 * Groups, Rings and Fields (Prof. Mohammed Sa\"idi) - [Groups, Rings and Fields](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH2010-GRF/notes.pdf)
 * Number Theory (Prof. Henri Johnston) - [Number Theory](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3004-NumberTheory/notes.pdf)
 * MathsBio (Dr Ozgur Akman and Dr Marc Goodfellow) - [MathsBio](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3006-MathsBio/notes.pdf)
+
+### T2
 * Partial Differential Equations (Dr. Hamid Alemi Ardakani) - [PDEs]()
 * Topology and Metric Spaces (Prof. Nigel Byott) - [Topology & Metric Spaces]()
 
