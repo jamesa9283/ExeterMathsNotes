@@ -1,0 +1,35 @@
+% !TEX root = ../notes.tex
+
+\section{Divisibility and Factorisation}
+
+We can consider a $R$ as an integral domain and then define a norm,
+\begin{ndefi}[Norm]
+  A norm is map from an integral domain to $\N$,
+  $$ N : R\setminus \{0_R\} \to \N $$
+  We call a norm multiplicative if $N(ab) = N(a)N(b)$ for all $a, b \in R\setminus \{0\}$.
+\end{ndefi}
+
+\noindent
+We define a Euclidean Domain by considering division in a similar way to how we consider division in the integers. This is where the norm comes in, it defines how large an element is,
+\begin{ndefi}[Euclidean Domain]
+  We say that $R$ is a euclidean domain if $N$ is a norm and we have $a \in R$ and $0_R \ne b \in R$ then we can write $a = bq + r$ where $q \in R$ and $r = 0_R$ or $N(r) < N(b)$.
+\end{ndefi}
+
+This is slightly abstract, we say that $\Z$ is a ED where we equipt it with the norm $a \mapsto |a|$.
+
+\noindent
+Now we define a PID,
+\begin{ndefi}[Principal Ideal Domain]
+  Let $R$ be an integral domain, then $R$ is a PID if it has the property if every ideal of $R$ is principal, ie.
+  $$ I = (a)_R = \{ab : b \in R\} $$
+\end{ndefi}
+Here is a nice characterisation,
+
+\begin{nthm}
+  $R$ being an Euclidean domain, means $R$ is a principal ideal domain.
+\end{nthm}
+\begin{proof}
+  Let $\{0_R\} \ne I \subset R$ be an ideal, then we seek to show that $I = (a)_R$ for some $a \ne 0$. Let
+  $$ n = \min\{N(a) : a \in I,\, a \ne 0\} $$
+  now for $a \in I$ and with $N(a) = n$. We show that $I = (a)_R$. We can see quickly that $(a)_R \subset I$ as $a \in I$, so it suffices to prove that $I \subset (a)_R$. Now let $b \in I$, then we can write $b = \a a + r$, we know that $r = 0$ or $N(r) < N(a)$. We see that $r = b - \a a \in I$; now this forces $r = 0$ as we cannot have that $N(r) < N(a)$ by the definition of $a$. Hence $r = 0$, and so $b = \a a$ and so $b \in (a)_R$ and $I \subset (a)_R$.
+\end{proof}
