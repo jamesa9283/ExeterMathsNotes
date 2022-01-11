@@ -1,27 +1,27 @@
 %%
-%% This is file, `testoutput.tex',
+%% This is file, `definitions.tex',
 %% generated with the extract package.
 %%
-%% Generated on :  2022/01/07,11:00
+%% Generated on :  2022/01/11,10:33
 %% From source  :  notes.tex
-%% Using options:  active,generate=testoutput,extract-env={ndefi}
+%% Using options:  active,generate=testoutput,extract-env={ndefi},extract-cmd={section,subsection,subsubsection}
 %%
 \documentclass{article}
-
-\input{../../header}
-
 \def\npart {3}
 \def\nterm {Autumn Term}
 \def\nyear {2021}
 \def\nlecturer {Professor Mohamed Sa\"{i}di}
 \def\ncourse {Groups, Rings and Fields}
-\title{Groups, Rings and Fields Definitions}
 
+\input{../../header.tex}
+
+\title{Groups, Rings and Fields Definitions}
 
 \begin{document}
 \maketitle
 
-\section{Groups}
+
+\section[Basics of Groups]{\Sectionformat {Basics of Groups}{1}}
 
 \begin{ndefi}[Group]
   $G$ is a nonempty set and endowed with a composition rule $(\cdot)$. We denote this $(G, \cdot)$. $(\cdot)$ is well defined, so we can associate another element $a \cdot b \in G$ and $a \cdot b$ is unique. $(\cdot)$ must be associative,
@@ -47,6 +47,8 @@
   Then\marginnote{\emph{Lecture 2}}[0mm] this is our $2n$ elements. This is indeed a group with composition of rotations and $n \ge 3$ then the group isn't abelian. We also have the interesting rule which spits out the non-commutative behavior,
   $$ sr^i = r^{-i}s = r^{n-i}s $$
 \end{ndefi}
+
+\subsection[Subgroups and Orders]{\Sectionformat {Subgroups and Orders}{2}}
 
 \begin{ndefi}[Subgroup]
   A subgroup, $H \subset G$, of a group $(G, \cdot)$,
@@ -77,6 +79,8 @@
   The from this, the rest of the group axioms follow trivially.
 \end{ndefi}
 
+\subsection[Homomophism]{\Sectionformat {Homomophism}{2}}
+
 \begin{ndefi}[Homomophism]
   Let there be a group $(G, \circ)$ and $(H, *)$ and define a homomophism from $G \to H$ which satisfy,
   \begin{enumerate}
@@ -95,6 +99,8 @@
   $$ \ker f = \{ g \in G \m f(g) = e_G \} $$
 \end{ndefi}
 
+\section[Cosets and Normal Subgroups]{\Sectionformat {Cosets and Normal Subgroups}{1}}
+
 \begin{ndefi}[Relation]
   $x \sim y \implies x^{-1}y = h\in H$
 \end{ndefi}
@@ -103,12 +109,14 @@
   We define the left coset as this equivalence relation.
 \end{ndefi}
 
+\subsection[Normal Subgroups]{\Sectionformat {Normal Subgroups}{2}}
+
 \begin{ndefi}[Normal Subgroup]
   A subgroup $H$ of $G$ is called normal if,
   $$ xH = Hx = \{h'x : h' \in H\} \qquad \fa x \in G $$
 \end{ndefi}
 
-\begin{ndefi}[Conjugate]
+\begin{ndefi}[Conjugate]\marginnote{\emph{Lecture 6}}[0mm]
   Two elements $g,h \in G$ if we can find a $x \in G$ such that,
   $$ g = x h x^{-1} $$
   and we call it the conjugate of $g$ by $x$.
@@ -122,6 +130,8 @@
   \end{cases} $$
 \end{ndefi}
 
+\subsection[Quotient Groups]{\Sectionformat {Quotient Groups}{2}}
+
 \begin{ndefi}[Quotient Group Law]
   We define a composition law $(\cdot)$ on the set of left cosets $G/H$ by,
   \begin{align*}
@@ -129,6 +139,10 @@
     (xH, yH) \mapsto xH \cdot yH = xyH
   \end{align*}
 \end{ndefi}
+
+\subsubsection[First Isomorphism Theorem]{\Sectionformat {First Isomorphism Theorem}{3}}
+
+\section[Group Actions]{\Sectionformat {Group Actions}{1}}
 
 \begin{ndefi}[Group Action]
   Let $(G, *)$ be a group and a set $A$. A group action is a map,
@@ -179,6 +193,8 @@
   is just the kernel of the representation $\t$. If we find $\ker \t = \{e_G\}$, or $\t$ is injective, we say $(\cdot)$ is faithful.
 \end{ndefi}
 
+\subsection[Stabilisers and Orbits]{\Sectionformat {Stabilisers and Orbits}{2}}
+
 \begin{ndefi}[Stabiliser]
   We define the following set called the stabiliser
   $$ \stab (a) = \{g \in G : g \cdot a = a\} $$
@@ -194,6 +210,10 @@
   If $g \in G$, $\rho(g)$ is the permutation defined for $i,j \in \{1, \dots, n\}$ by,
   $$ \rho(g)(i) = j \qquad \text{if $g * g_i = g_j$} $$
 \end{ndefi}
+
+\section[Class Equation]{\Sectionformat {Class Equation}{1}}
+
+\subsection[Normalisers, Centralisers and Centers]{\Sectionformat {Normalisers, Centralisers and Centers}{2}}
 
 \begin{ndefi}[Normaliser]
   The stabiliser of the above group action,
@@ -211,9 +231,17 @@
   $$ Z(G) = \{g \in G : gh = hg,\, \fa h \in G\} $$
 \end{ndefi}
 
+\subsection[The Class Equation]{\Sectionformat {The Class Equation}{2}}
+
+\subsubsection[Conjuagacy Classes of $S_n$]{\Sectionformat {Conjuagacy Classes of $S_n$}{3}}
+
+\subsection[Simple Groups]{\Sectionformat {Simple Groups}{2}}
+
 \begin{ndefi}[Simple Groups]
   $G$ is simple if the only normal subgroups of $G$ are $H = G$ and $H = \{e_G\}$.
 \end{ndefi}
+
+\section[Sylow's Theorems]{\Sectionformat {Sylow's Theorems}{1}}
 
 \begin{ndefi}[$p$-group]
   Let $p$ be a prime number. A group of cardinality $p^t$ for some $t \ge 1$ is called a $p$-group. A non-trivial subgroup of a $p$-group is a $p$-group.
@@ -227,8 +255,15 @@
   Consider a group $H$ acting on a set $X$ and take a $x \in X$. Then if $h \cdot x = x$ for all $h \in H$, then we say that $x$ is a fixed point of the action.
 \end{ndefi}
 
-\section{Rings and Fields}
+\subsection[Proof of Sylow I]{\Sectionformat {Proof of Sylow I}{2}}
 
+\subsection[Proof of Sylow II]{\Sectionformat {Proof of Sylow II}{2}}
+
+\subsection[Proof of Sylow III]{\Sectionformat {Proof of Sylow III}{2}}
+
+\subsection[Classifying groups through Sylow]{\Sectionformat {Classifying groups through Sylow}{2}}
+
+\section[Polynomials]{\Sectionformat {Polynomials}{1}}
 
 \begin{ndefi}[Polynomial]
   A polynomial with coefficients in $\Q$ is an infinite sequence
@@ -244,6 +279,8 @@
 \begin{ndefi}[Irriducible]
   Let $f \in\QX$ be a non constant polynomial, $f \in \QX\sm\Q$ and $\deg(f) \ge 1$. We say that $f$ is irreducible if whenever $f(X) = g(X)h(X)$ then either $g$ or $h$ is a unit.
 \end{ndefi}
+
+\section[Rings and Fields]{\Sectionformat {Rings and Fields}{1}}
 
 \begin{ndefi}[Commutative Ring]
   If we have a set $(R,\,+,\,\ti)$, then the following is true,
@@ -285,6 +322,8 @@
   A subset $S$ of a ring $R$ is called a subring if $(S,\,+)$ is a subgroup of $(R,\,+)$ and $S$ is closed under multiplication.
 \end{ndefi}
 
+\section[Ring Homorphisms and Ideals]{\Sectionformat {Ring Homorphisms and Ideals}{1}}
+
 \begin{ndefi}[Ring Homomorphism]
   Let $R$ and $S$ be rings. A map $\phi : R \to S$ is called a ring homomorphism if it satisfies,
   \begin{enumerate}
@@ -315,6 +354,8 @@
   \end{enumerate}
 \end{ndefi}
 
+\subsection[Construction of the quotient ring]{\Sectionformat {Construction of the quotient ring}{2}}
+
 \begin{ndefi}[Addition and Multiplication of ideals]
   Suppose we have two ideals, $I$ and $J$ and we define addition,
   $$ I + J = \{ a + b : a \in I, b \in J\} $$
@@ -327,6 +368,78 @@
   \begin{enumerate}
     \item An ideal $I \in R$ is called principal if $I = (a)_R$ is generated by one element $a \in R$, called a generator of $R$.
     \item Let $a, b \in R$ and define $(a,\,b)_R = \{ac + bd : c, d \in R\}$. Then $(a,\,b)_R$ is an ideal called the ideal generated by $a$ and $b$.
+  \end{enumerate}
+\end{ndefi}
+
+\section[Prime and Maximal Ideals]{\Sectionformat {Prime and Maximal Ideals}{1}}
+
+\subsection[Maximal Ideals]{\Sectionformat {Maximal Ideals}{2}}
+
+\begin{ndefi}[Proper Ideal]
+  Let $R$ be a ring, then an ideal of $R$ is proper if $I \subsetneq R$.
+\end{ndefi}
+
+\begin{ndefi}[Maximal Ideal]
+  A proper ideal $M \subsetneq R$ is called a maximal ideal if the only ideals of $R$ containing $M$ are $M$ and $R$.
+\end{ndefi}
+
+\subsection[Prime Ideals]{\Sectionformat {Prime Ideals}{2}}
+
+\begin{ndefi}[Prime Ideals]
+  A proper ideal $P \subsetneq R$ is a prime ideal if for some $a, b \in R$ and $ab \in I$, then $a \in I$ or $b \in I$
+\end{ndefi}
+
+\subsection[Field of Fractions]{\Sectionformat {Field of Fractions}{2}}
+
+\subsection[Chinese Remainder Theorem]{\Sectionformat {Chinese Remainder Theorem}{2}}
+
+\begin{ndefi}[Comaximal]
+  We call two ideal comaximal, if $I + J = R$, if two ideals are comaximal, then $I + J = IJ$.
+\end{ndefi}
+
+\section[Divisibility and Factorisation]{\Sectionformat {Divisibility and Factorisation}{1}}
+
+\begin{ndefi}[Norm]
+  A norm is map from an integral domain to $\N$,
+  $$ N : R\setminus \{0_R\} \to \N $$
+  We call a norm multiplicative if $N(ab) = N(a)N(b)$ for all $a, b \in R\setminus \{0\}$.
+\end{ndefi}
+
+\begin{ndefi}[Euclidean Domain]
+  We say that $R$ is a euclidean domain if $N$ is a norm and we have $a \in R$ and $0_R \ne b \in R$ then we can write $a = bq + r$ where $q \in R$ and $r = 0_R$ or $N(r) < N(b)$.
+\end{ndefi}
+
+\begin{ndefi}[Principal Ideal Domain]
+  Let $R$ be an integral domain, then $R$ is a PID if it has the property if every ideal of $R$ is principal, ie.
+  $$ I = (a)_R = \{ab : b \in R\} $$
+\end{ndefi}
+
+\begin{ndefi}[Divisble]
+  Let $R$ be a ring, then let $a, b \in R$. Then we say $b$ divides $a$ means that $a = bc$ for some $c \in R$. We write $b/a$.
+\end{ndefi}
+
+\begin{ndefi}[Greatest Common Divisor]
+  A greatest commmon divisor of $a$ and $b$, say $d$ is described as,
+  \begin{enumerate}
+    \item $d/a$ and $d/b$
+    \item If $d'/a$ and $d'/b$, then $d'/d$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{ndefi}[Irreducible, Prime, Associate]
+  Let $R$ be an integral domain,
+  \begin{enumerate}
+    \item An element $r \in R \setminus \{0, R^\ti\}$ is called irreducible if $ab \in R$ then $a \in R^\ti$ or $b \in R^\ti$.
+    \item An element $p \in R\setminus\{0, R^\ti\}$ is called prime if $p/ab$ then $p/a$ or $p/b$
+    \item Two elements $a, b \in R$ are associate we write $a \sim b$ if $a = bu$ where $u \in R^\ti$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{ndefi}[Unique Factorisation Domain]
+  A UFD is an integral domain $R$ in which every element $r \in R\setminus \{0, R^\ti\}$ has the following properties,
+  \begin{enumerate}
+    \item $r = p_1p_2\dots p_n$ is a product of irreducible elements $p_1, p_2, \dots, p_n$.
+    \item The above factorisation is unique up to associates if $r = q_1q_2 \dots q_m$ is another factorisation of $r$ as a product of irreducible elements $q_1, q_2, \dots, q_m$ then $n = m$ and after possible renumbering the factors $p_i \sim q_i$ for all $i$.
   \end{enumerate}
 \end{ndefi}
 

@@ -12,7 +12,7 @@ We can consider a $R$ as an integral domain and then define a norm,
 \noindent
 We define a Euclidean Domain by considering division in a similar way to how we consider division in the integers. This is where the norm comes in, it defines how large an element is,
 \begin{ndefi}[Euclidean Domain]
-  We say that $R$ is a euclidean domain if $N$ is a norm and we have $a \in R$ and $0_R \ne b \in R$ then we can write $a = bq + r$ where $q \in R$ and $r = 0_R$ or $N(r) < N(b)$.
+  We say that $R$ is a Euclidean domain if $N$ is a norm and we have $a \in R$ and $0_R \ne b \in R$ then we can write $a = bq + r$ where $q \in R$ and $r = 0_R$ or $N(r) < N(b)$.
 \end{ndefi}
 
 This is slightly abstract, we say that $\Z$ is a ED where we equipt it with the norm $a \mapsto |a|$.
@@ -71,7 +71,7 @@ We remark that the $\gcd(a,\, b)$ for some $a, b \in R$ can always be found when
 \begin{ndefi}[Irreducible, Prime, Associate]
   Let $R$ be an integral domain,
   \begin{enumerate}
-    \item An element $r \in R \setminus \{0, R^\ti\}$ is called irreducible if $ab \in R$ then $a \in R^\ti$ or $b \in R^\ti$.
+    \item An element $r \in R \setminus \{0, R^\ti\}$ is called irreducible if $r = ab \in R$ then $a \in R^\ti$ or $b \in R^\ti$.
     \item An element $p \in R\setminus\{0, R^\ti\}$ is called prime if $p/ab$ then $p/a$ or $p/b$
     \item Two elements $a, b \in R$ are associate we write $a \sim b$ if $a = bu$ where $u \in R^\ti$
   \end{enumerate}
