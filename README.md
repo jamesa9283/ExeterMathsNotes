@@ -35,7 +35,7 @@ Here are some selected notes from third year:
 * MathsBio (Dr Ozgur Akman and Dr Marc Goodfellow) - [MathsBio](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3006-MathsBio/notes.pdf)
 
 ### T2
-* Partial Differential Equations (Dr. Hamid Alemi Ardakani) - [PDEs]()
-* Topology and Metric Spaces (Prof. Nigel Byott) - [Topology & Metric Spaces]()
+* Partial Differential Equations (Dr. Hamid Alemi Ardakani) - [PDEs](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/ECM3908-PDEs/notes.pdf)
+* Topology and Metric Spaces (Prof. Nigel Byott) - [Topology & Metric Spaces](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3040-TMs/notes.pdf)
 
 There also exist some notes I am writing for my dissertation, they are based around Geometric Mechanics and Lie Groups. They can be found [here](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/Dissertation/notes.pdf)
