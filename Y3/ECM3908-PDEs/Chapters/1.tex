@@ -3,12 +3,14 @@
 \section{Introduction to PDEs}
 A differential equation that contains, in addition to the dependent variable and independent variables, one or more partial derivatives of the dependent variable is called a partial differential equation.\\
 
+\noindent
 In general it may be written in the form,
 \begin{equation}
   f(x, y, \dots, u, u_x, u_y, \dots, u_{xx}, u_{yy}, \dots) = 0
 \end{equation}
 involving several of the $x, y, u_{x}, u_{xx}$ terms. Note that the notation $u_x = \pd{u}{x}$.\\
 
+\noindent
 When we consider a PDE, we also consider it in a suitable domain. For us, the domain, $D$, will just be some domain of $\R^n$ in the variables $x, y, \dots$. A solution of this equation will be a function $u = u(x, y, \dots)$ which satisfy $(1)$. We call the order of the PDE the highest order partial derivative appearing the equation.
 \begin{eg}
   $u_{xxy} + xu_{yy} + 8u = 8y$ is a third order PDE.
@@ -30,6 +32,7 @@ and furthermore, an equation that isn't linear is non-linear. IN this course we 
 $$ \sum_{i, j = 1}^n A_{ij}u_{x_ix_j} + \sum_{i=1}^n B_iu_{x_i} + F_u = G $$
 where we assume that $A_{ij} = A_{ji}$, we also assume that $B_i$, $F$ and $G$ are functions of the $n$ independent variables $x_i$. If $G = 0$, then we have a homogenous PDE; otherwise it's non-homogenous.\\
 
+\noindent
 If we consider an $n^{th}$ order ODE, then what we end up with is a solution depending on $n$ arbitrary constants. A similar thing applies to PDEs, but they are $n$ arbitrary functions. To illustate, we solve $u_{xy} = 0$, where first we integrate wrt $y$, and we get $u_x = f(x)$ and then integrate wrt $x$ and we get $u(x, y) = g(x) + h(y)$ where $g$ and $h$ are arbitrary functions.
 
 \subsection{Mathematical Problems}
@@ -37,6 +40,7 @@ A mathematical problem is PDE along with some supplimentary conditions on that P
 $$ u_t - u_{xx} = 0 $$
 Then an initial conditions for this PDE may be $u(x, 0) = \sin x$ and if we consider it on some boundary $0 \le x \le \ell$ some boundary conditions may be $u(0, t) = 0$ and $u(\ell, t) = 0$ for some $t \ge 0$ (This example is the heat equation for a rod of length $\ell$). This problem is known as an initial boundary problem. Sometimes we have more conditions that specify the problem, for example some conditions on the derivative. If we have a boundary that is not bounded, then sometimes we won't have boundary conditions and then we have a initial-value problem or a Cauchy Problem. \\
 
+\noindent
 Finally, we say that a problem is well posed if,
 \begin{enumerate}
   \item Existence, there is at least one solution
@@ -69,6 +73,7 @@ then if we let,
 $$ L = A(x, y)\pdd{}{x} + B(x, y)\pdxy u + C(x, y)\pdd{}{y} + D(x, y)\pd{}{x} + E(x, y)\pd{}{y} + F(x, y) $$
 be a linear differential operator, then we can write $Lu = G$ and that is our PDE.\\
 
+\noindent
 Let $v_1, v_2, \dots, v_n$ be $n$ functions satisfying
 $$ L[v_j] = G_j $$
  for $j$ running from $1$ to $n$. Let $w_1, w_2, \dots, w_n$ be $n$ functions where $L[w_j] = 0$ for $j$ running from $1$ to $n$. If we let $u_j = v_j + w_j$ then $u=  \sum_{j=1}^n u_j$ this is called the principle of linear superposition.\\
@@ -124,7 +129,7 @@ with a solution, $u(x, y)$, for a classical solution we need this solution conti
 
 If the PDE has order $n$, then a solution has class $\mathcal{C}^n$. If we consider
 $$ \pd u t + k\pdd u x = 0 $$
-A solution is classical if $u(x, t)$ is differentiable by all th variables $n$ times.
+A solution is classical if $u(x, t)$ is differentiable by all the variables $n$ times.
 
 \section{First Order Linear and Nonlinear waves}
 We want to solve,
@@ -133,7 +138,10 @@ for $u(x, t)$. We can integrate both sides wrt time,
 $$ \int_0^t \pd u s \, ds = 0 $$
 and so we see $u(x, t) - u(x, 0) = 0$ and so $u(x, t) = f(x)$ where $f(x)$ is defined by the IC. For this to be classical $f(x) \in \mathcal{C}^1$. If $f(x) = x$, then we get $u(x, t) = xt + f(x)$ where $f(x) \in \cc^1$.\\
 
+\noindent
 If we want to solve $u_t = x - t$, then $u(x, t) = xt - \frac{1}{2}t^2 + f(x)$, or $u_x + tu = 0$ then we can use an integrating factor and then get $\pd u t (e^{tx}u) = 0$ and so $u(x, t) = e^{-tx}f(t)$ where $f(t) \in \cc^1$.\\
+
+\subsection{Transport Equations}
 
 Next let us add another term,
 $$\pd u t + c\pd u x = 0$$
@@ -203,12 +211,12 @@ Hence, from $\di x t = c(x)$, we can find a characteristic curve for the PDE; if
   using the method of characteristics.
 \end{eg}
 
-\subsection{Quasi-Linear equations and methods of MoC}
+\subsection{Solutions to Quasi-Linear equations via methods of characteristics}
 We can write
-$$ F(x, y , u, u_x, u_y) = 0 \qquad (x, y) \in D \subset \R$$
+$$ F(x, y , u, u_x, u_y) = 0 \qquad (x, y) \in D \subset \R^2$$
 Then if we write $u_x = p$ and $q = u_y$. Then this solution is quasi-linear if,
 $$ F(x, y, u, p, q) = 0 $$
-is quasi-linear if the PDE is linear in first partial derivatives of the unknown function $u(x, y)$. We can write the most general form as,
+the PDE is linear in first partial derivatives of the unknown function $u(x, y)$. We can write the most general form as,
 $$ a(x, y, u)\pd u x + b(x, y, u)\pd u y = c(x, y, u) $$
 Some examples are,
 $$ x(y^2 + u)u_x - y(x^2 + u)u_y = (x^2 - y^2)u $$
@@ -246,12 +254,18 @@ More generally, these are geometric surfaces described by $f(x, y, z, a, b) = 0$
   and simplify,
   $$ \pd f \phi \left( \pd \phi x + p\pd \phi z \right) + \pd f \psi \left(\pd \psi x + p\pd \psi z\right) = 0 $$
   and now we do the same thing for $y$,
-  $$ \pd f \phi \left( \pd \phi y + q\pd \phi z \right) + \pd f \psi \left( \pd \psi y + q\pd \psi z\right) $$
+  $$ \pd f \phi \left( \pd \phi y + q\pd \phi z \right) + \pd f \psi \left( \pd \psi y + q\pd \psi z\right) = 0 $$
   and now let us write these in matrix form,
-  % matrices
+  $$ \begin{bmatrix}
+    \pd \phi x + p\pd \phi z & \pd \psi x + p\pd \psi z\\[5pt]
+    \pd \phi y + q\pd \phi z & \pd \phi y + q\pd \phi z
+  \end{bmatrix}\begin{bmatrix}
+    \pd f \phi \\ \pd f \psi
+  \end{bmatrix} = \vec 0'$$
   There is a non-trivial solution is and only if the  determinant matrix is zero. If we calculate this determinant we get the solution of the PDE.
 \end{proof}
 
+\noindent
 If we consider a PDE of the form,
 $$ a(x, y, u)u_x + b(x, y, u)u_y - c(x, y, u) = 0 $$
 If we assume that $z = u$ is a solution surface, then we can define $f(x, y, u) = u(x, y) - u = 0$
@@ -278,10 +292,43 @@ and we can write them as, $\frac{dx}{a(x, y, u)} = \frac{dy}{b(x, y, u)} = \frac
   $$ d\phi = \phi_x dx + \phi_ydy + \phi_udu = 0 $$
   and so,
   $$ \di \phi t = \phi_x \di x t + \phi_y \di y t + \phi_u\di u t = 0 $$
-  and so we get $a\phi_x + b\phi_y + c\phi_u = 0$ and similarly we can get $a\psi_x + b\psi_y + c\psi_u = 0$. ({\color{red} Exercise}). We can now take each of the terms to the right hand side in term and then show that,
+  and so we get $a\phi_x + b\phi_y + c\phi_u = 0$ and similarly we can get $a\psi_x + b\psi_y + c\psi_u = 0$. If we now consider the following system of equations,
+  $$ \begin{cases}
+    a\phi_x + b\psi_y = -c\phi_u \\
+    a\psi_x + b\psi_y = -c\psi_u
+  \end{cases} $$
+  and multiply the top equation by $\psi_u$ and the bottom by $\phi_u$ we can conclude that,
+  $$ a(\phi_x\psi_u - \psi_x\phi_u) + b(\psi_y\psi_u - \psi_y\phi_u) = 0 $$
+  and we can write this as a Jacobean,
+  $$ a\pd{(\phi, \psi)}{(x, u)} + b\pd{(\psi, \phi)}{(y, u)} = 0 $$
+  and hence we can now find that,
+  $$ \frac{a}{\pd{(\phi, \psi)}{(u, x)}} = \frac{b}{\pd{(\phi, \psi)}{(y, u)}} $$
+  Now we can do a very similar thing for the other systems we can form this way and get the desired result:
   \begin{equation}
     \frac{a}{\pd{(\phi, \psi)}{(y, u)}} = \frac{b}{\pd{(\phi, \psi)}{(u, x)}} = \frac{c}{\pd{(\phi, \psi)}{(x, y)}} \tag{$*$}
   \end{equation}
-  and so now from Theorem 2.4, and using the above result $(*)$ we get an expression of the form,
+  and so now from Theorem 2.4, and using the above result $(*)$ in the following way, consider $\pd f x$ and $\pd f y$,
+  \begin{align*}
+    \pd f x &= \pd f \phi\left( \pd \phi x + p\pd \phi u \right) + \pd f \psi \left( \pd \psi x + p\pd \psi u \right)\\
+    \pd f y &= \pd f \phi\left( \pd \phi y + q\pd \phi u \right) + \pd f \psi \left( \pd \psi y + q\pd \psi u \right)\\
+  \end{align*}
+  and again write this as a matrix,
+  $$ \begin{bmatrix}
+    \pd \phi x + p\pd \phi u & \pd \psi x + p\pd \psi u\\[5pt]
+    \pd \phi y + q\pd \phi u & \pd \psi y + q\pd \psi u
+  \end{bmatrix} \begin{bmatrix}
+    \pd f \phi \\ \pd f \psi
+  \end{bmatrix} = \vec 0$$
+  and so we can say, similarly to before that there is a unique solution if the determinant of the matrix is zero. Hence,
+  $$ \left(\pd \phi x\pd \psi y - \pd \psi x\pd \phi y\right) + p\left(\pd \phi u\pd \phi y - \pd \psi u\pd \phi y\right) + q\left(\pd \psi y\pd \phi x - \pd \psi x \pd \phi u \right) = 0 $$
+  and so we can then rewrite this with Jacobeans,
+  $$ p\pd{(\phi, \psi)}{(y, u)} + q\pd{(\phi, \psi)}{(u, x)} = \pd{(\phi, \psi)}{(x, y)} $$
+  and so we can now divide through and get,
+  $$ p\frac{\pd{(\phi, \psi)}{(y, u)}}{\pd{(\phi, \psi)}{(x, y)}} + q\frac{\pd{(\phi, \psi)}{(u, x)}}{\pd{(\phi, \psi)}{(x, y)}} = 1$$
+  and from the result above we can say that,
+  $$ \frac{\pd{(\phi, \psi)}{(y, u)}}{\pd{(\phi, \psi)}{(x, y)}} = \frac{a}{c} \qquad \frac{\pd{(\phi, \psi)}{(u, x)}}{\pd{(\phi, \psi)}{(x, y)}} = \frac{b}{c} $$
+  and so,
+  $$ p \frac{a}{c} + q \frac{b}{c} = 1 $$
+  which yields,
   $$ ap + bq = c $$
 \end{proof}
