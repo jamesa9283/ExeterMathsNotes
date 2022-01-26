@@ -1,0 +1,247 @@
+% !TEX root = ../notes.tex
+
+\section{Introduction}
+\subsection{Motivation}
+
+In this module we will look at ways to generalise Real Analysis.
+\begin{enumerate}
+  \item Metric Spaces
+  \item Topological Spaces
+  \item Measure Spaces
+\end{enumerate}
+A key idea in Real Analysis is continuity, a function $f : \R \to \R$ is continuous if, given $a \in \R$ given $\e > 0$ there exists some $\d > 0$ so that,
+$$ |x - a| < \d \implies |f(x) - f(a)| < \e $$
+% continuity diagram
+We have seen a version of this for $\R^n \to \R^m$ or $\C \to \C$. This can interpreted as a notion of a distance, we can ensure that the distance between $f(x)$ and $f(a)$ be less than $\e$. Here the distance between real numbers is $|x - y|$. This leads to metric spaces is a set where we have a distance function $d_X(a, b)$ for any points $a, b \in X$.\\
+
+\noindent
+Another way to interpret the continuity of $f : \R \to \R$ is to day that for any $U$ in
+$\R$, the set,
+$$ f^{-1}(U) := \{x \in \R : f(x) \in U\} $$
+is also open.
+% diagram for U on x^2
+We may ask what happens if we choose a $U$ such that $f^{-1}(U) = \varnothing$, but we say that the empty set is open.\\
+
+\noindent
+We can talk about continuity without talking about distances, provided that we know what we mean by the idea of open sets. Open sets may not be defined by distance. A space together with a collection of open subsets is a topological space. Metric spaces are topological spaces with a idea of distance.\\
+
+\noindent
+Measure spaces are related to length of a subset, and also integration. These are linked since if $A$ is a subset of $\R$ of length $\ell$, then,
+$$ \ell = \int_{\R} 1_A(x)\, dx $$
+where $1_A : \R \to \R$ is the indicator function,
+$$ 1_A \begin{cases}
+  1 & \text{if $x \in A$}\\
+  0 & \text{if $x \notin A$}
+\end{cases} $$
+This unproblematic if we have $A = [a, b]$, then we can integrate this nicely,
+% add graph
+However, if $A = \Q$ it is not clear that we can make sense of this `length' of $\Q$, and the integral is not defined (as a Riemann Integral). Measure Theory provides the theoretical framework for assigning a length to most (but not all, the measureable ones work) subsets of $\R$ and making corresponding integral as Lesbegue integrals. It turns out that $\Q$ has `length' of $0$, so there are way more irrational numbers, and $\Q$ is countable.
+
+\newpage
+\subsection{Review of Real Analysis}
+For real numbers $a \le b$, we have the open interval,
+$$ (a, b) = \{x \in \R : a < x < b\} $$
+and closed interval,
+$$ [a, b] = \{x \in \R : a \le x \le b\} $$
+We can also have the mixed intervals, $(a, b]$ or $(a, \infty)$. \\
+
+\noindent
+In general, a subset $U$ is open, if for each $a \in U$ there is some $\e > 0$ such that $(a- \e, a + \e) \subset U$ ($U$ does not contain it's boundary, every point is interior). A closed set is a set where it's complement is open. The empty set and $\R$ are clopen, open and closed.\\
+
+\begin{nlemma}[Triangle Inequality]
+  For some $a, b \in R$,
+  $$ |a + b| \le |a| + |b| $$
+\end{nlemma}
+and we can extend this to say $|a - b| \ge ||a| - |b||$. \\
+
+
+\noindent
+Let $A \subset \R$. An upper bound is a number $u$ such that $a \le u$ for all $a \in A$. If $u$ is an upper bound of $a$ then it has many upper bounds, if at least one exists, the set is bounded. A least upper bound or supremum for $A$ is a number $u$ such that,
+\begin{enumerate}
+  \item $a \le u$ for all $a \in A$
+  \item if $u_* < u$ then there is some $a \in A$ with $a > u_*$
+\end{enumerate}
+If $A$ has a least upper bound $u$, then $u$ might or might not be in $A$. There are similar definitions for greatest lower bound or infimum. A set is bounded, if it is bounded above and below, or there is some $M$ such that $|a| \le M$ for all $a \in A$. An important property of the real numbers is the completeness property: every non-empty set of real numbers which is bounded above has a least upper bound.\\
+
+We say that a sequence converges to $a$, if given $\e > 0$ thiere is some $N \in \N$ such that $|a_n - a| < \e$ for all $n > N$. Then $a$ is the limit of a sequence. A sequence is a bounded if $|a_n| < M$ for all $n$. If $a_n$ is bounded which is monotonically increasing, then it must converge, same for monotonically decreasing. In general a sequence that is bounded, doesn't have to converge. However, a bounded sequence always has a convergence subsequence. \\
+
+\noindent
+A function is continuous at a point $a \in \R$, for all $\e > 0$ there is some $\d > 0$ so that $|f(x) - f(a)| < \e$ whenever $|x - a| < \d$. We say that $f$ is continuous if it holds for every $a$. If $f, g : \R \to \R$, then $f \pm g$, $fg$, $\frac{f}{g}$ ($g \ne 0$) are all continuous. Suppose we have a continuous function on a closed and bounded interval
+\begin{nthm}[Intermediate Value Theorem]
+  Let $f: [a, b] \to \R$ be continuous, for any $v$ between $f(a)$ and $f(b)$, there is at least one $x \in [a, b]$ with $f(x) = v$.
+\end{nthm}
+% IVT diagram
+
+\begin{nthm}
+  Let $f: [a, b] \to \R$ be continuous. Then $f(x)$ is bounded and attains its bounds, i.e. $f$ has a (finite) maximum $M$ and minimum $m$ in $[a, b]$. More precisely $x_{\text{min}}$ and $x_{\text{max}} \in [a, b]$ so that $m = f(x_{\text{min}}) \le f(x) \le f(x_{\text{max}})$ for all $x \in [a, b]$.
+\end{nthm}
+% Bounds diagram.
+
+\section{Metric Spaces}
+We firstly define a metric space,
+\begin{ndefi}[Metric Space]
+  A metric space, $(X, d)$ consists of a non-empty set $X$ and a function $d : X \ti X \to \R$ satisfying,
+  \begin{enumerate}
+    \item $d(x, y) \ge 0$ for all $x, y \in X$ and $d(x, y) = 0 \iff x = y$
+    \item $d(x, y) = d(y, x)$ for all $x, y \in X$ (symmetry)
+    \item $d(x, z) \le d(x, y) + d(y, z)$ (triangle inequality)
+  \end{enumerate}
+\end{ndefi}
+
+Here are a load of examples,
+\begin{eg}
+  Take, $X = \R$ and $d_\R(x, y) = |x - y|$. Now, we can probably see normally that the three axioms hold. The first is how we define $|\cdot|$, then $|x - y| = |(-1)(y - x)| = |y - x|$ and the third is the triangle inequality.
+\end{eg}
+and now for $\R^m$,
+\begin{eg}
+  If we let $\R^m$ and $d_{\R^m}(x, y) = \sqrt{\sum_{j=1}^n |x_j - y_j|^2}$ where $\vec x, \vec y  \in \R^m$. The axioms hold, as if $d_{\R^m}(\vec x, \vec y) = 0$, then we require that $x_j = y_j$ for all $j$ and so $\vec x = \vec y$. For the second, we can use a similar argument to before as $|x_j - y_j|= |y_j - x_i|$. For the triangle inequality for this metric space, we need to use the Cauchy Schwartz inequality,
+  $$ \left| \sum_{j=1}^n a_j\bar{b_j} \right| \le \left(\sum_{j=1}^n |a_j|^2\right)\left(\sum_{j=1}^n |b_j|^2\right) $$
+  that is $|\vec a \cdot \bar{\vec b}| < |\vec a|^2|\vec b|^2$.
+\end{eg}
+
+We now can look at the taxicab metric,
+\begin{eg}
+  Take $X = \R^m$ and $d'_{\R^m}(\vec x, \vec y) = \sum_{j=1}^n |x_{i} - y_j|$ for $x, y \in \R^m$. The first two are trivial for $d'$, but the third easier than before,
+  $$ \sum_{j=1}^n |x_j - z_j| = \sum_{j=1}^n |x_j - y_j - (y_j - z_j)| \le \sum_{j=1}^n |x_j - y_j| + \sum_{j=1}^n |y_j - z_j| = d'(\vec x, \vec y) + d'(\vec y, \vec z)$$
+\end{eg}
+For an example not $\R^m$,
+\begin{eg}
+  Take any $X$ that is non-empty, then
+  $$ d(x, y) = \begin{cases}
+    1 & \text{if $x \ne y$}\\
+    0 & \text{if $x = y$}
+  \end{cases} $$
+  The first two axioms are clear, then for the third consider $x = z$,
+  $$ d(x, z) = 0 \le d(x, y) + d(y, z) $$
+  and this is always true. If $x \ne z$, then,
+  $$ d(x, z) = 1 \le d(x, y) + d(y, z) $$
+  if $x \ne z$, then either $x \ne y$ or $y \ne z$, so the above holds.
+\end{eg}
+
+Now for something more abstract,
+\begin{eg}
+  Consider $\cc[0, 1]$ and let the metric be, $d(f, g) = \max\{f(t) - g(t) : t \in [0,1] \}$. Does this metric make sense? Are they bounded / why does this maximum make sense. This makes sense because of a Theorem in the last lecture. The first two of the conditions follow nicely, then the third,
+  \begin{align*}
+    |f(t) - h(t)| &= |(f(t) - g(t)) + (g(t) - h(t))|\\
+    &\le |f(t) - g(t)| + |g(t) - h(t)|\\
+    &= d(f, g) + d(g, h)
+  \end{align*}
+  and so taking the maximum, we can get that $d(f, h) \le d(f, g) + d(g, h)$.
+\end{eg}
+
+We can remark, that this is not the only way to consider the distance between two functions, we could have integrated.
+
+\begin{ndefi}[Subspace]
+  A subspace of a metric space $(X, d_X)$, is a non-empty subset $Y$ together with the metric $d_Y$ by restricting $d_X$ to $Y$.
+  $$ d_Y(y, y') = d_X(y, y') \qquad \forall y, y' \in Y $$
+\end{ndefi}
+This is clearly a metric space as if the conditions hold for $X$, they will then hold for $Y$.
+
+\subsection{Continuity in Metric Spaces}
+We can talk nicely about continuity in metric space, in a rather obvious way once we realise it's all about distance,
+\begin{ndefi}[Limit]
+  Let $(X, d)$ be a metric space, then let $(a_n)$ be a sequence of points in $X$. For some $a \in X$ we say that $(a_n)$ converges to $a$, written $a_n \to a$ as $n \to \infty$ if, for any real number $\e > 0$ there exists some $N \in \N$ with $d(a_n, a) < \e$ for all $n > N$. We say that $a$ is the limit of the sequence.
+\end{ndefi}
+
+\noindent
+This is just a copy of the definition of a limit, just with our metric placed in. Here is an interesting quirk, if we take the discrete metric, then the sequence $\left( \frac{1}{n} \right)$ then this does not converge to zero. For, if we choose $\e > 0$ with $\e < 1$, then $d\left(\frac{1}{n}, 0 \right) > \e$
+
+\begin{ndefi}[Continuity]
+  Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces, then $f : X \to Y$. For $a \in X$, we say that $f$ is continuous at $a$ if, given $\e > 0$, there is some $\d > 0$ so that $d_Y(f(x), f(a)) < \e$ for all $x \in X$ with $d_X(x, a) < \d$. We say $f$ is continuous if it is continuous for every $a$.
+\end{ndefi}
+
+We can prove that in the discrete metric then any function $f : X \to Y$ is convergent where $X$ and $Y$ have the discrete metric, just take $\d = 1$.
+
+\subsection{Opens Sets}
+We can consider balls, as we have a distance metric we can move forwards to open sets and the required analytic tools.
+\begin{ndefi}[Open Ball]
+  Let $(X, d)$ be a metric space, for any $a > 0$ and any $a \in X$, the set
+  $$ B_\e (a) = \{x \in X : d(x, a) < \e\} $$
+  is called an open ball in $X$ of radius $\e$ and center $a$.
+\end{ndefi}
+
+\noindent
+As a sanity check, when $X = \R$ we get an interval, $(a - \e, a + \e)$
+% interval
+and with $X = \R^2$ or $\C$, then we see we get an open disc
+% open disc
+
+\begin{ndefi}[Open Set]
+  A subset $U$ of a metric space $X$ is open if, for every $x \in U$ there is some $\e > 0$ such that
+  $$ B_\e(x) \subset U $$
+  A subset $V$ is closed if $X \setminus V$ is open.
+\end{ndefi}
+
+\noindent
+By convention, $\varnothing$ is open and now we prove that the epsilon ball is open.
+\begin{nprop}
+ For any $a \in X$ and every $\e > 0$ the set $B_\e(a)$ is an open set in $X$.
+\end{nprop}
+% diagram
+\begin{proof}
+  Let $x \in B_\e(a)$, then we need to find a $\d > 0$ such that $B_\d(a) \subset B_\e(a)$. Take $\d = \e - d(x, a)$. Then $\e > 0$ and if $y \in B_\d(a)$ then $d(y, a) \le d(y, x) + d(x, a) < \d + d(x, a) = \e$. Thus $y \in B_\e(a)$. This holds for every $y \in B_\d(a)$ and so $B_\d(a) \subset B_\e(a)$.
+\end{proof}
+
+\noindent
+Here's a slight quirk, if we consider $X$ and $Y \subset X$. If we consider a $U \subset Y$ which is open, this need not be open in $X$. Consider $Y = [0, 1] \subset \R$, and $B_{\frac{1}{2}}(0)$ as our open set, which is just $\{x \in [0, 1] : |x - 0| < \frac{1}{2}\}$. However, in $\R$ this subset is $\left[ 0, \frac{1}{2} \right)$.
+
+\begin{nprop}
+   Let $U$ and $V$ be open sets in the metric space $(X, d)$. Then $U \cap V$ is an open set.
+\end{nprop}
+\begin{proof}
+  If $x \in U \cap V$, then there are $\e_1, \e_2 > 0$ such that $B_{\e_1}(x) \subset U$ and $B_{\e_2}(x) \subset V$ and so we just choose $\e = \min(\e_1, \e_2)$. Then $B_\e(x) \subset U \cap V$.
+\end{proof}
+
+\noindent
+Then by induction we can generalise this,
+\begin{nprop}
+  The intersection of any finite family of open sets is open, ie. if $n \ge 0$, then $U_1, \dots, U_n$ are open sets then $U_1 \cap U_2 \cap \dots \cap U_n$ is an open set.
+\end{nprop}
+
+\noindent
+We often write this to mean the above intersection,
+$$ \bigcap_{i=0}^n U_i$$
+The same works for unions, but we can say more. Suppose we have a family of open sets, indexed by some set $\mathcal{I}$. This means for every $i \in \mathcal{I}$ we have an open set $U_i \subset X$. The indexing set doesn't need to be finite.
+
+\begin{nprop}
+   If $U_i$, $i \in \mathcal{I}$ is a family of open sets $\bigcup_{i\in\mathcal{I}} U_i$ is open.
+\end{nprop}
+\begin{proof}
+  Let $U = \bigcup_{i \in \mathcal{I}} U_i$. We need to show that $U$ is open. Let $x \in U$, then $x \in U_i$ for some $i \in \mathcal{I}$. As $U_i$ is open, there is some $\e > 0$ with $B_\e(x) \subset U_i$. As $U_i \sub U$, we have $B_\e(x) \sub U$. Hence $U$ is open.
+\end{proof}
+
+\noindent
+The intersection of infinitely many open sets, need not be open. Consider,
+$$ \bigcap_{n = 1}^\infty \left( -\frac{1}{n}, \frac{1}{n} \right) = \{0\}$$
+which is then closed.
+
+Now let us redefine the continuity and convergence in terms of these open sets,
+\begin{ndefi}[Limit]
+  Let $(a_n)$ be a sequence in a metric space, $(X, d)$ and let $a \in X$. Then $a_n \to a$ as $n \to \infty$ if and only if the following hold,
+  \begin{enumerate}
+    \item for every open set $U$ containing $a$ there is some $N \in \N$ such that $a_n \in U$ for all $n > N$
+  \end{enumerate}
+\end{ndefi}
+\begin{proof}
+  First suppose $a_n \to a$ as $n \to \infty$. We must show that the condition holds. Let $a \in U$, $U$ is open. Then there is some $\e$ with $B_\e(a) \subset U$. As $a_n \to a$ there exists $N \in \N$ with $d(a_n, a) < \e$ for all $n > N$. But then $a_n \in B_\e(a) \sub U$ for all $n > N$ as required.
+
+  Conversely, suppose the conditon holds, then we must show that $a_n \to a$. Let $\e > 0$. Then $B_\e(a)$ is an open set containing $a$, so by the condition there is some $N$ with $a_n \in B_\e(a)$ is an open set containing $a$, so there is some $N$
+ with $a_n \in B_e(a)$ for all $n > N$. Hence $d(a_n, a) < \e$ for all $n > N$. This shows $a_n \to a$.
+\end{proof}
+
+We can do a similar thing for continuity.
+\begin{nprop}
+   Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces and let $f : X \to Y$. Then $f$ is continuous if and only if, for every open set $U$ in $Y$, the set $\{x \in X : f(x) \in U\}$ is an open set in $X$.
+\end{nprop}
+
+\noindent
+We often use the notation $f^{-1}(U)$ for the set $\{x \in X : f(x) \in U\}$. This is the preimage of the set $U$.  We use this notation even if there is no actual function $f^{-1}$.
+
+\begin{proof}
+  Suppose $f$ is continuous, let $U \sub Y$ be open. We must show that $f^{-1}(U)$ is open. If $f^{-1}(U) = \varnothing$, then $f^{-1}(U)$ is open. Let $x \in f^{-1}(U)$, then $f(x) \in U$. Since $U$ is open, there is some $\e > 0$ such $B^Y_\e(f(x)) \sub U$ (with metric $Y$). Since $f$ is continuous, there is some $\d > 0$ so that $d_Y(f(x'), f(x)) < \e$ for all $x'$ such that $d(x, x') < \d$.
+  If $x' \in B_\d^X(x)$ then $f(x') \in B^Y_\e(f(x)) \sub U$ and so $x' \in f^{-1}(U)$ and $B^X_\d(x) \sub f^{-1}(U)$. So $f^{-1}(U)$ is open.\\
+
+  Conversely suppose $f^{-1}(U)$ is open for all open $U \sub Y$. Let $x \in X$ and $\e > 0$. Then $U = B^Y_\e(f(x))$ is an open set in $Y$, then $x \in f^{-1}(U)$, which is open in $X$. So there is some $\d > 0$ with $B_\d^Y(x) \sub f^{-1}(U)$. Therefore for all $x' \in B_\d(x)$ where $x' \in f^{-1}(U)$ and so $f(x)\in B_\e^Y(f(x))$, that is forall $x'$ with $d^X(x', x) < \d$ and so we have
+  $$ d_Y (f(x'), f(x)) < \e $$
+  Hence $f$ is continuous.
+\end{proof}

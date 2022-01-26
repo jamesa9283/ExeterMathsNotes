@@ -1,0 +1,41 @@
+% !TEX root = ../notes.tex
+
+
+\subsection{Equivalent Metrics}
+\begin{ndefi}[Equivalent Metrics]
+  Let $d_1$ and $d_2$ be two metrics on the same set $X$.
+  \begin{enumerate}
+    \item We say that $d_1$ and $d_2$ are topologically equivalent if the open sets with respect to $d_1$ are the same as the open sets with repsect to $d_2$
+    \item We say that $d_1$ and $d_2$ are Lipschitz equivalent if there are constants $A \ge B > 0$ such that,
+    $$ Bd_1(x, y) \le d_2(x, y) \le Ad_1(x, y) \qquad \forall x, y \in X $$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{nprop}
+   If $d_1$ and $d_2$ are Lipschitz equivalent metrics on $X$ then they are topologically equivalent.
+\end{nprop}
+\begin{proof}
+  Let $B_\e^{d_1}(a)$ and $B_\e^{d_2}(a)$ be the open balls with respect to $d_1$ and $d_2$ respectively. By hypothesis, there are constants such that,
+  $$ Bd_1(x, y) \le d_2(x, y) \le Ad_1(x, y) \qquad \forall x, y \in X $$
+  Let $U$ be an open set with respect to $d_1$. Given an $a \in U$ there is some $\e > 0$ with $B_{\e}^{d_1}(a) \sub U$. Now if $d_2(x, a) < B\e$ then $Bd_1(x, a) \le d_2(x, a) < B\e$ so $d_1(x, a) < \e$. Hence $B_{B\e}^{d_2}(a) \subset B_{\e}^{d_2}(a) \sub U$. This shows that $U$ is an open set with respect to $d_2$.
+\end{proof}
+
+\begin{eg}
+  Let $X = \R$ with $d_1$ is the usual metric and $d_2$ is the taxi-cab metric. Then $d_1$ and $d_2$ are Lischitz equivalent. This is because, if $\vec x = (x_1, x_2)$ and $\vec y = (y_1, y_2)$ in $\R^2$. Then, for some $A \ge B > 0$,
+  $$ Bd_1(\vec x, \vec y) \le d_2(\vec x, \vec y) \le Ad_1(\vec x, \vec y) $$
+  that is,
+  \begin{align*}
+    B\sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2} &\le |x_1 - y_1| + |x_2 - y_2|\\
+    &\le A\sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2}
+  \end{align*}
+  Let $u_1 = |x_1 - y_1|$ and $u_2 = |x_2 - y_2|$, and then squaring,
+  \begin{align*}
+    B^2(u_1^2 + u_2^2) &\le (u_1 + u_2)^2 \\
+    &\le A^2(u_1^2 + u_2^2)
+  \end{align*}
+  for all $u_1, u_2 \ge 0$. We now want to find such $A$ and $B$. For $B$, we let $B = 1$ as $u_1^2 + u_2^2 \le (u_1 + u_2)^2$. For $A$, $u_1^2 + u_2^2 - 2u_1u_2 \ge 0$ and so $u_1^2 + u_2^2 \ge 2u_1u_2$ and so $(u_1 + u_2)^2 \le 2(u_1^2 + u_2^2)$, so $A = \sqrt 2$.
+\end{eg}
+
+Consider $X = \R_{>0}$ and $d_1$ be the usual metric and $d'(x, y) = \left| \frac{1}{x} - \frac{1}{y} \right|$, it can be proved that this $d'$ is a metric. Now let $x = \frac{1}{n}$ and $y = \frac{1}{n+1}$ and we can see that our normal distance, $d\left(\frac{1}{n}, \frac{1}{n+1}\right) = \left| \frac{1}{n} - \frac{1}{n+1}\right| = \frac{1}{n(n+1)}$ and $d'\left(\frac{1}{n}, \frac{1}{n+1}\right) = 1$ and so we can pick points close together in $d$ but not in $d'$. Now consider,
+$$ \frac{d'(x, y)}{d(x, y)} = n(n+1) $$
+and so we can make this whatever we want and so we cannot have these as Lipschitz equivalent. However, they are topologically equivalent because $f : \R_{>0} \to \R_{>0}$ where $x \mapsto \frac{1}{x}$ is continuous.
