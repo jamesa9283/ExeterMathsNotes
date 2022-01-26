@@ -1,0 +1,65 @@
+% !TEX root = ../notes.tex
+w
+\begin{nthm}[Cauchy Problem for first order PDEs]
+  Suppose $C$ is a given curve in the $(x, y)$-plane with it's parametric equation, $x = x_0(t)$ and $y = y_0(t)$ where $t \in I \sub \R$ and derivatives $x_0(t)$ and $y_0'(t)$ are piecewise continuous such that they satisfy $x_0'^2 + y_0'^2 \ne 0$. Suppose that $u = u_0(t)$ is a given function on the curve $C$. Then there exists a solution $u = u(x, y)$ of the equation,
+  $$ F(x, y, u, u_x, u_y) = 0 $$
+  in the domain $D \sub \R^2$ containing the curve $C$ for all $t \in I$. $u(x, y)$ satisfies $u(x_0(t), y_0(t)) = u_0(t)$ for all values of $t \in I$.
+\end{nthm}
+
+Now for a lot of examples,
+\begin{eg}
+  Find the general solution of the PDE, $xu_x + yu_y = u$. We let $a = x$, $b = y$ and $c = u$, hence,
+  $$ \frac{dx}{x} = \frac{dy}{y} = \frac{du}{u} $$
+  and now we split and solve to get $y = c_1x$ and $u = c_2x$. Hence, the solution is $f\left( \frac{y}{x}, \frac{u}{x} \right) = 0$. We could have written this as $\frac{u}{x} = F\left( \frac{y}{x} \right)$ or $u(x, y) = xF\left( \frac{y}{x} \right)$.
+\end{eg}
+
+\begin{eg}
+  Obtain the general solution of the linear equation $xu_x + yu_y = nu$ where $n$ is a constant. Here we do the same thing as above,
+  $$ \frac{dx}{x} = \frac{dy}{y} = \frac{du}{nu} $$
+  and we get the solution $u(x, y) = x^nF\left( \frac{y}{x} \right)$
+\end{eg}
+
+\begin{eg}
+  Find the general solution of $x^2u_x + y^2u_y = (x + y)u$. Here the characteristic is,
+  $$ \frac{dx}{x^2} = \frac{dy}{y^2} = \frac{du}{(x + y)u}$$
+  The first function is easy to construct, we find that $\frac{1}{y} - \frac{1}{x} = c_1$ and the second can be found from
+  \begin{align}
+    (x + y)udx &= x^2du \\
+    (x + y)udy &= y^2du
+  \end{align}
+  and then solving. Hence $\frac{x-y}{u} = c_2$. Then we can say the solution is $f(\frac{y - x}{xy}, \frac{x - y}{u}) = 0$ or $u(x, y) = (x - y)h(\frac{y - x}{xy})$
+\end{eg}
+\begin{exercise}
+  Verify the solution.
+\end{exercise}
+
+\begin{eg}
+  Obtain the general solution of the linear equation $u_x - u_y = 1$ with the Cauchy data $u(x, 0) = x^2$. We find the characteristics,
+  $$ \frac{dx}{1} = \frac{dy}{-1} = \frac{du}{1} $$
+  and so we find that $y + x = c_1$ and $u - y = c_2$. Therefore, $u(x, y) = -y - F(x + y)$ and using the Cauchy data we can get that $u(x, y) = (x + y)^2 - y$
+\end{eg}
+
+\noindent
+\textbf{Review:} We have $a(x, y, u) \pd u x + b(x, y, u)\pd u y = c(x, y, u)$ and we write this as $(a, b, c) \cdot (u_x, u_y, u_z) = 0$ and wrote $u(x, y)$ as the third coordinate and then considered the level surface $f(x, y, u) = u(x, y) - u$ and got that $\nab f = (u_x, u_y, -1)$ and hence concluded that $(a, b, c) \cdot \nab f = 0$ recovers our PDE. $\nab f$ is perpendicular to the solution surface, and $(a, b, c)$ is tangent to the surface and some curve in the surface must have tangent vector $(a, b, c)$ which we call the characteristic curve.
+$$ (a, b, c) = \left(\di x t, \di y t, \di u t\right) $$
+and this yielded a way to solve the PDE. How do we now parmaterise this solution surface?\\
+
+\subsection{Characteristic Projections}
+
+\noindent
+We shall now introduce characteristic projections. Suppose that $u(x, y)$ is specified along some curve $\La$ in the $(x, y)$-plane we then have $u = u_0(s)$ when $x = x_0(s)$ and $y = y_0(s)$ where $s$ parameterises $\La$ in 3D, $(x_0(s), y_0(s), u_0(s))$ is our initial curve. Characteristics pass through this curve and they are tangent to $(a, b, c)$, so
+$$ \di x \tau = a, \quad \di y \tau = b, \quad \di u \tau = c $$
+with initial conditions $x = x_0(s)$, $y = y_0(s)$ and $u = u_0(s)$ at $\tau = 0$. Then we know that the parameterised surface will be $(x(s, \tau), y(s, \tau), u(s, \tau))$and these are the parametric equations of the solution surface.
+
+\begin{eg}
+  Solve $\pd u x + \pd u y = 1$ subject to the boundary data $u = 0$ when $x + y = 0$. We can solve this by setting up characteristics,
+  $$ \di x \tau = 1 \quad \di y \quad \di y \tau = 1 \quad \di u \tau = 1 $$
+  Then we need initial conditions so we will find solutions depending on the parameter $s$, so our intial conditions are,
+  $$ x = s \quad y = -s \quad u = 0 \quad \text{at $\tau = 0$} $$
+  and then we solve this system and get,
+  $$ x(\t) = \t + s \quad y(\t) = \t - s \quad u(\t) = \t $$
+  Now we can eliminate $\t$ and get the solution as $x + y = 2u$ or $u = \frac{x + y}{2}$
+\end{eg}
+\begin{eg}
+  Solve the PDE, $u_t + uu_x = 1$ for $u = u(x, t)$ in $t > 0$ subject to the initial condition $u = x$ at $t = 0$.
+\end{eg}
