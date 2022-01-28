@@ -146,18 +146,24 @@ If we want to solve $u_t = x - t$, then $u(x, t) = xt - \frac{1}{2}t^2 + f(x)$, 
 Next let us add another term,
 $$\pd u t + c\pd u x = 0$$
 where $c$ is a constant. This is a transport equation, and the solution is a travelling wave. This models a uniform fluid flow with speed $c$ subject to the condition $u(x, t_0) = f(x)$. We aim to reduce this to an ODE. Let us introduce $\xi = x - ct$ (the characteristic variable), then $u(x, t) = v(\xi, t) = v(x - ct, t)$. Let us take partial derivatives,
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \resizebox{0.5\textwidth}{!}{\input{./figures/transport_cl.pdf_tex}}
+  \caption{Characteristic Lines of a QLPDE}
+\end{wrapfigure}
+
 $$ \pd u t = \pd v t + \pd v \xi \pd xi t = v_t - cv_\xi$$
 and
 $$ \pd u x = \pd v \xi \pd \xi x = v_\xi $$
-and so we get, $v_t - cv_\xi + cv_\xi$ and so $v_t = 0$. Hence, $v = v(\xi) = v(x - ct)$.
-
-Now let us put this more formally,
+and so we get, $v_t - cv_\xi + cv_\xi$ and so $v_t = 0$. Hence, $v = v(\xi) = v(x - ct)$. Now let us put this more formally,
 \begin{nprop}
    If $u(x, t)$ is a solution to the PDE
    $$\pd u t + c\pd u x = 0$$
    defined on all $\R^2$. Then, $u(x, t) = v(x - ct)$ where $v(\xi)$ is a $\cc^1$ function of the characteristic variable $\xi = x - ct$.
 \end{nprop}
 
+\noindent
 Now for an example,
 \begin{eg}
   Solve,
@@ -170,6 +176,13 @@ Now for an example,
   and so $v = v(x - 2t)$. Now we plug in the IC and get that $v(x) = \frac{1}{1 + x^2}$ and so $v = \frac{1}{1 + (x - 2t)^2}$ and hence, $u(x, t) = \frac{1}{1 + (x - 2t)^2}$.
 \end{eg}
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \resizebox{0.5\textwidth}{!}{\input{./figures/transport_decay.pdf_tex}}
+  \caption{Transport Decay Equation}
+\end{wrapfigure}
+
+\noindent
 Let's go one step further with the transport equation with decay.
 $$ \pd u t + c \pd u x + au = 0 \qquad a > 0 $$
 \begin{eg}
@@ -187,6 +200,12 @@ $$ \pd u t + c \pd u x + au = 0 \qquad a > 0 $$
     u(x, 0) = e^{-x^2}
   \end{cases} $$
 \end{exercise}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \resizebox{0.5\textwidth}{!}{\input{./figures/characteristic_curves.pdf_tex}}
+  \caption{Non-uniform characteristic curves}
+\end{wrapfigure}
 
 Now let us adapt this such that $c = f(x)$, a non-uniform transport equation. It is of the form,
 $$ \pd u t + c(x)\pd u x = 0 $$
@@ -264,6 +283,12 @@ More generally, these are geometric surfaces described by $f(x, y, z, a, b) = 0$
   \end{bmatrix} = \vec 0'$$
   There is a non-trivial solution is and only if the  determinant matrix is zero. If we calculate this determinant we get the solution of the PDE.
 \end{proof}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \resizebox{0.5\textwidth}{!}{\input{./figures/geometry_QLPDE.pdf_tex}}
+  \caption{Geometric Interpretations.}
+\end{wrapfigure}
 
 \noindent
 If we consider a PDE of the form,
