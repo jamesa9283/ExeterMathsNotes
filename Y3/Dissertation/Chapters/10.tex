@@ -1,0 +1,26 @@
+% !TEX root = ../notes.tex
+
+\section{Pseudo-Rigid Bodies}
+Now let us assume that our body can stretch and sheer, this will be called a psudo rigid body. I have done the following derivations with the assumption that the configuration space we are working in is $\GL^+(3)$, ie. the set of matrices with postive determinant. We make a few assumptions, firstly the moment of inertia tensor is rotationally invariant, it is sufficient that the density function $\rho(\vec X)$ is spherically symmetric. We will also assume that the Lagrangian only depends on the kinetic energy and so we study free ellipsoid motion.\\
+
+We fix a reference configuration via a fixed spatial coordinate system and a moving body coordinate system, both with origin of the fixed point of the body. We will assume that the configuration of the system is a matrix $\vec Q(t) \in \GL^+(3)$ which takes the label $\vec X$ to the spacial position $\vec x(t)$, that is,
+$$ \vec x(t, \vec X) = \vec Q(t)\vec X \qquad \dot{\vec x}(t, \vec X) = \dot{\vec Q}\vec X = \dot{\vec Q}(t)\vec Q^{-1}(t)\vec x(t, \vec X) $$
+as before let $\rho(\vec X)$ be the density function and $\mathcal{B}$ be the region occupied by the body in it's configuration space. The moment of inertia tensor is assumed to be spherically symmetric, that is,
+$$ \int_{\mathcal{B}} \rho(\vec X)\vec X\vec X^T d^3\vec X = kI \qquad k \in \R $$
+and $I$ is the identity matrix. We assume without loss of generality that $k = 1$ and so,
+$$ \int_{\mathcal{B}} \rho(\vec X)\vec X\vec X^T d^3\vec X = I $$
+We now consider the kinetic energy,
+\begin{align*}
+  K &= \frac{1}{2}\int_{\mathcal{B}} \rho(\vec X) \norm{\dot{\vec x}}\, d^3 \vec X \\
+  &= \frac{1}{2}\int_{\mathcal{B}} \rho(\vec X) \norm{\dot{\vec Q}\dot{\vec X}}\, d^3 \vec X \\
+  &= \frac{1}{2}\int_{\mathcal{B}} \rho(\vec X) \Tr\left( (\dot{\vec Q}\vec X)(\dot{\vec Q}\vec X)^T \right)\, d^3 \vec X \\
+  &= \frac{1}{2}\Tr\left(\dot{\vec Q}\int_{\mathcal{B}} \rho(\vec X) \vec X\vec X^T \, d^3 \vec X\, \dot{\vec Q}^T \right)\\
+  &= \frac{1}{2}\Tr\left( \dot{\vec Q}\J\dot{\vec Q}^T \right) \\
+  &= \frac{1}{2}\Tr\left( \dot{\vec Q}\dot{\vec Q}^T \right)
+\end{align*}
+We can notice that this Lagrangian is symmetric and invariant left and right actions, that is, if $L = \frac{1}{2}\Tr\left(\dot{\vec Q}\dot{\vec Q}^T\right)$, then \begin{align*}
+  L(g\vec{Q}h, g\dot{\vec Q}h) &= \frac{1}{2}\Tr\left( g\dot{\vec Q}h(g\dot{\vec Q}h)^T \right) \\
+  &= \frac{1}{2}\Tr\left( g\dot{\vec Q}hh^T\dot{\vec Q}g^T \right) \\
+  &= \frac{1}{2}\Tr\left( \dot{\vec Q}\dot{\vec Q} \right)
+\end{align*}
+as $g, h \in \SO(3)$.
