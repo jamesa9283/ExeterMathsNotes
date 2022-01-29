@@ -44,6 +44,7 @@ Now for a lot of examples,
 $$ (a, b, c) = \left(\di x t, \di y t, \di u t\right) $$
 and this yielded a way to solve the PDE. How do we now parmaterise this solution surface?\\
 
+\newpage
 \subsection{Characteristic Projections}
 
 \noindent
@@ -70,5 +71,90 @@ with initial conditions $x = x_0(s)$, $y = y_0(s)$ and $u = u_0(s)$ at $\tau = 0
   Now we can eliminate $\t$ and get the solution as $x + y = 2u$ or $u = \frac{x + y}{2}$
 \end{eg}
 \begin{eg}
-  Solve the PDE, $u_t + uu_x = 1$ for $u = u(x, t)$ in $t > 0$ subject to the initial condition $u = x$ at $t = 0$.
+  Solve the PDE, $u_t + uu_x = 1$ for $u = u(x, t)$ in $t > 0$ subject to the initial condition $u = x$ at $t = 0$. We have the characteristics of,
+  $$ \di t \tau = 1 \quad \di x \tau = u \quad \di u \tau = 1 $$
+  We can solve the first and third very quickly, more specifically, $t(\tau) = \tau + c_1$ and $u(\tau) = \tau + c_3$, now given the data we can form some initial conditions, $x = s$, $u = s$ for $\tau = 0$. Hence, we have $t = \tau$ and $u = \tau + s$. Now we solve the second equation by plugging in $u$, $\di x \tau = \tau + s$ and now we can solve them, $x(\tau) = \frac{1}{2}\tau^2 + s\tau + s$, or $s = \frac{x(\tau) - \frac{1}{2}\tau^2}{\tau + 1}$.
+  Now we plug in the other solutions and find,
+  $$ u(x, t) = \frac{\frac{1}{2}t^2 + t + x}{t + 1} $$
+\end{eg}
+
+We start with another example,
+\begin{eg}
+  Find the solution of $u(x + y)u_x + u(x - y)u_y = x^2 + y^2$ with the Cauchy data $u = 0$ on $y = 2x$. We start with the characteristics,
+  $$ \frac{dx}{u(x + y)} = \frac{dy}{u(x - y)} = \frac{du}{x^2 + y^2} $$ we can verify that $ydy + xdy - udu = 0$. Now we can turn this equation into an exact equation,
+  $$ d\left(xy - \frac{1}{2}u^2\right) = xdy + ydx - udu = 0 $$
+  and so, $xy - \frac{1}{2}u^2 = c_1 = \phi(x, y, u)$. We now need to find a $\psi$ function, consider $xdx - ydy - udu = 0$ is satisfied by our characteristics and so we can form another exact equation,
+  $$ d\left( \frac{1}{2}x^2 - \frac{1}{2}y - \frac{1}{2}u\right) = 0 $$
+  and so, $\psi = x^2 - y^2 - u^2$. Therefore the general solution is,
+  $$ u(x, y) = f\left(2xy - u^2, x^2 - y^2 - u^2\right) = 0 $$
+  Now we consider the Cauchy data, $u(x, 2x) = 0 = f(4x^2, -3x^2)$ and so $\frac{1}{2}c_1 = -\frac{1}{3}c_2$, hence, $\frac{1}{4}\left( 2xy - u^2 \right) = -\frac{1}{3}\left(x^2- y^2 - u^2\right)$ and so $7u^2 = 6xy + 4(x^2 + y^2)$
+\end{eg}
+
+Now we revisit the Cauchy Theorem in a slightly different form.
+\begin{nthm}[Cauchy Problem (revisited)]
+  Suppose that $x_0(t)$, $y_0(t)$ and $u_0(t)$ are continuously differentiable functions of $t$ in $t \in [0, 1]$. Further suppose that $a(x, y, u)$, $b(x, y, u)$ and $c(x, y, u) \in \cc^1$ with respect to their arguments t respect to some domain $D$ of the $(x, y, u)$-space. $\La : x = x_0(t) \quad y = y_0(t) \quad u = u_0(t)$ for $t \in [0, 1]$ and $y'_0(t)a(x_0, y_0, u_0) - x'_0(t)b(x_0, y_0, z_0) \ne 0$ then there exists a unique solution $u = u(x, y)$ of the quasi-linear PDE $au_x + bu_y = c$.
+\end{nthm}
+
+This condition assures that the intial curve is not in the same direction as the solution as they should arise from the Cauchy data. Another interpretation of this is there is a, one to one mapping from $x, y, z$ to $t, \tau, s$. We can now state the Cauchy-Kowalevski Theorem,
+\begin{nthm}[Cauchy-Kowaleski]
+  A necessary condition for a unique solution $u(x, y)$ to exist in a neighbourhood $\La$ is for the first derivative of $u(x, y)$ to be determined on $\La$
+\end{nthm}
+
+\noindent
+We say that along the curve if $\La$ is parameterised by $s$, then $u_0(x_0(s), y_0(s)) = u_0(s)$. Any point of this curve has a projection onto the $(x,y)$-plane. We want to find the first order derivatives of $u$,
+$$ \di {u_0} s = \pd {u_0} x \di {x_0} s + \pd{u_0} y\di{y_0} s $$
+and the PDE says,
+$$ a\pd u x + b\pd u y = c $$
+Now, let us put these in a matrix and find a condition,
+$$ \begin{pmatrix}
+  a & b \\ \di{x_0} s & \pd {y_0} s
+\end{pmatrix} \begin{pmatrix}
+  \pd u x \\ \pd u y
+\end{pmatrix} = \begin{pmatrix}
+  c \\ \di{u_0} s
+\end{pmatrix}$$
+Hence, we need the determinant to be non-zero and so $a\di{y_0} s - b\di{x_0} s \ne 0$. This is just what we said in the Cauchy Problem Theorem. Here is the formal statement,
+\begin{nthm}[]
+  The PDE $a\pd u x + b\pd u y = c$ has a unique analytical solution in some neighbourhood of $\La$, provided $a, b$ and $c$ are analytic and satisfy $a \di{y_0} s - b\di{x_0} s \ne 0$
+\end{nthm}
+
+Some more examples,
+\begin{eg}
+  Solve the following PDE, $\pd u t + xu\pd u x = u$ for $u(x, t)$ in $t > 0$ subject to the cauchy data $u = x$ at $t = 0$ for $0 < x < 1$. We can write the characteristics as,
+  $$ \frac{dt}{1} = \frac{dx}{xu} = \frac{du}{u} $$
+  or,
+  $$ \di{t}{\t} = 1 \qquad \di x \t = xu \qquad \di u \t = u $$
+  We can solve the first of the second form of characteristics, with the initial curve of $t = 0, x = s, u = s$ and we can say that $t = \t$. Now we aim to solve $dt = \frac{du}{u}$ which yields a solution of the form $u(s, t)= f(s, t)e^t$ which when we use our intial curve gives us a specific solution of $u(s, t) = se^t$. Now we can solve $\di x \t = xu$ by plugging in our solution for $u(s, t)$ and so we solve, $\di x t = xse^t$ which we can separate and then solve. This yields a solution of $x(s, t) = se^{s(e^t - 1)}$ for $0 < s < 1$. We can now talk about the domain of definition, which will be $0 < x < e^{e^t - 1}$.
+
+  Now we aim to eliminate $s$, so find a solution in terms of physical variables, we can see quickly that $s = ue^{-t}$ and so after substituting it in we get that $x = ue^{u - t - ue^{-t}}$
+\end{eg}
+
+Here is another example,
+\begin{eg}
+  $\pd u x + \pd u y = u^3$ subject to $u = y$ on $x = 0$ for $0 < y < 3$. We write the characteristics,
+  $$ \di x \t = 1 \qquad \di x \t = 1 \qquad \di u \t = u^3 $$
+  We can also write the initial curve of $x = 0, y = s, u = s$. This leads to us being able to write $x(\t) = \t$ and $y(\t) = \t + s$. Now we aim to solve $\di u \t = u^3$, we aim to solve it by seperation of variables so let $u(s, \t) = A(s)B(\t)$. Now, $\di u \t = A(s)\di B \t$, as we are considering $\di u \t = u^3$ we say that $u^3 = A(s)\di B \t$ and so, $\frac{dB}{B^3} = A^2 d\t$ and integrating we reach that $B(\t) = \frac{1}{\sqrt{c - 2A^2(s)\t}}$. Hence, $u(s, \t) = \frac{A(s)}{\sqrt{c - 2A^2(s)\t}}$.
+  Now consider the intial curve and we get that $A(s) = s\sqrt c$ and so,
+  $$ u(s, t) = \frac{s}{\sqrt{1 - 2s^2\t}} $$
+  Finally, by considering the fact that $x = \t$ and $y = \t + s$, we can say that $s = y - x$ and the the implicit solution is,
+  $$ u = \frac{y - x}{\sqrt{1 - (y-x)^2x}} $$
+  An interesting feature of this solution is that it blows up if $1 - (y - x)^2x = 0$, that is along the line $y = x + \frac{1}{\sqrt{2x}}$ the solution does not exist and it's a singularity. The domain of solution is $x < y < x + 3$. Hence we can plot the domain of solution,
+\end{eg}
+
+\subsection{Canonical Form for Linear First Order Equations}
+Assume that the PDE is linear,
+$$ a(x, y)\pd u x + b(x, y)\pd u y + c(x, y)u = d(x, y) $$
+We aim to reduce this PDE to an ODE an integrate this ODE. This reduction is guided by the characteristics of this PDE. Assume that the characteristics are, $\xi = \xi(x, y)$, $\eta = \eta(x, y)$. This will be just a coordinate change, and this is a one-to-one mapping between $(x, y) \mapsto (\xi, \eta)$, that is $J = \xi_x\eta_y - \xi_y\eta_x \ne 0$. We want to substitute for these partial differentials.
+$$ u_x = u_\xi\xi_x + u_\eta\eta_x \qquad u_y = u_\xi\xi_y + u_\eta\eta_y$$
+Now we substitute this into our linear PDE,
+$$ (a\xi_x + b\xi_y)u_\xi + (a\eta_x + b\eta_y)u_\eta + cu = d $$
+Let $A = a\xi_x + b\xi_y$ and $B = a\eta_x + b\eta_y$, we get that $Au_\xi + Bu_\eta + cu = d$. If $B = 0$ we have an ODE. If $B = 0$, then $a\eta_x + b\eta_y = 0$. Our characteristics of our original equation is, $\frac{dx}{a} = \frac{dy}{b}$. The level curves of $B = 0$ are always characteristics of the original first order PDE. Hence, $\eta(x, y) = c$ and so $d\eta = 0 = \eta_x dx + \eta_ydy = 0$ or $\eta_x + \eta_y \di y x = 0$. Now we substitute into the characteristcs, $a\eta + b\eta_y = 0$.
+This tells us that the general condition is just the characteristics. For the second characteristic we need to choose a one parameter family of curves such that the jacobean is zero. Hence we set $\xi = x$ (or $\xi = y$), then the jacobean is non-zero, or $\xi(x, y) = c$ and choose $\eta = y$ to satisfy $J \ne 0$. As $B = 0$ we can rewrite the PDE as,
+$$ u_\xi + \frac{c}{A}u = \frac{d}{A} $$
+and we call this the cannonical form of this PDE and it is an ODE, hence we can just integrate it and get the required solution.
+
+\begin{eg}
+  Reduce, $u_x - u_y = u$. The characteristics are,
+  $$ \frac{dx}{1} = \frac{dy}{-1} = \frac{du}{u} $$
+  as $dx = -dy$ we let $x + y = \xi$, now set $\eta = y$. Hence we can say that $J \ne 0$. $u_x = u_\xi$ and $u_y = u_\xi + u_\eta$. We substitute this into the PDE, $u_x - u_y = -u_\eta = u $ or $u_\eta + u = 0$ and hence $u(\xi, \eta) = f(\xi)e^{-\eta}$ or $u(x, y) = f(x + y)e^{-y}$
 \end{eg}
