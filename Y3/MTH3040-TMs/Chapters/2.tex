@@ -39,3 +39,102 @@
 Consider $X = \R_{>0}$ and $d_1$ be the usual metric and $d'(x, y) = \left| \frac{1}{x} - \frac{1}{y} \right|$, it can be proved that this $d'$ is a metric. Now let $x = \frac{1}{n}$ and $y = \frac{1}{n+1}$ and we can see that our normal distance, $d\left(\frac{1}{n}, \frac{1}{n+1}\right) = \left| \frac{1}{n} - \frac{1}{n+1}\right| = \frac{1}{n(n+1)}$ and $d'\left(\frac{1}{n}, \frac{1}{n+1}\right) = 1$ and so we can pick points close together in $d$ but not in $d'$. Now consider,
 $$ \frac{d'(x, y)}{d(x, y)} = n(n+1) $$
 and so we can make this whatever we want and so we cannot have these as Lipschitz equivalent. However, they are topologically equivalent because $f : \R_{>0} \to \R_{>0}$ where $x \mapsto \frac{1}{x}$ is continuous.
+
+\section{Topological Spaces}
+We are going to mainly start by focussing on defintions and examples.
+\begin{ndefi}[Topological Space]
+  A topological space $(X, \T)$ is a non-empty set $X$ along with a family $\T$ of subsets $X$ satisfying,
+  \begin{enumerate}
+    \item $X \in \T$ and $\varnothing \in \T$
+    \item If $U_1, U_2 \in \T$, then $U_1\cap U_2 \in \T$
+    \item If $U_1 \in \T$ are any collection of sets in $\T$, indexed by $i \in \cI$ for some set $\cI$, then
+    $$ \bigcup_{i \in \cI} U_i \in \T $$
+  \end{enumerate}
+  We call a collection $\T$ of subsets satisfying these axioms a topology on $X$ and we call the elements of $\T$ the open sets of $X$ in the topology $\T$.
+\end{ndefi}
+
+\noindent
+It follows from (T2) by induction that the intersection of finitely many open sets is an open set. This (T1) - (T3) say that the open sets in a topology on $X$ must satisfy,
+\begin{itemize}
+  \item $\varnothing$ and $X$ are open
+  \item the intersection of finitely many open sets is open
+  \item The union of an arbitrary collection of open sets is open.
+\end{itemize}
+
+\noindent
+Moreover, any collection of subsets of $X$ with these properties form a topology on $X$. Note that the intersections and unions behave differently, the union of infinitely many open sets must be open but their intersection need not be. That's a definition, here are some examples,
+
+\begin{eg}
+  Let $(X, d)$ be any metric space and let $\T$ be the collection of open sets defined with respect to $d$. We have seen these satisfy the axioms of a topological space. In particular, $\R$, $\C$ and $\R^n$ are topological spaces with the topology given by the usual metric. We call this the \textbf{usual topology}.
+\end{eg}
+
+\noindent
+Here's (potentially) a different example,
+\begin{eg}
+  Let $X$ be any non-empty set and $\T$ be the powerset of $X$. Clearly the axioms hold, so this is a topology on $X$, which we call the \textbf{discrete topology}. It is the topology with the most open sets, every subset of $X$ is open. In fact, this is a special case of the previous example, with the discrete example.
+\end{eg}
+
+\begin{eg}
+  Let $X$ be a set. Then $\T = \{\vn, X\}$ is a topology on $X$, called the \textbf{indescrete topology} on $X$.
+\end{eg}
+\begin{eg}
+  The \textbf{Sierpinski space} is the two-point set $\{0, 1\}$ with the open sets $\vn$, $\{0\}$, $\{0, 1\}$.
+\end{eg}
+\begin{eg}
+  Let $X$ be a non-empty set and let $\T$ consist of all $U \sub X$ whose complement ($X\setminus U$) is finite, together with the empty set, $\vn$. Then $\T$ is a topology on $X$, called the \textbf{cofinite topology}. WE check (T1) - (T3),
+  \begin{enumerate}
+    \item $\vn \in \T$ follows from the definition, also $X^c = \vn \in \T$.
+    \item Let $U, V \in \T$. We must show that $U \cap V \in \T$. If $U = \vn$ or $V = \vn$, then $U \cap V = \vn$. Otherwise $X\setminus U$ and $X \sm V$ are finite. So $X\sm (U \cap V) = (X\sm U)\cap (X\sm V)$ is finite, again $U \cap V \in \T$.
+    \item Let $U_i $ for $i \in \cI$ be a family of sets in $\T$. We must show $V := \bigcup_{i \in \cI} U_i \in \T$. If $U_i = \vn$ for all $i$ then $V = \vn$ and we are done. Otherwise. we can choose a $j \in \cI$ such that $U_j \ne \vn$. As $U_j \in \T$, we have $X \sm U_j$ is finite. As $U_j \subset V$ we have $X\sm V \sub X\sm U_j$ so $X\sm V$ is also finite. Hence $V \in \T$.
+  \end{enumerate}
+\end{eg}
+
+\noindent
+\subsection{Basis of a topology}
+
+Next we talk about how we start to adapt the definition such that we can define the sets in terms of building blocks, like in $\R$ where we talk about intervals and epsilon neighbourhoods. In fact, in a matric space, not every open set is from one open ball, but if we know of all the open balls we know of all the open sets. We can do something similar for topological spaces.
+
+\begin{ndefi}[Basis]
+  Given a topological space $(X, \T)$, a basis of $\T$ is a subset $\mathcal{B}$ of $\T$ such that every open set is a union of sets from $\mathcal{B}$.
+\end{ndefi}
+\begin{remark}
+   If $\mathcal{B}$ is a basis of $\T$, then every $B \in \mathcal{B}$ is open (since $\cB \sub \T$) and hence every union of sets from $\cB$ is open. So $\T$ consists exactly of the subsets of $X$ which can be written as the unions of sets of $\cB$.
+\end{remark}
+
+\begin{eg}
+  A basis for $\R$ is
+  $$ \cB = \{(a, b) : a, b \in \R \text{ with } a < b\} $$
+  the collection of all open intervals in $\R$. For id $U$ is an open set, then for each $x \in U$ we can find $\e_x > 0$ so that the open interval $B_x = (x - \e_x, x + \e_x) \subset U$ and then,
+  $$ U= \bigcup_{x \in U} B_x$$
+\end{eg}
+
+and now a lemma,
+\begin{nlemma}
+  If $\cB$ is a basis for a topology $\T$ on $X$, then,
+  \begin{enumerate}
+    \item For each $x \in X$, there is some $B \in \cB$ with $x \in B$
+    \item If $x \in B_1$ and $x \in B_2$ with $B_1, B_2 \in \cB$ then there exists a $B_3$ such that $B_3 \in \cB$ with $x \in B_3 \subset B_1 \cap B_2$.
+  \end{enumerate}
+  Conversely, let $\cB$ be a collection of subsets of a non-empty set $X$. If $\cB$ satisfies (B1), (B2) then there exists unique topology $\T$ on $X$ such that $\cB$ is a topology for $\T$.
+\end{nlemma}
+\begin{proof}
+  \textbf{(B1):} $\T$ consists of all possible unions of sets in $\cB$. $X \in \T$ so $X$ is a union of sets in $\cB$ therefore given a $x \in X$, so $x \in B$ for some $B \in \cB$. Hence (B1) holds.\\
+
+  \noindent
+  \textbf{(B2):} If $x \in B_1$ and $x \in B_2$ with $B_1, B_2 \in \cB$, so $B_1, B_2$ are open sets as they are in $\T$, therefore $B_1 \cap B_2 \in \T$, so $x \in B_1\cap B_2$ and $B_1\cap B_2$ is a union of sets in $\cB$. So there is a $B_3 \in \cB$ with $x \in B_3 \sub B_1 \cap B_2$. So (B2) holds.\\
+
+  \noindent
+  Converse: Uniqueness is easy, if $\cB$ is a basis, then the topology is just all the union of $B \in \cB$. This is the only possible topology. We need to check that $\T$ satisfies (T1)-(T2):\\
+
+  \noindent
+  \textbf{(T1):} To get the empty set, take no elements of $\cB$ and take the union of them. For $X$, it is just $X = \bigcup_{B \in \cB} B$.\\
+
+  \noindent
+  \textbf{(T2):} If $U, V \in \T$ and $x \in U\cap V$ then there is a $B, C \in \cB$ with $x \in B \sub U$ and $x \in C \sub V$, by (B2) there is some $W_x \in \cB$ with $x \in W_x \sub B \cap C$. Then $U \cap V = \bigcup_{x \in U \cap V} W_x$. We have written $U \cap V$ as a union of sets in $\cB$, hence $U \cap V \in \T$.\\
+
+  \noindent
+  \textbf{(T3):} If $U_i \in \T$ for some $i \in \cI$. Each $U_i$ is a union of sets in $\cB$, so $\bigcup_{i \in \cI} U_i$ is a union of sets in $\cB$. Therefore $\bigcup_{i \in \cI}U_i \in \T$.\\
+
+  \noindent
+  Hence we have a topology.
+\end{proof}

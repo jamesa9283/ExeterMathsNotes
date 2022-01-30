@@ -19,6 +19,13 @@ Another way to interpret the continuity of $f : \R \to \R$ is to day that for an
 $\R$, the set,
 $$ f^{-1}(U) := \{x \in \R : f(x) \in U\} $$
 is also open.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \centering
+  \resizebox{0.4\textwidth}{!}{\input{./figures/image_conv.pdf_tex}}
+  \caption{Image Convergence.}
+\end{wrapfigure}
+
 % diagram for U on x^2
 We may ask what happens if we choose a $U$ such that $f^{-1}(U) = \varnothing$, but we say that the empty set is open.\\
 
@@ -34,8 +41,15 @@ $$ 1_A \begin{cases}
   0 & \text{if $x \notin A$}
 \end{cases} $$
 This unproblematic if we have $A = [a, b]$, then we can integrate this nicely,
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \centering
+  \resizebox{0.4\textwidth}{!}{\input{./figures/step_int.pdf_tex}}
+  \caption{Image Convergence.}
+\end{wrapfigure}
+
 % add graph
-However, if $A = \Q$ it is not clear that we can make sense of this `length' of $\Q$, and the integral is not defined (as a Riemann Integral). Measure Theory provides the theoretical framework for assigning a length to most (but not all, the measureable ones work) subsets of $\R$ and making corresponding integral as Lesbegue integrals. It turns out that $\Q$ has `length' of $0$, so there are way more irrational numbers, and $\Q$ is countable.
+However, if $A = \Q$ it is not clear that we can make sense of this `length' of $\Q$, and the integral is not defined (as a Riemann Integral). Measure Theory provides the theoretical framework for assigning a length to most (but not all, the measurable ones work) subsets of $\R$ and making corresponding integral as Lesbegue integrals. It turns out that $\Q$ has `length' of $0$, so there are way more irrational numbers, and $\Q$ is countable.
 
 \newpage
 \subsection{Review of Real Analysis}
@@ -153,6 +167,13 @@ This is just a copy of the definition of a limit, just with our metric placed in
 We can prove that in the discrete metric then any function $f : X \to Y$ is convergent where $X$ and $Y$ have the discrete metric, just take $\d = 1$.
 
 \subsection{Opens Sets}
+
+\begin{wrapfigure}{r}{0.2\textwidth}
+  \centering
+  \resizebox{0.2\textwidth}{!}{\input{./figures/open_ball.pdf_tex}}
+  \caption{Open Ball.}
+\end{wrapfigure}
+
 We can consider balls, as we have a distance metric we can move forwards to open sets and the required analytic tools.
 \begin{ndefi}[Open Ball]
   Let $(X, d)$ be a metric space, for any $a > 0$ and any $a \in X$, the set
