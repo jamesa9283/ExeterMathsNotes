@@ -1,0 +1,59 @@
+% !TEX root = ../notes.tex
+
+\section{Canonical Form of first and second order PDEs}
+\subsection{Coordinate Method for the first order constant coefficient PDEs}
+
+Consider $au_x + bu_y = 0$ where $a, b$ are constant. We can represent this as $(a b) \cdot \grad u$, if we let $\vec v = (u v)$ and so $\grad u \cdot v = 0$. This is the directional derivative of $u(x, y)$ in the direction of the vector of coefficients $(a b)$, and it's zero. Now let us change the coordinates, such that the coordinates have their axis is parallel to $(a b)$. Then $(\xi, \eta) = \left[ (x, y) \cdot (a b),\, (x, y) \cdot (b -a) \right]$. Therefore, $\xi = ax + by$ and $\eta = bx - ay$.
+
+\begin{eg}
+  Solve $au_x + bu_y + cu = g(x, y)$ using the coordinate method. We let $\xi = ax + by$ and $\eta = bx - ay$. Then we can write out $u_x = u_\xi\xi_x + u_\eta\eta_x = au_\xi + bu_\eta$ and $u_y = u_\xi\xi_y + u_\eta\eta_y = bu_\xi - au_\eta$. Now we substitute these into our equation and get, $(a^2 + b^2)u_\xi + cu = g(\xi, \eta)$. We can now solve this with an integrating factor and get that,
+  $$u(\xi, \eta) = f(\eta)e^{-\frac{c}{a^2 + b^2}\xi} + e^{-\frac{c}{a^2 + b^2}}\int e^{-\frac{c}{a^2 + b^2}\xi} g(\xi, \eta)\, d\xi$$
+\end{eg}
+
+\begin{exercise}
+  Find the general solution of $-3u_x + 4u_y + 5u = e^{x + 3y}$.
+\end{exercise}
+\begin{solution}
+  $u(x, y) = e^{\frac{1}{2}x - y}\left( f(4x + 2y) + \frac{1}{15}e^{\frac{1}{2}x + 4y} \right)$
+\end{solution}
+
+\subsection{Classification of second order linear PDEs.}
+
+Let us write the general form of a second order PDE,
+$$ A(x, y)u_{xx} + B(x, y)u_{xy} + C(x, y)u_{yy} + D(x, y)u_x + E(x, y)u_y + F(x, y)u = G(x, y) $$
+
+We want to classify the PDE, then we can find the right method to solve them. The classification is inspired by how we classify a quadratic curve in analytic geometry, we write the following,
+$$ Ax^2 + Bxy + Cy^2 + Dx + Ex + F = 0 $$
+$$ \begin{cases}
+  B^2 - 4AC > 0 & \text{hyperbola}\\
+  B^2 - 4AC = 0 & \text{parabola} \\
+  B^2 - 4AC < 0 & \text{ellipse} \\
+\end{cases} $$
+
+\noindent
+A similar thing happens, but the signs of the coefficients may change in the domain of solution. However, we assume that this case will never happen, so it's classification holds for the whole domain of solution. The same definition as for quadratic curve works for PDEs. \\
+
+\noindent
+This classification is on an invariant that is invariant under a change of coordinates. So we consider some change of variables that is guided by the characteristics. Let $\xi = \xi(x, y)$ and $\eta = \eta(x, y)$. We assume that $(x, y) \mapsto (\xi, \eta)$ is one-to-one, that is $J \ne 0$. Let us input this change of coordinates, $u_x = u_\xi\xi_x + u_\eta\eta_x$ and $u_y = u_\xi\xi_y + u_\eta\eta_y$ and $u_{xx} = u_{\xi\xi}\xi_x^2 + u_{\xi\eta}\xi_x\eta_x + u_\xi\xi_{xx} + u_{\eta\eta}\eta_x^2  + u_{\xi\eta}\xi_x\eta_x + u_\xi\xi_{xx} $
+and after a load of laborious maths we get,
+$$ A^*u_{\xi\xi} + B^*u_{\eta\xi} + C^*u_{\eta\eta} + D^*u_\xi + E^*u_\eta + F^*u = G^* $$
+where $A^* = A\xi_x^2 + B\xi_x\xi_y + C\xi_y^2$, $B^* = 2A\xi_x\eta_x + B(\xi_x\eta_y + \xi_y\eta_x) + 2C\xi_y\eta_y$, $C^* = A\eta_x^2 + B\eta_x\eta_y + C\eta_y^2$, $D^* = A\xi_{xx} + B\xi_{xy} + C\xi_{yy} + D\xi_x + E\xi_y$, $E^* = A\eta_{xx} + B\eta_{xy} + C\eta_{yy} + D\eta_x + E\eta_y$, $F^* = F$ and $G^* = G$
+we see that this PDE has the same form. If we consider the discriminant of the PDE, this is ${B^*}^2 - 4A^*C^*$, and if we substitute the definitions, we can prove that this is just $J^2(B^2 - 4AC)$ and so the sign of the discriminant is invariant under this change of coordinates. Hence, we can write the PDE in the form,
+$$ Au_{xx} + Bu_{xy} + C_{yy} = H(x, y, u_x, u_y) $$
+
+\begin{eg}
+  The wave equation $u_{xx} - u_{tt} = 0$ is hyperbolic.
+\end{eg}
+\begin{eg}
+  The Laplace equation $u_{xx} + u_{yy} = 0$ is elliptic.
+\end{eg}
+\begin{eg}
+  The diffusion / heat equation $u_{t} - u_{xx} = 0$ is parabolic.
+\end{eg}
+\begin{eg}
+  Classify,
+  \begin{itemize}
+    \item $u_{xx} - u{xy} = 0$, this is hyperbolic
+    \item $4u_{xx} + 6u_{xy} + 9u_{yy} = 0$, this is elliptic.
+  \end{itemize}
+\end{eg}
