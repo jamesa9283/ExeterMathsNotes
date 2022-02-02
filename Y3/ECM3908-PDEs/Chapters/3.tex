@@ -57,3 +57,76 @@ $$ Au_{xx} + Bu_{xy} + C_{yy} = H(x, y, u_x, u_y) $$
     \item $4u_{xx} + 6u_{xy} + 9u_{yy} = 0$, this is elliptic.
   \end{itemize}
 \end{eg}
+
+\subsection{Cannonical Forms of the semilinear second order PDE.}
+
+
+\textbf{PDE Problem: }We have a system or singular PDEs and we know of different types of boundary conditions; Dirichlet, Neumann and Robin boundary conditions, or it can be of mixed type.\\
+
+\noindent
+Assume that the general form of our PDE is,
+$$ A(x, y)u_{xx} + B(x, y)u_{xy} + C(x, y)u_{yy} = H(x, y, u_x, u_y) $$
+the cauchy data is to specify $\pd u {\vec n}$ and $u(x, y)$ on some curve $\La$ in the $(x, y)$ - plane. Let $x = x_0(s)$, $y = y_0(s)$, $u = u_0(x_0(s), y_0(s)) = u_0(s)$ and $\pd u {\vec n} = v_0(s)$. However it's easier to write the last in other terms as $\di {u_0} s = \pd u x \di {x_0} s + \pd u y \di {y_0} s$ and $v_0(s) = \grad u \cdot {\vec n} = \pd u x$. What is $\vec n$?
+We know that $(\di {x_0} s\, \di {y_0} s)$ is tangent to the curve $\La$, hence we let $\vec n = (\di{y_0} s, -\di{x_0} s)$. Hence we can write that $v_0(s) = (\pd u x, \pd u y) \cdot (\di{y_0} s, -\di{x_0} s) = \pd u x \di{y_0}s - \pd u y \di{x_0} s$. Therefore we can write the cauchy data as, $x = x_0(s)$, $y = y_0(s)$, $u = u_0(s)$, $\pd u x = p_0(s)$ and $\pd u y = q_0(s)$.\\
+
+\noindent
+We now want a condition for a unique solution in neighbourhood of the initial curve, and then to find the characteristics of the equation. Consider $\di p s = \pdd u x \di {x_0} s + \pdxy u \di {y_0} s$ and $\di q s = \pdd u x + \pdxy u \di y s$. We now have our second order PDE, $Au_{xx} + Bu_{xy} + Cu_{yy} = H$. Now let us write these in matrix form,
+$$ \begin{pmatrix}
+  A & B & C \\
+  \di {x_0} s & \di {y_0} s & 0 \\ 0 & \di {x_0} s & \di {y_0} s
+\end{pmatrix} \begin{pmatrix}
+  u_{xx} \\ u_{xy} \\ u_{yy}
+\end{pmatrix} = \begin{pmatrix}
+  H \\ \di p s \\ \di q s
+\end{pmatrix} $$
+Here we want $\hat A \ne 0$. Now we want the determinant of the coefficiet matrix,
+$$ |\hat A| = A\left(\di {y_0} s\right)^2 + B\di {x_0} s \di {y_0} s + C\left(\di {x_0} s\right)^2 $$
+if the characteristics are parameterised by $\t$ then from $*$, we can say that
+$$ A\left(\di y \t\right) - B\di x \t \di y \t + C\left(\di x \t\right)^2 =0 $$
+Hence, after some manipulation,
+$$ A\left(\di y x\right)^2 - B\di y x + C = 0 $$
+or $A\l^2 - B\l + C = 0$ and this is the characteristic equation of the second order semi-linear PDE.
+
+We have already shown that a second order PDE is invariant under change of coordinates and achieved,
+$$ A^*u_{\xi\xi} + B^*u_{\xi\eta} + C^*u_{\eta\eta} = H(\xi, \eta, y, u_\xi, u_{\eta}) $$
+We want to choose characteristics such that $A^* = C^* = 0$, however we know that $A^* = A\xi_x^2 + B\xi_x\xi_y + C\xi_y^2$ and that $C^* = A\eta_x^2 + B\eta_x\eta_y + C\eta_y^2$. Now we can write them in the form,
+$$ A\g_{x}^2 + \g_x\g_y + c\g_y^2 = 0 $$
+and so we get,
+$$ A\left(\frac{\g_x}{\g_y}\right)^2 + B\left(\frac{\g_x}{\g_y}\right) + C = 0 $$
+Now assume that one of them is a constant. Hence we differentiate, $d\g = \g_xdx + \g_ydy = 0$ and so $\di y x = - \frac{\g_x}{\g_y}$ and so, $A(\di y x) - B\di y x + C = 0$ and we recover the characteristic equation. Hence we now want to find roots of this equation and get,
+$$ \di y x = \frac{B \pm \sqrt{B^2 - 4AC}}{2A} $$
+and so we have two equations for the characteristics and so we integrate to find the equations for characteristic curves. Here $\xi = \phi(x, y)$ and $\eta = \psi(x, y)$.
+
+Let us consider three different cases, \\
+\addcontentsline{toc}{subsubsection}{Hyperbolic Canonical Form}\textbf{Hyperbolic: }$A^*u_{\xi\xi} + B^*u_{\xi\eta} + C^*u_{\eta\eta} = H^*$ and so we have $B^2 - 4AC > 0$ and so we get,
+$$ B^*u_{\xi\eta} = H^*$$
+or,
+$$ \frac{\partial^2 u}{\partial \xi \partial \eta} = \frac{H^*}{B^*} = H $$
+This is the first canonical form for hyperbolic PDEs. We can find the second order, let $\a = \xi + \eta$ and $\b = \xi - \eta$. Therefore $u_{\xi} = u_\a \a_\xi + u_\b \b_\xi = u_\a + u_\b$ and $u_{\xi\eta} = u_{\a\a} - u_{\a\b} + u_{\b\a} - u_{\b\b} = u_{\a\a} - u_{\b\b} = H_2(\a, \, u_\a, u_\b)$. This is the second canonical form of hyperbolic PDEs.\\
+
+\noindent
+\addcontentsline{toc}{subsubsection}{Parabolic Canonical Form}\textbf{Parabolic Equations: }Here we have $B^2 - 4AC = 0$ and so we have a repeated root. Therefore, $\xi = c_1$ or $\eta = c_2$. Therefore, if $A^* = A\xi_x^2 + B\xi_x\xi_y + c\xi_y^2 = (\sqrt A \xi_x + \sqrt c \xi_y)^2 = 0$. Now consider $B^* = 2A\xi_x\eta_x + B(\xi_x\eta_y + \xi_y\eta_x) + 2C\xi_y\eta_y = 2(\sqrt A\xi_x + \sqrt C \xi_y)(\sqrt A \eta_x + \sqrt C\eta_y) = 0$ as $(\sqrt A \xi_x + \sqrt C\xi_y) = 0$.
+Hence, $A^* = B^* = 0$ and so we get the PDE of the form,
+$$u_{\eta\eta} = \frac{H^*}{C^*} = H_3(\xi, \eta, u_\xi, u_\eta)$$
+ This is the canonical form for parabolic PDEs. If you set $C^* = 0$, you just get $u_{\xi\xi} = H_3(\xi, \eta, u_\xi, u_\eta)$. Similarly to before, if you solve $\di y x = \frac{B }{2A}$ and call $\xi$ the solution, then let $\eta = y$ you get a one-to-one mapping. Similarly, letting $\xi = x$ gives the same outcome.
+
+\noindent
+\addcontentsline{toc}{subsubsection}{Elliptic Canonical Form}\textbf{Ellipic PDEs:} The characteristic equation is,
+$$ A\left(\di y x\right)^2 - B\left(\di y x\right) + C = 0 $$
+We know that $B^2 - 4AC < 0$, let the roots be $\hat \a(x, y) \pm i \hat \b(x, y)$, now we integrate this and get $\xi = \a(x, y) + i \b(x, y)$ and $\eta = \a(x, y) - i\b(x, y)$. Now we let $\a = \frac{1}{2}(\xi + \eta)$ and $\b = \frac{1}{2i}(\xi - \eta)$. Now we reduce using this change of transformation. The reduced PDE is,
+$$ A^{**}u_{\a\a} + B^{**}u_{\a\b} + C^{**}u_{\b\b} = H^{**}(\a, \b, u, u_\a, u_{\b}) $$
+What happens when we set $A^* = C^* = 0$. We substitute in for the derivatives into the equation for $A^*$,
+\begin{align*}
+  A^* &= A(\a_x + i\b_x) + B(\a_x + i\b_x)(\a_y + i\b_y) + C(\a_y + i\b_y)^2\\
+  &= A(\a_x^2 + B\a_x\a_y + C\a_y^2) - (A\b_x^2 + B\b_x\b_y + C\b_y^2) + i\left[ 2A\a_x\b_x + B[\a_x\b_y + \b_x\a_y\right] + 2C\a_y\b_y ]
+\end{align*}
+and the same thing for $C^*$ and get that, $C^* = A(\a_x^2 + B\a_x\a_y + C\a_y^2) - (A\b_x^2 + B\b_x\b_y + C\b_y^2) - i\left[ 2A\a_x\b_x + B[\a_x\b_y + \b_x\a_y] + 2C\a_y\b_y \right]$ and finally
+\begin{align*}
+  B^* &= 2A\xi_x\eta_x +B(\xi_x\eta_y + \xi_y\eta_x) + 2C\xi_y\eta_y \\
+  &= 2A\a_x\b_x + B[\a_x\b_y + \b_x\a_y] + 2C\a_y\b_y
+\end{align*}
+
+Hence, $A^{**} - C^{**} + iB^{**} = 0$ and also $A^{**} - C^{**} - iB^{**} = 0$. Therefore, $A^{**} = C^{**}$ and $B^{**} = 0$. Hence, we can write,
+$$ u_{\a\a} + u_{\b\b} = \frac{H^{**}}{A^{**}} = H_4(\a, \b, u, u_\a, u_\b)  $$
+This is the canonical form of Elliptic PDEs.
+
