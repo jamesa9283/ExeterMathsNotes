@@ -1,0 +1,103 @@
+% !TEX root = ../notes.tex
+
+We can compare two topologies on the same set $X$.
+\begin{ndefi}[Coarse/Fine]
+  Let $\T_1, \T_2$ be topologies on $X$. We say $\T_1$ is coarser than $\T_2$ (or weaker) if every open set of $\T_1$ is an open set in $\T_2$. We also say that $\T_2$ is finer than $\T_1$.
+\end{ndefi}
+On any $X$, the coarsest topology is the indiscrete topology and the finest is the discrete topology.
+
+\begin{eg}
+  Let $X = \{1, 2\}$, we can ask what are the topologies on $X$? The subsets of $X$ are $\vn$, $\{1\}$, $\{2\}$ and $\{1, 2\}$. Any topology of $X$ contains $\vn$ and $\{1, 2\}$ so the possible topologies are $\T_1 = \{\vn, \{1, 2\}\}$ (indiscrete topology), $\T_2 = \{\vn, \{1\}, \{1, 2\}\}$, $\T_3 = \{\vn, \{2\}, \{1, 2\}\}$, $\T_2 = \{\vn, \{1\}, \{2\}, \{1, 2\}\}$ (discrete topology).\\
+
+  \noindent
+  We can say that $\T_1$ is coarser than $\T_2$, $\T_3$ and $\T_4$. $\T_2$ is finer than $\T_1$ and coarser than $\T_4$, similarly for $\T_4$. We say $\T_4$ is finer than $\T_1$, $\T_2$ and $\T_3$. $\T_2$ and $\T_3$ are not comparable as neither is coarser than the other.
+\end{eg}
+
+\subsection{Closed Sets in a TS}
+\begin{ndefi}[Closed]
+  A subset $A$ of a topological space $X$ is closed if its complement $X\sm A$ is open.
+\end{ndefi}
+Note that $\vn$ and $X$ are closed. So a set can be both open and closed. It is also to have a set that is neither. USing demorgans laws for sets,
+$$ \bigcup_{i \in \cI} X \sm U_i = X\sm \left( \bigcap_{i \in \cI} U_i \right) \qquad \bigcap_{i \in \cI} X \sm U_i = X \sm \left( \bigcup_{i \in \cI} U_i \right) $$
+and the properties of open sets, we can show
+
+\begin{nprop}
+   \begin{enumerate}
+     \item An arbitrary intersection of closed sets is closed
+     \item A finite union of closed sets is closed.
+   \end{enumerate}
+\end{nprop}
+\begin{proof}
+  (i) Let $C_i$ for $i \in \cI$ be an arbitrary collection of closed sets in $X$. Then,
+  $$ X\sm \left( \bigcap_{i \in \cI} U_i \right) = bigcup_{i \in \cI} X \sm U_i $$
+  Since the sets $X\sm C_i$ are open, so is their union. Hence $\bigcap_{i \in \cI} C_i$ is closed.\\
+
+  \noindent
+  (ii) \textbf{Exercise}
+\end{proof}
+
+\noindent
+Again, the union of an infinite family of closed sets need not be closed.
+
+\subsection{Convergence and Continuity}
+\begin{ndefi}[Limit of a sequence]
+  Let $a_n$, $n \ge 1$ be a sequence of points in a topological space $X$. We say that $a_n$ converges to a point $a \in X$, written $a_n \to a$ as $n \to \infty$, if, for every open set $U$ of $X$ with $a \in U$, there is some $N \in \N$ such that $a_n \in U$ for all $n > N$.
+\end{ndefi}
+
+\begin{eg}
+  Let $X$ be a topological space with the indiscrete topology (the only open sets are $\vn$ and $X$). Then every sequence $(a_n)$ in $X$ converges to every point $a \in X$. For, given an open set $U$ containing $a$, we must have $U = X$, and then $a_n \in X$ for all $n$.
+\end{eg}
+
+\begin{remark}
+   If $X$ is a metric space, viewed as a topological space with topology given by it's metric, then the two definitions agree.
+\end{remark}
+
+\begin{ndefi}[Continuous]
+  A function $f : X \to Y$ between topological spaces is continuous if, for every open set $U$ of $Y$, the subset $f^{-1}(U)$ is an open subset $X$.
+\end{ndefi}
+
+\begin{eg}
+  Let $f : \R \to \R$,
+  $$ \begin{cases}
+    1 & x \ge 0\\
+    0 & x < 0
+  \end{cases} $$
+  is not continuous since, for the open set $U = \left( \frac{1}{2}, \frac{3}{2} \right)$ we have $f^{-1}(U) = [0, \infty)$
+\end{eg}
+
+Here's a slightly more interesting example,
+\begin{eg}
+  Let $X = (\R, \T_d)$ and let $Y = (\R, \T_u)$ where $\T_d$ is the discrete topology and $\T_u$ is the usual topology on $\R$. Let $f : X \to Y$ and $f: Y \to X$ be the identity map on $\R$. \\
+
+  Then $f$ is continuous, for if $U \sub Y$ is open then $f^{-1}(U) = U$ is certainly open in $X$. However $g$ is not continuous, the set $V = \{0\}$ is open in $Y$ (because every set is open in $Y$) but $f^{-1}(V)$ is not open in $X$ (since $\{0\}$ is not an open set in the usual topology.)
+\end{eg}
+
+\begin{nlemma}[]
+  If $f : X \to Y$ and $g : Y \to Z$ are continuous maps between topological spaces, then $g \circ f : X \to Z$ is continuous
+\end{nlemma}
+\begin{proof}
+  Let $U$ be an open set in $Z$. Then $g^{-1}(U)$ is an open set in $A$ since $g$ is continuous, and therefore $f^{-1}(g^{-1}(U))$ is an open set in $X$ since $f$ is continuous. But,
+  \begin{align*}
+    f^{-1}(g^{-1}(U)) &= \{x \in X : f(x) \in g^{-1}(U)\}\\
+    &= \{ x \in X : g(f(x)) \in U\} = (g \circ f)^{-1}(U)
+  \end{align*}
+  Hence $g\circ f$ is continuous.
+\end{proof}
+
+Continuous functions should be thought of as the structure-preserving functions between topological spaces, in the same as we have homomorphisms between groups, and linear maps between vector spaces. An isomorphism of topological spaces is called a homeomorphism.
+
+\begin{ndefi}[Homeomorphism]
+  A homeomorphism between topological dpaces $X$ and $Y$ as a continuous function $f : X \to Y$ which is bijective and whose inverse function $f^{-1} : Y \to X$ is also continuous. We say that $X$ and $Y$ are homeomorphic if there is a homeomorphism between them.
+\end{ndefi}
+
+\begin{eg}
+  The intervals $(0, 1)$ and $(0, \infty)$ in $\R$ (usual topology) are homeomorphic. Indeed, consider $f : (0,1) \to (0, \infty)$ with
+  $$ f(x) = \frac{1 - x}{x} $$
+  This is well defined and continuous, and is bijective with continuous inverse $g : (0, \infty) \to (0, 1)$ with,
+  $$ g(y) = \frac{y}{1 + y} $$
+\end{eg}
+The inverse of a homeomorphism is again, a homeomorphism, but a continuous bijection is not necessarily a homeomorphism.
+
+\begin{eg}
+  We have seen that $(\R, \T_d) \to (\R, \T_u)$ is a continuous bijection whose inverse is not continuous. So it is not a homeomorphism.
+\end{eg}
