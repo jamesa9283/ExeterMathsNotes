@@ -1,0 +1,94 @@
+% !TEX root = ../notes.tex
+
+In this course we will study some introductory algebraic geometry, we will study Classical Algebraic Geometry and Sheaves
+There are three chapters,
+\begin{enumerate}
+  \item Affine Varieties
+  \item Noetherian Rings
+  \item Algebraic Varieties in general
+\end{enumerate}
+
+\textbf{Literature: }Karen Smith's Book, has lots of examples and is very readable. We will cover chapter one and the start of chapter two of Hardshawn.\\
+
+\textbf{Prerequistites: }Commutative Algebra, Topology.
+
+\section{Affine Varieties}
+Algebraic Sets in $n$-space, we want to study zero sets of polynomials in several variables in affine spaces. The affine spaces are $k$-vector spaces. We will consider algebraically closed fields $k$. \\
+
+\begin{ndefi}[Affine n-space]
+  Let $k$ be a field. We write $\A^n(k)$ to be an affine $n$-space over $k$. This is the set, $\{a_{1}, a_{2}, \dots, a_n : a_i \in k\}$\\
+\end{ndefi}
+
+Let $k[X_1, \dots, X_n]$ be the polynomial ring in $n$-variables over $k$ where $n < \infty$.
+\begin{ndefi}[Vanishing Set]
+  Let $f \in k[X_1, \dots, X_n]$ then the zero-set of $f$ is,
+  $$ \mathcal{V}(f) = \{(a_1, \dots, a_n) \in \A^n(k) : f(a_1, \dots, a_n) = 0\} $$
+\end{ndefi}
+
+\begin{eg}
+  Let $k = \R$ and $n = 1$, then $f(X) = X + 1$,
+  $$ \mathcal{V}(f) = \{-1\} \in \A^1(\R) $$
+\end{eg}
+
+\begin{eg}
+  Let $k = \R$, $n = 2$ and $f(X, Y) = X^2 + Y^2 - 1$, then,
+  $$ \mathcal{V}(f) = \{X, Y \in \R^2 : X^2 + Y^2 = 1\} $$
+\end{eg}
+
+\begin{eg}
+  Let $k = \R$, $n = 3$ and $f(X, Y, Z) = Z^3 + Z^2Y^2 - X^2$, this is not as obvious. The vanishing set is just some curve, and if we intersect it with a sphere we get,
+
+  This is slightly odd, it intersects itself and so this isn't a manifold and so is slightly more complicated.
+\end{eg}
+
+\noindent
+More generally: $f_1, \dots f_m \in k[X_1, \dots, X_n]$, we define,
+$$ \V(f_1, \dots, f_m) = \{a \in \A^n : f_1(a) = f_2(a) = \dots = f_m(a) = 0\} $$
+
+Even more generally, we can take any $S \sub k[X_1, \dots, X_n]$, then
+$$ \V(S) = \{a \in \A^n : f(a) = 0 \,\forall f \in S\} $$
+This allows us to have infinitely many functions. We call $S$ an algebraic subset of $\A^n$.
+
+\begin{eg}
+  $$ \V(X^2 - Y, X^3 - Z) \subset \A^3(\R) $$
+  This defines a smooth space curve.
+\end{eg}
+
+\begin{eg}
+  $M_{n\ti n}(\C)$ can be identified by $\A^{n^2}(\C)$ and we can look at subsets of this space. Let $V = \{ A \in M_{n \ti n}(\C) : \det A = 1 \}$. $V = \V(S)$ is an algebraic subset of $\A^{n^2}$. For $\A^{n^2}$ we associate $k[X_{ij}]$ where $1 \le i, j \le n$. Let $S = \D - 1$ where
+  $$ \D(X_{ij}) = \det \begin{pmatrix}
+    X_{11} & \dots & X_{1n} \\
+     & \ddots & &\\
+    X_{n1} & \dots & X_{nn}
+  \end{pmatrix} $$
+\end{eg}
+
+We can say slightly more than this,
+\begin{remark}
+ \begin{enumerate}
+   \item $\A^n$ is a algebraic subset, $0$ is a polynomial and we can see that $\V(0) = \A^n$.
+   \item $\vn$ is an algebraic set, $V(1) = \{a \in \A^n : 1(a) = 1 = 0\} = \vn$.
+   \item Algebraic sets are closed under intersection. Let $V(S_i)_{i \in \cI}$ be a collection of algebraic sets in $\A^n$, then,
+   $$ \bigcap_{i \in \cI} V(S_i) = V\left(\bigcup_{i \in \cI} S_i \right) $$
+   \begin{proof}Exercise
+   \end{proof}
+   \item Algebraic sets are closed under \textbf{finite} unions. We want to show that the union of two algebraic sets is algebraic. Let $V(S), V(T)$ be algebraic sets in $\A^n$, let $S.T = \{fg : f \in S, g \in T\}$. Then we claim that $V(S) \cup V(T) = V(S.T)$. We aim to show both inclusions,\\
+   \begin{proof}
+     ($\subset$): Suppose $a \in V(S)$, then $f(a) = 0$ for all $f \in S$, but, $(f \cdot g) (a) = f(a) \cdot g(a) = 0$ for all $g \in T$. Therefore $a \in V(S.T)$.\\
+     ($\supset$) Suppose $a \in V(S.T) \sm V(S)$. Then there is some $f \in V(S)$ such that $f(a)\ne 0$, but then, for any $g \in T$ $fg(a) = f(a) \cdot g(a) = 0$ as $a \in V(S.T)$ and as we are in a field, and as $f(a) \ne 0$, then $g(a) = 0$ for all $g \in T$. Therefore $a \in V(T)$.
+   \end{proof}
+ \end{enumerate}
+\end{remark}
+
+\begin{nprop}
+    The collection of algebraic subsets of $\A^n(k)$ form the closed sets of a topology on $\A^n$. This topology is called the Zariski Topology on $\A^n$.
+\end{nprop}
+
+Here are some examples of closed sets,
+\begin{eg}
+  If $a \in \A^n$ is a point then $\{a\} = V(X_1 - a_1, X_2 - a_2, \dots, X_n - a_n)$ and so points are closed in the Zariski Topology.
+\end{eg}
+
+\begin{eg}
+  If $n = 1$ and $S = 0$, then $V(S) = \A^n$, but if $S \sub \A^n$ is algebraic, and if $\ex f \ne 0 \in S$ then since we have every polynomial in $k[X]$ has finitely many zeros. Then $\V(f)$ is finite. However $\V(S) \sub \V(f)$ and so $\V(S)$ must be finite. Therefore the Zariski Topology is cofinite, the sets are finite or the whole space.
+\end{eg}
