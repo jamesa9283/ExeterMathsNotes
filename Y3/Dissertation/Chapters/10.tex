@@ -24,3 +24,8 @@ We can notice that this Lagrangian is symmetric and invariant left and right act
   &= \frac{1}{2}\Tr\left( \dot{\vec Q}\dot{\vec Q} \right)
 \end{align*}
 as $g, h \in \SO(3)$.
+From Linear Algebra last year we saw that we can decompose a matrix using single value decomposition. That is, take a matrix $A$ and we can represent this as $U\Sigma V$ where $U, V \in O(3)$ and $\Sigma \in \diag^+(3)$. We want $U,V$ to be in $\SO(3)$ and so we now do the following. Take a decomposition of $Q = RAS$ and we know that $\det R = \pm 1$, if $\det R = 1$ leave it as it is, if $\det R = -1$, then we tag on an additional matrix,
+$$ M = \begin{pmatrix}
+  -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
+\end{pmatrix} $$
+to $R$ creating $R' = RM$ and similarly for $S' = RS$ if $\det S = -1$. Now we have the following decomposition, $Q = R'MAMS'$, noting that $R', S' \in \SO(3)$, $MAM \in \diag^+(3)$ and $M^2 = I$ and so this makes sense. Now I present a nice example,
