@@ -8,7 +8,15 @@ $$(d^2f)(v) = \sum_{j=0}^{k+1} (-1)^j (df)(v \circ \d_j) = \sum_{i=0}^{k} \sum_{
 Now we look at these terms and find the following diagram. Consider a tetrahedron, the $\d_i$ give ud the faces and the $\d_i\circ \d_j$ give us the edges. We can look at the arrows and the orientations of the faces. If we consider the ways we go around the faces, we find they go in opposite ways around and so they cancel out.
 % add tetrahedron diagram
 \begin{nlemma}
-  if $0 \le j \le i \le k$, then $\D_{k-1} \to^{\d_i} \D_k \to^{\d_{j}} \D_{k+1}$ is the same as $\D_{k-1} \to^{\d_j} \D_k \to^{\d_{i+1}} \to \D_{k+1}$ or $\d_j\d_i = \d_{i+1}\d_j$.
+  if $0 \le j \le i \le k$, then$\begin{tikzcd}
+	{\Delta_{k-1}} & {\Delta_{k}} & {\Delta_{k+1}}
+	\arrow["\d_i", from=1-1, to=1-2]
+	\arrow["\d_j"', from=1-2, to=1-3]
+\end{tikzcd}$ is the same as$\begin{tikzcd}
+	{\Delta_{k-1}} & {\Delta_{k}} & {\Delta_{k+1}}
+	\arrow["\d_j", from=1-1, to=1-2]
+	\arrow["\d_{i+1}"', from=1-2, to=1-3]
+\end{tikzcd}$ or $\d_j\d_i = \d_{i+1}\d_j$.
 \end{nlemma}
 \begin{proof}
   Consider $x = (x_0, \dots, x_{k-1}) \in \D_{k-1}$. Then $\d_i x = x$ with $0$ inserted in position $i$. Therefore $\d_j\d_i x = \d_i x$ with a $0$ inserted into position $j \le i$ which pushes the first zero to position $i+1$. $\d_jx = x$ with $0$ inserted in position $j$ and $\d_{i+1}\d_j x$ with $0$ inserted in position $i+1 > j$. Therefore the first $0$ doesn't move, so it's just $x$ with zeros at positions at $j$ and $i+1$ which is just $\d_i\d_j x$.
@@ -38,10 +46,15 @@ Recall the definition of a cohomology of a cochain complex, $U^*$,
 and $d^2 = 0$ implies that $B^k \le Z^k$ and so we can form a quotient $H^k = Z^k / B^k = H^*(U^*)$. We define $H^k(X) = H^k(C^k(X)) = \frac{\ker (d : U^k \to U^{k+1})}{\im(d : U^{k-1} \to U^k)}$. This has a ring structure and so $1 \in C^0(X) = \map(S_0(X), \Z) = \map(X, \Z)$ and so we let $1$ be the constant map sending everything in $X$ to $1$. Then $(d1)(u) = 1(u \circ \d_0) - 1(u \circ \d_1) = 0$ for $u : \D_1 \to X$. So $1 \in Z^0(X)$ and so $[1] = 1 + B^0(X) \in H^0(X)$ (but $B^0(X) = 0$).\\
 
 \noindent
-Now to define the product, suppose $f \in C^n(X)$ and $g \in C^m(X)$, ir. $f(u), g(v) \in \Z$ for all $u : \D_n \to X$ and $v : \D_m \to X$. We want to find $fg \in C^{n+m}(X)$ and so we need to define $(fg)(w) \in \Z$ for all $w : \D_{m+n} \to \Z$. We define $\D_{n} \to^{\l} \D_{n+1} \leftarrow^{\rho} \D_m$ where,
+Now to define the product, suppose $f \in C^n(X)$ and $g \in C^m(X)$, ie. $f(u), g(v) \in \Z$ for all $u : \D_n \to X$ and $v : \D_m \to X$. We want to find $fg \in C^{n+m}(X)$ and so we need to define $(fg)(w) \in \Z$ for all $w : \D_{m+n} \to \Z$. We define
+$\begin{tikzcd}
+	{\Delta_n} & {\Delta_{n+1}} & {\Delta_m}
+	\arrow["\lambda", from=1-1, to=1-2]
+	\arrow["\rho"', from=1-3, to=1-2]
+\end{tikzcd}$ where,
 $$ \l(x_0, x_1, \dots, x_n) = (x_0, x_1, \dots, x_n, 0, \dots, 0) $$
 $$ \rho(y_1, y_2, \dots, y_m) = (0, \dots, 0, y_0, y_1, \dots, y_m) $$
-So $w \circ \l : \D_n \to X$ and $w \circ \rho : \D_m \to X$, so $f(w \circ \l) \in \Z$ and $g(w \circ \rho) \in \Z$. Therefore $(fg))w = f(w\circ \l) g(w \circ \rho) \in C^{n+m}(X)$. This is easily seen to distribute over addition.
+So $w \circ \l : \D_n \to X$ and $w \circ \rho : \D_m \to X$, so $f(w \circ \l) \in \Z$ and $g(w \circ \rho) \in \Z$. Therefore $(fg)(w) = f(w\circ \l) g(w \circ \rho) \in C^{n+m}(X)$. This is easily seen to distribute over addition.
 
 \begin{exercise}
   This product is associative, with $1$ as a $2$-sided unit $1f = f = f1$ and also $d(fg) = d(f)g + (-1)^n fd(g) \in C^{n+m+1}(X)$ (so the Liebnitz formula holds)
