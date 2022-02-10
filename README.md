@@ -39,3 +39,7 @@ Here are some selected notes from third year:
 * Topology and Metric Spaces (Prof. Nigel Byott) - [Topology & Metric Spaces](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/MTH3040-TMs/notes.pdf)
 
 There also exist some notes I am writing for my dissertation, they are based around Geometric Mechanics and Lie Groups. They can be found [here](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/Dissertation/notes.pdf)
+
+In the Cambridge rejection, post clarity I decided to pick up some graduate courses in Pure Maths,
+MAGIC Algebraic Topology (Cohomology) (Prof. Neil Strickland) - [AlgTop]()
+MAGIC Algebraic Geometry -
