@@ -101,3 +101,102 @@ The inverse of a homeomorphism is again, a homeomorphism, but a continuous bijec
 \begin{eg}
   We have seen that $(\R, \T_d) \to (\R, \T_u)$ is a continuous bijection whose inverse is not continuous. So it is not a homeomorphism.
 \end{eg}
+
+% Lecture
+\subsection{Interior and Closure}
+
+Here's a defintion
+\begin{ndefi}[Interior]
+  Let $X$ be a topological space. For any $A \sub X$, the interior of $A$, written $A^\circ$, is the union of all open subsets of $X$ contained in $A$,
+  $$ A^\circ = \bigcup_{U \text{ open;} U \sub A} U $$
+\end{ndefi}
+
+\begin{nprop}
+   \begin{enumerate}
+     \item $A^\circ$ is the (unique) largest open subset contained in $A$, that is $A^\circ$ is an open set, $A^\circ \sub A$ and if $U$ is open and $U \sub A$ then $U \sub A^\circ$.
+     \item For $x \in X$ we have $x \in A^\circ$ $\iff$ there exists an open set $U$ with $x \in U \sub A$
+     \item $A^\circ = A \iff$ $A$ is open.
+   \end{enumerate}
+\end{nprop}
+\begin{proof}
+  \begin{enumerate}
+    \item $A^\circ$ is a union of open sets, so it is open. If $U$ is open and $U \sub A$ then $U$ is one of the sets in the union, so $U \sub A^\circ$.
+    \item If $x \in A^\circ$ then $x \in U$ for some $U$, so $x \in U \sub A$. Conversely if $x \in U \sub A$ for some $U$, then $U$ is one of the sets in the union and so $x \in U^\circ$.
+    \item If $A^\circ = A$, then $A$ is open as $A^\circ$ by $(i)$. Conversely, if $A$ is open, then it is clearly the largest open set contained in $A$, so $A^\circ = A$ by $(i)$.
+  \end{enumerate}
+\end{proof}
+
+\begin{ndefi}[Closure]
+  Let $X$ be a topological space. For any $A \sub X$, the closure of $A$, written $\bar A$ is the intersection of all closed subsets of $X$ which contain $A$:
+  $$ \bar A = \bigcap_{C \text{ closed; } A \sub C} C $$
+\end{ndefi}
+\begin{nprop}
+ \begin{enumerate}
+   \item $\bar A$ is the (unique) smallest closed subset containing $A$. That is, $\bar A$ is a closed set, $A \sub \bar A$, and if $C$ is closed and $A\sub C$ then $\bar A \sub C$.
+   \item For $x \in X$ we have $x \in \bar A \iff$ there is no open set $U$ with $x \in U$ and $U \cap A = \vn$
+   \item $\bar A = A \iff A$ is closed.
+ \end{enumerate}
+\end{nprop}
+\begin{proof}
+  Exercise
+\end{proof}
+
+\noindent
+Here is an application,
+\begin{ncor}
+   Let $X$ be any topological space and let $S$ be a subset $X$. Let $(a_n)$ be a sequence in $X$ with $a_n \in S$ for all $n$. If $a_n$ converges to some point $a \in X$ then $a \in \bar S$.
+\end{ncor}
+\begin{eg}
+  Let $X = \R$ and $S = \R^+$. Let $a_n = \frac{1}{n} \in S$ and $a_n \to 0$ but $0 \in S$, but $0 \in \bar S$.w
+\end{eg}
+
+\begin{proof}
+  Recall that $x \in \bar S$ if and only if there no open $U \ni x$ with $U \cap S = \vn$. Suppose $U \sub X$ is open and suppose $a \in U$. Then there is some $N$ so $a_n \in U$ for some $n > N$. Therefore, $a_n \in U \cap S$ for all $n > N$. So $U \cap S \ne \vn$. Hence $a \in \bar S$.
+\end{proof}
+\newpage
+\subsection{Hausdorff Spaces}
+\begin{wrapfigure}{r}{0.4\textwidth}
+  \centering
+  \resizebox{0.4\textwidth}{!}{\input{./figures/Hausdorff.pdf_tex}}
+  \caption{Hausdorff Spaces}
+  \vspace{-20pt}
+\end{wrapfigure}
+\begin{ndefi}[Hausdorff]
+  A topological space is Hausdorff if, given any points $x, y \in X$ with $x \ne y$, there exists open sets $U, V \in X$ with $x \in U$, $y \in V$ and $U \cap V = \vn$.
+\end{ndefi}
+
+We ask two questions, are metric spaces Hausdorff and are all topological spaces Hausdorff?
+\begin{eg}
+  Every metric space $(X, d)$ is Hausdorff. If $x, y \in X$ and $x \ne y$. Let $\e = d(x, y)$, so $\e > 0$. Then $B_{\frac{\e}{2}}(x)$ and $B_{\frac{\e}{2}}(y)$ are disjoint open sets containing $x, y$ respectively.
+\end{eg}
+
+\begin{eg}
+  Let $X$ be a set with at least two elements and let $X$ have the indiscrete topology. Then $X$ is not hausdorff.\\
+  Indeed, take $x, y \in X$ with $x \ne y$. The only open set that contains $x$ is $X$, this also contains $y$. Therefore, it cannot be Hausdorff.
+\end{eg}
+
+\begin{remark}
+   It follows that any topological space that is not Hausdorff, it cannot comes from a metric. For example, there is no metric on a set $X$ with $|X| \ge 2$ which gives rise to the indiscrete topology.
+\end{remark}
+
+\begin{nprop}
+  In a Hausdorff space, any sequence can converge to at most one point.
+\end{nprop}
+\begin{proof}
+  Suppose $a_n \to a$ and $a_n \to b$. We must prove that $a = b$. Suppose $a \ne b$, let $U, V$ be open sets with $a \in U$, $b \in V$ and $U \cap V = \vn$. There exists an $N_1$ such that $a_n \in U$ for all $n > N_1$ and there is also an $N_2$ such that $a_n \in V$ for all $n > N_2$. For $n > \max(N_1, N_2)$, then $a_n \in U\cap V$ and so $U \cap V \ne \vn$ - Contradiction. Therefore, $a = b$.
+\end{proof}
+
+\begin{nprop}
+   If $f : X \to Y$, $X, Y$ are topological spaces, is injective and continuous and $Y$ is Hausdorff. Then $X$ is Hausdorff.
+\end{nprop}
+\begin{proof}
+  Let $x_1 \ne x_2$ where $x_1, x_2 \in X$. Let $y_1 = f(x_1)$ and $y_2 = f(x_2)$. Then $y_1 \ne y_2$ as $f$ is injective. As $Y$ is hausdorff, then there are open sets $U, V \sub Y$ with $y_1 \in U$ and $y_2 \in V$ with $U \cap V \ne \vn$. Then $x_1 \in f^{-1}(U)$ and $x_2 \in f^{-1}(V)$, these preimages are open subsets in $X$ as $f$ is continuous.
+  If $x \in f^{-1}(U) \cap f^{-1}(V)$, therefore $f(x) \in U \cap V$, with is $\vn$ - Contradiction. So $f^{-1}(U) \cap f^{-1}(V) = \vn$. Therefore $X$ is Hausdorff.
+\end{proof}
+
+\begin{ncor}
+   If $X$ and $Y$ are homeomorphic then $X$ is Hausdorff if and only if $Y$ is Hausdorff.
+\end{ncor}
+\begin{proof}
+  Let $f : X \to Y$ be a homeomorphism. Then we apply the previous proposition as we have two continuous injections, $f : X \to Y$ and $f^{-1} : Y \to X$ which gives us both directions.
+\end{proof}
