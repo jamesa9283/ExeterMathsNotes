@@ -1,0 +1,65 @@
+% !TEX root = ../notes.tex
+
+\begin{eg}
+  $u_{tt} - c^2u_{xx} = 0$,
+\end{eg}
+
+\begin{eg}
+  Find the general solution of $x^2u_{xx} + 2xyu_{xy} + y^2u_{yy} = 0$
+\end{eg}
+
+\subsection{The Cauchy Problem for the wave equation}
+$\pdd u t - c^2 \pd u x = 0$ with $u(x, 0) = f(x)$ and $u_t(x, 0) = g(x)$ for $x \in R$, $t > 0$ and $c$ being a constant. Let's find the solution, $A = -c^2$ and $B = 0$, then $C = -1$ and so we get $B^2 - 4AC = 4c^2 > 0$ which means it's hyperbolic. We then get characteristics of $1 - c^2\left( \di t x \right) = 0$ and so $(dx - cdt)(dx + cdt) = 0$ and so $\xi = x + ct$ and $\eta = x - ct$. This then reduces the PDE to $u_{\xi\eta} = 0$ and so $u(\xi, \eta) = \Phi(\xi) + \psi(\eta)$. Hence we get the general solution,
+$$ u(x, t) = \Phi(x + ct) + \psi(x - ct) $$
+where $\phi, \psi \in \cc^2$. The initial conditions can now be implemented, $u(x, 0) = f(x) = \Phi(x) + \psi(x)$ and, $u_{t}(x, t) = c\Phi'(x + ct) - c\psi'(x - xt)$ and so $g(x) = \Phi'(x) - c\psi'(x)$. Therefore, $\Phi'(x) - \psi'(x) = \frac{1}{c}g(x)$ and so $\Phi(x) - \psi(x) = \frac{1}{c}\int_{x_0}^x g(\t)\, d\t + K$. We can now solve these two equations and get,
+$$ \Phi(x) = \frac{1}{2}f(x) + \frac{1}{2c}\int_{x_0}^x g(\t)\,d\t + \frac{K}{2} $$
+$$ \psi(x) = \frac{1}{2}f(x) - \frac{1}{2c}\int_{x_0}^x g(\t)\,d\t - \frac{K}{2} $$
+Now we can rewrite $u(x, t)$ as,
+$$ u(x, t) = \frac{1}{2}\left(f(x + ct) + f(x - ct)) + \frac{1}{2c}\int_{x_0}^{x + ct} g(\t)\,d\t - \frac{1}{2c}\int_{x_0}^{x - ct} g(\t)\,d\t $$
+We then finally simplify this to the D'Alembent solution method,
+$$ u(x, t) = \frac{1}{2}\left(f(x + ct) + f(x - ct)) + \frac{1}{2c}\int_{x - ct}^{x + ct} g(\t)\,d\t$$
+
+\begin{eg}
+  Find the solution of the initial value problem $u_{tt} - c^2u_{xx} = 0$ where $x \in \R$ and $t > 0$ where $u(x, 0) = \sin x$ and $u_{t}(x, 0) = \cos x$
+\end{eg}
+
+\subsection{Nonhomogenous wave equation}
+Consider the Cauchy Problem $u_{tt} - c^2u_{xx} = h^*(x, t)$ where $u(x, 0)= f(x)$ and $u_t(x, 0) = g^*(x)$. We are going to use Greens Theorem and so let us change coordinates, $y = ct$, so $\pd{}{t} = \pd{}{y}c$ and $\pdd{}{t} = c^2\pd{}{y}$. Now we substitute in $u_{yy} - u_{xx} = \frac{1}{c^2}h^*(x, y) = h(x, y)$. Now we want to rewrite the Cauchy Data, $u_{t} (x, 0) = cu_y(x, 0) = g^*(x)$ or $u_y(x, 0) = \frac{1}{c}g^*(x) = g(x)$. Hence our transformed equations are,
+$$ u_{xx} - u_{yy} = h(x, y) $$
+with data $u(x, 0) = f(x)$ and $u_y(x, 0) = g(x)$. Now we seek the characteristics, which are just going to be $x \pm y = c_{1, 2}$ and so $\xi = x + y$ and $\eta = x - y$.
+%TODO domain of dependance diagram
+Let us integrate over the domain of dependance,
+$$ \iint_R (u_{xx} - u_{yy})\, dR = \iint_R h(x, y)\,dR $$
+We can apply Greens Theorem, we know from Vector Calculus a bounded area the integrals of two functions can be related,
+$$ \oint_{\partial R} P(x, y) + Q(x, y)\, dy = \iint_{R} \pd Q x - \pd P y dxdy $$
+Now we can apply it,
+\begin{align*}
+  \iint_{R} u_{xx} + u_{yy} dR = \oint_{\partial R} u_ydx + u_xdy
+\end{align*}
+Now we can consider these along each side of $R$. Remember that we need to move counterclockwise around the surface, as stokes theorem needs the normal vector to be outward pointing. Therefore we get,
+\begin{align*}
+  &= \int_{B_0} u_ydx + u_xdy + \int_{B_1} u_ydx + u_xdy + \int_{B_2} u_ydx + u_xdy \\
+  &= \int_{B_0} u_ydx + \int_{B_1} u_ydx + u_xdy + \int_{B_2} u_ydx + u_xdy && \text{as $x = 0$ along $x$ axis.} \\
+\end{align*}
+Now we consider $B_1$ and $B_2$ which depend on the characteristics. On $B_1$ we know $x + y = c$ and so $dx = -dy$ and on $B_2$ we similarly know $dx = dy$. Hence we get,
+$$ \int_{B_0} u_ydx + \int_{B_1} -u_ydx - u_xdy + \int_{B_2} u_ydy + u_xdx $$
+and hence we get that,
+\begin{align*}
+  &= \int_{B_0} u_ydx + \int_{B_1} -du + \int_{B_2} du \\
+  &=\int_{x_0 - y_0}^{x_0 + y_0} u_ydx - \left.u\right|_{p_2}^{p_0} + \left. u\right|_{p_0}^{p_1} \\
+  &= \int_{x_0 - y_0}^{x_0 + y_0} u_ydx - u(x_0, y_0) + u(x_0 + y_0, 0) + u(x_0 - y_0, 0) - u(x_0, y_0) \\
+  &= \int_{x_0 - y_0}^{x_0 + y_0} u_ydx - 2u(x_0, y_0) + u(x_0 + y_0, 0) + u(x_0 - y_0, 0) \\
+\end{align*}
+Let us put this together, then
+$$  \int_{x_0 - y_0}^{x_0 + y_0} u_ydx - 2u(x_0, y_0) + u(x_0 + y_0, 0) + u(x_0 - y_0, 0) = \iint_R h(x, y) dR $$
+and here from we can conclude that,
+$$ u(x_0, y_0) = \frac{1}{2} \left[ u(x_0 - y_0, 0) + u(x_0 + y_0, 0) \right] + \frac{1}{2}\int_{x_0 - y_0}^{x_0 + y_0}u_ydx - \frac{1}{2}\iint_R h(x, y) dR$$
+and further with the initial conditions,
+$$ u(x, y) = \frac{1}{2}\left( f(x + y) + f(x - y) \right) + \frac{1}{2}\int_{x-y}^{x + y} g(\t)\,d\t - \frac{1}{2}\iint h(x, y)\, dR $$
+
+\subsection{Solution of the Goursat Problem}
+Consider $u_{xy} = a_1(x, y)u_x + a_2(x, y)u_y + a_3(x, y)u + h(x, y)$. This PDE is prescribed along two lines $u(x, y) = f(x)$ along $y = 0$ and $u(x, y) = g(x)$ along $y = y(x)$ in the first quadrant. We will use the method of successive approximations.
+
+\begin{eg}
+  We consider $u_{tt} - c^2u_{xx} = 0$ where $u(x, t) = f(x)$ on $x - ct =0$ and $u(x, t) = g(x)$ on some $t = t(x)$ and $f(0) = g(0)$. We already know $u(x, t) = \Phi(x, t) + \psi(x, t)$. If we consider $x = ct$, then $f(x) = u(x, t) = \Phi(2x) + \psi(0)$, but on some $t = t(x)$ we get, $g(x) = \Phi(x + ct(x)) - \psi(x - ct(x))$. From these two we can verify that $f(0) = \Phi(0) + \psi(0) = g(0)$. To find the solution define $s$ and let $s = x - ct(x)$, this means $x = \a (s)$. From $g(x)$ we can see that $g(\a(s)) = \Phi(x + ct(x)) + \psi(s)$ and from $f(x)$ we get $f(\a(s))$
+\end{eg}
