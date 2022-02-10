@@ -1,5 +1,49 @@
 % !TEX root = ../notes.tex
 
+\section{Constant Coefficient Second Order PDEs}
+
+Last week we solved $A(x, y)u_{xx} + B(x, y)u_{xy} + C(x,y)u_{yy} = H(x, y, u_x, u_y, u)$ and found cannonical form. Now we assume that we have a PDE of the form,
+$$ Au_{xx} + Bu_{xy} + Cu_{yy} = H(x, y, u_x, u_y, u) $$
+where the coeffients are constant. We then get the characteristics of the form,
+$$ \di y x = \frac{B \pm \sqrt{B^2 - 4AC}}{2A} $$
+and so,
+$y = \l_{1, 2}x + c_{1, 2}$
+hence we our characteristics care,
+$$ \xi = y - \l_1x \qquad \eta = y - \l_2x $$
+If $H = 0$, then we call the PDE the Euler Equation. If $B^2 - 4AC$, then we have two roots, $\xi = y - \l_1x$ and $\eta = y - \l_2x$ and so $u_{x} = -\l_1u_\xi - \l_2u_\eta$ and $u_{xx} = \l_1^2u_{\xi\xi} + \l_2^2u_{\eta\eta} + 2\l_1\l_2u_{\xi\eta}$ and $u_{xy} = -\l_1u_{\xi\xi} - (\l_1 + \l_2)u_{\xi\eta} - \l_{2u_{\eta\eta}}$ and $u_{yy} = u_{\xi\xi} + 2u_{\xi\eta} + u_{\eta\eta}$ and now we can substitute and it reduces to
+$$ (A\l_1^2 - \l_1B + C)u_{\xi\xi} + (2\l_1\l_2 A - (\l_1 + \l_2)B + 2C)u_{\xi\eta} + (A\l_2^2 - \l_2B + C)u_{\eta\eta} = H^*(\xi,\eta, u, u_\xi, u_\eta) $$
+The coeffients are just the charactersitic equations and so,
+$$ u_{\xi\eta} = H^*_1 $$
+which is our expected canonical form. If $A = 0$, then $\di y x = \frac{B \pm \sqrt{B^2 - 4AC}}{2A}$, but our equation is $Bu_{xy} + B_{yy} = H(x, y, u, u_x, u_y)$ and then we get the geneeral transformation $(B\xi_x\xi_y + C\xi_\eta^2)u_{\xi\xi} + (B(\xi_x\eta_y + \xi_y\eta_x) + 2C\xi_y\eta_y) + (B\eta_x\eta_y + C\eta_y^2)u_{\eta\eta} = H^*$
+which is a changed version of what we expected from before, just with $A = 0$. Again let $\g$ be $\xi$ or $\eta$ and then,
+$$ B\g_x\g_y + C\g_y^2 = 0 $$
+and this equation can now be written as, $B \frac{\g_x}{\g_y} + C = 0$ and look at it along the curves $\g =0$. Then $d\g = \g_xdx + \g_ydy = 0$. Therefore, $\di y x = -\frac{\g_x}{\g_x}$, and so substituting for this into $B\frac{\g_x}{\g_y} + C = 0$ gives us the usual characteristic equation.\\
+
+\noindent
+Now consider $-B\di y x + C = 0$, then we can say that $-Bx\di x y + C\left(\di x y\right)^2 = 0$ and so $\di x y\left( -B + C\di x y \right) = 0$ so either $\di x y = 0$ or $-B + C\di x y = 0$. Hence $\xi = x$ or $\eta = x - \frac{B}{C}y$. We can then reduce this to $u_{\xi\eta} = H^*(\xi, \eta, u, u_\xi, u_\eta)$. For the Euler Equation (with $A \ne 0$), $u_{\xi\eta} = 0$.
+We can simply integrate this equation,
+$$ u(\xi, \eta) = \int f(\xi)\,d\xi + G(\eta) = F(\xi) + G(\eta)$$
+where $F, G$ are arbitrary functions. Therefore in physical variables,
+$$ u(x, y) = F(y - \l_1x) + G(y - \l_2x) \qquad \text{\textbf{where $A \ne 0$}}$$
+
+\noindent
+For \textbf{Parabolic Equations} we get a similar final form, which is $u_{\eta\eta} = H_1^*(\xi, \eta, u, u_\xi, u_\eta)$. For the Euler Equation, we just end up with $u_{\eta\eta} = 0$ and so we can just integrate these two equations to get the general solutions,
+$$ u(\xi, \eta) = \eta f(\xi) + g(\xi) $$
+or in terms of physical variables,
+$$ u(x, y) = (y - \l_2x)f(y - \l_1x) + g(y - \l_1x) $$
+If $A = 0$, then,
+$$ u(x, y) = f(y - \l x) + yg(y - \l x) $$
+
+\noindent
+For \textbf{Elliptical Equations} we again get a nice canonical form.
+$$ u_{\a\a} + u_{\b\b} = H^*(\a, \b, u, u_\a, u_\b) $$
+
+\begin{eg}
+  \textbf{The Wave Equation}. Solve $_0^2\pdd u x - \pdd u y = f(x, y)$ where $a_0$ is a constant.
+\end{eg}
+
+
+% Lecture
 \begin{eg}
   $u_{tt} - c^2u_{xx} = 0$,
 \end{eg}
@@ -15,9 +59,9 @@ where $\phi, \psi \in \cc^2$. The initial conditions can now be implemented, $u(
 $$ \Phi(x) = \frac{1}{2}f(x) + \frac{1}{2c}\int_{x_0}^x g(\t)\,d\t + \frac{K}{2} $$
 $$ \psi(x) = \frac{1}{2}f(x) - \frac{1}{2c}\int_{x_0}^x g(\t)\,d\t - \frac{K}{2} $$
 Now we can rewrite $u(x, t)$ as,
-$$ u(x, t) = \frac{1}{2}\left(f(x + ct) + f(x - ct)) + \frac{1}{2c}\int_{x_0}^{x + ct} g(\t)\,d\t - \frac{1}{2c}\int_{x_0}^{x - ct} g(\t)\,d\t $$
+$$ u(x, t) = \frac{1}{2}\left(f(x + ct) + f(x - ct)\right) + \frac{1}{2c}\int_{x_0}^{x + ct} g(\t)\,d\t - \frac{1}{2c}\int_{x_0}^{x - ct} g(\t)\,d\t $$
 We then finally simplify this to the D'Alembent solution method,
-$$ u(x, t) = \frac{1}{2}\left(f(x + ct) + f(x - ct)) + \frac{1}{2c}\int_{x - ct}^{x + ct} g(\t)\,d\t$$
+$$ u(x, t) = \frac{1}{2}\left(f(x + ct) + f(x - ct)\right) + \frac{1}{2c}\int_{x - ct}^{x + ct} g(\t)\,d\t$$
 
 \begin{eg}
   Find the solution of the initial value problem $u_{tt} - c^2u_{xx} = 0$ where $x \in \R$ and $t > 0$ where $u(x, 0) = \sin x$ and $u_{t}(x, 0) = \cos x$
