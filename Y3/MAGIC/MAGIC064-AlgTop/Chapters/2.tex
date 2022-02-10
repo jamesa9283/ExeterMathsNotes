@@ -5,7 +5,20 @@ Suppose $f \in C^kX$, so $f : S_kX \to \Z$, that is, $f(u) \in \Z$ for all $u : 
 
 Recall we spoke briefly about chain complexes and cochain complexes, for these we need $d^2 = 0 : C^{k-1}(X) \to C^{k+1}(X)$. Note
 $$(d^2f)(v) = \sum_{j=0}^{k+1} (-1)^j (df)(v \circ \d_j) = \sum_{i=0}^{k} \sum_{j=0}^{k+1} (-1)^{i+j} f(v \circ \d_j \circ \d_i) $$
-Now we look at these terms and find the following diagram. Consider a tetrahedron, the $\d_i$ give ud the faces and the $\d_i\circ \d_j$ give us the edges. We can look at the arrows and the orientations of the faces. If we consider the ways we go around the faces, we find they go in opposite ways around and so they cancel out.
+\newpage
+\noindent
+Now we look at these terms and find the following diagram.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+  \centering
+  \vspace{-20pt}
+  \resizebox{0.3\textwidth}{!}{\input{./figures/tetra.pdf_tex}}
+  \caption{Tetetrahedron}
+  \vspace{-20pt}
+\end{wrapfigure}
+\noindent
+ Consider a tetrahedron, the $\d_i$ give ud the faces and the $\d_i\circ \d_j$ give us the edges. We can look at the arrows and the orientations of the faces. If we consider the ways we go around the faces, we find they go in opposite ways around and so they cancel out.
+
 % add tetrahedron diagram
 \begin{nlemma}
   if $0 \le j \le i \le k$, then$\begin{tikzcd}
@@ -64,6 +77,15 @@ So $w \circ \l : \D_n \to X$ and $w \circ \rho : \D_m \to X$, so $f(w \circ \l) 
 Therefore $C^*(X)$ is a differential graded ring. Therefore, $H^*(X)$ has a well defined ring structure. This isn't hard, what is substantially harder is $ab = (-1)^{nm}ba$ for $a \in H^n(X)$ and $b \in H^m(X)$, we will prove this later. We now have a definition of a cohomology ring, this isn't useful though. We can't calculate the cohomology of each space. We proved that $H^0(X) = \map (\fg X, \Z)$. Now let us focus on $H^1(X)$.\\
 
 \noindent
-Suppose $X$ has a basepoint $x_0$, the loops at $x_0$ are maps $u : \D_1 \to X$ with $u(e_0) = u(e_1) = x_0$ so $u \in S_1X$. Suppose $f \in C^1X$ so $f(u) \in \Z$ for any such $u$. Suppose $f \in B^1X$, that is $f = dg$ for some $g \in C^0X$, ie $g : X \to \Z$. Then for any $u : \D_1 \to X$ we have $f(u) = (dg)(u) = g(u(e_1)) - g(u(e_0))$, if $u$ is a loop, then $f(u) = g(x_0) - g(x_0) = 0$.
+\begin{figure}[!ht]
+\centering
+\input{./figures/homotopy_sq.pdf_tex}
+\caption{Homotopy Square}
+\end{figure}
+
+\noindent
+Suppose $X$ has a basepoint $x_0$, the loops at $x_0$ are maps $u : \D_1 \to X$ with $u(e_0) = u(e_1) = x_0$ so $u \in S_1X$. Suppose $f \in C^1X$ so $f(u) \in \Z$ for any such $u$. Suppose $f \in B^1X$, that is $f = dg$ for some $g \in C^0X$, ie $g : X \to \Z$. Then for any $u : \D_1 \to X$ we have $f(u) = (dg)(u) = g(u(e_1)) - g(u(e_0))$, if $u$ is a loop, then $f(u) = g(x_0) - g(x_0) = 0$.\\
+
+\noindent
 So for $a \in H^1X$ we have a well-defined $a(u) \in \Z$ given by $a(u) = f(u)$ for any $f \in Z^1X$ with $a = [f]$. But $\pi_1(X)$ is loops up to homotopy relation and points, suppose $h : [0, 1]^2 \to X$ is a homotopy relative to endpoints between $u$ and $b$, divide this into two triangles $p, q : \D_2 \to X$ suppose
 $f \in Z^1(X)$ so $df= 0$ in $C^2X$ so $df(p) = df(q) = 0$ and using this we ca check that $f(v) = f(u)$. So $a \in H^1X$ the integer $a(u)$ depends only on the homotopy class of $u$, the corresponding element of $\pi_1(X)$. Using this we have a well-defined map from $\a : H_1X \to \Hom(\fg X, \Z)$ and it's a fact that if $X$ is path connected, then $\a$ is an isomorphism.
