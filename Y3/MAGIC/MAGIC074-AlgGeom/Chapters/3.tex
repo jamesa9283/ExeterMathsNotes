@@ -1,0 +1,79 @@
+% !TEX root = ../notes.tex
+
+
+\noindent
+The issue is, what is $k[W]$? Then we have to show that $(W, k[W])$ satisfies an affine variety.
+\begin{proof}
+  Denote, $B := \{f|_W : f \in A\}$ and let $\pi : A \to B : f \mapsto f|_W$ be the restriction map. Now we want to show that $(W, B)$ is an affine variety. First, $B = \pi(A)$ is a finitely generated subalgebra of $A$, and so $B$ is finitely generated. Since $W$ is closed we have that $W = \V(S)$ ($S \sub A$). Let $x \in W$ and $\e'_X B \to k$ be the evaluation at $x$. Note $\e'_X \circ \pi = \e_X : A \to k$
+  % insert diagram
+  Now it remains to show that $W \to \Hom_{k-alg}(B, k)$ where $x \mapsto \e'_X$ is a bijection. This is injective as if $x, y \in W$ and $\e'_X =\e'_Y$, then $\e'_X \circ \pi = \e'_Y \circ \pi$ and so $\e_X = \e_Y$ hence $x = y$.\\
+
+  \noindent
+  Surjective. Let $\theta \in \Hom_{k-alg}(B, k)$. Then $\theta \circ \pi = \Hom(A, k)$ and so $\theta\circ \pi = \e_x$ for some $x \in V$. Now we want to show this is just some evaluation map.
+\end{proof}
+
+\begin{remark}
+   This now gives us lots of examples.
+\end{remark}
+\begin{eg}
+  Last time we say that $(\A^n, k[X_1, X_2, \dots, X_n])$ is an affine variety, a closed subset $\V(S)$ where $S \sub k[X_1, \dots, X_n]$ and so these are just algebraic sets. Hence algebraic sets are affine $k$-varieties. Hence we have the varieties, $(\V, k[X_1, \dots, X_n] / I_\V)$ where $I_\V = \{f \in k[X_1, \dots, X_n] : f|_\V = 0\}$.
+\end{eg}
+
+\begin{ndefi}[Morphism]
+  Let $(V, k[V])$ and $(W, k[W])$ be affine $k$-varieties. A map $\phi : V \to W$ is called a morphism of affine varieties if $g \circ \phi \in k[V]$ for all $g \in k[W]$.
+\end{ndefi}
+
+\noindent
+Suprisingly we have another morphism, called a comorphism
+\begin{ndefi}[Co-morphism]
+  Let $\phi^{\sharp} : k[W] \to k[V]$ be defined by $g \mapsto g \circ \phi$, this is called the co-morphism of $\phi$.
+\end{ndefi}
+
+\noindent
+and now as expected, an isomorphism,
+\begin{ndefi}[Isomorphism]
+  $\phi$ is an isomorphism if and only if $\phi$ is morphism and there is a $\psi : W \to V$ is a morphism such that $\phi \circ \psi = \id_W$ and $\psi \circ \phi = \id_V$.
+\end{ndefi}
+
+\begin{eg}
+  Exercise 7 and 8 will be useful here.
+\end{eg}
+
+\noindent
+Now we want to show a closed subsets of $\A^n$ correspond to affine varieties. We have seen the forward direction already.
+\begin{nlemma}
+  Let $\phi : V \to W$ be a morphism of affine varieties and assume $\phi^\sharp : k[W] \to k[V]$ is surjective. Then the image $\phi(V) \sub W$ is closed and $\phi|_V : V \to \phi(V)$ is an isomorphism.
+\end{nlemma}
+\begin{remark}
+   We may ask why we need the comorphism to be surjective? Well then $\im(\phi)$ will not necessarily closed. Here is an example,
+   \begin{eg}
+     Take $\phi : \A^2 \to \A^2$ where $(x, y) \mapsto (xy, y)$, then the comorphism, $\phi^\sharp : k[X, Y] \to k[Z, W]$ is $X \mapsto ZW$ and $Y \mapsto W$ and so we know $f(X, Y) \mapsto f(ZW, W)$. Why is the image not closed? Well thr image is $\im(\phi) = \{(a, b) \in \A^2 : a = xy, b = y\}$. If $b \ne 0$ so $y = b$
+     and $x = \frac{a}{b}$, then we have a preimage. If $b = 0$ then $a= 0$ and the preimage is just the origin. Hence the image of $\phi$ is $\A^2 \sm \{(x, 0) : x \ne 0\}$. Why is this not closed? Well $\A^2 \sm \{(x, 0) : x \ne 0\} = (\A^2 \sm \{(x, 0) : x \in \R\}) \cup \{(0, 0)\} = \A^2 \sm \{(x, 0) : x \in \R\} \cap \A^2 \sm \{(0, 0)\}$.
+   \end{eg}
+\end{remark}
+
+\begin{proof}
+  Let $Z := \phi(V) = \im (\phi)$ and $I := \ker(\phi^\sharp)$. We use the first isomorphism theorem, we have
+  \[\begin{tikzcd}
+	{k[W]} && {k[V]} \\
+	\\
+	{k[W]/I}
+	\arrow["{\phi^\sharp}", from=1-1, to=1-3]
+	\arrow["{\bar{\phi^\sharp}}"', from=3-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+\end{tikzcd}\]
+and we have isomorphism. We denote the inverse of the isomorphism as $\theta : k[V] \to k[W]/I$. We claim $Z = V(I)$, so we show both inclusions.\\
+($\sub$) Let $g \in I$, $x \in V$, then $g(\phi(X)) = \phi^\sharp (g)(x) = 0$ and so $\phi(x) \in V(I)$ for all $x \in V$. Therefore $Z \sub V(I)$.\\
+($\supseteq$) Assume $y \in V(I) \sub W$. Then $\e'_y : k[W] \to k$ is zero for all $g \in I$. Therefore we get a homomorphism of algebra $\bar{\e'_y} : k[W]/I \to k$.
+\[\begin{tikzcd}
+	{k[V]} && {k[W]/I} \\
+	\\
+	k
+	\arrow["\theta", from=1-1, to=1-3]
+	\arrow["{\bar{\varepsilon'_y}}", from=1-3, to=3-1]
+	\arrow[dashed, from=1-1, to=3-1]
+\end{tikzcd}\]
+Then we have a homomorphism $\bar{\e'_y} \circ \theta : k[V] \to k$. Since $V$ is an affine variety we have $\bar{\e'_y} \circ \theta = \e_x$ for some $x \in V$. Let us write this out,
+$$ \bar{\e'_y} \circ \theta \circ \bar{\phi^\sharp} = \bar{\e'_{y}} = \e_x \circ \bar{\phi^\sharp} $$
+For $g \in k[W]$ and so $\bar{\e'_y} (y + I) = \e_x \circ \bar{\phi^\sharp}(y + I)$ and so $\e'_y = \phi^\sharp (g)(x) = g(\phi(x)) = \e'_{\phi(x)}(g)$. Since $W$ is affine $y = \phi(x) \sub \phi(V) = Z$. Therefore $V(I) \sub Z$. This shows that $Z$ is closed.
+\end{proof}
