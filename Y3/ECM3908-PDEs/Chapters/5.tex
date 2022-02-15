@@ -1,0 +1,38 @@
+% !TEX root = ../notes.tex
+
+
+\noindent
+Now consider $u(x, t)$/$u(x, y)$ is prescribed along both characteristics the linear hyperbolic problem is called a characteristic initial value problem.
+
+\begin{eg}
+  $u_{xy} = h(x, y)$ where $u(x, 0) = f(x)$ and $u(0, y) = g(y)$. We say that $f$ and $g$ are continuously differentiable and $f(0) = g(0)$. We integrate this function,
+  $$ u(x, y) = \int_0^x\int_0^y h(\xi, \eta) d\xi d\eta + \Phi(x) + \psi(y) $$
+  We now need to find $\phi$ and $\psi$ in terms of the given functions. We substitute in the first initial condition,
+  \begin{align*}
+    u(x, 0) &= \Phi(x) + \psi(0) = f(x) \\
+    u(0, y) &= \Phi(0) + \psi(y) = g(y)
+  \end{align*}
+  Therefore, $\Phi(x) + \psi(y) = f(x) + g(y) - \Phi(0) - \psi(0)$. From the last condition, we know $f(0) = g(0)$ and so $\Phi(0) + \psi(0) = f(0)$, which then gives us $\Phi(x) + \psi(y) = f(x) + g(y) - f(0)$. Therefore,
+  $$ u(x, y) = \int_0^x\int_0^y h(\xi, \eta) d\xi d\eta + f(x) + g(y) - f(0) $$
+\end{eg}
+
+\begin{eg}
+  Determine the solution of characteristic initial-value problem, $u_{tt} - c^2u_{xx} = 0$ where $u(x, t) = f(x)$ on $x + ct = 0$ and $u(x, t) = g(x)$ on $x - ct = 0$ where $f(0) = g(0)$. We start with the solution of the wave equation,
+  $$ u(x, t) = \Phi(x + ct) + \psi(x - ct) $$
+  The first characteristic tells us $x = -ct$ and so $u(x, t) = \Phi(0) + \psi(x - ct) = \Phi(0) + \psi(2x) = f(x)$. Along the second characteristic $x = ct$ and so $u(x, t) = \Phi(2x) + \psi(0) = g(x)$. From these we can see that $f(0) = g(0)$ is satisfied. We can now make a substitution $x \mapsto \frac{x - ct}{2}$ and see that $\Phi(0) + \psi(x - ct) = f\left(\frac{x - ct}{2}\right)$ and make another substitution of $x \mapsto \frac{x + ct}{2}$ to get $\Phi(x + ct) + \psi(0) = g\left( \frac{x + ct}{2} \right)$.
+  Then we can then plug in to get $\Phi(x + ct) + \psi(x - ct) = f\left(\frac{x - ct}{2}\right) + g\left(\frac{x + ct}{2}\right) - f(0)$. Therfore,
+  $$ u(x, t) = f\left( \frac{x -ct}{2} \right) + g\left( \frac{x + ct}{2}\right) - f(0) $$
+\end{eg}
+
+\subsection{Semi-infinite string with fixed end point}
+We will consider the wave equation on the positive real line. We have $u_{tt} - c^2u_{xx} = 0$ for $0 < x < \infty$ where $t > 0$ where $u(x, 0) = f(x)$ and $u_t(x, 0) = g(x)$ and $u(0, t) = 0$ for $t \ge 0$ (Dirichlet Boundary Condition).
+
+Under $x = ct$ then we don't have a problem, it can be solved nicely. If we are above one of the characteristics hits the y-axis and then we have a problem, therefore we want to constrain this solution some how. We have the solution, $u(x, t) = \Phi(x + ct) + \psi(x - ct) $ and the solution on the real line is,
+\begin{align*}
+  \Phi(\xi) &= \frac{1}{2}f(\xi) + \frac{1}{2c}\int_0^\xi g(\t) d\t + \frac{K}{2} \\
+  \psi(\eta) &= \frac{1}{2}f(\eta) - \frac{1}{2c}\int_0^\eta g(\t)d\t - \frac{K}{2}
+\end{align*}
+Now we use the initial condition $u(0, t) = 0$ and this gives $\Phi(ct) + \psi(-ct) = 0$ and so $\psi(-ct) = -\Phi(ct)$ and so $\psi(\a) = -\Phi(-a)$ where $\a = -ct$. Now we can say that $\psi(x - ct) = -\Phi(-(x - ct)) = -\Phi(ct - x)$. Then from the first equation above, $\psi(x - ct) = \frac{1}{2}f(ct - x) - \frac{1}{2c} \int_0^{ct - x} g(\t)d\t - \frac{K}{2}$. From here we conclude that for $x < ct$,
+$$ u(x, t) = \Phi(x + ct) - \Phi(ct - x) = \frac{1}{2}\left( g(x + ct) - f(ct - x) \right) + \frac{1}{2c}\int_{ct - x}^{x + ct} g(\t) d\t $$
+and for $x > ct$ we get the usual form of solution,
+$$ u(x, t) = \frac{1}{2}\left( f(x + ct) + f(x - ct) \right) + \frac{1}{2c}\int_{x-ct}^{x + ct} g(\t) d\t $$

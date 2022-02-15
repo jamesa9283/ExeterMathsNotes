@@ -105,5 +105,8 @@ $$ u(x, y) = \frac{1}{2}\left( f(x + y) + f(x - y) \right) + \frac{1}{2}\int_{x-
 Consider $u_{xy} = a_1(x, y)u_x + a_2(x, y)u_y + a_3(x, y)u + h(x, y)$. This PDE is prescribed along two lines $u(x, y) = f(x)$ along $y = 0$ and $u(x, y) = g(x)$ along $y = y(x)$ in the first quadrant. We will use the method of successive approximations.
 
 \begin{eg}
-  We consider $u_{tt} - c^2u_{xx} = 0$ where $u(x, t) = f(x)$ on $x - ct =0$ and $u(x, t) = g(x)$ on some $t = t(x)$ and $f(0) = g(0)$. We already know $u(x, t) = \Phi(x, t) + \psi(x, t)$. If we consider $x = ct$, then $f(x) = u(x, t) = \Phi(2x) + \psi(0)$, but on some $t = t(x)$ we get, $g(x) = \Phi(x + ct(x)) - \psi(x - ct(x))$. From these two we can verify that $f(0) = \Phi(0) + \psi(0) = g(0)$. To find the solution define $s$ and let $s = x - ct(x)$, this means $x = \a (s)$. From $g(x)$ we can see that $g(\a(s)) = \Phi(x + ct(x)) + \psi(s)$ and from $f(x)$ we get $f(\a(s))$
+  We consider $u_{tt} - c^2u_{xx} = 0$ where $u(x, t) = f(x)$ on $x - ct =0$ and $u(x, t) = g(x)$ on some $t = t(x)$ and $f(0) = g(0)$. We already know $u(x, t) = \Phi(x, t) + \psi(x, t)$. If we consider $x = ct$, then $f(x) = u(x, t) = \Phi(2x) + \psi(0)$, but on some $t = t(x)$ we get, $g(x) = \Phi(x + ct(x)) - \psi(x - ct(x))$. From these two we can verify that $f(0) = \Phi(0) + \psi(0) = g(0)$. To find the solution define $s$ and let $s = x - ct(x)$, this means $x = \a (s)$. From $g(x)$ we can see that $g(\a(s)) = \Phi(x + ct(x)) + \psi(s)$ and from $f(x)$ we get $f(\a(s))$.
+
+  If we let $t = t(x) = kx$ for some $k > 0$. Then $s = x - ckx = (1 - ck)x$. Therefore, $x = \frac{s}{1 - ck} = \a(s)$ and so $\a(x - ct) = \frac{x - ct}{1 - ct}$ and so $t(\a(x - ct)) = \frac{k(x - ct)}{1 - ck}$. Therefore, we can say that the solution is,
+  $$ u(x, y) = f\left( \frac{x + ct}{2} \right) - f\left( \frac{(x - ct)(x + ct)}{x} \right)$$ % fill in
 \end{eg}
