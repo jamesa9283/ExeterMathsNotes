@@ -6,33 +6,138 @@ Now consider $u(x, t)$/$u(x, y)$ is prescribed along both characteristics the li
 
 \begin{eg}
   $u_{xy} = h(x, y)$ where $u(x, 0) = f(x)$ and $u(0, y) = g(y)$. We say that $f$ and $g$ are continuously differentiable and $f(0) = g(0)$. We integrate this function,
-  $$ u(x, y) = \int_0^x\int_0^y h(\xi, \eta) d\xi d\eta + \Phi(x) + \psi(y) $$
-  We now need to find $\phi$ and $\psi$ in terms of the given functions. We substitute in the first initial condition,
+  $$ u(x, y) = \int_0^x\int_0^y h(\xi, \eta) d\xi d\eta + \Phi(x) + \Psi(y) $$
+  We now need to find $\phi$ and $\Psi$ in terms of the given functions. We substitute in the first initial condition,
   \begin{align*}
-    u(x, 0) &= \Phi(x) + \psi(0) = f(x) \\
-    u(0, y) &= \Phi(0) + \psi(y) = g(y)
+    u(x, 0) &= \Phi(x) + \Psi(0) = f(x) \\
+    u(0, y) &= \Phi(0) + \Psi(y) = g(y)
   \end{align*}
-  Therefore, $\Phi(x) + \psi(y) = f(x) + g(y) - \Phi(0) - \psi(0)$. From the last condition, we know $f(0) = g(0)$ and so $\Phi(0) + \psi(0) = f(0)$, which then gives us $\Phi(x) + \psi(y) = f(x) + g(y) - f(0)$. Therefore,
+  Therefore, $\Phi(x) + \Psi(y) = f(x) + g(y) - \Phi(0) - \Psi(0)$. From the last condition, we know $f(0) = g(0)$ and so $\Phi(0) + \Psi(0) = f(0)$, which then gives us $\Phi(x) + \Psi(y) = f(x) + g(y) - f(0)$. Therefore,
   $$ u(x, y) = \int_0^x\int_0^y h(\xi, \eta) d\xi d\eta + f(x) + g(y) - f(0) $$
 \end{eg}
 
 \begin{eg}
   Determine the solution of characteristic initial-value problem, $u_{tt} - c^2u_{xx} = 0$ where $u(x, t) = f(x)$ on $x + ct = 0$ and $u(x, t) = g(x)$ on $x - ct = 0$ where $f(0) = g(0)$. We start with the solution of the wave equation,
-  $$ u(x, t) = \Phi(x + ct) + \psi(x - ct) $$
-  The first characteristic tells us $x = -ct$ and so $u(x, t) = \Phi(0) + \psi(x - ct) = \Phi(0) + \psi(2x) = f(x)$. Along the second characteristic $x = ct$ and so $u(x, t) = \Phi(2x) + \psi(0) = g(x)$. From these we can see that $f(0) = g(0)$ is satisfied. We can now make a substitution $x \mapsto \frac{x - ct}{2}$ and see that $\Phi(0) + \psi(x - ct) = f\left(\frac{x - ct}{2}\right)$ and make another substitution of $x \mapsto \frac{x + ct}{2}$ to get $\Phi(x + ct) + \psi(0) = g\left( \frac{x + ct}{2} \right)$.
-  Then we can then plug in to get $\Phi(x + ct) + \psi(x - ct) = f\left(\frac{x - ct}{2}\right) + g\left(\frac{x + ct}{2}\right) - f(0)$. Therfore,
+  $$ u(x, t) = \Phi(x + ct) + \Psi(x - ct) $$
+  The first characteristic tells us $x = -ct$ and so $u(x, t) = \Phi(0) + \Psi(x - ct) = \Phi(0) + \Psi(2x) = f(x)$. Along the second characteristic $x = ct$ and so $u(x, t) = \Phi(2x) + \Psi(0) = g(x)$. From these we can see that $f(0) = g(0)$ is satisfied. We can now make a substitution $x \mapsto \frac{x - ct}{2}$ and see that $\Phi(0) + \Psi(x - ct) = f\left(\frac{x - ct}{2}\right)$ and make another substitution of $x \mapsto \frac{x + ct}{2}$ to get $\Phi(x + ct) + \Psi(0) = g\left( \frac{x + ct}{2} \right)$.
+  Then we can then plug in to get $\Phi(x + ct) + \Psi(x - ct) = f\left(\frac{x - ct}{2}\right) + g\left(\frac{x + ct}{2}\right) - f(0)$. Therfore,
   $$ u(x, t) = f\left( \frac{x -ct}{2} \right) + g\left( \frac{x + ct}{2}\right) - f(0) $$
 \end{eg}
 
 \subsection{Semi-infinite string with fixed end point}
 We will consider the wave equation on the positive real line. We have $u_{tt} - c^2u_{xx} = 0$ for $0 < x < \infty$ where $t > 0$ where $u(x, 0) = f(x)$ and $u_t(x, 0) = g(x)$ and $u(0, t) = 0$ for $t \ge 0$ (Dirichlet Boundary Condition).
 
-Under $x = ct$ then we don't have a problem, it can be solved nicely. If we are above one of the characteristics hits the y-axis and then we have a problem, therefore we want to constrain this solution some how. We have the solution, $u(x, t) = \Phi(x + ct) + \psi(x - ct) $ and the solution on the real line is,
+Under $x = ct$ then we don't have a problem, it can be solved nicely. If we are above one of the characteristics hits the y-axis and then we have a problem, therefore we want to constrain this solution some how. We have the solution, $u(x, t) = \Phi(x + ct) + \Psi(x - ct) $ and the solution on the real line is,
 \begin{align*}
   \Phi(\xi) &= \frac{1}{2}f(\xi) + \frac{1}{2c}\int_0^\xi g(\t) d\t + \frac{K}{2} \\
-  \psi(\eta) &= \frac{1}{2}f(\eta) - \frac{1}{2c}\int_0^\eta g(\t)d\t - \frac{K}{2}
+  \Psi(\eta) &= \frac{1}{2}f(\eta) - \frac{1}{2c}\int_0^\eta g(\t)d\t - \frac{K}{2}
 \end{align*}
-Now we use the initial condition $u(0, t) = 0$ and this gives $\Phi(ct) + \psi(-ct) = 0$ and so $\psi(-ct) = -\Phi(ct)$ and so $\psi(\a) = -\Phi(-a)$ where $\a = -ct$. Now we can say that $\psi(x - ct) = -\Phi(-(x - ct)) = -\Phi(ct - x)$. Then from the first equation above, $\psi(x - ct) = \frac{1}{2}f(ct - x) - \frac{1}{2c} \int_0^{ct - x} g(\t)d\t - \frac{K}{2}$. From here we conclude that for $x < ct$,
+Now we use the initial condition $u(0, t) = 0$ and this gives $\Phi(ct) + \Psi(-ct) = 0$ and so $\Psi(-ct) = -\Phi(ct)$ and so $\Psi(\a) = -\Phi(-a)$ where $\a = -ct$. Now we can say that $\Psi(x - ct) = -\Phi(-(x - ct)) = -\Phi(ct - x)$. Then from the first equation above, $\Psi(x - ct) = \frac{1}{2}f(ct - x) - \frac{1}{2c} \int_0^{ct - x} g(\t)d\t - \frac{K}{2}$. From here we conclude that for $x < ct$,
 $$ u(x, t) = \Phi(x + ct) - \Phi(ct - x) = \frac{1}{2}\left( g(x + ct) - f(ct - x) \right) + \frac{1}{2c}\int_{ct - x}^{x + ct} g(\t) d\t $$
 and for $x > ct$ we get the usual form of solution,
 $$ u(x, t) = \frac{1}{2}\left( f(x + ct) + f(x - ct) \right) + \frac{1}{2c}\int_{x-ct}^{x + ct} g(\t) d\t $$
+
+% Lecture 2, 3
+
+\begin{eg}
+  Determine the solution of the initial boundary value problem $u_{tt} - 4u_{xx} = 0$ for $x > 0$ and $t > 0$ with $u(x, 0) = |\sin x|$ for $x > 0$, $u_t(x, 0) = 0$ for $x \ge 0$ and the Dirichlet Boundary condition, $u(0, t) = 0$.
+\end{eg}
+
+\begin{eg}
+  Determine the solution of the initial boundary value problem $u_{tt} - 4u_{xx} = 0$ for $x > 0$ and $t > 0$ with $u(x, 0) = 1$ for $x > 0$, $u_t(x, 0) = 0$ for $x \ge 0$ and the Dirichlet Boundary condition, $u(0, t) = 0$. This has solution of,
+  $$ u(x, t) = \begin{cases}
+    1 & x > 2t \\
+    0 & x < 2t
+  \end{cases} $$
+\end{eg}
+
+\subsection{Semi-infinite string with a free end point}
+The problem is set us as follows, we consider the PDE $u_{tt} -c^2u_{xx} = 0$ on $0 < x < \infty$ and $t > 0$. We have the initial conditions $u(x, 0) = f(x)$ for $0 \le x < \infty$, $u_t(0, t) = 0$ for $0 \le x < \infty$ and the Neumann Boundary condition $u_x(0, t) = 0$ for $0 \le t < \infty$.\\
+
+\noindent
+We begin with the D'Alembert solution,
+$$ u(x, t) = \Phi(x + ct) + \Psi(x - ct) $$
+and the usual definitions for $\Phi$ and $\Psi$. We consider the Neumann Boundary condition,
+$$ u_x(x, t) = \Phi'(x + ct) + \Psi'(x - ct) $$
+and so,
+$$ u_x(0, t) = \Phi'(ct) + \Psi'(-ct) = 0$$
+Then we can integrate and get that $\Phi(ct) - \Psi(-ct) = K$. Now let $\a = -ct$ and so we get that $\Psi(\a) = \Phi(-\a) - K$ and so $\Psi(x - ct) = \Phi(ct - x) - K$. Therefore, we can now substitite this into the relation we have for $\Psi$,
+$$ \Psi(x - ct) = \frac{1}{2}f(ct - x) + \frac{1}{2c}\int_0^{ct - x} g(\t)d\t - \frac{K}{2} $$
+Therefore placing this into the D'Alembert solution we get,
+$$ u(x, t) = \frac{1}{2}(f(x + ct) + f(ct - x)) + \frac{1}{2c}\int_{0}^{x+ct}g(\t)d\t + \frac{1}{2c}\int_0^{ct - x}g(\t)d\t \qquad \text{for }x < ct $$
+and the usual solution for $x > ct$. Furthermore we should have $f'(0) = g'(0)$ and $f \in \cc^1$ and $g \in \cc^m$ where $m > 1$.
+
+\textbf{NB!} In exams, we can start with D'Alemberts in exams.
+
+\begin{eg}
+  Find the solution of the initial value boundary problem for $u_{tt} - u_{xx} = 0$ for $0 < x < \infty$ and $t > 0$, $u(x, 0) = \cos \frac{\pi x}{2}$ for $0 \le x < \infty$, $u_t(x, 0) = 0$ for $0 \le x < \infty$ and $u_x(0, t) = 0$ for $t \ge 0$.
+\end{eg}
+
+\subsection{Equations with nonhomogenous boundary conditions.}
+The problem is set us as follows, we consider the PDE $u_{tt} -c^2u_{xx} = 0$ on $0 < x < \infty$ and $t > 0$. We have the initial conditions $u(x, 0) = f(x)$ for $0 \le x < \infty$, $u_t(0, t) = g(x)$ for $0 \le x < \infty$ and the Boundary condition $u_t(0, t) = p(t)$ for $0 \le t < \infty$.\\
+
+\noindent
+We start with the D'Alembert solution, $u(x, t) = \Phi(x + ct) + \Psi(x - ct)$ with the initial conditions giving $u(x, 0) = \Phi(x) + \Psi(x) = f(x)$ and $u_t(x, 0) = c(\Phi'(x) + \Psi'(x)) = g(x)$. Now we consider the Boundary condition and $u(0, t) = \Phi(ct) + \Psi(-ct) = p(t)$. then letting $\a = -ct$ we get that $\Psi(\a) = -\Phi(-\a) + p\left( \frac{-\a}{c} \right)$ and now we let $\a = x -ct$ and as usual we arrive at $\Psi(x - ct) = \Phi(ct - x) + p\left( t - \frac{x}{c}\right)$.
+Therefore, for $0 \le x <ct$ we have the solution,
+$$ u(x, t) = \frac{1}{2}( f(x + ct) - f(ct - x)) - \int_{ct - x}^{x + ct} \frac{1}{2c}g(\t)d\t + p\left(t - \frac{x}{c}\right) $$
+where $p(0) = f(0)$, $p'(0) = g(0)$ and $p''(0) = c^2f''(0)$.\\
+
+\noindent
+Consider the where we have a Neumann Boundary Conditions, we consider the PDE $u_{tt} -c^2u_{xx} = 0$ on $0 < x < \infty$ and $t > 0$. We have the initial conditions $u(x, 0) = f(x)$ for $0 \le x < \infty$, $u_t(0, t) = g(x)$ for $0 \le x < \infty$ and the Neumann Boundary condition $u_x(0, t) = q(t)$ for $0 \le t < \infty$.\\
+
+\begin{exercise}
+  Verify that we reach the solution of,
+  $$ u(x, t) = \frac{1}{2}(f(x + ct) + f(ct - x)) + \frac{1}{2c}\int_{0}^{x+ct}g(\t)d\t + \frac{1}{2c}int_0^{ct - x} g(\t)d\t - c\int_0^{t - \frac{x}{c}} q(\t)d\t $$
+  for $x < ct$ where $f'(0) = q(0)$, $g'(0) = q'(0)$.
+\end{exercise}
+
+\subsection{Vibration of finite string with fixed ends}
+
+Thus far we have considered the half string, now consider a finite string where both ends are fixed. Now let us consider both ends as fixed. The problem is set us as follows, we consider the PDE $u_{tt} -c^2u_{xx} = 0$ on $0 < x < \ell$ and $t > 0$. We have the initial conditions $u(x, 0) = f(x)$ for $0 \le x < \ell$, $u_t(0, t) = g(x)$ for $0 \le x < \ell$ for two boundary conditions, $u(0, t) = u(\ell, t) = 0$. \\
+
+\noindent
+Using D'Alemberts solution we have $u(x, t) = \Phi(x + ct) + \Psi(x - ct)$ and the initial conditions give us that $u(x, 0) = \Phi(x) + \Psi(x) = f(x)$ and $u_t(x, t) = c(\Phi'(x) - \Psi'(x))$ for $0 \le x < \ell$. So we now integrate and get,
+$$ \Phi(\xi) = \frac{1}{2}f(\xi) + \frac{1}{2c}\int_0^\xi g(\t)d\t + \frac{K}{2} \qquad 0 \le \xi \le \ell $$
+$$ \Psi(\eta) = \frac{1}{2}f(\eta) + \frac{1}{2c}\int_0^\eta g(\t)d\t - \frac{K}{2} \qquad 0 \le \eta \le \ell $$
+From here, we can conclude that $u(x, t) = \frac{1}{2}(f(x + ct) + f(x - ct)) + \frac{1}{2c}\int_{x - ct}^{x + ct} g(\t)d\t$ where $0 \le x + ct \le \ell$ and $0 \le x - ct \le \ell$. This means the solution is unique determined by the initial data in $t \le \frac{x}{c}$ and $t \le \frac{\ell - x}{c}$.
+
+We can now take the boundary condition and substitute this into the D'Alembert solution. We get
+\begin{equation}
+  u(0, t) = \Phi(ct) + \Psi(-ct) = 0
+\end{equation}
+and
+\begin{equation}
+  u(\ell, t) = \Phi(\ell + ct) + \Psi(\ell - ct) = 0
+\end{equation}
+for $t \ge 0$. Then from $(4)$ we get that $\Psi(\a) = -\Phi(-\a)$ for $\a = -ct$. From $(5)$ we get that $\Phi(\a) = -\Psi(2\ell - \a)$ where $\a = \ell + ct$. We can now use these two and the general solution to formulate the whole solution. Let us now replace $\xi = -\eta$ and we can get that,
+$$ \Phi(-\eta) = \frac{1}{2}f(-\eta) + \frac{1}{2c}\int_{0}^{-\eta}g(\t)d\t + K \qquad \text{for } 0 \le - \eta \le \ell $$
+Therefore,
+$$ \Psi(\eta) -\Phi(-\eta) = -\frac{1}{2}f(-\eta) - \frac{1}{2c}\int_{0}^{-\eta}g(\t)d\t - K \qquad \text{for } -\ell \le \eta \le 0 $$
+Now use $(2)$ and then let $\a = \xi$ and get a solution for up to $2\ell - \a$. Therefore,
+$$ \Phi(\xi) = -\psi(2\ell - \xi) = -\frac{1}{2}f(2\ell - \xi) + \frac{1}{2c}\int_{0}^{2\ell - \xi}g(\t)d\t - \frac{K}{2} \qquad \ell \le \xi \le 2\ell $$
+Furthermore we can now extend the solution further to all the values of $\ell$. The better way to solve this is through a series solution.
+
+\section{The Diffusion Equation}
+The diffusion (or heat) equation is parabolic equation denoted by $\pd u t -k \pdd u t = 0$ for $k > 0$.
+
+\begin{nthm}[Maximum Principle]
+  If $u(x, t)$ satisfies the diffusion equation in a rectangle for $0 \le x \le \ell$ and $0 \le t < T$ in space-time, then the maximum value of $u(x, t)$ is assumed either initially at $t = 0$ or on lateral sides $x = 0, L$
+\end{nthm}
+
+\begin{nthm}[Uniqueness]
+  Consider $u_t - ku_{xx} = f(x, t)$ for $0 \le x \le L$ and $t > 0$ subject to $u(x, 0) = \Phi(x)$ as an initial condition and the boundary condition $u(0, t) = g(x)$ and $u(L, t) = h(t)$. Let $u_1(x, t)$ and $u_2(x, t)$ be two solutions of this PDE problem. These are the same solution.
+\end{nthm}
+\begin{proof}
+  Then $w(x, t) = u_2(x, t) - u_1(x, t)$, satisfies $w_{t} - w_{xx} = 0$ and $w(x, 0) = 0$ and $w(0, t)= w(L, t) = 0$. We know via the maximum principle, then if $T > 0$ we can say that $w(x, t) \le 0$.
+  We can make a similar argument for the minimal princliple then we can get that $w(x, t) \ge 0$. Therefore, $w(x, t) = 0$, that is $u_1(x, t) = u_2(x, t)$.
+\end{proof}
+\begin{proof}[Formal Proof]
+  Consider $w_t - kw_{xx} = 0$ then mmultiply this by $w$, we get $ww_t - kww_{xx} = 0$ and so $\pd{}{t}(\frac{1}{2}w^2) - \pd{}{x}(kww_x) + kw_x^2 = 0$. This then gives us the PDE, $\pd{}{t}(\frac{1}{2}w^2) - \pd{}{x}(kww_x) = -kw_x^2$. Now from what we obtained, we can integrate this equation,
+  \begin{align*}
+    \int_0^L \left(\frac{1}{2}w^2\right)_xdx - [kww_x]_0^L + k\int_0^L w_x^2 &= 0 \\
+    \int_0^L \left(\frac{1}{2}w^2\right)_xdx &=- k\int_0^L w_x^2 \\
+  \end{align*}
+  The RHS is always negative or zero. Therefore, $\int_0^L w_x^2dx$ is decreasing and so
+  $$ \int_0^L w_x^2 \le \int_0^L w_x(x, 0)^2 dx  $$
+  and so $w(x, t) = 0$ and so $u_1(x, t) = u_2(x, t)$.
+\end{proof}

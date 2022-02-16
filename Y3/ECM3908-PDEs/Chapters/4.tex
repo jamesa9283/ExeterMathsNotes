@@ -1,6 +1,6 @@
 % !TEX root = ../notes.tex
 
-\section{Constant Coefficient Second Order PDEs}
+\subsection{Constant Coefficient Second Order PDEs}
 
 Last week we solved $A(x, y)u_{xx} + B(x, y)u_{xy} + C(x,y)u_{yy} = H(x, y, u_x, u_y, u)$ and found cannonical form. Now we assume that we have a PDE of the form,
 $$ Au_{xx} + Bu_{xy} + Cu_{yy} = H(x, y, u_x, u_y, u) $$
@@ -51,6 +51,8 @@ $$ u_{\a\a} + u_{\b\b} = H^*(\a, \b, u, u_\a, u_\b) $$
 \begin{eg}
   Find the general solution of $x^2u_{xx} + 2xyu_{xy} + y^2u_{yy} = 0$
 \end{eg}
+
+\section{THE WAVE EQUATION}
 
 \subsection{The Cauchy Problem for the wave equation}
 $\pdd u t - c^2 \pd u x = 0$ with $u(x, 0) = f(x)$ and $u_t(x, 0) = g(x)$ for $x \in R$, $t > 0$ and $c$ being a constant. Let's find the solution, $A = -c^2$ and $B = 0$, then $C = -1$ and so we get $B^2 - 4AC = 4c^2 > 0$ which means it's hyperbolic. We then get characteristics of $1 - c^2\left( \di t x \right) = 0$ and so $(dx - cdt)(dx + cdt) = 0$ and so $\xi = x + ct$ and $\eta = x - ct$. This then reduces the PDE to $u_{\xi\eta} = 0$ and so $u(\xi, \eta) = \Phi(\xi) + \psi(\eta)$. Hence we get the general solution,
