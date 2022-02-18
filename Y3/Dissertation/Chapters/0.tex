@@ -14,7 +14,95 @@ We start with a problem. Consider a particle that is half way along a piece of l
 To solve this problem, the best (and probably only) way is to describe the particle's energy. That is, we know that energy is conserved and so if at some point we know the total energy we can then describe the energy in the system at any point. At $t = 0$ there is zero kinetic energy, as the particle is held at rest. If we assume that the only energies to consider are potential and kinetic, the whole energy of the system can be described by just the elastic potential energy. Then we know that the kinetic energy of the particle at displacement zero is, $\frac{\l x^2}{2l_0}$ where $l_0$ is the natural extension of the spring, $x$ is the elastic extension and $\l$ is the spring constant. Hence, in our case the energy in the string is $\frac{\l (\ell - l_0)^2}{2l_0}$ and so the velocity of the particle at displacement zero is going to be, $v = (\ell - l_0)\sqrt{\frac{\l}{ml_0}}$. In general, we can make these energy arguments about sets of particles in Euclidean space. To do this we go on a little detour to explain the Lagrangian, a useful tool in this area of mathematics.\\
 
 \noindent
-Consider some points in Euclidean space, let's call them $\vec r_1, \vec r_2, \dots, \vec r_n$. We seek the energy of each of these particles, which requires us to know the forces applied to each of them. To describe the forces on each of these particles, we will use Newton's Second Law. One of the main equations that we use in mechanics is Newton's Second Law, namely $F = ma$, which can be written as $F = \frac{m(v - u)}{t} \approx \di p t$. After some algebra, we can arrive at an exact differential equation $vdx - pdv = dL$, where $dL$ is some function. Then we can solve this differential equation and arrive at $L = K - V$ where $K$ is kinetic energy and $V$ is potential energy. The Lagrangian is now our invariant, as before we added the potential energy and kinetic energy, here we subtract them and this will be our way to describe systems. The next natural question, is how do we describe systems and that is exactly what we will spend the rest of this dissertation discussing.\\
+The rest of this chapter is in very close relation to first chapter of Holm, Schmah and Stoica, Geometric Mechanics and Symmetry. Consider a point mass, the position of this point is also called the \textbf{configuration} is a vector $\vec q \in \R^d$. If we consider $N$ points then the configuration becomes $\vec q = (\vec q_1, \vec q_2, \dots, \vec q_N) \in \R^{dN}$. This notation works with familiar mechanics concepts, that is we can write Newtons Second Law, $F_i = m_i\ddot{\vec q_i}$ for $i = 1, 2, \dots, N$. We now define a special type of Newtonian system that we can use to illustrate a few important concepts.
+
+\begin{ndefi}[Newtonian Potential System]
+  A \textbf{Newtonian potential system} is a system of equations,
+  $$ m_i\vec{\ddot q_i} = -\pd{V_i}{\vec q_i} $$
+  for $i = 1, 2, \dots, N$ where $V(\{\vec q_i\})$ is a real-valued function, called the potential energy.
+\end{ndefi}
+\noindent
+This system has conserved energy and this is one of the most interesting thing for mathematicians. We define it to be kinetic energy plus potential energy, $E := K + V$.
+\begin{nthm}[Conservation of Energy]
+  Energy is conserved in Newtonian Potential Systems.
+\end{nthm}
+\begin{proof}
+  \begin{align*}
+    \di E t &= \dit \left( \frac{1}{2}\sum m_i\norm{\vec{\ddot q_i}}^2 + V(\vec q) \right)\\
+    &= \sum m_i \dot {\vec q_i} \cdot \ddot{\vec q_i} + \sum \pd{V}{\vec q_i} \cdot \dot{\vec q_i}\\
+    &= \sum \vec{\dot q_i} \cdot \left(\sum m_i \ddot{\vec q_i} + \sum \pd{V}{\vec q_i} \right) = 0 && \text{these vectors are orthogonal.}\\
+  \end{align*}
+\end{proof}
 
 \noindent
-In the following document, there are several, `checkpoints', places where you can take different paths through the dissertation and end up at one of the examples at the end. The following diagram explains the roadmap,
+This is one of the first important ideas that we will use again and again throughout this dissertation. These are the main motivation behind Noethers Theorems; they tell us about different conserved quantities in the system we are studying. These different types of conserved quantities will change depending on different types of invariance. We can have different types of invariance in the systems we are studying, later we will mostly consider invariance in Lagrangians.
+\begin{ndefi}[Rotational Invariance]
+  A function $V : \R^{dN} \to \R$ is rotationally invariant if
+  $$ V(R\vec q_1, R\vec q_2, \dots, R\vec q_N) = V(\vec q_1, \vec q_2, \dots, \vec q_N) $$
+  for any $\vec q = (\vec q_1, \vec q_2, \dots, \vec q_N)$ and a rotation matrix $R \in M_{d \times d}(\R)$.
+\end{ndefi}
+
+\noindent
+As an interesting and motivating example, see Proposition 1.28 of %Holms Book
+, which says in any Newtonian potentially system with rotationally invariant $V$, angular momentum is conserved.
+
+\subsection{Lagrangian Mechanics}
+We firstly introduce the following theorem relating to a new set of equations called the Euler-Lagrange Equations,
+\begin{nthm}[Euler-Lagrange Equations for Newtonian Potential System]
+  Every Newtonian potential system is equivalent to the Euler Lagrange Equations,
+  \begin{equation}
+    \dit \pd{L}{\vec{\dot q}_i} - \pd{L}{\vec q_i} = 0 \label{equ:EL1}
+  \end{equation}
+  for the Lagrangian $L : \R^{2dN} \to \R$ defined by,
+  $$ L(\vec q, \vec{\dot q}) = \sum_{i=1}^N \frac{1}{2}m_i\norm{\vec{\dot q_i}}^2 - V(\vec q) $$
+\end{nthm}
+\begin{proof}
+  $$ \dit \left( \pd{L}{\vec{\dot q}_i} \right) - \pd{L}{\vec q_i} = \dit\left( m_i\vec{\dot q}_i \right) + \pd{V}{\vec q_i} =  m_i\vec{\ddot q}_i + \pd{V}{\vec q_i} = 0$$
+\end{proof}
+
+\noindent
+Henceforth, we will work in Lagrangian systems, that is defined as,
+\begin{ndefi}[Lagrangian System]
+  A \textbf{Lagrangian system} on a configuration space $\R^{dN}$ is the system of ODEs called the Euler-Lagrange equations (Equation \ref{equ:EL1}), for some function $L : \R^{2dN} \to \R$ called the Lagrangian.
+\end{ndefi}
+
+\noindent
+As we did before, we can talk about energy in terms of the Lagrangian, $E := \pd{L}{\vec{\dot q}_i} \cdot \vec{\dot q}_i - L$ and the energy is conserved. We now go the final idea that I would like to introduce in the introduction. The variational principle and Hamiltons Principle. We will use these to derive the Euler-Lagrange again, in a more general case. \\
+
+\noindent
+The Euler-Lagrange equations relate to a variational principle on the space of smooth paths with fixed end points. The main idea of this variational principle is that we can determine solutions of the Euler-Lagrange equations as stationary points of some action functional. In an example, consider a chain that is fixed at two ends. This will form a catenary, but a chain can form many more shapes or paths, but it turns out the minimal of the functional, which is a stationary point, is the catenary that the chain forms.\\
+
+\noindent
+Consider some smooth path, $\vec q : [a, b] \to \R^{dN}$ with endpoints $\vec q(a) = \vec q_a$ and $\vec q(b) = \vec q_b$. We define a \textbf{deformation} of $\vec q$ as a smooth map $\vec q(s, t)$ where $s \in (-\e,\, \e)$ where $\e > 0$ such that $\vec q(0, t) = \vec q(t)$ for all $t \in [a, b]$.
+\begin{ndefi}[Variation]
+  The \textbf{variation} of the curve $\vec q(t)$ corresponding to the following deformation $\vec q(s, t)$ is,
+  $$ \d \vec q(s) = \left.\di{}{s}\right|_{s=0} \vec q(s, t) $$
+\end{ndefi}
+\noindent
+Then the first variation,
+\begin{ndefi}[First Variation]
+  The \textbf{first variation} of a smooth $C^\infty$ functional $\mathcal{S} : [a, b] \to \R^{dN}$ is
+  $$ \d\mathcal{S} := \left.\di{}{s}\right|_{s=0} \mathcal{S}[\vec q(s, t)] $$
+\end{ndefi}
+\noindent
+Then we call $\vec q$ a \textbf{stationary point} of $\mathcal{S}$ if $\d\mathcal{S} = 0$ for all deformations of $\vec q$. Furthermore, if $\vec q(s, t)$ has fixed endpoints, meaning that $\vec q(a,s) = \vec q_a$ and $\vec q(b, s) = \vec q_b$ for all $s = (-\e, \e)$ then $\d\vec q(a) = \d\vec q(b) = 0$. These are variations along paths with fixed endpoints. Finally, we prove that the Euler-Lagrange equations are equivalent to Hamilton's Principle,
+\begin{nthm}
+  For any $L : \R^{2dN} \to \R$, the Euler-Lagrange equations (Equations \ref{equ:EL1}) are equivalent to Hamilton's principle of stationary action $\d\mathcal{S} = 0$ where $\mathcal{S}$ is defined as,
+  $$ \mathcal{S}[\vec q(t)] = \int_{t_1}^{t_2} L(\vec q, \vec{\dot q})\, dt $$
+  with respect to variations along paths and fixed endpoints.
+\end{nthm}
+\begin{proof}
+  We will proceed using the fact that $\dit \d \vec q = \d \vec{\dot q}$ and using integration by parts.
+  \begin{align*}
+    \d\mathcal{S} &= \left.\di{}{s}\right|_{s=0} S[\vec q(s, t)] = \left.\di{}{s}\right|_{s=0} \int_{t_1}^{t_2} L(\vec q, \vec{\dot q})\, dt\\
+    &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} \cdot \vec q + \pd{L}{\vec{\dot q}} \cdot \d\vec{\dot q} \right) dt \\
+    &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} \right) \cdot \d\vec q \,dt + \left[ \pd{L}{\vec{\dot q}}\cdot \d\vec q \right]_{t_1}^{t_2} \\
+    &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} \right) \cdot \d\vec q \,dt && \text{applying end point conditions} \\
+  \end{align*}
+  This then tells us that for any smooth $\d\vec q(t)$ satisfying $\d\vec q(a) = \d\vec q(b) = 0$. If $\d\mathcal{S} = 0$, then $\pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} = 0$ and so Hamilton's Principle is equivalent to the Euler-Lagrange equations.
+\end{proof}
+
+\noindent
+The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincare Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last chapter of pseudo-rigid bodies. We will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
+
+% There are several, `checkpoints', places where you can take different paths through the dissertation and end up at one of the examples at the end. The following diagram explains the roadmap,
