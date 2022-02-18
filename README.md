@@ -41,5 +41,5 @@ Here are some selected notes from third year:
 There also exist some notes I am writing for my dissertation, they are based around Geometric Mechanics and Lie Groups. They can be found [here](https://github.com/jamesa9283/ExeterMathsNotes/blob/main/Y3/Dissertation/notes.pdf)
 
 In the Cambridge rejection, post clarity I decided to pick up some graduate courses in Pure Maths,
-MAGIC Algebraic Topology (Cohomology) (Prof. Neil Strickland) - [AlgTop]()
-MAGIC Algebraic Geometry -
+MAGIC Algebraic Topology (Cohomology) (Prof. Neil Strickland) - [AlgTop](https://github.com/jamesa9283/ExeterMathsNotes/tree/main/Y3/MAGIC/MAGIC064-AlgTop)
+MAGIC Algebraic Geometry (Dr. Eleanore Faber) - [AlgGeom](https://github.com/jamesa9283/ExeterMathsNotes/tree/main/Y3/MAGIC/MAGIC074-AlgGeom)
