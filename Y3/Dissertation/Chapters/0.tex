@@ -14,11 +14,11 @@ We start with a problem. Consider a particle that is half way along a piece of l
 To solve this problem, the best (and probably only) way is to describe the particle's energy. That is, we know that energy is conserved and so if at some point we know the total energy we can then describe the energy in the system at any point. At $t = 0$ there is zero kinetic energy, as the particle is held at rest. If we assume that the only energies to consider are potential and kinetic, the whole energy of the system can be described by just the elastic potential energy. Then we know that the kinetic energy of the particle at displacement zero is, $\frac{\l x^2}{2l_0}$ where $l_0$ is the natural extension of the spring, $x$ is the elastic extension and $\l$ is the spring constant. Hence, in our case the energy in the string is $\frac{\l (\ell - l_0)^2}{2l_0}$ and so the velocity of the particle at displacement zero is going to be, $v = (\ell - l_0)\sqrt{\frac{\l}{ml_0}}$. In general, we can make these energy arguments about sets of particles in Euclidean space. To do this we go on a little detour to explain the Lagrangian, a useful tool in this area of mathematics.\\
 
 \noindent
-The rest of this chapter is in very close relation to first chapter of Holm, Schmah and Stoica, Geometric Mechanics and Symmetry. Consider a point mass, the position of this point is also called the \textbf{configuration} is a vector $\vec q \in \R^d$. If we consider $N$ points then the configuration becomes $\vec q = (\vec q_1, \vec q_2, \dots, \vec q_N) \in \R^{dN}$. This notation works with familiar mechanics concepts, that is we can write Newtons Second Law, $F_i = m_i\ddot{\vec q_i}$ for $i = 1, 2, \dots, N$. We now define a special type of Newtonian system that we can use to illustrate a few important concepts.
+The rest of this chapter is in very close relation to first chapter of Holm, Schmah \& Stoica (2009), Geometric Mechanics and Symmetry \cite{holm_schmah_stoica_2009}. Consider a point mass, the position of this point is also called the \textbf{configuration} is a vector $\vec q \in \R^d$. If we consider $N$ points then the configuration becomes $\vec q = (\vec q_1, \vec q_2, \dots, \vec q_N) \in \R^{dN}$. This notation works with familiar mechanics concepts, that is we can write Newtons Second Law, $F_i = m_i\ddot{\vec q_i}$ for $i = 1, 2, \dots, N$. We now define a special type of Newtonian system that we can use to illustrate a few important concepts.
 
 \begin{ndefi}[Newtonian Potential System]
   A \textbf{Newtonian potential system} is a system of equations,
-  $$ m_i\vec{\ddot q_i} = -\pd{V_i}{\vec q_i} $$
+  $$ m_i\vec{\ddot q}_i = -\pd{V_i}{\vec q_i} $$
   for $i = 1, 2, \dots, N$ where $V(\{\vec q_i\})$ is a real-valued function, called the potential energy.
 \end{ndefi}
 \noindent
@@ -28,9 +28,9 @@ This system has conserved energy and this is one of the most interesting thing f
 \end{nthm}
 \begin{proof}
   \begin{align*}
-    \di E t &= \dit \left( \frac{1}{2}\sum m_i\norm{\vec{\ddot q_i}}^2 + V(\vec q) \right)\\
-    &= \sum m_i \dot {\vec q_i} \cdot \ddot{\vec q_i} + \sum \pd{V}{\vec q_i} \cdot \dot{\vec q_i}\\
-    &= \sum \vec{\dot q_i} \cdot \left(\sum m_i \ddot{\vec q_i} + \sum \pd{V}{\vec q_i} \right) = 0 && \text{these vectors are orthogonal.}\\
+    \di E t &= \dit \left( \frac{1}{2}\sum_{i=1}^N m_i\norm{\vec{\ddot q}_i}^2 + V(\vec q) \right)\\
+    &= \sum_{i=1}^N m_i \vec{\dot q}_i \cdot \vec{\ddot q}_i + \sum_{i=1}^N \pd{V}{\vec q_i} \cdot \vec{\dot q}_i\\
+    &= \sum_{i=1}^N \vec{\dot q}_i \cdot \left( m_i \vec{\ddot q}_i + \pd{V}{\vec q_i} \right) = 0 && \text{these vectors are orthogonal.}\\
   \end{align*}
 \end{proof}
 
@@ -43,8 +43,7 @@ This is one of the first important ideas that we will use again and again throug
 \end{ndefi}
 
 \noindent
-As an interesting and motivating example, see Proposition 1.28 of %Holms Book
-, which says in any Newtonian potentially system with rotationally invariant $V$, angular momentum is conserved.
+As an interesting and motivating example, see Proposition 1.28 of \cite{holm_schmah_stoica_2009}, which says in any Newtonian potentially system with rotationally invariant $V$, angular momentum is conserved. This invariance can be used to reduce certain functions from $N$ variables to $N - 1$ variables, this will be one the main focus' of study.
 
 \subsection{Lagrangian Mechanics}
 We firstly introduce the following theorem relating to a new set of equations called the Euler-Lagrange Equations,
@@ -67,7 +66,7 @@ Henceforth, we will work in Lagrangian systems, that is defined as,
 \end{ndefi}
 
 \noindent
-As we did before, we can talk about energy in terms of the Lagrangian, $E := \pd{L}{\vec{\dot q}_i} \cdot \vec{\dot q}_i - L$ and the energy is conserved. We now go the final idea that I would like to introduce in the introduction. The variational principle and Hamiltons Principle. We will use these to derive the Euler-Lagrange again, in a more general case. \\
+As we did before, we can talk about energy in terms of the Lagrangian, $E := \pd{L}{\vec{\dot q}_i} \cdot \vec{\dot q}_i - L$ and the energy is conserved. We now go the final ideas that I would like to introduce in the introduction, the variational derivative and Hamilton's Variational Principle. We will use these to derive the Euler-Lagrange equations again, in a more general case. \\
 
 \noindent
 The Euler-Lagrange equations relate to a variational principle on the space of smooth paths with fixed end points. The main idea of this variational principle is that we can determine solutions of the Euler-Lagrange equations as stationary points of some action functional. In an example, consider a chain that is fixed at two ends. This will form a catenary, but a chain can form many more shapes or paths, but it turns out the minimal of the functional, which is a stationary point, is the catenary that the chain forms.\\
@@ -79,7 +78,7 @@ Consider some smooth path, $\vec q : [a, b] \to \R^{dN}$ with endpoints $\vec q(
   $$ \d \vec q(s) = \left.\di{}{s}\right|_{s=0} \vec q(s, t) $$
 \end{ndefi}
 \noindent
-Then the first variation,
+Then the first variation is,
 \begin{ndefi}[First Variation]
   The \textbf{first variation} of a smooth $C^\infty$ functional $\mathcal{S} : [a, b] \to \R^{dN}$ is
   $$ \d\mathcal{S} := \left.\di{}{s}\right|_{s=0} \mathcal{S}[\vec q(s, t)] $$
@@ -103,6 +102,6 @@ Then we call $\vec q$ a \textbf{stationary point} of $\mathcal{S}$ if $\d\mathca
 \end{proof}
 
 \noindent
-The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincare Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last chapter of pseudo-rigid bodies. We will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
+The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincar\'e Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last chapter of pseudo-rigid bodies. We will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
 
 % There are several, `checkpoints', places where you can take different paths through the dissertation and end up at one of the examples at the end. The following diagram explains the roadmap,
