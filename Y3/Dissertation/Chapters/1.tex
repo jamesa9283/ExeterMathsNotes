@@ -2,18 +2,18 @@
 
 \section{Lie Groups and Algebras}
 
-To start, let us define some groups. Firstly, what is a group?
+Thus far, we have only considered mechanics, in this section we start to introduce what we mean by Geometric Mechanics. This section we consider new mathematical structures, being Manifolds and Lie Groups. We will look briefly at Manifolds, Lie Groups and then consider the connection between manifolds and Lie Groups. To start, let us define some groups. Firstly, what is a group?
 \begin{ndefi}[Group]
   $G$ is a nonempty set and endowed with a binary operation such that,
-  \begin{itemize}
+  \begin{enumerate}
     \item It's closed under $(\cdot)$, $\fa a, b \in G,\, a \cdot b \in G$
     \item It's associative, i.e. $\fa a, b \in G,\,a \cdot ( b \cdot c) = (a \cdot b) \cdot c$.
     \item There is an identity element, $\fa a \in G,\, a \cdot e = a = e \cdot a$.
     \item Every element has an inverse, $\fa a \in G,\,a \cdot a^{-1} = e = a^{-1} \cdot a$.
-  \end{itemize}
+  \end{enumerate}
 \end{ndefi}
 
-The definition of a Lie group also uses something called a manifold, to define this let's go on a slight adventure into topology!
+Groups are a very useful and interesting structure. There is a rich area of research and study surrounding them. One of the things that will be the most useful to us is actions of groups. We can take groups and consider then acting on sets, with a identity and compatibility axiom. We will see that in the next chapter where we consider the adjoint actions. In order to define a Lie Group, we now need to define a manifold,
 
 \subsection{Manifolds}
 A manifold is a topological space that locally resembles Euclidean space near each point~\cite{wmwMan}. However, this doesn't sate me as, what does near mean? It's very informal and hand wavey. Let's define it properly!
@@ -24,7 +24,7 @@ Where we refer to a second countable space as being a topological equivalent to 
 \begin{ndefi}[Pairwise Neighborhood-Separable]
   Two points are pairwise neighborhood-separable if there exists a neighborhood $U$ of $x$ and $V$ of $y$ such that $U$ and $V$ are disjoint.
 \end{ndefi}
-Then we can say that a space is Hausdorff if all distinct points are pairwise neighborhood-separable. Finally, to say something is homeomorphic to another space, this means it can be stretched without creating holes or glueing. A homeomorphism is a bijective map between two spaces and local homeomorphisms relates to neighborhoods around points. Hence, saying that something is locally homeomorphic to Euclidean space directly means, that you can bijectively map the contents of the neighborhood around a point to an open ball in $\R^n$, i.e the Euclidean $n$-ball.\footnote{This is long and a very non-succinct way to define this structure, I prefer to define manifolds via sheaves as I feel it is neater. A manifold is just a locally ringed space, whose sheaf structure is just locally isomorphic to continuous functions on Euclidean space.}
+Then we can say that a space is Hausdorff if all distinct points are pairwise neighborhood-separable. Finally, to say something is homeomorphic to another space, this means it can be stretched without creating holes or glueing. A homeomorphism is a bijective map between two spaces and local homeomorphisms relates to neighborhoods around points. Hence, saying that something is locally homeomorphic to Euclidean space directly means, that you can bijectively map the contents of the neighborhood around a point to an open ball in $\R^n$, i.e the Euclidean $n$-ball.\footnote{This is long and a very non-succinct way to define this structure, a slightly nicer definition of manifolds is: A manifold is just a locally ringed space, whose sheaf structure is just locally isomorphic to continuous functions on Euclidean space.}
 
 \noindent
 \subsection{Lie Groups}
@@ -58,7 +58,7 @@ To actually understand what Lie Algebras are, we need to generalise the notion o
   A $C^\infty$ atlas on a topological space $X$ is a collection of charts $\phi_\a : U_\a \to U_\a'$ where all the $U'$'s are open subsets of one fixed $\R^n$ such that,
   \begin{enumerate}
     \item Each $U_\a \in X$ is open and $\bigcup_\a U_\a = X$ ($U_\a$ is an open subcover of $X$) and,
-    \item Changes of coordinates are smooth.
+    \item Changes of coordinates are smooth. % transition maps are smooth
   \end{enumerate}
 \end{ndefi}
 
@@ -95,6 +95,11 @@ Here are a few examples of manifolds,
   \item If we let $M_n (\R)$ be all real $n \times n$ matrices, then this is a manifold as it's just $\R^{n^2}$. We also can say $\GL(n, \R) \subset M_n(\R)$ and so by the previous point, $\GL(n, \R)$ is a manifold.
 \end{itemize}
 
+\begin{nthm}[Whitney Embedding Theorem]
+  Every $m$-dimensional manifold can be embedded in $\R^{2m}$
+\end{nthm}
+
+\noindent
 Now we can formalise the idea of tangent vectors on a manifold\cite{Lee-2009}
 \begin{ndefi}[Tangent Vectors]
   Let $M$ be a $C^\infty$ manifold, then we can say that $x \in M$. Let us take a chart of $M$, $\phi : U \to \R^n$ where $x \in U$. Now take two curves $\g_1, \g_2 : (-1, 1) \to M$ with $\g_1(0) = \g_2(0) = x$ such that we can form $\phi \circ \g_1 \circ \phi \circ \g_2 : (-1, 1) \to \R^n$ are differentiable. \\
