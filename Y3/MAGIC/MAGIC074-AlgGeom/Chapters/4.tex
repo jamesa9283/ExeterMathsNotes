@@ -1,0 +1,56 @@
+% !TEX root = ../notes.tex
+
+\section{Principal Open Sets and Products}
+We have seen closed sets in the Zariski topology, $(V, A)$. The open sets, are the complements of closed sets, are in general not affine variety. But, there is one important example of open sets that have the structure of an affine variety: Let $(V, A)$ be an affine variety, $0 \ne f \in A$
+$$ \V_f = \{x \in V : f(x) \ne 0\} $$
+\begin{eg}
+  Let $V = \A^2$ and $f = X^3 - Y^2$
+  % picture
+\end{eg}
+\begin{ndefi}[Principal Open Set]
+  $\V_f$ is called a principal open set of $V$, $V\sm \V(f)$
+\end{ndefi}
+
+\begin{exercise}
+  The sets $\V_f$ for a basis of the Zariski topology on $V$.
+  \begin{enumerate}
+    \item $V = \bigcup \V_f$
+    \item if $x \in \V_f \cap \V_{f'}$ and there is some $g \in A$ and $x \in \V_g$ then $\V_g \in \V_f \cap V_{f'}$
+  \end{enumerate}
+\end{exercise}
+
+\noindent
+Now we need a coordinate ring, so we localise, $A_f = \{\frac{a}{f^r} : a \in A, r \ge 0\} = A\left[ \frac{1}{f} \right]$ this is not the localisation in a prime ideal, $A_{(f)} = \{\frac{a}{b} : a \in A, b \in A\sm \gen f\}$. This is though, a finitely generated algebra. We now claim that
+\begin{claim}
+  The pair $(\V_f, A_f)$ is an affine variety.
+\end{claim}
+\begin{proof}
+  We need $A_f \sub \map(\V_f, k)$. We always have a map $\Phi : A_f \to \map(V_f, k)$, where $\Phi : \frac{a}{f^r} \to \frac{a}{f^r}(x) := \frac{a(x)}{f^r(x)}$ for any $f, a, x \in \V_f$. $\Phi$ is injective, because
+  $\Phi(\frac{a}{f^r})$, then $a(x) = 0$ as $f(x) \ne 0$ and then $af = 0$ for all $x \in V$ and $\frac{a}{f^r} = \frac{af}{f^{r+1}} = 0$. Therefore $\Phi$ is injective. Therefore, $A_f \sub \map(\V_f, k)$ is a subalgebra.\\
+
+  \noindent
+  Now we need to show that
+  \begin{enumerate}
+    \item $A_f = A\left[ \frac{1}{f} \right]$ is a finitely generated $k$-algebra.
+    \item $\V_f \to \Hom_{k-alg}(A_f, k)$ is a bijection, $x \mapsto \e_x$ is a bijection. Show injective and surjective using properties of localisation.
+  \end{enumerate}
+\end{proof}
+
+\begin{eg}
+  Consider $(V, A) = (\A^1, k[X])$. Let $f = X$ and $\V_f = \{x \in \A^1 : x \ne 0\}$. We have $\A^1 \sm \{(0, 0)\}$ now we claim this an affine variety, that is a zero set of some polynomial. By construction, $A_f = k[X]_X = k[X, \frac{1}{X}] = k[X, X^{-1}]$ and $(\A^1 \sm \{0\}, k[X, X^{-1}])$ is an affine variety. We can look at a $\phi : Z = \V(XY - 1) \subset \A^1$ that is $t \mapsto (t, t^{-1})$ and this is an isomorphism. We use Exercise 7 and then show $\phi^\sharp$ is an algebra homomorphism, $\phi^\sharp : k[X, Y] / (XY - 1) \to k[X, X^{-1}]$. The nice picture you should get
+\end{eg}
+
+\subsection{Products}
+This is another construction of affine varieties: we take two affine varieties $(V, A)$ and $(W, B)$ then we can take cartesian products $(V \ti W, A \otimes_k B)$ is an affine variety.
+
+\begin{eg}
+  Let $V = W = \A^1$ then $V \times W = \A^1 \ti \A^1 = \A^2$ and so we have the affine variety $(A^2, k[X] \otimes_k k[Y] = k[X, Y])$ and there is something interesting about the topology.
+\end{eg}
+
+If we have $(x, y) \in V \ti W$ where $f \in A$ and $g \in B$ then we need to build up a function from the cartesian product to $k$. We write $f \otimes g : V \times W \to k$ and $(x, y) \mapsto f(x)g(y)$. We recall $A \otimes_k B$ is the $k$-span of the elements $f \otimes g$ where $f \in A$ and $g \in B$.
+
+\begin{remark}
+   If $\{f_i : i \in I\}$ and $\{g_j : j \in J\}$ are bases of $A$ and $B$ respectively, then $\{f_i \otimes g_j\}$ are a $k$-basis of $A\otimes_k B$.
+\end{remark}
+
+We now need the ring structure, but this can again be constructed, $A \otimes B$, $f_1, f_2 \in A$ and $g_1, g_2 \in B$ what happens to $(f_1 \otimes g_1) \cdot (f_2 \otimes g_2) := (f_1 \cdot f_2) \otimes (g_1g_2)$ this means that $A \otimes B$ is a finitely generated $k$-algebra. We cal also show that $A \otimes B \sub \map(V \ti W, k)$ and $(V \ti W, A \otimes B)$ is an affine variety.

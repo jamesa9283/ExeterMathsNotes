@@ -47,8 +47,9 @@ Now we want to show a closed subsets of $\A^n$ correspond to affine varieties. W
 \begin{remark}
    We may ask why we need the comorphism to be surjective? Well then $\im(\phi)$ will not necessarily closed. Here is an example,
    \begin{eg}
-     Take $\phi : \A^2 \to \A^2$ where $(x, y) \mapsto (xy, y)$, then the comorphism, $\phi^\sharp : k[X, Y] \to k[Z, W]$ is $X \mapsto ZW$ and $Y \mapsto W$ and so we know $f(X, Y) \mapsto f(ZW, W)$. Why is the image not closed? Well thr image is $\im(\phi) = \{(a, b) \in \A^2 : a = xy, b = y\}$. If $b \ne 0$ so $y = b$
+     Take $\phi : \A^2 \to \A^2$ where $(x, y) \mapsto (xy, y)$, then the comorphism, $\phi^\sharp : k[X, Y] \to k[Z, W]$ is $X \mapsto ZW$ and $Y \mapsto W$ and so we know $f(X, Y) \mapsto f(ZW, W)$. Why is the image not closed? Well the image is $\im(\phi) = \{(a, b) \in \A^2 : a = xy, b = y\}$. If $b \ne 0$ so $y = b$
      and $x = \frac{a}{b}$, then we have a preimage. If $b = 0$ then $a= 0$ and the preimage is just the origin. Hence the image of $\phi$ is $\A^2 \sm \{(x, 0) : x \ne 0\}$. Why is this not closed? Well $\A^2 \sm \{(x, 0) : x \ne 0\} = (\A^2 \sm \{(x, 0) : x \in \R\}) \cup \{(0, 0)\} = \A^2 \sm \{(x, 0) : x \in \R\} \cap \A^2 \sm \{(0, 0)\}$.
+     \textit{ This is the union of an open and a closed set, this is still closed and is shown in the written notes. We assume that it's closed and then move to a contradiction. }
    \end{eg}
 \end{remark}
 
@@ -75,5 +76,21 @@ and we have isomorphism. We denote the inverse of the isomorphism as $\theta : k
 \end{tikzcd}\]
 Then we have a homomorphism $\bar{\e'_y} \circ \theta : k[V] \to k$. Since $V$ is an affine variety we have $\bar{\e'_y} \circ \theta = \e_x$ for some $x \in V$. Let us write this out,
 $$ \bar{\e'_y} \circ \theta \circ \bar{\phi^\sharp} = \bar{\e'_{y}} = \e_x \circ \bar{\phi^\sharp} $$
-For $g \in k[W]$ and so $\bar{\e'_y} (y + I) = \e_x \circ \bar{\phi^\sharp}(y + I)$ and so $\e'_y = \phi^\sharp (g)(x) = g(\phi(x)) = \e'_{\phi(x)}(g)$. Since $W$ is affine $y = \phi(x) \sub \phi(V) = Z$. Therefore $V(I) \sub Z$. This shows that $Z$ is closed.
+For $g \in k[W]$ and so $\bar{\e'_y} (y + I) = \e_x \circ \bar{\phi^\sharp}(y + I)$ and so $\e'_y = \phi^\sharp (g)(x) = g(\phi(x)) = \e'_{\phi(x)}(g)$. Since $W$ is affine $y = \phi(x) \sub \phi(V) = Z$. Therefore $V(I) \sub Z$. This shows that $Z$ is closed.\\
+
+\noindent
+We now restrict $\phi$ to $V$, we use Exercise $8$ and so we show that the morphism is an isomorphism of $k$-algebras. We have subjectivity as of this diagram
+% diagram
+and then injectivity is we take $h \in k[Z]$ and then $\phi^\sharp|_{V} = 0$ and then we have that the $\ker(\phi^\sharp|_V) = 0$
 \end{proof}
+We use the algebra to show something geometrically. Algebra is more useful to prove things. Now we have a load of interesting examples. If we have some closed subset of $\A^n$ this is an affine variety. Now if we have an affine variety, then it is the vanishing set of some ideals. If we have some affine variety $V$ and it's coordinatering $k[V]$, we assume it's fg by some $k[V] = k[f_1, f_2, \dots, f_n]$ and so now we define a map $\phi : V \to \A^n$
+$$ \phi : x \mapsto (f_1(x), f_2(x), \dots, f_n(x)) $$
+Now we want to prove this a morphism of varieties, so $X_i \in k[\A^n]$, the $i^{th}$ coordinate function. We can look at $(X_i \circ \phi)(x) = X_i(\phi(x)) = f_i(x)$ and so $X_i \circ \phi = f_i \in k[V]$. Since the $X_i$ generate $k[\A^n]$ and so $g \circ \phi \in k[V]$ for all $g \in k[\A^n]$ thus $\phi$ is a morphism. Moreover, $f_i = \phi^\sharp(X_i)$ and thus
+$k[V] = k[\phi^\sharp(X_1), \dots, \phi^\sharp(X_n)]$. Hence $\phi^\sharp : k[\A^n] \to k[V]$ is surjective and the lemma tells us that $\im(\phi)$ is closed and $\phi|_V : V \to \im \phi$ is an isomorphism. Therefore $V$ is isomorphic to a closed set in $\A^n$.
+\begin{center}
+  \textbf{Affine Varieties are precisely the closed sets in $\A^n$}
+\end{center}
+
+Now we can immediately see that points are always closed in affine varieties. Points in $\A^n$ are closed. if $x \in \A^n$ then
+$$ x = (x_1, \dots, x_n) = \V (\{X_1 - x_1, \dots, X_n - x_n\}) $$
+since $V \cong$ a closed subsets of $\A^n$ for some $n$, it follows that points in $V$ are closed.
