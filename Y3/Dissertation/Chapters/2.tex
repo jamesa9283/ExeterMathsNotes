@@ -3,21 +3,27 @@
 \noindent
 Assume we have a surface, of manifold $M$, the tangent space $T_qM$, then we can say that,
 $$ \bigcup T_qM = TM $$
-Cotangent manifold is dual space of manifold\\
+is the tangent bundle. We can further define a cotangent bundle, which leads to the cotangent manifold. The cotangent manifold is dual space of manifold.\newpage
+
+\noindent
+We now present several examples of Lie Algebras and their groups to help the reader understand the main space of study for the rest of the work.
 
 \begin{eg}
   \begin{itemize}
-    \item The lie algebra $\mathfrak{GL}(n, \R) = T_e\GL(n, \R)$ which is vector space of real square $n \times n$ matrices with commutator.
-    \item The lie algebra of $\mathfrak{SL}(n, \R) := T_e \SL(n, \R)$ vector space of real traceless square $n \times n$ matrices.
+    \item The lie algebra $\mathfrak{gl}(n, \R) = T_e\GL(n, \R)$ which is vector space of real square $n \times n$ matrices with commutator.
+    \item The lie algebra of $\mathfrak{sl}(n, \R) := T_e \SL(n, \R)$ vector space of real traceless square $n \times n$ matrices.
     \begin{proof}
-      Take $g(t) \in \SL(n, \R)$, and so $\det g(t) = 1$ hence, take $g(t)$ such that $g(0) = e$, and $\dot g(0) = \xi$ and so $\dot g(0) \in \mathfrak{SL}(n, \R)$. Now use the formula of the derivative of the determinant of a matrix to show,
+      Take $g(t) \in \SL(n, \R)$, and so $\det g(t) = 1$ hence, take $g(t)$ such that $g(0) = e$, and $\dot g(0) = \xi$ and so $\dot g(0) \in \mathfrak{sl}(n, \R)$. Now use the formula of the derivative of the determinant of a matrix to show,
       $$ \di {}{t} (\det (g(t)))_{t=0} = \det {g(0)}\Tr(g^{-1}(0)\dot g(0)) $$
-      and so, $g^{-1}(0)\dot g(0) \in \mathfrak{SL}(n, \R)$ and so we just have $\Tr (\xi)$.
+      and so, $g^{-1}(0)\dot g(0) \in \mathfrak{sl}(n, \R)$ and so we just have $\Tr (\xi)$.
     \end{proof}
-    \item The lie algebra of $\mathfrak{SO}(3) = T_e\SO(3)$, the vector space of skew-symmetric matrices.
+    \item The lie algebra of $\mathfrak{so}(3) = T_e\SO(3)$, the vector space of skew-symmetric matrices.
   \end{itemize}
 \end{eg}
 
+
+\noindent
+We finally present a lemma that we will use again and again throughout this work. In some sense this is the most important lemma in the whole document. If this were false, we would not be able to do many of the things we do in the next few chapters.
 \begin{nlemma}
   If $v \in T_gG$, then we can say,
   \begin{enumerate}
@@ -25,7 +31,7 @@ Cotangent manifold is dual space of manifold\\
     \item $vg^{-1} \in T_eG$
   \end{enumerate}
 \end{nlemma}
-{\color{red} \begin{proof}
+{\begin{proof}
   Suppose we have a $c(t) \in G$ such that $c(0) = g$ and $\dot c(0) = v$. Now we define a $\g(t) = g^{-1}c(t)$ and we see that $\g (0) = e$ and $\dot\g(0) = g^{-1}\dot c(0) = g^{-1}v$. Hence by Lemma 1.14 we can say if $v \in T_eG$ then $gvg^{-1} \in T_eG$, applying this to $g^{-1}v$, we can get that $vg^{-1} \in T_eG$, as required.
 \end{proof} }
 
