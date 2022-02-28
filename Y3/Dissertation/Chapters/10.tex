@@ -3,12 +3,13 @@
 \section{Pseudo-Rigid Bodies}
 Now let us assume that our body can stretch and sheer, this will be called a psudo rigid body. I have done the following derivations with the assumption that the configuration space we are working in is $\GL^+(3)$, ie. the set of matrices with postive determinant. We make a few assumptions, firstly the moment of inertia tensor is rotationally invariant, it is sufficient that the density function $\rho(\vec X)$ is spherically symmetric. We will also assume that the Lagrangian only depends on the kinetic energy and so we study free ellipsoid motion.\\
 
+\noindent
 We fix a reference configuration via a fixed spatial coordinate system and a moving body coordinate system, both with origin of the fixed point of the body. We will assume that the configuration of the system is a matrix $\vec Q(t) \in \GL^+(3)$ which takes the label $\vec X$ to the spacial position $\vec x(t)$, that is,
 $$ \vec x(t, \vec X) = \vec Q(t)\vec X \qquad \dot{\vec x}(t, \vec X) = \dot{\vec Q}\vec X = \dot{\vec Q}(t)\vec Q^{-1}(t)\vec x(t, \vec X) $$
 as before let $\rho(\vec X)$ be the density function and $\mathcal{B}$ be the region occupied by the body in it's configuration space. The moment of inertia tensor is assumed to be spherically symmetric, that is,
-$$ \int_{\mathcal{B}} \rho(\vec X)\vec X\vec X^T d^3\vec X = kI \qquad k \in \R $$
+$$ \J = \int_{\mathcal{B}} \rho(\vec X)\vec X\vec X^T d^3\vec X = kI \qquad k \in \R $$
 and $I$ is the identity matrix. We assume without loss of generality that $k = 1$ and so,
-$$ \int_{\mathcal{B}} \rho(\vec X)\vec X\vec X^T d^3\vec X = I $$
+$$ \J = \int_{\mathcal{B}} \rho(\vec X)\vec X\vec X^T d^3\vec X = I $$
 We now consider the kinetic energy,
 \begin{align*}
   K &= \frac{1}{2}\int_{\mathcal{B}} \rho(\vec X) \norm{\dot{\vec x}}\, d^3 \vec X \\
@@ -24,14 +25,135 @@ We can notice that this Lagrangian is symmetric and invariant left and right act
   &= \frac{1}{2}\Tr\left( \dot{\vec Q}\dot{\vec Q} \right)
 \end{align*}
 as $g, h \in \SO(3)$.
-From Linear Algebra last year we saw that we can decompose a matrix using single value decomposition. That is, take a matrix $A$ and we can represent this as $U\Sigma V$ where $U, V \in O(3)$ and $\Sigma \in \diag^+(3)$. We want $U,V$ to be in $\SO(3)$ and so we now do the following. Take a decomposition of $Q = RAS$ and we know that $\det R = \pm 1$, if $\det R = 1$ leave it as it is, if $\det R = -1$, then we tag on an additional matrix,
-$$ M = \begin{pmatrix}
+From Linear Algebra last year we saw that we can decompose a matrix using single value decomposition. That is, take a matrix $\vec A$ and we can represent this as $\vec U\vec \Sigma \vec V$ where $\vec U, \vec V \in O(3)$ and $\vec\Sigma \in \diag^+(3)$. We want $\vec U, \vec V$ to be in $\SO(3)$ and so we now do the following. Take a decomposition of $\vec Q = \vec R\vec A\vec S$ and we know that $\det \vec R = \pm 1$, if $\det \vec R = 1$ leave it as it is, if $\det \vec R = -1$, then we tag on an additional matrix,
+$$ \vec M = \begin{pmatrix}
   -1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
 \end{pmatrix} $$
-to $R$ creating $R' = RM$ and similarly for $S' = RS$ if $\det S = -1$. Now we have the following decomposition, $Q = R'MAMS'$, noting that $R', S' \in \SO(3)$, $MAM \in \diag^+(3)$ and $M^2 = I$ and so this makes sense. Now I present a nice example,
+to $\vec R$ creating $\vec R' = \vec R\vec M$ and similarly for $\vec S' = \vec R\vec S$ if $\det \vec S = -1$. Now we have the following decomposition, $\vec Q = \vec R'\vec M\vec A\vec M\vec S'$, noting that $\vec R', \vec S' \in \SO(3)$, $\vec M\vec A\vec M \in \diag^+(3)$ and
+ $\vec M^2 = \vec I$ and so this makes sense. The decomposition $\vec Q = \vec R\vec A\vec S$ can be thought of as a body rotation, a stretch and a spatial rotation. That is, if we consider $\vec S$, this rotates the $\vec X$ (body) coordinates in the reference congifuration, the $\vec A$ stretches the axis and $\vec R$ rotates the $\vec x$ (spatial) coordinates. Now I present a nice example,
 
+\begin{eg}
+  Consider a bipolar decomposition of $\vec Q$ acting on a pseudo-rigid sphere. If $\vec R(t) = \vec I$, where $\vec A(t) = \diag (a_1, a_2, a_3)$. This is called the Jacobi ellipsoid motion, this is where only the outside of the sphere moves. However, if $\vec S(t) = \vec I$, then we have Dedekind ellipsoid motion, where only the inside moves and the outside stays still.
 
+  \begin{figure}[!ht]
+    \begin{minipage}{0.49\textwidth}
+      \centering
+      \resizebox{0.48\textwidth}{!}{\input{./figures/DedekindPRB.pdf_tex}}
+      \captionof{figure}{Dedekind Motion}
+    \end{minipage}\hspace{20pt}\begin{minipage}{0.49\textwidth}
+    \centering
+    \resizebox{0.48\textwidth}{!}{\input{./figures/JacobiPRB.pdf_tex}}
+    \captionof{figure}{Jacobi Motion}
+    \end{minipage}
+  \end{figure}
+\end{eg}
 
+\noindent
+After that interlude, we continue. We will work in an extended configuration space, that is, instead of just working in $\vec Q : \SO(3)$, we work in $\vec Q_{\text{ext}} : \SO(3) \times \diag^+(3) \times \SO(3)$. We call this the extended configuration space for psuedo rigid bodies. We also define a submersion\footnote{This is an everywhere surjective map between the tangent spaces of differentiable manifolds}, $\phi : \vec Q \to \GL^+(3)$, defined by $\phi(\vec R, \vec A, \vec S) = \vec{RAS}$, which allows us to define the extended Lagrangian,
+$L_{\text{ext}} : T\vec Q_{\text{ext}} \to \R$ defined by $L_{\text{ext}} = L \circ T\phi$.
+Furthermore, we assume that this Lagrangian is invariant under left and right symmetry, that is
+$$ L_{\text{ext}}(g\vec R, \vec A, \vec Sh, g\vec{\dot R}, \vec{\dot A}, \vec{\dot S}h) = L_{\text{ext}}(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}) $$
+To do the usual reduction, we now need some sort of Hamilton's variational principle. We will find in the following poroposition that it indeed satisfies the expected Hamilton's variational principle,
+\begin{nprop}
+  $(\vec R, \vec A, \vec S)$ satisfies Hamilton's Principle for $L_{\text{ext}}$ if and only if $\vec Q$ satisfies Hamilton's Principle for $L$.
+\end{nprop}
+\begin{proof}
+  All deformations of $\vec Q(t, s)$ are of the form $\phi(\vec R(t, s), \vec A(t, s), \vec S(t, s))$. for some $(\vec R(t, s), \vec A(t, s), \vec S(t, s)) \in \vec Q_\text{ext}$. Hence by chain rule, $(\vec Q, \vec{\dot Q}) = T\phi(\vec R(t, s), \vec A(t, s), \vec S(t, s), \vec{\dot R}(t, s), \vec{\dot A}(t, s), \vec{\dot S}(t, s))$ and so
+  $L(\vec Q(t, s), \vec{\dot Q}(t, s)) = L_\text{ext} (\vec R(t, s), \vec A(t, s), \vec S(t, s), \vec{\dot R}(t, s), \vec{\dot A}(t, s), \vec{\dot S}(t, s))$. Now we can write the following,
+  \begin{align*}
+    \d\int_{t_1}^{t_2} L_\text{ext} (\vec R(t, s), \vec A(t, s), &\vec S(t, s), \vec{\dot R}(t, s), \vec{\dot A}(t, s), \vec{\dot S}(t, s)) dt = 0\\ &\iff \left.\di{}{s}\right|_{s=0} \int_{t_1}^{t_2} L_\text{ext} (\vec R(t, s), \vec A(t, s), \vec S(t, s), \vec{\dot R}(t, s), \vec{\dot A}(t, s), \vec{\dot S}(t, s))dt = 0\\
+    &\iff \left.\di{}{s}\right|_{s=0}\int_{t_1}^{t_2} L(\vec Q(t, s), \vec{\dot Q}(t, s))dt = 0\\
+    &\iff \left.\di{}{s}\right|_{s=0}\int_{t_1}^{t_2} L(\vec Q(t), \vec{\dot Q}(t))dt = 0\\
+    &\iff \d\int_{t_1}^{t_2} L(\vec Q(t), \vec{\dot Q}(t))dt = 0\\
+  \end{align*}
+  which gives the Hamilton's Principle for $L$.
+\end{proof}
+
+\noindent
+For the rest of the chapter we will refer to $L_\text{ext}$ as $L$ as the previous proposition proves that the analysis we do on $L_\text{ext}$ suffices. We will use the following Lagrangian,
+$$ L(\vec Q, \vec{\dot Q}) = \frac{1}{2}\Tr(\vec{\dot Q}\vec{\dot Q}^T) $$
+We note that $\dit (\vec{RAS}) = \vec{\dot RAS} + \vec{R\dot AS} + \vec{RA\dot S}$, which we denote as $(RAS)^{\bullet}$, therefore we can write the Lagrangian as, $L(\vec Q, \vec{\dot Q}) = \frac{1}{2}\tr((\vec{RAS})^\bullet (\vec S^T\vec A\vec R^T)^\bullet)$. We will use this later to derive one of the sets of equations. We will now move to the reduction of the Lagrangian and then the Euler-Poincare equations.
+
+\subsection{Euler-Poincare Reduction}
+We now seek to reduce the Lagrangian, we recall the symmetric invariance on the Lagrangian we stated above,
+$$ L(g\vec R, \vec A, \vec Sh, g\vec{\dot R}, \vec{\dot A}, \vec{\dot S}h) = L(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}) $$
+and we let $g = \vec R^{-1}$, $h = \vec S^{-1}$ and the define $\Oh := \vec R^{-1}\vec{\dot R}$ and $\Lh := \vec{\dot S}\vec S^{-1}$ and we can now write,
+$$ L(e, \vec A, e, \Oh, \dot A, \Lh) = L(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}) $$
+We define $\ell(\vec A, \Oh, \vec{\dot A}, \Lh) := L(e, \vec A, e, \Oh, \vec{\dot A}, \Lh) = L(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S})$ and now start to work towards the Euler-Poincare equations. We firstly consider Hamilton's Principle for this Lagrangian,
+\begin{align*}
+  0 &= \d \int_{t_1}^{t_2} \ell(\vec A, \Oh, \vec{\dot A}, \Lh)dt \\
+  0 &= \int_{t_1}^{t_2} \ip{\pd \ell {\vec A}}{\d \vec A} + \ip{\pd \ell \Oh}{\d \Oh} + \ip{\pd{\ell}{\vec{\dot A}}}{\d \vec{\dot A}} + \ip{\pd \ell \Lh}{\d\Lh}dt \\
+  0 &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\vec A} - \dit\pd{\ell}{\vec{\dot A}}}{\d \vec A} + \ip{\pd \ell \Oh}{\d \Oh} + \ip{\pd \ell \Lh}{\d\Lh}dt \\
+  0 &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\vec A} - \dit\pd{\ell}{\vec{\dot A}}}{\d \vec A} + \ip{\pd \ell \Oh}{\dot \xi + [\Oh, \hat\xi]} + \ip{\pd \ell \Lh}{\dot \eta - [\Lh, \hat \eta]}dt \\
+\end{align*}
+\begin{align*}
+  0 &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\vec A} - \dit\pd{\ell}{\vec{\dot A}}}{\d \vec A} + \ip{\pd \ell \Oh}{\dot \xi} + \ip{\pd \ell \Oh}{\ad_{\Oh} \xi} + \ip{\pd \ell \Lh}{\dot \eta} - \ip{\pd \ell \Lh}{\ad_{\Lh} \eta}dt \\
+  0 &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\vec A} - \dit\pd{\ell}{\vec{\dot A}}}{\d \vec A} + \ip{-\dit\pd \ell \Oh}{\xi} + \ip{\ad^*_{\Oh} \pd \ell \Oh}{\xi} + \ip{-\dit \pd \ell \Lh}{\eta} - \ip{\ad^*_{\Lh} \pd \ell \Lh}{ \eta}dt \\
+  0 &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\vec A} - \dit\pd{\ell}{\vec{\dot A}}}{\d \vec A} + \ip{\ad^*_{\Oh} \pd \ell \Oh -\dit\pd \ell \Oh}{\xi} - \ip{\ad^*_{\Lh} \pd \ell \Lh + \dit \pd \ell \Lh}{ \eta}dt \\
+\end{align*}
+Therefore, considering endpoint conditions we reach the following set of Euler-Poincare equations,
+\begin{align}
+  \dit \pd \ell \Ov &= \ad^*_{\Ov} \pd \ell \Ov \\
+  \dit \pd{\ell}{\vec{\dot A}} &= \pd \ell {\vec A} \\
+  \dit \pd{\ell}{\Lv} &= -\ad^*_{\Lv} \pd \ell \Lv
+\end{align}
+which then give arise to (10.12) - (10.14) in \cite{holm_schmah_stoica_2009}. We can now work forward, in a very similar vein to Holm and replace the coadjoints and partial derivatives back with $\Lh$, $\vec A$, $\Oh$ and $\vec{\dot A}$. We go straight the rewritten derivatives,
+$$ \ell(Q, \dot Q) = \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A\Lh)(\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right) $$
+We now need to take variations of this Lagrangian in order to get the direct equations. Consider the following,
+\begin{align*}
+  \left.\dit\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \left.\dit\right|_{\e = 0} \frac{1}{2}\tr\left( ((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)^T \right) \\
+  &= \frac{1}{2}\tr\left( (\d\Oh \vec A)^T (\Oh \vec A + \vec {\dot A} + \vec A\Lh) + (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \d\Oh \vec A \right)\\
+  &= \tr\left( (\d\Oh \vec A)^T (\Oh \vec A + \vec {\dot A} + \vec A\Lh)  \right)
+\end{align*}
+This step can be done as we know that $\tr(\vec A^T\vec B) = \tr(\vec A\vec B^T)$ and so $\frac{1}{2}\tr(\vec A^T\vec B + \vec A\vec B^T) = \frac{1}{2}\tr(\vec A^T\vec B) + \frac{1}{2}\tr(\vec A^T\vec B) = \tr(\vec A^T\vec B)$
+\begin{align*}
+  \left.\dit\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \tr\left( (\d\Oh \vec A) (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right)\\
+   &= \tr\left( (\d\Oh \vec A) (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right)\\
+   &= \tr\left( \vec A^T(\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T\d\Oh \right)\\
+   &= \ip{\vec A(\Oh \vec A + \vec {\dot A} + \vec A\Lh}{\d\Oh}
+\end{align*}
+Now we consider the fact that $\displaystyle{\d\ell = \ip{\pd \ell \Oh}{\d\Oh}}$ and so $\displaystyle{\pd \ell \Oh = \Oh \vec A^2 + \vec {\dot A}\vec A + \vec A\Lh\vec A}$. We now need to consider,
+\begin{align*}
+  \ip{\vec{\dot A}\vec A}{\d\Oh} &= \tr((\vec{\dot A}\vec A)^T\d\Oh) \\
+  &= \tr (\vec A\vec{\dot A}\d\Oh) = 0
+\end{align*}
+This is true as $\vec A\vec{\dot A}$ is symmetric and $\d\Oh$ is asymmetric. We recall the result from the previous section that says that the trace must then be zero. Finally we note that $\Oh \vec A^2 = \frac{1}{2}\left(\Oh \vec A^2 + \vec A^2\Oh\right)$, as $\vec A^2$ is diagonal and so commutative. Hence the first equation now must be,
+\begin{align}
+  \pd \ell \Oh = \frac{1}{2}\left(\Oh \vec A^2 + \vec A^2\Oh\right) + \vec A\Lh\vec A
+\end{align}
+
+\noindent
+We continue with a similar argument for $\Lh$, again taking variations,
+\begin{align*}
+  \left.\dit\right|_{\e = 0} \ell (\Lh + \e\d\Lh) &= \left.\dit\right|_{\e = 0} \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A(\Lh + \e\d\Lh))(\Oh \vec A + \vec {\dot A} + \vec A(\Lh + \e\d\Lh))^T \right) \\
+  &=\frac{1}{2}\tr \left( (\vec A\d \Lh)^T (\Oh\vec A + \vec{\dot A} + \vec A\Lh) + (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T (A\d\Lh) \right) \\
+  &= \tr \left( (\vec A\d \Lh) (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right) \\
+  &= \tr \left( \vec A^T (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \d \Lh \right) \\
+  &= \ip{\vec A (\Oh\vec A + \vec{\dot A} + \vec A\Lh)}{\d\Lh}
+\end{align*}
+and so we get $\displaystyle{\pd \ell \Lh = \vec A\Oh\vec A + \vec A\vec{\dot A} + \vec A^2\Lh}$, and as before we get that $\ip{\vec A\vec{\dot A}}{\d\Lh} = 0$, therefore,
+\begin{align}
+  \pd{\ell}{\Lh} = \vec A\Oh\vec A + \frac{1}{2}\left( \Lh \vec A^2 + \vec A^2\Lh \right)
+\end{align}
+Finally, we derive the $\vec A$ version of the equations using a slightly different argument, where we split it half way through,
+\begin{align*}
+  \left.\dit\right|_{\e = 0} \ell (\vec A + \e\d\vec A) &= \left.\dit\right|_{\e = 0} \frac{1}{2}\tr \left( (\Oh (\vec A + \e\d\vec A) + \vec {\dot A} + (\vec A + \e\d\vec A)\Lh)(\Oh (\vec A + \e\d\vec A) + \vec {\dot A} + (\vec A + \e\d\vec A)\Lh)^T \right) \\
+  &= \frac{1}{2}\tr\left( (\Oh\d\vec A + \d\vec A\Lh)^T (\Oh\vec A + \vec{\dot A} + \vec A\Lh) + (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T(\Oh\d\vec A + \d\vec A\Lh) \right) \\
+  &= \tr\left( (\Oh\d\vec A + \d\vec A\Lh) (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right) \\
+  &= \tr\left( \Oh\d\vec A(\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right) + \tr\left( \d\vec A\Lh (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right)\\
+  &= \tr\left( \Oh^T(\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T\d\vec A \right) + \tr\left(  (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T\Lh^T\d\vec A \right)\\
+  &= \tr\left( \left(\Oh^2\vec A + \vec A\Lh^2 + \Oh\vec{\dot A} + \vec{\dot A}\Lh + 2\Oh\vec A\Lh \right)^T\d\vec A \right)\\
+  &= \ip{\Oh^2\vec A + \vec A\Lh^2 + \Oh\vec{\dot A} + \vec{\dot A}\Lh + 2\Oh\vec A\Lh}{\d\vec A}
+\end{align*}
+Now we reduce this further as we know that $\Lh^2\vec A + A\Lh^2 = A(\Oh^2 + \Lh^2)$ and so considering the trace pairing, we get that this term disapears. We can make a similar argument for $\Oh\vec{\dot A} + \vec{\dot A}\Lh$ and so we get the equations reduce to,
+\begin{align}
+  \pd \ell {\vec A} = 2\Oh A\Lh = \Oh\vec A\Lh + \Lh\vec A\Oh
+\end{align}
+In addition to,
+\begin{align}
+  \pd{\ell}{\vec{\dot A}} = \vec{\dot A}
+\end{align}
+these are then the Equations (10.15)-(10.18) that are stated by Holm, Schmah \& Stoica in \cite{holm_schmah_stoica_2009}
 \subsection{Noether Theory for general Euler-Poincare reduction}
 Let $G$ be an arbitrary matrix Lie group and let $L$ be a left-invariant Lagrangian,
 $$ L(hg, h\dot g) = L(g, \dot g) \quad \forall g, h \in G$$
@@ -47,7 +169,7 @@ The reduced system is just $\left.L(hg, h\dot g)\right|_{h = g^{-1}} = L(g^{-1}g
   \begin{align*}
     \int_{t_1}^{t_2} L(\chi(s)g, \chi(s)\dot g) = \int_{t_1}^{t_2} L(g, \dot g) \\
   \end{align*}
-  Now differentiate wrt s and set $s = 0$ (take first variation).
+  Now differentiate with respect to $s$ and set $s = 0$ (take first variation).
   $$ \int_{t_1}^{t_2} \left(\ip{\pd L g}{\chi_s(0)g} + \ip{\pd{L}{\dot g}}{\chi_s(0)\dot g}\right)dt = 0 $$
   Integrate by parts,
   $$ 0 = \int_{t_1}^{t_2} \ip{\pd L g - \dit \pd{L}{\dot g}}{\chi_s(0)g} + \left.\ip{\pd{L}{\dot g}}{\chi_s(0)g}\right|_{t_1}^{t_2} $$
