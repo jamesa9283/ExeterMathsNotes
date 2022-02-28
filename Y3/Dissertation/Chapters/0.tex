@@ -2,7 +2,10 @@
 
 \section{Introduction}
 
-We start with a problem. Consider a particle that is half way along a piece of massless string which is pulled past its natural extension. The question is, what is the velocity of the particle when it reaches a displacement of zero? Anybody trained in mathematics would start by trying to describe the position of the particle in this system and that is the wrong way to solve this problem.\\
+This document started nearly a year ago in a zoom call with two words, `plastic bag'. The challenge set was to get a mathematical model to describe the motions of pseudo rigid bodies, of which a plastic bag is an example of. The original plan, was for the derivations to be below as a first and motivating example. However, I underestimated the journey that the mathematics would take me on and this document now acts as the path that I took on this journey. I realised that energy is really important in mathematics and sometimes a problem cannot be solved by considering the particle position alone and so we need to use energy arguments. A simple example of an energy argument can be seen in the following example,\\
+
+\noindent
+Consider a particle that is half way along a piece of massless string which is pulled past its natural extension. The question is, what is the velocity of the particle when it reaches a displacement of zero? Anybody trained in mathematics would start by trying to describe the position of the particle in this system and that is the wrong way to solve this problem.\\
 
 \begin{figure}[!ht]
 \centering
@@ -11,10 +14,11 @@ We start with a problem. Consider a particle that is half way along a piece of m
 \end{figure}
 
 \noindent
-To solve this problem, the best (and probably only) way is to describe the particle's energy. That is, we know that energy is conserved and so if at some point we know the total energy we can then describe the energy in the system at any point. At $t = 0$ there is zero kinetic energy, as the particle is held at rest. If we assume that the only energies to consider are potential and kinetic, the whole energy of the system can be described by just the elastic potential energy. Then we know that the kinetic energy of the particle at displacement zero is, $\frac{\l x^2}{2l_0}$ where $l_0$ is the natural extension of the spring, $x$ is the elastic extension and $\l$ is the spring constant. Hence, in our case the energy in the string is $\frac{\l (\ell - l_0)^2}{2l_0}$ and so the velocity of the particle at displacement zero is going to be, $v = (\ell - l_0)\sqrt{\frac{\l}{ml_0}}$. In general, we can make these energy arguments about sets of particles in Euclidean space. To do this we go on a little detour to explain the Lagrangian, a useful tool in this area of mathematics.\\
+To solve this problem, the best (and probably only) way is to describe the particle's energy. That is, we know that energy is conserved and so if at some point we know the total energy we can then describe the energy in the system at any point. At $t = 0$ there is zero kinetic energy, as the particle is held at rest. If we assume that the only energies to consider are potential and kinetic, the whole energy of the system can be described by just the elastic potential energy. Then we know that the kinetic energy of the particle at displacement zero is, $\frac{\l x^2}{2l_0}$ where $l_0$ is the natural extension of the spring, $x$ is the elastic extension and $\l$ is the spring constant. Hence, in our case, the energy in the string is $\frac{\l (\ell - l_0)^2}{2l_0}$ and so the velocity of the particle at displacement zero is going to be, $v = (\ell - l_0)\sqrt{\frac{\l}{ml_0}}$. In general, we can make these energy arguments about sets of particles in Euclidean space. To start to understand this, we must first go on a little detour to explain the role of the Lagrangian through the Euler-Lagrange equations and variations. \\
 
 \noindent
-The rest of this chapter is in very close relation to first chapter of Holm, Schmah \& Stoica (2009), Geometric Mechanics and Symmetry \cite{holm_schmah_stoica_2009}. Consider a point mass, the position of this point is also called the \textbf{configuration} is a vector $\vec q \in \R^d$. If we consider $N$ points then the configuration becomes $\vec q = (\vec q_1, \vec q_2, \dots, \vec q_N) \in \R^{dN}$. This notation works with familiar mechanics concepts, that is we can write Newtons Second Law, $F_i = m_i\ddot{\vec q_i}$ for $i = 1, 2, \dots, N$. We now define a special type of Newtonian system that we can use to illustrate a few important concepts.
+The rest of this chapter is in very close relation to first chapter of Holm, Schmah \& Stoica (2009), Geometric Mechanics and Symmetry \cite{holm_schmah_stoica_2009}. Consider a point mass, the position of this point is also called the \textbf{configuration} is a vector $\vec q \in \R^d$. If we consider $N$ points then the configuration becomes $\vec q = (\vec q_1, \vec q_2, \dots, \vec q_N) \in \R^{dN}$. This notation works with familiar mechanics concepts, that is we can write Newtons Second Law, $F_i = m_i\ddot{\vec q_i}$ for $i = 1, 2, \dots, N$.
+We now define a special type of Newtonian system that we can use to illustrate a few important concepts.
 
 \begin{ndefi}[Newtonian Potential System]
   A \textbf{Newtonian potential system} is a system of equations,
@@ -100,8 +104,7 @@ Then we call $\vec q$ a \textbf{stationary point} of $\mathcal{S}$ if $\d\mathca
   \end{align*}
   This then tells us that for any smooth $\d\vec q(t)$ satisfying $\d\vec q(a) = \d\vec q(b) = 0$. If $\d\mathcal{S} = 0$, then $\pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} = 0$ and so Hamilton's Principle is equivalent to the Euler-Lagrange equations.
 \end{proof}
-
 \noindent
-The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincar\'e Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last chapter of pseudo-rigid bodies. We will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
+We now have the foundation to use Lagrangian Mechanics throughout the rest of the document. We will again and again see the use of Hamilton's Variational Principle and different types of Euler-Legrange equations. The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincar\'e Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last chapter of pseudo-rigid bodies. We will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
 
 % There are several, `checkpoints', places where you can take different paths through the dissertation and end up at one of the examples at the end. The following diagram explains the roadmap,
