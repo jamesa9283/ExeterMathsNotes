@@ -38,9 +38,9 @@ This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As 
   We already know that $\d \xi = \dot \eta + [\xi, \eta]$ and $\eta = g^{-1}\d g$ and then $\d a = -g^{-1}\d g a = -\eta_{\mathcal{M}} a = -\eta a$. Now we look at our variational principle,
   \begin{align*}
     0 &= \d\int_{t_1}^{t_2} \ell(\xi, a)\, dt \\
-    &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a})\, dt \\
+    &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{\xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a})\, dt \\
     &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{\xi}}{\dot \eta + \ad_{\xi} \eta} - \ip{\pd{\ell}{a}}{\eta_\mathcal{M}}\, dt \\
-    &= \int_{t_1}^{t_2} \ip{ -\dit \pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{xi}}{\eta} - \ip{a \diamond \pd{\ell}{a}}\, dt && \text{ we used integration by parts}
+    &= \int_{t_1}^{t_2} \ip{ -\dit \pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{\xi}}{\eta} - \ip{a \diamond \pd{\ell}{a}}\, dt && \text{ we used integration by parts}
   \end{align*}
   Now we want the second equation,
   \begin{align*}
