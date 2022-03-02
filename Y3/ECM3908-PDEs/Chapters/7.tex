@@ -1,0 +1,162 @@
+% !TEX root = ../notes.tex
+
+\noindent
+We consider the diffusion equation with a source,
+\subsection{Diffusion Equation with a source equation}
+$u_t - ku_{xx} = f(x, t)$ where $-\infty < x < \infty$, $t > 0$ and $k > 0$ where $u(x, 0) = \Phi(x)$. When $f(x, t) = 0$, then we get,
+$$ u(x, t) = \int_{-\infty}^\infty S(x - y, t)\Phi(y)dy $$
+Then with $f(x, t) \ne 0$, we get that,
+$$ u(x, t) = \int_{-\infty}^\infty S(x - y, t)\Phi(y)dy + \int_0^t \int_{-\infty}^\infty S(x - y, t - s)f(y, s)dyds$$
+For simplicity, we let $\Phi(x) = 0$. Then we need to find that,
+\begin{align*}
+  \pd u t &= \pd{}{t}\int_0^t \int_{-\infty}^{\infty} S(x - y, t - s)f(y, s)dyds\\
+  &= \int_0^t \int_{-\infty}^{\infty} \pd{}{t}S(x - y, t - s)f(y, s)dyds + \lim_{s \to t}\int_{-\infty}^\infty S(x - y, t - s)f(y, s)dy\\
+  &= \int_0^t \int_{-\infty}^\infty k\pdd{}{x}S(x - y, t - s)f(y,s)dyds + \lim_{s \to t}\int_{-\infty}^\infty S(x - y, t - s)f(y, s)dy
+\end{align*}
+\begin{align*}
+  &= \int_0^t \int_{-\infty}^\infty k\pdd{}{x}S(x - y, t - s)f(y,s)dyds + \int_{-\infty}^\infty S(x - y, \e)f(y, t)dy \\
+  &= \int_0^t \int_{-\infty}^\infty k\pdd{}{x}S(x - y, t - s)f(y,s)dyds + \int_{-\infty}^\infty \pd Q x(x - y, \e)f(y, t)dy \\
+  &= \int_0^t \int_{-\infty}^\infty k\pdd{}{x}S(x - y, t - s)f(y,s)dyds - \int_{-\infty}^\infty \pd Q y(x - y, \e)f(y, t)dy \\
+  &= \int_0^t \int_{-\infty}^\infty k\pdd{}{x}S(x - y, t - s)f(y,s)dyds -\left[ - Q(x - y, \e)f(y, t) \right]_{y = -\infty}^{y = \infty} + \int_{-\infty}^\infty Q(x - y, \e)\pd f ydy \\
+  &= \int_0^t \int_{-\infty}^\infty k\pdd{}{x}S(x - y, t - s)f(y,s)dyds + \int_{-\infty}^\infty Q(x - y, \e)\pd f y dy \\
+\end{align*}
+\noindent
+Consider as $\e \to 0$ and we consider the initial conditions for $Q$,
+\begin{align*}
+  &= \int_{-\infty}^x \pd f y dy = f(x)
+\end{align*}
+and so we can write that,
+\begin{align*}
+  \pd u t &= k\pdd{}{x}\int_0^t \int_{-\infty}^\infty S(x - y, t - s)f(y, s)dyds + f(x, t) \\
+  \pd u t &= k\pdd u x + f(x, t)
+\end{align*}
+\noindent
+Therefore it satisfies the given PDE and so now we need to show it satisfies the initial condition. Therefore,
+\begin{align*}
+  u(x, 0) &= \int_{-\infty}^\infty S(x - y, 0)\Phi(y)dy + 0 \\
+  &= \Phi(x)
+\end{align*}
+Then substituting into the source function $S(x, t)$, we get that,
+\begin{align*}
+  u(x, t) &= \int_0^t \int_{-\infty}^\infty S(x - y, t - s)f(y, s)dyds \\
+  &= \int_0^t \int_{-\infty}^\infty \frac{1}{\sqrt{4\pi k (t - s)}}e^{\frac{-(x - y)^2}{4k(t - s)}} f(y, s)dy ds
+\end{align*}
+If $\Phi(x) \ne 0$, then we get,
+$$ \int_0^t \int_{-\infty}^\infty \frac{1}{\sqrt{4\pi k (t - s)}}e^{\frac{-(x - y)^2}{4k(t - s)}} f(y, s)dy ds + \int_{-\infty}^\infty \frac{1}{\sqrt{4\pi k t}}e^{-\frac{(x - y)^2}{4kt}}\Phi(y)dy $$
+
+\noindent
+\begin{eg}
+  Use the method of reflection to solve the inhomogeneous diffusion equation on the half-line with Dirichlet boundary condition
+  $$ \begin{cases}
+    u_t - ku_{xx} = f(x, t)\\
+    u(0, t) = 0, u(x, 0) = \Phi(x)
+  \end{cases} $$
+  We consider the odd extensions of $\Phi$ and $f$. We denote them as $f_{\text{odd}}$ and $\Phi_\text{odd}$. Then we use the laws of integration to simplify the answer to,
+  $$ v(x, t) = \int_0^\infty \left(S(x - y, t - s) - S(x + y, t - s)\right)\Phi(y)dy + \int_0^t \int_{-\infty}^\infty \left( S(x - y, t - s) - S(x + y, t - s) \right) dyds $$
+\end{eg}
+
+\section{Fourier Series}
+The Fourier Series of a function on an interval $[-\pi, \pi]$ is,
+$$ f(x) = \frac{a_0}{2} + \int_{k=1}^\infty a_k\cos kx + b\sin kx $$
+where we define,
+$$ a_k = \ip{f(x)}{\cos kx} = \frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos kx $$
+$$ b_k = \ip{f(x)}{\sin kx} = \frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin kx $$
+Where we use the $L-2$ inner product on function spaces. This is defined as,
+$$ \ip f g = \frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)dx $$
+We can now see that the trigonometric functions are orthogonal,
+$$ \int_{-\pi}^\pi \cos (kx)\cos (\ell x) = \begin{cases}
+  0 & k \ne \ell \\
+  2\pi & k = \ell = 0\\
+  \pi & k = \ell \ne 0
+\end{cases} $$
+and,
+$$ \int_{-\pi}^\pi \cos(kx)\sin(\ell x)dx = 0 \qquad \forall k, \ell \ge 0$$
+and
+$$ \int_{-\pi}^\pi \sin (kx)\sin(\ell x) = \begin{cases}
+  0 & k \ne \ell \\
+  \pi & k = \ell \ne 0
+\end{cases} $$
+Therefore we that $\sin$ is orthogonal to $\sin$ and $\cos$ for $k \ne \ell$ and $\cos$ is orthogonal to $\cos$ for $k \ne \ell$. Furthermore, $\norm 1 = \sqrt 2$, $\norm {\cos kx} = 1$ and $\norm {\sin kx} = 1$ where $k \ne 0$.\\
+
+
+\noindent
+Consider $\ip{f(x)}{\cos \ell x}$,
+\begin{align*}
+   \ip{f(x)}{\cos \ell x} &= \ip{\frac{a_0}{2}}{\cos \ell x} + \sum_{k=1}^\infty a_k \ip{\cos kx}{\cos \ell x} + b_k\ip{\sin kx}{\cos \ell x}\\
+   &= \ip{\frac{a_0}{2}}{\cos \ell x} + \sum_{k=1}^\infty a_k \ip{\cos kx}{\cos \ell x} \\
+   &= \sum_{k=1}^\infty a_k \ip{\cos kx}{\cos \ell x} = a_\ell \\
+\end{align*}
+Therefore, $a_k = \ip{f(x)}{\cos kx}$. We can now prove a similar thing for $b_k$. \\
+
+\noindent
+Now assume $f$ is an even function, then we have the following,
+$$ f(x) = \frac{a_0}{2} + \sum_{k=1}^\infty a_k\cos kx $$
+as $b_k = \ip{f(x)}{\sin kx} = 0$. This is called the \textbf{Fourier Cosine Series}. If $f$ is an odd function, then we have a \textbf{Fourier Sine series},
+$$ f(x) = \sum_{k=1}^\infty b_k \sin kx$$
+We notice that in the sine and cosine series the coefficients double. That is in the Fourier Cosine series we have,
+$$ a_k = \frac{2}{\pi}\int_{-\pi}^\pi f(x)\cos kx dx $$
+
+\noindent
+We know that $e^{ix} = \cos kx + i \sin kx$ and we also know that $\cos kx = \frac{1}{2}\left( e^{ikx} + e^{-ikx}\right)$ and $\sin kx = \frac{1}{2i}\left( e^{ikx} - e^{-ikx} \right)$. We cal also extend the $L-2$ norm to complex-valued functions,
+$$ \ip f g = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)\bar g(x) $$
+Therefore we consider,
+$$ \ip{e^{ikx}}{e^{-i\ell x}} = \frac{1}{2\pi}\int_{-\pi}^\pi e^{i(k - \ell)x}dx = \begin{cases}
+  1 & k = \ell \\
+  0 & k \ne \ell
+\end{cases} $$
+Therefore, the Fourier Series of the complex valued function is,
+$$ f(x) = \sum_{k = -\infty}^\infty c_k e^{ikx} \qquad c_k = \ip{f(x)}{e^{ikx}} $$
+
+
+\noindent
+Finally if we have a domain of definition of $[-\ell, \ell]$ instead of $[-\pi, \pi]$ we can use a change of variables of $x = \frac{\ell}{\pi}y$ for $- \pi \le y \le \pi$. Then our Fourier Series becomes,
+$$ f(x) = \frac{a_0}{2} + \sum_{k=1}^\infty a_k\cos \frac{k\pi}{\ell}x + b_k\sin \frac{k\pi}{\ell}x $$
+where,
+$$ a_k \frac{1}{\ell}\int_{-\ell}^\ell f(x)\cos \frac{k\pi}{\ell}x dx \qquad b_k = \frac{1}{\ell}\int_{-\pi}^\pi f(x)\sin \frac{k\pi}{\ell}x $$
+
+\section{Seperation of Vairables}
+We consider the diffusion equation, $u_t - u_{xx} = 0$ for $0 < x < \ell$ where $t > 0$ and $k > 0$. With boundary and initial conditions $u(0, t) = u(\ell, t) = 0$ and $u(x, 0) = f(x)$. We consider a solution of the form $u(x, t) = X(x)T(t) \ne 0$. Then we get that, the PDE reduces to $XT' - kX''T = 0$ then we can write that,
+$$ \frac{T'}{T} = k \frac{X''}{X} = -\a^2 $$
+As they are equal, they must equal a constant. Therefore,
+$$ \frac{T'}{kT} = -\a^2 \qquad \frac{X''}{X} = -\a^2 $$
+We then have the two ODEs, $T' + \a^2kT = 0$ and $X'' + \a^2X = 0$, therefore we have the solutions of $T(t) = ce^{-\a^2 kt}$ (We have $-\a^2$ as we want a solution that decays), which means $u(x, t) = e^{-\l t}X(t)$. We consider this as a solution, then $u_t = -\l e^{-\l t}X(x)$ and $u_{xx} = e^{-\l t}X''(x)$. We then have that $-e^{-\l t}(\l X + k X'') = 0$ and so we then have that $X'' + \frac{\l}{k}X = 0$.
+We have the initial conditions of $u(0, t) = u(\ell, t) = 0$, that is $e^{-\l t}X(0) = e^{-\l t}X(\ell) = 0$ and so $X(0) = X(\ell) = 0$. We now solve the second order ODE with these boundary conditions.
+$$ \begin{cases}
+  kX'' + \l X = 0\\
+  X(0) = X(\ell) = 0
+\end{cases} $$
+If $\l = 0$, then $\di X t = c$ and so $X(x) = Cx + D$, therefore $X(0) = D = 0$ and $X(\ell) = c\ell = 0$. Therefore, $X(x) = 0$, which is the trivial solution. Now consider $\ell < 0$, let $\l = -\b$ where $\b > 0$.  Therefore we get the ODE, $X'' - \frac{\b}{k}X = 0$, and so we have the solution $X(x) = c_1e^{\sqrt{\frac{\b}{k}}x} + c_2e^{-\sqrt{\frac{\b}{k}}x}$. Now impose boundary conditions,
+$X(0) = c_1 + c_2 = 0 \implies c_1 = -c_2$ and so $X(\ell) = c_1e^{\sqrt{\frac{\b}{k}}\ell} + c_2e^{-\sqrt{\frac{\b}{k}}\ell} = 0$. Therefore, we get that $c_1 = 0$ and so $c_2 = 0$ as well so $X(x) = 0$. Now consider if $\l > 0$, then $X'' + \frac{\l}{k}X = 0$ and so we get,
+$X(x) = c_1\cos \o x + c_2\sin \o x$ where $\o^2 = \frac{\l}{k}$. We impose the conditions and get that $X(0) = c_1 = 0$ and the second we get that $X(\ell) = c_2\sin \o\ell = 0$, so we let $\sin \o \ell = 0$ and so $\o_n \ell = n\pi$ where $n \in \Z$. We then have $\o_n = \frac{n\pi}{\ell}$, this is the eigenfrequency. Therefore $\l_n = k\o_n^2 = k\left( \frac{n\pi}{\ell} \right)^2$.
+Now we can find the eigenfunctions. Therefore, $X_n(x) = \sin \frac{n\pi}{\ell}x$ for $n \in \Z$ are the eigenfunctions. The eigensolutions are,
+$$ u_n(x, t) = X_n(x)T_n(t) = e^{-\l_n t}X_n(x) = e^{-\l_n t}\sin \frac{n\pi}{\ell} x $$
+Therefore we have,
+$$ u(x, t) = \sum_{n=1}^\infty c_n e^{-k \left( \frac{n\pi}{\ell} \right)^2 t}\sin \frac{n\pi}{\ell} x $$
+Now we find $c_n$ by imposing the initial condition.
+$$ u(x, 0) = \sum_{n=1}^\infty c_n\sin \frac{n\pi}{\ell} x = f(x) \qquad n \in \Z $$
+This is a Fourier Sine series, so
+$$ c_n = \frac{2}{\ell}\int_{0}^\ell f(x)\sin \frac{n\pi}{\ell}dx $$
+
+\begin{eg}
+  Consider $u_t - ku_{xx} = 0$ for $0 < x < \ell$ and $t > 0$ where $u(0, t) = 0$ and $u(\ell, t) = u_0$ subject to $u(x, 0) = f(x)$ for $0 < x < \ell$. We introduce that,
+  $$ u(x, t) = v(x, t) + \frac{u_0x}{\ell} $$
+  and then $u(0, t) = v(0, t) = 0$ and $u(\ell, t) = v(\ell, t) + u_0 = u_0$ and so $v(\ell, t) = 0$. We solve another PDE for $v(x, t)$, then we can find $u(x, t)$. We can quickly check that $u_t = v_t$ and $u_{xx} = v_{xx}$. Therefore the PDE problem is $v_t - kv_{xx} = 0$ for $0 < x < \ell$ and $t > 0$ where $v(0, t) = v(\ell, t) = 0$ subject to $v(x, 0) = u(x, 0 ) - \frac{u_0 x}{\ell} = f(x) - \frac{u_0 x}{\ell}$ for $0 < x < \ell$. We can now solve this.
+  $$ v(x, t) = \sum_{n=1}^\infty v_n(x, t) = \sum_{n=1}^\infty c_n e^{-k\left( \frac{n\pi}{\ell} \right)^2 t}\sin \frac{n\pi}{\ell} x $$
+  where
+  $$c_n = \frac{2}{\ell}\int_0^\ell \left(f(x) - \frac{u_0x}{\ell}\right) \sin \frac{n\pi}{\ell}xdx.$$
+  Therefore we get,
+  $$ u(x, t)= \sum_{n=1}^\infty \left[ \frac{2}{\ell}\int_0^\ell \left(f(\t) - \frac{u_0\t}{\ell}\right) \sin \frac{n\pi}{\ell}\t d\t \right] e^{-k\left( \frac{n\pi}{\ell} \right)^2 t}\sin \frac{n\pi}{\ell} x + \frac{u_0x}{\ell}$$
+\end{eg}
+
+\subsection{Diffusion Equation with Neumann Boundary Condition}
+Consider $u_t - ku_{xx} = 0$ for $0 < x < \ell$ where $t, k > 0$ with $u_x(0, t) = u_x(\ell, t) = 0$ for $u(x, 0) = \Phi(x)$. We have a solution of the form $u(x, t) = e^{-\l t}X(x)$, then we substitute this into the PDE, we get that $X'' + \frac{\l}{k}X = 0$ where $\l > 0$. This is just $X'' + \o^2 X = 0$ where $\o^2 =
+\frac{\l}{k}$. We have that $X(x) = c_1\cos \o x + c_2\sin \o x$. Now we consider the boundary conditions, $u_x(0, t) = u_x(\ell, t) = 0$. That is $X'(0) = X'(\ell) = 0$. We consult our solution for $X(x)$ and get, $X'(x) = -c_1\o \sin\o x + c_2\o \cos \o x$ and so $X'(0) = c_2\o = 0$ and so $c_2 = 0$. Now $X'(\ell) = -c_1\o\sin \o \ell = 0$.
+For non-trivial solutions $\sin \o\ell = 0$ and so $\o_n = \frac{n\pi}{\ell}$. Therefore, $\l_n = k\o_n^2 = k\left( \frac{n\pi}{\ell} \right)^2$. Therefore, $X(x) = c_n\cos \frac{n\pi}{\ell}x$. Therefore,
+$$ u_n(x, t) = e^{-\l_n t}X_n(x) = e^{-k\left( \frac{n\pi}{\ell} \right)^2 t}\cos \frac{n\pi}{\ell }x $$
+We also consider $\l = 0$, we then get another solution, $X(t) = D$. Therefore we have a solution (letting $D = \frac{1}{2}c_0$),
+$$ u(x, t) = \frac{c_0}{2} + \sum_{n=1}^\infty c_ne^{-k\left( \frac{n\pi}{\ell} \right)^2 t}\cos \frac{n\pi}{\ell }x $$
+Now we impose the initial conditions. Therefore,
+$$ u(x, 0) = \frac{c_0}{2} + \sum_{n=1}^\infty c_n\cos \frac{n\pi}{\ell }x $$
+and so we have that,
+$$ c_n = \frac{2}{\ell}\int_0^\ell \cos \frac{n\pi}{\ell}x \Phi(x)dx  $$
+
