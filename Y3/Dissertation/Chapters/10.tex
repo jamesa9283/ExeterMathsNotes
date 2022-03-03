@@ -1,7 +1,10 @@
 % !TEX root = ../notes.tex
 
 \section{Pseudo-Rigid Bodies}
-Now let us assume that our body can stretch and sheer, this will be called a psudo rigid body. I have done the following derivations with the assumption that the configuration space we are working in is $\GL^+(3)$, ie. the set of matrices with postive determinant. We make a few assumptions, firstly the moment of inertia tensor is rotationally invariant, it is sufficient that the density function $\rho(\vec X)$ is spherically symmetric. We will also assume that the Lagrangian only depends on the kinetic energy and so we study free ellipsoid motion.\\
+In the following section we will firstly follow Chapter 10 of Holm, Schmah \& Stoica, Geometric Mechanics and Symmetry~\cite{holm_schmah_stoica_2009}, which I summarise then derive the left, right and left and right invariant Euler Poincar\'e equations for Pseudo Rigid bodies. After, we will look at introducing potential energy into the Lagrangian following a 2010 paper from Toshihiro Iwai~\cite{Iwai_2010}.\\
+
+\noindent
+Let us assume that our body can stretch and sheer, this will be called a psudo rigid body. I have done the following derivations with the assumption that the configuration space we are working in is $\GL^+(3)$, ie. the set of matrices with postive determinant. We make a few assumptions, firstly the moment of inertia tensor is rotationally invariant, it is sufficient that the density function $\rho(\vec X)$ is spherically symmetric. We will also assume that the Lagrangian only depends on the kinetic energy and so we study free ellipsoid motion.\\
 
 \noindent
 We fix a reference configuration via a fixed spatial coordinate system and a moving body coordinate system, both with origin of the fixed point of the body. We will assume that the configuration of the system is a matrix $\vec Q(t) \in \GL^+(3)$ which takes the label $\vec X$ to the spacial position $\vec x(t)$, that is,
@@ -154,6 +157,7 @@ In addition to,
   \pd{\ell}{\vec{\dot A}} = \vec{\dot A}
 \end{align}
 these are then the Equations (10.15)-(10.18) that are stated by Holm, Schmah \& Stoica in \cite{holm_schmah_stoica_2009}
+
 \subsection{Noether Theory for general Euler-Poincare reduction}
 Let $G$ be an arbitrary matrix Lie group and let $L$ be a left-invariant Lagrangian,
 $$ L(hg, h\dot g) = L(g, \dot g) \quad \forall g, h \in G$$
@@ -165,7 +169,7 @@ The reduced system is just $\left.L(hg, h\dot g)\right|_{h = g^{-1}} = L(g^{-1}g
   $$ \ip{\Ad^*_{g^{-1}} \pd \ell \xi}{\eta} = K $$
 \end{nthm}
 \begin{proof}
-  Take a one parameter subgroup $\chi(s)$ and multiply this by the Lgrangian left,
+  Take a one parameter subgroup $\chi(s)$ and multiply this by the Lagrangian left,
   \begin{align*}
     \int_{t_1}^{t_2} L(\chi(s)g, \chi(s)\dot g) = \int_{t_1}^{t_2} L(g, \dot g) \\
   \end{align*}
@@ -173,11 +177,11 @@ The reduced system is just $\left.L(hg, h\dot g)\right|_{h = g^{-1}} = L(g^{-1}g
   $$ \int_{t_1}^{t_2} \left(\ip{\pd L g}{\chi_s(0)g} + \ip{\pd{L}{\dot g}}{\chi_s(0)\dot g}\right)dt = 0 $$
   Integrate by parts,
   $$ 0 = \int_{t_1}^{t_2} \ip{\pd L g - \dit \pd{L}{\dot g}}{\chi_s(0)g} + \left.\ip{\pd{L}{\dot g}}{\chi_s(0)g}\right|_{t_1}^{t_2} $$
-  The first part is $0$ as they are just the Euler Legrange equations. Therefore,
+  The first part is zero as they are just the Euler Legrange equations. Therefore,
   $$ \ip{\pd{L}{\dot g}}{\chi_s(0)g} = K $$
   But we can write $\chi_s(0)g = \eta g = gg^{-1}\eta g = g(g^{-1}\eta g) = g\Ad_{g^{-1}}\eta$. Therefore,
   $$ \ip{\pd{L}{\dot g}}{g\Ad_{g^{-1}}\eta} = K $$
-  Now we need to add $\xi$. We want to deform $g_t(t, s)$ but not $g(t)$. Assume that $L(g(t), g_t(t, s)) = L(g^{-1}(t)g(t),  g^{-1}(t)g_t(t, s)) = \ell(g^{-1}(t)g_t(t,s))$. Now differentiate wrt $s$. Now we conclude,
+  Now we need to add $\xi$. We want to deform $g_t(t, s)$ but not $g(t)$. Assume that $L(g(t), g_t(t, s)) = L(g^{-1}(t)g(t),  g^{-1}(t)g_t(t, s)) = \ell(g^{-1}(t)g_t(t,s))$. Now differentiate with respect to $s$. Now we conclude,
   $$ \ip{\pd{L}{\dot g}}{g_{ts}(t, s)} = \ip{\pd{\ell}{\xi}}{g^{-1}g_{ts}(t, s)} $$
    and set $s = 0$ we get,
    $$ \ip{\pd{L}{\dot g}}{\d g_{t}} = \ip{\pd{\ell}{\xi}}{g^{-1}\d g_{t}(t)} $$
@@ -188,7 +192,9 @@ The reduced system is just $\left.L(hg, h\dot g)\right|_{h = g^{-1}} = L(g^{-1}g
    Therefore,
    $$ K = \ip{g\pd \ell \xi}{g\Ad_{g^{-1}}\eta} = \ip{\pd \ell \xi}{\Ad_{g^{-1}}\eta} = \ip{\Ad^*_{g^{-1}}\pd \ell \xi}{\eta} $$
 \end{proof}
-NB! The conserved quantity is the constant that arises from integration by parts.
+
+\noindent
+We note that the conserved quantity is the constant that arises from integration by parts. I find this quite nice.
 
 \begin{eg}
   Now apply this to Pseudo Rigid bodies.
