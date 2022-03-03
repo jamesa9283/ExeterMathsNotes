@@ -1,0 +1,104 @@
+% !TEX root = ../notes.tex
+
+\begin{ncor}
+   Let $f : X \to X'$ and $g : Y \to Y'$ be continuous functions and define $f \ti g : X\ti Y \to X'\ti Y'$ by $(f \ti g)(x, y) = (f(x), g(y))$. Then $f \ti g$ is continuous.
+\end{ncor}
+\begin{proof}
+  We have $p_{X'}\circ (f \ti g) = f\circ p_x : X \ti Y \to X$, since both functions take $(x, y)$ to $f(x)$.
+  \[\begin{tikzcd}
+  	{X\times Y} & {X'\times Y'} \\
+  	X & Y
+  	\arrow["{f\times g}", from=1-1, to=1-2]
+  	\arrow["f", from=2-1, to=2-2]
+  	\arrow["{p_X}"', from=1-1, to=2-1]
+  	\arrow["{p_{X'}}", from=1-2, to=2-2]
+  \end{tikzcd}\]
+  Since $p_X$ is continuous (Lemma 3.24) and $f$ is continuous, it follows that their composite $f \circ p_X$ is continuous. Hence $p_{X'} \circ (f \ti g)$ is continuous. Similarly, so is $fp_{Y'}\circ (f \ti g)$. so by Lemma 3.24, $f\ti g$ is continuous.
+\end{proof}
+
+\begin{ncor}
+  For any topological space $X$, the diagonal map $\D : X \to X\ti X$, $\D(x) = (x, x)$, is continuous.
+\end{ncor}
+\begin{proof}
+  Let $p_1, p_2$ be the projections from $X\ti X$ to the first and second factors. Then $p_1 \circ \D$ and $p_2\circ \D$ coincide with the identity function $id_X : X \to X$ (which is most certainly continuous). So by Lemma 3.24 $\D$ is continuous.
+\end{proof}
+
+\begin{ncor}
+   For continuous functions $f, g : X \to \R$, the functions $f \pm g$, $fg$ etc. are continuous.
+\end{ncor}
+\begin{proof}
+  Let $m : \R \to \R \to \R$ be the multiplication function $m(x, y) = xy$. We know that this is continuous. Now $fg : X \ti X \to \R$ is the composite of the continuous maps $\D : X \ti X \to X$. $f \times g : X\ti X \to \R\ti \R$ and $m : \R \ti \R \to \R$, so it is continuous. The cases for $f + g$, and $f - g$ are similar.
+\end{proof}
+
+\subsection{Compact Spaces}
+We look back to the function on the closed and bounded interval. We need both `closed' and `bounded'. We can find a continuous function $(0, 1) \to \R$ defined by $\frac{1}{x}$ and $[0, \infty)$ defined by $x$ that have no maximum.\\
+
+\noindent
+It is also important that we work with $\R$ not $\Q$. On the closed bounded subset $S = [1, 2] \cap \Q$, the function,
+$$ f(x) = \frac{1}{x^2 - 2} $$
+is well defined as $x^2 \ne 2$ but has no maximum or minimum. The essential property of $[a, b] \sub \R$ which makes this work is \textbf{compactness}.
+
+\begin{ndefi}[Open Cover, Compact]
+  Let $X$ be a topological space and let $A$ be any subset of $X$,
+  \begin{enumerate}
+    \item An \textbf{open cover} of $A$ in $X$ is a family of open sets $U_i$, $i \in \cI$ such that,
+    $$ A \sub \bigcup_{i \in \cI} U_i $$
+    \item $A$ is \textbf{compact} if every open cover $U_i$, $i \in \cI$ has a finite subcover, that is there are $i_1, \dots i_m \in \cI$ with,
+    $$ A \sub U_{i_1} \cup U_{i_2} \cup \dots \cup U_{i_n} $$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{remark}
+  Taking $A$ to be $X$ itself, $X$ is compact if, for any family of open sets $U_i$, $i \in \cI$ with,
+  $$ X = \bigcup_{i \in \cI} U_i $$
+  we have,
+  $$ X = \bigcup_{j=1}^n U_{i_j}  $$
+  for some finite subcover $\{i_1, i_2, \dots, i_n\}$ of $\cI$.
+\end{remark}
+
+\begin{eg}
+  The intervals $U_n = (n - 1, n + 1)$ in $\R$ for $n \in \Z$ form an open cover of $\R$,
+  $$ \bigcup_{n \in \Z} U_n = \R $$
+  but we cannot write $\R$ as a finite union of these intervals. Hence $\R$ is not compact.
+\end{eg}
+
+\begin{eg}
+  Any finite topological space $X = \{x_1, \dots, x_n\}$ is compact. If we have the open cover,
+  $$ X = \bigcup_{i \in \cI} U_i $$
+  then, $1 \le j \le n$ we can pick $i_j \in \cI$ with $x_j \in U_{i_j}$. This means that $U_{i_1}\cup \dots \cup U_{i_n}$.
+\end{eg}
+
+\subsubsection{Compact subsets of $\R$}
+Our aim in this section is to show that a subset of $\R$ is compact if and only if it is closed and bounded. So for example $[0, 1] \cup [2, 3]$ is compact. The hardest part of this is to show that a closed interval $[a, b]$ is compact. This is the Heine-Borel Theorem. We will prove some easier results in greater results first,
+
+\begin{nlemma}
+  Let $(X, d)$ be a metric space. Then any compact subset $A$ of $X$ is bounded.
+\end{nlemma}
+\begin{proof}
+  For $n \ge 1$, let $U_n = \{y \in X : d(y,x) < n\}$, the open ball with center $x$ and radius $n$. For every $y \in X$ we can find $n > d(y, x)$, so
+  $$ X = \bigcup_{n=1}^\infty U_n, $$
+  and we have,
+  $$ A \sub \bigcup_{n=1}^\infty U_n $$
+  that is, it's an open cover. Since $A$ is compact, $A$ is contained in the union of finitely many of these sets $U_{n_1}, \dots, U_{n_k}$. Taking $R = \max\{n_1, \dots, n_k\}$ we have $A \sub U_R$, so $d(a, x) < R$ for all $a \in A$. Hence $A$ is bounded.
+\end{proof}
+
+\noindent
+A compact subset of a metric space is also closed. In fact this holds in any Hausdorff space.
+
+\begin{nlemma}
+  A compact subset $C$ of a Hausdorff space $X$ is closed.
+\end{nlemma}
+\begin{proof}
+  We have to show that $D = X\sm C$ is open. We will show that, for each $x \in D$, there is an open set $U_x$ with $x \in U_x \sub D$. Then $D = \bigcup_{x \in D} U_x$ is open.\\
+
+  \noindent
+  Let $x \in D$. Since $X$ is Hausdorff, for each $y \in C$, we can find open sets $A_y$ and $B_y$ with $x \in A_y$ and $y \in B_y$ and $A_y \cap B_y = \vn$. Then $C \sub \bigcup_{y \in C} B_y$. Since $C$ is compact, there are $y_1, y_2, \dots, y_n \in C$ with $C \sub \bigcup_{k=1}^n B_{y_k}$. However,
+  $$ \left( \bigcup_{k=1}^n B_{y_k} \right) \cap \left( \bigcap_{k=1}^n A_{y_k} \right) = \vn $$
+  so $\bigcap_{k=1}^n A_{y_k}$ is a subset of $D$ containing $x$. Moreover, $U$ is open since is it is the intersection of finitely many open sets.
+\end{proof}
+
+\noindent
+Combining the two previous results, we get that,
+\begin{ncor}
+  A compact subset of a metric space is closed and bounded. In particular, any compact subset of $\R$ is closed and bounded.
+\end{ncor}
