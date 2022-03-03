@@ -1,0 +1,86 @@
+% !TEX root = ../notes.tex
+
+\subsection{Subspaces}
+If $(X, \T)$ is a topological space and $A$ is any non-empty subset of $X$, then there is a natural way to make $A$ into a topological space,
+
+\begin{ndefi}[Subspace Topology]
+  With the above notation, we define
+  $$ \T_A = \{U \cap A : U \in \T\} $$
+  Thus a subset $V \sub A$ is open in $A$ if and only if there exists an open set $U$ in $X$ with $V = U \cap A$. We call $\T_A$ the subset topology on $A$ induced by $X$.
+\end{ndefi}
+
+\noindent
+We must check that $\T_A$ satisfies $(T1)-(T3)$.
+\begin{enumerate}
+  \item $\vn = \vn \cap A$ and $A = A \cap X$ and so they are open sets in $A$.
+  \item If $V_1$ and $V_2$ are open in $A$, there are open sets $U_1, U_2 \in X$ where $V_1 = U_1 \cap A$ and $V_2 = U_2 \cap A$. Therefore, $V_1 \cap V_2 = (U_1 \cap A)\cap (U_2 \cap A) = (U_1 \cap U_2)\cap A$ where $U_1 \cap U_2$ is open and so $V_! \cap V_2$ is open.
+  \item If $V_i$ where $i \in \cI$ is a family of open sets in $A$, then for each $i$ there is a $U_i \in X$ with $V_i = U_i \cap A$ and,
+  $$ \bigcup_{i \in \cI} V_i = \bigcup_{i \in \cI}(U_i \cap A) = \left( \bigcup_{i \in \cI} U_i \right) \cap A $$
+  Then since $\left( \bigcup_{i \in \cI} U_i \right)$ is open in $X$, then $\bigcup_{i \in \cI} V_i$ is open in $A$.
+\end{enumerate}
+
+\noindent
+Here is a remark,
+\begin{remark}
+   If $(X, d)$ is a metric space, then we have a metric topology on $X$, where a subset $U$ of $X$ is open if and only if for each $x \in U$ we have $B_\e (x) \sub U$ for some $\e > 0$. If $A$ is a non-empty subset of $X$ then the subspace topology on $A$ induced by $X$ is the sae as the topology of the restriction.
+\end{remark}
+
+\begin{nlemma}
+  Let $A$ be a non-empty subset of a topological space $X$ and let $i : A \to X$ be the inclusion map. Then,
+  \begin{enumerate}
+    \item $i$ is continuous
+    \item For any topological space $Z$ and any function $g : Z \to A$, $g$ is continuous of and only if $i \circ g : Z \to X$ is continuous. This is the \textbf{universal property} for topological spaces.
+      \[\begin{tikzcd}
+  	Z \\ A & X
+  	\arrow["{i \circ g}", from=1-1, to=2-2]
+  	\arrow["i"', hook, from=2-1, to=2-2]
+  	\arrow["g"', from=1-1, to=2-1]
+  \end{tikzcd}\]
+    \item The subspace topology on $A$ is the only topology for which (ii) holds for all functions $g$.
+  \end{enumerate}
+\end{nlemma}
+\begin{proof}
+  (i), We first prove that $i : A \to X$ is continuous. That is we need to prove for all open sets $U \in X$, $i^{-1}(U)$ is open in $A$. Therefore, take $U \sub X$, then $i^{-1}(U) = \{a \in A : i(a) \in U\} = \{a \in A : a \in U\} = U \cap A$, which is an open set in $A$, by the definition of $\T_A$.\\
+
+  \noindent
+  (ii), We just want to show that $g$ is continuous iff $i \circ g$ is continuous.
+    \[\begin{tikzcd}
+  Z \\ A & X
+  \arrow["{i \circ g}", from=1-1, to=2-2]
+  \arrow["i"', hook, from=2-1, to=2-2]
+  \arrow["g"', from=1-1, to=2-1]
+  \end{tikzcd}\]
+  For $U \sub X$, then
+  \begin{align*}
+    (i\circ g)^{-1}(U) &= \{z \in Z : i(g(z)) \in U\} \\
+    &= \{z \in Z : g(z) \in U\}
+  \end{align*}
+  Since $g(z) \in A$, this set can be written as $\{z \in Z : g(z) \in U \cap A\} = g^{-1}(U \cap A)$. If $g$ is continuous, then we could also write $g^{-1}(V)$ is open for every open $V \sub A$, that is also the same as $g^{-1}(U \cap A)$ is open for every open $U \sub A$. We know that is then equivalent to $(i \circ g)^{-1}(U)$ is open for every $U \sub A$, which gives the required result.\\
+
+  \noindent
+  (iii), Let $\T'$ be a topology on $A$ such that (ii) holds. So $A$ is a topological space in two ways, $(A, \T_A)$ and $(A, \T')$, we want to prove that $\T_A = \T'$. To do this we make an appropriate choice of $Z$ and $g$. We can choose a function where even though we don't know what $A$ is, we can still make this work. First, let $g = \id_A : (A, \T') \to (A, \T')$. $g$ is continuous as $U \in \T'$, then $g^{-1}(U) = U \in \T'$ is open. By (ii)$\implies$,
+  $g \circ i$ is continuous. For open $U \sub X$, $(i \circ g)^{-1}(U)$ is open in $(A, \T')$,
+  \begin{align*}
+    (i \circ g)^{-1}(U) &= \{ a \in A : i \circ g (a) \in U \}\\
+    &= \{a \in A : a \in U\}
+    &= U \cap A
+  \end{align*}
+  Hence, for each $U \sub X$, $U \cap A \in \T'$. Therefore, $\T_A \sub \T'$. We now need the other inclusion. Secondly, let $g = \id_A : (A, \T_A) \to (A, \T')$. Now we consider $i \circ g = i : (A, \T') \to X$ and this is continuous by (i). Therefore, by $(ii) \Leftarrow$, $g$ is continuous. If $V \sub A$ is open in $\T'$ then $g^{-1}(V) = V$ is again in $\T_A$. Therefore, $\T' \sub \T_A$. Hence, $\T' = \T_A$.
+\end{proof}
+
+We've seen $\T_A = \{U \cap A : U \in \T\}$ is the only topology such that $\forall g : Z \to A$, $g$ is continuous if and only if $i \circ g$ is continuous. If we try something else,
+\[\begin{tikzcd}
+	& Z \\
+	A & X
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\]
+This doesn't make sense, but what about this,
+\[\begin{tikzcd}
+	A & X \\
+	& Y
+	\arrow["i", hook, from=1-1, to=1-2]
+	\arrow["h", from=1-2, to=2-2]
+	\arrow["{h \circ i}"', dashed, from=1-1, to=2-2]
+\end{tikzcd}\]
+But there wouldn't be a universal property like that. It is not true that $\forall h : X \to Y$, $h$ is continuous if and only if $h \circ i$ is continuous.
