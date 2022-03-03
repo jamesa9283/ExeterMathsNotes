@@ -84,3 +84,80 @@ This doesn't make sense, but what about this,
 	\arrow["{h \circ i}"', dashed, from=1-1, to=2-2]
 \end{tikzcd}\]
 But there wouldn't be a universal property like that. It is not true that $\forall h : X \to Y$, $h$ is continuous if and only if $h \circ i$ is continuous.
+
+% Lecture 9
+\subsection{Products of Topological Spaces}
+
+\begin{ndefi}[Product Topology]
+  Let $X$, $Y$ be topological spaces. The \textbf{product topology} on $X\ti Y$ is the topology with basis,
+  $$ \mathcal{B} = \{U \ti V : U \text{ open in } X, V \text{ open in } Y\} $$
+  That means that a subset of $A$ of $X\to Y$ is open if and only if it is the union of subsets of the form $U\times V$ with $U$ and $V$ open in $X$, $Y$ respectively. Equivalently, $A$ is open for each point $(x, y) \in A$, if there are open sets such that $x \in U \sub X$ and $y \in V \sub Y$.
+\end{ndefi}
+
+\begin{remark}
+   If we have $\mathcal{B}_X$ and $\mathcal{B}_Y$ for the topologies on $X$, $Y$ then we get the same open sets in $X\ti Y$ if we restrict $U$, $V$ to be sets in $\mathcal{B}_X$, $\mathcal{B}_Y$ respectively.
+\end{remark}
+
+\noindent
+So a disc in $\R^2$ is an open set, since it can be filled with open rectangles. This isn't finitely many rectangles, but still it can be done. We now check that the product topology gives a usual topology on $\R^2$ formally,
+\begin{nlemma}
+  Let $X = Y = \R$. Then the product topology on $\R^2$ agrees with the usual topology on $\R^2$.
+\end{nlemma}
+\begin{proof}[Proof Sketch.]
+  The bounded open intervals $B_\e(x) = (x - \e, x + \e)$ for all $x \in \T$ and $\e > 0$ for a basis for the usual topology on $\R$. So $U \sub \R^2$ is open in the product topology if, for all $(x, y) \in U$ there is $\e, \d > 0 $ such that,
+  $$ (x, y) \in B_\e(x) \ti B_\d(y) \sub U $$
+  Replacing $\e$ and $\d$ with $\min (\e, \d)$ we can assume that $\d = \e$. This agrees with the topology on $\R^2$ given by the metric $d$ where
+  $$ d((x, y), (x', y')) = \max(|x - x'|, |y - y'|). $$
+  It is not difficult to check that $d$ is a metric on $\R^2$ and that it is Lipschitz equivalent to the Euclidean metric. So it gives the usual topology.
+\end{proof}
+
+\noindent
+We really should check the product topology gives us a topology.
+\begin{enumerate}
+  \item $\vn = \vn \ti \vn$ and so it is open in the product topology as it is open in $X$ and $Y$. Similarly for $X\ti Y$ as $X$ is open in $X$ and $Y$ is open in $Y$.
+  \item Let $W_1, W_2 \sub X\ti Y$ be open sets in the product topology. We must show that $W_1 \cap W_2$ is an open set in the product topology. Let $(x, y) \in W_1 \cap W_2$, then as $(x, y) \in W_1$ we can find some set $U_1 \ti V_1 \in \mathcal{B}$ with $(x, y) \in U_1\ti V_1 \sub W_1$. Similarly $(x, y) \in U_2 \cap V_2 \sub W_2$.
+  Let $U = U_1 \cap U_2$ and $V = V_1 \cap V_2$, which are open. Then, $(x, y) \in U\ti V \sub W_1 \cap W_2$. With $U \ti V \in \mathcal{B}$. So $W_1 \cap W_2$ is the union of sets in $\mathcal{B}$, therefore it is open in the product topology.
+  \item Let $W_i$ for $i \in \cI$ be a family of open sets in $X \ti Y$. We must show $\bigcup_{i \in\cI} W_i =: W$ is open. Let $(x, y) \in W$, then $(x, y) \in W_j$ for some $j \in \cI$ where $W_j$ s open. Therefore $(x, y) \in U \ti V \sub W_j$ for some open $U \sub X$ and $V \sub Y$. Then $U \ti V \sub W$,
+  so $W$ is open in the product topology.
+\end{enumerate}
+
+\begin{remark}
+   We can define the product topology of finitely many topological spaces by just iterating the construction. (The product of infinitely many topological spaces).
+\end{remark}
+
+\begin{nlemma}
+  Let $X$, $Y$ be topological space and let $p_X : X \ti Y \to X$ and $p_Y : X \ti Y \to Y$ be the projection functions:
+  $$ p_X((x, y)) = x \qquad p_Y((x, y)) = y $$
+  For any topological space $Z$ and any function $f : Z \to X \ti Y$, $f$ is continuous if and only if $p_X \circ f$ and $p_Y \circ f$ are continuous.
+    \[\begin{tikzcd}
+  	Z \\
+  	& {X\times Y} & X \\
+  	& Y
+  	\arrow["f", from=1-1, to=2-2]
+  	\arrow["{p_X}", from=2-2, to=2-3]
+  	\arrow["{p_Y}", from=2-2, to=3-2]
+  	\arrow[bend left, dotted, from=1-1, to=2-3]
+  	\arrow[bend right, dotted, from=1-1, to=3-2]
+  \end{tikzcd}\]
+  In particular $p_X$ and $p_Y$ are continuous.
+\end{nlemma}
+\begin{proof}
+  If $U \sub X$, then,
+  \begin{align*}
+    (p_X\circ f)^{-1}(U) &= \{z \in Z : p_X\circ f(z) \in U\} \\
+    &= \{z \in Z : f(z) \in U \ti Y\} = f^{-1}(U \ti Y)
+  \end{align*}
+  ($\Longrightarrow$) If $f$ is continuous, let $U \sub X$ be open. We consider $(p_X \circ f)^{-1}(U) = f^{-1}(U \ti Y)$, this is open in $Z$, as $f$ is continuous and $U \ti Y$ is open in $X \ti Y$. Hence $p_X \circ f$ is continuous. Similarly, $p_Y \circ f$ is continuous.\\
+
+  \noindent
+  ($\Longleftarrow$) Suppose that $p_X \circ f$ and $p_Y \circ f$ are continuous. We must show that if $W \sub X\ti Y$ is open, then $f^{-1}(W)$ is open in $Z$. Since any union of open sets in $Z$ is open it's enough to take $W = U \ti V$ with $U \sub X$ and $V \sub Y$ open. Now we consider $f^{-1}(U \ti V)$,
+  \begin{align*}
+    f^{-1}(U \ti V) &= f^{-1}((U \ti Y) \cap (X \ti V))\\
+    &= f^{-1}((U \ti Y)) \cap f^{-1}((X \ti V))\\
+    &= (p_X \circ f)^{-1}(U) \cap (p_Y \circ f)^{-1}(V)
+  \end{align*}
+  This is a union of open sets, and so $f^{-1}(U \ti V)$ is open in $Z$.\\
+
+  \noindent
+  Finally, we can see that $p_X$ and $p_Y$ are continuous. Let $Z = X \ti Y$ and $f = \id_{X\ti Y}$, then $(p_X \circ f) (x, y) = (p_X \circ \id_{X \ti Y})(x, y) = p_X(x, y) = x$. Hence, as $f$ is continuous, then $p_X$ is continuous. Similarly for $p_Y$.
+\end{proof}
