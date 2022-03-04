@@ -1,7 +1,22 @@
 % !TEX root = ../notes.tex
 
 \section{The Hat Map as a Lie Algebra Isomorphisms}
-The lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\SO(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
+In this Chapter we will take a quick jaunt back into some purer topics, more specifically a Lie Algebra Isomorphism called the Hat Map. We can define a Lie Algebra Isomorphism as a bijective Lie Algebra homomorphism, which we then define as,
+\begin{ndefi}[Lie Algebra Homomorphism]
+  A Lie Algebra homomorphism is a linear map, $\phi : \mathfrak{g} \to \mathfrak{g}'$ compatible with the respective lie brackets,
+  $$ \phi([x, y]_\mathfrak{g}) = [\phi(x), \phi(y)]_{\mathfrak{g}'} \qquad \forall x, y \in \mathfrak{g} $$
+\end{ndefi}
+
+\noindent
+We note that the Lie bracket for $\R^3$ is the cross product, and more specifically $(\R^3, \ti)$ is a Lie Algebra. Then we can talk about a Lie Algebra homomorphism, $\phi : \R^3 \to \mathfrak{so}(3)$, which is a homomorphism that maps,
+$$ \phi(\vec x \ti \vec y) = [\phi (x), \phi (y)]_{\mathfrak{so}(3)}. $$
+We let this $\phi$ be the hat map where we define,
+$$ \oh = \begin{pmatrix}
+  0 & -\o_1 & \o_2 \\ \o_3 & 0 & -\o_1 \\ -\o_2 & \o_1 & 0
+\end{pmatrix} $$
+
+\noindent
+The Lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\SO(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
 $$ \di {}{t} \pd{\ell}{\Oh} - \ad^*_{\Oh}\pd{\ell}{\Oh} = 0 $$
 Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
 {\color{red} \begin{align*}
@@ -16,14 +31,56 @@ Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defin
   &= \ip{[\vec\Pi,\,\Oh]}{\oh}
 \end{align*} }
 
-Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ {[\Oh,\,\oh] = }\wh{\vec\O\ti\vec\o} $
-\begin{proof}
-  Exercise
-\end{proof}
-We define, $\hat{\cdot} : (\R^3,\, \ti) \to (\SO(3),\, [\cdot,\, \cdot])$. This is the isomorphism.\\
+\noindent
+Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ [\Oh,\,\oh] = \wh{\vec\O\ti\vec\o} $. We prove this from the definition of the Lie Bracket, that is,
 
+\begin{align*}
+  [\Oh, \oh] &= \Oh\oh - \oh\Oh\\
+  &= \begin{pmatrix}
+    0 & -\O_1 & \O_2 \\ \O_3 & 0 & -\O_1 \\ -\O_2 & \O_1 & 0
+  \end{pmatrix}\begin{pmatrix}
+    0 & -\o_1 & \o_2 \\ \o_3 & 0 & -\o_1 \\ -\o_2 & \o_1 & 0
+  \end{pmatrix} - \begin{pmatrix}
+    0 & -\o_1 & \o_2 \\ \o_3 & 0 & -\o_1 \\ -\o_2 & \o_1 & 0
+  \end{pmatrix}\begin{pmatrix}
+    0 & -\O_1 & \O_2 \\ \O_3 & 0 & -\O_1 \\ -\O_2 & \O_1 & 0
+  \end{pmatrix}\\
+\end{align*}
+\begin{align*}
+  &= \begin{pmatrix}
+    -\O_3\o_3 - \O_2\o_2 & \O_2\o_1 & \O_3\o_1 \\
+    \O_1\o_2 & -\O_3\o_3 - \O_1\o_1 & \O_3\o_2 \\
+    \O_1\o_3 & \O_2\o_3 & -\O_2\o_2 - \O_1\o_1
+\end{pmatrix} - \begin{pmatrix}
+  -\o_3\O_3 - \o_2\O_2 & \o_2\O_1 & \o_3\O_1 \\
+  \o_1\O_2 & -\o_3\O_3 - \o_1\O_1 & \o_3\O_2 \\
+  \o_1\O_3 & \o_2\O_3 & -\o_2\O_2 - \o_1\O_1
+\end{pmatrix} \\
+&= \begin{pmatrix}
+  0 & \O_2\o_1 - \O_1\o_2 & \O_3\o_1 - \O_1\o_3 \\
+  \O_1\o_2 - \O_2\o_1 & 0 & \O_3\o_2 - \O_2\o_3 \\
+  \O_1\o_3 - \O_3\o_1 & \O_2\o_3 - \O_3\o_2 & 0
+\end{pmatrix} \\
+&= \wh{\vec\O \ti \vec\o}
+\end{align*}
+
+\noindent
+We have proved that where $\phi$ is the hap map that $[\phi(\vec x), \phi(\vec y)] = \phi(\vec x \ti \vec y)$. We now need to prove that the hap map is a bijective linear map. It is linear as it can be represented as a matrix in $\SO(3)$. Now we prove bijectivity by first proving injectivity, then surectivity. Let $\vec x, \vec y \in \R$ and we know that $\hat{\vec x} = \hat{\vec y}$, that is,
+$$ \begin{pmatrix}
+  0 & -x_1 & x_2 \\ x_3 & 0 & -x_1 \\ -x_2 & x_1 & 0
+\end{pmatrix} = \begin{pmatrix}
+  0 & -y_1 & y_2 \\ y_3 & 0 & -y_1 \\ -y_2 & y_1 & 0
+\end{pmatrix} $$
+Then we can see that $x_1 = y_1$, $x_2 = y_2$ and $x_3 = y_3$. Therefore, $\vec x = \vec y$. Hence the hat map is injective. Now we seek to prove that the hap map is surjective. Consider some $\hat{\vec z} \in \mathfrak{so}(3)$, then we can write it as,
+$$ \begin{pmatrix}
+  0 & -z_1 & z_2 \\ z_3 & 0 & -z_1 \\ -z_2 & z_1 & 0
+\end{pmatrix} $$
+Then this will uniquely define some $\vec z = (z_1, z_2, z_3)^T \in \R^3$. Hence the hat map is surjective. Therefore the hat map is a Lie Algebra Isomorphism.\\
+
+\noindent
 We have described Lagrangians that have left or right invariance. We now look to Lagrangians that have Symmetry breaking parameters, like gravity. If we consider the spherical pendulum, we have defined $\Oh = R^T\dot R$ and we define $\oh = R\vec\O$ and then we can see that $\oh = \dot R R^T = \dot R R^{-1}$ where $R \in \SO(3)$. This doesn't lead to a symmetric Lagrangian but we can still use our theory here. \\
 
+\noindent
 We are going to study rigid body dynamics in the spatial frame. We look firstly to the Lagrangian. We have showed,
 $$ L(R,\,\dot R) = \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \vec X}^2 d^3\vec X $$
 and we showed that $L(R,\, \dot R) = L(e,\, R^{-1}\dot R)$ and then we used Euler Poincare Theorem to show that $\ell = \frac{1}{2}\mathbb{I}\vec\O \cdot \vec\O$. Now assume we would prefer to formulate rigid body dynamics in the spatial frame. We need to consider a $\vec\o$ such that $\oh = \dot R R^{-1}$. We can now prove that, $L(R,\,\dot R) \ne L(R\chi,\,\dot R\chi)$ (right multiplication) hence we have broken symmetry,
@@ -31,6 +88,7 @@ and we showed that $L(R,\, \dot R) = L(e,\, R^{-1}\dot R)$ and then we used Eule
   Exercise
 \end{proof}
 
+\noindent
 Now we seek this Lagrangian,
 \begin{align*}
   L(R,\,\dot R) &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\dot R \vec X}^2d^3\vec X\\
@@ -40,9 +98,7 @@ Now we seek this Lagrangian,
   &= \vdots\\
   &= \frac{1}{2}\vec\o \cdot (R\mathbb{I} R^T)\o = L(\vec\o,\,R)
 \end{align*}
-We define a new parameter, $\mathbb{J} := R\mathbb{I}R^T$ and so $\ell = \ell(\mathbb{J},\,\vec\o) = \frac{1}{2}\vec\o(t) \cdot \mathbb{J}(t) \vec\o(t)$
-% J is for spatial frame.
-
+We define a new parameter, $\mathbb{J} := R\mathbb{I}R^T$ and so $\ell = \ell(\mathbb{J},\,\vec\o) = \frac{1}{2}\vec\o(t) \cdot \mathbb{J}(t) \vec\o(t)$ % J is for spatial frame.
 Now we take variations as usual,
 $$ \d\int_{t_1}^{t_2} \ell(\J,\,\vec\o) = 0 $$
 \begin{align*}
