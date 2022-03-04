@@ -96,12 +96,16 @@ and we showed that $L(R,\, \dot R) = L(e,\, R^{-1}\dot R)$ and then we used Eule
 \noindent
 Now we seek this Lagrangian,
 \begin{align*}
-  L(R,\,\dot R) &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\dot R \vec X}^2d^3\vec X\\
-  &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\dot RR^{-1}R \vec X}^2d^3\vec X\\
-  &= \frac{1}{2}\int_{\b}\rho(\vec X)\norm{\hat\o R \vec X}^2d^3\vec X\\
-  &= \frac{1}{2}\int_{\b}\rho(\vec X)(\o \ti R\vec X) \cdot (\o \ti R\vec X)d^3\vec X\\
-  &= \vdots\\
-  &= \frac{1}{2}\vec\o \cdot (R\mathbb{I} R^T)\o = L(\vec\o,\,R)
+  L(R,\,\dot R) &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\dot R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\dot RR^{-1}R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\oh R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)(\ov \ti R\vec X) \cdot (\ov \ti R\vec X)d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\norm{\ov}^2\norm{R\vec X}^2 - (\ov \cdot R\vec X)^2)d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\ov^T \ov\norm{R\vec X}^2 - \ov^T (R\vec X)(R\vec X)^T\ov )d^3\vec X\\
+  &= \ov^T\frac{1}{2}\int_\mathcal{B}\rho(\vec X) (R\norm{\vec X}^2 R^T - R\vec X\vec X^T R^T d^3\vec X \,\ov\\
+  &= \ov^TR\frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\norm{\vec X}^2 - \vec X\vec X^T d^3\vec X \,R^T\ov\\
+  &= \frac{1}{2}\ov^T (R\I R^T \ov) \\
+  &= \frac{1}{2}\vec\ov \cdot (R\mathbb{I} R^T)\ov = L(\vec\ov,\,R)
 \end{align*}
 We define a new parameter, $\mathbb{J} := R\mathbb{I}R^T$ and so $\ell = \ell(\mathbb{J},\,\vec\o) = \frac{1}{2}\vec\o(t) \cdot \mathbb{J}(t) \vec\o(t)$ % J is for spatial frame.
 Now we take variations as usual,
