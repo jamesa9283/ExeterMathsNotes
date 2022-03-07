@@ -16,20 +16,20 @@
 We say that $B$ is integral over a subring $A$ if every element of $B$ is integral over $A$. A non-example is that $Z \sub \Q$ is not integral, or if we take $k[X^2, X^3] \sub k[X]$ this is integral.
 
 \begin{remark}
-   Integral dependce is also important in AlgNumber Theory.
+   Integral dependence is also important in AlgNumber Theory.
 \end{remark}
 
-Here is a really integersting result about prime ideals,
+Here is a really interesting result about prime ideals,
 \begin{nprop}[Lying Over]
   Lt $B$ be an integral extension of $A$. Then for each prime ideal $P \sub A$ then there exists a prime $Q$ `lying over $P$', that is $Q\sub A = P$.
 \end{nprop}
 and we can improve this to be about chains of prime ideals,
 \begin{nprop}
- Let $B$ be integral over a subring $A$. If $P_0 \subsetneq P_1 \subsetneq \dots \subsetneq P_n$ then there is an ascending sequence of prime ideals $B$ such that $Q_i \cap A_i = P_i$
+ Let $B$ be integral over a subring $A$. If $P_0 \subsetneq P_1 \subsetneq \dots \subsetneq P_n$ then there is an ascending sequence of prime ideals $B$, $Q_0 \subsetneq Q_1 \subsetneq \dots \subsetneq Q_n$ such that $Q_i \cap A_i = P_i$
 \end{nprop}
 
 \noindent
-and now what is needed for the big german lemma,
+and now what is needed for the Nullstellensatz,
 \begin{ncor}
    Let $A$ be a subring of $B$ and suppose that $B$ is integral over $A$,
    \begin{enumerate}
@@ -41,7 +41,7 @@ and now what is needed for the big german lemma,
 \noindent
 This is the most important result about integral dependence in algebraic geometry,
 \begin{nprop}[Noether Normalisation (NN)]
-  LEt $B$ be a finitely generated $k$-algebra. Then there exists a polynomial subring $A = k[X_1, \dots, X_n]$ of $B$ with $X_1, \dots, X_n$ \textbf{something} independent, such that $B$ is integral over $A$.
+  LEt $B$ be a finitely generated $k$-algebra. Then there exists a polynomial subring $A = k[X_1, \dots, X_n]$ of $B$ with $X_1, \dots, X_n$ algebraically independent, such that $B$ is integral over $A$.
 \end{nprop}
 \noindent
 This tells us that $B$ is a finitely generated $A$-module.
@@ -60,7 +60,7 @@ Now for the big theorem, Nullstellensatz means the `theorem of zeroes'. We need 
   \end{enumerate}
 \end{nthm}
 \begin{proof}
-  (i), Let $M \sub A$ be maximal, and $B := A/M$. Then by NN, $B$ is integral over $C = k[T_1, \dots, T_n]$. Since $M$ is maximal, then $B$ is a field.  By Corrolary 4.12, then as $B$ is a field, then $C$ has to be a field. This can only happen if $n = 0$, and so $C = k$. $B$ is then an algebraic extension of $k$, but since $k = \bar k$, $B = k$. Hence, $\dim_k (B) = \dim_k (k) = 1$.\\
+  (i), Let $M \sub A$ be maximal, and $B := A/M$. Then by NN, $B$ is integral over $C = k[T_1, \dots, T_n]$. Since $M$ is maximal, then $B$ is a field.  By Corollary 4.12, then as $B$ is a field, then $C$ has to be a field. This can only happen if $n = 0$, and so $C = k$. $B$ is then an algebraic extension of $k$, but since $k = \bar k$, $B = k$. Hence, $\dim_k (B) = \dim_k (k) = 1$.\\
 
   \noindent
   (ii), Let $M \sub A$ be a maximal ideal containing $I$ (by Zorn's Lemma). Let $\theta : A \to k$ be a $k$-algebra map such that we define $a \mapsto a + M$, $\ker \theta = M$ and $\theta$ is surjective. Then $\theta = \e_x$ for some $x \in V$ [$(V, A)$ is an affine variety]. For $f \in I \sub M$ we have $f(x) = \e_x (f) = \theta(f) = 0$. That is $x \in \V(I)$.
