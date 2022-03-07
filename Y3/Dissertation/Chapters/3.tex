@@ -1,37 +1,5 @@
 % !TEX root = ../notes.tex
 
-Let $g(t) \in G$ such that $g(0) = e$ where $\eta = \dot g (0) \in T_eG$
-$$ ad_\eta \xi := \di {}{t} _{t = 0} Ad_{g(t)}\xi \qquad \fa \xi \in \mathfrak{g} $$
-which we can see to be
-$$ \dot g(0)\xi g(0)^{-1} + g(0)\xi \di {}{t}_{t=0} g(t)^{-1}= \eta\xi - \xi\eta $$
-Hence we can say that $\ad_{\eta}\xi = [\eta, \xi] = \eta\xi - \xi\eta$.\\
-Hence now we define the coadjoint action on $\mu$,
-\begin{ndefi}[Adjoint / Coadjoint action on $\mathfrak{g}/\mathfrak{g^*}$]
-  The adjoint action of the matrix lie algebra on itself is given by,
-  $$ \ad : \mathfrak{g}\times \mathfrak{g} \to \mathfrak{g} $$
-  $$ \ad_\eta \xi = [\eta,\, \xi] $$
-  The dual map $\ip{ad^*_\eta \mu}{\xi} = \ip{\mu}{\ad_\eta \xi}$ is the coadjoint action of $\mathfrak{g}$ on $\mathfrak{g}^*$.
-\end{ndefi}
-
-\begin{exercise}
-  Find $\ad^*_\eta \mu$.
-\end{exercise}
-{\color{red} \begin{solution}
-  Above we said that $\ip{\Ad^*_g\mu}{\xi} = \ip{g^T \mu (g^T)^{-1}}{\xi}$ and so $\Ad^*_g \mu = g^T \mu (g^T)^{-1}$. As before we define,
-  $$ \ad^*_g \mu = \dit_{t=0} Ad_g^* \mu $$
-  and now we can input our definitions and differentiate where we define $g(0) = 0$ and $\dot g (0) = \eta \in T_eG$,
-  \begin{align*}
-    \ad^*_g \mu &= \dit_{t=0} Ad_g^* \mu \\
-    &= \dit_{t=0} g^T \mu (g^T)^{-1} \\
-    &= [\dot g^T \mu (g^T)^{-1} - g^T \mu (g^T)^{-1}\dot g^T (g^T)^{-1}]_{t=0} \\
-    &= \dot g(0)^T \mu (g(0)^T)^{-1} - g(0)^T \mu (g(0)^T)^{-1}\dot g(0)^T (g(0)^T)^{-1} \\
-    &= \eta^t \mu e - e \mu e^{-1} \eta^T e^{-1} \\
-    &= \eta^T \mu - \mu \eta^T \\
-    &= [\eta^T,\,\mu]
-  \end{align*}
-  Hence, $\ad_g^*\mu = [\eta^T,\,\mu]$
-\end{solution}
- }
 \section{Rotation}
 \subsection{Inertial Frame}
 A spatial coordinate system with origin at the centre of mass of the given rigid body. We denote it by, $\vec{x}(t) \in \R^3$, where $\vec x = X$. Assume we have a spatial coordinate system,
