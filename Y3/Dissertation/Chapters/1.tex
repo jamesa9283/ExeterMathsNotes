@@ -2,10 +2,10 @@
 
 \section{Lie Groups and Algebras}
 
-Thus far, we have only considered mechanics, in this section we start to introduce what we mean by Geometric Mechanics. This section we consider new mathematical structures, being Manifolds and Lie Groups. We will look briefly at Manifolds, Lie Groups and then consider the connection between manifolds and Lie Groups. To start, let us define some groups. Firstly, what is a group?
+Thus far, we have only considered mechanics, in this section we start to introduce what we mean by Geometric Mechanics, our toolbox for making arguments about Lagrangians. We will look briefly at the definitions of manifolds and Lie groups and then consider the connection between them. To start, let us define some groups. Firstly, what is a group?
 \begin{ndefi}[Group]
   $G$ is a nonempty set and endowed with a binary operation such that,
-  \begin{enumerate}
+  \begin{enumerate}[(i)]
     \item It's closed under $(\cdot)$, $\fa a, b \in G,\, a \cdot b \in G$
     \item It's associative, i.e. $\fa a, b \in G,\,a \cdot ( b \cdot c) = (a \cdot b) \cdot c$.
     \item There is an identity element, $\fa a \in G,\, a \cdot e = a = e \cdot a$.
@@ -14,25 +14,25 @@ Thus far, we have only considered mechanics, in this section we start to introdu
 \end{ndefi}
 
 \noindent
-Groups are a very useful and interesting structure. There is a rich area of research and study surrounding them. One of the things that will be the most useful to us is actions of groups. We can take groups and consider then acting on sets, with a identity and compatibility axiom. We will see that in the next chapter where we consider the adjoint actions. However, before we get to that we need to define a Lie Group. I feel that in order to define a Lie Group it would help to define a manifold or get some idea of what structures we will be working with.
+Groups are a very useful and interesting structure. There is a rich area of research and study surrounding them. One of the things that will be the most useful to us is actions of groups. We can take groups and consider them acting on sets, with an identity and compatibility axiom. We will see this in the next chapter, where we consider the adjoint actions. However, before we get to that we need to define a Lie group. I feel that in order to define a Lie group it would help to define a manifold or get some idea of what structures we will be working with.
 
 \subsection{Manifolds}
-In the most simplest definition, a manifold is a space where we can do geometry. We are studying Analytic and Differential Geometry so we need to consider differentiable, or smooth manifolds. These are manifolds where we can take paths along them and are able to consider the velocity (or tangent vectors) of these paths. We are particularly interested in one specific type of manifold, $\SO(3)$ and the associated tangent space. The tangent space is just a vector space where we can use all the rules of Linear Algebra to understand it. \\
+In the simplest definition, a manifold is a space where we can do geometry. We are studying Analytic and Differential Geometry so we need to consider differentiable, or smooth manifolds. These are manifolds that we can take paths along and we can consider the velocity (or tangent vectors) of these paths. We are particularly interested in one specific type of manifold, $\SO(3)$ and the associated tangent space. The tangent space is just a vector space where we can use all the rules of Linear Algebra to understand it. \\
 
 \noindent
-For our purposes, we will use the fact that a Lie Group is just a manifold. For background, I will spend the rest of this section defining what a manifold is formally. A manifold is a topological space that locally resembles Euclidean space near each point~\cite{wmwMan}. However, this doesn't sate me as, what does near mean? It's very informal and hand wavey. Let's define it properly!
+For our purposes, we will use the fact that a Lie Group is just a manifold. For background, we will spend the rest of this section defining what a manifold is formally. A manifold is a topological space that locally resembles Euclidean space near each point~\cite{wmwMan}. However, this isn't entirely satisfactory as what does near mean? It's very informal. Let's define it properly!
 \begin{ndefi}[Manifold]
   A manifold is a second countable Hausdorff space that is locally homeomorphic to Euclidean space.
 \end{ndefi}
 
 \noindent
-Where we refer to a second countable space as being a topological equivalent to having a countable basis. There exists some countable base of this space $\mathcal{U} = \{U_i\}_{i=1}^\infty$, where any open subset of our space, $T$, can be written as a disjoint union of a finite subfamily of $\mathcal{U}$. This nicely restricts manifolds to be smaller spaces, by making them be the union of countably many open sets. On the point of Hausdorff, this relies on the following defintion,
+In the above definition, we refer to a second countable space as being a topological equivalent to having a countable basis. That is, there exists some countable base of this space $\mathcal{U} = \{U_i\}_{i=1}^\infty$, where any open subset of our space, $T$, can be written as a disjoint union of a finite subfamily of $\mathcal{U}$. This nicely restricts manifolds to be smaller spaces, by making them be the union of countably many open sets. We define a Hausdorff space as,
 \begin{ndefi}[Hausdorff]
   A topological space is Hausdorff if, given any points $x, y \in X$ with $x \ne y$, there exists open sets $U, V \in X$ with $x \in U$, $y \in V$ and $U \cap V = \vn$.
 \end{ndefi}
 
 \noindent
-Finally, to say something is homeomorphic to another space, this means it can be stretched without creating holes or glueing. A homeomorphism is a bijective map between two spaces that has bijective inverse and local homeomorphisms relates to neighborhoods around points. Hence, saying that something is locally homeomorphic to Euclidean space directly means, that you can bijectively map the contents of the neighborhood around a point to an open ball in $\R^n$, i.e the Euclidean $n$-ball.\footnote{This is long and a very non-succinct way to define this structure, a slightly nicer definition of manifolds is: A manifold is just a locally ringed space, whose sheaf structure is just locally isomorphic to continuous functions on Euclidean space.}
+Finally, to say something is homeomorphic to another space, means it can be stretched to the other space without creating holes or gluing. A homeomorphism is a bijective map between two spaces that has a bijective inverse. A local homeomorphism is a homeomorphism in a neighbourhood of a point. Hence, saying that something is locally homeomorphic to Euclidean space directly means, that you can bijectively map the contents of the neighbourhood around a point to an open ball in $\R^n$, i.e the Euclidean $n$-ball.\footnote{This is long and not very succinct way to define this structure, a slightly nicer definition of manifolds is: A manifold is just a locally ringed space, whose sheaf structure is just locally isomorphic to continuous functions on Euclidean space.}
 
 \noindent
 \subsection{Lie Groups}
@@ -41,10 +41,11 @@ Now we know enough to define what a Lie group actually is,
   A Lie group is a group that is also a smooth manifold, such that the binary product and inversion are smooth functions.
 \end{ndefi}
 
-What we will be focusing our attention to is special Lie groups, the general linear group, special linear group and the special orthogonal group.
+\noindent
+What we will be focusing our attention on is special Lie groups; the general linear group, special linear group and the special orthogonal group.
 
 \begin{ndefi}[General Linear Group]
-  $\GL(n, \R)$  is the linear matrix group. The manifold of $n \times n$ invertible square real matrices is a lie group denoted by $\GL(n, \R)$
+  $\GL(n, \R)$  is the linear matrix group. The manifold of $n \times n$ invertible square real matrices is a Lie group denoted by $\GL(n, \R)$.
 \end{ndefi}
 
 \begin{ndefi}[Special Linear Group]
@@ -52,11 +53,11 @@ What we will be focusing our attention to is special Lie groups, the general lin
 \end{ndefi}
 
 \begin{ndefi}[Special Orthogonal Group]
-  $\SO(n, \R)$ is the manifold of rotation matrices in $n$ dimensions. This may be denoted by $\mathit{SO(n)}$
+  $\SO(n, \R)$ is the manifold of rotation matrices in $n$ dimensions. This may be denoted by $\SO(n)$
 \end{ndefi}
 
 \subsection{Lie Algebras}
-To actually understand what Lie Algebras are, we need to generalise the notion of a vector and a tangent. We shall look at so called tangent spaces. To formally define them, we will define a second way, one that leads to the defintion of smooth (or $C^\infty$ manifolds). We shall first define charts and atlas. These definitions are adapted from \cite{Eugene-year}.
+To actually understand what Lie Algebras are, we need to generalise the notion of a vector and a tangent. We shall look at so called tangent spaces. To formally define them, we will define manifolds a second way, one that leads to the definition of smooth (or $C^\infty$ manifolds). We shall first define charts and atlases. These definitions are adapted from \cite{Eugene-year}.
 
 \begin{ndefi}[Chart]
   Let $X$ be a topological space. An $\R^n$ chart on $X$ is a homeomorphism $\phi : U \to U'$ where $U \subset X$ and $U' \subset \R^n$.
@@ -66,7 +67,7 @@ To actually understand what Lie Algebras are, we need to generalise the notion o
   A $C^\infty$ atlas on a topological space $X$ is a collection of charts $\phi_\a : U_\a \to U_\a'$ where all the $U'$'s are open subsets of one fixed $\R^n$ such that,
   \begin{enumerate}
     \item Each $U_\a \in X$ is open and $\bigcup_\a U_\a = X$ ($U_\a$ is an open subcover of $X$) and,
-    \item Changes of coordinates are smooth\footnote{This is slightly more convoluted than what I hint to here. In the greatest formality, I should write that transition maps are smooth. Transitions maps are maps from two charts $(U_\a,\phi_\a)$ and $(U_\b, \phi_\b)$ where $U_\a \cap U_\b$ is nonempty and $$\t_{\a,\b} : \phi_\a(U_\a\cap U_\b) \to \phi_\b(U_\a \cap U_\b)$$ defined by $\t_{\a,\b} = \phi_\b \circ \phi_\a^{-1}$ (this is a homeomorphism).}. % transition maps are smooth
+    \item Changes of coordinates are smooth\footnote{This is slightly more convoluted than what we hint to here. In the greatest formality, we should write that transition maps are smooth. Transitions maps are maps from two charts $(U_\a,\phi_\a)$ and $(U_\b, \phi_\b)$ where $U_\a \cap U_\b$ is nonempty and $$\t_{\a,\b} : \phi_\a(U_\a\cap U_\b) \to \phi_\b(U_\a \cap U_\b)$$ defined by $\t_{\a,\b} = \phi_\b \circ \phi_\a^{-1}$ (this is a homeomorphism).}. % transition maps are smooth
   \end{enumerate}
 \end{ndefi}
 
@@ -107,7 +108,7 @@ Here are a few examples of manifolds,
 \end{itemize}
 
 \noindent
-This is very abstract, we should see that a manifold has similar behaviour to $\R^n$, but is more flexible and can have some sort of curvature inbuilt. The ideas of a manifold holding similarities to $\R^n$ can be seen in Whitney's Embedding Theorem, a theorem whose proof would not add to the work, so it is ommited. It's existence should suffice to prove to the reader that manifolds, however abstract, can be manipulated and argued with using similar ideas to $\R^n$.
+This is very abstract, we should see that a manifold has similar behaviour to $\R^n$, but is more flexible and can have some sort of curvature inbuilt. The ideas of a manifold holding similarities to $\R^n$ can be seen in Whitney's Embedding Theorem, a theorem whose proof would not add to the work, so it is omitted. Its existence should suffice to prove to the reader that manifolds, however abstract, can be manipulated and argued with using similar ideas to $\R^n$.
 
 \begin{nthm}[Whitney Embedding Theorem]
   Every $m$-dimensional manifold can be embedded in $\R^{2m}$
@@ -145,9 +146,9 @@ Now we can formalise the idea of tangent vectors on a manifold~\cite{Lee-2009}
 \end{figure}
 
 \noindent
-These definitions aren't the most intuitive, so I provide Figure \ref{fig:1} to help the reader see the geometric interpretations. We let $G$ be a Lie Group and $\mathfrak{g}$ be a Lie Algebra, or a tangent space to the manifold, or Lie Group. Lie Algebras are tangent space to the lie group at the identity. Let $G$ be a lie group, then the $T_e G$ (tangent space at the identity) is an interesting vector space with a remarkable structure called the lie algebra structure. We now will prove a few results relating to this structure and the define the Lie Algebra using the bilinear map called the Lie Bracket,
+These definitions aren't the most intuitive, so we provide Figure \ref{fig:1} to help the reader see the geometric interpretations. We let $G$ be a Lie group and $\mathfrak{g}$ be a Lie algebra, or a tangent space to the manifold, or Lie group. Lie algebras are tangent spaces to the Lie group at the identity. $T_e G$ (tangent space at the identity) is an interesting vector space with a remarkable structure called the Lie algebra structure. We now will prove a few results relating to this structure and then define the Lie algebra using the bilinear map called the Lie Bracket,
 
-\begin{nlemma}
+\begin{nlemma}\label{lemma:comm}
   Let $G$ be a matrix lie group, and $g \in G$, then,
   $$ \xi \in T_eG \implies g\xi g^{-1} \in T_eG $$
 \end{nlemma}
@@ -184,31 +185,31 @@ Now we have a Lie Algebra,
 \end{ndefi}
 
 \noindent
-The Lie Bracket, could be any bilinear map and the behaviour of this map is related to the space that we are considering. In particular, when we consider the matrix lie groups, we are interested in the Lie Bracket defined in Theorem \refeq{ref:LBthm}
+The Lie Bracket, could be any bilinear map and the behaviour of this map is related to the space that we are considering. In particular, when we consider the matrix Lie groups, we are interested in the Lie Bracket defined in Theorem \refeq{ref:LBthm}
 
 \begin{nthm}\label{ref:LBthm}
-  Let $G$ be a matrix Lie group. Then $T_eG$ is a lie algebra with bracket given by the matrix commutator. Denoted by $\mathfrak{g}$.
+  Let $G$ be a matrix Lie group. Then $T_eG$ is a Lie algebra with the Lie bracket given by the matrix commutator. Denoted by $\mathfrak{g}$.
   $$ [A,\, B] = AB - BA $$
 \end{nthm}
 
 \noindent
-Assume we have a surface, of manifold $M$, the tangent space $T_qM$, then we can say that,
+Assume we have a surface, or manifold $M$, with tangent space $T_qM$, then we can say that,
 $$ \bigcup T_qM = TM $$
-is the tangent bundle. We can further define a cotangent bundle, which leads to the cotangent manifold. The cotangent manifold is dual space of manifold.\newpage
+is the tangent bundle. We can further define a cotangent bundle, which leads to the cotangent manifold. The cotangent manifold is the dual space of the manifold, $M$.\newpage
 
 \noindent
-We now present several examples of Lie Algebras and their groups to help the reader understand the main space of study for the rest of the work.
+We now present several examples of Lie algebras and their groups to help the reader understand the main space of study for the rest of the work.
 
 \begin{eg}
   \begin{itemize}
-    \item The lie algebra $\mathfrak{gl}(n, \R) = T_e\GL(n, \R)$ which is vector space of real square $n \times n$ matrices with commutator.
-    \item The lie algebra of $\mathfrak{sl}(n, \R) := T_e \SL(n, \R)$ vector space of real traceless square $n \times n$ matrices.
+    \item The Lie algebra $\mathfrak{gl}(n, \R) = T_e\GL(n, \R)$ which is vector space of real square $n \times n$ matrices with commutator.
+    \item The Lie algebra of $\mathfrak{sl}(n, \R) := T_e \SL(n, \R)$ vector space of real traceless square $n \times n$ matrices.
     \begin{proof}
       Take $g(t) \in \SL(n, \R)$, and so $\det g(t) = 1$ hence, take $g(t)$ such that $g(0) = e$, and $\dot g(0) = \xi$ and so $\dot g(0) \in \mathfrak{sl}(n, \R)$. Now use the formula of the derivative of the determinant of a matrix to show,
       $$ \di {}{t} (\det (g(t)))_{t=0} = \det {g(0)}\Tr(g^{-1}(0)\dot g(0)) $$
-      and so, $g^{-1}(0)\dot g(0) \in \mathfrak{sl}(n, \R)$ and so we just have $\Tr (\xi)$.
+      and so, $g^{-1}(0)\dot g(0) \in \mathfrak{sl}(n, \R)$. Therefore, we just have $\Tr (\xi)$.
     \end{proof}
-    \item The lie algebra of $\mathfrak{so}(3) = T_e\SO(3)$, the vector space of skew-symmetric matrices.
+    \item The Lie algebra of $\mathfrak{so}(3) = T_e\SO(3)$, the vector space of skew-symmetric matrices.
   \end{itemize}
 \end{eg}
 
@@ -223,5 +224,5 @@ We finally present a lemma that we will use again and again throughout this work
   \end{enumerate}
 \end{nlemma}
 {\begin{proof}
-  Suppose we have a $c(t) \in G$ such that $c(0) = g$ and $\dot c(0) = v$. Now we define a $\g(t) = g^{-1}c(t)$ and we see that $\g (0) = e$ and $\dot\g(0) = g^{-1}\dot c(0) = g^{-1}v$. Hence by Lemma 1.14 we can say if $v \in T_eG$ then $gvg^{-1} \in T_eG$, applying this to $g^{-1}v$, we can get that $vg^{-1} \in T_eG$, as required.
+  Suppose we have a $c(t) \in G$ such that $c(0) = g$ and $\dot c(0) = v$. Now we define a $\g(t) = g^{-1}c(t)$ and we see that $\g (0) = e$ and $\dot\g(0) = g^{-1}\dot c(0) = g^{-1}v$. Hence by Lemma \ref{lemma:comm} we can say if $v \in T_eG$ then $gvg^{-1} \in T_eG$, applying this to $g^{-1}v$, we can get that $vg^{-1} \in T_eG$, as required.
 \end{proof} }
