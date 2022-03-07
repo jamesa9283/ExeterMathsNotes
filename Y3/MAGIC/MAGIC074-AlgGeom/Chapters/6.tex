@@ -1,0 +1,104 @@
+% !TEX root = ../notes.tex
+
+\begin{nlemma}
+  Let $A$ be a subring of $B$ and $g \in B$,
+  \begin{enumerate}
+    \item $g$ is integral over $A$
+    \item $A[g] \sub B$ is a finitely generated $A$-module
+    \item there exists a subring $C$ of $B$ containing $A[g]$ which is a finitely generated $A$-module,
+  \end{enumerate}
+\end{nlemma}
+\begin{proof}
+  Skipped
+\end{proof}
+
+\noindent
+We say that $B$ is integral over a subring $A$ if every element of $B$ is integral over $A$. A non-example is that $Z \sub \Q$ is not integral, or if we take $k[X^2, X^3] \sub k[X]$ this is integral.
+
+\begin{remark}
+   Integral dependce is also important in AlgNumber Theory.
+\end{remark}
+
+Here is a really integersting result about prime ideals,
+\begin{nprop}[Lying Over]
+  Lt $B$ be an integral extension of $A$. Then for each prime ideal $P \sub A$ then there exists a prime $Q$ `lying over $P$', that is $Q\sub A = P$.
+\end{nprop}
+and we can improve this to be about chains of prime ideals,
+\begin{nprop}
+ Let $B$ be integral over a subring $A$. If $P_0 \subsetneq P_1 \subsetneq \dots \subsetneq P_n$ then there is an ascending sequence of prime ideals $B$ such that $Q_i \cap A_i = P_i$
+\end{nprop}
+
+\noindent
+and now what is needed for the big german lemma,
+\begin{ncor}
+   Let $A$ be a subring of $B$ and suppose that $B$ is integral over $A$,
+   \begin{enumerate}
+     \item if $B$ is a field, so is $A$
+     \item if $B$ is an integral domain and $A$ is a field so is $B$
+   \end{enumerate}
+\end{ncor}
+
+\noindent
+This is the most important result about integral dependence in algebraic geometry,
+\begin{nprop}[Noether Normalisation (NN)]
+  LEt $B$ be a finitely generated $k$-algebra. Then there exists a polynomial subring $A = k[X_1, \dots, X_n]$ of $B$ with $X_1, \dots, X_n$ \textbf{something} independent, such that $B$ is integral over $A$.
+\end{nprop}
+\noindent
+This tells us that $B$ is a finitely generated $A$-module.
+
+\begin{ncor}
+  If $L$ is an extension of a field $k$, that is finitely generated as a $k$-algebra, then $L$ is algebraic over $k$.
+\end{ncor}
+
+\noindent
+Now for the big theorem, Nullstellensatz means the `theorem of zeroes'. We need that $k$ is algebraically closed.
+\begin{nthm}[Hilbert's Nullstellensatz (HNS)]
+  Let $k$ be an algebraically closed field,
+  \begin{enumerate}
+    \item Let $A$ be a finitely generated $k$-algebra then for every maximal ideal $M\sub A$ we have that the $\dim_k (A / M) = 1$ (that is $A/M = k$)
+    \item Let $(V, A)$ be an affine variety and let $I \sub A$ be an ideal, $I \ne A$, then $\V(I) \ne \vn$.
+  \end{enumerate}
+\end{nthm}
+\begin{proof}
+  (i), Let $M \sub A$ be maximal, and $B := A/M$. Then by NN, $B$ is integral over $C = k[T_1, \dots, T_n]$. Since $M$ is maximal, then $B$ is a field.  By Corrolary 4.12, then as $B$ is a field, then $C$ has to be a field. This can only happen if $n = 0$, and so $C = k$. $B$ is then an algebraic extension of $k$, but since $k = \bar k$, $B = k$. Hence, $\dim_k (B) = \dim_k (k) = 1$.\\
+
+  \noindent
+  (ii), Let $M \sub A$ be a maximal ideal containing $I$ (by Zorn's Lemma). Let $\theta : A \to k$ be a $k$-algebra map such that we define $a \mapsto a + M$, $\ker \theta = M$ and $\theta$ is surjective. Then $\theta = \e_x$ for some $x \in V$ [$(V, A)$ is an affine variety]. For $f \in I \sub M$ we have $f(x) = \e_x (f) = \theta(f) = 0$. That is $x \in \V(I)$.
+\end{proof}
+
+\noindent
+\begin{ndefi}[Nilradical]
+  Let $R$ be a ring. The Nilradical of $R$ is,
+  $$ \mathcal{N}(R) = \{ f \in R : \ex n \ge 1 : f^n = 0\} $$
+\end{ndefi}
+\noindent
+This is an ideal in $R$, and,
+$$ \mathcal{N}(R) = \bigcap_{r \sub R, \text{prime}} r $$
+That is, it's the intersection of all ideals.
+\begin{ndefi}[Radical]
+  Let $I \sub R$ be an ideal,
+  $$ \sqrt I = \{f \in R : \ex n \ge 1 : f^n \in I\} $$
+\end{ndefi}
+We know $\sqrt I$ is an ideal in $R$, $I \sub \sqrt I$ and $\sqrt I$ is the intersection of all prime ideals contained in $I$. We can pass to the quotient, $R / I = \mathcal{N}(R/I) = \sqrt I / I$. Also note that $\sqrt 0 = \mathcal{N}(R)$.
+
+\begin{nthm}[Strong Nullstellensatz]
+  Let $k = \bar k$,
+  \begin{enumerate}
+    \item Let $A$ be a finitely generated $k$-algebra. Then
+    $$ \bigcap_{m \sub A,\text{maximal}} m = \mathcal{N}(A) $$
+    \item Let $(V, A)$ be an affine variety, $J \sub A$ an ideal. Then, $I(\V(J)) = \sqrt J$.
+  \end{enumerate}
+\end{nthm}
+\begin{proof}
+  (i), this is quite messy. We skip it, but essentially need NN.\\
+
+  \noindent
+  (ii), We show both inclusions, it is clear that $\sqrt J \sub I(\V(J))$, we take $f \in \sqrt J$, then we fine some $f^n \in J$ and so $f^n(x) = 0 \forall x \in J$. Then we have $f(x)$ times by itself $n$ times. Then we have $f(x) = 0$, as we are in an integral domain. Therefore, $f \in I(\V(J))$. For the other inclusion, we assume that $\sqrt J \subsetneq  I(\V(J))$, this means that there exists some $f \in I(\V(J)) \sm \sqrt J$, that is $f^n \notin J$ for all $m \ge 1$. We apply (i) to the ring $A/J$, therefore $\mathcal{N}(A/J) = \bigcup_{m \in A/J, \text{maximal}} m$.
+  We know that the maximal ideals in $A/J$ are in bijection with the maximal ideals in $A$ that contain $J$. Therefore, there exists some maximal ideal $M \sub A$ where $J \sub M$ such that $f \notin M$. By HNS, we have $A/M = k$ and so we consider the short exact sequence,
+  $$ 0 \to M \to A \to k \to A, $$ then we call $\theta : A \to k$, where $\ker \theta = M$ and so $(V, A)$ is an affine variety, $\theta = \e_x$ for some $x \in V$. For any $g \sub J \sub M$ we have, $\theta(g) = \e_x(g) = g(x) = 0$. Therefore $x \in \V(J)$. But $J \notin M$, therefore $0 \ne \theta(f)$, but $\theta(f) = \e_x(f) = f(x) = 0$. Therefore $f \in I(\V(J))$.
+\end{proof}
+
+\noindent
+\begin{remark}
+  Let $A$ be a finitely generated $k$-algebra that is reduced (that is, $\mathcal{N}(A) = 0$, or $A$ has no nilpotent elements). Set $\Var(A) = \hom_{k-alg}(A, k)$. We can construct a natural map $q : A \to \map(\Var(A), k)$ by $\theta(a)(\a) = \a(a)$ for $a \in \Var(A)$. By HNS $\theta$ is injective and $A \sub \map(\Var(A), k)$. Therefore, $(\Var(A), A)$ is an affine variety. This is an equivalence of categories, affine varieties and finitely generated $k$-algebras.
+\end{remark}
