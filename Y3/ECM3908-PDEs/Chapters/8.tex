@@ -1,17 +1,67 @@
 % !TEX root = ../notes.tex
 
-\section{Laplace Equation}
-We have $\D u = \pdd u x + \pdd u y = 0$ for a Laplace equation and $\pdd u x + \pdd u y = f(x, y)$ for the Poisson equations. We have a selection of boundary conditions on this problem. We can seperate variables, let $u = X(x)Y(y)$, then we can reduce this by substituting this into the PDE, we get that
-$$ \frac{X''}{X} = \frac{Y''}{Y} = \l $$
-We look at different possible values for $\l$, if $\l = - \o^2 < 0$, then we get solutions
-% input solutions
-If we consider the Laplace equation on $u(x, 0) = f(x)$, then $u(x, b) = 0$, $u(0, y) = 0$ and $u(a, y) = 0$. We want to induce the BC to reduce the number of solutions. We get,
+\subsection{Seperation of variables for wave equation}
+Consider $u_{tt} - c^2u_{xx} = 0$ subject to $u(x, 0) = f(x)$ and $u_t(x, 0) = g(x)$ and the boundary conditions $u(0, t) = u(\ell, t) = 0$. We know the D'Alembert solution for the wave equation, but we consider seperation of variables. Let $u(x, t) = X(x)T(t)$, then we get the ODE, $XT'' -c^2X''T = 0$. Then we seperate and see,
+$$ \frac{T''}{T} = c^2 \frac{X''}{X} = \l $$
+Then we have to solve,
 $$ \begin{cases}
-  c_1\cos \o + c_2\sin \o x \\
-  c_1x + c_2 \\
-  c_1e^{\o x} + c_2e^{-\o x}
+  T'' - \L T = 0\\
+  X'' - \frac{\l}{c^2}X = 0
 \end{cases} $$
-Then using the BC we get,
+Then we consider different cases of $\l$. Firstly, let $\l = - \o^2$, then we get two ODEs that solve to $T(t) = c_1\cos \o t + c_2\sin \o t$ and $X(x) = d_1\cos \frac{\o}{c}x + d_2\sin \frac{\o}{c}x$. Now we consider the boundary conditions, these yield that $d_1 = 0$ and $d_2\sin \frac{\o \ell}{x} = 0$ and so $\o_n = \frac{n\pi c}{\ell}$ for $n = 1, 2, 3 \dots$
+and further, $\l_n = - \left(\frac{n\pi c}{\ell}\right)^2$. Therefore, $X_n = d_n \sin \frac{n\pi}{\ell}x$ for $n = 1, 2,3\dots$. Therefore the eigensolution is,
+$$ u_n(x, t) = X_n T_n (t) = d_n\sin \frac{n\pi}{\ell}x \left( c_{1n}\cos \frac{n\pi c}{\ell} t + c_{2n}\sin \frac{n\pi c}{\ell} t \right) $$
+This can be written as,
+$$ u_n(x, t) = C_n \sin \frac{n\pi }{\ell}x \cos \frac{n\pi c}{\ell} t + d_n \sin \frac{n\pi }{\ell} x \sin \frac{n\pi c}{\ell}t $$
+Therefore, we can finally write,
+$$ u(x, t) = \sum_{n=1}^\infty C_n \sin \frac{n\pi }{\ell}x \cos \frac{n\pi c}{\ell} t + d_n \sin \frac{n\pi }{\ell} x \sin \frac{n\pi c}{\ell}t $$
+Now consider the initial conditions,
+$$ u(x, 0) = \sum_{n=1}^\infty C_n \sin \frac{n\pi }{\ell}x = f(x) $$
+and so,
+$$ C_n = \frac{2}{\ell}\int_0^L f(x)\sin \frac{n\pi}{\ell}x dx $$
+Now we differentiate,
+$$ u_t(x, 0) = \sum_{n=1}^\infty d_n \frac{n\pi c}{\ell} \sin \frac{n\pi }{\ell} x = g(x) $$
+and so,
+$$ d_n = \frac{2}{n\pi c}\int_0^L g(x)\sin \frac{n\pi }{\ell}x dx $$
+We can verify that this is the only place where we don't have trivial solutions, that is $\l = 0$ and $\l > 0$ is trivial.
+
+\begin{eg}
+  Consider the wave equation where $u(x, 0) = f(x)$, $u(x, 0) = g(x)$ and $u_x(0, t) = u_x(\ell, t) = 0$. The boundary conditions tell us that $X'(0) = 0$ and $X'(\ell) = 0$. So we consider the separated ODEs and continue from there. We consider the ODE in terms of $X$, this has solution of $X(x) = d_1\cos \frac{\o}{c}x + d_2\sin \frac{\o}{c}x$, then we consider the boundary conditions. $X'(x) = -\frac{d_1\o}{c} \sin \frac{\o}{c}x + \frac{d_2\o}{c}\cos \frac{\o}{c}x$. Then imposing boundary conditions,
+  we get that $d_2 = 0$ and secondly $X'(\ell) = -\frac{d_1\o}{c}\sin \frac{\o}{c}\ell = 0$, that is $\o_n = \frac{n\pi c}{\ell}$ for $n = 1, 2, \dots$. Therefore the eigenfunctions are,
+  $$X_n(x) = d_n\cos \frac{n\pi }{\ell} x$$
+  for $n = 1, 2, \dots$. Then the other eigenfunction is,
+  $$ T_n = c_{1n}\cos \frac{n\pi c}{\ell}t + c_{2n}\sin \frac{n\pi c}{t} $$
+  Putting them together,
+  $$ u_n(x, t) = c_n\cos \frac{n\pi}{\ell}x \cos \frac{n\pi c}{\ell} t + d_n \cos \frac{n\pi }{\ell} x \sin \frac{n\pi c}{\ell}t $$
+  We consider $\l = 0$, then we get that, $X'' = 0$, that gives $X(x) = Cx + D$, then imposing the boundary conditions, we get that $X'(0) = C = 0$ and $X'(\ell) = C = 0$. Therefore, $X_0(x) = D$ and for $T$, we get $T(t) = c_0 + d_0t$. This gives,
+  $$ u(x, t) = c_0 + d_0t + \sum_{n=1}^\infty c_n\cos \frac{n\pi}{\ell}x \cos \frac{n\pi c}{\ell} t + d_n \cos \frac{n\pi }{\ell} x \sin \frac{n\pi c}{\ell}t $$
+  Now we impose the intial conditions,
+  $$ u(x, 0) = c_0 + \sum_{n=1}^\infty c_n\cos \frac{n\pi}{\ell} x = f(x)$$
+  and differentiate to get,
+  $$ u_t(x, 0) = d_0 + \sum_{n=1}^\infty \frac{d_n n\pi c}{\ell} \cos \frac{n\pi}{\ell}x = g(x) $$
+  and these are Fourier series. This gives us,
+  $$ c_n = \frac{2}{\ell}\int_0^L f(x)\cos \frac{n\pi }{\ell} x dx $$
+  and,
+  $$ d_n = \frac{2}{n\pi c}\int_0^L g(x)\cos \frac{n\pi }{\ell}x dx $$
+\end{eg}
+
+
+\section{Laplace Equation}
+We have $\D u = \pdd u x + \pdd u y = 0$ for a Laplace equation and $\pdd u x + \pdd u y = f(x, y)$ for the Poisson equations. We have a simply connected region that is the domain of definition, which we call $\O$. We have a selection of boundary conditions on this problem,
+\begin{enumerate}
+  \item Dirichlet BC, $u(x, y) = h(x, y)$ for $(x, y) \in \partial \O$
+  \item Neumann BC, $\pd u {\vec n}  = \nab u \cdot \vec n = k(x, y)$ on $\partial \O$
+  \item Robin BC, $\pd u {\vec n} + \b (x, y)u = k(x, y)$ on $\partial \O$.
+\end{enumerate}
+or even a mixture of these. We can separate variables, let $u = X(x)Y(y)$, then we can reduce this by substituting this into the PDE, we get that
+$$ \frac{X''}{X} = \frac{Y''}{Y} = \l $$
+We look at different possible values for $\l$, if $\l = - \o^2 < 0$, then we get solutions. We can run through each case and get the following,
+$$ \begin{cases}
+  c_1\cos \o + c_2\sin \o x & \l = -\o^2\\
+  c_1x + c_2 & \l = 0\\
+  c_1e^{\o x} + c_2e^{-\o x} & \l = \o^2
+\end{cases} $$
+If we consider the Laplace equation on $u(x, 0) = f(x)$, then $u(x, b) = 0$, $u(0, y) = 0$ and $u(a, y) = 0$ (This is a rectangle). We want to induce the BC to reduce the number of solutions.
 $$ \begin{cases}
   c_1\sin \o x \\
   c x\\
@@ -133,7 +183,7 @@ $$ a_n = \frac{1}{a\pi} \int_{-\pi}^\pi h(\theta) \cos n \theta d \theta \qquad 
   using $z = \frac{r}{a}e^{i\theta}$
 \end{exercise}
 
-\subsection{Poisson Equation for wedge}
+\subsection{Laplace Equation for wedge}
 Consider a wedge along $u = 0$, where the angle $\theta$ is $\theta = 0$ and $\theta = \b$. That is, $u(r, 0) = 0$ and $u(r, \b) = 0$. We also have $\pd u r (a, \theta) = h(\theta)$. As usual assume that $u(r, \theta) = R(r)\Th(\theta)$, then we have $u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2}u_{\theta \theta}$. We have the two ODEs,
 $$ \begin{cases}
   \Th'' + \l\Th = 0 \\
