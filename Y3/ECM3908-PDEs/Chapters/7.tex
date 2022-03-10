@@ -1,5 +1,159 @@
 % !TEX root = ../notes.tex
 
+We now consider stability of the equation. Consider $u_t - ku_{xx} = 0$ for $0 < x <\ell$ and $t > 0$ with initial and boundary conditions of $u(x, 0) = \Phi(x)$ and $u(0, t) = u(L, t) = 0$. Let $u_1(x, 0) = \Phi_1(x)$ and $u_2(x, t) = \Phi_2(x)$ we solutions of the equations. Call $w = u_1(x, t) - u_2(x, t)$ with the intial condition of $\Phi(x) = \Phi_1(x) + \Phi_2(x)$. Then from the energy method,
+$$ \int_0^L \left(u_1(x, t) - u_2(x,t)\right)^2 dx \le \int_0^L \left( \Phi_1(x) - \Phi_2(x)\right)^2 $$
+The LHS is the nearness of the solutions at any later time and the RHS is the nearness of the initial data for two solutions. Stability means that if we stay near a point if we just change it a little bit. Therefore, the solution of the diffusion equation is stable. \\
+
+\noindent
+\subsection{Diffusion Equation on the real line}
+The problem of interest is $u_t - ku_{xx} = 0$ for $-\infty < x < \infty$ with initial condition of $u(x, 0) = \Phi$. We consider the invariance properties,
+\begin{enumerate}
+  \item The translate $u(x - y, t)$ for any solution is another solution for any fixed $y$.
+  \item Any derivative, $u_x$, $u_t$, $u_{xx}$, etc. of a solution is again a solution.
+  \item A linear combination of solutions of the diffusion equation is a solution of the diffusion equation.
+  \item An integral of a solution is again a solution. Thus if $S(x, t)$ is a solution to the diffusion equation, then so is $S(x - y, t)$ and so is,
+  $$ v(x, t) = \int_{-\infty}^\infty S(x-y, t)g(y)dy $$
+  for any $g(y)$, as long as this convolution converges properly.
+  \item If $u(x, t)$ is a solution of the diffusion equation, then the dilated function $u(\sqrt a x, at)$ for any $a > 0$ is also a solution.
+  \begin{proof}
+    Let $v(x, t) = u(\sqrt a, at)$, then $v_t = au_t$ and $v_{x} = \sqrt a u_x$ and so $v_{xx} = au_{xx}$. Therefore, $v_t - kv_{xx} = a(u_t - ku_{xx}) = 0$
+  \end{proof}
+\end{enumerate}
+
+\noindent
+Consider $Q_t - kQ_{xx} = 0$ with special initial conditions, such that $Q(x, 0) = 1$ for $x > 0$ and $Q(x, 0) = 0$ for $x < 0$. We let $Q(x, t) = g(p)$ where $p = \frac{x}{\sqrt{4kt}}$. We can see that $\frac{x}{\sqrt t} \to \frac{\sqrt a x}{\sqrt{at}}$ via dilation. This is now just $\frac{\sqrt a}{\sqrt a} \frac{x}{\sqrt t}$.
+We will now use this form to transform the PDE to an ODE. We see that $Q_t = \di g p\pd p t = -\frac{1}{2t}\frac{x}{\sqrt{4kt}}\di g p$ and also $Q_x = \di g p \pd p x = \frac{1}{\sqrt{4kt}} g'(p)$ and $Q_{xx} = \frac{1}{4kt}g''(p)$. Then we get the following ODE,
+$$ \frac{1}{t}\left( - \frac{1}{2}pg'(p) - \frac{1}{4}g''(p) \right) = 0 $$
+which is just,
+$$ g''(p) + 2pg'(p) = 0 $$
+and then we can solve this and get a solution of,
+$$ g'(p) = c_1e^{-p^2} $$
+and then we integrate again to get an solution in terms of $g$
+$$ g(p) = c_1\int e^{-p^2}dp + c_2 $$
+But $Q(x, t) = g(p)$ and so
+$$ Q(x, t) = c_1\int_0^{\frac{x}{\sqrt{4kt}}} e^{-p^2} + c_2 $$
+We now want to impose initial conditions to get the constants. If $x > 0$, then,
+\begin{equation}
+  1 = \lim_{t \to 0} Q(x, t) = c_1\int_0^\infty e^{-p^2}dp + c_2 \label{equ:diff1}
+\end{equation}
+and impose the second condition, if $x < 0$, then
+\begin{equation}
+  0 = \lim_{t \to 0} Q(x, t) = c_1 \int_0^{-\infty} e^{-p^2}dp + c_2 \label{equ:diff2}
+\end{equation}
+We now will find the closed form of the gaussian integral. Let $I = \int_0^\infty e^{-x^2}dx$ and so,
+\begin{align*}
+  I^2 &= \int_0^\infty e^{-x^2}dx\int_0^\infty e^{-y^2}dy\\
+  &= \int_0^\infty\int_0^\infty e^{-(x^2 + y^2)}dxdy \\
+  &= \int_0^{\frac{\pi }{2}}\int_0^\infty e^{-r^2}rdrd \theta\\
+  &= \int_0^{\frac{\pi }{2}} \left.-\frac{1}{2}e^{-r^2}\right|_{0}^\infty d\theta \\
+  &= \int_0^{\frac{\pi }{2}} \frac{1}{2}d \theta = \frac{\pi}{4}
+\end{align*}
+Therefore, we can say that $I = \frac{\sqrt{\pi}}{2}$. From here we can say that (\ref{equ:diff1}) is, $c_1 \frac{\sqrt \pi}{2} + c_2$ and (\ref{equ:diff2}) becomes $-c_1 \frac{\sqrt \pi}{2} + c_2$. We solve these and see that $c_1 = \frac{1}{\sqrt \pi}$ and $c_2 = \frac{1}{2}$.
+We can now substitute these into the solution for the equation,
+$$ Q(x, t) = \frac{1}{2} + \frac{1}{\sqrt \pi} \int_0^{\frac{x}{\sqrt{4kt}}} e^{-p^2}dp \qquad t > 0 $$
+If $Q(x, t)$ is a solution, then $S(x, t) = \pd Q x$ is a solution. Then using the convolution integral, the following is also a solution,
+\begin{equation}
+  u(x, t) = \int_{-\infty}^\infty S(x - y, t)\Phi(y) dy \qquad t > 0 \tag{$*$}\label{equ:diff3}
+\end{equation}
+Furthermore, we claim this is unique. It suffices to show it satisfies the original initial condition.
+\begin{align*}
+  u(x, t) &= \int_{-\infty}^\infty S(x - y, t)\Phi(y)dy \\
+  &= \int_{-\infty}^\infty \pd Q x (x - y, t) \Phi(y)dy \\
+  &= -\int_{-\infty}^\infty \pd Q y (x - y, t) \Phi(y)dy \\
+  &= \left.-Q(x - y, t)\Phi(y)\right|_{-\infty}^\infty + \int_{-\infty}^\infty Q(x - y, t)\Phi'(y)dy
+\end{align*}
+We now impose the initial condition, $\Phi(y) \to 0$ as $|y|$ becomes large. Therefore,
+$$ u(x, t) = \int_{-\infty}^\infty Q(x - y, t)\Phi'(y)dy $$
+Now let $t = 0$, then,
+$$ u(x, 0) = \int_{-\infty}^\infty Q(x - y, 0)\Phi'(y)dy $$
+We also have initial conditions for $Q$, then,
+$$ u(x, 0) = \int_{-\infty}^x \Phi'(y)dy = \Phi(x) $$
+We said that $S(x, t) = \pd Q x = \frac{1}{2\sqrt{\pi k t}} e^{-\frac{x^2}{4kt}}$ for $t > 0$ (this is also known as Greens function). Now substituting in for the source function into (\ref{equ:diff3}), we can conclude,
+$$ u(x, t) = \frac{1}{\sqrt{4\pi kt}}\int_{-\infty}^\infty e^{\frac{-(x - y)^2}{4kt}}\Phi(y)dy $$
+We also note that,
+$$ \int_{-\infty}^\infty S(x, t)dt = \int_{-\infty}^\infty \frac{1}{\sqrt \pi} e^{-q^2}dq = 1 $$
+We can't always talk about the solution in terms of elementary functions, but we are able to write it in terms of $\erf x$, which is defined as,
+$$ \erf x = \frac{2}{\sqrt \pi} \int_0^x e^{-p^2}dp $$
+
+\begin{eg}
+  $Q(x, t)$ can be written in terms of $\erf x$ as,
+  $$ Q(x, t) = \frac{1}{2}\erf\left( \frac{x}{\sqrt{4kt}} \right) $$
+\end{eg}
+
+\begin{eg}
+  Solve,
+  $$ \begin{cases}
+    u_t - ku_{xx} = 0\\
+    u(x, 0) = e^x
+  \end{cases} $$
+  We already have a solution, we just have to replace $\Phi$ by the initial condition.
+  $$ u(x, t) = \frac{1}{\sqrt{4\pi kt}}\int_{-\infty}^\infty  e^{-\frac{(x - y)^2}{4kt}}e^{-y}dy = \frac{1}{\sqrt{4\pi kt}}e^{-\frac{(y - x - 2kt)^2}{4kt} + kt - x}$$
+  and so we now let $p = \frac{y + 2kt - x}{\sqrt{4kt}}$, then,
+  $$ u(x, t) = \frac{1}{\pi}e^{kt - x}\int_{-\infty}^\infty e^{-p^2}dp = e^{kt - x} $$
+\end{eg}
+
+\subsection{Diffusion on the half line}
+We consider $v_t - kv_{xx} = 0$ on $0 < x < \infty$ for $t > 0$ subject to initial condition $u(x, 0) = \Phi(x)$ for $t = 0$ and $x > 0$ and Dirichlet Boundary condition, $v(0, t) = 0$. We need to restrict the equation, so we will consider the method of reflection or odd expansion. We will use odd expansion, consider $$\Phi_\text{odd} = \begin{cases}
+  \Phi(x) & x > 0 \\
+  0 & x = 0 \\
+  -\Phi(-x) & x < 0
+\end{cases}$$
+
+Our problem of interest is $u_t - ku_{xx} = 0$ for $- \infty < x < \infty$ and $t > 0$ subject to $u(x, 0) = \Phi_\text{odd}(x)$. Then the solution to this is,
+$$ u(x, t) = \int_{-\infty}^\infty S(x - y, t)\Phi_\text{odd}(y)dy $$
+where $v(x, t) = u(x, t)$ for $x > 0$. We can write,
+\begin{align*}
+  u(x, t) &= \int_0^\infty S(x - y, t)\Phi(y)dy - \int_{-\infty}^0 S(x - y, t)\Phi(-y)dy \\
+  &= \int_0^\infty S(x - y, t)\Phi(y)dy - \int^{\infty}_0 S(x + y, t)\Phi(y)dy \\
+  &= \int_0^\infty \left(S(x - y, t) - S(x + y, t)\right)\Phi(y)dy \\
+\end{align*}
+Therefore,
+$$ v(x, t) = \frac{1}{\sqrt{4\pi kt}}\int_0^\infty \left(e^{-\frac{(x - y)^2}{4kt}} - e^{-\frac{(x + y)^2}{4kt}}\right) \Phi(y)dy $$
+\begin{eg}
+  Solve the diffusion equation, $v_t - kv_{xx} = 0$ for $0 < x < \infty$ and $t > 0$ subject to $v(x, 0) = 1$ at $t = 0$ and $v(0, t) = 0$ at $x = 0$.\\
+
+  \noindent
+  We get the solution of,
+  $$ v(x, t) = \frac{1}{\sqrt{4\pi kt}}\int_0^\infty \left(e^{-\frac{(x - y)^2}{4kt}} - e^{-\frac{(x + y)^2}{4kt}}\right) dy $$
+  We then change variables, let $p = \frac{x - y}{\sqrt{4kt}}$ and $q = \frac{x + y}{\sqrt{4kt}}$, then we get,
+  $$ v(x, t) = -\frac{1}{\sqrt{\pi }}\int_{\frac{x}{\sqrt{4kt}}}^{-\infty} e^{-p^2} dp - \frac{1}{\sqrt{\pi}}\int_{\frac{x}{\sqrt{4kt}}}^{\infty} e^{-q^2} dq $$
+  Then we get,
+  $$ v(x, t) = \frac{1}{\sqrt \pi}\int_{-\infty}^0 e^{-p^2}dp + \frac{1}{\sqrt \pi}\int_0^{\frac{x}{\sqrt{4kt}}}e^{-p^2}dp + \frac{1}{\sqrt \pi}\int^{\frac{x}{4kt}}_0 e^{-q^2}dq - \frac{1}{\sqrt\pi} \int_0^\infty e^{-q^2}dq $$
+  and the first and last terms cancel,
+  $$ v(x, t) = \frac{1}{\sqrt \pi}\int_0^{\frac{x}{\sqrt{4kt}}}e^{-p^2}dp + \frac{1}{\sqrt \pi}\int^{\frac{x}{4kt}}_0 e^{-q^2}dq $$
+  which is just a $\erf$ functions,
+  $$ \erf \left(\frac{x}{\sqrt{4kt}}\right) $$
+\end{eg}
+
+\noindent
+Now consider a Neumnann Boundary condition,
+\begin{eg}
+  Consider $w_t - kw_{xx} = 0$ on the half line where $w(x, 0) = \Phi(x)$ and subject to $w_x(0, t) = 0$. For the Neumann problem we need to use the even extension as then we will get it's derivative as an odd function. Consider,
+  $$ \Phi_\text{even}(x) = \begin{cases}
+    \Phi(x) & x \ge 0 \\
+    \Phi(-x) & x < 0
+  \end{cases} $$
+  We consider $u_t - ku_{xx} = 0$ where $u(x, 0) = \Phi_\text{even}(x)$. We restrict this to $x > 0$ this will be the unique solution. We start with the solution on the entire real line, then,
+  $$ u(x, t) = \int_{-\infty}^\infty S(x - y, t)\Phi_\text{even}dy $$
+  Then we break it into two parts,
+  \begin{align*}
+    u(x, t) &= \int_{0}^\infty S(x - y, t)\Phi(y)dy + \int_{-\infty}^0 S(x - y, t)\Phi(-y)dy\\
+    &= \int_{0}^\infty S(x - y, t)\Phi(y)dy + \int^{\infty}_0 S(x + y, t)\Phi(y)dy\\
+    &= \int_{0}^\infty \left(S(x - y, t) + S(x + y, t)\right)\Phi(y)dy\\
+  \end{align*}
+  Then we have that,
+  $$ w(x, t) = \frac{1}{\sqrt{4\pi kt}}\int_0^\infty \left(e^{-\frac{(x - y)^2}{4kt}} + e^{-\frac{(x + y)^2}{4kt}}\right)\Phi(y) dy $$
+\end{eg}
+
+\begin{eg}
+  Solve $w_t - kw_{xx} = 0$ for the half line where $w(x, 0) = \Phi(x) = 1$ and $w_x(0, t) = 0$. Then even extension of $\Phi_{\text{even}}(x) = \Phi(x)$. So we know $w(x, t) = u(x, t)$ for $x > 0$. Therefore, we have the solution,
+  $$ u(x, t) = \frac{1}{\sqrt{4\pi kt}}\int_0^\infty \left(e^{-\frac{(x - y)^2}{4kt}} + e^{-\frac{(x + y)^2}{4kt}}\right)dy $$
+  Let $p = \frac{x - y}{\sqrt{4kt}}$ and $q = \frac{x + y}{4kt}$,
+  $$ u(x, t) = \frac{1}{\sqrt \pi}\int_{\frac{x}{\sqrt{4kt}}}^{-\infty} e^{-p^2}dp + \frac{1}{\sqrt \pi} \int_{\frac{x}{\sqrt{4kt}}}^{\infty} e^{-q^2}dq $$
+  Then we can further simplify as before, and we get,
+  $$ \int_{-\infty}^\infty \frac{1}{\sqrt{\pi}}e^{-p^2} = 1 $$
+\end{eg}
+
 \noindent
 We consider the diffusion equation with a source,
 \subsection{Diffusion Equation with a source equation}
