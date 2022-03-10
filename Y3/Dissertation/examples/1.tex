@@ -1,8 +1,10 @@
 % !TEX root = ../notes.tex
 
-\section{Spherical Pendulum}
+\section{Applications of Geometric Mechanics}
 
-\subsection{Euler-Legrange Equations}
+\subsection{Spherical Pendulum}
+
+\subsubsection{Euler-Legrange Equations}
 
 We want to consider a pendulum in 3D space. We will think about this through the definition of spherical coordinates, as in actuality our motion of the bob will just be on $S^2$. However, we need to define what are Euler Lagrange equations?\cite{holm_2011}\\
 
@@ -88,7 +90,7 @@ $$ \begin{cases}
   \quad\ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta = 0
 \end{cases} $$
 
-\subsection{Euler-Poincar\'e Equations}
+\subsubsection{Euler-Legrange Equations II}
 We will now consider an Euler-Poincar\'e treatment of the Spherical Pendulum. The spherical pendulum is just a particle that moves along the surface of a sphere. We will consider two coordinates, the body coordinates $\vec x(t)$ and the spatial coordinates $\vec X$, where $\vec x(t) = R(t)\vec X$ and we let $R \in \SO(3)$. In terms of the body coordinates, we can write the Lagrangian as,
 $$ L(\vec x, \vec{\dot x}) = \frac{1}{2}m\left|\vec{\dot x}\right|^2 - mg\vec e_3 \cdot \vec x $$
 and then using the body to spatial coordinate transformation,

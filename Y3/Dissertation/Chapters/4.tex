@@ -51,31 +51,3 @@ $$ \I\dot{\vec \Lambda} = \I\vec\O \times \vec\O $$
 \noindent
 We can write the equations by considering the tangent space.
 
-
-\subsection{Euler-Poincare Reduction by Symmetry}
-To gain a general idea of how the equations of motion appear for rotational dynamics with symmetry, we consider an arbitrary Lagrangian of this form,
-$$ L : T\SO(3) \to \R $$
-$$ L = L(R, \dot R) $$
-and satisfies,
-$$ \d\int_{t_1}^{t_2} L(R, \dot R)\,dt = 0 $$
-this means,
-\begin{align*}
-  \d\int_{t_1}^{t_2} L(R, \dot R)\,dt &= \int_{t_1}^{t_2} \ip{\pd{L}{R}}{\d R} + \ip{\pd{L}{\dot R}}{\d R}\, dt\\
-  &= \ip{\pd{L}{\dot R}}{\d R}\Bigg|_{t_2} - \ip{\pd{L}{\dot R}}{\d R}\Bigg|_{t_1} + \int_{t_1}^{t_2} \ip{\pd{L}{R} - \di{}{t} \pd{L}{\dot R}}{\d R} \,dt
-\end{align*}
-and so we can notice $\di{}{t}\pd{L}{\dot R} - \pd{L}{R} = 0$
-\begin{ndefi}[Left-Symmetric Lagrangian]
-  A Lagrangian is said to be left-symmetric or left-invariant under the action of the group of the group of rotations if, $L(\chi R,\, \chi\dot R) = L(R, \dot R)$ $\fa \chi \in \SO(3)$.
-\end{ndefi}
-We also know $\mathfrak{SO}(3) = T_e\SO(3)$ and we said that $v \in T_eG \implies g^{-1}v \in \mathfrak{g} = T_eG$. We know $\dot R(t) \in T_{R(t)}\SO(3)$ and so we can say $R^{-1}\dot R \in \mathfrak{SO}(3)$.\\
-
-We say
-\begin{align*}
-  L(R, \dot R) &= L(R^{-1}R, R^{-1}\dot R)\\
-  &= \wt{\ell}(R^{-1}\dot R) = \wt{\ell}(\Oh)
-\end{align*}
-Now we write out Hamilton's principle,
-\begin{align*}
-  0 &= \d \int_{t_1}^{t_2} \wt{\ell}(\Oh)\,dt\\
-  &= \d \int_{t_1}^{t_2} \ell(\vec\O) = \vec{0}\\
-\end{align*}

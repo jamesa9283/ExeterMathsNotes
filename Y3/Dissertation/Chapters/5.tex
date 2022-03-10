@@ -1,142 +1,130 @@
 % !TEX root = ../notes.tex
 
-Euler Poincare equtions,
-$$ \di {}{t} \pd{\ell}{\vec\O} - \pd{\ell}{\vec\O} \ti \O = \vec 0 $$
+\subsection{The Hat Map as a Lie Algebra Isomorphisms}
+In this Chapter we will take a quick jaunt back into some purer topics, more specifically a Lie Algebra Isomorphism called the Hat Map. We can define a Lie Algebra Isomorphism as a bijective Lie Algebra homomorphism, which we then define as,
+\begin{ndefi}[Lie Algebra Homomorphism]
+  A Lie Algebra homomorphism is a linear map, $\phi : \mathfrak{g} \to \mathfrak{g}'$ compatible with the respective lie brackets,
+  $$ \phi([x, y]_\mathfrak{g}) = [\phi(x), \phi(y)]_{\mathfrak{g}'} \qquad \forall x, y \in \mathfrak{g} $$
+\end{ndefi}
+
+\noindent
+We note that the Lie bracket for $\R^3$ is the cross product, and more specifically $(\R^3, \ti)$ is a Lie Algebra. Then we can talk about a Lie Algebra homomorphism, $\phi : \R^3 \to \mathfrak{so}(3)$, which is a homomorphism that maps,
+$$ \phi(\vec x \ti \vec y) = [\phi (x), \phi (y)]_{\mathfrak{so}(3)}. $$
+We let this $\phi$ be the hat map where we define,
+$$ \oh = \begin{pmatrix}
+  0 & -\o_1 & \o_2 \\ \o_3 & 0 & -\o_1 \\ -\o_2 & \o_1 & 0
+\end{pmatrix} $$
+
+\noindent
+The Lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\SO(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
+$$ \di {}{t} \pd{\ell}{\Oh} - \ad^*_{\Oh}\pd{\ell}{\Oh} = 0 $$
+Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
+{\color{red} \begin{align*}
+  \ip{\ad_{\Oh}^*\vec\Pi}{\oh} &= \ip{\vec\Pi}{\ad_{\Oh}{\oh}}\\
+  &= \ip{\vec\Pi}{[\Oh,\,\oh]}\\
+  &= \Tr(\vec\Pi^\top [\Oh,\,\oh])\\
+  &= \Tr(\vec\Pi^\top \Oh\oh - \vec\Pi^\top\oh\Oh)\\
+  &= \Tr(\vec\Pi\Oh^\top\oh - \vec\Pi\Oh\oh^\top)\\
+  &= \Tr(\vec\Pi\Oh\oh^\top - \Oh\vec\Pi\oh^\top) \\
+  &= \Tr((\vec\Pi\Oh - \Oh\vec\Pi)\oh^\top) \\
+  &= \Tr([\vec\Pi,\,\Oh]\oh^\top) \\
+  &= \ip{[\vec\Pi,\,\Oh]}{\oh}
+\end{align*} }
+
+\noindent
+Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a lie algebra isomorphism, i.e., $ [\Oh,\,\oh] = \wh{\vec\O\ti\vec\o} $. We prove this from the definition of the Lie Bracket, that is,
+
+\begin{align*}
+  [\Oh, \oh] &= \Oh\oh - \oh\Oh\\
+  &= \begin{pmatrix}
+    0 & -\O_1 & \O_2 \\ \O_3 & 0 & -\O_1 \\ -\O_2 & \O_1 & 0
+  \end{pmatrix}\begin{pmatrix}
+    0 & -\o_1 & \o_2 \\ \o_3 & 0 & -\o_1 \\ -\o_2 & \o_1 & 0
+  \end{pmatrix} - \begin{pmatrix}
+    0 & -\o_1 & \o_2 \\ \o_3 & 0 & -\o_1 \\ -\o_2 & \o_1 & 0
+  \end{pmatrix}\begin{pmatrix}
+    0 & -\O_1 & \O_2 \\ \O_3 & 0 & -\O_1 \\ -\O_2 & \O_1 & 0
+  \end{pmatrix}\\
+\end{align*}
+\begin{align*}
+  &= \begin{pmatrix}
+    -\O_3\o_3 - \O_2\o_2 & \O_2\o_1 & \O_3\o_1 \\
+    \O_1\o_2 & -\O_3\o_3 - \O_1\o_1 & \O_3\o_2 \\
+    \O_1\o_3 & \O_2\o_3 & -\O_2\o_2 - \O_1\o_1
+\end{pmatrix} - \begin{pmatrix}
+  -\o_3\O_3 - \o_2\O_2 & \o_2\O_1 & \o_3\O_1 \\
+  \o_1\O_2 & -\o_3\O_3 - \o_1\O_1 & \o_3\O_2 \\
+  \o_1\O_3 & \o_2\O_3 & -\o_2\O_2 - \o_1\O_1
+\end{pmatrix} \\
+&= \begin{pmatrix}
+  0 & \O_2\o_1 - \O_1\o_2 & \O_3\o_1 - \O_1\o_3 \\
+  \O_1\o_2 - \O_2\o_1 & 0 & \O_3\o_2 - \O_2\o_3 \\
+  \O_1\o_3 - \O_3\o_1 & \O_2\o_3 - \O_3\o_2 & 0
+\end{pmatrix} \\
+&= \wh{\vec\O \ti \vec\o}
+\end{align*}
+
+\noindent
+We have proved that where $\phi$ is the hap map that $[\phi(\vec x), \phi(\vec y)] = \phi(\vec x \ti \vec y)$. We now need to prove that the hap map is a bijective linear map. It is linear as it can be represented as a matrix in $\SO(3)$. Now we prove bijectivity by first proving injectivity, then surectivity. Let $\vec x, \vec y \in \R$ and we know that $\hat{\vec x} = \hat{\vec y}$, that is,
+$$ \begin{pmatrix}
+  0 & -x_1 & x_2 \\ x_3 & 0 & -x_1 \\ -x_2 & x_1 & 0
+\end{pmatrix} = \begin{pmatrix}
+  0 & -y_1 & y_2 \\ y_3 & 0 & -y_1 \\ -y_2 & y_1 & 0
+\end{pmatrix} $$
+Then we can see that $x_1 = y_1$, $x_2 = y_2$ and $x_3 = y_3$. Therefore, $\vec x = \vec y$. Hence the hat map is injective. Now we seek to prove that the hap map is surjective. Consider some $\hat{\vec z} \in \mathfrak{so}(3)$, then we can write it as,
+$$ \begin{pmatrix}
+  0 & -z_1 & z_2 \\ z_3 & 0 & -z_1 \\ -z_2 & z_1 & 0
+\end{pmatrix} $$
+Then this will uniquely define some $\vec z = (z_1, z_2, z_3)^T \in \R^3$. Hence the hat map is surjective. Therefore the hat map is a Lie Algebra Isomorphism.\\
+
+\noindent
+We have described Lagrangians that have left or right invariance. We now look to Lagrangians that have Symmetry breaking parameters, like gravity. If we consider the spherical pendulum, we have defined $\Oh = R^T\dot R$ and we define $\oh = R\vec\O$ and then we can see that $\oh = \dot R R^T = \dot R R^{-1}$ where $R \in \SO(3)$. This doesn't lead to a symmetric Lagrangian but we can still use our theory here. \\
+
+\noindent
+We are going to study rigid body dynamics in the spatial frame. We look firstly to the Lagrangian. We have showed,
+$$ L(R,\,\dot R) = \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \vec X}^2 d^3\vec X $$
+and we showed that $L(R,\, \dot R) = L(e,\, R^{-1}\dot R)$ and then we used Euler Poincare Theorem to show that $\ell = \frac{1}{2}\mathbb{I}\vec\O \cdot \vec\O$. Now assume we would prefer to formulate rigid body dynamics in the spatial frame. We need to consider a $\vec\o$ such that $\oh = \dot R R^{-1}$. We can now prove that, $L(R,\,\dot R) \ne L(R\chi,\,\dot R\chi)$ (right multiplication) hence we have broken symmetry,
+\begin{align*}
+  L(R\chi,\,\dot R\chi) &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \chi\vec X}^2 d^3\vec X \\
+  &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) (\dot R \chi\vec X) \cdot (\dot R \chi\vec X) d^3\vec X \\
+  &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) (\dot R \chi\vec X)  (\dot R \chi\vec X)^T d^3\vec X \\
+  &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) (\dot R \chi\vec X)  (\vec X^T\chi^T\dot R^T) d^3\vec X \\
+  &\ne \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \vec X}^2 d^3\vec X = L(R, \dot R)
+\end{align*}
+
+
+\noindent
+Now we seek this Lagrangian,
+\begin{align*}
+  L(R,\,\dot R) &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\dot R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\dot RR^{-1}R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\oh R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)(\ov \ti R\vec X) \cdot (\ov \ti R\vec X)d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\norm{\ov}^2\norm{R\vec X}^2 - (\ov \cdot R\vec X)^2)d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\ov^T \ov\norm{R\vec X}^2 - \ov^T (R\vec X)(R\vec X)^T\ov )d^3\vec X\\
+  &= \ov^T\frac{1}{2}\int_\mathcal{B}\rho(\vec X) (R\norm{\vec X}^2 R^T - R\vec X\vec X^T R^T d^3\vec X \,\ov\\
+  &= \ov^TR\frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\norm{\vec X}^2 - \vec X\vec X^T d^3\vec X \,R^T\ov\\
+  &= \frac{1}{2}\ov^T (R\I R^T \ov) \\
+  &= \frac{1}{2}\vec\ov \cdot (R\mathbb{I} R^T)\ov = L(\vec\ov,\,R)
+\end{align*}
+We define a new parameter, $\mathbb{J} := R\mathbb{I}R^T$ and so $\ell = \ell(\mathbb{J},\,\vec\o) = \frac{1}{2}\vec\o(t) \cdot \mathbb{J}(t) \vec\o(t)$ % J is for spatial frame.
+Now we take variations as usual,
+$$ \d\int_{t_1}^{t_2} \ell(\J,\,\vec\o) = 0 $$
+\begin{align*}
+  \d \int_{t_1}^{t_2} \frac{1}{2}\vec \o(t) \cdot \mathbb{J}(t) \vec\o(t) dt = 0
+\end{align*}
+and we ask what is $\d\J(t)$,
+\begin{align*}
+  \d\J(t) &= \d(R\I R^T)\\
+  &= \d R\I R^T + R\I \d R^T\\
+  &= \d R R^{-1}R\I R^T - R\I R^{-1}\d R R^{-1}\\
+  &= \Lh \J - \J \Lh\\
+  &= [\Lh,\,\J]
+\end{align*}
+where $\Lh = \d R R^{-1}$
+
 \begin{exercise}
-  Derive these
+  Prove that $\d \oh = \vec\Lhd + [\Lh,\, \oh]$ and $\d\vec\o = \dot{\vec{\Lambda}} + \vec\Lambda \ti \vec\o$ and then take variations of $\frac{1}{2}\vec\o \cdot \J\vec\o$ and prove that $\di{}{t} (\J\vec\o) = \vec 0$
+  and then
+ $\di{\J}{t} \oh + \J\vec{\dot{\hat{\o}}} = \vec 0$ and so $\di{\J}{t} = [\oh,\,\J]$.
 \end{exercise}
-{\color{red} \begin{solution}
-  We shall start from Hamilton's Principle and move forward to derive our Euler-Poincare Equations.
-  \begin{align*}
-    \d\int_{t_1}^{t_2} \ell(\Oh)\,dt &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Oh}}{\d\Oh}\, dt\\
-    &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov}
-  \end{align*}
-  Now, we shall use a fact we proved in the last exercise $\d\Ov = \Ld + (\Ov \ti \Lv)$ to derive the Euler-Poincare equations we wanted,
-  \begin{align*}
-    \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov} &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\Ld + \Ov \ti \Lv} \\
-    &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\dit\Lv} + \ip{\pd{\ell}{\Ov}}{\Ov \ti \Lv} \\
-    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\Ov}}{\Lv} + \ip{-\Ov \ti \pd{\ell}{\Ov}}{\Lv} \\
-    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\Ov}}{\Lv} + \ip{ \pd{\ell}{\Ov} \ti \Ov}{\Lv} \\
-    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\Ov} + \pd{\ell}{\Ov} \ti \Ov}{\Lv} = \vec 0\\
-  \end{align*}
-  Hence we say that
-  \begin{equation*}
-    \dit\pd{\ell}{\Ov} - \pd{\ell}{\Ov} \ti \Ov = \vec 0
-  \end{equation*}
-\end{solution} }
-These are the Euler-Poincare equations for rotational dynamics with symmetry under left multiplication.
-
-\newpage
-\begin{nthm}[]
-  The spatial angular momentum (in the spatial frame) is conserved along solutions of the Euler-Poincare equations.
-\end{nthm}
-\begin{proof}
-  We know $\di {}{t}\pd{\ell}{\vec \O} - \pd{\ell}{\vec \O} \times \O = 0$ and we know that $R\pd{\ell}{\vec\O}$ and the multiplcation by $R$ means spatial frame. Hence we prove,
-  $$ \di{}{t} R\pd{\ell}{\vec \O} = \vec 0$$
-  \begin{align*}
-    \di{}{t} R\pd{\ell}{\vec \O} &= \dot R \pd{\ell}{\vec \O} + R\di { }{t} \pd{\ell}{\vec\O}\\
-    &= R\Oh\pd{\ell}{\vec\O} + R\left(\pd{\ell}{\vec \O} \times \vec\O\right)\\
-    &= R\left(\O \times \pd{\ell}{\vec\O}\right) + R\left(\pd{\ell}{\vec \O} \times \vec\O\right)\\
-    &= \vec 0
-\end{align*}
-\end{proof}
-
-Now we want to write a general form of the Euler-Poincare Equations for left invariant systems. \\
-Let $L$ be a lagrangian on the tangent bundle of a matrix lie group $G$,
-$$ L : TG \to \R $$
-$$ L = L(g, \dot g) \qquad \fa g \in G $$
-Assume that the lagrangian is left-invariant,
-$$ L(g,\,\dot g) = L(hg,\, h\dot g) \quad \fa h\in G $$
-and now let $h = g^{-1}$, and so $L(g,\,\dot g) = L(g^{-1}g\,g^{-1}\dot g) = \ell(\xi)$. We have gone from a lie group to a lie algebra, $\xi = g^{-1}\dot g \in T_eG = \mathfrak{g}$ which is a matrix lie algebra. We now aim to use the action functional and variational derivative,
-\begin{align*}
-  \d \int_{t_1}^{t_2} L(g,\,\dot g) &= \vec 0\\
-  \d \int_{t_1}^{t_2} \ell(\xi)\,dt &= \vec 0\\
-  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d \xi}\,dt &= \vec 0\\
-\end{align*}
-Now we want to consider $\d \xi = \d (g^{-1}\dot g)$,
-\begin{align*}
-  \d (g^{-1}\dot g) &= \d g^{-1}\dot g + g^{-1}\d \dot g\\
-  &= g^{-1}\d gg^{-1}\dot g + g^{-1}\di {}{t}\d g\\
-  &= -(g^{-1}\d g)g^{-1}\dot g + g^{-1}\di{}{t}\d g\\
-  &= - \eta\xi + \di{}{t}\d (g^{-1}\d g) + (g^{-1}\dot g)(g^{-1}\di{}{t}\d g)\\
-  &= -\eta\xi +  \dot\eta+\xi\eta\\
-  &= \dot\eta + [\xi,\,\eta]\\
-  &= \dot\eta + \ad_{\xi}{\eta}
-\end{align*}
-and so back to the derivation,
-\begin{align*}
-  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d \xi}\,dt &= 0\\
-  \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dot\eta + \ad_{\xi}\eta} &= 0\\
-  \int_{t_1}^{t_2} \ip{-\di{}{t} \left(\pd{\ell}{\xi}\right)}{\eta} + \ip{\ad^{*}_{\xi}\pd{\ell}{\xi}}{\eta}\,dt &= 0
-\end{align*}
-Since $\eta$ is arbitrary our equation is of this form,
-$$ \di{}{t} \pd{\ell}{\xi} - \ad^{*}_{\xi}\pd{\ell}{\xi} = 0 $$
-and these are our Euler-Poincare equations for a left invariant system.
-
-\begin{nthm}[Noethers Theorem for left-invariant systems]
-  The Euler Poincare equations associated a left-invariant system preserve the generalised momentum along solutions of the Euler-Poincare equations, that is,
-  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = 0 $$
-\end{nthm}
-{\color{red} \begin{proof}
-  Suppose we have a left invariant lagrangian, i.e. $L(g, \dot g) = L(e,\,g^{-1}\dot g) = \ell(g^{-1}g) := \ell(\xi)$ where $\xi = g^{-1}\dot g$. Firstly, however, let us consider the following derivative where $\mu(t) \in \mathfrak{g}$,
-  \begin{align*}
-    \ditat{t_0}\left( \Ad_{g^{-1}(t)}\mu(t) \right) &= \ditat{t_0} \Ad_{g^{-1}(t)g(t_0)}\left( \Ad_{g^{-1}(t_0)} \mu\right)\\
-    &= -\ad_{g^{-1}(t_0)\dot g(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right)\\
-    &= -\ad_{\xi(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right)
-  \end{align*}
-  and so we can say,
-  $$ \dit\left( \Ad_{g^{-1}(t)}\mu(t) \right) = -\ad_{\xi(t)} \left( \Ad_{g^{-1}(t)} \mu(t)\right) $$
-  Now, we can move forward and consider the trace pairing of our interested quantity and $\mu(t)$.
-  \begin{align*}
-    \ip{ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) }{ \mu(t) } &= \dit \ip{ \Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t) }{ \mu(t) } \\
-    &= \dit \ip{ \pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
-    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } + \ip{ \pd{\ell}{\xi}(t) }{ \dit\Ad_{g^{-1}(t)}\mu(t) } \\
-    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } + \ip{ \pd{\ell}{\xi}(t) }{ -ad_{\xi(t)}(\Ad_{g^{-1}(t)}\mu(t)) } \\
-    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } - \ip{ \pd{\ell}{\xi}(t) }{ ad_{\xi(t)}(\Ad_{g^{-1}(t)}\mu(t)) } \\
-    &=  \ip{ \dit\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } - \ip{ ad^*_{\xi(t)}\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
-    &=  \ip{ \dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
-    &=  \ip{ \Ad^*_{g^{-1}(t)}\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right] }{ \mu(t) } \\
-  \end{align*}
-  Hence, we can say that,
-  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = \Ad^*_{g^{-1}(t)}\underbrace{\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right]}_{\text{LHS of Euler-Poincare Equations}}  $$
-  and as we have a left invariant system, we can use the left invariant Euler-Poincare equations to reduce the above derivative to zero, and hence Noethers Theorem for left invariant systems follows from this.
-\end{proof} }
-
-\begin{exercise}
-  Repeat derivations for the Euler-Poincare Equations for right-invariant systems. What is Noether Theorem?\footnote{What about both left and right invariant?}
-\end{exercise}
-{\color{red} \begin{solution}
-  Now let us carry forward with the derivation for right invariant systems. A right invariant lagrangian is one that the following is true, $L(g,\,\dot g) = L(gh,\,\dot gh)$ for all $h \in G$. We then set $h = g^{-1}$ and get that $L(g,\,\dot g) = L(e,\,\dot gg^{-1})$ and so we let $\xi = \dot gg^{-1}$ and hence write our lagrangian as $\ell(\xi)$. Now we again go back to Hamiltons Principle,
-  \begin{align*}
-    0 = \d\int_{t_1}^{t_2} L(g,\,\dot g)\,dt &= \d\int_{t_1}^{t_2} \ell(\xi)\,dt\\
-    &= \int_{t_1}^{t_2} \d\ell(\xi)\,dt \\
-    &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d\xi}\,dt \\
-  \end{align*}
-  Now we consider $\d\xi = \d(\dot g g^{-1})$,
-  \begin{align*}
-    \d(\dot g g^{-1}) &= \d\dot g g^{-1} + \dot g\d g^{-1} \\
-    &= \dit(\d g)g^{-1} - \dot g g^{-1}\d gg^{-1}\\
-    &= \dit(\d g g^{-1}) - \d g\dit(g^{-1}) - \dot g g^{-1}\d gg^{-1}\\
-    &= \dit(\d g g^{-1}) - \d gg^{-1}\dot g g^{-1} - \dot g g^{-1}\d gg^{-1} && \text{let $\nu = \d gg^{-1}$}\\
-    &= \dot\nu + \nu\xi - \xi\nu \\
-    &= \dot\nu + [\nu,\,\xi] \\
-    &= \dot \nu + \ad_\nu\xi \\
-    &= \dot\nu - \ad_\xi\nu
-  \end{align*}
-  Hence, we now can move forward and complete the derivation of the right invariant Euler-Poincare Equations.
-  \begin{align*}
-    \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dit\nu - \ad_\xi\nu}\,dt &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dit\nu} - \ip{\pd{\ell}{\xi}}{\ad_\xi\nu}\,dt \\
-    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi}}{\nu} - \ip{\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt \\
-    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi} -\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt
-  \end{align*}
-  and so we can write down the Euler-Poincare equations for the right invariant system,
-  $$ \dit\pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{\xi} = 0 $$
-  We can restate Noethers Theorem as following,
-  \begin{nthm}[Noethers Theorem for right invariant systems.]
-    The Euler Poincare equations associated a right-invariant system preserve the generalised momentum along solutions of the Euler-Poincare equations, that is,
-    $$ \di{}{t} \left(\Ad^*_{g(t)}\pd{\ell}{\xi}(t)\right) = 0 $$
-  \end{nthm}
-  \begin{proof}
-    This follows from a very similar argument to before by finding that $\dit (\Ad_{g^{-1}}\mu) = \ad_\xi (\Ad_g\mu)$ and applying this fact in an identical analysis of the trace pairings ending with $\dit(\Ad_g^*\pd{\ell}{\xi}) = \Ad^*_g\left[ \dit\pd{\ell}{\xi} + \ad_\xi^* \pd{\ell}{\xi} \right]$ and then the result follows from the right-invariant version of the Euler-Poincare equations.
-  \end{proof}
-\end{solution} }
