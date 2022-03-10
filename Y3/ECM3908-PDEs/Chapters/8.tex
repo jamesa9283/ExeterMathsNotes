@@ -1,0 +1,185 @@
+% !TEX root = ../notes.tex
+
+\section{Laplace Equation}
+We have $\D u = \pdd u x + \pdd u y = 0$ for a Laplace equation and $\pdd u x + \pdd u y = f(x, y)$ for the Poisson equations. We have a selection of boundary conditions on this problem. We can seperate variables, let $u = X(x)Y(y)$, then we can reduce this by substituting this into the PDE, we get that
+$$ \frac{X''}{X} = \frac{Y''}{Y} = \l $$
+We look at different possible values for $\l$, if $\l = - \o^2 < 0$, then we get solutions
+% input solutions
+If we consider the Laplace equation on $u(x, 0) = f(x)$, then $u(x, b) = 0$, $u(0, y) = 0$ and $u(a, y) = 0$. We want to induce the BC to reduce the number of solutions. We get,
+$$ \begin{cases}
+  c_1\cos \o + c_2\sin \o x \\
+  c_1x + c_2 \\
+  c_1e^{\o x} + c_2e^{-\o x}
+\end{cases} $$
+Then using the BC we get,
+$$ \begin{cases}
+  c_1\sin \o x \\
+  c x\\
+  c\sinh \o x
+\end{cases} $$
+The last two of these provide trivial solutions. We now impose the BC,
+$$ X(a) = c\sin \o a = 0 $$
+and so $\sin \o a = 0$ and so $\o_n a = n\pi$ for $n \in \Z$. Then we get that $\o_n = \frac{n\pi}{a}$. Hence $\l_n = -\o_n^2 = -\left( \frac{n\pi}{a} \right)$. Therefore our eigenfuctions are,
+$$ X_n(x) = c_n\sin \frac{n\pi}{a}x $$
+and now we consider $Y$, we get that,
+$$ Y'' + \l Y = 0 $$
+and so we can say that $Y(y) = d_1e^{\o y} + d_2e^{-\o y}$. Now we impose boundary conditions, $Y(b) = d_1 e^{\o b} + d_2 e^{-\o b} = 0$. Hence, $d_2 = d_1e^{-2\o b}$. Hence we get the general solution,
+$$ Y(y) = d_1 e^{\o b}\left( e^{\o (y - b)} - r^{\o(b - y)}\right) $$
+and so we can conclude,
+$$ Y_n(y) = d_n\sinh \o_n (b - y) $$
+where $n \in \Z$. We can substitute for $\o_n$,
+$$ Y_n(y) = d_n\sinh \frac{n\pi}{a}(b - y) $$
+We can now find $u(x, y) = X(x)Y(y)$,
+$$ u_n(x, y) = C_n \sin \frac{n\pi}{a}x\sinh \frac{n\pi}{a}(b - y) $$
+where $C_n = c_nd_n$. Therefore,
+$$ u(x, y) = \sum_{n=1}^\infty C_n\sin \frac{n\pi}{a}x\sinh \left( \frac{n\pi (b - y)}{a} \right) $$
+Now we consider the bottom edge, where $y = 0$, we get,
+$$ u(x, 0) = \sum_{n=1}^\infty C_n \sin \frac{n\pi }{a}\sinh \frac{n\pi b}{a} = f(x)$$
+This is fourier sine series and so,
+$$ C_n\sinh \frac{n\pi b}{a} = \frac{2}{a}\int_0^a f(x)\sin \frac{n\pi}{a}xdx $$
+
+\subsection{Laplace Equation in Polar Coordinates}
+Assume we want to solve $\D u = 0$ in $\O$ where $\O = x^2 + y^2 \le 1$, where $\partial\O$ is just the unit circle. Along the boundary $u(x, y) = h(x, y)$. We know that in polar coordinates we have that $x = r\cos \theta$, $y = r\sin \theta$ where $x^2 + y^2 = r^2$ and $\theta = \tan^{-1}\frac{y}{x}$. \\
+
+\noindent
+We know $\D u = \pdd u x + \pdd u y = 0$. We know that $\pd{}{r} = \pd{}{x}x_r + \pd{}{y}y_r = \cos \theta \pd{}{x} + \sin \theta \pd{}{y}$, similarly, $\pd{}{\theta} = \pd{}{x}x_\theta + \pd{}{y}y_\theta = -r\sin \theta \pd{}{x} + r\cos \theta \pd{}{y}$.
+Then from these two equations we ge that,
+$$ \begin{pmatrix}
+  \pd{}{r} \\ \pd{}{\theta}
+\end{pmatrix} = \begin{pmatrix}
+  \cos \theta & \sin \theta \\ -r\sin \theta & r\cos \theta
+\end{pmatrix} \begin{pmatrix}
+  \pd{}{x} \\ \pd{}{y}
+\end{pmatrix} $$
+and so we can see that,
+$$ \begin{pmatrix}
+  \pd{}{x} \\ \pd{}{y}
+\end{pmatrix} = \begin{pmatrix}
+  r\cos \theta & -\sin \theta \\ r\sin \theta & \cos \theta
+\end{pmatrix}\begin{pmatrix}
+  \pd{}{r} \\ \pd{}{\theta}
+\end{pmatrix}  $$
+Therefore we get that,
+$$ \pd{}{x} = \cos \theta\pd{}{r} - \frac{1}{r}\sin \theta \pd{}{\theta} \qquad \pd{}{y} = \sin \theta \pd{}{r} + \frac{1}{r}\cos \theta \pd{}{\theta} $$
+We can now transform the laplacian to,
+$$ \D u = \pdd u x + \pdd u y = 0 \to \pdd u r + \frac{1}{r}\pd u r + \frac{1}{r^2}\pdd u \theta $$
+If $r = 1$, then $u(1, \theta) = h(\theta)$. Hence we have transformed the problem to polar coordinates. We will now solve this. We also need periodic boundary conditions, that is $u(r, \theta + 2\pi) = u(r, \theta)$ and $h(\theta + 2\pi) = h(\theta)$. We will use seperation of variables, let $u(r, \theta) = R(r)\Th (\theta)$. We substitute this into the PDE to get,
+$$ R''\Th + \frac{1}{r}R'\Th + \frac{1}{r^2}R\Th'' = 0 $$
+We will multiply by $\frac{r^2}{R\Th}$,
+$$ r^2 \frac{R''}{R} + r \frac{R'}{R} + \frac{\Th''}{\Th} = 0 $$
+or,
+$$ \frac{r^2R'' + rR'}{R} = - \frac{\Th''}{\Th} = \l $$
+This is a set of ODEs,
+$$ \begin{cases}
+  r^2R'' + rR' - \l R &= 0\\
+  \Th'' + \l\Th &= 0
+\end{cases} $$
+We let $\l = \o^2$. Then the second equation becomes $\Th(\theta) = c_1\cos \o \theta + c_2\sin \o \theta$. Then we assume that the solution is $2\pi$-periodic. That is, $\Th(\theta + 2\pi) = \Th(\theta)$. We conclude,
+$$ \Th(-\pi) = c_1\cos \o\pi -c_2\sin \o\pi $$
+$$ \Th(\pi) = c_1\cos \o\pi + c_2\sin \o \pi $$
+Therefore $\Th(-\pi) = \Th(\pi)$ implies that $c_2\sin \o\pi = 0$, that is $\o_n = n$ for $n \in \Z$. If $\l = 0$, then $\Th'' = 0$, that is $\Th(\theta) = C \theta + D$. Considering this under $2\pi$-periodic, we get that $\Th(\theta) = D$, that is it's a constant. We now conclude that $\l = n^2$ where $n \in \Z$.
+Therefore $\Th_n = a_n\cos n \theta + b_n\sin n \theta$ for $0 \ne n \in Z$ and $\Th_0(\theta) = a_n$ for $n = 0$.\\
+
+\noindent
+Now we consider the radial direction,
+$$ r^2R'' + rR' - \l R = 0 $$
+We let $z = \ln r$, that is $\di{}{r} = \di{}{z}\di z r = \frac{1}{r}\di{}{z}$ and we also get that $\ddi{}{r} = \di{} r\left( \frac{1}{r}\di{}{z} \right) = - \frac{1}{r^2} \di{}{z} + \frac{1}{r^2}\dii{}{z}$.
+We substitute this back in and get,
+$$ \dii R z - \l R = 0 $$
+and so we get that $R(z) = c_1e^{\sqrt \l z} + c_2e^{-\sqrt \l z}$, now we substitute in for $\l_n$,
+$$ R_n(z) = c_{1n}e^{nz} + c_{2n}e^{-nz} \to R_n(r) = c_{1n}e^{n\ln r} + c_{2n}e^{-nln r} = c_{1n}r^n + c_{2n}r^{-n} $$
+Therefore,
+$$ R_n(r) = c_{1n}r^n + c_{2n}r^{-n} \quad n \in \Z^+\sm\{0\} $$
+Now we consider $\l = 0$, then we have the equation
+$$ r^2 R'' + rR' = 0 $$
+and so we get that,
+$$ \dii R z = 0 $$
+and this has solution $R(z) = \tilde{a_0}z + \tilde{b_0}$, which is then just $R_0(r) = \tilde{a_0}\ln r + \tilde {b_0}$. Then we get the following solution,
+$$ u_n(r, \theta) = R_n(r)\Th_n(\theta) = (\tilde{a_0}\ln r + \tilde{b_0}) +(c_{1n}r^n + c_{2n}r^{-n})(a_n\cos n \theta + b_n\sin n \theta) $$
+Then $\tilde{a_0}\ln r$ and $c_{2n}r^{-n}$ are singular as $r \to 0$ and so we remove them.
+$$ u(r, \theta ) = \sum_{n=1}^\infty u_n(r , \theta) = \frac{a_0}{2} + \sum_{n=0}^\infty a_nr^n\cos n \theta + b_nr^n\sin n \theta $$
+As a series solution for this problem. To find the coefficients we consider the boundary condition along $\partial \O$. We  consider $u(1, \theta)$,
+$$ u(1, \theta) = \frac{a_0}{2} + \sum_{n=0}^\infty a_n\cos n \theta + b_n\sin n \theta = h(\theta)$$
+This is now a fourier series and so,
+$$ a_n = \frac{1}{\pi}\int_{-\pi}^\pi h(\theta)\cos n \theta d \theta \qquad b_n = \frac{1}{\pi} \int_{-\pi}^\pi h(\theta)\sin n \theta d \theta  $$
+
+\noindent
+We want to find an explicit expression, so we will substitute the coefficients into the solution,
+$$ u(r, \theta ) = \sum_{n=1}^\infty u_n(r , \theta) = \frac{1}{2\pi}\int_{-\pi}^\pi h(\varphi) d \varphi + \sum_{n=0}^\infty \left( \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi)\cos n \varphi d \varphi \right)r^n\cos n \theta + \left( \frac{1}{\pi} \int_{-\pi}^\pi h(\varphi)\sin n \varphi d \varphi \right)r^n\sin n \theta $$
+This is then just,
+$$ u(r, \theta) = \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi) \left( \frac{1}{2} + \sum_{n=1}^\infty r^n\cos (n - \phi) \right)d\varphi $$
+Then considering complex numbers,
+\begin{align*}
+  u(r, \theta) &= \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi) \left( \frac{1}{2} + \sum_{n=1}^\infty  \Re\left(\frac{1 + z}{2(1 - z)} \right)\right)d\varphi\\
+  u(r, \theta) &= \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi) \left( \frac{1}{2} + \sum_{n=1}^\infty  \left(\frac{\Re(1 + z - \bar z - |z|^2)}{2|1 - z|^2}\right) \right)d\varphi\\
+  u(r, \theta) &= \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi) \left( \frac{1}{2} + \sum_{n=1}^\infty  \left(\frac{1 - |z|^2}{2|1 - z|^2}\right) \right) d\varphi\\
+  u(r, \theta) &= \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi) \left( \frac{1}{2} + \sum_{n=1}^\infty  \left(\frac{1 - r^2}{2(1 + r^2 - 2r\cos (\theta - \phi))}\right) \right)d\varphi
+\end{align*}
+
+\begin{nthm}[Poisson Integral Formula]
+  The solution to the Laplace equation in the unit disc subject to Dirichlet boundary condition $u(1, \theta) = h(\theta)$ is,
+  $$ u(r, \theta) = \frac{1}{\pi}\int_{-\pi}^\pi h(\varphi) \frac{1 - r^2}{1 +r^2 - 2r\cos (\theta - \phi)}d\varphi $$
+  This is the Poisson Formula.
+\end{nthm}
+
+\noindent
+If we consider $x^2 + y^2 = a$ for the boundary condition, then we get that from this boundary condition,
+$$ h(\theta) = \frac{a_0}{2} + \sum_{n=1}^\infty \left( a_na^n \cos n \theta + b_na^n \sin n \theta \right) $$
+Then we get that,
+$$ a_n = \frac{1}{a\pi} \int_{-\pi}^\pi h(\theta) \cos n \theta d \theta \qquad b_n = \frac{1}{a^n}\int_{-\pi}^\pi h(\theta)\sin n \theta $$
+\begin{exercise}
+  Finish the derivation,
+  $$ u(r, \theta) = \frac{1}{2\pi}\int_{-\pi}^\pi h(\varphi) \frac{a^2 - r^2}{a^2 - 2ar\cos(\theta - \varphi)} $$
+  using $z = \frac{r}{a}e^{i\theta}$
+\end{exercise}
+
+\subsection{Poisson Equation for wedge}
+Consider a wedge along $u = 0$, where the angle $\theta$ is $\theta = 0$ and $\theta = \b$. That is, $u(r, 0) = 0$ and $u(r, \b) = 0$. We also have $\pd u r (a, \theta) = h(\theta)$. As usual assume that $u(r, \theta) = R(r)\Th(\theta)$, then we have $u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2}u_{\theta \theta}$. We have the two ODEs,
+$$ \begin{cases}
+  \Th'' + \l\Th = 0 \\
+  r^2R'' + rR' - \l R = 0
+\end{cases} $$
+Then we have $\Th'' + \l\Th = 0$ for $\Th(0) = \Th(\b) = 0$. We let $\l = \o^2$, then we solve $\Th(\theta) = c_1\cos \o \theta + c_2\sin \o \theta$, then using the boundary condition, we get that $c_1 = 0$, and the second tells us that $c_2\sin \o \b = 0$. Then for a non-trivial solution we have $\sin \o \b = 0$ and so $\o_n = \frac{n\pi }{\b}$, therefore $\l_n = \left( \frac{n\pi}{\b} \right)^2$.
+Now we consider $R$, we get that $r^2R'' + rR' - \l R= 0$, we let $ p = \ln r$. We then have $\dii R p - \l R = 0$, therefore, $R(p) = c_1e^{\sqrt \l p} + c_e^{-\sqrt \l p}$, then substituting for $\l$ and $p$, we get,
+$$ R_n(r) = d_n r^{\frac{n\pi}{\b}} $$
+and we impose the BC at $r = 0$ by removing terms of form $r^{-n}$ and $n \in \Z^+\sm \{0\}$. Therefore we get the solution,
+$$ u(r, \theta) = \sum_{n=1}^\infty a_n r^{\frac{n\pi}{\b}}\sin \frac{n\pi \theta}{\pi}$$
+We now impose the other BC,
+$$ \pd u r = \sum_{n=1}^\infty a_n \frac{n\pi}{\b} r^{\frac{n\pi}{\b} - 1}\sin \frac{n\pi \theta}{\b} $$
+and now let $r = a$ to get,
+$$ h(\theta) = \sum_{n=1}^\infty a_n \frac{n\pi}{\b} a^{\frac{n\pi}{\b} - 1} sin \frac{n\pi \theta}{\b} $$
+This is a fourier series in the interval $[0, \b]$,
+$$ \frac{n\pi}{\b}a^{\frac{n\pi}{\b} - 1} a_n = \frac{2}{\b} \int_0^\b h(\theta) \sin \frac{n\pi \theta}{\b} d\theta $$
+and so,
+$$ a_n = \frac{2}{n\pi}a^{1- \frac{n\pi}{\b}}\int_0^\b h(\theta)\sin \frac{n\pi \theta}{\b}d \theta $$
+
+\subsection{Laplace Equation for an annulus}
+We now want to solve the poisson equation in an annulus. We say $u(b, \theta) = h(\theta)$ and also $u(a, \theta) = g(\theta)$. We consider $u_{xx} + u_{yy} = 0$ for $a^2 < x^2 + y^2 < b^2$ subject to $u = g(\theta)$ for $x^2 + y^2 = a^2$ and $u = h(\theta)$ for $x^2 + y^2 = b^2$. We follow the usual method for solution,
+$$ u(r, \theta) = \frac{1}{2}\left( a_0 + b_0\ln r\right) + \sum_{n=1}^\infty (a_nr^n + b_n r^{-n})\cos n \theta + (c_n r^n + d_n r^{-n})\sin n \theta $$
+then we have the terms that have a singularity at $r = 0$ as $r = 0$ is not in the domain of solution.
+\begin{exercise}
+  Find the coefficients by letting $ r = a$ and $r = b$.
+\end{exercise}
+
+\subsection{Laplace Equation on an exterior of circle}
+Here we have boundary conditions on the boundary of the circle, $u(a, \theta) = h(\theta)$. We consider $\D u = 0$ on $x^2 + y^2 > a$. We also impose that the solution is bounded. We know that,
+$$ u(r, \theta) = \frac{a_0}{2} + \sum_{n=1}^\infty r^{-n} \left( a_n\cos n \theta + b_n\sin n \theta\right) $$
+Then,
+$$ h(\theta) = \frac{a_0}{2} + \sum_{n=1}^\infty a^{-n} \left( a_n\cos n \theta + b_n\sin n \theta \right) $$
+Then we can write this as,
+$$ a_n = \frac{a^n}{\pi}\int_{-\pi}^\pi h(\theta)\cos n \theta d \theta \qquad a_n = \frac{a^n}{\pi}\int_{-\pi}^\pi h(\theta)\sin n \theta d \theta $$
+
+\section{Eigenfunction Expansion}
+We recall from vector calculus,
+\begin{ndefi}[Gauss Divergence Theorem]
+  $$ \iiint \nab \cdot \vec u dV = \iint_{\partial V} \vec u \cdot \vec n = \iint_{\partial V} \vec u \cdot d\vec S $$
+\end{ndefi}
+Now we let $\vec u = f\nab g$, where $f, g$ are scalar differentiable functions. Then we can substitute this in,
+$$ \iiint_{V} \nab \cdot (f\nab g) dV = \iint_{\partial V} f \nab g \cdot \vec n dS $$
+but we know that $\nab \cdot (f \nab g) = \nab f \cdot \nab g + f\D g$. We substitute this in and get, greens first identity.
+$$ \iiint_V  $$
+Let $\vec u = g \grad f$, then,
+$$ \nab f \cdot \nab g + g\nab^2 f dV  = \iint_{\partial V} g\nab f \cdot n dS $$
+Then we subtract the two and get that,
+$$ \iiint_V (f\nab^2 g = g\nab^2 f) dV = \iint_{\partial V} (f \nab g - g \nab f)\cdot \vec n cS $$
+This is Greens second identity.
