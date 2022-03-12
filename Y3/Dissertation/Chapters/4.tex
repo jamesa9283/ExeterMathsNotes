@@ -1,53 +1,49 @@
 % !TEX root = ../notes.tex
 
 \subsection{Calculus of variations}
-We are going to consider a continuous level, but you can use discrete level.
+Now we will continue our exploration of pure-applied mathematics by looking at calculus of variations. We are going to consider the mathematics on a continuous level, but you can consider a discrete level. This could be done via discrete differential geometry and is very useful to derive numerical methods subject to some conditions.
 % mathscr
-\begin{nthm}[The variation principle]
-  $$ \L = \int_{t_1}^{t_2} \frac{1}{2}\I\vec \O \cdot \vec\O \,dt $$
-  and we find differential equations by letting $\d\L = 0$ but this is subject to $\d\vec\O(t_1) = \d\vec\O(t_2) = \vec 0$
+\begin{nthm}[Hamilton's Variation Principle]
+  Let $G$ be a Lie group and $\mathfrak{g}$ be its associated algebra. We consider a Lagrangian, $L : G \ti \mathfrak{g} \to \mathfrak{g}$. Then Hamilton's Variational Principle holds, that is,
+  $$ L = \int_{t_1}^{t_2} \frac{1}{2}\I\vec \O \cdot \vec\O \,dt. $$
+  We find differential equations by letting $\d L = 0$ but this is subject endpoint conditions, $\d\vec\O(t_1) = \d\vec\O(t_2) = \vec 0$.
 \end{nthm}
-and so,
+\noindent
+Now we can take Hamilton's Variational Principle with respect to the Lagrangian we derived in the last section,
 $$ \d\int_{t_1}^{t_2} \frac{1}{2}\I\vec\O \cdot \vec\O\, dt = \int_{t_1}^{t_2} \frac{1}{2}\I\d\vec\O \cdot \vec\O + \frac{1}{2}\I\vec\O \cdot \d\vec\O \, dt  = \int_{t_1}^{t_2}\I\vec\O \cdot \d\vec\O$$
-but what is $\d\vec\O$, but remember we have $\Oh$, which is the lie algebra of $\SO(3)$. We said, $\Oh = R^T\dot R = R^{-1}\dot R$. Now we take variations of $\Oh = \vec\O \times \vec X$ and so,
-$$ (\d \vec \O)\times\vec X = (\d\Oh) \vec X $$
-and so we see that,
+We have reached an impassable point, we currently don't know what $\d\vec\O$ is. Remember $\Oh$ is in the Lie algebra of $\SO(3)$. We said that $\Oh = R^T\dot R = R^{-1}\dot R$. Now we take variations of $\Oh = \vec\O \times \vec X$ and so,
+$$ (\d \vec \O)\times\vec X = (\d\Oh) \vec X. $$
+We can now rewrite this as,
 $$ \d\Oh = \d(R^{-1}\dot R) = \d R^{-1}\dot R + R^{-1}\d\dot R = 0 $$
-as $\d I = \d RR^{-1} + R\d R^{-1}$ and then we see that $R^{-1}\d R R^{-1} + R^{-1}R \d R^{-1} = 0$ and so as $RR^{-1} = I$, $R^{-1}\d RR^{-1} + \d R^{-1} = \vec 0$. We have that $\d R^{-1}\dot R + R^{-1}\d \dot R = \d \Oh$ and $\Oh = R^{-1}\dot R$ where $\Lh = R^{-1}\d R$ and so we sub in,
+as $\d I = \d RR^{-1} + R\d R^{-1}$. We see that $R^{-1}\d R R^{-1} + R^{-1}R \d R^{-1} = 0$ and so as $RR^{-1} = I$, $R^{-1}\d RR^{-1} + \d R^{-1} = \vec 0$. Therefore, $\d R^{-1}\dot R + R^{-1}\d \dot R = \d \Oh$
+and $\Oh = R^{-1}\dot R$ where $\Lh = R^{-1}\d R$ and so we substitute for this quantity,
 \begin{align*}
   \d\Oh &= -R^{-1}\d R R^{-1}\dot R + R^{-1}\di{}{t}\d R\\
   &= R^{-1}\d R \Oh + \di{}{t}(R^{-1}\d R) - (\di{}{t}R^{-1})\d R\\
   &= R^{-1}\d R \Oh + \di{}{t}(R^{-1}\d R) + R^{-1}\dot R R^{-1}\d R\\
   &= - \Lh\Oh + \di{}{t}\Lh + \Oh\Lh\\
-  &=\Lhd + [\Oh, \Lh]
+  &=\Lhd + [\Oh, \Lh].
 \end{align*}
 
-\begin{exercise}
-  Prove,
-  $$ \d\vec\O = \dot\Lambda + (\vec\O \times \vec\Lambda) $$
-\end{exercise}
-{\color{red} \begin{solution}
-  We can use the fact that $\wh{[\vec\O,\,\vec\Lambda]} = [\Oh,\,\Lh]$ and then we can get the required result.
-  \begin{align*}
-    \d\Oh &= \Lhd + [\Oh,\,\Lh] \\
-    &= \Lhd + \wh{[\vec\O,\,\vec\Lambda]} \\
-    &= \Lhd + \wh{(\vec\O \ti \vec\Lambda)} \\
-    \wh{\d\vec\O} &= \wh{\Ld + (\Ov \ti \Lv)} \\
-  \end{align*}
-  and so we can see that $\d\Ov = \dot\Lv + (\Ov \ti \Lv)$
-\end{solution}
- }
 \noindent
-Now, let us substitute this back into our variational principle.
+We now aim to prove,
+$$ \d\vec\O = \dot\Lambda + (\vec\O \times \vec\Lambda). $$
+We can use the fact that $\wh{[\vec\O,\,\vec\Lambda]} = [\Oh,\,\Lh]$ to get the required result.
 \begin{align*}
-  \d\int_{t_1}^{t_2} \I \vec\O \cdot \vec\O \,dt &= 0 \\
-  \int_{t_1}^{t_2}\I \vec\O \cdot \d\vec\O \,dt &= 0 \\
-  \int_{t_1}^{t_2} {\I \vec\O \cdot (\Ld + \vec\O \times \vec\La)\,dt} &= 0\\
-  \left[ \I\vec\O \cdot \Lv |_{t_2} - \I\vec\O \cdot \Lv |_{t_1} \right] - \int_{t_1}^{t_2} \di{}{t}(\I\vec\O) \cdot \Lv\,dt + \int_{t_1}^{t_2} (\I\vec\O \times \vec\O)\cdot \Lv &= 0\\
-  0 - 0 - \int_{t_1}^{t_2} (- \I\dot{\vec\O} + \I\vec\O \times \vec\O) \cdot \Lv \, dt &= 0
+  \d\Oh &= \Lhd + [\Oh,\,\Lh] \\
+  &= \Lhd + \wh{[\vec\O,\,\vec\Lambda]} \\
+  &= \Lhd + \wh{(\vec\O \ti \vec\Lambda)} \\
+  \wh{\d\vec\O} &= \wh{\Ld + (\Ov \ti \Lv)} \\
+\end{align*}
+Therefore, $\d\Ov = \dot\Lv + (\Ov \ti \Lv)$. Now, let us substitute this back into our variational principle.
+\begin{align*}
+  0 &= \d\int_{t_1}^{t_2} \I \vec\O \cdot \vec\O \,dt \\
+  0 &= \int_{t_1}^{t_2}\I \vec\O \cdot \d\vec\O \,dt \\
+  0 &= \int_{t_1}^{t_2} {\I \vec\O \cdot (\Ld + \vec\O \times \vec\La)\,dt} \\
+  0 &= \left[ \I\vec\O \cdot \Lv |_{t_2} - \I\vec\O \cdot \Lv |_{t_1} \right] - \int_{t_1}^{t_2} \di{}{t}(\I\vec\O) \cdot \Lv\,dt + \int_{t_1}^{t_2} (\I\vec\O \times \vec\O)\cdot \Lv\\
+  0 &= 0 - 0 - \int_{t_1}^{t_2} (- \I\dot{\vec\O} + \I\vec\O \times \vec\O) \cdot \Lv \, dt.
 \end{align*}
 Hence,
-$$ \I\dot{\vec \Lambda} = \I\vec\O \times \vec\O $$
-\noindent
-We can write the equations by considering the tangent space.
+$$ \I\dot{\vec \Lambda} = \I\vec\O \times \vec\O. $$
+We note that can write the equations by considering the tangent space.
 

@@ -1,7 +1,7 @@
 % !TEX root = ../notes.tex
 
 \subsection{Actions of a Lie Group and Lie Algebra}
-In this section we will focus on how our Lie Group will act on our Algebra. We will first use conjugation actions to define our adjoints which will become very useful once we see the Euler Poincare equations. As an introduction consider classical groups, then we define a group action on the group as how a group can act on a set,
+In this section we will focus on how our Lie groups will act on our algebras. We will first use conjugation actions to define our adjoints which will become very useful once we see the Euler-Poincar\'e equations. As an introduction we will consider classical groups, then define a group action as how the structure can act on a set,
 \begin{ndefi}[Group Action]
   Let $(G, *)$ be a group and $A$ be a set. A group action is a map,
   $$ (\cdot) : G \ti A \to A $$
@@ -14,7 +14,7 @@ In this section we will focus on how our Lie Group will act on our Algebra. We w
 \end{ndefi}
 
 \noindent
-One of the most thoroughly studied actions in applied settings is conjugation. In our case we will also use the conjugation action to derive the adjoint and coadjoint actions for firstly the Lie Group onto the Lie algebra and then the Lie algebra onto itself. The conjugation action is defined in the usual way,
+One of the most thoroughly studied actions in applied settings is conjugation. In our case we will also use the conjugation action to derive the adjoint and coadjoint actions for firstly the Lie group onto the Lie algebra and then the Lie algebra onto itself. The conjugation action is defined in the usual way,
 
 \begin{ndefi}[Conjugation Action]
   Let $g \in G$, then the operation $I_g : G \to G$ (Inner Automorphism) and so you define it by $h \mapsto ghg^{-1}\quad\fa h \in G$. $I_{gh} = AD_{gh}$.
@@ -28,14 +28,14 @@ Take an arbitrary path $h(t) \in {G}$ such that $h(0) = e$ and let $\xi = \dot h
   $$ Ad : G \times \mathfrak{g} \to \mathfrak{g} $$
   defined by,
   $$ \Ad_g \xi = g\xi g^{-1} $$
-  The dual map $\ip {Ad^*_g \mu} \xi = \ip {\mu} {Ad_g\xi}$ where $\mu \in \mathfrak{g}^*$ and $\xi \in T_eG = \mathfrak{g}$ is called the coadjoint map of $G$ on the dual lie algebra $\mathfrak{g}^*$.
+  The dual map $\ip {Ad^*_g \mu} \xi = \ip {\mu} {Ad_g\xi}$ where $\mu \in \mathfrak{g}^*$ and $\xi \in T_eG = \mathfrak{g}$ is called the coadjoint map of $G$ on the dual Lie algebra $\mathfrak{g}^*$.
 \end{ndefi}
 
 \noindent
-We will find that sometimes our classical ideas of vector spaces doesn't work. Hence, we shall introduce functionals and use them to define dual vector spaces.
+We will find that sometimes our classical ideas of vector spaces don't work. Hence, we shall introduce functionals and use them to define dual vector spaces.
 
 \begin{ndefi}[Dual Space for vectors]
-  Let $V$ be a finite dimensional vector space, of dimension $n$, over $\R$. The dual vector space is denoted by $V^*$ is the space of all linear functionals from $V \to \R$, $f(v) = a$ where $v \in V$ and $a \in \R$, then also $f(\a v + \b w) = \a f(v) + \b f(w)$ and $\a, \b \in \R$ and $v, w \in V$. Hence, $f(v) = Mv$ we call $M$ the covector such that $Mv \in \R$. The vector space of all covectors is the dual space.
+  Let $V$ be a finite dimensional vector space, of dimension $n$, over $\R$. The dual vector space, denoted by $V^*$, is the space of all linear functionals from $V \to \R$, $f(v) = a$ where $v \in V$ and $a \in \R$, then also $f(\a v + \b w) = \a f(v) + \b f(w)$ and $\a, \b \in \R$ and $v, w \in V$. Hence $f(v) = Mv$, we call $M$ the covector such that $Mv \in \R$. The vector space of all covectors is the dual space.
   $$ \ip{m}{v} \in \R \quad m \in V^* \quad v \in V $$
 \end{ndefi}
 
@@ -43,12 +43,12 @@ We will find that sometimes our classical ideas of vector spaces doesn't work. H
 Now we can see that the dual space is also a vector space so we can use the normal vector space ideas with it,
 
 \begin{nlemma}
-  Let $V$ be a vector space of real $n \times n$ real matrices. Then the dual vector space $V^*$ is also a vector space of $n \times n$ matrices and every linear functional $f : V \to \R$ such that,
+  Let $V$ be a vector space of $n \times n$ real matrices. Then the dual vector space $V^*$ is also a vector space of $n \times n$ matrices and every linear functional $f : V \to \R$ such that,
   $$ f(A) := Tr(B^TA), \quad B \in V^*, A \in V  $$
 \end{nlemma}
 
 \noindent
-We need to generalise the idea of a inner product to matrices and here is a particular inner product called  trace pairing. From here on any inner product signs will indicate a trace pairing.
+We need to generalise the idea of an inner product to matrices and here is a particular inner product called the trace pairing. From here on any inner product signs will indicate a trace pairing.
 
 \begin{ndefi}[Trace Pairing]
   For every vector space $V$ of real $n\times n$ matrices with dual $V^*$, then the pairing is,
@@ -81,19 +81,19 @@ We now seek a closed form for the adjoint action of $G$ onto $\mathfrak{g}$. Thi
 \end{align*}
 
 \noindent
-We conclude this chapter with ideas about the adjoint action from the Lie Algebra to the Lie Algebra. This can be derived by taking what we will see to be the first variation. This is because we know to get from a Lie Group to it's tangent space (which is it's Lie Algebra) it suffices to just take the derivative and set the variable to zero. We do this with the adjoint from $G \to \mathcal{g}$. Let $g(t) \in G$ such that $g(0) = e$ where $\eta = \dot g (0) \in T_eG$, then we define the adjoint from $\mathfrak{g}$ to $\mathfrak{g}$ as,
+We conclude this chapter with ideas about the adjoint action from the Lie algebra onto itself. This can be derived by taking what we will see to be the first variation. This is because we know to get from a Lie group to its tangent space (which is its Lie algebra) it suffices to just take the derivative and set the variable to zero. We do this with the adjoint from $G \to \mathcal{g}$. Let $g(t) \in G$ such that $g(0) = e$ where $\eta = \dot g (0) \in T_eG$, then we define the adjoint from $\mathfrak{g}$ to $\mathfrak{g}$ as,
 $$ ad_\eta \xi := \di {}{t} _{t = 0} Ad_{g(t)}\xi \qquad \fa \xi \in \mathfrak{g} $$
 which we can see to be
 $$ \dot g(0)\xi g(0)^{-1} + g(0)\xi \di {}{t}_{t=0} g(t)^{-1}= \eta\xi - \xi\eta $$
 Hence we can say that $\ad_{\eta}\xi = [\eta, \xi] = \eta\xi - \xi\eta$. We define the coadjoint action on $\mu$,
 \begin{ndefi}[Adjoint / Coadjoint action on $\mathfrak{g}/\mathfrak{g^*}$]
-  The adjoint action of the matrix lie algebra on itself is given by,
+  The adjoint action of the matrix Lie algebra on itself is given by,
   $$ \ad : \mathfrak{g}\times \mathfrak{g} \to \mathfrak{g} $$
   $$ \ad_\eta \xi = [\eta,\, \xi] $$
   The dual map $\ip{ad^*_\eta \mu}{\xi} = \ip{\mu}{\ad_\eta \xi}$ is the coadjoint action of $\mathfrak{g}$ on $\mathfrak{g}^*$.
 \end{ndefi}
 \noindent
-We again, now seek a closed form for the coadjoint action from a lie algebra to itself. Above we said that $\ip{\Ad^*_g\mu}{\xi} = \ip{g^T \mu (g^T)^{-1}}{\xi}$ and so $\Ad^*_g \mu = g^T \mu (g^T)^{-1}$. As before we define,
+We now seek again a closed form for the coadjoint action from a Lie algebra onto itself. Above we said that $\ip{\Ad^*_g\mu}{\xi} = \ip{g^T \mu (g^T)^{-1}}{\xi}$ and so $\Ad^*_g \mu = g^T \mu (g^T)^{-1}$. As before we define,
 $$ \ad^*_g \mu = \dit_{t=0} Ad_g^* \mu $$
 and now we can input our definitions and differentiate where we define $g(0) = 0$ and $\dot g (0) = \eta \in T_eG$,
 \begin{align*}
@@ -105,5 +105,5 @@ and now we can input our definitions and differentiate where we define $g(0) = 0
   &= \eta^T \mu - \mu \eta^T \\
   &= [\eta^T,\,\mu]
 \end{align*}
-Hence, $\ad_g^*\mu = [\eta^T,\,\mu]$. These results may seem arbitrary and slightly non-useful currently, however after we have started to derive equations these results will be invaluable. Now we will move towards a more applied treatment of this area and consider the acts of rotation and different types of coordinate systems.
+Hence, $\ad_g^*\mu = [\eta^T,\,\mu]$. These results may seem arbitrary and slightly non-useful currently; however, after we have started to derive equations these results will be invaluable. Now we will move towards a more applied treatment of this area and consider the acts of rotation and different types of coordinate systems.
 
