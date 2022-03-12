@@ -10,11 +10,105 @@ If $F = F^\top$ and $G = -G^\top$, then $\Tr(FG) = 0$. We see that $\Lv$ is symm
 \end{align*}
 We can say that $\vec u \diamond \vec w = \Sym(\vec u\vec w^\top A) = \frac{1}{2}(\vec u\vec w^T A + A^\top \vec w\vec u^\top)$. This is going to appear in EP theory in symmetry breaking paramaters.
 
-\subsection{EP Reduction with parameters}
+\subsection{Euler-Poincar\'e Reduction with Parameters}
+In this final section of Euler-Poincar\'e theory, we will now lift the assumption that all Lagrangians are symmetric and study what we should do if a Lagrangian isn't symmetric. It may seem that symmetry is everywhere in the world, but certain parameters may cause issues. The main one we consider in the applications section is gravity. Gravity only acts downwards, we model potential energy in a gravitational field using $-mg\vec e_3 \cdot R\vec X$. One can quickly verify that this doesn't hold any sort of symmetry or invariance. Therefore, we need to develop a theory to work around these restrictions. We start with an example that we have seen half of before in the previous chapter, but we now consider right symmetry, then we will consider gravity and end this section by considering the Noether Theorem for symmetry breaking parameters.\\
 
-What are symmetry breaking parameters? We already know of $\I$ is a symmetry breaking parameter or $\vec e_3 = R\Gamma$ which is gravity.\\
+\noindent
+We have described Lagrangians that have left or right invariance. We now look to Lagrangians that have symmetry breaking parameters, like gravity. If we consider the spherical pendulum, we have defined $\Oh = R^T\dot R$ and we define $\oh = R\vec\Oh$ and then we can see that $\oh = \dot R R^T = \dot R R^{-1}$ where $R \in \SO(3)$. This doesn't lead to a symmetric Lagrangian but we can still use our theory here. \\
 
-Consider a Lie Group, $G$, and a left action on a manifold, $\mathcal{M}$. Then for a given $a_0 \in \mathcal{M}$ (a parameter), let $L: TG \ti \mathcal{M} \to \R$ be a Lagrangian with symmetry breaking parameter $a_0$, and suppose it is invariant under the left action: $G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$ then $(h, (g, \dot g, a_0)) \to (hg, h\dot g, ha_0)$ for all $h \in G$.
+\noindent
+We are going to study rigid body dynamics in the spatial frame. We look firstly to the Lagrangian. We have showed,
+$$ L(R,\,\dot R) = \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \vec X}^2 d^3\vec X $$
+and we showed that $L(R,\, \dot R) = L(e,\, R^{-1}\dot R)$ and then we used Euler Poincare Theory to show that $\ell = \frac{1}{2}\mathbb{I}\vec\O \cdot \vec\O$. Now assume we would prefer to formulate rigid body dynamics in the spatial frame. We need to consider a $\vec\o$ such that $\oh = \dot R R^{-1}$. We can now prove that, $L(R,\,\dot R) \ne L(R\chi,\,\dot R\chi)$ (right multiplication) hence we have broken symmetry,
+\begin{align*}
+  L(R\chi,\,\dot R\chi) &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \chi\vec X}^2 d^3\vec X \\
+  &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) (\dot R \chi\vec X) \cdot (\dot R \chi\vec X) d^3\vec X \\
+  &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) (\dot R \chi\vec X)  (\dot R \chi\vec X)^T d^3\vec X \\
+  &= \frac{1}{2} \int_\mathcal{B} \rho(\vec X) (\dot R \chi\vec X)  (\vec X^T\chi^T\dot R^T) d^3\vec X \\
+  &\ne \frac{1}{2} \int_\mathcal{B} \rho(\vec X) \norm{\dot R \vec X}^2 d^3\vec X = L(R, \dot R)
+\end{align*}
+
+
+\noindent
+Now we seek this Lagrangian,
+\begin{align*}
+  L(R,\,\dot R) &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\dot R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\dot RR^{-1}R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)\norm{\oh R \vec X}^2d^3\vec X\\
+  &= \frac{1}{2}\int_{\mathcal{B}}\rho(\vec X)(\oh \ti R\vec X) \cdot (\oh \ti R\vec X)d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\norm{\oh}^2\norm{R\vec X}^2 - (\oh \cdot R\vec X)^2)d^3\vec X\\
+  &= \frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\oh^T \oh\norm{R\vec X}^2 - \oh^T (R\vec X)(R\vec X)^T\oh )d^3\vec X\\
+  &= \oh^T\frac{1}{2}\int_\mathcal{B}\rho(\vec X) (R\norm{\vec X}^2 R^T - R\vec X\vec X^T R^T d^3\vec X \,\oh\\
+  &= \oh^TR\frac{1}{2}\int_\mathcal{B}\rho(\vec X) (\norm{\vec X}^2 - \vec X\vec X^T d^3\vec X \,R^T\oh\\
+  &= \frac{1}{2}\oh^T (R\I R^T \oh) \\
+  &= \frac{1}{2}\oh \cdot (R\mathbb{I} R^T)\oh = L(\oh,\,R)
+\end{align*}
+We define a new parameter, $\mathbb{J} := R\mathbb{I}R^T$ and so $\ell = \ell(\mathbb{J},\,\oh) = \frac{1}{2}\oh(t) \cdot \mathbb{J}(t) \oh(t)$. % J is for spatial frame.
+Now we take variations as usual. Firstly we ask what is $\d\J(t)$,
+\begin{align*}
+  \d\J(t) &= \d(R\I R^T)\\
+  &= \d R\I R^T + R\I \d R^T\\
+  &= \d R R^{-1}R\I R^T - R\I R^{-1}\d R R^{-1}\\
+  &= \Lh \J - \J \Lh\\
+  &= [\Lh,\,\J]
+\end{align*}
+and carry on,
+\begin{align*}
+  0 &= \d\int_{t_1}^{t_2} \ell(\J,\,\oh)\,dt \\
+  0 &= \int_{t_1}^{t_2}  \ip{\pd \ell \J}{\d \J} + \ip{\pd \ell {\oh}}{\d \oh}\,dt\\
+  0 &= \int_{t_1}^{t_2}  \ip{\pd \ell \J}{[\Lh, \J]} + \ip{\pd \ell {\oh}}{\Lhd + [\Lh, \oh]}\,dt\\
+  0 &= \int_{t_1}^{t_2}  \ip{\pd \ell \J}{[\Lh, \J]} + \ip{\pd \ell {\oh}}{\Lhd + [\Lh, \oh]}\,dt\\
+  0 &= \int_{t_1}^{t_2} \ip{-\ad_\J^* \pd \ell \J}{\Lh} - \ip{\dit \pd \ell {\oh}}{\Lh} - \ip{\ad_{\oh}^* \pd \ell \oh}{\Lh}\,dt
+\end{align*}
+where $\Lh = \d R R^{-1}$. This tells us that,
+$$ \dit\pd \ell \oh = -\ad^*_\J \pd \ell \J - \ad^*_{\oh} \pd \ell \oh. $$
+We proved before that $\ad^*_{\Oh}\vec\Pi = [\vec\Pi, \Oh]$ and so we can use this and find the equations linked to our Lagrangian. We can write the equation as this,
+\begin{equation}
+  \dit\pd \ell \oh = \left[\J, \pd \ell \J\right] - \left[\pd \ell \oh, \oh\right].\label{equ:LB1}
+\end{equation}
+We now seek to find the derivatives of a Lagrangian with respect to $\J$ and $\oh$. These can be found to be,
+$$ \pd \ell \J = \frac{1}{2}\oh \cdot \oh \qquad \pd \ell \oh = \oh \cdot \J + \frac{1}{2}\left( \di \J \oh \oh \right) \cdot \oh $$
+Now we can consider the two terms of Equation \refeq{equ:LB1} in turn. The details get slightly lengthy and so that's why we consider each term on it's own. Firstly note that $\J^T = (R\I R^T)^T = R\I R^T = \J$ and then consider $\left[ \J, \pd \ell \J \right]$,
+\begin{align*}
+  \left[ \J, \pd \ell \J \right] &= \left[ \J, \frac{1}{2}\oh \cdot \oh \right]\\
+  &= \frac{1}{2}\left[ \J, \oh \cdot \oh \right]\\
+  &= \frac{1}{2}\left(\J\oh \cdot \oh - \J\oh \cdot \oh\J \right)\\
+  &= \frac{1}{2}\left(\J\oh^T \oh - \oh^T \oh\J \right)\\
+  &= \frac{1}{2}\left((\oh\J)^T \oh - \oh^T \oh\J \right)\\
+  &= \frac{1}{2}\left((\oh\J) \cdot \oh - \oh^T \oh\J \right)\\
+  &= \frac{1}{2}\left(\oh \cdot (\oh\J) - \oh^T \oh\J \right)\\
+  &= \frac{1}{2}\left(\oh^T\oh\J - \oh^T \oh\J \right) = 0
+\end{align*}
+Therefore, we can remove the first term from Equation \ref{equ:LB1}. Now we consider the second term,
+\begin{equation}
+  \left[ \oh \cdot \J + \frac{1}{2}\left( \pd \J \oh \oh \right) \cdot \oh, \oh \right] = \left[ \oh \cdot \J, \oh\right] + \frac{1}{2}\left[\left( \pd \J \oh \oh \right) \cdot \oh, \oh \right].\label{equ:LB2}
+\end{equation}
+We can use a similar argument to the first term, along with the fact that $\oh$ is symmetric (that is, $\oh^T = -\oh$), to produce that $\left[ \oh \cdot \J, \oh\right] = 2\J \oh \oh$, then some further manipulation yields that $-2\J \oh\oh = 2\J \cdot (\oh \ti \ov)$. For the second term of the right hand side of Equation \refeq{equ:LB2}. The major simplification we can make is to find $\pd \J \oh$. We can use the following, because $\J$ is at least twice differentiable,
+\begin{equation}
+  \pd{}{\oh}\pd \J t = \pd{}{t}\pd \J \oh\label{equ:diffJ}
+\end{equation}
+and now we aim to find $\di \J t$. This can be found from the following argument,
+\begin{align*}
+  \di\J t &= \dit (R\I R^T)\\
+  &= \dot R\I R^{-1} + R\I R^{-1}\dot RR^{-1} \\
+  &= \dot R R^{-1}R\I R^{-1} + R\I R^{-1}\dot RR^{-1}\\
+  &= \oh R\I R^{-1} + R\I R^{-1}\oh \\
+  &= \oh\J - \J\oh = [\oh, \J].
+\end{align*}
+\noindent
+Now we can substitute this into \ref{equ:diffJ} and consider the derivative,
+$$ \pd{}{\oh} [\oh, \J] = \pd{}{\oh} \left( \oh\J - \J\oh \right) = \left(\J + \oh\pd{\J}{\oh}\right) - \left(\pd{\J}{\oh}\oh + \J\right) = 0 $$
+Therefore we have the following PDE,
+$$ \frac{\partial\J}{\partial t\partial \oh} = 0 $$
+That then implies that $\pd \J \oh = K$ where $K$ is a constant. This is true as both $\oh$ and $\J$ are functions of $t$ and so in essence we really have an ODE. Therefore we can now consider the second term in \ref{equ:LB2},
+$$ \frac{1}{2}\left[\left(\pd \J \oh\oh\right)\cdot \oh, \oh\right] = \frac{K}{2}\left[ \oh \cdot \oh, \oh \right] = 0. $$
+Therefore, we can write our equation as this,
+$$ \dit \left( \oh \cdot \J + \frac{1}{2}\left( \di \J \oh \oh \right) \cdot \oh \right) = 2\J \cdot (\oh \ti \ov)$$
+Then expanding and neglecting the terms that go to zero, we get the following,
+$$ \left( \J + \pd \J \oh \right) \cdot \ohd + (\dot\J + \J \ti \ov) \cdot \oh = 0. $$
+
+\subsubsection{Symmetry Breaking Parameters and the Diamond Map}
+We have now derived a system of equations for a symmetry broken Lagrangian. We will now write more formally what we have just done and then consider gravity and we will see that then we will have an equation that relates to the Diamond map we introduced in the last section. Consider a Lie Group, $G$, and a left action on a manifold, $\mathcal{M}$. Then for a given $a_0 \in \mathcal{M}$ (a parameter), let $L: TG \ti \mathcal{M} \to \R$ be a Lagrangian with symmetry breaking parameter $a_0$, and suppose it is invariant under the left action: $G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$ then $(h, (g, \dot g, a_0)) \to (hg, h\dot g, ha_0)$ for all $h \in G$.
 This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As usual let $h = g^{-1}$, then $L(g, \dot g, a_0) = L(g^{-1}g, g^{-1}\dot g, g^{-1}a_0) =: \ell(\xi, a)$ where $\xi := g^{-1}\dot g$ and $a = g^{-1}a_0$.
 \begin{nthm}
   Then the following are equivalent,
@@ -38,22 +132,27 @@ This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As 
   We already know that $\d \xi = \dot \eta + [\xi, \eta]$ and $\eta = g^{-1}\d g$ and then $\d a = -g^{-1}\d g a = -\eta_{\mathcal{M}} a = -\eta a$. Now we look at our variational principle,
   \begin{align*}
     0 &= \d\int_{t_1}^{t_2} \ell(\xi, a)\, dt \\
-    &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{\xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a})\, dt \\
-    &= \int_{t_1}^{t_2} (\ip{\pd{\ell}{\xi}}{\dot \eta + \ad_{\xi} \eta} - \ip{\pd{\ell}{a}}{\eta_\mathcal{M}}\, dt \\
-    &= \int_{t_1}^{t_2} \ip{ -\dit \pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{\xi}}{\eta} - \ip{a \diamond \pd{\ell}{a}}\, dt && \text{ we used integration by parts}
+    &= \int_{t_1}^{t_2} \left(\ip{\pd{\ell}{\xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a}\right)\, dt \\
+    &= \int_{t_1}^{t_2} \left(\ip{\pd{\ell}{\xi}}{\dot \eta + \ad_{\xi} \eta} - \ip{\pd{\ell}{a}}{\eta_\mathcal{M}a}\right)\, dt \\
+    &= \int_{t_1}^{t_2} \ip{ -\dit \pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{\xi}}{\eta} - \ip{a \diamond \pd{\ell}{a}}{\eta}\, dt && \text{ we used integration by parts}
   \end{align*}
   Now we want the second equation,
   \begin{align*}
     \dot a &= \dit (g^{-1}a_0) \\
     &= \dit g^{-1} a_0 \\
     &= -g^{-1}\dot g g^{-1} a_0 \\
-    &= -\xi a \\
     &= -\xi_\mathcal{M} a
   \end{align*}
-  and we are done.
+  Therefore our set of equations are,
+  \begin{align}
+    \dit\pd \ell \xi &= \ad^*_\xi \pd \ell \xi - a\diamond \pd \ell a\\
+    \di a t &= -\xi_\mathcal{M}a
+  \end{align}
+  and the proof is complete.
 \end{proof}
 
-Now we look at Noethers Theorems.
+\noindent
+Now we look at Noether's Theorems.
 \begin{nthm}[Noether's Theorem for Symmetry Breaking Parameters]
   Let $\xi = g^{-1}\dot g$ be a solution of the Euler Poincare Equations with parameters $a = g^{-1}a_0$. Then,
   $$ \dit \Ad^*_{g^{-1}(t)} \mu = -\Ad^*_{g^{-1}(t)} (a \diamond \pd{\ell}{a}) $$
@@ -69,7 +168,7 @@ Now we look at Noethers Theorems.
   $$ (h, (g, \dot g, a_0)) \mapsto (gh, \dot g h, a_0h) $$
   and
   $$ \dit \pd{\ell}{\xi} = -\ad^*_\xi \pd{\ell}{\xi} - a\diamond \pd{\ell}{a} $$
-  $$ \dot  = -\xi_\mathcal{M}a $$
+  $$ \dot a = -\xi_\mathcal{M}a $$
   The Noether Theorem is,
   \begin{nthm}
     $$ \dit Ad^*_{g(t)} \mu = -\Ad^*_{g(t)} \left(a \diamond \pd{\ell}{a}\right) $$
