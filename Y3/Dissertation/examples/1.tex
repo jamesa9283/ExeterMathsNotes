@@ -1,22 +1,24 @@
 % !TEX root = ../notes.tex
 
 \section{Applications of Geometric Mechanics}
+In this final section of the thesis, we will work towards using the mathematics we have defined in the previous chapters to describe real world situations. We will focus on three examples, the Spherical Pendulum, the Heavy Top and Pseudo Rigid Bodies. These will follow the mathematics in the order it was introduced in the text. For example, the Spherical Pendulum is the simplest of the examples as we can describe it with just the content from Chapter 1, although we will then describe it using more sophisticated means. The Heavy Top is a classic example of how to use Euler-Poincar\'e reduction with symmetry breaking parameters and Pseudo Rigid Bodies expands on the work we have thus far by considering the implications of bipolar decomposition on the body coordinate.
 
 \subsection{Spherical Pendulum}
+The Spherical Pendulum is a canonical example of where Geometric Mechanics is useful. The description of a pendulum in a plane is a usual exercise in undergraduate dynamics courses. However, the Spherical Pendulum is a lot harder to describe and to describe it simply you need either the Euler-Lagrange or Euler-Poincar\'e equations. The simplicity of this example does not mean it is uninteresting as, with a slight modification of putting the bob on a spring, this example can be used to model climate dynamics. We will first derive two sets of Euler-Lagrange Equations before deriving some Euler-Poincar\'e Equations and using the associated Noether Theorem to derive a conserved quantity, which we will see is very nice.
 
 \subsubsection{Euler-Legrange Equations}
 
-We want to consider a pendulum in 3D space. We will think about this through the definition of spherical coordinates, as in actuality our motion of the bob will just be on $S^2$. However, we need to define what are Euler Lagrange equations?\cite{holm_2011}\\
+We want to consider a pendulum in 3D space. We will think about this through the definition of spherical coordinates, as in actuality the motion of the bob will just be on $S^2$. However, to describe the motion more precisely, we need to derive the Euler-Lagrange equations.~\cite{holm_2011}\\
 
 \begin{minipage}{0.49\textwidth}
-  Firstly, here is what the Euler Lagrange equations are,
+  Firstly, here is what the Euler-Lagrange equations are,
   $$ \di {} {t} \pd{L}{\dot{q}^a} - \pd{L}{q^a} $$
   where we range through the different basis vectors $q^a$ and their associated derivatives $\dot q^a$.\\
 
   \noindent
   We also define $L$ as the Lagrangian. We define this simply as,
   $$ L(q, \dot q) = T(q, \dot q) - V(\vec r(q)) $$
-  where further we define $T(q,\dot q)$ as the kinetic energy of the system and $V(\vec r(q))$ the potential energy of the system.
+  where we further define $T(q,\dot q)$ as the kinetic energy of the system and $V(\vec r(q))$ as the potential energy of the system.
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
   \begin{tikzpicture}
@@ -50,61 +52,61 @@ We are going to use polar coordinates to derive our system of equations.
 \begin{align*}
   x &= R\sin \theta \cos\phi \\
   y &= R\sin\theta\sin\phi\\
-  z &= R(1 - \cos\theta)
+  z &= R(1 - \cos\theta).
 \end{align*}
-Our first focus is $T(q, \dot q)$, which will just be $\frac{1}{2}mv^2$. We can see that $v = |\dot{\vec{r}}(t)|$ and so $v = \sqrt{\dot x^2 + \dot y^2 + \dot z^2}$. Hence, we now find what $v$ is and then find the lagrangian. Firstly, we note that,
+Our first focus is to derive $T(q, \dot q)$, which will be $\frac{1}{2}mv^2$. We can see that $v = |\dot{\vec{r}}(t)|$ and so $v = \sqrt{\dot x^2 + \dot y^2 + \dot z^2}$. Hence, we now find what $v$ is and then find the Lagrangian. Firstly, we note that,
 $$ \di {} t (x(t)) = \pd{x}{\theta}\di {\theta}{t} + \pd{x}{\phi}\di \phi t $$
 and similarly for $y(t)$ and $z(t)$. Hence,
 \begin{align*}
   \di {x(t)} t &= R\cos \theta \cos \phi \,\dot \theta - R\sin \theta \sin \phi \,\dot \phi\\
   \di {y(t)} t &= R\cos \theta\sin\phi \dot \theta + R\sin \theta\cos \phi \dot \phi\\
-  \di {z(t)} t &= R\sin \theta\dot \theta
+  \di {z(t)} t &= R\sin \theta\dot \theta.
 \end{align*}
-and now we derive our $T(q, \dot q)$,
+Now we derive our $T(q, \dot q)$,
 \begin{align*}
   T(q, \dot q) &= \frac{1}{2}m \bigg( \left(R\cos \theta \cos \phi \,\dot \theta - R\sin \theta \sin \phi \,\dot \phi\right)^2 + \\
   & \left(R \cos \theta\sin\phi \dot \theta + R\sin \theta\cos \phi \dot \phi \right)^2 + \\
-  & \left( R\sin \theta\dot \theta \right)^2 \bigg)
+  & \left( R\sin \theta\dot \theta \right)^2 \bigg).
 \end{align*}
-which then can be simplified down to,
-$$ T(\theta, \dot \theta, \phi, \dot \phi) = \frac{mR^2}{2}\left( \dot \theta^2 + \dot \phi ^2\sin^2 \theta \right) $$
-and we note that our system has only one potential energy, gravitation potential! Hence,
-$$ V(\theta, \dot \theta, \phi, \dot \phi) = -mgz = -mgR(1 - \cos \theta) $$
+This can be nicely simplified,
+$$ T(\theta, \dot \theta, \phi, \dot \phi) = \frac{mR^2}{2}\left( \dot \theta^2 + \dot \phi ^2\sin^2 \theta \right). $$
+We note that our system has only one potential energy, gravitation potential. Therefore,
+$$ V(\theta, \dot \theta, \phi, \dot \phi) = -mgz = -mgR(1 - \cos \theta). $$
 Hence, we can now talk about Lagrangian explicitly,
-$$ L(\theta, \dot \theta, \phi, \dot \phi) = \frac{mR^2}{2} \left( \dot \theta^2 + \dot\phi^2\sin^2 \theta\right) + mgR\left(1 - \cos \theta\right) $$
-Finally, we can now take derivatives of this function and produce the Euler Lagrange equations. We need to find the basis vectors, $\theta$ and $\phi$, as we have two basis vectors, we will have two equations. Firstly, $\theta$
+$$ L(\theta, \dot \theta, \phi, \dot \phi) = \frac{mR^2}{2} \left( \dot \theta^2 + \dot\phi^2\sin^2 \theta\right) + mgR\left(1 - \cos \theta\right). $$
+Finally, we can now take derivatives of this function and produce the Euler-Lagrange equations. We have two basis vectors, $\theta$ and $\phi$. We need to differentiate the Lagrangian with respect to each of these. Firstly, $\theta$
 \begin{align*}
   \di {} t \pd{L}{\dot\theta} - \pd{L}{\theta} = \di {} t {mR^2 \dot \theta} - \left( \dot\phi^2mR^2\sin\theta\cos\theta - mgR\sin\theta \right) &= 0\\
   mR^2\ddot{\theta} - mR^2\sin \theta \cos \theta\,\dot \phi^2 + mgR\sin \theta &= 0\\
   R\ddot{\theta} - R\sin \theta \cos \theta\,\dot \phi^2 + g\sin \theta &= 0
 \end{align*}
-and secondly, $\phi$
+and secondly, $\phi$,
 \begin{align*}
   \di {} t \pd{L}{\dot\phi} - \pd{L}{\phi} = \di {} t  (mR^2 \dot \phi \sin^2 \theta) &= 0\\
   mR^2\ddot\phi\sin^2 \theta + 2mR^2\dot \phi\,\dot\theta \sin \theta\cos \theta &= 0\\
-  \ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta &= 0\\
+  \ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta &= 0.
 \end{align*}
-We have derived the Euler-Lagrange equations for the spherical pendulum, which are
+We have now derived the Euler-Lagrange equations for the Spherical Pendulum, which are
 $$ \begin{cases}
   \quad R\ddot{\theta} - R\sin \theta \cos \theta\,\dot \phi^2 + g\sin \theta = 0\\
-  \quad\ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta = 0
+  \quad\ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta = 0.
 \end{cases} $$
 
 \subsubsection{Euler-Legrange Equations II}
-We will now consider an Euler-Poincar\'e treatment of the Spherical Pendulum. The spherical pendulum is just a particle that moves along the surface of a sphere. We will consider two coordinates, the body coordinates $\vec x(t)$ and the spatial coordinates $\vec X$, where $\vec x(t) = R(t)\vec X$ and we let $R \in \SO(3)$. In terms of the body coordinates, we can write the Lagrangian as,
+We will now consider a second Euler-Lagrange treatment of the Spherical Pendulum. The Spherical Pendulum is just a particle that moves along the surface of a sphere. We will consider two coordinates, the body coordinates $\vec x(t)$ and the spatial coordinates $\vec X$, where $\vec x(t) = R(t)\vec X$ and we let $R \in \SO(3)$. In terms of the body coordinates, we can write the Lagrangian as,
 $$ L(\vec x, \vec{\dot x}) = \frac{1}{2}m\left|\vec{\dot x}\right|^2 - mg\vec e_3 \cdot \vec x $$
-and then using the body to spatial coordinate transformation,
-$$ L\left(R, {\dot R}\right) = \frac{1}{2}m\left|{\dot R\vec X}\right|^2 - mg\vec e_3 \cdot R\vec {X} $$
-This is similar to the Lagrangian we will see in the next example, but we aren't integrating over the body. We need to check whether this Lagrangian is invariant under symmetry. We can notice that the second term won't be. As $R\vec{X} \ne gR\vec{X}$. This is in contrast to the first part of the Lagrangian, which is symmetric. Let $g \in \SO(3)$,
+and then using the body-to-space map we can rewrite it as,
+$$ L\left(R, {\dot R}\right) = \frac{1}{2}m\left|{\dot R\vec X}\right|^2 - mg\vec e_3 \cdot R\vec {X}. $$
+This is similar to the Lagrangian we will see in the next example, but we aren't integrating over the body. We need to check whether this Lagrangian is invariant under symmetry. We can notice that the second term won't be, as $R\vec{X} \ne gR\vec{X}$. This is in contrast to the first part of the Lagrangian, which is symmetric. Let $g \in \SO(3)$,
 \begin{align*}
   \frac{1}{2}m\left|{g\dot R \vec X}\right|^2 &= \frac{1}{2}m\left({g\dot R \vec X} \cdot {g\dot R \vec X}\right)\\
   &= \frac{1}{2}m\left({g\dot R \vec X} \left({g\dot R \vec X}\right)^T\right)\\
   &= \frac{1}{2}m\left({gg^T}{\dot R \vec X} \left({\dot R \vec X}\right)^T\right)\\
-  &= \frac{1}{2}m\left({\dot R \vec X} \left({\dot R \vec X}\right)^T\right) = \frac{1}{2}m\left|{\dot R \vec X}\right|^2\\
+  &= \frac{1}{2}m\left({\dot R \vec X} \left({\dot R \vec X}\right)^T\right) = \frac{1}{2}m\left|{\dot R \vec X}\right|^2.
 \end{align*}
 We call $-mg\vec e_3 \cdot R\vec{X}$ a symmetry breaking parameter and we proceed by introducing a new parameter $\Gv = \vec e_3R^{-1}$. Then the Lagrangian becomes,
-$$ L(\dot R, \Gv) = \frac{1}{2}m\left| \dot R\vec X \right|^2 - mg\Gv(t) \cdot \vec X $$
-Now we can start using Hamilton's Variational Principle in order to try and derive the Euler Poincar\'e equations for our system. We firstly consider $\d\Gv$, which we can see is,
+$$ L(\dot R, \Gv) = \frac{1}{2}m\left| \dot R\vec X \right|^2 - mg\Gv(t) \cdot \vec X. $$
+Now we can start using Hamilton's Variational Principle to derive the Euler-Lagrange equations for our system. We firstly consider $\d\Gv$, which we can see is,
 $$\d\Gv = \d R^{-1}\vec e_3 = R^{-1}\d R R^{-1}\vec e_3 = \Lh\Gv = \Lv \ti \Gv$$
 where we define $\Lv = R^{-1}\d R$. Now we can carry on with the derivation,
 \begin{align*}
@@ -114,18 +116,20 @@ where we define $\Lv = R^{-1}\d R$. Now we can carry on with the derivation,
   &= \int_{t_1}^{t_2} \ip{-\dit \pd L {\dot R}} + \ip{-\pd L \Gv \ti \Gv}{\Lv}dt \\
   &= \int_{t_1}^{t_2} \ip{-\dit \pd L {\dot R}}{\d R} + \ip{\Gv \ti \pd L \Gv}{R^{-1}\d R}dt \\
   &= \int_{t_1}^{t_2} \ip{-\dit \pd L {\dot R}}{\d R} + \ip{R\Gv \ti \pd L \Gv}{RR^{-1}\d R}dt \\
-  &= \int_{t_1}^{t_2} \ip{R\Gv \ti \pd L \Gv -\dit \pd L {\dot R}}{\d R} dt \\
+  &= \int_{t_1}^{t_2} \ip{R\Gv \ti \pd L \Gv -\dit \pd L {\dot R}}{\d R} dt.
 \end{align*}
-Therefore, one of our Euler-Poincar\'e equation becomes,
+Therefore, one of our Euler-Lagrange equations becomes,
 $$ \dit \pd L {\dot R} = R\Gv \times \pd L \Gv $$
 and the other comes from just differentiating $\Gv = R^{-1}\vec e_3$ and letting $\Ov = R^{-1}\dot R$, then we get,
-$$ \vec{\dot \Gamma} = \Lv \ti \Ov $$
+$$ \vec{\dot \Gamma} = \Lv \ti \Ov. $$
+\noindent
+We call this last equation the reconstruction equation.
 
 \noindent
-Finally, we can differentiate our specific Lagrangian giving the system,
+Finally, we can differentiate our specific Lagrangian to give the system,
 $$ \begin{cases}
   \ddot R \vec X = mgR\vec X  \ti \Gv \\
-  \vec{\dot \Gamma} = \Gv \ti \Ov
+  \vec{\dot \Gamma} = \Gv \ti \Ov.
 \end{cases} $$
 We could further rewrite the first equation using the hat map isomorphism
 \begin{align*}
@@ -136,5 +140,5 @@ We could further rewrite the first equation using the hat map isomorphism
 as $\ddot R = -mgR\hat\Gv$, which is then invariant of the coordinate systems and only depends on the rotation tensors. Therefore, we have the final system of,
 $$ \begin{cases}
   \ddot R = -mgR\hat\Gv \\
-  \vec{\dot \Gamma} = \Gv \ti \Ov
+  \vec{\dot \Gamma} = \Gv \ti \Ov.
 \end{cases} $$

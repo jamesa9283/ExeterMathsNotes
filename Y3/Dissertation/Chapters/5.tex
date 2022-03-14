@@ -1,14 +1,14 @@
 % !TEX root = ../notes.tex
 
-\subsection{The Hat Map as a Lie Algebra Isomorphisms}
-In this section we will take a quick jaunt back into some purer topics, more specifically a Lie Algebra Isomorphism called the Hat Map. We can define a Lie Algebra Isomorphism as a bijective Lie Algebra homomorphism, which we then define as,
+\subsection{The Hat Map as a Lie Algebra Isomorphism}
+In this section we will take a quick jaunt back into some purer topics, more specifically a Lie algebra isomorphism called the Hat Map. We can define a Lie algebra isomorphism in the usual way, as a bijective homomorphism. We define this homomorphism as,
 \begin{ndefi}[Lie Algebra Homomorphism]
-  A Lie Algebra homomorphism is a linear map, $\phi : \mathfrak{g} \to \mathfrak{g}'$ compatible with the respective lie brackets,
-  $$ \phi([x, y]_\mathfrak{g}) = [\phi(x), \phi(y)]_{\mathfrak{g}'} \qquad \forall x, y \in \mathfrak{g} $$
+  A Lie algebra homomorphism is a linear map, $\phi : \mathfrak{g} \to \mathfrak{g}'$ compatible with the respective Lie brackets,
+  $$ \phi([x, y]_\mathfrak{g}) = [\phi(x), \phi(y)]_{\mathfrak{g}'} \qquad \forall x, y \in \mathfrak{g}. $$
 \end{ndefi}
 
 \noindent
-We note that the Lie bracket for $\R^3$ is the cross product, and more specifically $(\R^3, \ti)$ is a Lie Algebra. Then we can talk about a Lie Algebra homomorphism, $\phi : \R^3 \to \mathfrak{so}(3)$, which is a homomorphism that maps,
+We note that the Lie bracket for $\R^3$ is the cross product, and more specifically $(\R^3, \ti)$ is a Lie algebra. Then we can talk about a Lie algebra homomorphism, $\phi : \R^3 \to \mathfrak{so}(3)$, which is a homomorphism that maps,
 $$ \phi(\vec x \ti \vec y) = [\phi (x), \phi (y)]_{\mathfrak{so}(3)}. $$
 Given $\ov \in \R^3$, we let this $\phi$ be the hat map where we define,
 $$ \phi(\ov) = \oh = \begin{pmatrix}
@@ -16,9 +16,9 @@ $$ \phi(\ov) = \oh = \begin{pmatrix}
 \end{pmatrix}. $$
 
 \noindent
-The Lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\SO(3)$. Then we can conclude that the Euler-Poincare Equations are written as:
+The Lie algebra of $\SO(3)$ is the space of skew-symmetric matrices, $\mathfrak{so}(3)$. For $\mathfrak{so}(3)$ we can derive that the Euler-Poincar\'e Equations are written as:
 $$ \di {}{t} \pd{\ell}{\Oh} - \ad^*_{\Oh}\pd{\ell}{\Oh} = 0. $$
-Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
+Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then the $\ad^*$ operator is defined by $\ip{\ad_{\Oh}^*\vec\Pi}{\oh} = \ip{\vec\Pi}{\ad_{\Oh}{\oh}}$ where $\oh \in \mathfrak{g}^*$.
 \begin{align*}
   \ip{\ad_{\Oh}^*\vec\Pi}{\oh} &= \ip{\vec\Pi}{\ad_{\Oh}{\oh}}\\
   &= \ip{\vec\Pi}{[\Oh,\,\oh]}\\
@@ -32,7 +32,7 @@ Let $\vec\Pi$ be any element in $\mathfrak{g}^*$, then $\ad^*$ operator is defin
 \end{align*}
 
 \noindent
-Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hap map is a Lie algebra isomorphism, i.e. $ [\Oh,\,\oh] = \wh{\vec\O\ti\vec\o} $. We prove this from the definition of the Lie Bracket, that is,
+Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, the hat map is a Lie algebra isomorphism, i.e. $ [\Oh,\,\oh] = \wh{\vec\O\ti\vec\o} $. We prove this from the definition of the Lie bracket, that is,
 
 \begin{align*}
   [\Oh, \oh] &= \Oh\oh - \oh\Oh\\
@@ -63,14 +63,14 @@ Then, $\ad^*_{\Oh}\vec\Pi = [\vec\Pi,\,\Oh]$. From here we can conclude that, th
 \end{align*}
 
 \noindent
-We have proved that where $\phi$ is the hap map that $[\phi(\vec x), \phi(\vec y)] = \phi(\vec x \ti \vec y)$. We now need to prove that the hap map is a bijective linear map. It is linear as it can be represented as a matrix in $\SO(3)$. Now we prove bijectivity by first proving injectivity, then surectivity. Let $\vec x, \vec y \in \R$ and we know that $\hat{\vec x} = \hat{\vec y}$, that is,
+We have proved that $[\phi(\vec x), \phi(\vec y)] = \phi(\vec x \ti \vec y)$ where $\phi$ is the hat map. We now need to prove that the hat map is a bijective linear map. It is linear as it can be represented as a matrix in $\SO(3)$. Now we prove bijectivity by first proving injectivity, then surjectivity. Let $\vec x, \vec y \in \R^3$ and we know that $\hat{\vec x} = \hat{\vec y}$. In matrix form,
 $$ \begin{pmatrix}
   0 & -x_1 & x_2 \\ x_3 & 0 & -x_1 \\ -x_2 & x_1 & 0
 \end{pmatrix} = \begin{pmatrix}
   0 & -y_1 & y_2 \\ y_3 & 0 & -y_1 \\ -y_2 & y_1 & 0
 \end{pmatrix}. $$
-Then we can see that $x_1 = y_1$, $x_2 = y_2$ and $x_3 = y_3$. Therefore, $\vec x = \vec y$. Hence the hat map is injective. Now we seek to prove that the hap map is surjective. Consider some $\hat{\vec z} \in \mathfrak{so}(3)$, then we can write it as,
+Then we can see that $x_1 = y_1$, $x_2 = y_2$ and $x_3 = y_3$. Therefore, $\vec x = \vec y$. Hence the hat map is injective. Now we seek to prove that the hat map is surjective. Consider some $\hat{\vec z} \in \mathfrak{so}(3)$, then we can write it as,
 $$ \begin{pmatrix}
   0 & -z_1 & z_2 \\ z_3 & 0 & -z_1 \\ -z_2 & z_1 & 0
 \end{pmatrix}. $$
-Then this will uniquely define some $\vec z = (z_1, z_2, z_3)^T \in \R^3$. Hence the hat map is surjective. Therefore the hat map is a Lie Algebra Isomorphism.\\
+This will uniquely define some $\vec z = (z_1, z_2, z_3)^T \in \R^3$. Hence the hat map is surjective. Therefore, the hat map is a Lie algebra isomorphism.\\
