@@ -1,0 +1,113 @@
+% !TEX root = ../notes.tex
+
+\subsection{Dominant Morphisms}
+We will define a dominant morphism,
+\begin{ndefi}[Dominant Morphism]
+  Let $X, Y$ be affine varieties. A continuous map $f : X \to Y$ is dominant if $\im f \sub Y$ is dense.
+\end{ndefi}
+
+\noindent
+A dominant morphism of all affine varieties $f:  X \to Y$ is finite if $k[X]$ is an integral extension of $\im f^\sharp$.
+
+\begin{exercise}
+  a morphism $f : X\to Y$ is dominant if and only if $f^\sharp : k[Y] \to k[X]$ is injective.
+\end{exercise}
+
+\begin{eg}
+  \begin{enumerate}[(i)]
+    \item   Projections are dominant, $f : \A^2 \to \A$ is dominant, that is $(x, y) \mapsto x$, but not finite as $f^\sharp : k[X] \to k[X, Y]$.
+    \item If we consider $f : \V(xy - 1) \to \A^1$, then we get that $\im f = \A^1 \sm 0$, but $\im f = \A^1$. These aren't finite.
+    \item Finally consider $f: \V(x^2 - y) \to \A^1$, these are dominant with $f^\sharp : k[X] \to k[X, Y]\sm (X^2 - Y)$. This is finite.
+  \end{enumerate}
+\end{eg}
+
+\begin{nlemma}
+  Let $\phi : V \to W$ be a finite dominant morphism between two affine varieties. Then $\phi$ is surjective and takes closed sets to closed sets.
+\end{nlemma}
+\begin{ncor}
+  Let $\phi : V \to W$ be a finite dominant morphism of irreducible algebraic varieties. Then $\im \phi$ contains a non-empty open subset of $W$.
+\end{ncor}
+
+\section{Dimension and Tangent Spaces}
+We could just get a notion of dimension, but in Topology we have this,
+\begin{ndefi}[Topological Dimension]
+  Let $X$ be a topological space, then $X$ has dimension $n$ if there is a strictly asscending chain of irreducible closed subsets of the form,
+  $$ X_0 \subsetneq X_1 \subsetneq \dots \subsetneq X_n $$
+  where $X_0 \ne \vn$ and $n$ is maximal with this property.
+\end{ndefi}
+
+\noindent
+A more algebraic way to talk about this is with Noetherian Spaces,
+\begin{eg}
+  Let $X = \A^3$, then we have a chain,
+  $$ \V(\gen{2X, Y, Z}) \subsetneq \V(\gen{X, Y}) \subsetneq \V(\gen{X}) \subsetneq \A^3$$
+  Therefore, $\dim (\A^3) \ge 3$.
+\end{eg}
+
+\noindent
+Let $X$ be an affine variety, then we have an ascending chain of closed irreducible subsets,
+$$ X_0 \subsetneq X_1 \subsetneq \dots \subsetneq X_n $$
+where we can say $X_0 = \V(\mathcal{P}_n)$, $X_1 = \V(\mathcal{P}_{n_1})$ and so on until $X_n = \V(\mathcal{P}_0)$. This corresponds to a strictly ascending chain of prime ideals in $k[X]$,
+$$ I(X_r) \subsetneq I(X_{r-1}) \subsetneq \dots \subsetneq I(X_0) $$
+As these are primes, by Nullstellensatz, then these are radical and so we have a chain of prime ideals.
+\begin{ndefi}[Algebraic Krull-Dimension]
+  The (krull-)dimension of $X$ is the length of a maximal chain of ascending prime ideals,
+  $$ P_0 \subsetneq P_1 \subsetneq \dots \subsetneq P_r $$
+  in $k[X]$. We write that $\dim X = r$.
+\end{ndefi}
+
+\begin{eg}
+  Consider $(\A^3, k[X, Y, Z])$ we have,
+  $$ \gen 0 \subsetneq \gen X \subsetneq \gen{X, Y} \subsetneq \gen{X, Y, Z} $$
+  This then tells us that $\dim \A^3 \ge 3$.
+\end{eg}
+
+\noindent
+Ok, so what about the other direction? We want to say that $\dim \A^3 = 3$. For the other dimension we need some more algebra. We use the following facts. See Atiyah-Macdonald for further information.
+\begin{nthm}[]
+  Let $B$ be a finitely-generated $k$-algebra and suppose that
+  $B$ is an integral domain. Then, the dimension of $B$ is equal to $\trdeg((K(B))/k)$
+\end{nthm}
+\noindent
+As a corollary,
+\begin{ncor}
+  $\dim \A^3 = 3$, because $\trdeg (k[X, Y, Z] / k) = 3$
+\end{ncor}
+\noindent
+and,
+\begin{ncor}
+   $\dim \A^n = n$.
+\end{ncor}
+\noindent
+We further have,
+\begin{enumerate}
+  \item If $X$ is a affine variety, then $\dim X$ is finite, this is because of the Noetheriality of affine varieties.
+  \item If $X$ is irreducible, then $\dim X = \trdeg (K(k[X])/k)$
+  \item If $X$ is irreducible and $Y \subsetneq X$, then $\dim Y < \dim X$
+\end{enumerate}
+
+\begin{remark}[$\trdeg$ and basis]
+  If we have some field extension $L \supseteq K$ is a field extension, then $\a_1, \dots, \a_n \in L$ are algebraically independent over $k$, if $\not\ex f \in k[X_1, \dots, X_n]$ such that $f(\a_1, \dots, \a_n) = 0$.\\
+  \noindent
+  A subset $S\sub L$ is algebraically independent over $k$ if every finite subset of $S$ is algebraically independent over $k$. A transcendence basis of $L$ over $k$ is a subset that is maximal among the algebraically independent.\\
+  \noindent
+  The transcendence degree is the cardinality of the transcendence basis, we denote this $\trdeg (L / K)$.\\
+
+  \noindent
+  We can use Noether Normalisation to calculate this, namely if $B$ is an integral $k$-algebra over $A = K[X_1, \dots, X_n]$, then $\dim B = n$.
+\end{remark}
+
+\begin{eg}
+  If we take $(V, A)$ be the cusp with coordinate ring $k[X, Y]/ (X^3 - Y^2)$. We see that $k[X, Y]/ (X^3 - Y^2) \cong k[T^3, T^2]$. Then the Noether Normalisation means its integral over $k[T^2]$, and $k[T^3, T^2] = k[T^2] + tk[t^2]$. Therefore, $\dim(k[T^2]) = 1$ and so $\dim V = 1$.
+\end{eg}
+
+\noindent
+We note that if $V$ is a point, then the dimension of $V$ is $0$. Where a point is just an affine irreducible variety of dimension $0$. If $\dim V = 1$, then $V$ is called a curve. Let $V$ be an irreducible curve, then if we have $Z \subsetneq V$ closed, then $\dim Z \le \dim V = 1$ and so $\dim Z = 0$ and $Z$ is a finite set.
+
+\subsection{Tangent Space}
+We now look to the local notion of dimension, that is tangent spaces. $\dim_x T(V)$. Let $(V, k[V])$ be an affine variety and let $x \in V$. Then define $T_X(V) = \{\a : k[V] \to k, \a \text{ is $k$-linear and follows Lienitz}\}$. That is $\a(f \cdot g) = f(x) \cdot \a(g) + \a(f) \cdot g(x)$ for all $f, g \in k[V]$. We call $\a$'s the derivations and they follow the Liebnitz identity. We call $T_x(V)$ the tangent space of $V$ at $x$.
+\begin{enumerate}
+  \item $T_x(V)$ is a $k$-vector space.
+  \item For any $\a \in T_x(V)$ we have $\a(1) = \a(1^2) = 1 \cdot\a(1) + \a(1)\cdot 1$ and that says $\a(1) = 0$. As $\a$ is $k$-linear, then $\a(c) = 0$.
+  \item $T_x(V)$ is a finite dimensional $k$-vector space.
+\end{enumerate}
