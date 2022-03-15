@@ -1,0 +1,123 @@
+% !TEX root = ../notes.tex
+
+\noindent
+An alternative way to dercribe the Middle Third Cantor set $A$ is in terms of infinite ternary expansions. For $x \in [0, 1]$, write $x$ in base $3$ as,
+$$ x = (0.c_1c_2c_3 \dots)_3, \qquad c_j \in \{0, 1, 2\} $$
+or, more formally,
+$$ x = \sum_{j=1}^\infty c_j3^{-j}, \qquad c_j \in \{0, 1, 2\} $$
+where the $c_j$ are the base-$3$ digits of $x$.\\
+
+\noindent
+Analogously to the `recurring 9s problem' with infinite decimal expansions, a given $x$ may have more than one ternary expansion. For example if $x = \frac{1}{3}$, we may take $c_1 = 0$ and $c_j = 0$ for all $j \ge 2$, or we may take $c_1 = 0$, $c_j = 2$ for all $j \ge 2$. Since $2\sum_{j=2}^\infty 3^{-j} = \frac{1}{3}$. In general, if $x = 3^{-n}k$ for some $k \in \Z$
+with $0 < l < 3^n$, then $x$ has two ternary expansions, one terminating and one ending in recurring $2$. Since our ternary expansions have $0$ `before the ternary point', we have just one way of writing $x = 0$ $c_j = 0$ for all $j$ and one way to write $x = 1$, $c_j = 2$ for all $j$. We then have,
+$$ A_n = \{x \in [0, 1] : x \text{ has a ternary expansion with } c_j \ne 1 \text{ for all } j \le n\} $$
+For example $x \in A_1$ if $x$ has a ternary expansion with $c_1 = 0$ or $2$. In particular, $\frac{1}{3}\in A_1$ since it has the ternary expansion $c_1 = 0$ and $c_j = 2$ for all $j \ge 2$ (even though it has another expansion), and $\frac{2}{3}$ since it has a ternary expansion with $c_1 = 2$, $c_j = 0$ for all
+$j \ge 2$. The unique ternary expansions of $0$ and $1$ show that these also belong to $A_1$. Therefore, the ternary expansions do indeed give,
+$$ A_1 = \left[ 0 , \frac{1}{3} \right] \cup \left[ \frac{2}{3}, 1 \right] $$
+Similarly, the descriptions via ternary expansions correctly give $A_n$ as the disjoint union of $2^n$ closed intervals, correspond to the $2^n$ choices $c_1, \dots, c_n \in \{0 ,2 \}$ for the first $n$ ternary digits of $x$. Then,
+\begin{align*}
+  A &= \bigcap_{n=0}^\infty \\
+  &= \{x \in [0, 1] : x \text{ has a ternary expansion with } c_j \ne 1 \text{ for all } j \}
+\end{align*}
+
+\begin{nprop}
+  \leavevmode
+  \begin{enumerate}[(i)]
+    \item Each point $x$ in the Middle Third Cantor Set $A$ has a unique ternary expansion such that $c_j \ne 1$ for all $j$,
+    \item $A$ is uncountable infinite,
+    \item The interior of $A^\circ$ of $A$ is the empty set.
+  \end{enumerate}
+\end{nprop}
+\begin{proof}
+  (i), If $x$ has two ternary expansions, then one will terminate, so, for some $m$, we have $c_m \ne 0$ but $c_j = 0$ for all $j > m$. The other will then have digits $c_m' = c_m - 1$ with $c_j' = 2$ for all $j > m$. Then either $c_m = 1$ or $c_m' = 1$\\
+
+  \noindent
+  \textbf{Cantor's Diagonal Argument:} We are interested in finding some $x_1, x_2, x_3, \dots$ containing all real numbers. If suffices to show this for $[0, 1]$. Suppose there is such a list for $x_i$ as an infinite decimal. $x_1 = 0.x_{11}x_{21}x_{31}\dots$ and $x_2 = 0.1x_{12}x_{22}x_{32}\dots$. We avoid recurring $9$s. We shall now write down $y = 0.y_1y_2y_3\dots$ not in the list, then we have a contradiction. Let's say if $x_{jj} \ne 5$,
+  let $y_j = 5$ and if $x_{55} = 5$, then $y_j \ne 5$. $y$ differs from $x_j$ in the $j$th place and $y$ has just one decimal expansion. Therefore as $y$ differs from each $x_j$ in the list, then $\R$ is uncountable.\\
+
+  \noindent
+  (ii), We use a variation of Cantor's famous diagonal argument, which uses decimal expansions to show $\R$ is uncountable. We must show that the elements of $A$ cannot all be arranged into an infinite list $x_1, x_2, x_3, \dots$. Suppose for a contradiction that such a list exists, and write,
+  $$ x_n = \sum_{j=1}^\infty c_j^{(n)}3^{-j}, \qquad c_j^{(n)} \in \{0, 2\} $$
+  We define a new number,
+  $$ y = \sum_{j=1}^\infty d_j3^{-j} $$
+  by setting $d_j = 2 - c_j^{(j)}$ for each $j$. Thus $d_j \in \{0, 2\}$ but $d_j \ne c_j^{(j)}$. Then $y \in A$ but $y$ does not appear in our list since $y$ differs from $x_j$ in the $j$th ternary digit if its unique ternary expansion avoiding the digit $1$.\\
+
+  \noindent
+  (iii), Suppose for a contradiction that $A$ is a nonempty open set $U$. Then $U$ contains a closed interval of the form $[3^{-m}k, 3^{-m}(k+1)]$ for some $m \ge 1$ and some $k$ with $0 < k < 3^m$. This consists of all points with a ternary expansion in which the $c_j$ for $j \le m$ are determined by $k$, but the $c_j$ for $j > m$ can be chosen arbitrarily from $\{0, 1, 2\}$. In particular, this interval contains a point $x$ with $c_j = 1$ for all $j > m$. Then $x$ has a unique ternary expansion and $x \notin A$. As $x \in U \sub A$, this gives the required contradiction. Hence $A^\circ = \vn$.
+\end{proof}
+
+\subsection{Compactness and continuous functions}
+\begin{nthm}
+  The continuous image of a compact space is compact, i.e. if $f : X \to Y$ is a continuous function between topological spaces, and $X$ is compact, then the subset $f(X)$ of $Y$ is also compact.
+\end{nthm}
+\begin{proof}
+  Let,
+  $$ f(X) \sub \bigcup_{i \in \cI} U_i $$
+  where $U_i$ are open in $Y$. For each $x \in X$ we have $f(x) \in U_i$ for some $i \in \cI$. Then $f^{-1}(U_i)$ is open in $X$ and $x \in f^{-1}(U_i)$. So we have,
+  $$ X= \bigcup_{i \in \cI} f^{-1}(U_i) $$
+  Since $X$ is compact, there are $i_1, \dots, i_n \in \cI$ such that,
+  $$ X = \bigcup_{k=1}^n f^{-1}(U_{i_k}) $$
+  Then,
+  $$ f(X) \sub \bigcup_{k=1}^n U_{i_k} $$
+  Hence $f(X)$ is compact.
+\end{proof}
+
+\begin{ncor}
+   If $X$ is any compact topological space and $f : X \to \R$ is any continuous function, then $f$ is bounded and attains it's bounds.
+\end{ncor}
+\begin{proof}
+  By Theorem 3.36, $f(X)$ is a compact subset of $\R$, so, by an earlier Corollary it is closed and bounded. Since $f(X)$ is bounded and non-empty, it has supremum $M$ and infimum $m$. Since $f(X)$ is closed, $M, m \in f(X)$, so these are the bounds.
+\end{proof}
+
+\begin{nthm}
+  If $f : X \to Y$ is a continuous bijection with $X$ compact and $Y$ Hausdorff, then $f$ is a homeomorphism.
+\end{nthm}
+\begin{proof}
+  Since $f$ is a bijection, it has an inverse function $g = f^{-1} : Y \to X$. All we need to show it that $g$ is continuous. Now $f(X)$ is compact by Theorem 3.36 and $f(X) = Y$, since $f$ is surjective and $Y$ is compact. \\
+
+  \noindent
+  Let $U$ be an open set in $X$ and let $C = X\sm U$ be it's complement. We need to show that $g^{-1}(U)$ is open in $Y$, which is equivalent to showing that $g^{-1}(C)$ is closed in $Y$. Now $C$ is a closed subset of the compact space $X$, so $C$ is compact by an earlier lemma, and $g^{-1}(C) = f(C)$ is the continuous image of a compact set, so is compact by Theorem 3.36. Since $g^{-1}(C)$ is a compact set in the Hausdorff space $Y$, it is closed.
+\end{proof}
+
+\subsection{Compact subsets of $\R^n$}
+Our characterisation of compact subgroups of $\R$ extends to $\R^n$, but there is one further tricky fact we need to prove this,
+\begin{nthm}
+  Let $X$ and $Y$ be compact topological spaces. Then their product is compact.
+\end{nthm}
+\noindent
+We postpone the proof until after the next result,
+\begin{nthm}
+  For any $n \ge 1$, a subset of $\R^n$ is compact if and only if it is closed and bounded.
+\end{nthm}
+\begin{proof}
+  Since $\R^n$ is a metric space with the usual Euclidean metric $d$, any compact subset is closed and bounded by a Lemma. Now let $A$ be closed, bounded in $\R^n$. Since it is bounded we can find $R > 0$ so that,
+  $$ \vec A \sub \{\vec x \in \R^n : d(\vec x, \vec 0) \le R\} \sub [-R, R]^n $$
+  By Heine-Borel Theorem, $[-R, R]$ is compact, and hence using Theorem 3.39 (and induction), so is $[-R, R]^n$. Since $A$ is a closed subset of this compact set, it is compact.
+\end{proof}
+
+\noindent
+Now we unpostpone that proof,
+\begin{proof}[Proof of Theorem 3.39]
+  By the definition of the product topology, it is enough to show that any open cover by sets of the form $U_i \ti V_i$ for $i \in cI$ has a finite subcover, where $U_i$ and $V_i$ are open in $X, Y$ respectively.\\
+
+  \noindent
+  Given such an open cover, for each point $(x, y) \in X\ti Y$, there is some $i \in \cI$ with $(x, y) \in U_i \ti V_i$. We write $U(x, y) = U_i$ and $V(x, y) = V_i$. So it suffices to find a finite subcover of the open cover,
+  $$ \bigcup_{(x, y) \in X\ti Y} \left( U(x, y) \ti V(x, y) \right) $$
+  For a fixed $y \in Y$ we have,
+  $$ X \ti \{y\} \sub \bigcup_{x \in X} (U(x, y) \ti V(x, y)) $$
+  So $\bigcup_{x \in X} U(x, y)$ is an open cover of $X$. Since $X$ is compact, there exists $n(y) \in \N$ and $x_1(y), \dots, x_{n(y)}(y) \in X$ such that,
+  $$ X = \bigcup_{j=1}^{n(y)} U(x_j(y), y) $$
+  Now let $V_y = \bigcap_{j=1}^{n(y)} V(x_j(y), y)$. This is an open subset of $Y$ since it is a finite intersection of open sets. Moreover, it contains $y$, and,
+  $$ X \ti \{y\} \sub \bigcup_{j=1}^{n(y)} (U(x_j(y), y) \ti V_y) \sub \bigcup_{j=1}^{n(y)} (U(x_j(y), y) \ti V(x_j(y), y)) $$
+  Now let $y \in Y$ vary. The sets $V_y$ form an open cover of $Y$, and since $Y$ is compact, we can write $Y$ as a finite union:
+  $$ Y = \bigcup_{k=1}^m V_{y_k} $$
+  Then for each $k$, we have $X = \bigcup_{j=1}^{n(y_k)} U(x_j(y_k), y_k)$ so that,
+  \begin{align*}
+    X \ti Y &= \bigcup_{k=1}^m \bigcup_{j=1}^{n(y_k)} (U(x_j(y_k), y_k) \ti V_{y_k})\\
+    &\sub \bigcup_{k=1}^m \bigcup_{j=1}^{n(y_k)} (U(x_j(y_k), y_k) \ti V(x_j(y_k), y_k))
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+   The product of infinitely many compact spaces $X_i$, $\prod_{i \in \cI} X_i$ is compact with the right definition of comapct for infinitely many spaces. The basic open sets are $\prod_{i \in \cI} U_i$ with $U_i$ open in $X_i$, and $U_i = X_i$ for all but finitely many $i$'s.
+\end{remark}
