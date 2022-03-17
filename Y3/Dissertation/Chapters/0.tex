@@ -34,7 +34,7 @@ This system has conserved energy and this is one of the most interesting thing f
   \begin{align*}
     \di E t &= \dit \left( \frac{1}{2}\sum_{i=1}^N m_i\norm{\vec{\ddot q}_i}^2 + V(\vec q) \right)\\
     &= \sum_{i=1}^N m_i \vec{\dot q}_i \cdot \vec{\ddot q}_i + \sum_{i=1}^N \pd{V}{\vec q_i} \cdot \vec{\dot q}_i\\
-    &= \sum_{i=1}^N \vec{\dot q}_i \cdot \left( m_i \vec{\ddot q}_i + \pd{V}{\vec q_i} \right) = 0 && \text{these vectors are orthogonal.}\\
+    &= \sum_{i=1}^N \vec{\dot q}_i \cdot \left( m_i \vec{\ddot q}_i + \pd{V}{\vec q_i} \right) = 0. && \text{these vectors are orthogonal.}
   \end{align*}
 \end{proof}
 
@@ -57,10 +57,10 @@ We firstly introduce the following theorem relating to a new set of equations ca
     \dit \pd{L}{\vec{\dot q}_i} - \pd{L}{\vec q_i} = 0 \label{equ:EL1}
   \end{equation}
   for the Lagrangian $L : \R^{2dN} \to \R$ defined by,
-  $$ L(\vec q, \vec{\dot q}) = \sum_{i=1}^N \frac{1}{2}m_i\norm{\vec{\dot q_i}}^2 - V(\vec q) $$
+  $$ L(\vec q, \vec{\dot q}) = \sum_{i=1}^N \frac{1}{2}m_i\norm{\vec{\dot q_i}}^2 - V(\vec q). $$
 \end{nthm}
 \begin{proof}
-  $$ \dit \left( \pd{L}{\vec{\dot q}_i} \right) - \pd{L}{\vec q_i} = \dit\left( m_i\vec{\dot q}_i \right) + \pd{V}{\vec q_i} =  m_i\vec{\ddot q}_i + \pd{V}{\vec q_i} = 0$$
+  $$ \dit \left( \pd{L}{\vec{\dot q}_i} \right) - \pd{L}{\vec q_i} = \dit\left( m_i\vec{\dot q}_i \right) + \pd{V}{\vec q_i} =  m_i\vec{\ddot q}_i + \pd{V}{\vec q_i} = 0.$$
 \end{proof}
 
 \noindent
@@ -79,13 +79,13 @@ The Euler-Lagrange equations relate to a variational principle on the space of s
 Consider some smooth path, $\vec q : [a, b] \to \R^{dN}$ with endpoints $\vec q(a) = \vec q_a$ and $\vec q(b) = \vec q_b$. We define a \textbf{deformation} of $\vec q$ as a smooth map $\vec q(s, t)$ where $s \in (-\e,\, \e)$ where $\e > 0$ such that $\vec q(0, t) = \vec q(t)$ for all $t \in [a, b]$.
 \begin{ndefi}[Variation]
   The \textbf{variation} of the curve $\vec q(t)$ corresponding to the following deformation $\vec q(s, t)$ is,
-  $$ \d \vec q(t) = \left.\di{}{s}\right|_{s=0} \vec q(s, t) $$
+  $$ \d \vec q(t) = \left.\di{}{s}\right|_{s=0} \vec q(s, t). $$
 \end{ndefi}
 \noindent
 Then the first variation is,
 \begin{ndefi}[First Variation]
   The \textbf{first variation} of a smooth $C^\infty$ functional $\mathcal{S} : [a, b] \to \R^{dN}$ is
-  $$ \d\mathcal{S} := \left.\di{}{s}\right|_{s=0} \mathcal{S}[\vec q(s, t)] $$
+  $$ \d\mathcal{S} := \left.\di{}{s}\right|_{s=0} \mathcal{S}[\vec q(s, t)]. $$
 \end{ndefi}
 \noindent
 Then we call $\vec q$ a \textbf{stationary point} of $\mathcal{S}$ if $\d\mathcal{S} = 0$ for all deformations of $\vec q$. Furthermore, if $\vec q(s, t)$ has fixed endpoints, meaning that $\vec q(a,s) = \vec q_a$ and $\vec q(b, s) = \vec q_b$ for all $s = (-\e, \e)$ then $\d\vec q(a) = \d\vec q(b) = 0$. These are variations along paths with fixed endpoints. Finally, we prove that the Euler-Lagrange equations are equivalent to Hamilton's Principle,
@@ -100,11 +100,11 @@ Then we call $\vec q$ a \textbf{stationary point} of $\mathcal{S}$ if $\d\mathca
     \d\mathcal{S} &= \left.\di{}{s}\right|_{s=0} S[\vec q(s, t)] = \left.\di{}{s}\right|_{s=0} \int_{t_1}^{t_2} L(\vec q, \vec{\dot q})\, dt\\
     &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} \cdot \vec q + \pd{L}{\vec{\dot q}} \cdot \d\vec{\dot q} \right) dt \\
     &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} \right) \cdot \d\vec q \,dt + \left[ \pd{L}{\vec{\dot q}}\cdot \d\vec q \right]_{t_1}^{t_2} \\
-    &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} \right) \cdot \d\vec q \,dt && \text{applying end point conditions} \\
+    &= \int_{t_1}^{t_2} \left( \pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} \right) \cdot \d\vec q \,dt. && \text{applying end point conditions}
   \end{align*}
   This then tells us that for any smooth $\d\vec q(t)$ satisfying $\d\vec q(a) = \d\vec q(b) = 0$. If $\d\mathcal{S} = 0$, then $\pd{L}{\vec q} - \dit\pd{L}{\vec{\dot q}} = 0$ and so Hamilton's Principle is equivalent to the Euler-Lagrange equations.
 \end{proof}
 \noindent
-We now have the foundation to use Lagrangian Mechanics throughout the rest of the document. We will again and again see the use of Hamilton's Variational Principle and different types of Euler-Legrange equations. The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincar\'e Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last chapter of pseudo-rigid bodies. We will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
+We now have the foundation to use Lagrangian Mechanics throughout the rest of the document. We will again and again see the use of Hamilton's Variational Principle and different types of Euler-Legrange equations. The rest of this dissertation shall be used to explore this area further. We will focus on Euler-Poincar\'e Reduction, Noether Theory and several applications of this mathematics. The main focus will be on the pure background mathematics of Geometric Mechanics leading up to the last section of Pseudo-Rigid bodies. This is because the main aim of this project was to learn enough Geometric Mechanics to do a PhD in the area. Therefore heavy emphasis is put on Theorems and proofs rather than examples. Under this we will focus on three main activities; symmetry and reduction of Lagrangians, derivation of equations and finding conserved quantities of these systems.
 
 % There are several, `checkpoints', places where you can take different paths through the dissertation and end up at one of the examples at the end. The following diagram explains the roadmap,

@@ -27,7 +27,7 @@ Take an arbitrary path $h(t) \in {G}$ such that $h(0) = e$ and let $\xi = \dot h
   The adjoint action of the matrix lie group $G$ on it's lie algebra $\mathfrak{g}$ is a map,
   $$ Ad : G \times \mathfrak{g} \to \mathfrak{g} $$
   defined by,
-  $$ \Ad_g \xi = g\xi g^{-1} $$
+  $$ \Ad_g \xi = g\xi g^{-1}. $$
   The dual map $\ip {Ad^*_g \mu} \xi = \ip {\mu} {Ad_g\xi}$ where $\mu \in \mathfrak{g}^*$ and $\xi \in T_eG = \mathfrak{g}$ is called the coadjoint map of $G$ on the dual Lie algebra $\mathfrak{g}^*$.
 \end{ndefi}
 
@@ -44,7 +44,7 @@ Now we can see that the dual space is also a vector space so we can use the norm
 
 \begin{nlemma}
   Let $V$ be a vector space of $n \times n$ real matrices. Then the dual vector space $V^*$ is also a vector space of $n \times n$ matrices and every linear functional $f : V \to \R$ such that,
-  $$ f(A) := Tr(B^TA), \quad B \in V^*, A \in V  $$
+  $$ f(A) := Tr(B^TA), \quad B \in V^*, A \in V. $$
 \end{nlemma}
 
 \noindent
@@ -52,7 +52,7 @@ We need to generalise the idea of an inner product to matrices and here is a par
 
 \begin{ndefi}[Trace Pairing]
   For every vector space $V$ of real $n\times n$ matrices with dual $V^*$, then the pairing is,
-  $$ \ip B A = Tr(B^TA) = Tr(BA^T) $$
+  $$ \ip B A = Tr(B^TA) = Tr(BA^T). $$
 \end{ndefi}
 
 \begin{nprop}
@@ -64,7 +64,7 @@ We need to generalise the idea of an inner product to matrices and here is a par
     &= -\Tr((BA)^T)\\
     &= -\Tr(B^TA^T)\\
     &= -\Tr(A^TB^T)\\
-    &= - \Tr(B^TA)
+    &= - \Tr(B^TA).
   \end{align*}
 \end{proof}
 
@@ -77,19 +77,19 @@ We now seek a closed form for the adjoint action of $G$ onto $\mathfrak{g}$. Thi
   &= \Tr(\xi g\mu^Tg^{-1})\\
   &= \Tr [(g^T\mu(g^{-1})^T)^T\xi]\\
   &= \ip{g^T\mu (g^{-1})^T} {\xi}\\
-  &= \ip{g^T\mu (g^T)^{-1}} {\xi}\\
+  &= \ip{g^T\mu (g^T)^{-1}} {\xi}.
 \end{align*}
 
 \noindent
-We conclude this chapter with ideas about the adjoint action from the Lie algebra onto itself. This can be derived by taking what we will see to be the first variation. This is because we know to get from a Lie group to its tangent space (which is its Lie algebra) it suffices to just take the derivative and set the variable to zero. We do this with the adjoint from $G \to \mathcal{g}$. Let $g(t) \in G$ such that $g(0) = e$ where $\eta = \dot g (0) \in T_eG$, then we define the adjoint from $\mathfrak{g}$ to $\mathfrak{g}$ as,
+We conclude this chapter with ideas about the adjoint action from the Lie algebra onto itself. This can be derived by taking what we will see to be the first variation. This is because we know to get from a Lie group to its tangent space (which is its Lie algebra) it suffices to just take the derivative and set the variable to zero. We do this with the adjoint from $G \to \mathfrak{g}$. Let $g(t) \in G$ such that $g(0) = e$ where $\eta = \dot g (0) \in T_eG$, then we define the adjoint from $\mathfrak{g}$ to $\mathfrak{g}$ as,
 $$ ad_\eta \xi := \di {}{t} _{t = 0} Ad_{g(t)}\xi \qquad \fa \xi \in \mathfrak{g} $$
 which we can see to be
-$$ \dot g(0)\xi g(0)^{-1} + g(0)\xi \di {}{t}_{t=0} g(t)^{-1}= \eta\xi - \xi\eta $$
+$$ \dot g(0)\xi g(0)^{-1} + g(0)\xi \di {}{t}_{t=0} g(t)^{-1}= \eta\xi - \xi\eta. $$
 Hence we can say that $\ad_{\eta}\xi = [\eta, \xi] = \eta\xi - \xi\eta$. We define the coadjoint action on $\mu$,
 \begin{ndefi}[Adjoint / Coadjoint action on $\mathfrak{g}/\mathfrak{g^*}$]
   The adjoint action of the matrix Lie algebra on itself is given by,
   $$ \ad : \mathfrak{g}\times \mathfrak{g} \to \mathfrak{g} $$
-  $$ \ad_\eta \xi = [\eta,\, \xi] $$
+  $$ \ad_\eta \xi = [\eta,\, \xi]. $$
   The dual map $\ip{ad^*_\eta \mu}{\xi} = \ip{\mu}{\ad_\eta \xi}$ is the coadjoint action of $\mathfrak{g}$ on $\mathfrak{g}^*$.
 \end{ndefi}
 \noindent
@@ -101,9 +101,9 @@ and now we can input our definitions and differentiate where we define $g(0) = 0
   &= \dit_{t=0} g^T \mu (g^T)^{-1} \\
   &= [\dot g^T \mu (g^T)^{-1} - g^T \mu (g^T)^{-1}\dot g^T (g^T)^{-1}]_{t=0} \\
   &= \dot g(0)^T \mu (g(0)^T)^{-1} - g(0)^T \mu (g(0)^T)^{-1}\dot g(0)^T (g(0)^T)^{-1} \\
-  &= \eta^t \mu e - e \mu e^{-1} \eta^T e^{-1} \\
+  &= \eta^T \mu e - e \mu e^{-1} \eta^T e^{-1} \\
   &= \eta^T \mu - \mu \eta^T \\
-  &= [\eta^T,\,\mu]
+  &= [\eta^T,\,\mu].
 \end{align*}
 Hence, $\ad_g^*\mu = [\eta^T,\,\mu]$. These results may seem arbitrary and slightly non-useful currently; however, after we have started to derive equations these results will be invaluable. Now we will move towards a more applied treatment of this area and consider the acts of rotation and different types of coordinate systems.
 

@@ -98,11 +98,12 @@ Here is another definition of a manifold, this definition explicitly output a sm
    Our equivalence relation here is that two atlases are equivalent if their union is also an atlas.
 \end{remark}
 
+\noindent
 Here are a few examples of manifolds,
 \begin{itemize}
   \item Let $M = \R^n$, this is a manifold covered by one open set and then if we take the identity map as our chart, we get the standard manifold on $\R^n$.
   \item Let $M = \C^n$, then we cover $\C^n$ by just one open set and then chart the map, $\phi : \C^n \to \R^{2n}$ which is  just,
-  $$ \phi (z_1, \dots, z_n) = (\Re z_1, \Im z_1, \dots, \Re z_n, \Im z_n) $$
+  $$ \phi (z_1, \dots, z_n) = (\Re z_1, \Im z_1, \dots, \Re z_n, \Im z_n). $$
   \item If $M$ is a manifold, then any open $V \subset M$ is also a manifold. This can be seen as the union of the atlases $V$ and $M$ is going to be $M$ and so it has the same equivalence class and hence it must be a manifold.
   \item If we let $M_n (\R)$ be all real $n \times n$ matrices, then this is a manifold as it's just $\R^{n^2}$. We also can say $\GL(n, \R) \subset M_n(\R)$ and so by the previous point, $\GL(n, \R)$ is a manifold.
 \end{itemize}
@@ -150,7 +151,7 @@ These definitions aren't the most intuitive, so we provide Figure \ref{fig:1} to
 
 \begin{nlemma}\label{lemma:comm}
   Let $G$ be a matrix lie group, and $g \in G$, then,
-  $$ \xi \in T_eG \implies g\xi g^{-1} \in T_eG $$
+  $$ \xi \in T_eG \implies g\xi g^{-1} \in T_eG. $$
 \end{nlemma}
 \noindent
 \textbf{Note:} $g \xi g^{-1}$ is a matrix expression.\\
@@ -167,7 +168,7 @@ These definitions aren't the most intuitive, so we provide Figure \ref{fig:1} to
   \begin{align*}
     \dot b(0) &= \dot c(0)\eta c(0)^{-1} + c(0)\eta + \di {c(t)} t (0)\\
     &= \dot c(0)\eta c(0)^{-1} - c(0)\eta c(0)^{-1}\dot c(0) c(0)^{-1}\\
-    &= \xi \eta - \eta\xi
+    &= \xi \eta - \eta\xi.
   \end{align*}
   As $\dot b(t) \in T_eG$, then $\xi \eta - \eta\xi \in T_eG$
 \end{proof}
@@ -180,7 +181,7 @@ Now we have a Lie Algebra,
   such that,
   \begin{itemize}
     \item $[B,\, A] = - [A,\, B]$ (skew-symmetry property)
-    \item $[[A,\, B], C] + [[B,\, C], A] + [[C,\, A],\, B] = 0 \quad \fa A, B, C \in V \qquad$ (Jacobi Identity)
+    \item $[[A,\, B], C] + [[B,\, C], A] + [[C,\, A],\, B] = 0 \quad \fa A, B, C \in V \qquad$ (Jacobi Identity).
   \end{itemize}
 \end{ndefi}
 
@@ -201,6 +202,7 @@ is the tangent bundle. We can further define a cotangent bundle, which leads to 
 We now present several examples of Lie algebras and their groups to help the reader understand the main space of study for the rest of the work.
 
 \begin{eg}
+  \leavevmode
   \begin{itemize}
     \item The Lie algebra $\mathfrak{gl}(n, \R) = T_e\GL(n, \R)$ which is vector space of real square $n \times n$ matrices with commutator.
     \item The Lie algebra of $\mathfrak{sl}(n, \R) := T_e \SL(n, \R)$ vector space of real traceless square $n \times n$ matrices.
