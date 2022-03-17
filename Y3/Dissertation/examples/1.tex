@@ -4,9 +4,9 @@
 In this final section of the thesis, we will work towards using the mathematics we have defined in the previous chapters to describe real world situations. We will focus on three examples, the Spherical Pendulum, the Heavy Top and Pseudo Rigid Bodies. These will follow the mathematics in the order it was introduced in the text. For example, the Spherical Pendulum is the simplest of the examples as we can describe it with just the content from Chapter 1, although we will then describe it using more sophisticated means. The Heavy Top is a classic example of how to use Euler-Poincar\'e reduction with symmetry breaking parameters and Pseudo Rigid Bodies expands on the work we have thus far by considering the implications of bipolar decomposition on the body coordinate.
 
 \subsection{Spherical Pendulum}
-The Spherical Pendulum is a canonical example of where Geometric Mechanics is useful. The description of a pendulum in a plane is a usual exercise in undergraduate dynamics courses. However, the Spherical Pendulum is a lot harder to describe and to describe it simply you need either the Euler-Lagrange or Euler-Poincar\'e equations. The simplicity of this example does not mean it is uninteresting as, with a slight modification of putting the bob on a spring, this example can be used to model climate dynamics. We will first derive two sets of Euler-Lagrange Equations before deriving some Euler-Poincar\'e Equations and using the associated Noether Theorem to derive a conserved quantity, which we will see is very nice.
+The Spherical Pendulum is a canonical example of where Geometric Mechanics is useful. The description of a pendulum in a plane is a usual exercise in undergraduate dynamics courses. However, the Spherical Pendulum is a lot harder to describe and to describe it simply you need either the Euler-Lagrange or Euler-Poincar\'e equations. The simplicity of this example does not mean it is uninteresting as, with a slight modification of putting the bob on a spring, this example can be used to model climate dynamics. We will first derive two sets of Euler-Lagrange Equations before deriving some Euler-Poincar\'e Equations and using the associated Noether's Theorem to derive a conserved quantity, which we will see is very nice.
 
-\subsubsection{Euler-Legrange Equations}
+\subsubsection{Euler-Lagrange Equations}
 
 We want to consider a pendulum in 3D space. We will think about this through the definition of spherical coordinates, as in actuality the motion of the bob will just be on $S^2$. However, to describe the motion more precisely, we need to derive the Euler-Lagrange equations.~\cite{holm_2011}\\
 
@@ -92,7 +92,7 @@ $$ \begin{cases}
   \quad\ddot\phi\sin \theta + 2\dot \phi\,\dot\theta\cos \theta = 0.
 \end{cases} $$
 
-\subsubsection{Euler-Legrange Equations II}
+\subsubsection{Euler-Lagrange Equations II}
 We will now consider a second Euler-Lagrange treatment of the Spherical Pendulum. The Spherical Pendulum is just a particle that moves along the surface of a sphere. We will consider two coordinates, the body coordinates $\vec x(t)$ and the spatial coordinates $\vec X$, where $\vec x(t) = R(t)\vec X$ and we let $R \in \SO(3)$. In terms of the body coordinates, we can write the Lagrangian as,
 $$ L(\vec x, \vec{\dot x}) = \frac{1}{2}m\left|\vec{\dot x}\right|^2 - mg\vec e_3 \cdot \vec x $$
 and then using the body-to-space map we can rewrite it as,
@@ -142,3 +142,28 @@ $$ \begin{cases}
   \ddot R = -mgR\hat\Gv \\
   \vec{\dot \Gamma} = \Gv \ti \Ov.
 \end{cases} $$
+
+\subsubsection{Euler-Poincar\'e Equations}
+We now take the problem of interest and fully reduce it. To do so we will use a similar method to how we reduced the Lagrangian in Chapter 3.1 using vector identities. We start with the Lagrangian we introduced in the last section,
+$$ L(R, \dot R, \Gv) = \frac{1}{2}m\left| \dot R\vec X \right|^2 - mg\Gv(t) \cdot \vec X. $$
+This can then be reduced to something of the form,
+$$ L(\Oh, \Gv) = \frac{1}{2}\widetilde{\I} \Oh \cdot \Oh - mg \Gv \cdot \vec X $$
+where $\widetilde\I := |\vec X|^2 - \vec X\vec X^T$. We can now consider Hamilton's Variational Principle to derive some general equations for reduced Lagrangians of this form,
+\begin{align*}
+  \d\int_{t_1}^{t_2} \ell(\Oh, \Gv) dt &= \int_{t_1}^{t_2}\ip{\pd \ell \Oh}{\d \Oh} + \ip{\pd \ell \Gv}{\d \Gv} dt \\
+  &= \int_{t_1}^{t_2} \ip{\pd L \Oh}{\Lhd + \ad_{\Oh}\Lh} + \ip{\pd \ell \Gv}{-\Lh \ti \Gv}dt \\
+  &= \int_{t_1}^{t_2}\ip{-\dit\pd \ell \Oh + \ad^*_{\Oh} \pd \ell \Oh + \pd \ell \Gv \ti \Gv}{\Lh}dt = 0
+\end{align*}
+Therefore, we reach the equation,
+$$ \dit\pd \ell \Oh = \ad^*_{\Oh} \pd \ell \Oh + \pd \ell \Gv \ti \Gv. $$
+Now we can differentiate the Lagrangian to complete the derivation for this example,
+$$ \pd \ell \Oh = \widetilde \I \Oh \qquad \pd \ell \Gv = mg\vec X $$
+Then by considering the definition of the adjoint and then running through the algebra we reach the system of equations of,
+$$ \wt\I \Oh_t = \wt\I \Oh \ti \Ov + mg\vec X \ti \Gv $$
+with the reconstruction equation $\vec{\dot \Gamma} = \Gv \ti \Ov$. We can now consider the conserved quantity for this set of equations. To do this, we can consider the Noether Theorem we saw in section 4.1, which gives is that,
+$$ A_\xi = \ip {\Ad_{R^{-1}}(\wt \I\Oh)}{\eta} $$
+This is a slightly unrevealing form, so we can consider it as this,
+$$ L(\vec q, \vec{\dot q}) = \frac{1}{2}m\norm{\vec{\dot q}}^2 - V(\vec q) $$
+Then we get a conserved quantity of this form,
+$$ A_\xi = \ip{m\vec q \ti \vec{\dot q}}{\xi} $$
+and this is the classical conservation of angular momentum, the nice conserved quantity I alluded to at the start of this chapter.

@@ -1,14 +1,14 @@
 % !TEX root = ../notes.tex
 
 \noindent
-If $F = F^\top$ and $G = -G^\top$, then $\Tr(FG) = 0$. We see that $\Lv$ is symmetric so we consider the antisymmetric part,
+If $F = F^T$ and $G = -G^T$, then $\Tr(FG) = 0$. We see that $\Lv$ is symmetric so we consider the antisymmetric part,
 \begin{align*}
-  &= \Tr(\vec u\vec w^\top A \Lv )\\
-  &= \Tr (\frac{1}{2}(\vec u\vec w^\top A + A^\top \vec w\vec u^\top)\Lv ) && \text{we are spliitng this by it's symmetric part} \\
-  &= \Tr(\Sym(\vec u\vec w^\top A)\Lv) \\
-  &= \ip{\Sym(\vec u\vec w^\top A)}{\Lv}
+  &= \Tr\left(\vec u\vec w^T A \Lv \right)\\
+  &= \Tr \left(\frac{1}{2}(\vec u\vec w^T A + A^T \vec w\vec u^T)\Lv \right) && \text{we are spliitng this by it's symmetric part} \\
+  &= \Tr\left(\Sym\left(\vec u\vec w^T A\right)\Lv\right) \\
+  &= \ip{\Sym\left(\vec u\vec w^T A\right)}{\Lv}
 \end{align*}
-We can say that $\vec u \diamond \vec w = \Sym(\vec u\vec w^\top A) = \frac{1}{2}(\vec u\vec w^T A + A^\top \vec w\vec u^\top)$. This is going to appear in EP theory in symmetry breaking paramaters.
+We can say that $\vec u \diamond \vec w = \Sym\left(\vec u\vec w^T A\right) = \frac{1}{2}\left(\vec u\vec w^T A + A^T \vec w\vec u^T\right)$. This is going to appear in Euler-Poincar\'e theory in symmetry breaking parameters.
 
 \subsection{Euler-Poincar\'e Reduction with Parameters}
 In this final section of Euler-Poincar\'e theory, we will now lift the assumption that all Lagrangians are symmetric and study what we should do if a Lagrangian isn't symmetric. It may seem that symmetry is everywhere in the world, but certain parameters may cause issues. The main one we consider in the applications section is gravity. Gravity only acts downwards, we model potential energy in a gravitational field using $-mg\vec e_3 \cdot R\vec X$. One can quickly verify that this doesn't hold any sort of symmetry or invariance. Therefore, we need to develop a theory to work around these restrictions. We start with an example that we have seen half of before in the previous chapter, but we now consider right symmetry, then we will consider gravity and end this section by considering the Noether Theorem for symmetry breaking parameters.\\
@@ -74,10 +74,12 @@ Now we can consider the two terms of Equation \refeq{equ:LB1} in turn. The detai
   &= \frac{1}{2}\left[ \J, \oh \cdot \oh \right]\\
   &= \frac{1}{2}\left(\J\oh \cdot \oh - \J\oh \cdot \oh\J \right)\\
   &= \frac{1}{2}\left(\J\oh^T \oh - \oh^T \oh\J \right)\\
-  &= \frac{1}{2}\left((\oh\J)^T \oh - \oh^T \oh\J \right)\\
+  &= \frac{1}{2}\left((\oh\J)^T \oh - \oh^T \oh\J \right)
+\end{align*}
+\begin{align*}
   &= \frac{1}{2}\left((\oh\J) \cdot \oh - \oh^T \oh\J \right)\\
   &= \frac{1}{2}\left(\oh \cdot (\oh\J) - \oh^T \oh\J \right)\\
-  &= \frac{1}{2}\left(\oh^T\oh\J - \oh^T \oh\J \right) = 0
+  &= \frac{1}{2}\left(\oh^T\oh\J - \oh^T \oh\J \right) = 0.
 \end{align*}
 Therefore, we can remove the first term from Equation \ref{equ:LB1}. Now we consider the second term,
 \begin{equation}
@@ -108,16 +110,16 @@ Then expanding and neglecting the terms that go to zero, we get the following,
 $$ \left( \J + \pd \J \oh \right) \cdot \ohd + (\dot\J + \J \ti \ov) \cdot \oh = 0. $$
 
 \subsubsection{Symmetry Breaking Parameters and the Diamond Map}
-We have now derived a system of equations for a symmetry broken Lagrangian. We will now write more formally what we have just done and then consider gravity and we will see that then we will have an equation that relates to the Diamond map we introduced in the last section. Consider a Lie Group, $G$, and a left action on a manifold, $\mathcal{M}$. Then for a given $a_0 \in \mathcal{M}$ (a parameter), let $L: TG \ti \mathcal{M} \to \R$ be a Lagrangian with symmetry breaking parameter $a_0$, and suppose it is invariant under the left action: $G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$ then $(h, (g, \dot g, a_0)) \to (hg, h\dot g, ha_0)$ for all $h \in G$.
-This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As usual let $h = g^{-1}$, then $L(g, \dot g, a_0) = L(g^{-1}g, g^{-1}\dot g, g^{-1}a_0) =: \ell(\xi, a)$ where $\xi := g^{-1}\dot g$ and $a = g^{-1}a_0$.
+We have now derived a system of equations for a symmetry broken Lagrangian. We will now write more formally what we have just done and then consider gravity and we will see that then we will have an equation that relates to the Diamond map we introduced in the last section. Consider a Lie Group, $G$, and a left action on a manifold, $\mathcal{M}$. Then for a given $a_0 \in \mathcal{M}$ (a parameter), let $L: TG \ti \mathcal{M} \to \R$ be a Lagrangian with symmetry breaking parameter $a_0$. Suppose it is invariant under the left action: $G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$ then $(h, (g, \dot g, a_0)) \to (hg, h\dot g, ha_0)$ for all $h \in G$.
+This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As usual let $h = g^{-1}$, then $L(g, \dot g, a_0) = L(g^{-1}g, g^{-1}\dot g, g^{-1}a_0) =: \ell(\xi, a)$ where $\xi := g^{-1}\dot g$ and $a = g^{-1}a_0$. From this the following Theorem arises,
 \begin{nthm}
   Then the following are equivalent,
   \begin{enumerate}[(i)]
-    \item Hamiltons Principle
+    \item Hamilton's Variational Principle
     $$ \d\int_{t_1}^{t_2} L(g, \dot g, a_0)\,dt = 0 $$
     with $\d g(t_1) = \d g(t_2) = 0$.
     \item $g(t)$ satisfies the Euler-Lagrange equations associated with $L(g, \dot g, a_0)$
-    \item The reduced variational principle (or Hamiltons principle),
+    \item The reduced variational principle (or Hamilton's principle),
     $$ \d\int_{t_1}^{t_2} \ell(\xi, a) \,dt = 0 $$
     holds on $\mathfrak{g} \ti \mathcal{M}$, using variations $\d \xi = \dot \eta + \ad_{\xi}\eta$ and $\d a = -\eta_\mathcal{M} (a)$ with free variations $\eta(t)$ satisfying end point conditions.
     \item The Euler-Poincare equations
@@ -129,7 +131,7 @@ This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As 
   \end{enumerate}
 \end{nthm}
 \begin{proof}
-  We already know that $\d \xi = \dot \eta + [\xi, \eta]$ and $\eta = g^{-1}\d g$ and then $\d a = -g^{-1}\d g a = -\eta_{\mathcal{M}} a = -\eta a$. Now we look at our variational principle,
+  We already know that $\d \xi = \dot \eta + [\xi, \eta]$ and $\eta = g^{-1}\d g$ and then $\d a = -g^{-1}\d g g^{-1} a = -\eta_{\mathcal{M}} a = -\eta a$. Now we look at our variational principle,
   \begin{align*}
     0 &= \d\int_{t_1}^{t_2} \ell(\xi, a)\, dt \\
     &= \int_{t_1}^{t_2} \left(\ip{\pd{\ell}{\xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a}\right)\, dt \\
@@ -153,24 +155,80 @@ This means that $L(hg, h\dot g, a_0) = L(g, \dot g, a_0)$ for all $h \in G$. As 
 
 \noindent
 Now we look at Noether's Theorems.
-\begin{nthm}[Noether's Theorem for Symmetry Breaking Parameters]
-  Let $\xi = g^{-1}\dot g$ be a solution of the Euler Poincare Equations with parameters $a = g^{-1}a_0$. Then,
-  $$ \dit \Ad^*_{g^{-1}(t)} \mu = -\Ad^*_{g^{-1}(t)} (a \diamond \pd{\ell}{a}) $$
+\begin{nthm}[Noether's Theorem for Symmetry Breaking Parameters (Left-Symmetry)]
+  Let $\xi = g^{-1}\dot g$ be a solution of the Euler-Poincar\'e Equations with parameters $a = g^{-1}a_0$. Then,
+  $$ \dit \Ad^*_{g^{-1}(t)} \mu = -\Ad^*_{g^{-1}(t)} \left(a \diamond \pd{\ell}{a}\right) $$
   and $\mu(t) = \pd{\ell}{\xi} \in \mathfrak{g}^*$.
 \end{nthm}
 \begin{proof}
-  Exercise
+  We will prove this with a argument that relies heavily on the trace pairing. We will consider the following trace pairing and work from there, where $\nu(t) \in \mathfrak{g}$
+  \begin{align*}
+    \ip{\Ad_{g^{-1}}^* \pd \ell \xi}{\nu(t)} &= \dit \ip{\Ad_{g^{-1}}^* \pd \ell \xi}{\nu(t)} \\
+    &= \dit\ip{ \pd \ell \xi}{\Ad_{g^{-1}}\nu(t)} \\
+    &= \ip{ \dit\pd \ell \xi}{\Ad_{g^{-1}}\nu(t)} + \ip{ \pd \ell \xi}{\dit\Ad_{g^{-1}}\nu(t)} \\
+    &= \ip{ \dit\pd \ell \xi}{\Ad_{g^{-1}}\nu(t)} + \ip{ \pd \ell \xi}{-\ad^*_\xi\Ad_{g^{-1}}\nu(t)} \\
+    &= \ip{ \dit\pd \ell \xi}{\Ad_{g^{-1}}\nu(t)} - \ip{\ad_\xi \pd \ell \xi}{\Ad_{g^{-1}}\nu(t)} \\
+    &= \ip{ \dit\pd \ell \xi - \ad_\xi \pd \ell \xi}{\Ad_{g^{-1}}\nu(t)} - \ip{a\diamond \pd \ell a - a \diamond \pd \ell a}{\Ad_{g^{-1}}\nu(t)} \\
+    &= \ip{ \dit\pd \ell \xi - \ad_\xi \pd \ell \xi + a\diamond \pd \ell a}{\Ad_{g^{-1}}\nu(t)} - \ip{a \diamond \pd \ell a}{\Ad_{g^{-1}}\nu(t)} \\
+    &= - \ip{a \diamond \pd \ell a}{\Ad_{g^{-1}}\nu(t)} \\
+    &= \ip{-\Ad^*_{g^{-1}}\left(a \diamond \pd \ell a\right)}{\nu(t)}
+  \end{align*}
+  The result follows from this and so,
+  $$ \Ad_{g^{-1}(t)}^* \pd \ell \xi = -\Ad^*_{g^{-1}(t)}\left(a \diamond \pd \ell a\right) $$
+  is the conserved quantity, as required.
 \end{proof}
 
-\begin{exercise}
-  Do the same thing for right invariant actions. If the unreduced Lagrangian $L : TG \ti \mathcal{M} \to \R$ is invariant under a right action
-  $$G \ti (TG \ti \mathcal{M}) \to TG \ti \mathcal{M}$$
-  $$ (h, (g, \dot g, a_0)) \mapsto (gh, \dot g h, a_0h) $$
-  and
-  $$ \dit \pd{\ell}{\xi} = -\ad^*_\xi \pd{\ell}{\xi} - a\diamond \pd{\ell}{a} $$
-  $$ \dot a = -\xi_\mathcal{M}a $$
-  The Noether Theorem is,
-  \begin{nthm}
-    $$ \dit Ad^*_{g(t)} \mu = -\Ad^*_{g(t)} \left(a \diamond \pd{\ell}{a}\right) $$
-  \end{nthm}
-\end{exercise}
+\newpage
+\noindent
+We can prove an equivalent theorem to Theorem 4.10 for right-invariant systems,
+\begin{nthm}
+  The following are equivalent,
+  \begin{enumerate}[(i)]
+    \item Hamilton's Variational Principle
+    $$ \d\int_{t_1}^{t_2} L(g, \dot g, a_0)\,dt = 0 $$
+    with $\d g(t_1) = \d g(t_2) = 0$.
+    \item $g(t)$ satisfies the Euler-Lagrange equations associated with $L(g, \dot g, a_0)$
+    \item The reduced variational principle (or Hamiltons principle),
+    $$ \d\int_{t_1}^{t_2} \ell(\xi, a) \,dt = 0 $$
+    holds on $\mathfrak{g} \ti \mathcal{M}$, using variations $\d \xi = \dot \eta - \ad_{\xi}\eta$ and $\d a = -\eta_\mathcal{M} (a)$ with free variations $\eta(t)$ satisfying end point conditions.
+    \item The Euler-Poincare equations
+    \begin{align*}
+      \dit \pd{\ell}{\xi} &= -\ad^*_\xi \pd{\ell}{\xi} - a\diamond \pd{\ell}{a} \\
+      \dot a &=-\xi_\mathcal{M} a
+    \end{align*}
+    hold on $\mathfrak{g} \ti \mathcal{M}$ where $\ip{\pd{\ell}{a}}{\a_\mathcal{M}a} =: \ip{a \diamond \pd{\ell}{a}}{\a}$ for all $\a \in \mathfrak{g}$ and for all $a \in \mathcal{M}$.
+  \end{enumerate}
+\end{nthm}
+\begin{proof}
+  We consider a reduced Lagrangian and work from there, we will see that the proof is almost identical to Theorem 4.10, apart from a minus sign,
+  \begin{align*}
+    0 &= \d\int_{t_1}^{t_2} \ell(\xi, a)\, dt \\
+    &= \int_{t_1}^{t_2} \left(\ip{\pd{\ell}{\xi}}{\d \xi} + \ip{\pd{\ell}{a}}{\d a}\right)\, dt \\
+    &= \int_{t_1}^{t_2} \left(\ip{\pd{\ell}{\xi}}{\dot \eta - \ad_{\xi} \eta} - \ip{\pd{\ell}{a}}{\eta_\mathcal{M}a}\right)\, dt \\
+    &= \int_{t_1}^{t_2} \ip{ -\dit \pd{\ell}{\xi} - \ad^*_\xi \pd{\ell}{\xi}}{\eta} - \ip{a \diamond \pd{\ell}{a}}{\eta}\, dt.
+  \end{align*}
+  Now we want the second equation,
+  \begin{align*}
+    \dot a &= \dit (g^{-1}a_0) \\
+    &= \dit g^{-1} a_0 \\
+    &= -g^{-1}\dot g g^{-1} a_0 \\
+    &= -\xi_\mathcal{M} a
+  \end{align*}
+  Therefore our set of equations are,
+  \begin{align}
+    \dit\pd \ell \xi &= -\ad^*_\xi \pd \ell \xi - a\diamond \pd \ell a\\
+    \di a t &= -\xi_\mathcal{M}a
+  \end{align}
+  and the proof is complete.
+\end{proof}
+
+\noindent
+We now prove the right-invariant Noether's Theorem, which is very similar, but differs by an inverse sign,
+\begin{nthm}[Noether's Theorem for Symmetry Breaking Parameters (Right-Symmetry)]
+  Let $\xi = g^{-1}\dot g$ be a solution of the Euler-Poincar\'e Equations with parameters $a = g^{-1}a_0$. Then,
+  $$ \dit Ad^*_{g(t)} \mu = -\Ad^*_{g(t)} \left(a \diamond \pd{\ell}{a}\right) $$
+\end{nthm}
+\begin{proof}
+  As will all left and right Noether's Theorems we have seen, this theorem uses a similar argument to the left symmetric version but we use the fact that $\dit \Ad_g \mu = \ad^*_\xi \Ad_g \mu$ and then run through the steps to get the equation above.
+\end{proof}
+
