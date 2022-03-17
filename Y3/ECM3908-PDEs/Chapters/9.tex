@@ -1,0 +1,131 @@
+% !TEX root = ../notes.tex
+
+\section{Eigenfunction Expansion}
+For inhomogeneous PDEs, it's hard to solve the PDE using separation of variables.
+
+%TODO first lecture
+We now consider the $\pdd u t$ and then consider the BC with Greens second identity,
+$$ W_n(t) = \frac{2}{L}\int_0^L \pdd u x \sin \frac{n\pi x}{L}dx $$
+but we know that,
+$$ \iiint_V f\nab g - g\nab f dV = \iint_{\partial V} (f\nab g - g\nab f) \cdot \vec n = \iint_{\partial V} f \pd g {\vec n} - g\pd f {\vec n}.$$
+Then using the one dimensional variant,
+\begin{align*}
+  W_n(t) &= \frac{2}{L}\int_0^L \pdd u x \sin \frac{n\pi x}{L}dx \\
+  &= \frac{2}{L}\int_0^L g\D f dx + \frac{2}{L}\left[ f\nab g - g\nab f \right]_0^L \\
+  &= \frac{2}{L}\int_0^L -u(x, t)\left( \frac{n\pi}{L}\right)^2 \sin \frac{n\pi x}{L}dx + \left[\frac{2}{L}\sin \frac{n\pi x}{L}\pd u x - \frac{2}{L}u(x, t)\frac{n\pi}{L}\cos \frac{n\pi x}{L}\right]_0^L.
+\end{align*}
+\noindent
+We now impose the boundary conditions,
+\begin{align*}
+  W_n(t) &= \frac{2}{L}\int_0^L -u(x, t)\left( \frac{n\pi}{L}\right)^2 \sin \frac{n\pi x}{L}dx + \left[\frac{2}{L}\sin \frac{n\pi x}{L}\pd u x - \frac{2}{L}u(x, t)\frac{n\pi}{L}\cos \frac{n\pi x}{L}\right]_0^L \\
+  &= -\frac{2}{L}\int_0^L u(x, t)\left( \frac{n\pi}{L}\right)^2 \sin \frac{n\pi x}{L}dx - \frac{2}{L}\left((-1)^n \frac{n\pi}{L} g(t) + \frac{n\pi}{L}h(t) \right).
+\end{align*}
+Let $\l_n = \left( \frac{n\pi}{L} \right)^2$, then we can see that,
+$$ W_n = - \l_n u_n(t) + \frac{2}{L}\frac{n\pi}{L}\left( -(-1)^n g(t) + h(t) \right). $$
+Then we substitute this into the PDE, then we get that,
+$$ V_n(t) - kW_n(t) = 0 $$
+and we now substitute for $V_n$ and $W_n$, we get,
+$$ \frac{2}{L}\int_0^L (u_t - ku_{xx})\sin \frac{n\pi x}{L} = 0 $$
+We can substitute now using $V_n = kW_n$, $\di {u_n} t = V_n$, then get,
+$$ \di {u_n} t = k(-\l_n u_n - \frac{2n\pi}{L^2}\left( (-1)^n g(t) - h(t) \right)) $$
+and now we seek to solve this ODE with respect to $u_n(0) = 0$. We use an integrating factor, $e^{\int k\l_n dt} = e^{k\l_n t}$. This gives,
+$$ \dit \left( e^{k\l_n t}u_n(t) \right) = \frac{2n\pi k}{L^2}e^{k\l_n t}\left( (-1)^n g(t) - h(t) \right) $$
+Then we get the solution,
+$$ u_n(t) = Ce^{-k\l_n t} - \frac{2n\pi}{L^2}\int_0^t e^{-k\l_n (t - s)} ((-1)^n g(s) - h(s)) ds $$
+and considering initial conditions we see that $u_n(0) = 0 = C$, and so,
+$$ u_n(t) = \frac{2n\pi}{L^2}\int_0^t e^{-k\l_n (t - s)} (h(s) - (-1)^n g(s)) ds $$
+
+\subsection{Inhomogeneous wave problem}
+We consider $u_{tt} - c^2u_{xx} = f(x, t)$, where $u(0, t) = g(t)$, $u(L, t) = h(t)$ and the initial conditions $u(x, 0) = \Phi(x)$ and $u_t(x, 0) = \Psi(x)$. If we have a homogenous wave problem, then using seperation of variables we get the following solution,
+$$ u(x, t) = \sum_{n=1}^{\infty} u_n(t) \sin \frac{n\pi x}{L} $$
+Then we will get that,
+$$ u_n(t) = \frac{2}{L}\int_0^L u(x, t)\sin \frac{n\pi x}{L} $$
+If we now expand each of the terms in the PDE we get,
+\begin{align*}
+  \pdd u t &= \sum_{n=1}^\infty V_n(t)\sin \frac{n\pi x}{L}\\
+  \pdd u x &= \sum_{n=1}^\infty W_n(t)\sin \frac{n\pi x}{L}\\
+  f(x, t) &= \sum_{n=1}^\infty f_n(t)\sin \frac{n\pi x}{L}\\
+  \Phi (x) &= \sum_{n=1}^\infty \Phi_n\sin \frac{n\pi x}{L}\\
+  \Psi (x) &= \sum_{n=1}^\infty \Psi_n\sin \frac{n\pi x}{L}
+\end{align*}
+We now seek an ODE, so we consider $V_n$ first,
+\begin{align*}
+  V_n (t) &= \frac{2}{L}\int_0^L \pdd u t \sin \frac{n\pi x}{L} dx = \dii {u_n} t\\
+  W_n (t) &= \frac{2}{L}\int_0^L \pdd u x \sin \frac{n\pi x }{L}\\
+  &= \frac{2}{L}\int_0^L -u(x, t)\left( \frac{n\pi}{L} \right)^2 \sin \frac{n\pi x}{L}dx + \frac{2}{L}\left[ u_x(x, t)\sin \frac{n\pi x}{L} - \frac{n\pi}{L}u(x, t)\cos \frac{n\pi x}{L} \right]_0^L\\
+  &= -\l_nu_n(t) + \frac{2}{L}\left( g(t) - (-1)^n h(t) \right)
+\end{align*}
+Now we seek an ODE, from the PDE we get that $V_n - c^2W_n = f_n(t)$, from substituting the expansions into the PDE. Hence we substitute for $V_n(t)$ and $W_n(t)$ in terms of $u_n$. We then get,
+$$ \dii {u_n} t + c^2\l_n u_n(t) = \frac{2n\pi}{L^2}c^2 \left( g(t) - (-1)^n h(t)) + f_n(t) $$
+We also have two initial conditions, $u(0) = \Phi_n$ and $u_t(0) = \Psi_n$. We call the RHS, $S(t) = \frac{2n\pi}{L^2}c^2 \left( (-1)^n h(t) - g(t)) \right) + f_n(t)$. Therefore,
+$$ \dii {u_n} t + c^2\l_n u_n (t) = S(t) $$
+and so we solve this equation. We solve it using variation of parameters. We assume $u_p = b_1(t)\cos \frac{n\pi ct}{L} + b_2(t)\sin \frac{n\pi ct}{L}$. We can see that $u_h(t) = A\cos \frac{n\pi c t}{L} + B\sin \frac{n\pi c t}{L}$, we now consider $W(t)$,
+$$ W(t) = \left| \begin{matrix}
+  \cos \frac{n\pi ct}{L} & \sin \frac{n\pi ct}{L} \\
+  -\frac{n\pi ct}{L}\sin \frac{n\pi ct}{L} & \frac{n\pi ct}{L}\cos \frac{n\pi ct}{L}
+\end{matrix} \right| = \frac{n\pi c}{L}$$
+Therefore, we get,
+$$ u_p(t) = \cos \frac{n\pi ct}{L} \int \frac{-L}{n\pi c}\sin \frac{n\pi ct}{L} S(t) dt + \sin \frac{n\pi ct}{L} \int \frac{L}{n\pi c}\cos \frac{n\pi ct}{L}S(t) dt $$
+We want to make initial conditions explicit and so we now write,
+$$ \cos \frac{n\pi ct}{L} \int_0^t -\frac{L}{n\pi c}\sin \frac{n\pi c\t}{L}S(\t)d\t + \sin \frac{n\pi ct}{L} \int_0^t \frac{L}{n\pi c}\cos \frac{n\pi c\t}{L}S(\t) d\t $$
+Then we can write it as the following,
+$$ u_p(t) = \int_0^t \frac{L}{n\pi c}\sin \left( \frac{n\pi c}{L}(t - \t) \right)S(\t) dt $$
+Now we can write down $S(0)$, and the find the complementary solution to the problem. Hence we add them and get the solution,
+$$ u_n (t) = A\cos \frac{n\pi ct}{L} + B\sin \frac{n\pi ct}{L} + \frac{L}{n\pi c}\int_0^t \sin \left( \frac{n\pi c}{L}(t - \t) \right)S(\t) dt $$
+To find $A$ and $B$, consider the auxillary conditions, $u_n(0) = \Phi_n = A$ and $u_n'(0) = \Psi_n = B \frac{n\pi c}{L}$ and so $B = \frac{2}{n\pi L}\int_0^L \Psi(x)\sin \frac{n\pi x}{L}dx $. Then similarly for $A = \frac{2}{L}\int_0^L \Phi(x)\sin \frac{n\pi x}{L}dx$.
+Then,
+\begin{align*}
+  u_n (t) = \frac{2}{L}\int_0^L \Phi(q) \sin &\frac{n\pi q}{L}dq \cos \frac{n\pi ct}{L} + \frac{2}{n \pi c}\int_0^L \Psi(q)\sin \sin \frac{n\pi q}{L} dq\sin \frac{n\pi ct}{L} \\
+  &+ \frac{L}{n\pi c}\int_0^t \left[\sin \left(\frac{n\pi c}{L}(t - \t)\right) \frac{-2n\pi }{L^2}c^2\left( (-1)^n h(\t) - g(\t) \right) + \frac{2}{L}\int_0^L f(q, \t)\sin \frac{n\pi q}{L}dq \right]d\t
+\end{align*}
+
+\noindent
+\subsection{Method of Subtraction - Nonexaminable}
+We can move inhomogeneous boundary conditions to homogeonous conditions by the method of subtraction. Consider $u_{tt} - c^2u_{xx} = f(x, t)$ where $u(0, t) = g(t)$, $u(L, t) = h(t)$ with initial conditions, $u(x, 0) = \Phi(x)$ and $u_t(x, 0) = \Psi(x)$. Let $\hat u(x, t) = \left( 1 - \frac{x}{L}\right) g(t) + \frac{x}{L}h(t)$, where we see that $\hat u(0, t) = g(t)$ and $\hat u(L, t) = h(t)$. Then let $v(x, t) = u(x, t) - \hat u(x, t)$. Then we see that,
+$$ u_{tt} - c^2u_{xx} = v_{tt} + \hat u_{tt} - c^2(v_{xx} + \hat u_{xx}) $$
+This gives us,
+$$ v_{tt} - c^2v_{xx} + \hat u_{tt} = f(x, t) $$
+and so,
+$$ v_{tt} - c^2v_{xx} = f - \hat u_{tt} $$
+This then gives the boundary condition $v(0, t) = v(L, t) = 0$. We also need the initial conditions, $v(x, 0) = u(x, 0) - \hat u(x, 0) = \Phi(x) - \hat u(x, 0)$ and $v_t(x, 0) = \Psi(x) - \hat u_t(x, 0)$. If the source function on the RHS of the PDE is just a function of $x$, we would be able to make the PDE homogenous. If we have $u_{tt} - c^2u_{xx} = f(x)$, where $u(0, t) = g(t)$ and $u(L, t) = h$ subject to $u(x, 0) = \Phi(x)$ and $u_t(x, 0) = \Psi(x)$. We want to make this problem homogenous. We find a solution to the problem where $u(x, t) = \hat u(x)$. Then we get that $-c^2u_{xx} = f(x)$ where
+$\hat u(0) = g$ and $\hat u(L) = h$. Now let $v(x, t) = u(x, t) - \hat u(x)$. Then $v(t)$ solves the PDE problem with zero RHS and zero BC. From the new variable we conclude that $u(x, t) = v(x, t) - \hat u$, we get that,
+$$ u_{tt} - c^2u_{xx} = v_{tt} - c^2(v_{xx} + \hat u_{xx}) = f(x) $$
+which we can write as,
+$$ v_{tt} = c^2v_{tt} = c^2\hat u_{xx} + f(x) = 0$$
+Now we can show that $u(0, t) = v(0, t) + \hat u(0) = g$ and so $v(0, t) = 0$. That same thing is true for $u(L, t) = v(L, t) + \hat u(L) = h$ and so $v(L, t) = 0$. Then $u(x, 0) = v(x, 0) + \hat u(x) = \Phi(x)$ and so $v(x, 0) = \Phi(x) - \hat u(x)$ and we look to $u_t (x, 0) = v_t(x, 0) = \Psi(x)$, then we get the problem,
+$$ v_{tt} - c^2 u_{tt} = 0 $$
+where $v(0, t) = 0$, $v(L, t) = 0$ subject to $v(x, 0) = \Phi (x) - \hat u(x)$ and $v_t(x, 0) = \Psi(x)$.
+
+\subsection{Seperation of variables in higher dimensions - Nonexaminable}
+We cosider the wave equations in the place and in space and the Helmholtz equation. We have a higher order wave equation,
+$$ u_{tt} = c^2\D u $$
+which just just the laplacian of $u$, then for diffusion we have,
+$$ u_t = k\D u $$
+We aim to see what happens in higher variables. Assume we are in $\R^3$, that is we seek a solution of the form $u(x, y, z, t)$. We aim to find $v(x, y, z)T(t) = v(\vec x)T(t)$. We substitute this back into the wave equation PDE we get,
+$$ v(\vec x)T''(t) - c^2T(t)\D v(\vec x) = 0  $$
+Now we divide through and get,
+$$ \frac{T''}{T} = c^2 \frac{\D v(\vec x)}{v(\vec x)} = \l $$
+and for diffusions we get something similar,
+$$ \frac{T'}{kT} = \frac{\D v}{v} = - \l $$
+We now seek to find the ODEs, and get the Helmholtz equation,
+$$ \D v + \l v = 0. $$
+This satisfies one of the BC we have found on $\partial D$. We now seek to solve the Helmholtz equation. This is an eigenvalue problem with eigenvalues $\l$. If we call the eigenvalues of the problem $\l_n$ and eigenfunctions $v_n(\vec x) = v(x, y, z)$. Then we interested in solving the second ODE to form our series solution. This equation solves to give us a series solution of,
+$$ u(\vec x, t) = \sum_n \left( A_n \cos \sqrt\l_n ct + B_n\sin \sqrt \l_n ct \right)v_n(\vec x) $$
+Then for diffusions we get,
+$$ u(\vec x, t) = \sum_n A_ne^{-\l_n kt} v_n (\vec x) $$
+Now we consider $\ip f g$,
+\begin{align*}
+  \ip f g &= \iiint_D f(\vec x)\bar {g(x)}d\vec x\\
+   &= \iiint_D f(\vec x)g(x)d\vec x
+\end{align*}
+Now we use the Greens second identity,
+\begin{align*}
+  \iiint_D u\D v - v\D u d\vec x &= \iint_{\partial D} (u\nab v - v\nab u)\cdot \vec n ds \\
+  &= \iint_{\partial D} u\pd v {\vec n} - v\pd u {\vec n}ds
+\end{align*}
+Then with homogenous boundary conditions, we then get that the RHS is zero,
+$$ \iiint_D u\D v - v\D u d\vec x = 0 $$
+Now using Helmholtz equation we have that $-\D u = \l_1 u$ and $-\D v = \l_2 v$ in $D$. Where $u$ and $v$ satisfy some boundary condition on $\partial D$. Therefore,
+$$ \iiint_V u\D v - v\D ud\vec x = \iiint_D -uv(\l_1 - \l_2)d\vec x $$
+Therefore, $(\l_1 - \l_2)\ip u v = 0$. Therefore, they are both orthogonal. Now we know that $\Phi(x) = \sum_n A_n v_n(\vec x)$ where $A_n = \frac{\ip {\Phi (x)}{v_n(\vec x)}}{\ip{v_n(\vec x)}{v_n(\vec x)}}$. this is then,
+$$ A_n = \frac{\iiint_D \Phi(x)v_n(\vec x)d\vec x}{\iiint_D v_n^2 (\vec x)d\vec x} $$
