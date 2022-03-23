@@ -56,7 +56,7 @@ We now seek an ODE, so we consider $V_n$ first,
   &= -\l_nu_n(t) + \frac{2}{L}\left( g(t) - (-1)^n h(t) \right)
 \end{align*}
 Now we seek an ODE, from the PDE we get that $V_n - c^2W_n = f_n(t)$, from substituting the expansions into the PDE. Hence we substitute for $V_n(t)$ and $W_n(t)$ in terms of $u_n$. We then get,
-$$ \dii {u_n} t + c^2\l_n u_n(t) = \frac{2n\pi}{L^2}c^2 \left( g(t) - (-1)^n h(t)) + f_n(t) $$
+$$ \dii {u_n} t + c^2\l_n u_n(t) = \frac{2n\pi}{L^2}c^2 \left( g(t) - (-1)^n h(t)\right) + f_n(t) $$
 We also have two initial conditions, $u(0) = \Phi_n$ and $u_t(0) = \Psi_n$. We call the RHS, $S(t) = \frac{2n\pi}{L^2}c^2 \left( (-1)^n h(t) - g(t)) \right) + f_n(t)$. Therefore,
 $$ \dii {u_n} t + c^2\l_n u_n (t) = S(t) $$
 and so we solve this equation. We solve it using variation of parameters. We assume $u_p = b_1(t)\cos \frac{n\pi ct}{L} + b_2(t)\sin \frac{n\pi ct}{L}$. We can see that $u_h(t) = A\cos \frac{n\pi c t}{L} + B\sin \frac{n\pi c t}{L}$, we now consider $W(t)$,
@@ -129,3 +129,12 @@ Now using Helmholtz equation we have that $-\D u = \l_1 u$ and $-\D v = \l_2 v$ 
 $$ \iiint_V u\D v - v\D ud\vec x = \iiint_D -uv(\l_1 - \l_2)d\vec x $$
 Therefore, $(\l_1 - \l_2)\ip u v = 0$. Therefore, they are both orthogonal. Now we know that $\Phi(x) = \sum_n A_n v_n(\vec x)$ where $A_n = \frac{\ip {\Phi (x)}{v_n(\vec x)}}{\ip{v_n(\vec x)}{v_n(\vec x)}}$. this is then,
 $$ A_n = \frac{\iiint_D \Phi(x)v_n(\vec x)d\vec x}{\iiint_D v_n^2 (\vec x)d\vec x} $$
+
+\begin{eg}
+  Consider the $3$D heat equation, $u_t - k(u_{xx} + u_{yy} + u_{zz})$, then we can solve this with the solution,
+  $$ u(\vec x, t) = \sum_\ell \sum_m \sum_n A_{mn\ell} \sin nx \sin my \sin \ell z $$
+  with coefficient,
+  $$ A_{mn\ell} = \frac{\int_0^\pi\int_0^\pi\int_0^\pi \Phi(x)\sin nx \sin my \sin \ell z dxdydz}{\int_0^\pi\int_0^\pi\int_0^\pi \sin^2 nx \sin^2 my \sin^2 \ell z dxdydz} $$
+  which is just,
+  $$ A_{mn\ell }\left( \frac{2}{\pi} \right)^3 \int_0^\pi\int_0^\pi\int_0^\pi \Phi(x) \sin nx \sin my \sin \ell z dxdydz$$
+\end{eg}

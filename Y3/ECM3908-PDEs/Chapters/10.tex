@@ -1,0 +1,246 @@
+% !TEX root = ../notes.tex
+
+\section{Generalised functions and Green's functions}
+Assume we have $A\vec u = f$, where $\vec u = (u_1, u_2, \dots, u_n)$ and $f = (f_1, f_2, \dots, f_n)$. We know $f \in \R^n$ and so we can write it as, $\vec f = f_1\vec e_1 + f_2\vec e_2 + \dots + f_n\vec e_n$ and so we can write our original problem as $A\vec u_j = \vec e_j$, and get a solution $\vec u = f_1\vec u_1 + f_2\vec u_2 + \dots + f_n \vec u_n$. This is the idea of Greens function at discrete level.\\
+
+\noindent
+\subsection{Delta Function}
+A unit impulse function at position $a < \xi < b$ will be described by the delta function, denoted by $\d_\xi (x)$. We say $\d_\xi (x) = 0$ if $x \ne \xi$. In addition,
+$$ \int_a^b \d_\xi (x)dx = 0 \qquad a < x < b $$
+We can define this function in two ways,
+\subsubsection{Limit Method}
+Regard, the delta function $\d_\xi (x)$ as a limit of a sequence of ordinary function $g_n(x)$. This represents progressively more and more concentrated unit forces, in the limit , these converge to the desired limit impulse concentrated at $x = \xi$. That is,
+$$ \lim_{n \to \infty} g_n(x) = 0 \qquad x \ne \xi $$
+and $\int_a^b g_n(x) = 1$ for all $n$. We could take the example of $g_n(x) = \frac{n}{\pi (1 + n^2x^2)}$. This gives us $\d_0(x)$.
+
+\subsubsection{Duality Method}
+The critical property is that if $u(x)$ is any continuous function, then
+$$ \int_a^b \d_\xi (x) dx = u(\xi) \qquad a < \xi < b $$
+This is the same as taking a linear functional, $L_\xi [u] = \ip{\d_\xi (x)}{u(x)} = u(\xi)$. This serves to define the linear functional $L_\xi : \mathcal{C}^0 [a, b] \to \R$ that maps a continuous function to it's value at $x = \xi$. \\
+
+\noindent
+We consider,
+\begin{align*}
+  u(\xi) &= \lim_{n \to \infty} \ip{g_n(x)}{u}\\
+  &= \lim_{n \to \infty} \int_a^n g_n(x)u(x)dx \\
+  &= \int_a^b \d_\xi(x)u(x)\\
+  &= \ip{\d_\xi (x)}{u(x)}
+\end{align*}
+If we let $h(x) = 2\d (x) - 3\d(x - 1)$, then we note that $L_h[u] = 2u(0) - 3u(1)$.
+
+\subsection{Integral of delta function}
+The integral of the delta function is the unit step function,
+$$ \int_a^x \d_\xi (t)dt = \begin{cases}
+  0 & x < \xi \\
+  1 & x > \xi
+\end{cases} = \sigma (x - \xi)$$
+Furthere more the integral of the step function is a ramp function,
+$$ \int_a^x \sigma (t)dt = \sigma_\xi (x) = \begin{cases}
+  0 & x < \xi \\
+  x - \xi & x > \xi
+\end{cases} $$
+
+\subsection{Fourier Transforms}
+a fourier transform is the limiting case of a fourier series. Let $f(x)$ is a piecewise continuous function defined for all $-\infty < x < \infty$. Then,
+$$ f(x) = \sum_{k = -\infty}^\infty c_ke^{ik \frac{\pi x}{\ell}} $$
+where,
+$$ c_k = \int_{-\ell}^\ell f(x)e^{-ik \frac{\pi x}{\ell}}dx $$
+This function decays as $|x|\to \infty$. It's Fourier transform $\hat f(k)$ is defined by,
+$$ \mathcal{F} (f(k)) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x)e^{-ikx}dx = \hat f(k)   $$
+Then we can do the inverse,
+$$ f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx}dx $$
+The Fourier transform and it's inverse define linear operators on function space.
+
+\begin{nthm}[]
+  If the Fourier transform of the function $f(x)$ is $\hat f(x)$, then the Fourier transform of $\hat f(x)$ is $f(-k)$.
+\end{nthm}
+\begin{proof}
+  Something something proof
+\end{proof}
+
+\begin{nthm}[]
+  If $f(x) \to \hat f(k)$, then we want to show $f'(x) \mapsto (ik)f'(k)$
+\end{nthm}
+\begin{proof}
+  We know that,
+  $$ \hat f(k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x)e^{-ikx}dx $$
+  and the inverse is,
+  $$ f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx}dk $$
+  Then we can differentiate,
+  $$ f'(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty  ik\hat f(k)e^{ikx}dk = ik\hat f(k)$$
+\end{proof}
+
+Similarly, we have the Fourier Transform of product function $xf(x)$, obtained by differentiating the Fourier transform of $f(x)$. Hence we want to show,
+$$ \mathcal{F}(xf(x)) = i \di {\hat f} k $$
+We start with the definition of $\hat f(k)$ and differentiate,
+$$ i\di {\hat f} k = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty xf(x)e^{-ikx}dx = \mathcal{F}(xf(x)) $$
+\begin{ncor}
+   The Fourier Transform of $f^{(n)}(x)$ is $(ik)^n \hat f(x)$.
+\end{ncor}
+
+\subsection{Solution of boundary-value problem using Fourier Transform}
+We consider $-\dii u x + \o^2 u = h(x)$ for $-\infty < x < \infty$ and $\o > 0$. We then take Fourier transforms,
+$$ \cF \left[ -\dii u x + \o^2 u \right] = \cF [h(x)] $$
+Then this becomes,
+$$ -(ik)^3\hat u(k) + \o^2\hat u(k) = \hat h(k) $$
+That is,
+$$ \hat u(k) = \frac{\hat h (k)}{k^2 + \o^2} $$
+Therefore, we have,
+$$ u(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \frac{\hat h(k)}{k^2 + \o^2}e^{ikx}dk $$
+For an example consider $h(x) = e^{|x|}$, then we have $\hat h(k) = \frac{1}{\sqrt{2\pi}} \frac{1}{k^2 + 1}$. Therefore, we get,
+$$ u(x) = \frac{1}{\pi}\int_{-\infty}^\infty \frac{e^{ikx}}{(1 + k^2)(k^2 + \o^2)}dk $$
+We now use partial fractions,
+$$  u(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \sqrt{\frac{2}{\pi}} \frac{1}{\o^2 - 1}\left( \frac{1}{k^2 + 1} - \frac{1}{k^2 + \o^2} \right)e^{ikx}dk $$
+Then using inverse Fourier transforms, we can get that,
+$$ u(x) = \frac{e^{|x|}}{\o^2 - 1} + \frac{e^{\o|x|}}{\o(\o^2 - 1)} $$
+
+\subsection{Green's Function}
+We replace $h(x) = \d_\xi(x) = \d (x - \xi)$. We had that $\hat u(k) = \frac{\hat h(k)}{k^2 + \o^2}$. If we replace $h$ with the delta function we can get Greens function. Hence we have $\hat G(k; \xi) = \frac{1}{\sqrt{2\pi}}\frac{e^{ik\xi}}{k^2 + \o^2}$. We now want to find $\hat G(x; \xi)$. We have alreadt see that $\cF[ f(x - \xi)] = e^{-ik\xi}\hat f(k)$.
+We also know that $\cF [ e^{a|x|}] = \sqrt{\frac{2}{\pi}}\frac{\o}{\o^2 + k^2}$. Hence we get that,
+$$ \cF[ e^{-\o|x - \xi|}] = \sqrt{\frac{2}{\pi}} \frac{\o e^{-ik\xi}}{k^2 + \o^2} $$
+Therefore, we can find that $\hat G(k; \xi)$ transforms to $\hat G(x; \xi) = \frac{1}{2\o} e^{-\o|x - \xi|}$. We also know that,
+$$ h(x) = \int_{-\infty}^\infty \d(x - \xi)h(\xi)d\xi $$
+Then the superposition principle based upon Green's function implies that the solution to the inhomogeneous boundary-value problem,
+$$ -u'' + \o^2 u = h(x) \qquad -\infty < x < \infty \quad \o > 0$$
+Under general forcing function $h(x)$ takes the following form,
+$$ u(x) = \int_{-\infty}^\infty G(x; \xi)h(\xi) d\xi = \int_{-\infty}^\infty \frac{1}{2\pi} e^{-\o|x - \xi|}h(\xi)d\xi$$
+
+\begin{ndefi}[Convolution]
+  If we have a function $h(x) = f * g = \int_{-\infty}^\infty f(x - \xi)g(\xi)d\xi $ is the convolution.
+\end{ndefi}
+Here are the properties of convolutions,
+\begin{enumerate}
+  \item Symmetry, $f * g = g * f$,
+  \item Blinearity, $f * (ag + bh) = af*g + bf*h$ and $(af + bg)*h = af*h + bg*h$,
+  \item Associativity, $f * (g * h) = (f * g) * h$,
+  \item Zero function, $f * 0 = 0$,
+  \item Delta function $f * \d = \d * f = f$.
+\end{enumerate}
+
+We now want to show that $\cF [f * g (x)] = \sqrt{2\pi} \hat f (k) \hat g (k)$. We start with the definition of Fourier transform,
+\begin{align*}
+  \cF[f * g (x)] &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f * g(x) e^{-ikx}dx \\
+  &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \int_{-\infty}^\infty f(x - \xi)g(\xi) e^{-ikx} dx d\xi \\
+  &= \int_{-\infty}^\infty \int_{-\infty}^\infty f(\eta)g(\xi) e^{-k(\xi + \eta)}d\xi d\eta \\
+  &= \sqrt{2\pi} \left( \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(\eta) e^{-ik\eta}d\eta\right)\left( \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty g(\xi) e^{-ik\xi}d\xi \right) = \sqrt{2\pi}\hat f(k)\hat g(k)
+\end{align*}
+
+\noindent
+We now look at the Fourier transform of $f(x)g(x)$, up to multiple, is the convolution of the Fourier transforms of $f$ and $g$,
+$$ \cF[f(x)g(x)] = \frac{1}{\sqrt{2\pi}} \hat f * \hat g(k) $$
+We can use a similar argument to before, we know that,
+\begin{align*}
+  fg(x) &= \frac{1}{2\pi}\int_{-\infty}^\infty \F[f(k)g(k)] e^{ikx}dk \\
+  &= \frac{1}{2\pi}\int_{-\infty}^\infty  \frac{1}{2\pi} \int_{-\infty}^\infty \hat f(k - \xi) \hat g(\xi)d\xi e^{ikx}dk \\
+  &= \frac{1}{2\pi}\int_{-\infty}^\infty  \frac{1}{2\pi} \int_{-\infty}^\infty \hat f(\eta)\hat g(\xi) e^{ik\eta}e^{ik\xi}d\eta d\xi \\
+  &= \left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \hat f(\eta) e^{ik\eta} d\eta \right)\left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \hat g(\xi) e^{ik\xi} d\xi \right)
+\end{align*}
+
+\subsection{The Fundamental Solution to the diffusion equation}
+The problem of interest is $\pd u t - \pdd u x = 0$ for $-\infty < x < \infty$ subject to $u(x, 0) = f(x)$ for $-\infty < x < \infty$ and $u(x, t) \to 0$ in the limit as $x \to \pm \infty$. Apply Fourier transform in the $x$ direction, $\cF [u(x, t)] = \hat u(k, t)$,
+$$ \pd {\hat u} t + k^2 \hat u(k, t) = 0 $$
+We can consider the IC, and see,
+$$ u(k, 0) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty u(x, 0)e^{-ikx}dx = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x)e^{-ikx}dx = \hat f(x) $$
+and so now we can solve the first order ODE.
+$$ \hat u(k, t) = \hat f(k)e^{-k^2t} $$
+We now can write the following,
+$$ u(x, t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx-k^2t}dk $$
+
+\noindent
+The idea now is to replace $f(x)$ with $\d(\xi) = \d(x - \xi)$ the use linear superposition theorem. We know,
+$$ \hat \d_\xi(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \d(x - \xi)e^{-ikx}dx = \frac{1}{\sqrt{2\pi}}g(\xi) = \frac{1}{\sqrt{2\pi}}e^{-ik\xi} $$
+We will call $G$ by $F$ to let it align with current literature. Therefore,
+$$ F(x; \xi, t) = \frac{1}{2\pi}\int_{-\infty}^\infty e^{ik(x - \xi) - k^2t}dk $$
+We aim now to find some function,
+$$ \cF[ \qquad ] = \frac{1}{2\pi} e^{-ik\xi - k^2t} $$
+We know that
+$$ \cF [ e^{-ax^2} ] = \frac{e^{-\frac{k^2}{4a}}}{\sqrt{2a}}$$
+Now if we take $a = \frac{1}{4t}$, then we can use the above transform,
+$$ \F[ e^{-\frac{x^2}{4t}}] = \sqrt{2t}e^{-k^2t} $$
+and so we consider a transformed function and find,
+$$ \cF[e^{-\frac{(x - \xi)^2}{4t}}] = \sqrt{2t}e^{-ik\xi - k^2t} $$
+Therefore,
+$$ \F [ \frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{2t}} e^{-\frac{(x - \xi)^2}{4t}}] = F(k; \xi, t) $$
+Therefore,
+$$ F(x; \xi, t) = \frac{1}{\sqrt{4\pi t}} e^{-\frac{(x - \xi)^2}{4t}} $$
+We now aim to use linear superposition theorem. We then get,
+$$ u(x, t) = \frac{1}{\sqrt{4\pi t}}\int_{-\infty}^\infty e^{-\frac{(x - \xi)^2}{4t}}f(\xi)d\xi $$
+
+\noindent
+\subsection{The forced heat /diffusion equation and Dyhamel's principle}
+Assume we have a forced diffusion equation,
+$$ \begin{cases}
+  u_t - u_{xx} = h(x, t)\\
+  u(x, 0) = 0
+\end{cases} $$
+Consider $h(x, t) = \d(x - \xi)\d(x - \t)$. This will yield the general fundamental solution, which is actually Greens function. We use the critical property of the delta function,
+$$ h(x, t) = \int_0^\infty \int_{-\infty}^\infty \d(x - \xi)\d(t - \t)h(\xi, \t)d\xi d\t $$
+Then we can find the Greens function, $G(x, t; \xi, \t)$ and so we get the solution,
+$$ u(x, t) = \int_0^t \int_{\infty}^\infty G(x, t; \xi, \t) h(\xi, \t)d\xi d\t $$
+Then if we have $\pd u t - \pdd u x = h(x, t)$ where $u(x, 0) = f(x)$. We can decompose this problem into two parts.
+$$ \begin{cases}
+  \pd u t - \pdd u x = h(x, t) \\
+  u(x, 0) = 0
+\end{cases} \qquad + \qquad \begin{cases}
+  \pd u t - \pdd u x = 0 \\
+  u(x, 0) = f(x)
+\end{cases}$$
+Then we can find the solution to the original problem, by summing them. We know already that we have,
+$$ u(x, t) = \int_a^b F(x, t; \xi) f(\xi) d\xi + \int_0^t \int_a^b G(x, t; \xi, \t)h(\xi, \t) d\xi d\t$$
+We shall now derive the second term. Our problem is,
+$$ \begin{cases}
+  \pd u t - \pdd u x = h(x, t) \\
+  u(x, 0) = 0
+\end{cases} $$
+We use Fourier transforms and get,
+$$ \pd {\hat u} t + k^2\hat u = \hat h(k, t) $$
+Now we have an ODE, but we want to replace the right hand side with a delta function. Let $\hat h(k, t) = \hat \d (x - \xi) \d ( t - \t) = \frac{1}{\sqrt{2\pi}} e^{ik\xi}\d ( t - \t)$. Therefore we have,
+$$ \pd {\hat u} t + k^2\hat u = \frac{1}{\sqrt{2\pi}} e^{ik\xi}\d ( t - \t) $$
+We want to solve this subject to $\hat u (k, 0) = 0$. We can solve and see that,
+$$ \pd{}{t}\left( e^{k^2t}\hat u \right) = \frac{1}{\sqrt{2\pi}} e^{ik\xi + k^2t} \d(t - \t) $$
+Now we integrate from $0$ to $t$, we get a solution of this form,
+$$ \hat u(k, t) = \frac{1}{\sqrt{2\pi}}e^{-k^2(t - \t) - ik\xi} \s(t - \t) $$
+Then we have,
+$$ u(x, t) = G(x, t; \xi, \t) = \frac{\s(t - \t)}{2\pi}\int_{-\infty}^\infty e^{-k^2(t - \t) + ik(x - \xi)}dk $$
+This is then actually,
+$$ u(x, t) = \frac{\s(t - \t)}{2\sqrt{\pi ( t - \t)}}e^{-\frac{(x - \xi)^2}{4(t - \t)}} = \s(t - \t)F(x, t - \t; \xi) $$
+This is called Duhamels principle. That is, the general fundemental solution is obtained by translating the fundemental solution $F(x, t; \xi)$ for the initial-value problem to a starting time of $t = \t$ instead of $t = 0$. Applying linear superposition theorem,
+$$ u(x, t) = \int_0^t \int_{-\infty}^\infty \frac{h(\t, \xi)}{2\sqrt{\pi(t - \t)}}e^{-\frac{(x - \xi)^2}{4(t - \t)}} $$
+
+\subsection{The source function for the wave equation}
+In the literature, Greens function for the wave equation is called the source function. The problem of interest is,
+$$ \begin{cases}
+  \pdd u t - c^2 \pdd u x = 0 \\
+  u(x, 0) = 0 \\
+  u_t(x, 0) = g(x)
+\end{cases} $$
+We consider the source function $S$ this satisfies,
+$$ \begin{cases}
+  \pdd S t - c^2 \pdd S x = 0 \\
+  S(x, 0) = 0 \\
+  S_t(x, 0) = \d(x)
+\end{cases} $$
+We take fourier transforms of this problem and see,
+$$ \pdd S t + c^2k^2 \hat S = 0 $$
+subject to $\hat S (k, 0) = 0$ and $\hat S_t (k, 0) = \frac{1}{\sqrt{2\pi}}$. The solution to this second order ODE is,
+$$ \hat S(k, t) = A\cos ckt + B\sin ckt $$
+Then using the initial conditions, we see that $\hat S(k, 0) = A = 0$ and $\hat S_t (k, 0) = B = \frac{1}{\sqrt{2\pi}}$. Hence we have,
+$$ \hat S(k, t) = \frac{1}{\sqrt{2\pi}}\sin ckt = \frac{e^{ickt} - e^{-ickt}}{2\sqrt{2\pi}ick} $$
+Hence we can use the inverse Fourier transform,
+$$ S(x, t) = \int_{-\infty}^\infty \frac{e^{ik(x + ct)} - e^{-ik(x - ct)}}{4\pi ick} $$
+We know that $\cF[\sgn (x)] = \sqrt{\frac{2}{\pi}}\frac{1}{ik}$. Therefore we can say $\cF [ \sgn (x + ct)] = \sqrt{\frac{2}{\pi}}\frac{1}{ik}e^{ikct}$ and $\cF [ \sgn (x - ct)] = \sqrt{\frac{2}{\pi}}\frac{1}{ik}e^{-ikct}$.
+We can now look at the Fourier transforms,
+$$ \cF \left[ \frac{\sgn(x + ct) - \sgn(x - ct)}{4c} \right] = \frac{e^{ikct} - e^{-ikct}}{4\pi ick} $$
+Therefore, we say that,
+$$ S(x, t) = \frac{1}{4c}\left( \sgn(x + ct) - \sgn(x - ct)\right) $$
+If we let $\d(x)$ now be $\d(x - \xi)$, then we get that $\hat S(k, 0) = \frac{1}{\sqrt{2\pi}}e^{-ik\xi}$. Hence we get,
+$$ \hat S(k, t) = \frac{e^{ik(ct - \xi) - e^{-ik(x + \xi)}}}{2\sqrt {2 \pi}ick} $$
+and so we get that,
+$$ S(x; \xi, t) = \frac{1}{4c}\left( \sgn(x - ct - \xi) + \sgn(x - ct - \xi) \right) $$
+Now we apply linear superposition theorem and get,
+$$ u(x, t) = \int_{\-\infty}^\infty S(x; \xi, t) g(\xi)d\xi $$
+Then we can rewrite this as,
+$$ u(x, t) = \int_{x - ct}^{x + ct} \frac{1}{2c}g(\xi)d\xi $$
+
+\noindent
+Assume we have, $u_{tt} - c^2u_{xx} = 0$ subject to $u(x, 0) = f(x)$ and $u_t(x, 0) = g(x)$. We can now solve this similarly to before!
