@@ -1,7 +1,7 @@
 % !TEX root = ../notes.tex
 
 \section{Euler-Poincar\'e Reduction by Symmetry}
-We have seen several bits of applied-adjacent mathematics over the past few sections. In this chapter we aim to bundle it all together and introduce Euler-Poincar\'e reduction by symmetry. The main idea of this section is that Lagrangians can be classed as symmetric, that is if we take some $g \in \SO(3)$ and some Lagrangian we could have left-symmetry, that means $L(R, \dot R) = L(gR, g\dot R)$ for all $g \in \SO(3)$. If we now let $g = R^{-1}$, then we get that $L(R, \dot R) = L(I, R^{-1}\dot R)$ and so we have reduced the Lagrangian from two parameters to one. In mathematical modelling and applied maths generally we try to reduce the number of parameters in a system, because this makes it easier to analyse. Here we use this reduction before we have defined our equations and so we end up with simpler equations. We also work with Lie Groups and Algebras, which come with a set of tools, such as the hat map and the diamond map (introduced in 4.2). These tools help us reduce the equations and find nice closed forms for the conserved quantities of the systems and so the Noether Theorems are nicer. We will firstly look at the simplest example of an Euler-Poincar\'e reduction. Then we will look at Noether Theory in more depth. Finally, we consider Euler-Poincar\'e reduction where we have symmetry breaking parameters, this will lead to a few applications noted in the last chapter.\\
+We have seen several pieces of applied-adjacent mathematics over the past few sections. In this chapter we aim to bundle it all together and introduce Euler-Poincar\'e reduction by symmetry. The main idea underpinning this section is that Lagrangians can be classed as symmetric, that is if we take some Lagrangian we could have $L(R, \dot R) = L(gR, g\dot R)$ for all $g \in \SO(3)$. If we now let $g = R^{-1}$, then we get that $L(R, \dot R) = L(I, R^{-1}\dot R)$ and so we have reduced the Lagrangian from two parameters to one. In mathematical modelling and applied maths generally we try to reduce the number of parameters in a system, because this makes it easier to analyse. Here we use this reduction before we have defined our equations and so we end up with simpler equations. We also work with Lie Groups and Algebras, which come with a set of tools, such as the hat map and the diamond map (introduced in 4.2). These tools help us reduce the equations further and find nice closed forms for the conserved quantities (Noether Theorems) of the systems. We will firstly look at the simplest example of an Euler-Poincar\'e reduction. Then we will look at Noether Theory in more depth. Finally, we consider Euler-Poincar\'e reduction where we have symmetry-breaking parameters, leading to a few applications noted in the last chapter.\\
 
 \noindent
 To gain a general idea of how the equations of motion appear for rotational dynamics with symmetry, we consider an arbitrary Lagrangian of this form,
@@ -17,7 +17,7 @@ which means,
 Imposing endpoint conditions leads to the first term going to zero and so we can notice $\di{}{t}\pd{L}{\dot R} - \pd{L}{R} = 0$. These are the Euler-Lagrange equations we have derived a few times from other means. We now look towards a Lagrangian that has what we call left-symmetry.
 
 \begin{ndefi}[Left-Symmetric Lagrangian]
-  A Lagrangian is said to be left-symmetric or left-invariant under the action of the group of the group of rotations if, $L(\chi R,\, \chi\dot R) = L(R, \dot R)$ $\fa \chi \in \SO(3)$.
+  A Lagrangian is said to be left-symmetric or left-invariant under the action of the group of rotations if, $L(\chi R,\, \chi\dot R) = L(R, \dot R)$ $\fa \chi \in \SO(3)$.
 \end{ndefi}
 
 \noindent
@@ -28,12 +28,12 @@ We also know $\mathfrak{so}(3) = T_e\SO(3)$ and we have proven that $v \in T_eG$
 \end{align*}
 
 \noindent
-We now seek to derive the Euler-Poincar\'e equations for this system, we shall start from Hamilton's Variational Principle.
+We now seek to derive the Euler-Poincar\'e equations for this system. We shall start from Hamilton's Variational Principle,
 \begin{align*}
   \d\int_{t_1}^{t_2} \ell(\Oh)\,dt &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Oh}}{\d\Oh}\, dt\\
-  &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov}
+  &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov}.
 \end{align*}
-Now, we shall use a fact we proved in the last chapter, $\d\Ov = \Ld + (\Ov \ti \Lv)$, to derive the Euler-Poincar\'e equations we wanted,
+Now we shall use a fact we proved in the last chapter, $\d\Ov = \Ld + (\Ov \ti \Lv)$, to derive the Euler-Poincar\'e equations.
 \begin{align*}
   \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\d\Ov} &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\Ld + \Ov \ti \Lv} \\
   &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\Ov}}{\dit\Lv} + \ip{\pd{\ell}{\Ov}}{\Ov \ti \Lv} \\
@@ -45,22 +45,22 @@ Hence we say that
 \begin{equation*}
   \dit\pd{\ell}{\Ov} - \pd{\ell}{\Ov} \ti \Ov = \vec 0
 \end{equation*}
-are the Euler-Poincar\'e equations for rotational dynamics with symmetry under left multiplication.
+is the Euler-Poincar\'e equation for rotational dynamics with symmetry under left multiplication.
 
 \begin{nthm}[]
   The spatial angular momentum is conserved along solutions of the Euler-Poincar\'e equations.
 \end{nthm}
 \begin{proof}
-  We know $\di {}{t}\pd{\ell}{\vec \O} - \pd{\ell}{\vec \O} \times \Ov = 0$ and we know that $\dit R\pd{\ell}{\vec\O}$ is the spacial angular momentum. Hence we consider,
+  We know $\di {}{t}\pd{\ell}{\vec \O} - \pd{\ell}{\vec \O} \times \Ov = 0$ and we know that $\dit R\pd{\ell}{\vec\O}$ is the spatial angular momentum. Hence we consider,
   \begin{align*}
     \di{}{t} R\pd{\ell}{\vec \O} &= \dot R \pd{\ell}{\vec \O} + R\di { }{t} \pd{\ell}{\vec\O}\\
     &= R\Oh\pd{\ell}{\vec\O} + R\left(\pd{\ell}{\vec \O} \times \vec\O\right)\\
-    &= R\left(\Ov \times \pd{\ell}{\vec\O}\right) + R\left(\pd{\ell}{\vec \O} \times \vec\O\right) = \vec 0.
+    &= R\left(\Ov \times \pd{\ell}{\vec\O}\right) + R\left(\pd{\ell}{\vec \O} \times \vec\O\right) = 0.
 \end{align*}
 \end{proof}
 
 \noindent
-Now we want to write a general form of the Euler-Poincar\'e Equations for left invariant systems. Let $L$ be a Lagrangian on the tangent bundle of a matrix lie group $G$,
+Now we want to write a general form of the Euler-Poincar\'e Equations for left invariant systems. Let $L$ be a Lagrangian on the tangent bundle of a matrix Lie group $G$,
 \begin{align*}
   &L : TG \to \R\\
   &L = L(g, \dot g) \qquad \fa g \in G.
@@ -69,7 +69,7 @@ Now we want to write a general form of the Euler-Poincar\'e Equations for left i
 \noindent
 We assume that the Lagrangian is left-invariant,
 $$ L(g,\,\dot g) = L(hg,\, h\dot g) \quad \fa h\in G $$
-and now let $h = g^{-1}$, and so $L(g,\,\dot g) = L(g^{-1}g\,g^{-1}\dot g) = \ell(\xi)$. We have gone from the Lie group to the Lie algebra, $\xi = g^{-1}\dot g \in T_eG = \mathfrak{g}$ which is the Lie algebra. We now aim to use the action functional and variational derivative,
+and now let $h = g^{-1}$, and so $L(g,\,\dot g) = L(g^{-1}g\,g^{-1}\dot g) := \ell(\xi)$. We have moved from $g$ which is in the Lie group to, $\xi = g^{-1}\dot g \in T_eG = \mathfrak{g}$ which is the Lie algebra. We now aim to use the action functional and variational derivative,
 \begin{align*}
   \d \int_{t_1}^{t_2} L(g,\,\dot g) &= \vec 0\\
   \d \int_{t_1}^{t_2} \ell(\xi)\,dt &= \vec 0\\
@@ -83,32 +83,32 @@ Now we want to consider $\d \xi = \d (g^{-1}\dot g)$,
   &= - \eta\xi + \di{}{t}\d (g^{-1}\d g) + (g^{-1}\dot g)(g^{-1}\di{}{t}\d g)\\
   &= -\eta\xi +  \dot\eta+\xi\eta\\
   &= \dot\eta + [\xi,\,\eta]\\
-  &= \dot\eta + \ad_{\xi}{\eta}
+  &= \dot\eta + \ad_{\xi}{\eta}.
 \end{align*}
-and so back to the derivation,
+This is useful to free up the $\eta$ terms which we use to move all of terms into one trace pairing,
 \begin{align*}
   \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d \xi}\,dt &= 0\\
   \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dot\eta + \ad_{\xi}\eta} &= 0\\
-  \int_{t_1}^{t_2} \ip{-\di{}{t} \left(\pd{\ell}{\xi}\right)}{\eta} + \ip{\ad^{*}_{\xi}\pd{\ell}{\xi}}{\eta}\,dt &= 0
+  \int_{t_1}^{t_2} \ip{-\di{}{t} \left(\pd{\ell}{\xi}\right)}{\eta} + \ip{\ad^{*}_{\xi}\pd{\ell}{\xi}}{\eta}\,dt &= 0.
 \end{align*}
 Since $\eta$ is arbitrary our equation is of this form,
 $$ \di{}{t} \pd{\ell}{\xi} - \ad^{*}_{\xi}\pd{\ell}{\xi} = 0 $$
-and these are our Euler-Poincare equations for a left invariant system.
+and this is our Euler-Poincar\'e equation for a left-invariant system.
 
-\begin{nthm}[Noether's Theorem for left-invariant systems]
-  The Euler Poincare equations associated a left-invariant system preserve the generalised momentum along solutions of the Euler-Poincare equations, that is,
-  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = 0 $$
+\begin{nthm}[Noether's Theorem for left-invariant systems]\label{thm:NTLR}
+  The Euler-Poincar\'e equations associated with a left-invariant system preserve the generalised momentum along solutions of the Euler-Poincar\'e equations. That is,
+  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = 0. $$
 \end{nthm}
 \begin{proof}
-  Suppose we have a left invariant lagrangian, i.e. $L(g, \dot g) = L(e,\,g^{-1}\dot g) = \ell(g^{-1}g) := \ell(\xi)$ where $\xi = g^{-1}\dot g$. Firstly, however, let us consider the following derivative where $\mu(t) \in \mathfrak{g}$,
+  Suppose we have a left invariant Lagrangian, i.e. $L(g, \dot g) = L(e,\,g^{-1}\dot g) = \ell(g^{-1}g) := \ell(\xi)$ where $\xi = g^{-1}\dot g$. Firstly, however, let us consider the following derivative where $\mu(t) \in \mathfrak{g}$,
   \begin{align*}
     \ditat{t_0}\left( \Ad_{g^{-1}(t)}\mu(t) \right) &= \ditat{t_0} \Ad_{g^{-1}(t)g(t_0)}\left( \Ad_{g^{-1}(t_0)} \mu\right)\\
     &= -\ad_{g^{-1}(t_0)\dot g(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right)\\
-    &= -\ad_{\xi(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right)
+    &= -\ad_{\xi(t_0)} \left( \Ad_{g^{-1}(t_0)} \mu\right).
   \end{align*}
-  and so we can say,
-  $$ \dit\left( \Ad_{g^{-1}(t)}\mu(t) \right) = -\ad_{\xi(t)} \left( \Ad_{g^{-1}(t)} \mu(t)\right) $$
-  Now, we can move forward and consider the trace pairing of our interested quantity and $\mu(t)$.
+  Hence we can say,
+  $$ \dit\left( \Ad_{g^{-1}(t)}\mu(t) \right) = -\ad_{\xi(t)} \left( \Ad_{g^{-1}(t)} \mu(t)\right). $$
+  Now, we can move forward and consider the trace pairing of the conserved quantity and $\mu(t)$.
   \begin{align*}
     \ip{ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) }{ \mu(t) } &= \dit \ip{ \Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t) }{ \mu(t) } \\
     &= \dit \ip{ \pd{\ell}{\xi}(t) }{ \Ad_{g^{-1}(t)}\mu(t) } \\
@@ -120,12 +120,12 @@ and these are our Euler-Poincare equations for a left invariant system.
     &=  \ip{ \Ad^*_{g^{-1}(t)}\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right] }{ \mu(t) }.
   \end{align*}
   Hence, we can say that,
-  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = \Ad^*_{g^{-1}(t)}\underbrace{\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right]}_{\text{LHS of Euler-Poincare Equations}}  $$
-  and as we have a left invariant system, we can use the left invariant Euler-Poincare equations to reduce the above derivative to zero, and hence Noethers Theorem for left invariant systems follows from this.
+  $$ \di{}{t} \left(\Ad^*_{g^{-1}(t)}\pd{\ell}{\xi}(t)\right) = \Ad^*_{g^{-1}(t)}\underbrace{\left[\dit\pd{\ell}{\xi}(t) - ad^*_{\xi(t)}\pd{\ell}{\xi}(t)\right]}_{\text{LHS of Euler-Poincar\'e Equations}}  $$
+  and as we have a left-invariant system, we can use the left-invariant Euler-Poincar\'e equations to reduce the above derivative to zero, and hence Noether's Theorem for left-invariant systems follows from this.
 \end{proof}
 
 \noindent
-  Now let us more forward with the derivation for right invariant systems. A right invariant Lagrangian is one that the following is true, $L(g,\,\dot g) = L(gh,\,\dot gh)$ for all $h \in G$. We then set $h = g^{-1}$ and get that $L(g,\,\dot g) = L(I,\,\dot gg^{-1})$ and so we let $\xi = \dot gg^{-1}$ and hence write our Lagrangian as $\ell(\xi)$. Now we again go back to Hamilton's Variational Principle,
+  Now let us move forward with the derivation for right-invariant systems. A right-invariant Lagrangian can be defined as having the following property, $L(g,\,\dot g) = L(gh,\,\dot gh)$ for all $h \in G$. We then set $h = g^{-1}$ and get that $L(g,\,\dot g) = L(I,\,\dot gg^{-1})$ and so we let $\xi = \dot gg^{-1}$ and hence write our Lagrangian as $\ell(\xi)$. Considering Hamilton's Variational Principle,
   \begin{align*}
     0 = \d\int_{t_1}^{t_2} L(g,\,\dot g)\,dt &= \d\int_{t_1}^{t_2} \ell(\xi)\,dt\\
     &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\d\xi}\,dt.
@@ -141,19 +141,19 @@ and these are our Euler-Poincare equations for a left invariant system.
     &= \dot \nu + \ad_\nu\xi \\
     &= \dot\nu - \ad_\xi\nu.
   \end{align*}
-  Hence, we now can move forward and complete the derivation of the right invariant Euler-Poincar\'e Equations.
+  Hence, we now can move forward and complete the derivation of the right-invariant Euler-Poincar\'e equations.
   \begin{align*}
     \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dit\nu - \ad_\xi\nu}\,dt &= \int_{t_1}^{t_2} \ip{\pd{\ell}{\xi}}{\dit\nu} - \ip{\pd{\ell}{\xi}}{\ad_\xi\nu}\,dt \\
     &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi}}{\nu} - \ip{\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt \\
-    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi} -\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt
+    &= \int_{t_1}^{t_2} \ip{-\dit\pd{\ell}{\xi} -\ad^*_\xi\pd{\ell}{\xi}}{\nu}\,dt.
   \end{align*}
-  and so we can write down the Euler-Poincar\'e equations for the right invariant system,
+  So we can write down the Euler-Poincar\'e equations for the right-invariant system,
   $$ \dit\pd{\ell}{\xi} + \ad^*_\xi \pd{\ell}{\xi} = 0. $$
-  We can restate Noethers Theorem as following,
-  \begin{nthm}[Noethers Theorem for right invariant systems.]
-    The Euler Poincare equations associated a right-invariant system preserve the generalised momentum along solutions of the Euler-Poincare equations, that is,
-    $$ \di{}{t} \left(\Ad^*_{g(t)}\pd{\ell}{\xi}(t)\right) = 0 $$
+  We can restate Noether's Theorem as following,
+  \begin{nthm}[Noether's Theorem for right-invariant systems.]
+    The Euler-Poincar\'e equations associated to a right-invariant system preserve the generalised momentum along solutions of the Euler-Poincar\'e equations. That is,
+    $$ \di{}{t} \left(\Ad^*_{g(t)}\pd{\ell}{\xi}(t)\right) = 0. $$
   \end{nthm}
   \begin{proof}
-    This follows from a very similar argument to before by finding that $\dit (\Ad_{g(t)}\mu) = \ad_\xi (\Ad_{g(t)}\mu)$ and applying this fact in an identical analysis of the trace pairings ending with $\dit(\Ad_{g(t)}^*\pd{\ell}{\xi}) = \Ad^*_g(t)\left[ \dit\pd{\ell}{\xi} + \ad_\xi^* \pd{\ell}{\xi} \right]$ and then the result follows from the right-invariant version of the Euler-Poincar\'e equations.
+    This follows from a very similar argument to Theorem \ref{thm:NTLR}. By finding that $\dit (\Ad_{g(t)}\mu) = \ad_\xi (\Ad_{g(t)}\mu)$ and applying this fact in an identical analysis of the trace pairings ending with $\dit(\Ad_{g(t)}^*\pd{\ell}{\xi}) = \Ad^*_g(t)\left[ \dit\pd{\ell}{\xi} + \ad_\xi^* \pd{\ell}{\xi} \right]$ and then the result follows from the right-invariant version of the Euler-Poincar\'e equations.
   \end{proof}

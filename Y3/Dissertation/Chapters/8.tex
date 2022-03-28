@@ -1,19 +1,20 @@
 % !TEX root = ../notes.tex
 
 \subsection{More Noether Theory}
-Now we have introduced the ideas of Euler-Poincar\'e reduction, we follow some advances made by Emmy Noether in her 1918 paper `Invariante Variationsprobleme'~\cite{Noether1918}. This paper introduced the idea that whenever we have a symmetric Lagrangian then there is some conserved current. That is, some value $f$, such that $\dit f = 0$. If $\dit f = 0$, then we can also say that $f$ is also a conserved quantity. We will favour the terminology of `conserved quantity' to aline more closely with modern literature and Holm, Schmah \& Stoica (2009), Geometric Mechanics and Symmetry ~\cite{holm_schmah_stoica_2009}. In this section we will take the main idea of Noether Theorems and introduce two main theorems, the first a conserved quantity (or Noether Theorem) for Euler-Lagrange equations and the second a conserved quantity for Euler-Poincar\'e Equations. These will be joined with a third theorem for Euler-Poincar\'e Reduction with Parameters in the next section.
+Now we have introduced the ideas of Euler-Poincar\'e reduction, we follow some advances made by Emmy Noether in her 1918 paper `Invariante Variationsprobleme'~\cite{Noether1918}. This paper introduced the idea that whenever we have a symmetric Lagrangian there is some conserved current. That is, some value $f$, such that $\dit f = 0$. If $\dit f = 0$, then we can also say that $f$ is also a conserved quantity. We will favour the terminology of `conserved quantity' to align more closely with modern literature and Holm, Schmah \& Stoica (2009), Geometric Mechanics and Symmetry ~\cite{holm_schmah_stoica_2009}. In this section we will take the main idea of Noether Theorems and introduce two main theorems, the first a conserved quantity (or Noether Theorem) for Euler-Lagrange equations and the second a conserved quantity for Euler-Poincar\'e Equations. These will be joined with a third theorem for Euler-Poincar\'e Reduction with Parameters in the next section.
 \subsubsection{Noethers Theorem for Euler-Lagrange equations}
 
-Consider a Lagrangian $L(\vec q,\, \dot{\vec q})$ for $\vec q \in \R^3$ and $\dot{\vec q} \in T_{\vec q}\R^3$. Suppose that $L$ is left invariant with respect to the tangent lift on $\SO(3)$, ie. $R\in\SO(3)$ with $L(R\vec q\, R\dot{\vec q}) = L(\vec q,\,\dot{\vec q})$. Then we can prove that,
-$$ \mathcal{E} := \dit \pd{L}{\dot{\vec q}} - \pd{L}{\vec q} = 0 $$
-These are the Euler-Lagrange equations we have met a few times in the past. We can use these to show a conserved quantity exists, that is, prove the Noether Theorem for Euler-Lagrange equations.
-\begin{nthm}[Noether Theorem for Euler-Lagrange Equations]
+Consider a Lagrangian $L(\vec q,\, \dot{\vec q})$ for $\vec q \in \R^3$ and $\dot{\vec q} \in T_{\vec q}\R^3$. Suppose that $L$ is left-invariant with respect to the tangent lift on $\SO(3)$, i.e. $R\in\SO(3)$ with $L(R\vec q\, R\dot{\vec q}) = L(\vec q,\,\dot{\vec q})$.
+Then we can prove that,
+$$ \mathcal{E} := \dit \pd{L}{\dot{\vec q}} - \pd{L}{\vec q} = 0. $$
+These are the Euler-Lagrange equations we have met a few times in the past. We can use these to show a conserved quantity exists, that is, to prove the Noether Theorem for Euler-Lagrange equations.
+\begin{nthm}[Noether Theorem for Euler-Lagrange Equations]\label{thm:NTELE}
   Corresponding to each one-parameter subgroup of $\SO(3)$ $R(s)$ where $R(0) = e$ and $R'(0) = \hat\xi \in \mathfrak{SO}(3)$. There is a conserved quantity,
   $$ A_\xi := \ip{\vec q \ti \pd{L}{\vec{\dot q}}}{\xi} $$
-  with $\di{A_\xi}{t} = 0$ along solutions of the Euler Legrange equations $\mathcal{E}(\vec q) = 0$
+  with $\di{A_\xi}{t} = 0$ along solutions of the Euler-Lagrange equations, $\mathcal{E}(\vec q) = 0$.
 \end{nthm}
 \begin{proof}
-  Associated with the one parameter subgroup $R(s)$ is the generator $\xi_{\mathcal{M}}(\vec q) := \di{}{s}_{s=0} R(s)\vec q = \hat\xi \vec q = \xi\ti\vec q$ where $\mathcal{M} = \R^3$. As the Lagrangian is symmetric we know that $L(R(s)\vec q, R(s)\vec{\dot q}) = L(\vec q, \vec{\dot q})$. Hence we can use Hamilton's Principle and consider,
+  Associated with the one-parameter subgroup $R(s)$ is the generator $\xi_{\mathcal{M}}(\vec q) := \di{}{s}_{s=0} R(s)\vec q = \hat\xi \vec q = \xi\ti\vec q$ where $\mathcal{M} = \R^3$. As the Lagrangian is symmetric we know that $L(R(s)\vec q, R(s)\vec{\dot q}) = L(\vec q, \vec{\dot q})$. Hence we can use Hamilton's Principle and consider,
   \begin{align*}
     \d \int_{t_1}^{t_2} L(R(s)\vec q,\,R(s)q) &= \left[\int_{t_1}^{t_2} \ip{\pd L {\vec q}(R(s)\vec q, R(s)\vec{\dot q}) }{R'(s)\vec q} + \ip{\pd L {\vec{\dot q}}(R(s)\vec q, R(s)\vec{\dot q}) }{R'(s)\vec{\dot q}}dt \right]_{s = 0}\\
     &= \int_{t_1}^{t_2} \ip{\pd L {\vec q}(R(0)\vec q, R(0)\vec{\dot q}) }{R'(0)\vec q} + \ip{\pd L {\vec{\dot q}}(R(0)\vec q, R(0)\vec{\dot q}) }{R'(0)\vec{\dot q}}dt \\
@@ -21,67 +22,68 @@ These are the Euler-Lagrange equations we have met a few times in the past. We c
     &= \int_{t_1}^{t_2} \ip{\pd L {\vec q} - \dit \pd L {\dot{\vec q}}}{\xi_{\mathcal{M}}\vec q} + \ip{\dit \pd L {\dot{\vec q}}}{\xi_\mathcal{M}\vec q} + \ip{\pd L {\vec{\dot q}} }{\xi_{\mathcal{M}}\vec{\dot q}}dt \\
     &= \int_{t_1}^{t_2} \ip{\mathcal{E}(\vec q)}{\xi_\mathcal{M}\vec q} +\dit\ip{ \pd L {\dot{\vec q}}}{\xi_\mathcal{M}\vec q}dt \\
     &= \int_{t_1}^{t_2} \dit\ip{ \pd L {\dot{\vec q}}}{\xi\ti\vec q}dt \\
-    &= \int_{t_1}^{t_2} \dit\ip{ \pd L {\dot{\vec q}}\ti \vec q}{\xi}dt = 0
+    &= \int_{t_1}^{t_2} \dit\ip{ \pd L {\dot{\vec q}}\ti \vec q}{\xi}dt = 0.
   \end{align*}
-  This then imposing end point conditions and considering this integral we can say that $\dit\ip{ \vec q \ti \pd L {\dot{\vec q}}}{\xi} = 0$ and hence $\di {A_\xi} t = 0$, as required.
+  Then imposing end point conditions and considering this integral, we can say that $\dit\ip{ \vec q \ti \pd L {\dot{\vec q}}}{\xi} = 0$ and hence $\di {A_\xi} t = 0$, as required.
 \end{proof}
 
 \subsubsection{Noether Theory and Euler-Poincar\'e Reduction}
-In this subsection we will consider the conserved quantities for the Euler-Poincar\'e equations. We will first look at a half reduced version before formally defining what we mean by $\xi_\mathcal{M}$ and the proving the final version of the Noether's Theorem for Euler-Poincar\'e reduction.\\
+In this subsection we will consider the conserved quantities for the Euler-Poincar\'e equations. We will first look at a half reduced version before formally defining what we mean by $\xi_\mathcal{M}$ and proving the final version of the Noether's Theorem for Euler-Poincar\'e reduction.\\
 
 \noindent
 Suppose we have a Lagrangian $L$ that satisfies Hamilton's Variational Principle,
 $$ \int_{t_1}^{t_2} L(R,\,\dot R)\,dt = 0 $$
-and $L$ is left-invariant and so, $L(SR,\,S\dot R) = L(R,\,\dot R)$. Then we can state the half reduced Noether's Theorem,
+and $L$ is left-invariant and so, $L(SR,\,S\dot R) = L(R,\,\dot R)$. Then we can state the half reduced Noether's Theorem.
 \begin{nthm}[Half Reduced Noether's Theorem]
-  Corresponding to each one parameter subgroup of $\SO(3)$, $S(s)$ with $S(0)= e$ and $S'(0) = \hat\xi \in \mathfrak{so}(3)$, then there is a conserved quantity
+  Corresponding to each one-parameter subgroup of $\SO(3)$, $S(s)$ with $S(0)= e$ and $S'(0) = \hat\xi \in \mathfrak{so}(3)$, then there is a conserved quantity,
   $$ A_\xi := \ip{\Ad^*_{R^T}\pd{\hat\ell}{\Oh}}{\hat\xi} $$
-  with $\di{A_\xi}{t} = 0$ along solutions of the Euler Lagrange Equation.
-  $$ \mathcal{E}(R) := \dit\pd{L}{\dot R} - \pd{L}{R} = \vec 0 $$
+  with $\di{A_\xi}{t} = 0$ along solutions of the Euler-Lagrange Equation.
+  $$ \mathcal{E}(R) := \dit\pd{L}{\dot R} - \pd{L}{R} = \vec 0. $$
 \end{nthm}
 \begin{proof}
-  We will follow an almost identical argument to before, until we reach the following step,
+  We will follow an almost identical argument to Theorem \refeq{thm:NTELE}, until we reach the following step,
   \begin{align*}
-    \int_{t_1}^{t_2} \dit \ip{\pd L {\dot R}}{\hat\xi R}dt = 0
+    \int_{t_1}^{t_2} \dit \ip{\pd L {\dot R}}{\hat\xi R}dt = 0.
   \end{align*}
   \noindent
   Then we note the following,
-  $$ \int_{t_1}^{t_2} \dit \ip{\pd L {\dot R}}{\hat\xi R}dt = \int_{t_1}^{t_2} \dit \ip{R\pd \ell {\Oh}R^{-1}}{\hat\xi}dt $$
+  $$ \int_{t_1}^{t_2} \dit \ip{\pd L {\dot R}}{\hat\xi R}dt = \int_{t_1}^{t_2} \dit \ip{R\pd \ell {\Oh}R^{-1}}{\hat\xi}dt. $$
   Further we note that $R\pd \ell {\Oh}R^{-1} = \Ad_{R^T}\pd \ell \Oh$, then we can say,
   $$ \int_{t_1}^{t_2} \dit \ip{R\pd \ell {\Oh}R^{-1}}{\hat\xi}dt = \int_{t_1}^{t_2} \dit \ip{\Ad_{R^T}\pd \ell \Oh}{\hat\xi}dt = 0. $$
   Therefore,
-  $$ \dit \ip{\Ad_{R^T}^*\pd \ell \Oh}{\hat\xi} = 0 $$
+  $$ \dit \ip{\Ad_{R^T}^*\pd \ell \Oh}{\hat\xi} = 0, $$
   as required.
 \end{proof}
 
 \noindent
-In order to consider the full reduction Noether Theorem we will define what we meant by $\xi_\mathcal{M}$ more generally. This is what we will see to be the first variation of the infinitesimal generator,
+In order to consider the full reduction Noether's Theorem we will define what we mean by $\xi_\mathcal{M}$ more generally. This is what we will see to be the first variation of the infinitesimal generator,
 \begin{ndefi}[Infinitesimal Generator]
-  Consider the left action of a Lie group $G$ on the manifold $\mathcal{M}$, $(g, \vec x) \to gx$ ($\vec x \in \mathcal{M}$). Let $\xi \in \mathfrak{g}$ be a vector in the Lie algebra of $G$ and consider one parameter subgroup $$[\exp(t\xi) : t \in \R] \subseteq G$$
+  Consider the left action of a Lie group $G$ on the manifold $\mathcal{M}$, $(g, \vec x) \to gx$ ($\vec x \in \mathcal{M}$). Let $\xi \in \mathfrak{g}$ be a vector in the Lie algebra of $G$ and consider a one-parameter subgroup $$[\exp(t\xi) : t \in \R] \subseteq G.$$
   Then the orbit of an element $\vec x$ with respect to this subgroup is a smooth map $t \to (\exp(t\xi))\vec x$ in $\mathcal{M}$. The infinitesimal generator associated to $\xi$ at $\vec x \in \mathcal{M}$ denoted by $\xi_{\mathcal{M}}(\vec x)$ is the tangent vector (or velocity) to this curve at point $\vec x$,
-  $$ \xi_{\mathcal{M}} (\vec x) = \dit\Bigg|_{t=0} (\exp(t \xi)\vec x) \in T_{\vec x}\mathcal{M} $$
-  this smooth vector field $\xi_{\mathcal{M}} : M \to TM$ and $x \mapsto \xi_{\mathcal{M}}(\vec x)$ is called the infinitesimal generator vector field associated to $\xi$.
+  $$ \xi_{\mathcal{M}} (\vec x) = \dit\Bigg|_{t=0} (\exp(t \xi)\vec x) \in T_{\vec x}\mathcal{M}. $$
+  This smooth vector field $\xi_{\mathcal{M}} : M \to TM$ and $x \mapsto \xi_{\mathcal{M}}(\vec x)$ is called the infinitesimal generator vector field associated to $\xi$.
 \end{ndefi}
 
-Let $G$ be an arbitrary matrix Lie group, and let $L$ a left-invariant Lagrangian as defined above. The reduced system is $L(hg,\, h\dot g)|_{h = g^{-1}} = L(e,\,g^{-1}\dot g) = \ell(\xi) = \ell(g^{-1}\dot g)$. Now we can define the full reduction Noether's Theorem for the Euler-Poincar\'e equations,
+\noindent
+Let $G$ be an arbitrary matrix Lie group, and let $L$ be a left-invariant Lagrangian as defined above. The reduced system is $L(hg,\, h\dot g)|_{h = g^{-1}} = L(e,\,g^{-1}\dot g) = \ell(\xi) = \ell(g^{-1}\dot g)$. Now we can define the full reduction Noether's Theorem for the Euler-Poincar\'e equations.
 \begin{nthm}[Full Reduction Noether's Theorem]
-  Corresponding to each one-parameter subgroup of $G$, $\chi(s)$ such that $\chi(0) = e$ and $\xi_s(0) = \eta \in \mathfrak{g}$. There is a conserved quantity
+  Corresponding to each one-parameter subgroup of $G$, $\chi(s)$ such that $\chi(0) = e$ and $\xi_s(0) = \eta \in \mathfrak{g}$. There is a conserved quantity,
   $$ \ip{\Ad^*_{g^{-1}} \pd{\ell}{\xi}}{\eta}. $$
 \end{nthm}
 \begin{proof}
-  This follows a very similar, if not identical argument to Theorem 4.3.
+  This follows a very similar, if not identical argument to Theorem \ref{thm:NTLR}.
 \end{proof}
 
 \begin{nprop}
   The left-invariant Lagrangian $L(g,\,\dot g)$ satisfies,
-  $$ \dit\pd{L}{\dot g} - \pd{L}{g} = \vec 0  \iff \dit\pd{\ell}{\xi} - \ad^*\pd{\ell}{\xi} = 0$$
+  $$ \dit\pd{L}{\dot g} - \pd{L}{g} = \vec 0  \iff \dit\pd{\ell}{\xi} - \ad^*\pd{\ell}{\xi} = 0. $$
 \end{nprop}
 \begin{proof}
-  The argument is as follows, supposing a left-invariant Lagrangian. In Chapter 1, we provided proof that Hamilton's Variational Principle is equivalent to the Euler-Lagrange equations, and at the start of Chapter 4 we provide a proof that Hamilton's Variational Principle with reduced Lagrangian is equivalent to the adjoint version of the Euler-Poincar\'e equations. The Hamilton's Variational Principle is equivalent to the version with reduced Lagrangian and so the two sets of equations are equivalent for a left-invariant Lagrangian.
+  The argument is as follows. In Chapter 1, we provided proof that Hamilton's Variational Principle is equivalent to the Euler-Lagrange equations, and at the start of Chapter 4 we provide a proof that Hamilton's Variational Principle with reduced Lagrangian is equivalent to the adjoint version of the Euler-Poincar\'e equations. The Hamilton's Variational Principle is equivalent to the version with reduced Lagrangian and so the two sets of equations are equivalent for a left-invariant Lagrangian.
 \end{proof}
 
 \subsection{Diamond Map}
-We will quickly go back into pure mathematics, for the final time in this thesis in order to define the Diamond Map. This new piece of mathematics is there in order to help us find a closed form for the Euler-Poincar\'e equations for systems with symmetry breaking parameters.\\
+We will quickly go back into pure mathematics, for the final time in this thesis, in order to define the diamond map. This new piece of mathematics is there in order to help us find a closed form for the Euler-Poincar\'e equations for systems with symmetry-breaking parameters.\\
 
 \noindent
 Let $V$ be an $n$-dimensional vector space with dual $V^*$ and pairing $\ip{\vec w}{\vec u}_V$ where $\vec u \in V$ and $\vec w \in V^*$. Let $\mathcal{M}(n,\,\R)$ be a vector space of $n \ti n$ matrices with dual $\mathcal{M}^*(n,\,\R)$ and pairing $\ip{B}{A}_{\mathcal{M}} := \Tr(B^T A)$
@@ -92,11 +94,11 @@ The diamond map is a representation of the transformation of the pairing on $V$ 
 \begin{align*}
   \ip{\vec w}{A\vec u}_V &= \Tr(\vec u \vec w^T A) \\
   &= \Tr((\vec w \vec u ^T)^T A)\\
-  &= \ip{\vec w\vec u^T}{A}_{\mathcal{M}}
+  &= \ip{\vec w\vec u^T}{A}_{\mathcal{M}}.
 \end{align*}
 This is for any matrix $A \in \mathcal{M}(n,\,\R)$ and vectors $\vec u \in V$ and $\vec w \in V^*$. We now conclude that,
 \begin{align*}
   \ip{\vec w}{A\Lv \vec u}_V &= \Tr(\vec u \vec w^T A\Lv) \\
   &= \ip{(\vec u\vec w^T A)^T}{\Lv}_{\mathcal{M}}\\
-  &= \ip{A^T\vec w\vec u^T}{\Lv}
+  &= \ip{A^T\vec w\vec u^T}{\Lv}.
 \end{align*}

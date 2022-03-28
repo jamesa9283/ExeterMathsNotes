@@ -2,10 +2,20 @@
 
 \subsection{Heavy Top}
 
-The Heavy Top problem is a rigid body with a fixed point. We are going to study its dynamics in the body frame. That means we consider, $x(t) = R(t)\vec X$ and $R(t) \in \SO(3)$. We know the potential energy of a point mass in a gravitational field is $V = mg\vec e_3 \cdot x(t)$. We can write the following Lagrangian for our problem,
-$$ L(R, \dot R) = \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}\norm{\dot R \vec X} - g\vec e_3 \cdot R\vec X \right)\,d^3\vec X. $$
+Our second example is the heavy top problem. This is a second example of a body with the symmetry breaking parameter, gravity. The Heavy Top problem is a rigid body with a fixed point. We are going to study its dynamics in the body frame. That means we consider, $\vec x(t) = R(t)\vec X$ and $R(t) \in \SO(3)$. We know the potential energy of a point mass in a gravitational field is $V = mg\vec e_3 \cdot \vec x(t)$. We can write the following Lagrangian for our problem,
+$$ L(R, \dot R) = \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}\norm{\dot R \vec X}^2 - g\vec e_3 \cdot R\vec X \right)\,d^3\vec X. $$
 \noindent
-Now we can verify this Lagrangian is neither left nor right invariant.
+Now we can verify this Lagrangian is neither left nor right invariant. We first verify the left non-invariance,
+\begin{align*}
+  L(RS, \dot RS) &= \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}\norm{\dot RS \vec X}^2 - g\vec e_3 \cdot RS\vec X \right)\,d^3\vec X\\
+  &= \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}{(\dot RS \vec X)(\dot RS \vec X)^T} - g\vec e_3 \cdot RS\vec X \right)\,d^3\vec X\\
+  &= \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}{(\dot R \vec X)(\dot R \vec X)^T} - g\vec e_3 \cdot RS\vec X \right)\,d^3\vec X \\
+  &= \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}\norm{\dot R \vec X}^2 - g\vec e_3 \cdot RS\vec X \right)\,d^3\vec X \ne L(R, \dot R)
+\end{align*}
+and now the right non-invariance,
+\begin{align*}
+  L(SR, S\dot R) &= \int_\mathcal{B} \rho(\vec X) \left( \frac{1}{2}\norm{S\dot R \vec X}^2 - g\vec e_3 \cdot SR\vec X \right)\,d^3\vec X
+\end{align*}
 \begin{exercise}
   Prove that $L(R,\,\dot R) \ne L(RR^{-1},\,\dot RR^{-1})$ and $L(R,\,\dot R) \ne L(R^{-1}R,\,\dot R^{-1}\dot R)$.
 \end{exercise}
