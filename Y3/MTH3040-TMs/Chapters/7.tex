@@ -1,0 +1,179 @@
+% !TEX root = ../notes.tex
+
+\subsection{Connected Spaces}
+Intuitively, a connected topology space doesn't fall apart into two or more pieces. Therefore if we would expect $(0, 1)$ to be connected, but the union $(0, 1)\cup (2, 3)$ is disconnected. However if we take the topologists sine curve,
+$$ \{(x, \sin(1/x)) : x > 0\} \cup \{(0, y) : -1 \le y \le 1\} $$
+it is less obvious if this should be connected. It turns out that this is connected, but not path-connected.
+
+\begin{ndefi}[Connected]
+  A topological space $X$ is connected if there is no surjective continuous function $f : X \to \{0, 1\}$ (where $\{0, 1\}$ has the discrete topology). Otherwise it is disconnected.\\
+
+  \noindent
+  We say a non-empty subspace $Y$ of $X$ is connected if it is connected as a topological space with its subspace topology induced by $X$.
+\end{ndefi}
+
+\begin{eg}
+  $X = (0, 1)\cup (2, 3)$ is disconnected, since the $f : X \to \{0, 1\}$ can be defined as,
+  $$ f(x) = \begin{cases}
+    0 & x \in (0, 1)\\
+    1 & x \in (2, 3)
+  \end{cases} $$
+  This is surjective and continuous, the preimages $f^{-1}(\{0\}) = (0, 1)$ and $f^{-1}(\{1\}) = (2, 3)$ are both open in $X$, in addition to the basic open set.
+\end{eg}
+
+\begin{nthm}\label{thm:intCon}
+  Any interval $(a, b)$ with $a < b$ is connected.
+\end{nthm}
+\begin{proof}
+  We will use the Intermediate Value Theorem, whose proof ultimately depends on the completeness of $\R$. Suppose for a contradiction there is a surjective continuous function $f: (a, b) \to \{0, 1\}$ and let $A = f^{-1}(0)$ and $B = f^{-1}(1)$. Then $A, B \ne \vn$ as $f$ is surjective, and $A \cup B = (a, b)$. Also $A, B$ are open since $f$ is continuous. Pick $a_0 \in A$ and $b_0 \in B$. We may assume $a_0 < b_0$.\\
+
+  \noindent
+  Then $f$ restricts to a continuous function on the closed interval $[a_0, b_0]$ with $f(a_0) = 0$ and $f(b_0) = 1$. By IVT there is some $x \in [a_0, b_0]$ with $f(x) = \frac{1}{2}$. This is a contradiction as $f$ only takes the values of $0$ or $1$.
+\end{proof}
+
+\begin{eg}
+  $\Q$ is disconnected. Indeed we can defined $f : \Q \to \{0, 1\}$ by,
+  $$ f(x) = \begin{cases}
+    0 & x^2 < 2 \\
+    1 & x^2 > 2
+  \end{cases} $$
+  This is well defined, (there is no $x \in \Q$ such that $x^2 = 2$) and it's surjective. The sets,
+  $$ f^{-1}(\{0\}) = (- \sqrt 2, \sqrt 2) \cap \Q $$
+  $$ f^{-1}(\{1\}) = ((-\infty, -\sqrt 2) \cup (\sqrt 2, \infty))\cap \Q $$
+  are open in $\Q$, so $f$ is continuous.
+\end{eg}
+
+\begin{ndefi}[Partition]
+  A partition of a topological space $X$ is a pair of non-empty open subsets $A, B$ such that $A \cup B = X$ and $A \cap B = \vn$.
+\end{ndefi}
+
+\begin{remark}
+   If $A, B$ is a partition of $X$ then $A = X \sm B$ and $B = X\sm A$, so $A$ and $B$ are closed aswell as open.
+\end{remark}
+
+\begin{remark}
+  In Theorem \ref{intCon} we showed $(a, b)$ isn't connected by showing that there is no partition of $(a, b)$. We now show this in general.
+\end{remark}
+
+\begin{nlemma}
+  For a topological space $X$, the following are equivalent:
+  \begin{enumerate}[(i)]
+    \item $X$ is connected,
+    \item there is no partition of $X$,
+    \item the only subsets of $X$ which are both open and closed are $\vn$ and $X$.
+  \end{enumerate}
+\end{nlemma}
+\begin{proof}
+  We firstly show $(i)\implies (ii)$. We will prove the contrapositive statement, Suppose $X$ has a partition, then $X = A \cup B$ and $A, B$ are open, non-empty and $A \cap B = \vn$. We want to prove that if $X$ is disconnected. We define $f : X \to \{0, 1\}$ where,
+  $$ f(x) = \begin{cases}
+    0 & x \in A \\
+    1 & x \in B
+  \end{cases} $$
+  We have a well defined function as $A \cap B = \vn$ and $A \cup B = X$. $f$ is surjective, as $A, B \ne \vn$. $f$ is continuous because $f^{-1}(\{0\}) = A$ and $f^{-1}(\{1\}) = B$, which are open, hence $f$ is continuous. Therefore $f$ is disconnected.\\
+
+  \noindent
+  Now we prove $(ii) \implies (iii)$. Let $V \sub X$ be both open and closed and $W = X \sm V$. So $W$ is also both open and closed. We see $V \cup W = X$ and $V \cap W = \vn$. Hence we appear to have produced a partition. Since $X$ has no partition, $V$ and $W$ cannot both be non-empty, so either $V = \vn$ or $W = \vn$ and so the other is just $X$. \\
+
+  \noindent
+  (iii) $\implies$ (i). Assume $X$ has no sets which are both open and closed expect $\vn$ and $X$. Let $f : X \to \{0, 1\}$ be continuous. We will show $f$ is not surjective. This means $X$ is connected. Let $A = f^{-1}(\{0\})$ and $B = f^{-1}(\{1\})$, both open as $f$ is continuous. So $A$ is closed as $A = X \sm B$ and $B$ is open. Hence $A$ is open and closed, so either $A = \vn$ or $A = X$. If $A = \vn$ then $X = B$
+  and if $A = X$ then $B = \vn$. Hence $f$ is not surjective.
+\end{proof}
+
+\begin{nlemma}
+  Let $f : X \to Y$ be a continuous function between topological spaces. If $X$ is connected, so is $f(X)$.
+\end{nlemma}
+\begin{proof}
+  Replacing $f$ by the continuous map $f_1 : X \to f(X)$ with $f_1(x) = x$ for all $x$, we may assume $f$ is surjective. We prove the contrapositive, if $f(X)$ is disconnected then $X$ is disconnected. We use use $(ii)$ from the previous lemma.  Suppose $f(X)$ is disconnected, so there is a partition $A, B$ of $f(X)$. Then $f^{-1}(A)$, $f^{-1}(B)$ is a partition of $X$, showing $X$ is also disconnected.
+\end{proof}
+
+\subsubsection{Connected Components}
+\begin{nlemma}
+  Let $X$ be a topological space, let $x \in X$, and let $V_i$ $i \in \cI \ne \vn$, be a family of connected sets with $x \in V_i$ for each $i$. Then $\bigcup_{i \in \cI} V_i$ is connected.
+\end{nlemma}
+\begin{proof}
+  Suppose $V = \bigcup_{i \in \cI} V_i$ has a partition, $A, B$. Without loss of generality $x \in A$. Pick some $y \in B$. Then $y \in V_j$ for some $j$. So the sets $A \cap V_j$ and $B \cap V_j$ contain $x, y$ respectively and are disjoint and open in $V_j$. Hence they form a partition of $V_j$. This is impossible as $V_j$ is connected.
+\end{proof}
+
+\begin{ndefi}[Connected Component]
+  Let $X$ be a topological space and let $x \in X$. Then the connected components $C_x$ of $x \in X$ is the union of all connected subsets of $X$ containing $x$:
+  $$ C_x = \bigcup_{x \in V \sub X, V \text{ connected }} $$
+  Then $C_x$ is connected by Lemma 3.46, so $C_x$ is the unique largest connected subset of $X$ containing $x$.
+\end{ndefi}
+\noindent
+Clearly, $X$ is connected if and only if $C_x = X$ for every $x \in X$.
+\begin{eg}
+  The subspace $X = (0,1) \cup (2, 3)$ of $\R$ has two connected components, if $x \in (0, 1)$ then $C_x = (0, 1)$ and if $x \in (2, 3)$ then $C_x = (2, 3)$.
+\end{eg}
+
+\begin{nprop}
+  For any $x, y \in X$, either $C_x = C_y$ or $C_x \cap C_y = \vn$.
+\end{nprop}
+\begin{proof}
+  Suppose $C_x \cap C_y \ne \vn$, so there is some $z \in C_x \cap C_y$. As $C_x$ is a connected subset containing $z$, we have $C_x \sub C_z$. Hence $x \in C_z$. Since $z \in C_z$ is connected, this means that $C_z \sub C_x$. So $C_x = C_z$. Similarly $C_y = C_z$. Thus $C_x = C_y$.
+\end{proof}
+
+\begin{remark}
+   Proposition 3.48 means that $x \in C_y \iff C_x = C_y$. Moreover the relation $x \in C_y$ is an equivalence relation on $X$: it is,
+   \begin{enumerate}
+     \item reflexive, $x \in C_x$ for all $x$
+     \item symmetric, $x \in C_y \implies C_x = C_y \implies C_y = C_x \implies y \in C_x$
+     \item transitive, $x \in C_y$ and $y \in C_z$, then $C_x = C_y = C_z$ and so $x \in C_z$.
+   \end{enumerate}
+\end{remark}
+
+\begin{nprop}
+   If $A$ is a connected subset of $X$, then its closure $\bar A$ is also connected.
+\end{nprop}
+\begin{proof}
+  Let $f \to \bar A \to \{0, 1\}$ be a continuous function and let $f_A$ be the restriction to $A$. Then $f_A$ cannot be surjective, as $A$ is connected, so, without loss of generality, $f(a) = 0$ for all $a \in A$.\\
+
+  \noindent
+  Then $f^{-1}(1)$ is an open subset of $\bar A$, so $f^{-1}(1) = \bar A \cap U$ for some open subset $U$ of $X$ for which $A \cap U = \vn$. Then $\bar A \cap U = \vn$ aswell ( $X \sm U$ is a closed set containing $A$, so by the definition of $\bar A$ we have $\bar A \sub X \sm U$). Thus $f(x) = 0$ for all $x \in \bar A$, so $f$ is not surjective. Hence $\bar A$ is connected.
+\end{proof}
+
+\begin{ncor}
+   Connected components are closed. If there are only finitely many of them they are also open.
+\end{ncor}
+\begin{proof}
+  If $C$ is a connected component in $X$ then $\bar C$ is connected, so $\bar C \sub C$. Hence $C = \bar C$ is closed.\\
+
+  \noindent
+  If there are only finitely mant of them $C_1, \dots, C_n$ then the complement of each component $C_i$ is the union $\bigcup_{i \ne j} C_j$ of finitely many closed sets, so this complement is closed and $C_i$ is open.
+\end{proof}
+
+\noindent
+Can we find examples where there are infinitely many closed connected components?
+\begin{eg}
+  The connected compontents of $\Q$ are singletons. They are closed but not open. To see that a subset $S$ of $\Q$ containing at least two points cannot be connected, let $x, y \in S$ with $x < y$. Choose an irrational number $\a$ with $x < \a < y$. and define $f : S \to \{0, 1\}$ by,
+  $$ f(s) = \begin{cases}
+    0 & \text{ if } s < \a\\
+    1 & \text{ if } s > \a
+  \end{cases} $$
+  Then $f$ is continuous and surjective.
+\end{eg}
+
+\begin{eg}
+  Now for the topologists sine curve. We will show it's connected,
+  $$ S = \{(x, \sin 1/x) : x > 0\} \cup \{(0, y) : -1 \le y \le 1\}. $$
+  This set is the union of two pieces,
+  $$ S_1 = \{(x, \sin 1/x) : x > 0\} \qquad S_2 = \{(0, y) : -1 \le y \le 1\} $$
+  Since $(0,\infty]$ and $[-1, 1]$ are connected, then $S_1$ and $S_2$ are connected. Thus either $S$ has two connected components or one. However, if $S_1$ and $S_2$ were compontents, they would be open subsets of $S$. But $S_2$ is not open because any open neighbourhood of $(0, 0) \in S_2$ contains points from $S_1$, namely $((n\pi)^{-1}, 0)$ for large enough $n \in \N$. This shows that $S$ is connected. (In fact $S_1$ is open but not closed and $S_2$ is closed but not open).
+\end{eg}
+
+\subsection{Path Connected Spaces}
+\begin{ndefi}[Path Connected]
+  A topological space $X$ is path connected if, for any $x, y \in X$, there is a continuous function $p : [0, 1] \to X$ with $p(0) = x$ and $p(1) = y$. We call $p$ a path from $x$ to $y$.
+\end{ndefi}
+
+\begin{eg}
+  Any open ball $B_\e(\vec a) \subset \R^n$ for $\e > 0$ is path connected. Indeed, given $\vec x, \vec y \in B_\e(\vec a)$, we can define a path $\vec p$ from $\vec x$ to $\vec y$ by,
+  $$ \vec p(t) - (1 - t)\vec x + t\vec y \qquad \text{ for } t\in [0, 1] $$
+  We must check that $\vec p (t) \in B_\e(\vec a)$ for all $t$. But, writing $\norm{\vec v}$ for the euclidean norm, we have,
+  \begin{align*}
+    \norm{\vec p(t) - \vec a} &= \norm{(1 - t)(\vec x - \vec a) + t(\vec y - \vec a)} \\
+    &\le \norm{(1 - t)(\vec x - \vec a)} + \norm{t(\vec y - \vec a)} \\
+    &= (1 - t)\norm{\vec x - \vec a} + t\norm{\vec y - \vec a}\\
+    &< (1 - t)\e + t\e \\
+    &= \e
+  \end{align*}
+\end{eg}
