@@ -77,7 +77,7 @@ For the rest of the chapter we will refer to $L_\text{ext}$ as $L$ as the previo
 $$ L(\vec Q, \vec{\dot Q}) = \frac{1}{2}\Tr(\vec{\dot Q}\vec{\dot Q}^T). $$
 We note that $\dit (\vec{RAS}) = \vec{\dot RAS} + \vec{R\dot AS} + \vec{RA\dot S}$, which we denote as $(RAS)^{\bullet}$. Therefore, we can write the Lagrangian as, $L(\vec Q, \vec{\dot Q}) = \frac{1}{2}\tr((\vec{RAS})^\bullet (\vec S^T\vec A\vec R^T)^\bullet)$. We will use this later to derive one of the sets of equations. We will now move to the reduction of the Lagrangian and then the Euler-Poincar\'e equations.
 
-\subsubsection{Euler-Poincar\'e Reduction}
+\subsubsection{Left and Right Euler-Poincar\'e Reduction}
 We now seek to reduce the Lagrangian, we recall the symmetric invariance on the Lagrangian we stated above,
 $$ L(g\vec R, \vec A, \vec Sh, g\vec{\dot R}, \vec{\dot A}, \vec{\dot S}h) = L(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}). $$
 We let $g = \vec R^{-1}$, $h = \vec S^{-1}$ and then define $\Oh := \vec R^{-1}\vec{\dot R}$ and $\Lh := \vec{\dot S}\vec S^{-1}$ and we can now write,
@@ -156,7 +156,38 @@ In addition to,
 \begin{align}
   \pd{\ell}{\vec{\dot A}} = \vec{\dot A}
 \end{align}
-these are then the equations (10.15)-(10.18) that are stated by Holm, Schmah \& Stoica in ~\cite{holm_schmah_stoica_2009}.
+these are then the equations (10.15)-(10.18) that are stated by Holm, Schmah \& Stoica in~\cite{holm_schmah_stoica_2009}. We note that to derive the full set of equations, we would need to substitute the derivatives of $\ell$ back into (5.1) - (5.3) but for sake a brevity and sanity, I omit that step.\\
+
+\noindent
+\subsubsection{Left or Right Euler-Poincar\'e Reduction}
+
+We now consider the left-invariant Lagrangian, that is, we consider the following,
+$$ L(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}) = L(g\vec R, \vec A, \vec S, g\vec{\dot R}, \vec{\dot A}, \vec{\dot S}) \qquad g \in \SO(3). $$
+Now we let $g = \vec R^{-1}$ as usual and then define our reduced Lagrangian,
+$$ L(\vec R^{-1}\vec R, \vec A, \vec S, \vec R^{-1}\vec{\dot R}, \vec{\dot A}, \vec{\dot S}) = L(\vec I, \vec A, \vec S, \Oh, \vec{\dot A}, \vec{\dot S}) := \ell(\vec A, \vec S, \Oh, \vec{\dot A}, \vec{\dot S})$$
+where as usual we define $\Oh = \vec R^{-1}\vec{\dot R}$. This is invariant thanks to the fact that $\Tr(AB^T) = \Tr(BA^T)$, this can use used to iterate through the Lagrangian, until we arrive at $gg^T = I$. Then we can run through Hamilton's Variational Principle (which I omit as we have seen this several times already), and arrive at the following set of equations,
+$$ \dit \pd \ell {\vec{\dot A}} = \pd \ell {\vec A} \qquad \dit \pd \ell {\vec{\dot S}} = \pd \ell {\vec S} \qquad \dit \pd \ell \Oh = \ad_{\Oh}^* \pd \ell \Oh. $$
+Again we need to find our derivatives that we can plug back into these equations to produce the left-invariant equations. This is done very similarly to before, so I omit this as well. We arrive at the following set of derivatives,
+\begin{align*}
+  \pd \ell {\vec A} &= \Oh^2 \vec A\vec S + \Oh \vec {\dot A}S + \Oh \vec A\vec {\dot S} + \vec A \\
+  \pd \ell {\vec {\dot A}} &= \vec {\dot A} \\
+  \pd \ell {\vec S} &= (\Oh^2 + \Oh)\vec A^2S + 2\vec {\dot A}\vec A \Oh \vec S + \vec {\dot A}^2 \vec S\\
+  \pd \ell {\vec {\dot S}} &= \vec A^2(\Oh\vec S + \vec {\dot S}) + \vec A \vec {\dot A}\vec S \\
+  \pd \ell \Oh &= \vec A^2 \vec S^T \Oh \vec S
+\end{align*}
+
+Now we can consider the right-invariant Lagrangian,
+$$ L(\vec R, \vec A, \vec S, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}) = L(\vec R, \vec A, \vec Sh, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}h) \qquad h \in \SO(3). $$
+Hence we let $h = S^{-1}$, then arive at the reduced Lagrangian,
+$$ L(\vec R, \vec A, \vec S\vec S^{-1}, \vec{\dot R}, \vec{\dot A}, \vec{\dot S}\vec S^{-1}) := \ell (\vec R,\vec A, \vec{\dot R}, \vec{\dot A}, \Lh) $$
+where we define $\Lh = \vec{\dot S}\vec S^{-1}$. Hence we can consider Hamilton's Variantional principle and run through the derivations and reach,
+$$ \dit \pd \ell {\vec{\dot A}} = \pd \ell {\vec A} \qquad \dit \pd \ell {\vec{\dot R}} = \pd \ell {\vec R} \qquad \dit \pd \ell \Oh = -\ad_{\Lh}^* \pd \ell \Lh. $$
+We note the difference to the left-invariant equations is just that we have $R$ instead of $S$ and a negative sign in the Euler-Poincar\'e equation. Then we can write out the derivatives that we get from the usual method,
+\begin{align*}
+  \pd \ell {\vec R} &= \vec R\vec {\dot A}\vec A + \vec R\vec{\dot A}^2 - \vec R\vec A^2 (\Lh + \Lh^2)\\
+  \pd \ell {\vec{\dot R}} &= \vec A^2(\Lh\vec R + \vec{\dot R}) + \vec A\vec{\dot A}R \\
+  \pd \ell {\vec A} &= \vec{\dot A} + \vec A\vec R \Lh \vec R^T - \vec A\dot{\vec R}\Lh^T\vec R^T + \vec{\dot A}\vec R\Lh^T \vec{R}^T + \vec A\vec R \Lh\Lh^T \vec R^T\\
+\end{align*}
 
 \subsubsection{Noether Theory for general Euler-Poincar\'e reduction}
 Let $G$ be an arbitrary matrix Lie group and let $L$ be a left-invariant Lagrangian,
