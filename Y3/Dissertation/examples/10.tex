@@ -104,13 +104,13 @@ which then give arise to (10.12) - (10.14) in ~\cite{holm_schmah_stoica_2009}. W
 $$ \ell(Q, \dot Q) = \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A\Lh)(\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right). $$
 We now need to take variations of this Lagrangian in order to get the direct equations. Consider the following,
 \begin{align*}
-  \left.\dit\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \left.\dit\right|_{\e = 0} \frac{1}{2}\tr\left( ((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)^T \right) \\
+  \left.\di{}{\e}\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \left.\di{}{\e}\right|_{\e = 0} \frac{1}{2}\tr\left( ((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)^T \right) \\
   &= \frac{1}{2}\tr\left( (\d\Oh \vec A)^T (\Oh \vec A + \vec {\dot A} + \vec A\Lh) + (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \d\Oh \vec A \right)\\
   &= \tr\left( (\d\Oh \vec A)^T (\Oh \vec A + \vec {\dot A} + \vec A\Lh)  \right).
 \end{align*}
 This step can be done as we know that $\tr(\vec A^T\vec B) = \tr(\vec A\vec B^T)$ and so $\frac{1}{2}\tr(\vec A^T\vec B + \vec A\vec B^T) = \frac{1}{2}\tr(\vec A^T\vec B) + \frac{1}{2}\tr(\vec A^T\vec B) = \tr(\vec A^T\vec B)$.
 \begin{align*}
-  \left.\dit\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \tr\left( (\d\Oh \vec A) (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right)\\
+  \left.\di{}{\e}\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \tr\left( (\d\Oh \vec A) (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right)\\
    &= \tr\left( (\d\Oh \vec A) (\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right)\\
    &= \tr\left( \vec A^T(\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T\d\Oh \right)\\
    &= \ip{\vec A(\Oh \vec A + \vec {\dot A} + \vec A\Lh}{\d\Oh}.
@@ -128,7 +128,7 @@ This is true as $\vec A\vec{\dot A}$ is symmetric and $\d\Oh$ is antisymmetric. 
 \noindent
 We continue with a similar argument for $\Lh$, again taking variations,
 \begin{align*}
-  \left.\dit\right|_{\e = 0} \ell (\Lh + \e\d\Lh) &= \left.\dit\right|_{\e = 0} \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A(\Lh + \e\d\Lh))(\Oh \vec A + \vec {\dot A} + \vec A(\Lh + \e\d\Lh))^T \right) \\
+  \left.\di{}{\e}\right|_{\e = 0} \ell (\Lh + \e\d\Lh) &= \left.\di{}{\e}\right|_{\e = 0} \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A(\Lh + \e\d\Lh))(\Oh \vec A + \vec {\dot A} + \vec A(\Lh + \e\d\Lh))^T \right) \\
   &=\frac{1}{2}\tr \left( (\vec A\d \Lh)^T (\Oh\vec A + \vec{\dot A} + \vec A\Lh) + (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T (A\d\Lh) \right) \\
   &= \tr \left( (\vec A\d \Lh) (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right) \\
   &= \tr \left( \vec A^T (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \d \Lh \right) \\
@@ -140,7 +140,7 @@ and so we get $\displaystyle{\pd \ell \Lh = \vec A\Oh\vec A + \vec A\vec{\dot A}
 \end{align}
 Finally, we derive the $\vec A$ version of the equations using a slightly different argument, where we split it half way through,
 \begin{align*}
-  \left.\dit\right|_{\e = 0} \ell (\vec A + \e\d\vec A) &= \left.\dit\right|_{\e = 0} \frac{1}{2}\tr \left( (\Oh (\vec A + \e\d\vec A) + \vec {\dot A} + (\vec A + \e\d\vec A)\Lh)(\Oh (\vec A + \e\d\vec A) + \vec {\dot A} + (\vec A + \e\d\vec A)\Lh)^T \right) \\
+  \left.\di{}{\e}\right|_{\e = 0} \ell (\vec A + \e\d\vec A) &= \left.\di{}{\e}\right|_{\e = 0} \frac{1}{2}\tr \left( (\Oh (\vec A + \e\d\vec A) + \vec {\dot A} + (\vec A + \e\d\vec A)\Lh)(\Oh (\vec A + \e\d\vec A) + \vec {\dot A} + (\vec A + \e\d\vec A)\Lh)^T \right) \\
   &= \frac{1}{2}\tr\left( (\Oh\d\vec A + \d\vec A\Lh)^T (\Oh\vec A + \vec{\dot A} + \vec A\Lh) + (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T(\Oh\d\vec A + \d\vec A\Lh) \right) \\
   &= \tr\left( (\Oh\d\vec A + \d\vec A\Lh) (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right) \\
   &= \tr\left( \Oh\d\vec A(\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right) + \tr\left( \d\vec A\Lh (\Oh\vec A + \vec{\dot A} + \vec A\Lh)^T \right)\\
@@ -187,6 +187,8 @@ We note the difference to the left-invariant equations is just that we have $R$ 
   \pd \ell {\vec R} &= \vec R\vec {\dot A}\vec A + \vec R\vec{\dot A}^2 - \vec R\vec A^2 (\Lh + \Lh^2)\\
   \pd \ell {\vec{\dot R}} &= \vec A^2(\Lh\vec R + \vec{\dot R}) + \vec A\vec{\dot A}R \\
   \pd \ell {\vec A} &= \vec{\dot A} + \vec A\vec R \Lh \vec R^T - \vec A\dot{\vec R}\Lh^T\vec R^T + \vec{\dot A}\vec R\Lh^T \vec{R}^T + \vec A\vec R \Lh\Lh^T \vec R^T\\
+  \pd \ell \Lh &= \vec A^2 \vec R\Lh\vec R^T\\
+  \pd \ell {\vec {\dot A}} = \vec{\dot A}
 \end{align*}
 
 \subsubsection{Noether Theory for general Euler-Poincar\'e reduction}
@@ -226,8 +228,20 @@ The reduced system is just $\left.L(hg, h\dot g)\right|_{h = g^{-1}} = L(g^{-1}g
 \end{proof}
 
 \noindent
-We note that the conserved quantity is the constant that arises from integration by parts. I find this quite nice.
+We note that the conserved quantity is the constant that arises from integration by parts. I find this quite nice. We can now apply this to the psudo-rigid bodies we have studied in this chapter. There is one assumption that I will make to write these Theorems, if you reduce from left and right, the Noether Theorem is just the left conserved quantity added to the right. If we assume this then we get the following three theorems,
+\begin{nthm}[Noethers Theorem for left-invariant Psudo Rigid Bodies]
+  Corresponding to each one-parameter subgroup of $G$, $\chi(s)$ with $\chi(0) = e$ and $\chi_s(0) = \eta \in \mathfrak{g}$ and a left-invariant system there is a conserved quantity,
+  $$ A^2\ip{\Ad_{R^{-1}}^* \Oh}{\eta} + A^2\ip{\Ad_{R^{-1}}\Lh}{\eta}. $$
+\end{nthm}
+\begin{nthm}[Noethers Theorem for right-invariant Psudo Rigid Bodies]
+  Corresponding to each one-parameter subgroup of $G$, $\chi(s)$ with $\chi(0) = e$ and $\chi_s(0) = \eta \in \mathfrak{g}$ and a right-invariant system there is a conserved quantity,
+  $$ A^2\ip{\Ad_{S^{-1}}^* \Lh}{\eta} + A^2\ip{\Ad_{S^{-1}}\Lh}{\eta}. $$
+\end{nthm}
+\begin{nthm}[Noethers Theorem for left and right -invariant Psudo Rigid Bodies]
+  Corresponding to each one-parameter subgroup of $G$, $\chi(s)$ with $\chi(0) = e$ and $\chi_s(0) = \eta \in \mathfrak{g}$ and a left and right-invariant system there is a conserved quantity,
+  $$ A^2\ip{\Ad_{R^{-1}}^* \Oh}{\eta} + A^2\ip{\Ad_{S^{-1}}^* \Lh}{\eta} + A^2\ip{\Ad_{R^{-1}}\Lh + \Ad_{S^{-1}}^*\Oh }{\eta}. $$
+\end{nthm}
+\noindent
+These are really beautiful theorems because in actuality we have three different terms in Theorem 5.5 and these relate togeneralised angular moment of the Dedekind motion, Jacobi motion and the whole system respectively.\\
 
-\begin{eg}
-  Now apply this to Pseudo Rigid bodies.
-\end{eg}
+We shall leave pseudo-rigid bodies here, but note that there are several papers, such as ~\cite{Iwai_2010} that take this further and speak about how we can add potential energies into this system.
