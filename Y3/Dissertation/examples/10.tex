@@ -1,7 +1,7 @@
 % !TEX root = ../notes.tex
 
 \subsection{Pseudo-Rigid Bodies}
-In the following section we will firstly follow Chapter 10 of Holm, Schmah \& Stoica, Geometric Mechanics and Symmetry~\cite{holm_schmah_stoica_2009}, from which I summarise then derive the left, right and left and right invariant Euler-Poincar\'e equations for Pseudo-Rigid bodies.\\ % Following, we will look at introducing potential energy into the Lagrangian following a 2010 paper from Toshihiro Iwai~\cite{Iwai_2010}.\\
+In the following section we will firstly follow Chapter 10 of ~\cite{holm_schmah_stoica_2009}, from which I summarise then derive the left, right and left and right invariant Euler-Poincar\'e equations for Pseudo-Rigid bodies.\\ % Following, we will look at introducing potential energy into the Lagrangian following a 2010 paper from Toshihiro Iwai~\cite{Iwai_2010}.\\
 
 \noindent
 Let us assume that our body can stretch and sheer, we will call this a Pseudo-Rigid body. The following derivations are done with the assumption that the configuration space we are working in is $\GL^+(3)$, i.e. the set of matrices with positive determinant. We make a few assumptions, firstly the moment of inertia tensor is rotationally invariant, for this to happen it is sufficient that the density function $\rho(\vec X)$ is spherically symmetric. We will also assume that the Lagrangian only depends on kinetic energy, that means we study free ellipsoid motion.\\
@@ -101,7 +101,7 @@ Therefore, considering endpoint conditions we reach the following set of Euler-P
   \dit \pd{\ell}{\Lv} &= -\ad^*_{\Lv} \pd \ell \Lv
 \end{align}
 which then give arise to (10.12) - (10.14) in ~\cite{holm_schmah_stoica_2009}. We can now work forward, in a very similar vein to Holm and replace the coadjoints and partial derivatives back with $\Lh$, $\vec A$, $\Oh$ and $\vec{\dot A}$. We go straight to the rewritten derivatives,
-$$ \ell(Q, \dot Q) = \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A\Lh)(\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right). $$
+$$ \ell(\vec Q, \vec{\dot Q}) = \frac{1}{2}\tr \left( (\Oh \vec A + \vec {\dot A} + \vec A\Lh)(\Oh \vec A + \vec {\dot A} + \vec A\Lh)^T \right). $$
 We now need to take variations of this Lagrangian in order to get the direct equations. Consider the following,
 \begin{align*}
   \left.\di{}{\e}\right|_{\e = 0}\ell (\Oh + \e\d\Oh) &= \left.\di{}{\e}\right|_{\e = 0} \frac{1}{2}\tr\left( ((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)((\Oh + \e\d\Oh) \vec A + \vec {\dot A} + \vec A\Lh)^T \right) \\
@@ -156,7 +156,7 @@ In addition to,
 \begin{align}
   \pd{\ell}{\vec{\dot A}} = \vec{\dot A}
 \end{align}
-these are then the equations (10.15)-(10.18) that are stated by Holm, Schmah \& Stoica in~\cite{holm_schmah_stoica_2009}. We note that to derive the full set of equations, we would need to substitute the derivatives of $\ell$ back into (5.1) - (5.3) but for sake a brevity and sanity, I omit that step.\\
+these are then the equations (10.15)-(10.18) that are stated by ~\cite{holm_schmah_stoica_2009}. We note that to derive the full set of equations, we would need to substitute the derivatives of $\ell$ back into (5.1) - (5.3) but for sake a brevity and sanity, I omit that step.\\
 
 \noindent
 \subsubsection{Left or Right Euler-Poincar\'e Reduction}
@@ -244,4 +244,5 @@ We note that the conserved quantity is the constant that arises from integration
 \noindent
 These are really beautiful theorems because in actuality we have three different terms in Theorem 5.5 and these relate togeneralised angular moment of the Dedekind motion, Jacobi motion and the whole system respectively.\\
 
+\noindent
 We shall leave pseudo-rigid bodies here, but note that there are several papers, such as ~\cite{Iwai_2010} that take this further and speak about how we can add potential energies into this system.
