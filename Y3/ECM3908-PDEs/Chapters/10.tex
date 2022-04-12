@@ -55,11 +55,69 @@ The Fourier transform and it's inverse define linear operators on function space
   If the Fourier transform of the function $f(x)$ is $\hat f(x)$, then the Fourier transform of $\hat f(x)$ is $f(-k)$.
 \end{nthm}
 \begin{proof}
-  Something something proof
+  We consider the inverse fourier transform,
+  $$ f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx}dk $$
+  Therefore,
+  $$ f(-x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{-ikx}dk $$
+  Now let $x = k$, then we get,
+  $$ f(-k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(x)e^{-ikx}dx $$
+  Therefore we notice that we really just have fourier transform on the LHS and then the proof is complete.
 \end{proof}
 
 \begin{nthm}[]
-  If $f(x) \to \hat f(k)$, then we want to show $f'(x) \mapsto (ik)f'(k)$
+  The Fourier transform of the constant function $f(x) = 1$ is a multiple of the delta function in the frequency space.
+\end{nthm}
+\begin{proof}
+  We consider $f(x) = 1$, then $\hat f(k) = \sqrt{2\pi}\d (k)$ and so we get,
+  $$ \d(k) = \frac{1}{2\pi}\int_{-\infty}^\infty e^{-ikx}dx $$
+  We now consider the inverse Fourier transform,
+  $$ f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(k)e^{ikx}dk $$
+  Then substituting for $\hat f(k)$,
+  $$ f(x) = \int_{-\infty}^\infty \d(k)e^{ikx}dk = e^{ik (0)} = 1 $$
+\end{proof}
+
+\noindent
+The Fourier transform of the delta function is $\hat \d (k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \d(x) e^{-ikx}dx$, this is then just,
+$$ \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \d(x) e^{-ikx}dx = \frac{1}{\sqrt{2\pi}}e^{-ik (0)} = \frac{1}{\sqrt{2\pi}} $$
+That is,
+$$ \mathcal{F}(\d (x)) = \frac{1}{\sqrt{2\pi}} $$
+
+\noindent
+Assume that impulse function is at $x = \xi$. That is, $f(x) = \d_\xi (x) = \d (x - \xi)$. Then we have that,
+$$ \hat \d_\xi(k) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \d(x - \xi)e^{-ikx}dx = \frac{1}{\sqrt{2\pi}}e^{-ik\xi} $$
+Further we can say,
+\begin{equation}
+  \d_\xi (x) = \frac{1}{2\pi}\int_{-\infty}^\infty e^{-ik\xi}e^{ikx} = \frac{1}{2\pi}\int_{-\infty}^\infty e^{ik(x - \xi)} = \frac{1}{2\pi}\ip{e^{ikx}}{e^{ik\xi}}\label{equ:del}
+\end{equation}
+We now multiply both sides of Equation \refeq{equ:del} by $f(\xi)$ and integrating with respect to $\xi$ gives,
+$$ \int_{-\infty}^\infty \d_\xi (x)f(\xi) d\xi = \frac{1}{2\pi}\int_{-\infty}^\infty \int_{-\infty}^\infty e^{ik(x - \xi)}dkd\xi $$
+That then gives us,
+$$ f(x) = \frac{1}{2\pi}\int_{-\infty}^\infty \int_{-\infty}^\infty f(\xi)e^{ik(x - \xi)}dkd\xi $$
+This formula connects the direct and inverse transform of $f(x)$.
+
+\begin{nthm}[]
+  If we consider $f(x) \xrightarrow[]{\mathcal{F}} \hat f(k)$ then $f(x - \xi) \xrightarrow[]{\mathcal{F}} e^{-ik\xi} \hat f(k)$.
+\end{nthm}
+\begin{proof}
+  We know,
+  $$ \mathcal{F}(f(x - \xi)) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(x - \xi)e^{-ikx}dx $$
+  We use change of variables, let $x - \xi = y$, then $dx = dy$. We see we have,
+  $$ \mathcal{F}(f(x - \xi)) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(y)e^{-iky}e^{-ik\xi}dy = e^{-ik\xi}\int_{-\infty}^\infty f(y)e^{-iky}dy = e^{-ik\xi}\hat f(k)$$
+\end{proof}
+
+\begin{nthm}[]
+  Consider $f(x) \xrightarrow[]{\mathcal{F}} \hat f(k)$, then $f(cx) \xrightarrow[]{\mathcal{F}} \frac{1}{|c|}\hat f\left(\frac{k}{c}\right)$ where $c \in \R$.
+\end{nthm}
+\begin{proof}[]
+  Consider $c > 0$, then
+  $$ \mathcal{F}(f(cx)) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(cx)e^{-ikx}dx $$
+  and now we let $y = cx$, then $dx = \frac{1}{c}dy$. We get that,
+  $$ \mathcal{F}(f(cx)) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(y)e^{-ik \frac{y}{c}}\frac{1}{c}dy = \frac{1}{c} \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(y)e^{-i \frac{k}{c} y}dy = \frac{1}{c} \hat f\left( \frac{k}{c} \right) $$
+  The proof for $c < 0$ is similar, but a negative sign is eaten during the change of variables as the limits are flipped.
+\end{proof}
+
+\begin{nthm}[]
+  If $f(x) \xrightarrow[]{\mathcal{F}} \hat f(k)$, then we want to show $f'(x) \xrightarrow[]{\mathcal{F}} (ik)f'(k)$
 \end{nthm}
 \begin{proof}
   We know that,
@@ -70,6 +128,7 @@ The Fourier transform and it's inverse define linear operators on function space
   $$ f'(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty  ik\hat f(k)e^{ikx}dk = ik\hat f(k)$$
 \end{proof}
 
+\noindent
 Similarly, we have the Fourier Transform of product function $xf(x)$, obtained by differentiating the Fourier transform of $f(x)$. Hence we want to show,
 $$ \mathcal{F}(xf(x)) = i \di {\hat f} k $$
 We start with the definition of $\hat f(k)$ and differentiate,
@@ -130,7 +189,7 @@ We now look at the Fourier transform of $f(x)g(x)$, up to multiple, is the convo
 $$ \cF[f(x)g(x)] = \frac{1}{\sqrt{2\pi}} \hat f * \hat g(k) $$
 We can use a similar argument to before, we know that,
 \begin{align*}
-  fg(x) &= \frac{1}{2\pi}\int_{-\infty}^\infty \F[f(k)g(k)] e^{ikx}dk \\
+  fg(x) &= \frac{1}{2\pi}\int_{-\infty}^\infty \cF[f(k)g(k)] e^{ikx}dk \\
   &= \frac{1}{2\pi}\int_{-\infty}^\infty  \frac{1}{2\pi} \int_{-\infty}^\infty \hat f(k - \xi) \hat g(\xi)d\xi e^{ikx}dk \\
   &= \frac{1}{2\pi}\int_{-\infty}^\infty  \frac{1}{2\pi} \int_{-\infty}^\infty \hat f(\eta)\hat g(\xi) e^{ik\eta}e^{ik\xi}d\eta d\xi \\
   &= \left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \hat f(\eta) e^{ik\eta} d\eta \right)\left(\frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \hat g(\xi) e^{ik\xi} d\xi \right)
