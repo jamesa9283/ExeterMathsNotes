@@ -17,6 +17,7 @@ Here is the statement,
    Often forget that $p$ and $q$ are distinct odd primes.
 \end{remark}
 
+\noindent
 We will prove this later, but it is the most important theorem in the module.
 
 \begin{eg}
@@ -34,4 +35,165 @@ We will prove this later, but it is the most important theorem in the module.
     &= -1 && (\text{since $3 \c 3 \mod 8$})
   \end{align*}
   Thus, $\ls{29}{53} = (-1)^4 = 1$ and hence $x^2 \c 29 \mod 53$ is soluble.
+\end{eg}
+
+We recall Lemma 7.15,
+\begin{nlemma}[Lemma 7.15]
+  Let $p$ be an odd prime and $a \in \Z$ with $a$ odd and $p \nmid a$. Then,
+  $$ \ls a p = (-1)^t \text{ where } t = \sum_{k=1}^{(p-1)/2} \floor{\frac{ak}{p}}$$
+\end{nlemma}
+
+\begin{proof}[Proof of LQR]
+  Note that the result we want is equivalent to showing that,
+  $$ \ls p q \ls q p = (-1)^{\frac{p-1}{2}\frac{q-1}{2}} $$
+  Hence, by the Lemma, it suffices to show,
+  $$ \sum_{k=1}^{(p-1)/2} \floor{\frac{qk}{p}} + \sum_{k=1}^{(q-1)/2} \floor{\frac{pk}{q}} = \frac{p-1}{2} \frac{q-1}{2}$$
+  We shall count the points in,
+  $$ R := \{(x, y) \in \N \ti \N : 0 < x < \frac{p}{2}, 0 < y < \frac{q}{2}\} $$
+  in two different ways. Note since $p, q$ are odd, we have
+  $$ \# R = \# \{x : 1 \le x \le \frac{p-1}{2}\} \ti \# \{y : 1 \le y \le \frac{q-1}{2}\} = \frac{p-1}{2}\ti \frac{q-1}{2}. $$
+  Now we find another expression for $\# R$. If a point were on the line $(0, 0)$ to $(\frac{p}{2}, \frac{q}{2})$ we would have $y = \frac{qx}{p}$ and hence $py = qx$. However, then we would have $p \m qx$ which is impossible by Euclid's Lemma for primes, since $p \nmid q$ and $p \nmid x$ ($0 < x < \frac{p}{2}$). Thus there are no points $(x, y)$ of $R$ on the line from $(0, 0)$ to $(\frac{p}{2}, \frac{q}{2})$. \\
+
+  \noindent
+  How many points $(x, y)$ of $R$ are there below the diagonal? For each value of $x$ with $1 \le x \le \frac{p-1}{2}$, the pairs $(x, y)$ below the diagonal must satisfy $1 \le y \le \frac{q}{p}x$. However, there are $\floor{ \frac{qx}{p}}$ such values of $y$. It follows that the total number of points below the line $y = \frac{qx}{p}$ is,
+  $$ \sum_{k=1}^{(p-1)/2} \floor{\frac{qk}{p}}. $$
+  Similarly, there are
+  $$ \sum_{k=1}^{(q-1)/2} \floor{\frac{pk}{q}} $$
+  points above the line. If follows that,
+  $$ \# R = \sum_{k=1}^{(p-1)/2} \floor{\frac{qk}{p}} + \sum_{k=1}^{(q-1)/2} \floor{\frac{pk}{q}} $$
+  Comparing the two values for $\# R$ gives the required result.
+\end{proof}
+
+Here is an example,
+\begin{eg}
+  Determine $\ls 3 p$ where $p \ge 5$ is a prime. By LQR we have,
+  $$ \ls 3 p = \ls p 3 (-1)^{\frac{(p-1)(3 - 1)}{4}} = (-1)^{(p-1)/2}\ls p 3. $$
+  To determine $\ls p 3$ we need to know the value of $p \mod 3$. To determine $(-1)^{(p-1)/2}$ we need to know the value of $(p-1)/2 \mod 2$, or equivalently the value of $p \mod 4$. Thus, since $3$ and $4$ are coprime, by CRT it suffices to find the value of $p \mod 12$. We have four cases to consider, namely $p \c 1, 5, 7, 11 \mod 12$. Note that the other cases are excluded because $\varphi(12) = 4$ and $p$ must be coprime to $12$ as $p \ge 5$.\\
+
+  \noindent
+  \begin{enumerate}
+    \item $p \c 1 \mod 12$. In this case $p \c 1 \mod 3$ so $\ls p 3 = 1$. Also $p \c 1 \mod 4$, so $(p-1)/2$ is even. Hence $\ls 3 p = 1$.
+    \item $p \c 5 \mod 12$. In this case $p \c 2 \mod 3$ so
+    $$ \ls p 3 = \ls 2 3 = -1 $$
+    Also $p \c 1 \mod 4$ so $(p-1)/2$ is even. Hence $\ls 3 p = -1$.
+    \item $p \c 7 \mod 12$. In this case $p \c 1 \mod 3$ so $\ls p 3 = 1$. Also $p \c 3 \mod 4$ so $(p-1)/2$ is odd. Hence $\ls 3 p = -1$.
+    \item $p \c 11 \mod 12$. In this case $p \c 2 \mod 3$ so $\ls p 3 = -1.$ Also $p \c 3 \mod 4$ so $(p-1)/2$ is odd.
+  \end{enumerate}
+  We summarise and see,
+  $$ \ls 3 p = \begin{cases}
+    +1 & p \c \pm 1 \mod 12 \\
+    -1 & p \c \pm 5 \mod 12
+  \end{cases} $$
+  This doesn't work in general. In general if $p$ is an odd prime and $a \in \Z$ with $p \nmid a$ then we can use LQR and Euler's Criterion to compute $a^{(p-1)/2}\mod p$. (In particular this must be $\pm 1$).
+\end{eg}
+
+\section{Jacobi Symbol}
+We go right to the definition,
+\begin{ndefi}[Jacobi Symbol]
+  Let $n$ be an odd positive integer with prime factorisation $n = p_1^{e_1}p_2^{e_2}\dots p_r^{e_r}$. Then for any $a \in \Z$ we define the Jacobi symbol $\ls a n$ by,
+  $$ \ls a n = \prod_{i=1}^r \ls a {p_i} ^{e_i} $$
+  where the symbols on the right are Legendre symbols. We als define $\ls a 1 = 1$.
+\end{ndefi}
+Now for a property,
+\begin{nthm}[]
+  Let $n, m$ be odd positive integers and $a, b \in \Z$.
+  \begin{enumerate}
+    \item $\ls a n = \pm 1$ if $a$ and $n$ are coprime and $\ls a n = 0$, otherwise,
+    \item $\ls a n = \ls b n$ whenever $a \c b \mod n$
+    \item $\ls {ab} n = \ls a n \ls b n$ and $\ls a {mn} = \ls a m\ls a n$,
+    \item $\ls {a^2} n = 1$ whenever $a$ and $n$ are coprime.
+  \end{enumerate}
+\end{nthm}
+\begin{proof}
+  These are provably by the definition of the Legendre symbol.
+\end{proof}
+
+\begin{remark}
+   Let $n = p_1^{e_1}\dots p_r^{e_r}$ be an odd positive integer. If the congruence
+   $$ x^2 \c a \mod n  $$
+   has a solution then $\ls a {p_i} = 1$ for each $i$ and hence $\ls a n = 1$. However the converse isn't true since because an even number of factors of $-1$ could appeat in the defining product of $\ls a n$.
+\end{remark}
+Consider the following example on the previous remark,
+\begin{eg}
+  $$ \ls 2 {15} = \ls 2 3\ls 2 5 = (-1)(-1) = 1 $$
+  However, $x^2 \c 2 \mod 15$ is insoluble, because $x^2 \c 2\mod 3$ has no solutions.
+\end{eg}
+\noindent
+The point of Jacobi symbol is \textbf{not} to determine solubility of congruences. It is a very useful computational device to calculate the Legendre symbol. We now move forward to prove the following Theorem,
+
+\begin{nthm}[]
+  If $n$ is an odd positive integer then,
+  $$ \ls {-1} n = (-1)^{\frac{n-1}{2}} = \begin{cases}
+    1 & n\c 1 \mod 4 \\
+    -1 & n\c 3 \mod 4
+  \end{cases} $$
+\end{nthm}
+\begin{proof}
+  Write $n = p_1p_2 \dots p_r$ where the odd prime factors are not necessarily distinct. Then we have,
+  $$ n = \prod_{i=1}^r (1 + p_i - 1) = 1 + \sum_{i=1}^r (p_i - 1) + \sum_{i \ne j}(p_i - 1)(p_j - 1) + \dots $$
+  But each $p_i - 1$ is even so each sum after the first is divisible by $4$. Hence,
+  $$ n \c 1 + \sum_{i=1^r (p_i - 1)}\mod 4 $$
+  which gives,
+  $$ \frac{1}{2}(n - 1) \c \sum_{i=1}^r \frac{1}{2}(p_i - 1) \mod 2 $$
+  Therefore, the corresponding theorem for Legendre symbols we have,
+  \begin{align*}
+    \ls {-1} n &= \prod_{i=1}^r \ls {-1} {p_i} = \prod_{i=1}^r (-1)^{\frac{p_i - 1}{2}}\\
+    &= (-1)^{\sum_{i=1}^r (p_i - 1)/2} = (-1)^{(n-1)/2}
+  \end{align*}
+  which is the desired result.
+\end{proof}
+
+\noindent
+Now for another Theorem,
+\begin{nthm}
+  If $n$ is an odd positive integer then,
+  $$ \ls 2 n = (-1)^{(n^2 - 1)/8} = \begin{cases}
+    +1 & n \c \pm 1 \mod 8 \\
+    -1 & n \c \pm 3 \mod 8
+  \end{cases} $$
+\end{nthm}
+\begin{proof}
+  Write $n = p_1p_2 \dots p_r$ where the odd prime factors $p_i$ are not necessarily distinct. Then we have,
+  $$ n^2 = \prod_{i=1}^r (1 + p_i^2 - 1) = 1 + \sum_{i=1}^r (p_i^2 - 1) + \sum_{i \ne j} (p_i^2 - 1)(p_j^2 - 1) + \dots $$
+  But each $p_i$ is odd, we have $p_i^2 - 1 \c 0 \mod 8$ so,
+  $$ n^2 \c 1 + \sum_{i=1}^r (p_i^2 - 1)\mod 64. $$
+  Hence,
+  $$ \frac{1}{8}(n^2 - 1) \c \sum_{i=1}^r \frac{1}{8}(p_i^2 - 1) \mod 8 $$
+  This also holds modulo $2$, hence the corresponding result for Legendre symbol,
+  \begin{align*}
+    \ls 2 n &= \prod_{i=1}^r \ls 2 {p_i} = \prod_{i=1}^r (-1)^{(p_i^2 - 1)/8}\\
+    &= (-1)^{\sum_{i=1}^r \frac{1}{8}(p_i^2 - 1)} = (-1)^{(n^2 - 1)/ 8}
+  \end{align*}
+  Then the result follows from checking cases.
+\end{proof}
+
+\begin{nthm}[Reciprocity Law for Jacobi Symbols]
+  Let $m$ and $n$ be coprime odd positive integers. Then,
+  $$ \ls m n \ls n m = (-1)^{(m-1)(n - 1)/4} = \begin{cases}
+    +1 & m \c 1 \mod 4 \text{ or } n \c 1 \mod 4 \\
+    -1 & m \c n \c 3 \mod 4.
+  \end{cases} $$
+\end{nthm}
+\begin{proof}
+  Write $n = p_1p_2 \dots p_r$ where the odd prime factors $p_i$ are not necessarily distinct. Similarly, write $m = q_1q_2\dots q_s$ where the odd prime factors $q_i$ are not necessarily distinct. (Note that $m$ and $n$ are coprime so $p_i \ne q_j$ for all $i, j$). Then,
+  $$ \ls m n\ls n m = \prod_{i=1}^r \prod_{j=1}^r \ls {p_i}{q_j}\ls {q_j}{p_i} = (-1)^t $$
+  for some $t \in \Z$. Applying the Quadratic Reciprocity law to the first factor of each term $\ls {p_i}{q_j}\ls {q_j}{p_i}$, we can take
+  $$ t = \sum_{i=1}^r \sum_{j=1}^s \frac{1}{2}(p_i - 1)\frac{1}{2}(q_j - 1) = \sum_{i=1}^r \frac{1}{2}(p_i - 1) \sum_{j=1}^s \frac{1}{2}(q_j - 1). $$
+  However, the same argument as in the proof of the theorem of $\ls {-1} n$ shows that,
+  $$ \frac{1}{2}(n - 1) \c \sum_{i=1}^r \frac{1}{2}(p_i - 1)\mod 2 $$
+  and the corresponding result holds for $\frac{1}{2}(m - 1)$. Therefore,
+  $$ t \c \frac{n-1}{2}\frac{m-1}{2}\mod 2 $$
+  which completes the proof.
+\end{proof}
+
+\noindent
+Now for an example to see how use Jacobi symbols are in calculating Legendre symbols,
+\begin{eg}
+  Determine whether $888$ is a quadratic residue or nonresidue mod 1999. We have,
+  $$ \ls {888} {1999} = \ls 2 {1999} ^3 \ls {111} {1999} = \ls {111} {1999} $$
+  Since $1999 \c -1 \mod 8$. To calculate $\ls {111} {1999}$ using Legendre symbols, we should write,
+  $$ \ls {111} {1999} = \ls 3 {1999} \ls {37} {1999} $$
+  and apply LQR to each factor. However, it is easier to do it with the Jacobi symbol,
+  $$ \ls {111} {1999} = - \ls {1999} {111} = -\ls 1 {111} = -1$$
+  Therefore $888$ is a quadratic residue of $1999$.
 \end{eg}
