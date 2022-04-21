@@ -1,0 +1,213 @@
+% !TEX root = ../notes.tex
+
+\section{Sums of squares}
+\subsection{Pythagorean Triples}
+
+We start with a definition,
+\begin{ndefi}[Pythagorean Triple]
+  A pythagorean triple $(x, y, z)$ isa triple of positive integers satisfying
+  $$ x^2 + y^2 = z^2 $$
+  If $\gcd(x, y, z) = 1$ then $(x, y, z)$ is called a primitive Pythagorean triple.
+\end{ndefi}
+
+\begin{remark}
+   If $g = \gcd(x, y, z)$, then $(x/g, y/g, z/g)$ is also a Pythagorean triple. If follows that if $g > 1$, $(x, y, z)$ can be obtained from the `smaller' primitive Pythagorean triple $(x/g, y/g, z/g)$ by multiplying each entry by $g$. Thus it is natural to focus on primitive Pythagorean triples.
+\end{remark}
+
+It will be useful to know the following basic fact,
+\begin{nthm}[]
+  Let $(x, y, z)$ be a primitive Pythagorean triple. Then $\gcd(x, y) = \gcd(x, z) = \gcd(y, z) = 1$.
+\end{nthm}
+\begin{proof}
+  Suppose $\gcd(x, y) > 1$. Then there must be some $p$ such that $p \m x$ and $p \m y$. Then $z^2 = x^2 + y^2 \c 0 \mod p$. As $p \m z^2$ then by Euclid's Lemma for primes we have $p \m z$ and so $p \m \gcd(x, y, z)$, contradicting $(x, y, z)$ being primitive. Thus $\gcd(x, y) = 1$. The proofs for $\gcd(x, z) = 1$ and $\gcd(y, z) = 1$ are similar.
+\end{proof}
+
+\noindent
+Considering things mod $4$ we can determine the parity of the numbers in a primitive Pythagorean triple.
+\begin{nthm}
+  If $(x, y, z)$ is a primitive triple, then one of $x$ and $y$ is even and the other odd. (Equivalently $x + y$ is odd). Also $z$ must be odd.
+\end{nthm}
+\begin{proof}
+  Note that if $x$ is even, then $x^2 \c 0 \mod 4$ and if $x$ is odd then $x^2 \c 1 \mod 4$. If $x$ and $y$ are both odd, then $x^2 \c y^2 \c 1 \mod 4$. Hence $z^2 \c x^2 + y^2 \c 2 \mod 4$, which is impossible. If $x$ and $y$ are both even, then $\gcd(x, y) \ge 2$ contradicting the theorem above.
+  We conclude one of $x$ and $y$ is odd and the other even. In any case, $z \c z^2 = x^2 + y^2 \c x + y \mod 2$, so $z$ is odd.
+\end{proof}
+
+\noindent
+As the roles of $x$ and $y$ in Pythagorean triples are symmetric, it makes little loss in generality in studying only one primitive Pythagorean triple with $x$ odd and $y$ even. Now we can characterise the triples,
+\begin{nthm}
+  Let $(x, y, z)$ be a primitive Pythagorean triple with $x$ odd. Then there are $r, s \in \N$ with $r > s$, $\gcd(r, s) = 1$ and $r + s$ odd, such that,
+  $$ x = r^2 - s^2 \qquad y = 2rs \qquad z = r^2 + s^2 $$
+  Conversely, if $r, s \in \N$ with $r > s$, $\gcd(r, s) = 1$ and $r + s$ odd, then,
+  $$ (r^2 - s^2, 2rs, r^2 + s^2) $$
+  is a primitive Pythagorean triple.
+\end{nthm}
+\begin{proof}
+  Let $(x, y, z)$ be a primitive Pythagorean triple with $x$ odd. Then $y$ is even and $z$ is odd. Let $a = \frac{1}{2}(z - x)$, $b = \frac{1}{2}(z + x)$ and $c = \frac{y}{2}$. Then $a, b, c \in \N$. Also,
+  $$ ab = \frac{(z - x)(z + x)}{4} = \frac{z^2 - x^2}{4} = \frac{y^2}{4} = c^2 $$
+  Let $g = \gcd(a, b)$, then $g \m (a + b)$ and $g \m (b - a)$, that is $g \m z$ and $g \m x$. As $\gcd(x, z) = 1$, we have $g = 1$. That is $\gcd(a, b) = 1$.\\
+
+  \noindent
+  Let $p$ be a prime factor of $a$. Then $p \nm b$, so $v_p(b) = 0$. Hence,
+  $$ v_p(a) = v_p(a) + v_p(b) = v_p(ab) = v_p(c^2) = 2v_p(c) $$
+  is even. Thus $a$ is a square. Similarly, $b$ is a square. We can now write $a = s^2$ and $b = r^2$ where $r, s \in \N$. Then $\gcd(r, s) \m a$ and $\gcd(r, s) \m b$, as $a$ and $b$ are coprime then $\gcd(r, s) = 1$. Now $x = b - a = r^2 - s^2$, therefore $r > s$. Also $z = a + b = r^2 + s^2$. As $c^2 = ab = r^2s^2$ and so $c = rs$, therefore $y = rs$. Finally, as $x$ is odd,
+  $$ 1 \c x = b - a = r^2 - s^2 \c r^2 + s^2 \c r + s \mod 2 $$
+  that is, $r + s$ is odd. This proves the first half of the theorem.\\
+
+  \noindent
+  We seek to prove the converse. Suppose $r, s \in \N$ with $r > s$, $\gcd(r,s) = 1$ and $r + s$ odd. Set $x = r^2 - s^2$, $y = 2rs$ and $z = r^2 + s^2$. Certainly $y, z \in \N$ and also $x \in \N$ as $r > s > 0$. We plug in,
+  \begin{align*}
+    x^2 + y^2 &= (r^2 - s^2)^2 + (2rs)^2\\
+    &= (r^4 - 2r^2s^2 + s^4) + 4r^2s^2 \\
+    &= r^4 + 2r^2s^2 + s^4 = z^2
+  \end{align*}
+  Hence $(x, y, z)$ is a Pythagorean triple. Certainly $y$ is even, and
+  $$ x = r^2 - s^2 \c r - s \c r + s \mod 2 $$
+  Hence, $x$ is odd. To show $(x, y, z)$ is a primitive Pythagoran triple, we examine $g = \gcd(x, z)$. Since $x$ is odd, $g$ is odd. Also $g \m (x + z)$ and $g \m (z - x)$, that is $g \m 2r^2$ and $g \m 2s^2$. As $r$ and $s$ are coprime, then $\gcd(2r^2, 2s^2) = 2$ and so $g \m 2$. As $g$ is odd, then $g = 1$. Therefore $(x, y, z)$ is a primitive Pythagorean triple.
+\end{proof}
+
+\begin{nthm}
+  There do not exist $x, y, z \in \N$ with,
+  \begin{equation}
+    x^4 + y^4 = z^4\label{equ:FLT4}
+  \end{equation}
+\end{nthm}
+\begin{proof}
+  We are going to prove a stronger result. We claim there is no $x, y, u \in \N$ with,
+  \begin{equation}
+    x^4 + y^4 = u^2 \label{equ:FLT4C}
+  \end{equation}
+  A natural number solution $(x, y, z)$ to \ref{equ:FLT4} gives one for \ref{equ:FLT4C}, namely, $(x, y, u) = (x, y, z^2)$. Thus it suffices to show \ref{equ:FLT4C} has no solution over $\N$. We use Fermat's method of descent. Given $(x, y, u)$ of \ref{equ:FLT4C} we produce another solution $(x', y', u')$ with $u' < u$. This is a contradiction if we start with a solution of \ref{equ:FLT4C} minimising $u$.\\
+
+  \noindent
+  Let $(x, y, u)$ be a solution of \refeq{equ:FLT4C} over $\N$ with minimum possible $u$. We claim that $\gcd(x, y) = 1$. If not, $p \m x$ and $p \m y$ for some prime $p$. Then $p^4 \m (x^4 + y^4)$, that is $p^4 \m u^2$. Hence $p^2 \m u$. Then $(x' ,y', u') = (x/p, y/p, u/p^2)$ is a solution of \refeq{equ:FLT4C} in $\N$ with $u' < u$. This is a contradiction and so $\gcd(x, y) = 1$.
+  As $\gcd(x, y) = 1$ then $\gcd(x^2, y^2) = 1$, and so $(x^2, y^2, u)$ is a primitive Pythagorean triple by \refeq{equ:FLT4C}. By the symmetry we assume that $x^2$ is odd and $y^2$ is even, that is $x$ odd and $y$ even. Hence by the theorem on Pythagorean triples, there are $r, s \in \N$ with $\gcd(r, s) = 1$,
+  $$ x^2 = r^2 - s^2 \qquad y^2 = 2rs \qquad u = r^2 + s^2 $$
+  Then $x^2 + s^2 = r$, and as $\gcd(r,s) = 1$ then $(x, s, r)$ is a primitive Pythagorean triple. As $x$ is odd, there is some $a, b \in \N$ with $\gcd(a, b) = 1$ and,
+  $$ x = a^2 - b^2 \qquad s = 2ab \qquad r = a^2 + b^2 $$
+  by the Theorem on primitive triples. Then,
+  $$ y^2 = 2rs = 4(a^2 + b^2)ab $$
+  Equivalently, $(y/2)^2 = ab(a^2 + b^2) = abr$. If $p$ is prime and $p \m \gcd(a, r)$ then $b^2 = (a^2 + b^2) - a^2 \c 0 \mod p$ (as $r = a^2 + b^2$ and so $p \m b^2$) and so $p \m b$ by Euclid's Lemma for primes. This is impossible as $\gcd(a, b) = 1$. Thus $\gcd(a, r) = 1$. Similarly, $\gcd(b, r) = 1$. Now $abr$ is a square. If $p \m a$
+  then $p \nmid b$ and $p\nmid r$. Thus $v_p(a) = v_p(abr)$ is even and so $a$ is a square. Similarly, $b$ and $r$ are also squares. So we write $a = x'^2$, $b = y'^2$ and $r = u'^2$ where $x' ,y' , u' \in \N$. Then,
+  $$ u'^2 = a^2 + b^2 = x'^4 + y'^4 $$
+  so $(x', y' , u')$ is a solution of \refeq{equ:FLT4C}, Also,
+  $$ u' \le u'^2 = a^2 + b^2 = r \le r^2 < r^2 + s^2 = u $$
+  This contradicts the minimality of $u$ in the solution of $(x, y, u)$ of \refeq{equ:FLT4C}. Hence \refeq{equ:FLT4C} is insoluble over $\N$ and \ref{equ:FLT4} is insoluble over $\N$.
+\end{proof}
+
+\subsection{Sums of Squares}
+We make the definition,
+\begin{ndefi}[$S_k$]
+  For $k \in \N$ we let,
+  $$ S_k = \{a_1^2 + a_2^2 + \dots + a_k^2 : a_1, \dots, a_k \in \Z\} $$
+  be the set of $k$ squares. Note we allow zero.
+\end{ndefi}
+
+\begin{nthm}[]
+  The sets $S_2$ and $S_4$ are closed under multiplication. That is,
+  \begin{enumerate}
+    \item If $m, n \in S_2$, then $mn \in S_2$
+    \item If $m,n \in S_4$, then $mn \in S_4$.
+  \end{enumerate}
+\end{nthm}
+\begin{proof}
+  Let $m,n \in S_2$. Then $m = a^2 + b^2$ and $n = c^2 + d^2$ for some $a, b, c, d \in \Z$. We have,
+  \begin{align*}
+    mn = (a^2 + b^2)(c^2 + d^2) &= |a + bi|^2 |c + di|^2 \\
+    &= |(a + bi)(c + di)|^2 \\
+    &= |(ac - bd) + (ad + bc)i| ^2 \\
+    &= (ac - bd)^2 + (ad + bc)^2 \in S_2
+  \end{align*}
+  This formula is sometimes known as the two-square formula. Now let $m,n \in S_4$. Then $m = a^2 + b^2 + c^2 + d^2$ and $n = r^2 + s^2 + t^2 + u^2$ for some $a, b, c, d, r, s, t, u \in \Z$. By the four-square formula,
+  \begin{align*}
+    mn &= (a^2 + b^2 + c^2 + d^2)(r^2 + s^2 + t^2 + u^2) \\
+    &= (ar - bs - ct - du)^2 + (as + br + cu - dt)^2 \\
+    &\quad + (at - bu + cr + ds)^2 + (au + bt - cs + dr)^2 \in S_4.
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+   We have seen the two-square formula comes from complex numbers. Similarly the four-square formula comes from the theory of quaternions.
+\end{remark}
+
+\subsection{Sums of two squares}
+We start with a theorem,
+\begin{nthm}[]
+  Let $p$ be a prime and $p \c 3 \mod 4$ and let $n \in \N$. If $n \in S_2$ then $v_p(n)$ is even.
+\end{nthm}
+\begin{proof}
+  Let $p$ be a prime such that $p \c 3 \mod 4$. Let $n = a^2 + b^2$ with $a, b \in \Z$ and suppose $p \m n$. We aim to show that $p \m a$ and $p \m b$. Suppose $p \nmid a$. Then there is some $c \in \Z$ with $ac \c 1\mod p$. Then,
+  $$ 0 \c c^2n = (ac) + (bc)^2 \c 1 + (bc)^2 \mod p $$
+  This implies that $\ls {-1} p = 1$, but we know $\ls {-1} p = -1$ when $p \c 3 \mod 4$. This contradiction proves $p \m a$. Similarly $p \m b$. Thus $p \m (a^2 + b^2) = n$ and so $n/p^2 = (a/p)^2 + (b/p)^2 \in S_2$.\\
+
+  \noindent
+  Let $n \in S_2$ and $k = v_p(n)$. We have seen that if $k > 0$ then $k \ge 2$ and $n/p^2 \in S_2$. Note that $v_p(n/p^2) = k - 2$. Similarly if $k - 2> 0$ then $k - 2 \ge 2$ and $n/p^4 \in S_2$. Iterating the argument, if $k = 2r + 1$ is odd, then $n/p^{2r} \in S_2$ and $v_p(n/p^{2r}) = 1$, which is impossible. So $k$ is even.
+\end{proof}
+
+\begin{remark}
+   If $n \in \N$ we can write $n = rm^2$ where $m$ is the largest square dividing $n$ and $r$ is squarefree, that is either $r = 1$ or $r$ is a product of distinct primes. If any prime factor $p$ of $r$ is congruent to $3\mod 4$ then $v_p(n) = 1 + 2v_p(m)$ is odd and $n \notin S_4$. Hence, if $n \in S_2$, the only possible prime factors of $r$ are $p = 2$ and $p \c 1 \mod 4$.  Obviously $2 = 1^2 + 1^2 \in S_2$.
+   It would be nice if all primes congruent to $1 \mod 4$ were also in $S_2$. Fortunately, this is the case.
+\end{remark}
+
+\begin{nthm}
+  Let $p$ be a prime with $p \c 1 \mod 4$. Then $p \in S_2$.
+\end{nthm}
+\begin{proof}
+  As $p\c 1 \mod 4$, then we have $\ls {-1} p = 1$ and so there exists $u \in \Z$ such that $u^2 \c - 1 \mod p$. Let,
+  \begin{align*}
+    A &= \{(m_1, m_2) : m_1, m_2 \in \Z, 0 \le m_1, m_2 <\sqrt p\} \\
+    &= \{(m_1, m_2) : m_1, m_2 \in \Z, 0 \le m_1, m_2 \le \floor{\sqrt p}\}
+  \end{align*}
+  Then $A$ has $(1 + \floor{\sqrt p})^2$ elements and so $|A| > p$. For $\vec m = (m_1, m_2) \in \R^2$ define $\phi(\vec m) = um_1 + m_2$. Then $\phi : \R \to \R$ is a linear map, and if $\vec m \in \Z^2$ then $\phi(\vec m) \in \Z$. As $|A| > p$, the $\phi(\vec m)$
+  for $\vec m \in A$ can't all be distinct modulo $p$. Hence, there are distinct $\vec m, \vec n \in A$ with $\phi(\vec m) \c \phi(\vec n)\mod p$. Let $\vec a = \vec m - \vec n$. Then by linearity, $\phi(\vec a) = \phi(\vec m) - \phi(\vec n) \c 0 \mod p$. Write $\vec a = (a, b)$. Then $\vec a = m_1 - n_1$ where
+  $0 \le m_1,n_1 < \sqrt p$ so that $|a| < \sqrt p$ and $|b| < \sqrt p$. Then $a^2 + b^2 < 2p$. As $\vec m \ne \vec n$ then $\vec a \ne (0, 0)$ and so $a^2 + b^2 > 0$. By $0 \c \phi(\vec a) = ua + n \mod p$. Hence $b \c -ua \mod p$ and so,
+  $$ a^2 + b^2 \c a^2 + (-ua)^2 \c a^2(1 + u^2) \c 0 \mod p $$
+  As $a^2 + b^2$ is a multiple of $p$, and so $0 < a^2 + b^2 < 2p$, then $a^2 + b^2 = p$. We conclude that $p \in S_2$.
+\end{proof}
+
+\noindent
+We now give an alternative constructive proof,
+\begin{proof}[Constructive Proof]
+  As $p \c 1 \mod 4$ we have $\ls {-1} p = 1$ and so there exists $u \in \Z$ such that $u^2 \c -1 \mod p$. In other words, there is some $m \in \N$ such that $u^2 + 1 = mp$. Note that we can assume $|u| < \frac{p}{2}$, so $u^2 + 1 < \frac{p^2}{4} + 1 < \frac{p^2}{2}$.
+  Thus $1 \le m < \frac{p}{2}$.\\
+
+  \noindent
+  The idea is as follows. Given a representation $a^2 + b^2 = mp$ with $1 \le m < p$ use this to find another representation $c^2 + d^2 = m'p$ with $1 \le m' < m$. Then repeat this until we get $m' = 1$, giving the desired solution. Note that the starting point is $u^2 + 1 = mp$ od the first paragraph.\\
+
+  \noindent
+  Suppose $a^2 + b^2 = mp$ for some $m \in \N$ with $1 < m < p$. Then there exist $a', b' \in \Z$ with $a\c a'\mod m$, $|a| \le \frac{m}{2}$ and $b \c b' \mod m$ with $|b'| \le \frac{m}{2}$. Let $c = \frac{aa' + bb'}{m}$ and $d = \frac{ab' - ba'}{m}$.
+  Now,
+  $$ aa' + bb' \c a^2 + b^2 \c 0 \mod m \text{ and } ab' - ba' \c ab - ba \c 0 \mod m$$
+  and so $c, d \in \Z$. Moreover, $(a')^2 + (b')^2 \c a^2 + b^2 \c 0 \mod m$ and so,
+  \begin{align*}
+    c^2 + d^2 &= \frac{(aa' + bb')^2 + (ab' - ba')^2}{m^2} \\
+    &= \frac{(a^2 + b^2)(a'^2 + b'^2)}{m^2} = \frac{p(a'^2 + b'^2)}{m}
+  \end{align*}
+  is in fact an integer and a multiple of $p$. In other words, $c^2 + d^2 = m'p$ for some $m' \in \Z$. Now $a'^2 \le \frac{m^2}{4}$ and $b'^2 \le \frac{m^2}{4}$. So $a'^2 + b'^2 \le \frac{m^2}{2}$. Thus,
+  $$ 0 \le m' = \frac{a'^2 + b'^2}{m} \le \frac{m}{2} < m < p $$
+  Suppose $m' = 0$ for contradiction. Then $a' = b' = 0$ and so $m \m a$ and $m \m b$. Thus $m^2 \m (a^2 + b^2)$ and so $m \m p$. But $p$ is prime and $1 < m < p$ so $m \nmid p$ - contradiction. Thus $m \ne 0$ and therefore $1 < m' < m$.
+\end{proof}
+
+\noindent
+recall the following,
+\begin{nprop}
+  Let $n \in \N$, $a \in \Z$ and suppose that $\gcd(a, n) = 1$. For $r, s \in \Z$ we have $a^r \c a^s \mod n$ if and only if $r \c s \mod \ord_n(a)$.
+\end{nprop}
+
+\noindent
+Now for a remark,
+\begin{remark}
+  In order to create an algorithm to find an expression $p = a^b + b^2$ when $p\c 1 \mod 4$ is prime we need to solve the equation $u^2 \c - 1 \mod p$. (This is the hard part). We write $p = 4k + 1$ where $k \in \N$. Let $g$ be a primitive root mod $p$. Then $\ord_p(g) = \varphi(p) = p - 1 = 4k$ and $g^0, g^1, g^2, \dots, g^{4k-1}$ are congruent to $1, 2, \dots, p - 1$ in some order. Now $x = g^{2k}$
+  is a solution to $x^2 \c 1 \mod p$ and $x \not\c 1 \mod p$, so $g^{2k} \c -1 \mod p$ since $p$ is an odd prime. If $t \c g^r \mod p$ where $r$ is odd then $t^k$ is a solution of $x^2 \c - 1\mod p$ since $2kr \c 2k \mod 4k$ (this is true because of the above proposition and the fact that $\ord_p(g) = 4k$).
+  We now pick $t \in \{1, \dots, p - 1\}$ at random, there is a 50\% chance that $\t \c g^r \mod p$ with $r$ odd. (Actually, its obvious that $t = 1$ won't work so don't pick this). Given such a $t$ we set $u = t^k$.
+\end{remark}
+
+\begin{eg}
+  Let $p = 1997$. Note $p \c 1\mod 4$. Writing $p = 4k + 1$ we see that $k = 499$. Try $t = 2$. Then $t^k \c 2^{499} \c 1585 \c -412 \mod 1997$ (here we use modular exponentiation algorithm). Note that we choose $-412$ because $|-412| < 1997/2$. Check that $(-412)^2 \c -1\mod 1997$ (it does). Set $a = 412$ and $b = 1$, then $a^2 + b^2 = 169745 = 85 \ti 1995$, so $m = 85$.\\
+
+  \noindent
+  Now $412 \c -13 \mod 85$. So $a' = - 13$ and $b' = 1$. Set,
+  $$ c = \frac{aa' + bb'}{m} = -63 \qquad d = \frac{ab' - ba'}{m} = 5 $$
+  Now we have, $63^2 + 5^2 = 3994 = 2 \ti 1997$. Now let $a = 63$, $b = 5$ and $m = 2$. Then $63 \c 1 \mod 2$ and $5 \c 1 \mod 2$. So we take $a' = b' = 1$,
+  $$ c = \frac{aa' + bb'}{m} = 34 \qquad d = \frac{ab' - ba'}{m} = 29 $$
+  Now we have $34^2 + 29^2 = 1997$, so we are done.
+\end{eg}

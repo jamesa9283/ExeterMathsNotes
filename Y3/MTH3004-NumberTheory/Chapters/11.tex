@@ -1,0 +1,86 @@
+% !TEX root = ../notes.tex
+
+\noindent
+We recall the previous two theorems. We will now use those two theorems to characterise the elements of $S_2$.
+\begin{nthm}[Two Square Theorem]
+  Let $n \in \N$. Then $n \in S_2$ if and only if $v_p(n)$ is even whenever $p$ is a prime congruent to $3 \mod 4$.
+\end{nthm}
+\begin{proof}
+  If $n \in S_2$, $p$ is prime and $p \c 3 \mod 4$ then $v_p(n)$ is even by the first theorem above. If $v_p(n)$ is even whenever $p \c 3 \mod 4$ a prime then $n = rm^2$ where each prime factor $p$ of $r$ is either $2$ or $1 \mod 4$. By the second theorem all primes $p$ with $p \c 1 \mod 4$ are in $S_2$. Moreover, $2 = 1^2 + 1^2 \in S_2$.
+  Hence $r \in S_2$ since $S_2$ is closed under multiplication. Hence $r = a^2 + b^2$ where $a,b \in \Z$ and so,
+  $$ n = rm^2 = (am)^2 + (bm)^2 \in S_2 $$
+\end{proof}
+
+\noindent
+We now prove,
+\begin{nthm}
+  Let $p$ be a prime. If $p = a^2 + b^2 = c^2 + d^2$ with $a, b, c, d \in \N$ then either $a=c$ and $b=d$ or $a=d$ and $b = c$.
+\end{nthm}
+\begin{proof}
+  Consider,
+  \begin{align*}
+    (ac + bd)(ad + bc) &= (a^2 + b^2)cd + ab(c^2 + d^2) \\
+    &= p(ab + cd)
+  \end{align*}
+  As $p \c (ac + bc)(ad + bc)$ then by Euclids lemma for primes either $p \c (ac + bd)$ or $p\c (ad + bc)$. Assume for former, the later can be proved by relabelling. Now $ac + bd > 0$ so that $ac + bc \ge p$. Also,
+  \begin{align*}
+    (ac +bd)^2 + (ad- bc)^2 &= (a^2 + b^2)(c^2 + d^2)\\
+    &= p^2
+  \end{align*}
+  As $ac + bd \ge p$ the only way that this is possible is if $ac + bd = p$ and $ad - bc = 0$. Then $ac^2 + bcd = cp$ and $ad^2 + bcd = 0$, so adding gives $a(c^2 + d^2) = cp$, that is $ap = cp$ and so $a = c$. Then $c^2 + bd = p = c^2 + d^2$, that is $bd = d^2$ and so $b = d$.
+\end{proof}
+
+\begin{eg}
+  Find two `essentially' different ways of writing $629 = 17 \times 37$ as the sum of two squares. First note that $17$ and $37$ are both primes congruent $1\mod 4$, and thus can be written as the sum of two squares in a unique way. In fact, $17 = 4^2 + 1^2$ and $37 = 6^2 + 1^2$.
+  $$ 629 = |4 + i|^2|6 + i|^2 = |(4 + i)(6 + i)|^2 = |23 + 10i|^2 = 23^2 + 10^2 $$
+  $$ 629 = |4 + i|^2|6 - i|^2 = |(4 + i)(6 - i)|^2 = |25 + 2i|^2 = 25^2 + 2^2 $$
+\end{eg}
+
+\subsection{Sums of Four Squares}
+We wish to prove a theorem of Lagrange to the effect that all natural numbers are the sums of four squares. It is crucial to establish this for primes.
+\begin{nthm}
+  Let $p$ be a prime. Then $p \in S_4$.
+\end{nthm}
+\begin{proof}
+  If $p \c 1 \mod 4$, then there are $a, b \in \Z$ with $p = a^2 + b^2 + 0^2 + 0^2$ and so $p \in S_4$. Also,
+  $$ 2 = 1^2 + 1^2 + 0^2 + 0^2 \qquad 3 = 1^2 + 1^2 + 1^2 + 0^2 $$
+  We may assume that $p > 3$ and that $p \c 3 \mod 4$. As a consequence $\ls {-1} p = -1$. Let $w$ be the smallest positive integer with $\ls w p = -1$. (Note this forces $w \ge 2$). Then,
+  $$ \ls {w-1} p = 1 \text{ and } \ls {-w} p = \ls {-1} p \ls w p = 1. $$
+  Hence there are $u, v \in \Z$ with,
+  $$ w^2 - 1 \c u^2 \mod p \qquad -w^2 \c v^2 \mod p $$
+  Then $1 + u^2 + v^2 \c 1 + (w-1) - w \c 0 \mod p$. Let,
+  \begin{align*}
+    B &= \{(m_1, m_2, m_3, m_4) : m_1, \dots, m_4 \in \Z, 0 \le m_1,\dots, m_4 < \sqrt p\}\\
+    &= \{(m_1, m_2, m_3, m_4) : m_1, \dots, m_4 \in \Z, 0 \le m_1,\dots, m_4 \le \floor{\sqrt p}\}
+  \end{align*}
+  Then $B$ has $(1 + \floor{\sqrt p})$ elements. Hence $|B| > p^2$. We now define for $\vec m = (m_1, m_2, m_3, m_4)$,
+  $$ \psi(\vec m) = (um_1 + vm_2 + m_3, - vm_1 + um_2 + m_4) $$
+  Then $\psi : \R^4 \to \R^2$ is a linear map. If $\vec m \in \Z^4$ then $\psi(\vec m)\in \Z^2$. Write $(a, b) \c (a', b') \mod p$ if $a \c a' \mod p$ and $b \c b' \mod p$. If we have a list of $(a_1, b_1), \dots, (a_N, b_N)$ of vectors in $\Z^2$ with $N> p^2$,
+  then there must be some distinct $i$ and $j$ with $(a_i, b_i)\c (a_j, b_j) \mod p$. This happens for the vectors $\psi(\vec m)$ with $\vec m \in B$ as $|B| > p^2$. Thus there are distinct $\vec m, \vec n \in B$ with $\psi(\vec m)\c \psi(\vec n)\mod p$. Let $\vec a = \vec m - \vec n$. Then $\psi(a) = \psi(\vec m)- \psi(\vec n) \c (0, 0)\mod p$.
+  Write $\vec a = (a, b, c, d)$. Then $a = m_1 - n_1$ where $0 \le m_1, n_1 < \sqrt{p}$ so that $|a| < \sqrt p$. Similarly $|b|, |c|, |d| < \sqrt p$. Then $a^2 + b^2 + c^2 + d^2 < 4p$. As $\vec m \ne \vec n$ then $\vec a \ne (0, 0, 0, 0)$ and so $a^2 + b^2 + c^2 + d^2 > 0$.
+  Now $(0, 0) \c \psi(\vec a) = (ua + vb + c, -va + ub + d)\mod p$. Hence $c \c -ua - vb \mod p$ and $d\c va - ub \mod p$. Then,
+  \begin{align*}
+    a^2 + b^2 + c^2 + d^2 &\c a^2 + b^2 + (ua + vb)^2 + (va - ub)^2 \\
+    &= (1 + u^2 + v^2)(a^2 + b^2) \c 0 \mod p
+  \end{align*}
+  This holds because we have already shown that $1 + u^2 + v^2\c 0 \mod p$. As $a^2 + b^2 + c^2 +d^2$ is a multiple of $p$ and $0 < a^2 + b^2 + c^2 + d^2 < 4p$. When $a^2 + b^2 + c^2 + d^2 = p$ then $p \in S_4$. Alas, we need to consider the \textbf{other} cases where,
+  $$ a^2 + b^2 + c^2 + d^2 = 2p \text{ or }3p. $$
+  Suppose $a^2 + b^2 + c^2 + d^2 = 3p$. Then $a^2 + b^2 + c^2 + d^2 \c 3 \mod 4$ so that two of $a, b, c, d$ are odd and the other two even. Without loss of generality, suppose $a, b$ are odd and $c, d$ are even, Then $\frac{1}{2}(a + b)$, $\frac{1}{2}(a - b)$, $\frac{1}{2}(c + d)$ and $\frac{1}{2}(c - d)$ are all integers and a simple computation gives,
+  $$ \left( \frac{a + b}{2} \right)^2 + \left( \frac{a - b}{2} \right)^2 + \left( \frac{c + d}{2} \right)^2 + \left( \frac{c - d}{2} \right)^2 = \frac{a^2 + b^2 + c^2 + d^2}{2} = p$$
+  so that $p \in S_4$.\\
+
+  \noindent
+  Suppose $a^2 + b^2 + c^2 + d^2 = 3p$, then $a^2 + b^2 + c^2 + d^2$ is a multiple of $3$ but not $9$. As $a^2 \c 0 $ or $1\mod 3$ then either exactly one or all four of $a, b, c, d$ are multiples of three. The later case isn't possible as then it would be a multiple of $9$. So without loss of generality $3 \m a$ and $b, c, d \c \pm 1\mod 3$. By replacing $b$ by $-b$, etc. as necessary we may assume that $b \c c \c d \c 1\mod 3$.
+  Then $\frac{1}{3}(b + c + d)$, $\frac{1}{3}(a + b - c)$, $\frac{1}{3}(a + c - d)$, $\frac{1}{3}(a + d - b)$ are all integers and a simple computation gives,
+  $$ \left( \frac{b + c + d}{3} \right)^2 + \left( \frac{a + b - c}{3} \right)^2 + \left( \frac{a + c - d}{3} \right)^2 + \left( \frac{a + d + b}{3} \right)^2 = \frac{a^2 + b^2 + c^2 + d^2}{3} = p$$
+  so that $p \in S_4$.
+\end{proof}
+
+\noindent
+Now we can prove,
+\begin{nthm}[Lagrange's four-square theorem]
+  If $n \in \N$ then $n \in S_4$
+\end{nthm}
+\begin{proof}
+  Either $n = 1 = 1^2 + 0^2 + 0^2 + 0^2 \in S_4$ or $n$ is a product of primes. By the above theorem, each prime of $n$ lies in $S_4$. Then since $S_4$ is closed under multiplication, we have $n \in S_4$.
+\end{proof}
