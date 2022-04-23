@@ -1,0 +1,49 @@
+% !TEX root = ../notes.tex
+
+\section{Spatially distributed reaction-diffusion kinetics}
+
+\subsection{Background}
+Consider the concentration $c(\vec x, t)$. This is the concentration of some chemical species at $\vec x \in \R^3$ at time $t$.\\
+\begin{figure}[!ht]
+\centering
+\resizebox{0.3\textwidth}{!}{\input{./figures/spatialRK.pdf_tex}}
+\caption{Model setup}
+\end{figure}
+
+\noindent
+Let $f = f(c, \vec x, t)$ be the source of the chemical in $V$. Introduce the flux vector $\vec J = J_1\vec i + J_2\vec j + J_3\vec k$. We define this as, $\vec J \cdot d\vec S = \vec J \cdot \vec n dS$. This is the rate of movement of chemical across $dS$ per unit time. We can write the following conservation equation,
+$$ \pd{}{t} \iiint_V c(\vec x, t) dV = \iiint_V fdV - \iint_S \vec J \cdot d\vec S $$
+We recall the divergence theorem,
+$$ \iint_S \vec J \cdot d\vec S = \iiint_V \nab \cdot \vec J dV $$
+Thus,
+$$ \iiint_V \pd{}{t} c(\vec x, t) dV = \iiint_V f - \nab \cdot \vec J dV $$
+This holds for an arbitrary volume $V$. We can equate the integrands,
+\begin{equation}
+  \pd {c(\vec x, t)}{t} = -\nab \cdot \vec J + f \label{equ:CoMSK}
+\end{equation}
+If transport is via diffusion, then,
+$$ \vec J = -D\nab c $$
+where $D$ is the diffusion coefficient. In general $D = D(\vec x, t)$. This is referred to as Fick's law. In $1D$, then $J = -D\pd c x$. We now substitute into \ref{equ:CoMSK}. We obtain,
+\begin{equation}
+  \pd c t = f + \nab \cdot (D \nab c).\label{equ:RD}
+\end{equation}
+This is the reaction-diffusion equation. We now go further and assume that $D(\vec x, t) = D$ is constant. Then \refeq{equ:RD} simplifies to,
+\begin{equation}
+  \pd c t = f + D\nab \cdot \nab c = f + D\nab^2 c\label{equ:simpRD}
+\end{equation}
+where $\nab^2$ is just the Laplacian. If $f = 0$, then we obtain the diffusion equation in three dimensions. We consider $m$ reactants, with concentration,
+$$ u_1(\vec x, t), \dots, u_m(\vec x, t) $$
+with diffusion constants, $ D_1, \dots, D_m$ and source terms $f_1(u_1, \dots, u_m), \dots, f_m(u_1, \dots, u_m)$. We then write the equations as,
+$$ \pd {u_i} t = f_i(u_1, \dots, u_m) + D_i \nab^2 u_i \qquad 1 \le i \le m. $$
+We can write this in vector form,
+$$ \pd {\vec u} t = \vec f(\vec u) + \vec D\nab^2 \vec u $$
+where,
+$$ \vec u = (u_1, \dots, u_m)^T \qquad \vec f = (f_1, \dots, f_m)^T $$
+and,
+$$ D = \begin{pmatrix}
+  D_1 & & 0 \\
+  & \ddots & \\
+  0 & & D_m
+\end{pmatrix} $$
+First, we consider one reactant, $m = 1$ and $x \in \R$. This gives arise to,
+$$ \pd u t = f(u) + D\pdd u x $$

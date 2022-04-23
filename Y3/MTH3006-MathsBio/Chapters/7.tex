@@ -61,10 +61,10 @@ We want to know that happens as we increase time. So we want to create systems o
 \begin{enumerate}
   \item Chemical species vector, $x = \begin{pmatrix}
     x_1 & \dots & x_n
-  \end{pmatrix}^\top$
+  \end{pmatrix}^T$
   \item Reaction vector, $\vec v(\vec x) = \begin{pmatrix}
     \vec v_1(\vec x) & \dots & \vec v_m(\vec x)
-  \end{pmatrix}^\top$ where $\vec v_j (\vec x)$ is the rate of $R_j$.
+  \end{pmatrix}^T$ where $\vec v_j (\vec x)$ is the rate of $R_j$.
   \item Stoichiometry Matrix, $N = (N_{ij})$ where $N_{ij}$ is the number of molecules of the $X_i$ produced/consumed in $R_j$.
 \end{enumerate}
 We then obtain the equations for $\vec x(t)$,
@@ -200,7 +200,7 @@ We see that for $C \ge 1 + \a$, the solutions are closed curves over $(u, v)$ pl
 We start by considering classification by age, here we have one class per year of their life cycle and the discrete time steps are in years. We can represent our population as a population vector
 $$ \vec x(t) = \begin{pmatrix}
   x_1(t) & x_2(t) & \dots & x_n(t)
-\end{pmatrix}^\top $$
+\end{pmatrix}^T $$
 where $x_i(t)$ is population at life cycle $i$. A simple age-based odel is the following,
 \begin{align*}
   x_1(t+1) &= f_1x_1(t) + \dots + f_nx_n(t) \\
@@ -294,7 +294,7 @@ This is the eigenmode expansion of a solution. We can say that as $t \to \infty$
     \item $A$ has a single eigenvalue $\l_1$ of maximum modulus.
     \item $\l_1$ is real and positive
     \item Both the right $\vec w_1$ and the left eigenvector $\vec v_1$ are both positive.
-    $$ A\vec w_1 = \l_1 \vec w_1 \qquad \vec v_1^\top A = \l_1\vec v_1^\top $$
+    $$ A\vec w_1 = \l_1 \vec w_1 \qquad \vec v_1^T A = \l_1\vec v_1^T $$
     \item $\vec v_1$ and $\vec w_1$ are unique left and right eigenvectors.
   \end{enumerate}
 \end{nthm}
@@ -315,19 +315,19 @@ then we have a unique fixed point. Hence, we have the first condition in the the
 \noindent
 What about $\a_1$? We know,
 $$ \vec x_0 = \a_1\vec w_1 + \dots + \a_n\vec w_n $$
-for $i \ne j$, then $\vec v_i^\top \vec w_j = 0$. This can be proved by considering the definitions, multiplying and then manipulating the expressions. So,
+for $i \ne j$, then $\vec v_i^T \vec w_j = 0$. This can be proved by considering the definitions, multiplying and then manipulating the expressions. So,
 \begin{align*}
-  \vec v_1^\top\vec x_0 &= \a_1\vec v_1^\top \vec w_1 + \a_2\vec v_2^\top \vec w_2 + \dots + \a_n\vec v_n^\top \vec w_n \\
-  \vec v_1^\top\vec x_0 &= \a_1\vec v_1^\top \vec w_1 \\
-  \frac{\vec v_1^\top\vec x_0}{\vec v_1^\top \vec w_1} &= \a_1
+  \vec v_1^T\vec x_0 &= \a_1\vec v_1^T \vec w_1 + \a_2\vec v_2^T \vec w_2 + \dots + \a_n\vec v_n^T \vec w_n \\
+  \vec v_1^T\vec x_0 &= \a_1\vec v_1^T \vec w_1 \\
+  \frac{\vec v_1^T\vec x_0}{\vec v_1^T \vec w_1} &= \a_1
 \end{align*}
 That is the population inertia. \\
 
 \noindent
 In summary, when $A$ is primitive,
-$$ \lim_{t \to \infty} \l_1^{-t}\vec x(t) = \frac{\vec v_1^\top \vec x_0}{\vec v_1^\top\vec w_1}\vec w_1 $$
+$$ \lim_{t \to \infty} \l_1^{-t}\vec x(t) = \frac{\vec v_1^T \vec x_0}{\vec v_1^T\vec w_1}\vec w_1 $$
 where,
-$$ A\vec w_1 = \l_1\vec w_1, \quad \vec v_1^\top A = \l_1\vec v_1^\top $$
+$$ A\vec w_1 = \l_1\vec w_1, \quad \vec v_1^T A = \l_1\vec v_1^T $$
 and $\vec w_1$ is the stable state structure and $\vec v_1$ is the reproductive value.\\
 
 \subsection{Issues}
@@ -337,7 +337,7 @@ and $\vec w_1$ is the stable state structure and $\vec v_1$ is the reproductive 
 \noindent
 \begin{enumerate}
   \item We now consider some target growth rate $\l_T$, and we assume that this to be one. So the question is how can be change $A$ to make $\l = \l_T$.
-  \item How can be find bounds on $\frac{\vec v^\top \vec x_0}{\vec v^\top\vec w}$
+  \item How can be find bounds on $\frac{\vec v^T \vec x_0}{\vec v^T\vec w}$
 \end{enumerate}
 
 \subsubsection{Controlling $\l - \l_T$}
@@ -360,18 +360,18 @@ $$ R(A) = f_1 + f_2p_1 + \dots + f_np_1 + \dots + p_{n-1} $$ and so $\l > 1 \iff
 
 \subsubsection{Determining the range of the population inertia}
 We know that,
-$$ \lim_{t \to \infty} \l^{-t}\vec x(t) = \frac{\vec v^\top \vec x_0}{\vec v^\top \vec w} $$
+$$ \lim_{t \to \infty} \l^{-t}\vec x(t) = \frac{\vec v^T \vec x_0}{\vec v^T \vec w} $$
 we define $\vec x_0 = (x_i)$, $\vec v = (v_i)$, $v_{min} = \min_{i}v_i$ and $v_{max} = \max_i v_i$. Assume wlog,
 $$ \sum_{i=1}^n x_{i_0} = 1 $$
 then,
 \begin{align*}
-  \vec v^\top x_0 &= \sum_{i=1}^n v_ix_{i_0} \\
+  \vec v^T x_0 &= \sum_{i=1}^n v_ix_{i_0} \\
   &\le \sum_{i=1}^n v_{max}x_{i_0} \\
   &= v_{max}\sum_{i=1}^n x_{i_0}\\
   &= v_{max}
 \end{align*}
-and so $\vec v^\top \vec x_0 \le v_{max}$ and we can show $v_{min} \le \vec v^\top \vec x_0$ and so,
-$$ \frac{v_{min}}{\vec v^\top w} \le \frac{\vec v^\top \vec x_0}{\vec v^\top \vec w} \le \frac{v_{max}}{\vec v^\top \vec w} $$
+and so $\vec v^T \vec x_0 \le v_{max}$ and we can show $v_{min} \le \vec v^T \vec x_0$ and so,
+$$ \frac{v_{min}}{\vec v^T w} \le \frac{\vec v^T \vec x_0}{\vec v^T \vec w} \le \frac{v_{max}}{\vec v^T \vec w} $$
 These bounds are sharp, these are attained for suitable choices of $\vec x_0$. We just take $\vec x_0$ to have a one where the maximum or minimum value of $\vec v$.
 
 \subsection{Sensitivity Analysis}
@@ -399,17 +399,17 @@ and now exploit that our equations will satisfy the perterbed eigenvalue eignvec
   (A + \D A + \mathcal{O}(2))(\vec w + \vec{ \D w} + \mathcal{O}(2)) &= (\l(A) + \D\l + \mathcal{O}(2))(\vec w + \vec{\D w} + \mathcal{O}(2))\\
   A\vec w + A\vec{\D w} + \mathcal{O}(2) + \D A\vec w + \D A\vec{\D w} + \mathcal{O}(2) &= \l(A)\vec w + \l(A)\vec{\D w} + \mathcal{O}(2) + \D\l\vec{\D w} + \mathcal{O}(2) \\
   A\vec w + A\vec{\D w} + \D A\vec w &= \l\vec w + \l\vec{\D w} + \D\l\vec{w} + \mathcal{O}(2) \\
-  \vec v^\top A\vec w + \vec v^\top A\vec{\D w} + \vec v^\top\D \vec w &= \l\vec v^\top\vec w + \l\vec v^\top\vec{\D w} + \D\l\vec v^\top\vec{w} + \mathcal{O}(2)
+  \vec v^T A\vec w + \vec v^T A\vec{\D w} + \vec v^T\D \vec w &= \l\vec v^T\vec w + \l\vec v^T\vec{\D w} + \D\l\vec v^T\vec{w} + \mathcal{O}(2)
 \end{align*}
-Now $TA\vec w = \l\vec w$ and $\vec v^\top A = \l\vec v^\top $
+Now $TA\vec w = \l\vec w$ and $\vec v^T A = \l\vec v^T $
 \begin{align*}
-  \l\vec v^\top\vec w + \l\vec v^\top \D\vec{ w} + \vec v^\top\D A\vec w &= \l\vec v^\top\vec w + \l\vec v^\top\vec{\D w} + \D\l\vec v^\top\vec{w} + \mathcal{O}(2) \\
-  \vec v^\top\D A\vec w &=\D\l\vec v^\top\vec{w} + \mathcal{O}(2)
+  \l\vec v^T\vec w + \l\vec v^T \D\vec{ w} + \vec v^T\D A\vec w &= \l\vec v^T\vec w + \l\vec v^T\vec{\D w} + \D\l\vec v^T\vec{w} + \mathcal{O}(2) \\
+  \vec v^T\D A\vec w &=\D\l\vec v^T\vec{w} + \mathcal{O}(2)
 \end{align*}
 Thus,
-$$ \D\l = \frac{\vec v^\top\D A\vec w}{\vec v^\top \vec w} + \mathcal{O}(2) $$
+$$ \D\l = \frac{\vec v^T\D A\vec w}{\vec v^T \vec w} + \mathcal{O}(2) $$
 We now assume that $\D A$ is obtained by perturbing one entry $a_{ij}$ ($a_{ij} \mapsto a_{ij} + \D a_{ij}$). Then, \begin{align*}
-  \D A &= \D a_{ij} \vec e_i \vec e_j^\top \\
+  \D A &= \D a_{ij} \vec e_i \vec e_j^T \\
   &= \begin{pmatrix}
     0 &&&& 0 \\
     & \ddots &&\iddots& \\
@@ -420,14 +420,14 @@ We now assume that $\D A$ is obtained by perturbing one entry $a_{ij}$ ($a_{ij} 
 \end{align*}
 where it is on the $i^{th}$ row and $j^{th}$ column. We now substitute this back in and obtain,
 \begin{align*}
-  \D \l &= \frac{\vec v^\top \vec e_i \vec e_j^\top \vec w}{\vec v^\top \vec w}\D a_{ij} + \mathcal{O}(2) \\
-  &= \frac{v_i w_j}{\vec v^\top\vec w}\D a_{ij} + \mathcal{O}(2) \\
-  \frac{\D \l}{\D a_{ij}} &= \frac{v_i w_j}{\vec v^\top\vec w} + \mathcal{O}(1)
+  \D \l &= \frac{\vec v^T \vec e_i \vec e_j^T \vec w}{\vec v^T \vec w}\D a_{ij} + \mathcal{O}(2) \\
+  &= \frac{v_i w_j}{\vec v^T\vec w}\D a_{ij} + \mathcal{O}(2) \\
+  \frac{\D \l}{\D a_{ij}} &= \frac{v_i w_j}{\vec v^T\vec w} + \mathcal{O}(1)
 \end{align*}
 Now take the limit as $\D a_{ij} \to 0$, we obtain,
-$$ \pd{\l}{a_{ij}} = \frac{v_i w_j}{\vec v^\top \vec w} $$
+$$ \pd{\l}{a_{ij}} = \frac{v_i w_j}{\vec v^T \vec w} $$
 These are our terms and so we can find the sensitivity matrix,
-$$ S = \left( \pd{\l}{a_{ij}} \right) = \frac{\vec v \vec w^\top}{\vec v^\top \vec w} $$
+$$ S = \left( \pd{\l}{a_{ij}} \right) = \frac{\vec v \vec w^T}{\vec v^T \vec w} $$
 
 \textbf{Summary:} We mapped $A \mapsto \D A$ and $\l(A) \mapsto \l(A + \D A)$ where $\L(A + \D A) = \l(A) + \D\l + \mathcal{O}(2)$ and,
 $$ \D \l = \sum_{i=1}^n \pd{\l}{a_{ij}}(A)\D a_{ij} $$
@@ -443,7 +443,7 @@ this is a linear approximation. We can choose the smallest perturbation after ca
 
 \subsubsection{Transfer Function Analysis for PPMs}
 The idea here is $a_{ij} \mapsto a_{ij} + p_{ij}$ such that the perturbed eigenvalue is $\l$:
-$$ \D A = p_{ij}\vec e_i\vec e_j^\top = \begin{pmatrix}
+$$ \D A = p_{ij}\vec e_i\vec e_j^T = \begin{pmatrix}
   0 &&&& 0 \\
   & \ddots &&\iddots& \\
   &&p_{ij}&&\\
@@ -453,17 +453,112 @@ $$ \D A = p_{ij}\vec e_i\vec e_j^\top = \begin{pmatrix}
 and again we proceed from the perturbed eigenvalue equation.
 \begin{align*}
   (A + \D A)\vec w &= \l \vec w \\
-  A\vec w + p_{ij}\vec e_i\vec e_j^\top \vec w &= \l I\vec w \\
-  (\l I - A)\vec w &= p_{ij}\vec e_i\vec e_j^\top \vec w
+  A\vec w + p_{ij}\vec e_i\vec e_j^T \vec w &= \l I\vec w \\
+  (\l I - A)\vec w &= p_{ij}\vec e_i\vec e_j^T \vec w
 \end{align*}
-Now assume that $|\l I - A|\ne 0$ thus can multiply both sides by $e_j^\top (\l I - A)^{-1}$
+Now assume that $|\l I - A|\ne 0$ thus can multiply both sides by $e_j^T (\l I - A)^{-1}$
 \begin{align*}
-  \vec e_j^\top (\l I - A)^{-1} (\l I - A)\vec w &= \vec e_j^\top (\l I - A)^{-1}p_{ij}\vec e_i\vec e_j^\top \vec w \\
-  \vec e_j^\top \vec w &= p_{ij} \vec e_j^\top (\l I - A)^{-1} \vec e_i (\vec e_j^\top \vec w) \\
-  1 &= p_{ij} \vec e_j^\top (\l I - A)^{-1} \vec e_i \\
-  p_{ij} &= \frac{1}{\vec e_j^\top (\l I - A)^{-1} \vec e_i} \\
-  p_{ij} &= \frac{1}{[(\l I - A)^{-\top}]_{ij}}
+  \vec e_j^T (\l I - A)^{-1} (\l I - A)\vec w &= \vec e_j^T (\l I - A)^{-1}p_{ij}\vec e_i\vec e_j^T \vec w \\
+  \vec e_j^T \vec w &= p_{ij} \vec e_j^T (\l I - A)^{-1} \vec e_i (\vec e_j^T \vec w) \\
+  1 &= p_{ij} \vec e_j^T (\l I - A)^{-1} \vec e_i \\
+  p_{ij} &= \frac{1}{\vec e_j^T (\l I - A)^{-1} \vec e_i} \\
+  p_{ij} &= \frac{1}{[(\l I - A)^{-T}]_{ij}}
 \end{align*}
 
 \subsection{Transient Dynamics}
+\subsubsection{From transient to asymptotic dynamics}
+For $\vec x(t + 1) = A\vec x(t)$ where $\vec x(t) = (x_i(t))$ and we can write,
+\begin{equation}
+  \lim_{t\to \infty} \l^{-t}\vec x(t) = \frac{\vec v^T\vec x(0)}{\vec v^T \vec w}\vec w.\label{equ:asymp}
+\end{equation}
+We now introduce $N(t) = \norm{\vec x(t)}_1 = \sum_{i=1}^n |x_i(t)| = \sum_{i=1}^n x_i(t) = \vec 1^T \vec x(t)$. Now we consider \ref{equ:asymp} and then dot with $\vec 1$.
+\begin{align*}
+  \vec 1^T \lim_{t\to \infty} \l^{-t}\vec x(t) &= \vec 1^T \frac{\vec v^T\vec x(0)}{\vec v^T \vec w}\vec w\\
+  \lim_{t\to \infty} \l^{-t}\vec 1^T \vec x(t) = \frac{\vec v^T \vec x(0)}{\vec v^T \vec w}\vec 1^T \vec w \\
+  \lim_{t\to \infty} \l^{-t}N(t) = \frac{\vec v^T \vec x(0)}{\vec v^T \vec w}\norm{\vec w}_1 \\
+  \lim_{t\to \infty} N(t) = \frac{\vec v^T \vec x(0)}{\vec v^T \vec w}\norm{\vec w}_1 \l^t \\
+\end{align*}
+Asymptotically, three possibilities. We have exponential growth, stasis and exponential decay. What we want to know now is what happens before the asymptotic behaviour? We want some way to bound the possibilities.
+\begin{figure}[!ht]
+\centering
+\resizebox{0.48\textwidth}{!}{\input{./figures/transPPM.pdf_tex}}
+\caption{Transient and Asymptotic Dynamics.}
+\end{figure}
+\noindent
 
+\subsubsection{Bound 1 - Population Amplification and Attenuation}
+We will consider maximum and minimum column sums. We know $\vec x(t) = A^t \vec x(0)$. Thus $N(t) = \vec q^t \vec x(t) = \vec 1^T A^t \vec x(0) = \vec 1^T M \vec x(0)$, where $M = A^t$ given $\vec x(0)$ such that $N(0) = \vec 1^T \vec x(0) = 1$. How large or small can $N(t)$ become? \\
+
+\noindent
+Assume that $M = (m_{ij})$ is a non-negative matrix and that $\vec x = (x_j)$ is a non-negative vector. Then,
+\begin{align*}
+  \vec 1^T \vec M \vec x &= \sum_{i,j = 1}^n M_{ij}x_j = \sum_{j=1}^n \left(\sum_{i=1}^n M_{ij}\right)x_j\\
+  &\le \sum_{j=1}^n \max_j \left(\sum_{i=1}^n M_{ij} \right)x_j = \max_j \left(\sum_{i=1}^n M_{ij} \right) \sum_{j=1}^n x_j = \left( \max_j \sum_{i=1}^n M_{ij} \right)\vec 1^T \vec x
+\end{align*}
+We have to show that,
+$$ \vec 1^T M\vec x \le \bar c \vec 1^T \vec x $$
+where $\bar c = \max_j \sum_{i=1}^n M_{ij} = \sum_{i=1}^n M_{ij_M}$. Similarly we can show that,
+$$ \vec 1^T M\vec x \ge \underline c \vec 1^T\vec x $$
+where $\underline c = \min_j \sum_{i=1}^n M_{ij} = \sum_{i=1}^n M_{ij_m}$. Taking these together,
+\begin{equation}
+  \underline x \vec 1^T \vec x \le \vec 1^T M\vec x \le \bar c \vec 1^T \vec x \tag{*}\label{equ:star}
+\end{equation}
+
+\noindent
+Take $M = A^t$, $\vec x = \vec x(0)$ in \refeq{equ:star}, then,
+$$ \underline c \vec 1^T \vec x(0) \le \vec 1^T A^t \vec x(0) \le \bar c \vec 1^T \vec x $$
+where $\bar c$ is the maximum column sum of $A^t$, denoted $\rho_t$, and $\underline c$ is the minimum column sum of $A^t$, denoted, $a_t$. Thus,
+$$ a_t \le N(t) \le \rho_t \qquad t \ge 0. $$
+This is bound 1. We call $a_t$ the minimum attenuation and $\rho_t$ the maximum attenuation.
+\begin{figure}[!ht]
+\centering
+\resizebox{0.48\textwidth}{!}{\input{./figures/bound1.pdf_tex}}
+\caption{Bound 1.}
+\end{figure}
+These bounds are sharp. That is, for a given $t'$, $\vec x(0) = \vec e_{jM}$ (a basis vector), this will give $N(t') = \rho_{t'}$ and $\vec x(0) = \vec e_{jm}$ will give $N(t') = a_{t'}$. In simpler terms, they can be attained.
+
+\noindent
+\subsubsection{Bound 2}
+
+Now we multiply on the left by $\vec v^T$ and get, (wlog when we write $\vec v$ and $\l$ we mean $\vec v_1$ and $\l_1$, the dominant eigenvector. )
+\begin{align*}
+  \vec v^T \vec x(t+1) &= \vec v^T \vec A\vec x(t) \\
+  &= \l \vec v^T\vec x(t) \\
+  &= \sum v_i x_i(t)
+\end{align*}
+and so we can write,
+$$ v_{\text{min}}N(t) \le \vec v^T \vec x(t) \le v_{\text{max}}N(t) $$
+and so we can form another bound,
+$$ v_{\text{min}}N(t+1) \le \l v^T_{\max}N(t) $$
+and the other way around and so,
+$$\frac{v_{\text{min}}}{v_{\text{max}}}\l^t \le N(t) \le \frac{v_{\text{max}}}{v_{\text{min}}}\l^t $$
+This is bound 2. This bound isn't sharp, but is a lot easier to calculate.
+\subsubsection{Bound 3}
+We now look at $\vec x(t) = A^t\vec x(0)$ and we write this as
+\begin{align*}
+  N(t+1) &= \mathbf{1} A\vec x(t)\\
+  &= \begin{pmatrix}
+    c_1(A) & \dots & c_n(A)
+\end{pmatrix} \vec x(t)
+\end{align*}
+Now we will get $\underline c(A) N(t) \le N(t+1) \le \bar c(A) N(t)$ and now we iterate and get that,
+$$ \underline c(A)^t N(0) \le N(t) \le (\bar c(A))^tN(0). $$
+This is bound 3. This only contains values that can be found from $A$.
+\subsubsection{Combining Bounds}
+
+We now consider combining these bounds to create one overall bound. We consider bound 2 and 3. These say,
+$$ N(t) \ge \frac{v_{\text{min}}}{v_{\text{max}}}\l^t, \qquad N(t) \ge \underline c^t. $$
+This gives,
+$$ N(t) \ge \max\left(\frac{v_{\text{min}}}{v_{\text{max}}}\l^t, \underline c^t \right) $$
+Then bound 1 gives us that $N(t) \ge a_t$, with $N(t) = a_t$ for suitable $\vec x(0)$. Thus,
+$$ a_t \ge \max\left(\frac{v_{\text{min}}}{v_{\text{max}}}\l^t, \underline c^t \right).$$
+Similarly, follows from bounds 2 and 3 that,
+$$ \rho_t \le \min\left( \frac{v_{\text{max}}}{v_{\text{min}}}\l^t, \bar c^t \right) $$
+\begin{figure}[!ht]
+\centering
+\resizebox{0.48\textwidth}{!}{\input{./figures/combinedBounds.pdf_tex}}
+\caption{Combined Bounds.}
+\end{figure}
+
+\noindent
+Where the red lines are the bounds for $a_t$ and $\rho_t$. Further, these then give us bounds for any solutions for all the different initial conditions. That is, we can attain the less accurate bounds from just $A$. Sometimes as $A$ gets complex $A^t$ is very hard to calculate.
