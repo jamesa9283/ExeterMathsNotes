@@ -46,4 +46,99 @@ $$ D = \begin{pmatrix}
   0 & & D_m
 \end{pmatrix} $$
 First, we consider one reactant, $m = 1$ and $x \in \R$. This gives arise to,
-$$ \pd u t = f(u) + D\pdd u x $$
+$$ \pd u t = f(u) + D\pdd u x. $$
+\subsection{Fisher Equation}
+
+We will consider the Fisher equation. We consider $u(\vec x, t)$ as the concentration of the gene in a population at spatial location $\vec x$ at time $t$,
+$$ \pd u t = ku(1 - u) + D\pdd u x. $$
+We assume that $k, D > 0$. We can non-dimensionalise this set of equations with $\t = kt$, $\xi = \sqrt{\frac{k}{D}}$ to give,
+\begin{equation}
+  \pd u \t = u(1 - u) + \pdd u \xi\label{equ:fisher}
+\end{equation}
+To analyse systems of this kind we consider the spatially homogenous system, we ignore $\pdd u \xi$. It has two steady states, where $\pd u \t = 0$. That is $u = 0$ and $u = 1$,\newpage
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.4\textwidth}{!}{\input{./figures/SPFM.pdf_tex}}
+\caption{Stability of stable states}
+\end{figure}
+
+\noindent
+We know that $0$ is unstable and $1$ is stable, that is any profile between $0$ and $1$ it will asymptotically go to $1$. This isn't very interesting. We now consider the system with diffusion. We seek a solution of \refeq{equ:fisher}, as,
+$$ u(\xi, \t) = U(\xi - c\t) \qquad c > 0 $$
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.6\textwidth}{!}{\input{./figures/FMwaves.pdf_tex}}
+\caption{Characteristics of solutions of \refeq{equ:fisher}}
+\end{figure}
+
+\noindent
+We introduce the travelling wave coordinate $z = \xi - c\tau$, which now means, $u(\xi, \tau) = U(\xi - c\tau) = U(z)$. Now we can transform this into a system in terms of $z$. We see by the chain rule,
+\begin{align*}
+  \pd u \tau &= -c \di U z\\
+  \pdd u \xi &= \dii U z
+\end{align*}
+Then substituting this into the PDE (\refeq{equ:fisher}) we get,
+$$ \dii U z + c\di U z + u(1 - u) = 0 $$
+We seek solutions with respect to the boundary conditions,
+$$ U(-\infty) = 1 \quad \text{ and } U(\infty) = 0 $$
+These equate to a solution of the form,\newpage
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.6\textwidth}{!}{\input{./figures/fisherBC.pdf_tex}}
+\caption{BC of the solution.}
+\end{figure}
+
+\noindent
+We now let $v = u'$, which allows us to now present this as a system of two ODEs,
+\begin{equation}
+  \begin{aligned}
+    v &= u' = f(u, v)\\
+    v' &= -cv - u(1 - u) = g(u, v)
+  \end{aligned}
+\end{equation}
+\textbf{Steady states and stabilities} \\
+The steady states are where $u' = v' = 0$, that then implies for $v = 0$ we have $u(1 - u) = 0$ and so $u = 0$ or $u = 1$. Thus we have two steady states, $(0, 0)$ and $(1, 0)$. To find the stabilities we consider the jacobian at the two steady states,
+$$ \mathcal{J}(u, v) = \begin{pmatrix}
+  \pd f u & \pd f v \\
+  \pd g u & \pd g v
+\end{pmatrix} = \begin{pmatrix}
+  0 & 1 \\ -1 + 2u & -c
+\end{pmatrix} $$
+We now consider $\mathcal{J}(0, 0)$. We see,
+$$ \mathcal{J}(0, 0) = \begin{pmatrix}
+  0 & 1 \\ -1 & c
+\end{pmatrix} $$
+Then we get the eigenvalues are,
+$$ \l_{\pm} = \frac{1}{2}\left( -c \pm \sqrt{c^2 - 4} \right) $$
+Now we consider two cases. If $c^2 \ge 4$, then $\l_{-} \le \l_+ < 0$. This is a stable node. If $c^2 < 4$, then $\l_\pm \in \C$ and $\Re(\l_\pm) = -c \le 0$ and so we have a stable focus.
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.3\textwidth}{!}{\input{./figures/fisherO.pdf_tex}}
+\caption{Stability of the origin}
+\end{figure}
+
+\noindent
+We then must have $c^2 \ge 4$ and so $c \ge 2$. This is because $u < 0$ is biologically infeasible. We now have a bound on $c$. We now consider the other stable state.
+$$ \mathcal{J}(1, 0) =  \begin{pmatrix}
+  0 & 1 \\ 1 & -c
+\end{pmatrix}$$
+where we have eigenvalues of $\l_\pm = \frac{1}{2}\left( -c \pm \sqrt{c^2 - 4} \right)$. As $\sqrt{c^2 + 4} > c$, we have $\l_{-} < 0 < \l_+$ and so we have a saddle node. We can now draw a phase portrait of this system,
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.5\textwidth}{!}{\input{./figures/fisherSS.pdf_tex}}
+\caption{Phase Portrait for the system}
+\end{figure}
+
+\noindent
+We see the red trajectory is the only trajectory with the property we are interested in for the boundary conditions. We can now infer the form of $U(z)$.
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.6\textwidth}{!}{\input{./figures/fisherSol.pdf_tex}}
+\caption{Phase Portrait for the system}
+\end{figure}

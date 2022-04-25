@@ -1,0 +1,262 @@
+% !TEX root = ../notes.tex
+
+\subsection{Turing Mechanism}
+We now consider $n = 2$, we write these as $u$ and $v$.The application is pattern formation. In absence of diffusion, $u(\vec x, t) = u_0$ for all $\vec x, t$. This would produce a uniform pattern. We also assume in the absence of diffusion $ v(\vec x, t) = v_0$. We further assume that steady states are linearly stable. We will focus on deriving conditions such that the introduction of diffusion destabilises this and we get inhomogeneous patterning. \\
+
+\noindent
+We consider the reaction-diffusion equations for $u$ and $v$ in their normalised form ($\g > 0$),
+\begin{equation}
+  \begin{aligned}
+    \pd u t &= \g f(u, v) + \nab^2 u \\
+    \pd v t &= \gamma g(u, v) + \nab^2 v
+  \end{aligned}\label{equ:RDNF}
+\end{equation}
+We consider some domain $\O$ with boundary $\partial \O$ with outward normal $\vec n$. Further, we take zero-flux boundary conditions,
+$$ \vec n \cdot \nab u = \vec n \cdot \nab v = 0. $$
+Suppose we have a spatially uniform steady state of \refeq{equ:RDNF}, $(u_0, v_0)$. Then, $(u_0, v_0)$ satisfies,
+$$ f(u_0, v_0) = g(u_0, v_0) = 0. $$
+Also note that $\vec n \cdot \nab u_0 = \vec n \cdot \nab v_0 = 0$. We first linearise these about the steady states $(u_0, v_0)$ in the absence of diffusion, (i.e. when $\nab^2 u = \nab^2 v = 0$). Write,
+\begin{align*}
+  u &= u_0 + \hat u \\
+  v &= v_0 + \hat v.
+\end{align*}
+Substituting into \ref{equ:RDNF}, taking a Taylor expansion and considering lowest order terms, we obtain,
+\begin{align*}
+  \pd {\hat u} t &= \g (f_u\hat u + f_v\hat v)\\
+  \pd {\hat v} t &= \g (g_u\hat u + g_v\hat v).
+\end{align*}
+In vector form, $\vec w = (\hat u \quad \hat v)^T$, the equations become,
+$$ \pd {\vec w} t = L\vec w \qquad L = \g \left.\begin{pmatrix}
+  f_u & f_v \\ g_u & g_v
+\end{pmatrix}\right|_{(u_0, v_0)}. $$
+Recall that we want the diffusion-free problem to be stable. We want the eigenvalues of $L$ to have negative real part. This is guarenteed if $\tr L < 0$ and $\det L > 0$. Note,
+\begin{align*}
+  \Tr(L) &= \g(f_u + g_v)\\
+  \det L &= \g (f_u g_v - f_v g_u)
+\end{align*}
+Thus we obtain stability if,
+\begin{align}
+  f_u + g_v < 0 \tag{I}\\
+  f_ug_v - f_vg_u > 0\tag{II}.
+\end{align}
+Let us consider the full equations with diffusion,
+\begin{align*}
+  \pd u t &= \g f(u, v) + \nab^2 u \label{cond:linStab1}\\
+  \pd v t &= \gamma g(u, v) + \nab^2 v \label{cond:linStab2}
+\end{align*}
+We introduce again $u = u_0 + \hat u$ and $v = v_0 + \hat v$ and we then obtain the linearisation,
+\begin{align*}
+  \pd {\hat u} t = \g(f_u \hat u + f_v \hat v) + \nab^2 \hat u \\
+  \pd {\hat u} t = \g(g_u \hat u + g_v \hat v) + d\nab^2 \hat v
+\end{align*}
+In vector form, $\vec w = (\hat u \quad \hat v)^T$, obtaining,
+\begin{equation}
+  \pd {\vec w} t = L\vec w + D\nab^2 \vec w \qquad D = \begin{pmatrix}
+    1 & 0 \\ 0 & d
+  \end{pmatrix}\label{equ:linTM}
+\end{equation}
+To solve \ref{equ:linTM} we are going to separate space and time. First, let $\vec w_k(\vec x) = (\hat u_k(\vec x) \quad \hat v_k(\vec x))^T$ be the solution to the spatial eigenvalue problem,
+$$ \nab^2 \vec w_k = -k^2 \vec w_k. $$
+Subject to the following boundary conditions $\vec n \cdot \nab \hat u_k = \vec n \cdot \hat w_k = 0$.
+
+\begin{eg}
+  Consider the 1D domain $\O = \{0 \le x \le a\}$, then $\partial \O = \{0\} \cup \{a\}$. The eigenvalue problem is then,
+  $$ \pdd {\vec w_k} x = -k^2 \vec w_k$$
+  which we can write as the shorthand for $w_k = \hat u_k$ or $\hat v_k$. The boundary conditions are,
+  $$ \pd {w_k} x = 0 \text{ at } x = o \text{ and } x= a. $$
+  The general solution is,
+  $$ w_k(x) = A_k\cos (kx) + B_k\sin (kx) \qquad A_k, B_k \in \R. $$
+  Imposing the boundary conditions, the solution are,
+  $$ w_k(x) = A_k \cos \left(\frac{n\pi x}{a}\right) $$
+  Thus we have shown,
+  $$ \vec w_k(x) = \begin{pmatrix}
+    A_{k_1} \\ A_{k_2}
+  \end{pmatrix} \cos \left(\frac{n\pi x}{a}\right)$$
+  where $A_{k_1}, A_{k_2} \in \R$.
+\end{eg}
+
+\noindent
+In general we see a solution to (\ref{equ:linTM}) in the following form,
+\begin{equation}
+  \vec w(\vec x, t) = \sum_k c_k e^{\l_k t}\vec w_k(\vec x)\label{equ:wksol}
+\end{equation}
+The stability of the solutions in time will be determined by the spatial eigenvalues. If $\l_k < 0$ then we get the perturbation dying out, but if $\l_k > 0$ then we have a growing solution with the trig function in space with a periodic solution. Hence for instability we want some $\l_k > 0$. We are going to substitute this (\ref{equ:wksol}) back into (\ref{equ:linTM}),
+$$ \sum_k c_k\l_k e^{\l_k t} \vec w_k = \sum_k c_ke^{\l_k t} (\g A - k^2 D)\vec w_k $$
+where $A$ is just the Jacobean at $(u_0, v_0)$. But the $\vec w_k$'s are linearly independent, and so
+$$ (\g A - k^2D)\vec w_k = \l_k \vec w_k $$
+and so,
+$$ (\l_kI - \g A + k^2D)\vec w_k = 0 $$
+We are interested in the temporal eigenvalues $\l_k$. For non-trivial solutions, we require that,
+$$ |\l_k I - \g A + k^2D| = 0 $$
+This is equivalent to the following,
+$$ \l_k^2 + (k^2(1 + d) - \g(f_u + g_v))\l_k + h(k^2) = 0 $$
+where
+$$h(k^2) = dk^4 - \g(df_u + g_v)k^2 + \g(f_ug_v - f_vg_u).$$
+We want stable eigenvalues and so we will use (I) and (II) to find new conditions on this problem. From condition \ref{cond:linStab1}, $f_u + g_v < 0$. Hence, for $\Re (\l_k) > 0$, we must $h(k^2) < 0$. From condition \ref{cond:linStab2}, we have that $f_ug_v - f_vg_u > 0$, so for $h(k^2) < 0$, require
+\begin{equation}
+  df_u + g_v > 0 \tag{III}\label{cond:linStab3}
+\end{equation}
+Further we can write $h(k^2)$ as,
+$$ h(k^2) = d\left[ (k^2 - \frac{\g}{2d}(f_u + g_v)) + \frac{\g^2}{d}\left( f_ug_v - f_vg_u \right) - \frac{\g^2}{4d^2} \left( df_u + g_v \right)^2 \right]. $$
+The last two terms are independent of $k^2$, hence $h(k^2)$ is minimised when,
+\begin{equation}
+  k^2 = \frac{\g}{2d}\left( f_u + g_v \right)\label{equ:hkmin}
+\end{equation}
+and $h(k^2)$ has the following minimum value,
+$$ h_{\text{min}} = \g^2 \left( f_ug_v - f_vg_u \right) - \frac{\g^2}{4d} \left( df_u + g_v \right)^2 $$
+Then $h_{\text{min}} < 0$ and so $h(k^2) < 0$, so for instability we require,
+\begin{equation}
+  (df_u + g_v)^2 < 4d(f_ug_v - f_vg_u)\label{linStab4}\tag{IV}
+\end{equation}
+
+\noindent
+To recap. We have show that conditions required for diffusion driven instability are,
+\begin{align}
+  f_u + g_v < 0 \tag{I} \\
+  f_ug_v - f_vg_u > 0 \tag{II} \\
+  df_u + g_v > 0 \tag{III} \\
+  (df_u + g_v)^2 > 4d(f_ug_v - f_vg_u) \tag{IV}
+\end{align}
+The first two will guarantee that without diffusion it is stable and the last two guarantee it is unstable with diffusion. Note, each partial derivatives are evaluated at $(u_0, v_0)$. \\
+
+\noindent
+This is obviously a bifurcation. Let us thing about $d$ as a parameter. Then there is a critical value of $d$, $d_c$ at which instability occurs (When $h_{\text{min}}$). The derivation for condition \refeq{linStab4} tells us it is,
+\begin{equation}
+  (d_cf_u + g_v)^2 = 4d_c (f_ug_v - f_vg_u)\label{equ:kc}
+\end{equation}
+We can plot this as,
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.6\textwidth}{!}{\input{./figures/TC4.pdf_tex}}
+\caption{Different values of $d$ with respect to $d_c$.}
+\end{figure}
+
+\noindent
+We consider the the perturbation from the steady states was,
+$$ \vec w(\vec x, t) = \sum_k c_k e^{\l_k t} \vec w_k (\vec x). $$
+This tells is that for all $k_1^2 k^2 < k_2^2$ we have $\Re(\l_k) > 0$. For $d < d_c$ we have all the $\Re(\l_k) < 0$ and so $\vec w(\vec x, t) \to 0$, but for $d > d_c$ we will have $\vec w_k$ grow to an inhomogeneous solution.\\
+
+\noindent
+The bifurcation we see is sometimes called the Turing bifurcation, we call the $k$'s the wave numbers. There is a critical wave number, $k_c$, the wave number we get at the bifurcation. This is the first node to lose stability. From \ref{equ:hkmin}, we can see this is,
+$$ k_c ^2 = \frac{\g}{2d_c} (d_c f_u + g_v). $$
+Then \ref{equ:kc} then gives us,
+$$ k_c^2 = \g\sqrt{\frac{f_ug_v - f_vg_u}{d_c}} $$
+
+\subsection{Turing Mechanism: Example}
+Consider the following system in $\R$ ($u = u(x, t)$ and $v = v(x, t)$). Then the system is,
+\begin{align*}
+  u_t &= \frac{u^2}{v} - bu + u_{xx} \\
+  v_t &= u^2 - v + du_{xx}
+\end{align*}
+where $b, k > 0$. The reaction terms in this case are the following,
+$$ f(u,v) = \frac{u^2}{v} - bu \qquad g(u, v) = u^2 - v $$
+This define the system as an activator-inhibitor system because, an increase of $u$ increases $v$, that is $u$ is having a positive increasing affect on $v$. Increasing $v$ decreases the amount of $u$ created. Hence we have an activator coupled with an inhibitor. We can take partial derivatives,
+$$ f_u = \frac{2u}{v} - b \qquad f_v = - \frac{u^2}{v^2} $$
+$$ g_u = 2u \qquad g_v = -1 $$
+We are interested in spatially homogenous steady states $u = u_0$ and $v = v_0$ satisfy,
+$$ f(u_0, v_0) = g(u_0, v_0) = 0 $$
+That gives,
+$$ \frac{u_0^2}{v^2} - bu_0 = 0 \qquad u_0^2 = v_0 $$
+This is pretty easy to solve and we get,
+$$ u_0 = \frac{1}{b} \qquad v_0 = \frac{1}{b^2}.$$
+So we have the steady state of $\left( \frac{1}{b}, \frac{1}{b^2}\right)$. At the steady state,
+$$ f_u = b \qquad g_v = -b^2 \qquad g_u = \frac{2}{b} \qquad g_v = -1  $$
+
+\noindent
+Stability in the presence of diffusion requires,
+\begin{align*}
+  f_u + g_v < 0 \implies b < 1 \tag{I}\\
+  f_ug_v - f_vg_u > 0 \implies b > 0 \tag{II}
+\end{align*}
+Therefore, stability in the presence of diffusion happens when $0 < b< 1$. For diffusion-driven instability, requires,
+\begin{align*}
+  df_u + g_v > 0 \implies db > 1 \tag{III}\\
+  (df_u + g_v)^2 > 4d(f_ug_v - f_vg_u) \implies (db - 1)^2 > 4db \tag{IV}
+\end{align*}
+To simplify the analysis, we let $x = db$. Then (IV) becomes,
+$$ (x - 1)^2 > 4x $$
+This can be manipulated to find that $(x - 3) > 8$ and further $3 + 2\sqrt 2 < x < 3 - 2\sqrt{2}$. We let $x = db$ and (III) said that $db > 1$, we see that the later half of the above inequality violated that. This $db > 3 + 2\sqrt 2$. So for diffusion-driven instability we require,
+$$ 0 < b < 1 \quad \text{ and } d > \frac{3 + 2\sqrt 2}{b}. $$
+In the $(b, d)$ parameter plane,
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.6\textwidth}{!}{\input{./figures/TMex.pdf_tex}}
+\caption{Parameter variation for activator-inhibitor model.}
+\end{figure}
+
+The shaded value shows where diffusion-driven instability can occur. If we think of $d$ as a bifurcation parameter. For each fixed $b$, f we move $d$ through the curved dotted line a Turing bifurcation will occur. That is, as $d$ increases through,
+\begin{equation}
+  d_c = \frac{3 + 2\sqrt{2}}{b},\tag{$*$}\label{equ:dcex}
+\end{equation}
+$(u_0, v_0)$ loses stability in a Turing bifurcation. Now,
+$$ k_c^2 = \g \sqrt{\frac{f_ug_v - f_vg_u}{d_c}} = \sqrt{\frac{b}{d_c}}. $$
+So from \refeq{equ:dcex},
+$$ k_c = \sqrt{\frac{3 + 2\sqrt 2}{d_c^2}} = \frac{\sqrt{3 + 2\sqrt 2}}{d_c} = \frac{1 + \sqrt 2}{d_c}. $$
+
+\subsection{Biological Pattern Formation (Non-examinable)}
+We have been examining,
+\begin{align*}
+  u_t = \g f(u, v) + \nab^2 u \\
+  v_t &= \g g(u, v) + d\nab^2 v
+\end{align*}
+involving two reactants and two zero-flux conditions,
+$$ \pd u n = \vec n \cdot \nab u = 0 \quad \pd v n = \vec n \cdot \nab v = 0 $$
+and then the linearisation,
+$$ \vec w_t = L\vec w + D\nab^2 \vec w. $$
+This has solutions,
+$$ \vec w(\vec x, t) = \sum_k c_ke^{\l_k t}\vec w_k(\vec x) $$
+and we have the usual $I - IV$ conditions. So let us now consider $\O = \{0 < x< p, 0 < y < q\}$. The spatial eigenvalue problem is,
+$$ \nab^2 \vec w = -k^2 \vec w $$
+with boundary conditions,
+$$ \pd {\vec w} x = 0 \text{ at } x = 0, p \qquad \pd {\vec w} y = 0 \text{ at } y = 0, q $$
+Thus,
+$$ \pdd w x + \pdd w y = -k^2 w $$
+with,
+$$ \pd w x = 0 \text{ at } x = 0, p \qquad \pd w y = 0 \text{ at } y = 0, q, $$
+where $w = \hat u, \hat v$. We seek separable solutions $w(x, y) = X(x)Y(y)$. These satisfy,
+$$ X''Y + XY'' + k^2XY = 0 $$
+that is,
+$$ -\frac{X''}{X} = k^2 + \frac{Y''}{Y} = \a^2, $$
+for some $\a \in \R$. This then yields,
+$$ X(x) = A\cos (\a x) + B\sin (\a x). $$
+Now, $\pd w x = X'Y$ and $\pd w y = XY'$. The boundary conditions say,
+$$ X' = 0 \text{ at } x = 0, p \qquad Y' = 0 \text{ at } y = 0, q. $$
+Imposing boundary conditions,
+$$ \a = \frac{m\pi }{p} \qquad \b = \frac{n\pi}{q} \qquad m,n \in \Z $$
+This,
+$$ w = XY = A\cos\left( \frac{m\pi x}{p}\right)\cos\left( \frac{n\pi y}{q}\right) $$
+where,
+$$ k^2 = a^2 + b^2 = \pi^2 \left( \frac{m^2}{p^2} + \frac{n^2}{q^2} \right). $$
+Our solution is then of the form,
+$$ w(x, y, t) = \sum_{m, n} c_{mn}e^{\l_{mn} t} \cos\left( \frac{m\pi x}{p}\right)\cos\left( \frac{n\pi y}{q}\right) $$
+We now recall the stability discussion. Any $m, n$ that satisfy our stability condition will grow in time, these develop into different states that are dependent on the eigenfunctions.\\
+
+\noindent
+Suppose the only unstable wave numbers are $m = 1$ $n = 0$. The only unstable mode is then,
+$$ w(x, y, t) = Ae^{\l t} \cos \left( \frac{\pi x}{p} \right) \quad \text{ for } \Re \l > 0$$
+Thus,
+$$ u(x, y, t) = u_0 + \e e^{\l t}\cos \left( \frac{\pi x}{p} \right) $$
+where we have a steady state and perturbation terms. Similarly for $v$. Typically a patter will be laid down where the morphogen $u$ is about it's steady state. So we get some halved pattern,
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.4\textwidth}{!}{\input{./figures/Pattern1.pdf_tex}}
+\caption{Pattern Formation from $m = 1$, $n = 0$ unstable.}
+\end{figure}
+
+\noindent
+We can generalise this. If we have some pairing $(m, n)$ corresponds to an unstable solution then,
+$$ w(x, y, t) = Ae^{\l t} \cos \left( \frac{m\pi x}{p} \right)\cos \left( \frac{n\pi y}{q} \right) \quad \text{ for } \Re \l > 0$$
+Thus,
+$$ u(x, y, t) = u_0 + \e e^{\l t}\cos \left( \frac{m\pi x}{p} \right)\cos \left( \frac{n\pi y}{q} \right) $$
+and similarly for $v$. We therefore expect $u > u_0$ in an $(m + 1) \ti (n + 1)$ chessboard pattern. We get spots.\\
+
+\noindent
+More complex geometries and reaction kinetics lead to more complex patterns. Murray has a detailed discussion. We know that the wave numbers satisfy of our problem (a Helmhotlz Problem) satisfy,
+$$ k^2 = \pi \left( \frac{m^2}{p^2} + \frac{n^2}{q^2} \right). $$
+Typically, the chemistry, rather than the geometry will force unstable wave numbers $k$ to satisfy the condition $k_1^2 < k^2 < k_2^2$. \\
+
+\noindent
+For a tail, length $>>>$ width and so $p >>> q$. Then we might allow only $n = 0$ and $m = M >>> 1$ say, giving a striped tail and if $n = 2$ we might get a spotted tail. 
