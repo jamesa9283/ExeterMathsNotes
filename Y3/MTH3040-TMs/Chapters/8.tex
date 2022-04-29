@@ -1,0 +1,146 @@
+% !TEX root = ../notes.tex
+
+\noindent
+\begin{nlemma}
+  In a complete metric space, a subspace is complete if and only if it is closed.
+\end{nlemma}
+\begin{proof}
+  Let $(X, d)$ be a complete metric space and $Y$ a subspace. \\
+  Firstly suppose $Y$ is complete. If $a$ is any point in the closure $\bar Y$ of $Y$, we can find a sequence $a_n$ in $Y$ so that $a_n \to a$. Then $(a_n)$ is Cauchy sequence, so by the completeness of $Y$, it's limit $a$ must be an element of $Y$. Hence $\bar Y \sub Y$, so $Y$ is closed.\\
+
+  \noindent
+  Conversely, suppose that $Y$ is closed. Any Cauchy sequence $b_n$ in $Y$ converges to a point $b \in X$ since $X$ is complete. But then $\lim b_n = b$ must be in $Y$ as $Y$ is closed. Hence $Y$ is complete.
+\end{proof}
+
+\begin{nlemma}
+  The product of two complete metric spaces is complete.
+\end{nlemma}
+\begin{proof}
+  Given metric space $(X, d_X)$ and $(Y, d_Y)$, the product topology on $X \ti Y$ is given by the metric
+  $$ d((x_1, y_1), (x_2, y_2)) = d_X(x_1, x_2) + d_Y(y_1 + y_2) $$
+  (or any metric equivalent to this). If $(x_n, y_n)$ is a Cauchy sequence in $X \ti Y$ then $(x_n)$ is a Cauchy sequence in $X$, so it converges to some $x \in X$ since $X$ is complete. Similarly $(y_n)$ converges to some $y \in Y$. Then $(x_n, y_n) \to (x, y)$. Hence $X \ti Y$ is complete.
+\end{proof}
+
+\begin{eg}
+  $\R^n$ is complete.
+\end{eg}
+
+\subsection{Banach's Fixed Point Theorem}
+\begin{ndefi}[Fixed Point]
+  Let $S$ be any set and $f : S \to S$ a function. A fixed point of $f$ is a point $s \in S$ with $f(s) = s$.
+\end{ndefi}
+
+\noindent
+It is useful to know when a function has a fixed point. This is closely related to finding a solution to an equation by successive approximation.
+\begin{ndefi}[Contraction]
+  Let $(X, d)$ be a complete metric space. A function $f: X \to X$ is a contraction if there is some $K < 1$ such that,
+  $$ d(f(x), f(y)) \le Kd(x, y) \quad \text{for all }x, y \in X $$
+\end{ndefi}
+
+\begin{nthm}[Banach's Fixed Point Theorem / Contraction Mapping Theorem]
+  Let $(X, d)$ be a complete metric space and let $f: X \to X$ be a contraction. Then $f$ has a unique fixed point.
+\end{nthm}
+\begin{proof}
+  Choose any $x_1 \in X$ and define a sequence $(x_n)$ by $x_{n+1} = f(x_n)$ forall $n \ge 1$. Let $K < 1$ satisfy,
+  $$ d(f(x), f(y)) \le Kd(x, y) \quad \text{for all }x, y \in X $$
+  Then for $n \ge 2$ we have,
+  $$ d(x_{n+1}, x_n) = d(f(x_n), f(x_{n-1})) \le Kd(x_n, x_{n-1}) $$
+  Iterating, we get,
+  $$ d(x_{n+1}, x_n) = K^{n-1}d(x_2, x_1). $$
+  Hence if $m > n \ge 2$, using the triangle inequality in $X$ repeatedly to get,
+  \begin{align*}
+    d(x_n, x_m) \le d(x_m, x_{m-1}) + d(x_{m-1}, d_{m-2}) + \dots + d(x_{n+1}, x_n) \\
+    &\le (K^{m-2} + K^{m-3} + \dots + K^{n-1})d(x_2, x_1) \\
+    &= \frac{1 - K^{m-n}}{1 - k}K^{n-1} d(x_2, x_1)
+  \end{align*}
+  As $K < 1$ this shows that $(x_n)$ is a Cauchy sequence. Since $X$ is complete, it converges to some $p \in X$. Since $x_{n+1} = f(x_n)$ for all $n$, it follows that $f(p) = p$, so $p$ is a fixed point of $f$. If $q$ is another fixed point, we have $d(q, p) = d(f(p), f(q)) \le Kd(q, p)$. As $K < 1$, this shows that $d(p, q) = 0$, so $q = p$.
+\end{proof}
+
+\begin{remark}
+   If $X =[a, b]$ and $f: X \to X$ is differentiable, and there is a $K < 1$ with $|f'(X) \le K|$ for all $x \in (a, b)$, then $f$ is a contraction on $X$.\\
+
+   \noindent
+   This follows from the mean value theorem, if $a \le y < x \le b$, then,
+   $$ \frac{f(x) - f(y)}{x - y} = f'(c) \text{ for some } c \in (y, x). $$
+   As $|f'(c)| \le K$ it follows that $|f(x) - f(y)| \le K |x - y|$ for all $x$ and $y \in [a, b]$. So in the presvious example we could have shown that $f$ is a contraction on $X = [1, 2]$ by noting that $f'(x) \le \frac{1}{2}$ for all $x \in (1, 2)$
+\end{remark}
+
+\begin{eg}
+  We will show that $f(x) = x^5 - 7x + 1 = 0$ on $[0, 1]$ using BFP. To do so, we have to rewrite such that $x$ is a fixed point of $[0,1]$. Now we have,
+  $$ f(x) = \frac{1}{7}(x^5 + 1). $$
+  Then for $x \in [0, 1]$ we have $\frac{1}{7} \le f(x) \le \frac{2}{7}$, so $f(x) \in [0, 1]$. Moreover, as $f'(x) = \frac{5}{7}x^4$, so we have $|f'(x)| \le \frac{5}{7}$ on $[0, 1]$. Hence $f$ is a contraction on $[0, 1]$ and so by BFP we have $f$ has a unique fixed point in that interval. This shows that $x^5 - 7x + 1 = 0$ has a unique solution in $[0,1]$.
+\end{eg}
+
+\section{Measure Theory}
+\subsection{Motivation}
+This is basically trying to find some better way to do integration, but also we are interested in lengths of sets. If we have this length $m(A)$ of any $A \sub \R$. This is closely related to the idea of integration over $A$. If we define the indicator function of $A$,
+$$ 1_A : \R \to \R \qquad 1_A(x) = \begin{cases}
+  1 & \text{ if } x \in A \\
+  0 & \text{ if } x \notin A
+\end{cases} $$
+then we should have,
+$$ \int_A dx = \int_R 1_A(x)dx = m(A) $$
+If $A = [a, b]$ then this is straightforward. However, if $A = \Q$ it isn't straightforward. It isn't obvious what the length of $\Q$ should mean and the integral,
+$$ \int_\R 1_\Q dx $$
+isn't defined (as a Riemann integral). It turns out we can make sense of these subsets of $\R$ and the ones that work are called the measurable sets, which includes $\Q$. \\
+
+\noindent
+Let us begin realise what we want to happen with these subsets. Here are some properties,
+\begin{enumerate}
+  \item The length of an interval should have the obvious meaning,
+  $$ m((a, b)) = m([a, b]) = b- a \text{ if } b \ge a $$
+  In particular $m(\vn) = m(\{a\}) = 0$.
+  \item Unbounded intervals should have length $\infty$, but no set should have negative length. Hence the values for $m$ should be in $\{\infty\} \cup [0, \infty)$. We write this set as $[0, \infty]$.
+  \item We expect $m(A \cup B) \le m(A) + m(B)$ for all sets $A, B$ and,
+  $$ m(A \cup B) = m(A) + m(B) \text{ if } A\cup B = \vn. $$
+  By induction, this should be true for any union of finite collection of sets. Note that because we have $\infty$, we have $m + \infty = \infty$, $\infty + m = \infty$ and $\infty + \infty = \infty$ for $m \ge 0$.
+  \item More generally we should expect $m$ to respect countably infinite unions,
+  $$ m\left( \bigcup_{n=1}^\infty A_n \right) \le \sum_{n=1}^\infty m(A_n) $$
+  and,
+  $$ m\left( \bigcup_{n=1}^\infty A_n \right) \le \sum_{n=1}^\infty m(A_n) \text{ if }A_i \cap A_j = \vn \text{ when }i \ne j. $$
+  Note that the sums may diverge to $\infty$, however if the sum is absolutely convergent, so the order of the terms in the sum doesn't matter. For example, $\Q$ is countable. So we should have,
+  \begin{align*}
+    m(\Q) &= m\left( \bigcup_{q \in \Q} \{q\} \right)\\
+    &\le \sum_{q \in \Q} m(\{q\})\\
+    &= \sum_{q \in \Q} 0 = 0.
+  \end{align*}
+  \noindent
+  Note that is does not make sense to expect a similar property for uncountably infinite unions since, for example,
+  $$ [0, 1] = \bigcap_{x \in [0, 1]} \{x\} $$
+  where $m([0, 1]) = 1$ and $m(\{x\}) = 0$ for each of the uncountably many elements.
+  \item $m$ should be translation invariant, i.e. if $c \in \R$ and we write,
+  $$ A + c = \{a + c : a \in A\} $$
+  then $m(A + c) = m(A)$.
+\end{enumerate}
+\noindent
+It turns out that we can't have all 1-5 for all $A \sub \R$.
+\subsubsection{A strange example}
+We now show that is not possible to define $m(A)$ of all subsets $A \sub \R$ so that $1 - 5$ are all satisfies. Roughly, the ideas is that `real numbers modulo the rational numbers' gives a set too weird to have a length. However, to avoid the possibility of sets of infinite length, we work within $[0 ,1)$ instead of $\R$ fully. \\
+
+\noindent
+We first define an equivalence relation $\sim$ on $[0, 1)$ by $x \sim y \iff x - y \in \Q$. So $\R$ is disjoint union of it's equivalence classes, and for $x \in [0 ,1)$, its equivalence class is the set,
+$$ \{x + q : q \in \Q, 0 \le x + q < 1\}. $$
+The cooresponding values of $q$ will be those in $[-x, 1 - x) \cap \Q$, so each equivalence class is a countably infinite set. As $[0, 1)$ is uncountable, it follows that there are uncountably many equivalence classes. Now let $S \subsetneq [0, 1)$ be a set containing exactly one representation of each equivalence class. (Another way to say this is that $S$ is a system of coset representatives for the subgroup $\Q$ as a subgroup of $\R$, with these representatives in $[0, 1)$.) The axiom of choice guarantees that $S$ exists, even though we cannot write it down explicity. \\
+
+\noindent
+For each $q \in \Q$, let $S_q = S + q := \{s + q : s \in S\}$, so $S_q \sub [q, q + 1)$. In particular, if $q \in [0, 1) \cap \Q$, then $S_q$ is the disjoint union of it's `part below 1' and `part above 1':
+$$ S_q^1 = S_q \cap [0 ,1) = S_q \cap [q, 1) $$
+$$ S_q^2 = S_q \cap [1 ,2) = S_q \cap [1, q + 1) $$
+
+\noindent
+We will show that if $m(S_q^1)$ and $m(S_q^2)$ are defined for all $q$, then 1-5 will lead to a contradiction. This will show that $S$, and the closely related sets $S_q^1, S_q^2$ are too badly behaed to have a length satisfying our desired properties. \\
+
+\noindent
+If $m(S_q^1)$ and $m(S_q^2)$ are defined we should have,
+$$ m(S_q) = m(S_q^1) + m(S_q^2) $$
+by $3$. By the translation property, $m(S_q) = m(S)$. USing the translation property again to move $S_q^2$ back by $1$, we have $m(S_q^2) = m(T_q)$ for,
+$$ T_q = \{x - 1 : x \in S_q^2\} = S_{q-1} \cap [0, 1) \sub [0, q).$$
+So writing $A_q = T_q \cup S_q^1 \subsetneq [0, 1)$, we have,
+$$ m(A_q) = m(T_q) + m(S_q^1) = m(S_q) = m(S). $$
+Now $[0, 1)$ is the disjoint union of sets $A_q$ for $q \in [0, 1)$. Indeed, given some $x \in [0, 1)$, there is a unique $s \in S$ and a unique $q \in (-1, 1)\cap \Q$ with $x = s + q$. If $q \ge 0$, then $x \in S_q^1 \sub A_q$. If $q < 0$, let $r = q + 1 \in [0, 1)$ and $y = x+1$.
+Then $y = s + r \ge 1$ so $y \in S_r^2$ and hence $x \in T_r$.\\
+
+\noindent
+Now consider the countably infinite disjoint union,
+$$ [0, 1) = \bigcup_{q \in [0, 1) \cap \Q} A_q $$
+with $m(A_q) = m(S)$ for each $q$. If property $4$ holds and $s(S)$ is defined then either $m(S) = 0$ and $m([0, 1)) = 0$, or $m(S) > 0$ and $m([0, 1)) = \infty$. Both of these give a contradiction since $m([0, 1))= 1$.

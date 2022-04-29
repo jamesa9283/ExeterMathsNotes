@@ -1,0 +1,104 @@
+% !TEX root = ../notes.tex
+
+\noindent
+\subsection{Nulls Sets and Outer Measure}
+Null sets are sets that we can assign a length of $0$. We can `over-estimate' the length of a set by covering with a countable union of open sets. If we can make the over-estimate arbitrarily small, then our set should have length zero,
+\begin{ndefi}[Null Set]
+  A subset $A$ of $\R$ is a null set if, given $\e > 0$, there is a countable family of open intervals $I_n$, $n \ge 1$ such that,
+  $$ A \sub \bigcup_{n=1}^\infty I_n \text{ and } \sum_{n=1}^\infty m(I_n) < \e $$
+  where, for an open interval $I = (u, v)$ with $u \le v$ we define $m(I) = v - u$.
+\end{ndefi}
+\begin{eg}
+  Given any finite set $A = \{a_1, a_2, \dots, a_k\}$ is a null set. For a given $\e > 0$ we pick $\d > 0$ with $2k\d < \e$. Define $I_n$ by,
+  $$ I_n = \begin{cases}
+    (a_n - \d, a_n + \d) & \text{ if } 1 \le n \le k\\
+    \vn & \text{ if } n > k
+  \end{cases} $$
+  Then $a_n \in I_n$ for $1 \le n \le m$, so,
+  $$ A\sub \bigcup_{n=1}^\infty I_n $$
+  and,
+  $$ \sum_{n=1}^\infty m(I_n) = \sum_{n=1}^k 2\d < \e. $$
+\end{eg}
+
+\begin{eg}
+  The middle third cantor set $C$ is a null set. Recall $C = \bigcap_{k=0}^\infty C_k$ where $C_k$ is the disjoint union of $2^k$ closed intervals, each of length $3^{-k}$. We choose some $\a$ with $\frac{1}{3} < \a < \frac{1}{2}$. Given $\e > 0$, let $k$ be large enough that $(2\a)^k < \e$. For each of the $2^k$ closed intervals $J$ of length $3^{-k}$ making up $C_k$,
+  pick an open interval $I \supset J$ of length $\a^k$, and label these intervals $I_1, I_2, \dots, I_r$ with $r = 2^k$. For $n > r$, let $I_n = \vn$. Then,
+  $$ C \subset C_k \sub \bigcup_{n=1}^\infty I_n $$
+  and
+  $$ \sum_{n=1}^\infty m(I_n) = \sum_{n=1}^r \a^k = r\a^k = (2\a)^k < \e $$
+  This shows that $C$ is indeed a null set.
+\end{eg}
+
+\begin{nlemma}
+  If $A$ and $B$ are null sets, so is $A \cup B$.
+\end{nlemma}
+\begin{proof}
+  Given $\e > 0$, we can find open intervals $I_n$ and $J_n$ for $n \ge 1$ such that,
+  $$ A \sub \bigcup_{n=1}^\infty I_n \text{ and } \sum_{n=1}^\infty m(I_n) < \frac{1}{2}\e, $$
+  and,
+  $$ B \sub \bigcup_{n=1}^\infty J_n \text{ and } \sum_{n=1}^\infty m(J_n) < \frac{1}{2}\e. $$
+  Let $W_1, W_2, \dots$ be the sequence of intervals $I_1, J_1, I_2, J_2, \dots$. Then,
+  $$ A \cup B \sub \bigcup_{n=1}^\infty W_n = \bigcup_{n=1}^\infty I_n \cup \bigcup_{n=1}^\infty J_n $$
+  and,
+  $$ \sum_{n=1}^\infty W_n = \sum_{n=1}^\infty I_n + \sum_{n=1}^\infty J_n < \e $$
+  We can rearrange these sums since it is absolutely convergent.
+\end{proof}
+
+\noindent
+It follows by induction that the union of finitely many null sets is a null set. More generally,
+\begin{nlemma}
+  The union of countably many null sets is a null set.
+\end{nlemma}
+\begin{proof}
+  Let $A_1, A_2, \dots$ be null sets, Given $\e > 0$ for each $j \ge 1$, there is a countable collection of open sets $I_1^{(j)}, I_2^{(2)}, \dots$ such that
+  $$ A_j \sub \bigcup_{n=1}^\infty I_{n}^{(j)} \text{ and } \sum_{n=1}^\infty m(I_n^{(j)}) < 2^{-j}\e.$$
+  The collection of intervals $I_n^{(j)}$ for all $j$, $n \ge 1$ is countable. We can list it is $I_1^{(1)}, I_1^{(2)}, I_2^{(1)}, I_1^{(3)}, I_{2}^{(2)}, I_3^{(1)}, \dots$. Label these intervals $W_1, W_2, \dots$. Then we have,
+  $$ \bigcup_{j=1}^\infty A_j \sub \bigcup_{j=1}^\infty\bigcup_{i=1}^\infty I_n^{(j)} = \bigcup_{n=1}^\infty W_n$$
+  and,
+  \begin{align*}
+    \sum_{j=1}^\infty m(W_n) &= \sum_{j=1}^\infty \sum_{i=1}^\infty m(I_n^{(j)}) \\
+    &< \sum_{j=1}^\infty 2^{-j}\e = \e.
+  \end{align*}
+  (We can rearrange the sum since it's absolutely convergent.) Hence $\bigcup_{j=1}^\infty A_j$ is a null set.
+\end{proof}
+
+\begin{eg}
+  $\Q$ is a null set. In $\Q$ is countable, so we may list it's elements $q_1, q_2, \dots$. Then $\Q$ is the union of countably many null sets $\{q_n\}$ for $n \ge 1$.
+\end{eg}
+
+\noindent
+Now we seek to look at the Outer Measure. We wanted the following properties,
+\begin{enumerate}
+  \item $m((a, b)) = m([a, b]) = b - a$ if $b \ge a$,
+  \item $m(A) \in [0, \infty]$,
+  \item $m(A \cup B) \le m(A) + m(B)$ for all set $A, B$,
+  \item More generally we should expect $m$ to respect countably infinite unions.
+  \item $m$ should be translation invariant, $m(A + c) = m(A)$.
+\end{enumerate}
+
+\noindent
+We will now consider an $m^*$ which turns out to have all the properties above apart from the equality conditions (not listed). We will apply the same over-estimate strategy for null sets and define $m^*(A)$ for an arbitrary $A$ as the best over estimate. Consider the set of all possible over-estimates,
+$$ Z(A) = \left\{ \sum_{n=1}^\infty m(I_n) : I_1, I_2 \dots \text{ are open intervals with } A \sub \sum_{n=1}^\infty I_n \right\} $$
+Clearly $\infty \in Z(A)$. Either $Z(A) = \{\infty\}$ or $Z(A)\sm \{\infty \}$ is a non-empty subset of $\R$ bounded below by $0$. Hence $Z(A)$ has an infinimum, which may be $\infty$.
+
+\begin{ndefi}[Outer Measure]
+  The outer measure of $A$ is $m^*(A) = Z(A)$
+\end{ndefi}
+
+\noindent
+This means that for any family $I_1, I_2, \dots$ of open intervals covering $A$, we have,
+$$ m^*(A) \le \sum_{n=1}^\infty m(I_n) $$
+but, given $\e > 0$, there is such a family with,
+$$ \sum_{n=1}^\infty m(I_n) \le m^*(A) + \e $$
+In summary, we have defined $m^*(A) \in [0, \infty]$ for every subset $A \sub \R$, and shown that is has the following properties,
+\begin{enumerate}
+  \item If $A$ is an interval, then $m^*(A)$ is the length of $A$.
+  \item $m^*$ is countably subadditive,
+  $$ m^*\left( \bigcup_{n=1}^\infty A_n \right) \le \sum_{n=1}^\infty m^*(A_n) $$
+  \item $m^*$ is translation-invariant, $m^*(A + c) = m^*(A)$.
+\end{enumerate}
+
+\noindent
+However, the example above shows that $m^*$ cannot be additive on countable disjoint unions. That is,
+$$ m^*\left( \bigcup_{n=1}^\infty A_n \right) = \sum_{n=1}^\infty m^*(A_n) \text{ if } A_i \cap A_j = \vn \text{ when } i \ne j $$
+cannot always hold. (Indeed, it doesn't always hold even for finite unions.)

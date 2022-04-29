@@ -177,3 +177,148 @@ Can we find examples where there are infinitely many closed connected components
     &= \e
   \end{align*}
 \end{eg}
+
+\begin{nlemma}
+  A connected open subset $U$ of $\R^n$ is path connected.
+\end{nlemma}
+\begin{proof}
+  Fix some $\vec x \in U$ and let,
+  $$ A = \{\vec y \in U : \text{ there is a path from } \vec x \text{ to } \vec y\} $$
+  We will show that $A$ and it's complement $B = X \sm A$ are both open. Since $U$ is the disjoint union of $A$ and $B$, and $U$ is connected, this will show that $A = U$.\\
+
+  \noindent
+  Let $\vec y \in A$. As $U$ is open, there is $\e > 0$ with $B_\e (y) \sub U$. We will show that $B_\e(y) \sub A$. Let $\vec z \in B_\e(y)$. We will find a path in $U$ connecting $\vec x$ to $\vec z$. Since $y \in A$, there is a path $\vec p : [0, 1] \to U$ connecting $\vec x$ to $\vec y$.
+  By a previous example, there is a path $\vec q : [0, 1] \to B_\e(\vec y)$ joining $\vec y$ to $\vec z$. We will concatinate these to form a new path from $\vec x$ to $\vec z$.
+  $$ \vec r(t) = \begin{cases}
+    p(2t) & \text{ if } 0 \le t \le \frac{1}{2}\\
+    q(2t - 1) & \text{ if } \frac{1}{2}\le t \le 1.
+  \end{cases} $$
+  This is well defined since $\vec p(1) = \vec q(0) = \vec y$, and it is continuous since $\vec p$ and $\vec q$ are. Moreover, $\vec r(t) \in U$ for all $t \in [0, 1]$. Hence $\vec z \in A$. Since this works for all $\vec z \in B_\e (\vec y)$, this shows that $A$ is open.\\
+
+  \noindent
+  We now show that $B$ is also open by a similar argument. Let $\vec y \in B$. There is some $\e> 0$ with $B_\e(y) \sub U$. Let $\vec z \in B_\e(y)$. We must show that there is no path in $U$ from $\vec x$ to $\vec z$. If we had such a path $\vec p$, we could find a path $\vec q$ from $\vec y$ to $\vec z$ as above and then define,
+  $$ \vec r(t) = \begin{cases}
+    p(2t) & \text{ if } 0 \le t \le \frac{1}{2}\\
+    q(2t - 1) & \text{ if }\frac{1}{2}\le t \le 1
+  \end{cases} $$
+  This gives a path in $U$ from $\vec x$ to $\vec y$, which is impossible since $\vec y \notin A$.
+ \end{proof}
+
+ \begin{nlemma}
+   Any path connected topological space is connected.
+ \end{nlemma}
+ \begin{proof}
+   Let $X$ be a path connected topological space, and let $x, y \in X$. We will show that $y$ is in the connected component $C_x$ of $x$. Then $C_x = X$ so $X$ is connected.\\
+
+   \noindent
+   Since $X$ is path connected, there is a path $[0, 1] \to X$ with $p(0) = x$ and $p(1) = y$. Now $[0, 1]$ is connected so, so by a lemma above, $p([0, 1]) = \{p(t) : t \in [0, 1]\}$ is a connected subset of $X$ containing $x$ and $y$.\\
+
+   \noindent
+   Since $C_x$ is the unique largest connected subset of $X$ containing $x$, it follows that $y \in C_x$ as required.
+ \end{proof}
+
+\noindent
+ Now the question is, is the converse true? It isn't true in general. A counter example is the topologists since curve,
+ \begin{eg}
+   The topologists sine curve isn't connected.
+ \end{eg}
+ \begin{proof}
+   Let $A = (1/\pi, 0)$, i.e. the last point on the curve with $y = 0$ and let $B = (0, 0)$. Suppose for a contradiction that there is a path $\vec p \in S$ with $\vec p(0) = A$ and $\vec p(1) = B$. We will write $\vec p(t) = (p_1(t), p_2(t))$, so $p_1$ and $p_2$ are the projections of $\vec p$ to the $x$-axis of $\vec p$ onto the $x$ and $y$ axis. Thus $p_1$ and $p_2$ are continuous. \\
+   It is possible that the path reaches the $y$-axis before $t = 1$, so let $t_0$ be the first time it happens. More precisely, let,
+   $$ T = \{ t \in [0, 1] : p_1(t) = 0\}. $$
+   Then $1 \in T$ and $T$ is bounded below, so it has infinimum $t_0$. As $p_1$ is continuous, $p_1(t_0) = 0$. As $p_1(0) > 0$, we have $0 < t_0 \le 1$ and $p_1(t) > 0$ if $t \in [0, t_0)$.\\
+   Since $\vec p$ is continuous, there is some $\e > 0$ so that if $t_0 - \e < t < t_0$ then $\norm{\vec p(t) - \vec p(t_0)} < 1$. In particular, if $t_0 - \e < t < t_0$ then $|p_2(t) - p_2(t_0)| < 1$. Now $p_1$ is continuous on the interval $[t_0 - \frac{1}{2}\e, t_0]$, so by IVT, $p_1$ takes all the values between $p_1(t_0) = 0$ ad $p_1(t_0 - \frac{1}{2}\e) > 0$. \\
+   Thus for large enough $n \in \Z$ we can find $t', t'' \in [t_0 - \frac{1}{2}\e, t_0]$ and $p_1(t') = [(2n + \frac{1}{2})\pi]^{-1}$ and $p_1 (t'') = [(2n + \frac{3}{2})\pi]^{-1}$. Then $p_2(t') = \sin (1/p_1(t')) = +1$ and $p_2(t'') = -1$.
+   This can't happen as $|p_2(t) - p_2(t_0)| < 1$.
+  \end{proof}
+
+\section{Metric Spaces II}
+\subsection{Complete Metric Spaces}
+We will now return to metric spaces and talk about Cauchy Sequences,
+\begin{ndefi}[Cauchy Sequence]
+  A sequence $(a_n)_{n \ge 1}$ in a metric space $(X, d)$ is a Cauchy Sequence if for every $\e > 0$, there is an $N \in \N$ with $d(a_m, a_n) < \e$ for all $m,n > N$.
+\end{ndefi}
+
+\noindent
+An important result is that,
+\begin{nthm}[]
+  A sequence in $\R$ converges if and only if it is a Cauchy Sequence.
+\end{nthm}
+\noindent
+It is easy to show the forward direction, but is hard to show the backward direction. It requires the completeness property of $\R$. Can we prove this without the completeness property? Well, no, on $\Q$ this theorem doesn't hold. We will turn things on their head and define completeness from Cauchy Sequences,
+\begin{ndefi}[Complete Metric Space]
+  A metric space $(X, d)$ if every Cauchy sequence in $X$ converges to an element of $X$.
+\end{ndefi}
+
+\begin{eg}
+  $\R$ is a complete metric space.
+\end{eg}
+\begin{eg}
+  $\Q$ isn't complete, we can find a Cauchy sequence that converges to $\sqrt 2$, but not a rational number.
+\end{eg}
+\begin{eg}
+  Recall that $\mathcal{C}[0, 1] = \{f : [0, 1] \to \R : f \text{ continuous}\}$. Then $\mathcal{C}[0, 1]$ is complete in the sup metric,
+  $$ d(f, g) = \sup_{t \in [0, 1]} |f(t) - g(t)|. $$
+\end{eg}
+\begin{proof}
+  Let $f_1, f_2, \dots$ be a Cauchy sequence in $\mathcal{C}[0, 1]$. Given some $\e >0$ there is an $N$ such that for all $m, n > N$, $|f_m(t) - f_n(t)| < \e$ for all $t \in [0, 1]$. \\
+
+  \noindent
+  Let $s \in [0, 1]$. Then, given a $\e > 0$ there is $N$ so that, for all $m, n> N$,
+  $$|f_n(s) - f_m(s)| \le d(f_n, f_m) < \e$$
+  so $(f_n(s))_{n=1}^\infty$ is a Cauchy sequence in $\R$. Therefore, it has a unique limit $f(s)$. We have now defined a function $f : [0, 1] \to \R$ which is our candidate for the limit of the given sequence. We need to show,
+  \begin{enumerate}
+    \item $f \in \mathcal{C}[0, 1]$,
+    \item $f_n \to f$ with respect to $d$.
+  \end{enumerate}
+  To show that $f$ is continuous. We fix a $s \in [0, 1]$ and show $f$ is continuous at $s$. We choose $\e > 0$ and $N'$  such that,
+  $$ \max_{t \in [0, 1]} |f_n(t) - f_m(t)| < \frac{1}{4}\e \quad \forall m, n > N' $$
+  Choose some $\d > 0$ so,
+  $$ |f_{N'+1}(t) - f_{N'+1}(s)| < \frac{1}{4}\e \quad\forall t \in [0, 1] \text{ with } |t - s|< \d $$
+  For $m > N'$ we have and $|t - s| < \d$,
+  \begin{align*}
+    |f_m(t) - f_m(s)| &\le |f_m (t) - f_{N' + 1}(t)| + |f_{N'+1} - f_{N'+1}(s)| + |f_{N'+1}(t) - f_m(s)|\\
+    &< \frac{1}{4}\e + \frac{1}{4}\e + \frac{1}{4}\e \\
+    &= \frac{3}{4}\e.
+  \end{align*}
+  Since $f(t) = \lim_{m \to \infty} f_m(t).$ Taking limits as $m \to \infty$. We get,
+  $$ |f(t) - f(s)| \le \frac{3}{4}\e < \e  $$
+  for all $t \in [0, 1]$ with $|t - s| < \d$. So $f$ is continuous at $s$. This holds for all $s \in [0, 1]$. Therefore, $f \in \mathcal{C}[0, 1]$. We next show $f_n \to f$ in the metric $d$. i.e,
+  $$ \sup_{t \in [0, 1]} |f_n(t) - f(t)| \to 0 \text{ as } n \to \infty. $$
+  Given $\e > 0$, pick $N$ such that $\max_{t \in [0, 1]} |f_n(t) - f_m(t)| < \frac{1}{2}\e$ for all $n, m > N$. Fix $n > N$ and let $m \to \infty$. Therefore,
+  $$ \max_{t \in [0, 1]} |f_n(t) - f(t)| \le \frac{1}{2}\e < \e$$
+  That is, $d(f_n, f) < \e$ for all $n > N$, and so $f_n \to f$. Our Cauchy sequence $f_1, f_2, \dots$ converges to $f$.
+\end{proof}
+
+\noindent
+We now show that the same space of functions, with a different metric, is not complete.
+\begin{eg}
+  $\mathcal{C}[0, 1]$ is not complete in the $L^1$ metric,
+  $$ d_1(f, g) = \int_0^1 |f(t) - g(t)|dt $$
+\end{eg}
+\begin{proof}
+  We give a Cauchy sequence of functions for $d_1$ which does not converge to any function in $\mathcal{C}[0, 1]$. For $n \ge 1$, define,
+  $$ f_n(t) = \begin{cases}
+    0 & \text{if } 0 \le t \le \frac{1}{2} - \frac{1}{2n}\\
+    n(t - \frac{1}{2} - \frac{1}{2n}) & \text{ if} \frac{1}{2} - \frac{1}{2n }\le n \le \frac{1}{2} + \frac{1}{2n} \\
+    1 & \text{ if } \frac{1}{2} + \frac{1}{2n} \le t \le 1
+  \end{cases} $$
+  Then $f_n \in \cc [0, 1]$. If $N \in \N$ and $m \ge n \ge N$ then $f_n(t) = f_m(t)$ unless $\frac{1}{2} - \frac{1}{2n} \le t \le \frac{1}{2} + \frac{1}{2n}$, and $|f_n(t) - f_m(t)| \le 1$ for all $t$. Hence,
+  $$ d_1(f_m, f_n) \le \frac{1}{n} < \frac{1}{N} \text{ if } m,n > N $$
+  This shows that $(f_n)$ is a Cauchy sequence with respect to $d_1$. \\
+
+  \noindent
+  We will show that the sequence $(f_n) \in \cc[0, 1]$ does not converge to $d_1$ to any function in $\cc[0, 1]$. It is clear that $f$ is `trying to converge' to a function $f$ with,
+  $$ f(t) = \begin{cases}
+    0 & \text{if }t < \frac{1}{2} \\
+    1 & \text{if }t > \frac{1}{2}.
+  \end{cases} $$
+  This function can't be in $\cc[0, 1]$ whether we assign to $t = \frac{1}{2}$.\\
+
+  \noindent
+  Since $f$ is not in our metric space $(\cc[0, 1], d_1)$, this is not quite enough to show the sequence does not converge, perhaps maybe to some other limit $g \in \cc[0, 1]$. Suppose for a contradiction that such a continuous $g$ does exist. We first show that if $0 < t < \frac{1}{2}$ then $g(t) = 0$. Suppose there is some $t_0 \in (0, \frac{1}{2})$ with $|g(t_0)| = \a > 0$. Since $g$ is continuous, there is some $\d > 0$ with $|g(t) - g(t_0)| < \frac{1}{2}\a$
+  for all $t$ with $|t - t_0| < \d$. Choosing $\d$ even smaller if necessary, we may assume that $(t_0 - \d, t_0 + \d) \sub (0, \frac{1}{2})$.\\
+  If $|t - t_0| < \d$ we then have $|g(t)| \ge \frac{1}{2}\a$. For any $n$ large enough that $\frac{1}{2} - \frac{1}{2n} > t + \d$ we have,
+  $$ d_1(f_n, g) = \int_0^1 |f_n(t) - g(t)|dt \le \int_{t_0 - \d}^{t_0 + \d} |0 - g(t)|dt \ge (2\d)\frac{1}{2}\a = \d\a $$
+  Then $d_1(f_n, g)$ doesn't tend to zero as $n \to \infty$. This shows that $g(t) = 0$ for all $t \in (0, \frac{1}{2})$. By continuity, $g(0) = 0$. As similar argument shows $g(t) = 1$ for all $t \in (\frac{1}{2}, 1]$. Thus we have our required contradiction.
+\end{proof}
