@@ -102,3 +102,230 @@ In summary, we have defined $m^*(A) \in [0, \infty]$ for every subset $A \sub \R
 However, the example above shows that $m^*$ cannot be additive on countable disjoint unions. That is,
 $$ m^*\left( \bigcup_{n=1}^\infty A_n \right) = \sum_{n=1}^\infty m^*(A_n) \text{ if } A_i \cap A_j = \vn \text{ when } i \ne j $$
 cannot always hold. (Indeed, it doesn't always hold even for finite unions.)
+
+
+\subsection{Lebesgue Measurable Sets}
+\begin{nthm}[]
+  $m^*$ satisfies the countable subadditity property,
+  $$ m^*\left( \bigcup_{j=1}^\infty A_j \right) \le \sum_{j=1}^\infty m^*(A_j). $$
+\end{nthm}
+\begin{proof}
+  The argument is similar to the proof that a countable union of null sets is a null set. Given $\e > 0$ for each $j \ge 1$, there is a countable collection of open intervals $I_1^{(j)}, I_2^{(j)}, \dots$, such that
+  $$ A_j \sub \bigcup_{n=1}^\infty I_n^{(j)} \text{ and } \sum_{m=1}^\infty m(I_n^{(j)}) \le m^*(A_j) + 2^{-j-1}\e.$$
+  Then,
+  $$ \bigcap_{j=1}^\infty A_j \sub \bigcap_{j=1}^\infty \bigcap_{n=1}^\infty I_n^{(j)} $$
+  and,
+  \begin{align*}
+    \sum_{j=1}^\infty \sum_{n=1}^\infty m(I_n^{(j)}) &\le \sum_{j=1}^{\infty} (m^*(A_j) + 2^{-j-1}\e)\\
+    &= \left( \sum_{j=1}^\infty m^*(A_j) \right) + \e \\
+  \end{align*}
+  As this holds for all $\e$, then the result follows.
+\end{proof}
+
+\noindent
+Recall the for a bounded open interval $I = (a, b)$ we have defined $m(I) = b - a$, the length in the usual sense. The definition of $m^*$ is comparable with this.
+
+\begin{nlemma}
+  Let $I \sub \R$ be an interval. Then $m^*(I) = m(I)$.
+\end{nlemma}
+\begin{proof}
+  Lengthy but trivial, so omited.
+\end{proof}
+
+\noindent
+So the outer measure has,
+\begin{enumerate}
+  \item the length of an interval,
+  \item sub-additive property,
+  \item Translation Invariance.
+\end{enumerate}
+
+\noindent
+\subsection{Lebesgue Measure}
+We now describe a large class $\mathcal{M}$ of subsets where $m^*$ behaves nicely.
+\begin{ndefi}[Lesbegue Measurable]
+  We say $E\sub \R$ is (Lesbegue) Measurable if, for all $A\sub \R$,
+  $$ m^*(A) = M^*(A \cap E) + M^*(A\cap E^c) $$
+  We write $\mathcal{M}$ for the collection of measurable sets of $\R$.
+\end{ndefi}
+
+\noindent
+\begin{remark}
+   By sub-additivity, we always have,
+   \begin{align*}
+     m^*(A) &= m^*((A\cap E) \cup (A\cap E^c))\\
+     &\le m^*(A \cap E) + m^*(A \cap E^c),
+   \end{align*}
+   so to check that $E\in \mathcal{M}$ it is enough to show,
+   $$ m^*(A\cap E) + m^*(A \cap E^c) \le m^*(A). $$
+\end{remark}
+
+\noindent
+\begin{remark}
+   Some properties of $\mathcal{M}$ follows easily from the properties of $m^*$,
+   \begin{enumerate}
+     \item If $E$ is a null set, then $E\in \mathcal{M}$. Indeed $m^*(A \cap E) \le m^*(E) = 0$, ad similarly for $m^*(A \cap E^c)$. In particular $\vn \in \mathcal{M}$.
+     \item If $E \in \mathcal{M}$, then $E^c \in \mathcal{M}$.
+     \item $\mathcal{M}$ is translation invariant. If $E\in \mathcal{M}$ then $E + t \in \mathcal{M}$.
+   \end{enumerate}
+\end{remark}
+
+\begin{nthm}[]
+  $\mathcal{M}$ admits countable unions and intersections. If $E_1, E_2, \dots \in \mathcal{M}$ then,
+  $$ \bigcup_{n=1}^\infty E_n \in \mathcal{M} \text{ and } \bigcap_{n=1}^\infty E_n \in \mathcal{M} $$
+  \noindent
+  Moreover, if $E_i \cap E_j = \vn$ for $i \ne j$, then
+  $$ m^*\left( \bigcup_{n=1}^\infty E_n \right) = \sum_{n=1}^\infty m^*(E_n)$$
+\end{nthm}
+\begin{proof}
+  Omitted
+\end{proof}
+
+\begin{nthm}[]
+  Every interval is in $\mathcal{M}$
+\end{nthm}
+\begin{proof}
+  Omitted.
+\end{proof}
+\begin{ncor}
+   Every subset of $\R$ is in $\mathcal{M}$, and every closed subset of $\R$ is in $\mathcal{M}$.
+\end{ncor}
+\begin{proof}
+  As $E \in \mathcal{M} \iff E^c \in \mathcal{M}$, it suffices to consider the open subsets. By the theorems it suffices to show that any open set $U$ is a countable union of open intervals.\\
+
+  \noindent
+  Now $U$ is the disjoint union of it's connected components. If $x \in U$ then the connected components $C_x$ of $U$ containing $x$ is the open interval $(a, b)$, where $a = \inf \{a' : (a', x] \sub U\}$ and $b = \sup \{b' : [x, b') \sub U\}$.\\
+
+  \noindent
+  Thus each connected component contains rational numbers. As $\Q$ is countable and the components are disjoints, it follows that there are at most countable many components, so $U$ is indeed a union of countably man open intervals.
+\end{proof}
+
+\begin{ndefi}[Lebesgue]
+  For $E\in \mathcal{M}$ we define $m(E) = m^*(E)$. Then $m$ is the Lebesgue measure on $\R$.
+\end{ndefi}
+
+\noindent
+We now have achieved our aim as far as possible. We have assigned a `length' for $m(A)$ for any reasonable subset $A \sub \R$ with some of the properties we wanted.
+
+\begin{remark}
+   We have done this just for $\R$, but we can do this similarly for $\R^2$ and moreover for $\R^n$.
+\end{remark}
+
+\subsection{$\s$-algebras and measure spaces}
+We now set up some abstract ideas to talk about measures more generally.
+\begin{ndefi}[$\s$-algebra]
+  A $\s$-algebra $\mathcal{B}$ on a set $X$ is a faimly of subsets such that,
+  \begin{enumerate}
+    \item $\vn \in \mathcal{B}$,
+    \item if $A \in \mathcal{B}$ then $X\sm A \in \mathcal{B}$,
+    \item if $A_1, A_2, \dots$ is a countable sequence of sets in $\mathcal{B}$, then,
+    $$ \bigcup_{n=1}^\infty A_n \in \mathcal{B} $$
+  \end{enumerate}
+\end{ndefi}
+
+\begin{eg}
+  On any set $X$, the powerset $\mathcal{P}(X)$ of $X$ is a $\s$-algebra.
+\end{eg}
+
+\begin{eg}
+  Let $X = \{a, b, c, d\}$ then one possible $\s$-algebra is,
+  $$ \{\vn, \{a, b\}, \{c, d\}, X\} $$
+\end{eg}
+
+\begin{remark}
+   If $\mathcal{B}$ is a $\s$-algebra then $X \in \mathcal{B}$ since $X = X\sm \vn$.\\
+
+   \noindent
+   Also for a countable sequence we have,
+   $$ \bigcap_{n=1}^\infty A_n \in \mathcal{B} $$
+   as,
+   $$ \bigcup_{n=1}^\infty (X \sm A_n) = X \sm \bigcap_{n=1}^\infty A_n  \in \mathcal{B}$$
+   \noindent
+   Of course, this also holds for finite unions and intersections. We just take $A_n = \vn$ for all but finitely many $n$.
+\end{remark}
+
+\begin{remark}
+   A family of set $\mathcal{B}$ satisfying the definition for a $\s$-algebra, except that only finite unions are allowed is called an algebra on $X$.
+\end{remark}
+
+\begin{nprop}
+   Let $\{\mathcal{B}_i : i \in \mathcal{I}\}$ be any set of $\s$-algebras on $X$. Then their intersection,
+   $$ \mathcal{B} = \bigcap_{i \in \mathcal{I}} \mathcal{B}_i $$
+   is also a $\s$-algebra on $X$.
+\end{nprop}
+\begin{proof}[]
+  We check the three conditions from the definition.
+  \begin{enumerate}
+    \item As $\vn \in \mathcal{B}_i$ for all $i$, then $\vn \in \mathcal{B}$,
+    \item If $A \in \mathcal{B}$,, then $A \in \mathcal{B}_i$ for each $i$, so $X\sm A \in \mathcal{B}_i$. Thus $X\sm A \in \mathcal{B}$.
+    \item If $A_1, A_2, \dots \in \mathcal{B}$, then $A_1, A_2, \dots \in \mathcal{B}_i$ for each $i$, so $\bigcup_{n=1}^\infty A_n \in \mathcal{B}_i$ for each $i$. Thus $\bigcup_{n=1}^\infty A_n \in \mathcal{B}$.
+  \end{enumerate}
+\end{proof}
+
+\noindent
+Why is this important? We can make the following defintion,
+\begin{ndefi}[$\s$-algebra generated by a set]
+  Let $\mathcal{E}$ be any family of subsets of a set $X$. Then the $\s$-algebra generated by $\mathcal{E}$ is the smallest $\s$-algebra containing $\mathcal{E}$.
+\end{ndefi}
+
+\noindent
+Further we define the Borel Algebra,
+\begin{ndefi}[Borel Algebra]
+  Let $(X, \T)$ be a topological space. The Borel algebra on $X$ is the $\s$-algebra generated by $\T$. It's elements are called Borel subsets of $X$.
+\end{ndefi}
+
+\begin{eg}
+  On $\R$ the open sets are precisely unions of open intervals $(a, b)$. So the Borel Algebra of $\R$ are any sets that can be built up from open intervals by taking complements and countable infinite unions and intersections.
+\end{eg}
+
+\begin{eg}
+  The set $\mathcal{M}$ of measurable functions in $\R$ is a $\s$-algebra. This follows from the properties given above. Since open intervals are in $\mathcal{M}$, it follows that $\mathcal{M}$ contains the Borel algebra on $\R$.
+\end{eg}
+
+\begin{remark}
+   It turns out that not every null set is a Borel set. Since null sets are measurable, this means that there are measurable sets which are not Borel sets. However, every Borel set is contained in a measurable set with the same outer measure.
+\end{remark}
+
+\begin{eg}
+  Here is a sketch of a contruction of a null set which isn't Borel. We can write each $x \in [0, 1]$ as a binary expansion $x = \sum_{n=1}^\infty a_n/2^n$, with $a_n \in \{0, 1\}$. Choose the non-terminating expansion unless $x = 0$. Then the expansion is unique. \\
+
+  \noindent
+  Define $b_n = 2a_n \in \{0, 2\}$ and set $f(x) =\sum_{n=1}^\infty b_n/3^n$. This maps $[0, 1]$ bijectively to the middle-third cantor set. Then $f(S)$ is a null set. In particular, it is Lebesgue measurable.\\
+
+  \noindent
+  Now suppose $f(S)$ is a Borel set. Now $f: [0, 1] \to [0, 1]$ is injective and increasing, and the preimage of an interval under $f$ is an interval. Since unions and complements behave nicely under preimages, the preimage of a Borel set is a Borel set. This is $f(S)$ is a Borel set, so is $S$, and this is a contradiction.
+\end{eg}
+
+\begin{ndefi}[Measure / Measure Space]
+  Let $X$ be a set and $\mathcal{B}$ a $\s$-algebra on $X$. A measure is a function $\mu : \mathcal{B} \to [0, \infty]$ such that,
+  \begin{enumerate}
+    \item $\mu(\vn) = 0$,
+    \item for any countably infinite family of set $A_1, A_2, \dots \in \mathcal{B}$ with $A_i \cap A_j = \vn$ for $i \ne j$, we have,
+    $$ \mu \left( \bigcup_{n=1}^\infty A_n \right) = \sum_{n=1}^\infty \mu(A_n)$$
+  \end{enumerate}
+  We call the triple $(X, \mathcal{B}, \mu)$ a measure space. Further $\mu(X) < \infty$ and a probability measure if $\mu(X) = 1$.
+\end{ndefi}
+
+\begin{eg}
+  The triple $(\R, \mathcal{M}, m)$ is a measure space, where $\mathcal{M}$ is the set of measurable sets, and $m$ the Lebesgue measure. \\
+
+  \noindent
+  The tripe $(\R, \mathcal{B}, m)$, where $\mathcal{B}$ is the Borel algebra. These two measure spaces are different since $\mathcal{B} \ne \mathcal{M}$.
+\end{eg}
+
+\begin{eg}
+  For any set $X \ne \vn$ and any $p \in X$ we have the Dirac measure at $p$,
+  $$ \mu_p(A) = \begin{cases}
+    1 & \text{ if } p \in A\\
+    0 & \text{ if } p \notin A
+  \end{cases} $$
+  on the $\s$-algebra $\mathcal{P}(X)$.
+\end{eg}
+
+\begin{ndefi}[Measurable Function]
+  Let $(X, \mathcal{B}, \mu)$ be a measure space, let $E \sub \mathcal{B}$ and let $f: E \to \R$ be a function. We stay $f$ is a measurable function if, for each interval $I \sub \R$, the set $f^{-1}(I) \sub E$ is measurable.
+\end{ndefi}
+
+\begin{remark}
+ There are functions $f : \R \to \R$ which are Lebesgue measurable but not Borel measurable. Take the indicator function of a set which is Lebesgue measurable but not Borel measurable. 
+\end{remark}
